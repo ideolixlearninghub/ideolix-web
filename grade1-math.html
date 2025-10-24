@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideolix - Grade 1 Math Assessment</title>
+    <style>
+        /* Quiz Styles */
+        :root {
+            --ideolix-green: #10B981;
+            --ideolix-orange: #F97316;
+            --kid-blue: #3B82F6;
+            --kid-pink: #EC4899;
+            --light-bg: #f0f9ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .quiz-header {
+            background: linear-gradient(135deg, #10B981, #3B82F6);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .quiz-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .quiz-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Timer */
+        .quiz-timer {
+            background: #EC4899;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .quiz-timer.warning {
+            background: #EF4444;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* Question Container */
+        .question-container {
+            padding: 30px;
+        }
+
+        .question-number {
+            color: #3B82F6;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            color: #1F2937;
+        }
+
+        /* Options */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 18px 20px;
+            border: 3px solid #E5E7EB;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .option:hover {
+            border-color: #3B82F6;
+            background-color: #EFF6FF;
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            border-color: #10B981;
+            background-color: #D1FAE5;
+            transform: translateY(-2px);
+        }
+
+        /* Navigation */
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 30px;
+            background: #F9FAFB;
+            border-top: 2px solid #E5E7EB;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-prev {
+            background: #6B7280;
+            color: white;
+        }
+
+        .btn-next {
+            background: #10B981;
+            color: white;
+        }
+
+        .btn-submit {
+            background: #EC4899;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Results Page */
+        .results-container {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: #10B981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .score-message {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #1F2937;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 15px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <!-- Header -->
+        <div class="quiz-header">
+            <h1>Grade 1 Mathematics Assessment</h1>
+            <div class="quiz-info">
+                <span>5 Questions</span>
+                <span>•</span>
+                <span>10 Minutes</span>
+                <span>•</span>
+                <span>Mixed Topics</span>
+            </div>
+        </div>
+        
+        <!-- Timer -->
+        <div class="quiz-timer" id="quiz-timer">
+            Time: <span id="timer">10:00</span>
+        </div>
+        
+        <!-- Quiz Content -->
+        <div id="quiz-content">
+            <div class="question-container">
+                <div class="question-number" id="question-number">Question 1 of 5</div>
+                <div class="question-text" id="question-text">What is 2 + 3?</div>
+                <div class="options-container" id="options-container">
+                    <div class="option" onclick="selectAnswer(0)">4</div>
+                    <div class="option" onclick="selectAnswer(1)">5</div>
+                    <div class="option" onclick="selectAnswer(2)">6</div>
+                    <div class="option" onclick="selectAnswer(3)">7</div>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="quiz-navigation">
+                <button class="nav-btn btn-prev" onclick="prevQuestion()">Previous</button>
+                <button class="nav-btn btn-next" onclick="nextQuestion()">Next</button>
+            </div>
+            
+            <!-- Submit Button -->
+            <div style="text-align: center; padding: 20px;">
+                <button class="nav-btn btn-submit" onclick="submitQuiz()">Submit Test</button>
+            </div>
+        </div>
+        
+        <!-- Results Content (Hidden Initially) -->
+        <div id="results-content" style="display: none;">
+            <div class="results-container">
+                <h2>Test Complete! 🎉</h2>
+                
+                <div class="score-circle">
+                    <span id="final-score">0</span>/5
+                </div>
+                
+                <div class="score-message">
+                    Your Score: <span id="score-percentage">0</span>%
+                </div>
+                
+                <div style="background: #EFF6FF; padding: 20px; border-radius: 12px; margin: 20px 0;">
+                    <h3>Great Job!</h3>
+                    <p>You've completed your first math assessment!</p>
+                </div>
+                
+                <button class="nav-btn btn-submit" onclick="window.location.reload()">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple Quiz Logic
+        let currentQuestion = 0;
+        let userAnswers = [null, null, null, null, null];
+        let timeLeft = 600; // 10 minutes in seconds
+        let timerInterval;
+
+        const questions = [
+            {
+                text: "What is 2 + 3?",
+                options: ["4", "5", "6", "7"],
+                correct: 1
+            },
+            {
+                text: "How many fingers do you have on one hand?",
+                options: ["3", "4", "5", "6"],
+                correct: 2
+            },
+            {
+                text: "What is 7 - 2?",
+                options: ["3", "4", "5", "6"],
+                correct: 2
+            },
+            {
+                text: "Which number comes after 8?",
+                options: ["7", "8", "9", "10"],
+                correct: 2
+            },
+            {
+                text: "If you have 4 apples and eat 1, how many are left?",
+                options: ["2", "3", "4", "5"],
+                correct: 1
+            }
+        ];
+
+        function startTimer() {
+            updateTimer();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimer();
+                if (timeLeft <= 0) {
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function selectAnswer(optionIndex) {
+            userAnswers[currentQuestion] = optionIndex;
+            updateOptions();
+        }
+
+        function updateOptions() {
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                if (index === userAnswers[currentQuestion]) {
+                    option.classList.add('selected');
+                } else {
+                    option.classList.remove('selected');
+                }
+            });
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('question-number').textContent = 
+                `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('question-text').textContent = question.text;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.textContent = option;
+                optionElement.onclick = () => selectAnswer(index);
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            updateOptions();
+        }
+
+        function submitQuiz() {
+            clearInterval(timerInterval);
+            
+            let score = 0;
+            questions.forEach((question, index) => {
+                if (userAnswers[index] === question.correct) {
+                    score++;
+                }
+            });
+            
+            const percentage = (score / questions.length) * 100;
+            
+            document.getElementById('quiz-content').style.display = 'none';
+            document.getElementById('results-content').style.display = 'block';
+            document.getElementById('final-score').textContent = score;
+            document.getElementById('score-percentage').textContent = percentage.toFixed(0);
+        }
+
+        // Start the quiz when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            startTimer();
+            showQuestion();
+        });
+    </script>
+</body>
+</html>

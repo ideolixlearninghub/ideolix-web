@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideolix - Grade 5 Math Assessment</title>
+    <style>
+        /* Quiz Styles */
+        :root {
+            --ideolix-green: #10B981;
+            --ideolix-orange: #F97316;
+            --kid-blue: #3B82F6;
+            --kid-pink: #EC4899;
+            --light-bg: #f0f9ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .quiz-header {
+            background: linear-gradient(135deg, #10B981, #3B82F6);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .quiz-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .quiz-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Timer */
+        .quiz-timer {
+            background: #EC4899;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .quiz-timer.warning {
+            background: #EF4444;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* Question Container */
+        .question-container {
+            padding: 30px;
+        }
+
+        .question-number {
+            color: #3B82F6;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            color: #1F2937;
+        }
+
+        /* Options */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 18px 20px;
+            border: 3px solid #E5E7EB;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .option:hover {
+            border-color: #3B82F6;
+            background-color: #EFF6FF;
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            border-color: #10B981;
+            background-color: #D1FAE5;
+            transform: translateY(-2px);
+        }
+
+        /* Navigation */
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 30px;
+            background: #F9FAFB;
+            border-top: 2px solid #E5E7EB;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-prev {
+            background: #6B7280;
+            color: white;
+        }
+
+        .btn-next {
+            background: #10B981;
+            color: white;
+        }
+
+        .btn-submit {
+            background: #EC4899;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Question Numbers */
+        .question-numbers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            padding: 20px;
+            background: #F9FAFB;
+        }
+
+        .q-number {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #D1D5DB;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .q-number:hover {
+            border-color: #3B82F6;
+            background: #EFF6FF;
+        }
+
+        .q-number.answered {
+            background: #D1FAE5;
+            border-color: #10B981;
+        }
+
+        .q-number.current {
+            background: #3B82F6;
+            color: white;
+            border-color: #3B82F6;
+        }
+
+        /* Results Page */
+        .results-container {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(#10B981 0% var(--score-percent), #E5E7EB var(--score-percent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .score-circle::before {
+            content: '';
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .score-text {
+            position: relative;
+            z-index: 1;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #10B981;
+        }
+
+        .score-message {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #1F2937;
+        }
+
+        .recommendation {
+            background: #EFF6FF;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #3B82F6;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 15px;
+                font-size: 1rem;
+            }
+            
+            .quiz-navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <!-- Header -->
+        <div class="quiz-header">
+            <h1>Grade 5 Mathematics Assessment</h1>
+            <div class="quiz-info">
+                <span>40 Questions</span>
+                <span>•</span>
+                <span>45 Minutes</span>
+                <span>•</span>
+                <span>Advanced Level</span>
+            </div>
+        </div>
+        
+        <!-- Timer -->
+        <div class="quiz-timer" id="quiz-timer">
+            Time: <span id="timer">45:00</span>
+        </div>
+        
+        <!-- Quiz Content -->
+        <div id="quiz-content">
+            <div class="question-container">
+                <div class="question-number" id="question-number">Question 1 of 40</div>
+                <div class="question-text" id="question-text">Loading question...</div>
+                <div class="options-container" id="options-container">
+                    <!-- Options will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="quiz-navigation">
+                <button class="nav-btn btn-prev" id="prev-btn">Previous</button>
+                <div class="question-numbers" id="question-numbers">
+                    <!-- Question numbers will be generated here -->
+                </div>
+                <button class="nav-btn btn-next" id="next-btn">Next</button>
+            </div>
+            
+            <!-- Submit Button -->
+            <div style="text-align: center; padding: 20px;">
+                <button class="nav-btn btn-submit" id="submit-btn">Submit Test</button>
+            </div>
+        </div>
+        
+        <!-- Results Content (Hidden Initially) -->
+        <div id="results-content" style="display: none;">
+            <div class="results-container">
+                <h2>Test Complete! 🎉</h2>
+                
+                <div class="score-circle">
+                    <div class="score-text">
+                        <span id="final-score">0</span>/<span id="total-questions">40</span>
+                    </div>
+                </div>
+                
+                <div class="score-message">
+                    Your Score: <span id="score-percentage">0</span>%
+                </div>
+                
+                <div id="unanswered-warning" style="display: none; background: #FEF3C7; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    ⚠️ You left <span id="unanswered-count">0</span> questions unanswered
+                </div>
+                
+                <div class="recommendation">
+                    <h3>Recommendation</h3>
+                    <p id="recommendation-text">Loading recommendation...</p>
+                </div>
+                
+                <button class="nav-btn btn-submit" id="retry-btn">Take Another Test</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 40 CHALLENGING Grade 5 Math Questions
+        const questions = [
+            // Advanced Multiplication & Division (8 questions)
+            {
+                text: "What is 247 × 6?",
+                options: ["1,382", "1,432", "1,482", "1,532"],
+                correctAnswer: 2
+            },
+            {
+                text: "Calculate: 384 ÷ 8",
+                options: ["44", "46", "48", "52"],
+                correctAnswer: 2
+            },
+            {
+                text: "What is 156 × 7?",
+                options: ["1,082", "1,092", "1,102", "1,112"],
+                correctAnswer: 1
+            },
+            {
+                text: "If 1,176 books are packed into boxes of 12, how many boxes?",
+                options: ["86", "92", "96", "98"],
+                correctAnswer: 3
+            },
+            {
+                text: "Calculate: 525 ÷ 15",
+                options: ["32", "34", "35", "37"],
+                correctAnswer: 2
+            },
+            {
+                text: "What is 189 × 5?",
+                options: ["895", "925", "945", "965"],
+                correctAnswer: 2
+            },
+            {
+                text: "Calculate: 792 ÷ 9",
+                options: ["82", "86", "88", "92"],
+                correctAnswer: 2
+            },
+            {
+                text: "What is 324 × 4?",
+                options: ["1,256", "1,276", "1,296", "1,316"],
+                correctAnswer: 2
+            },
+            
+            // Fractions Operations (8 questions)
+            {
+                text: "What is ⅔ + ¼?",
+                options: ["⁷⁄₁₂", "⁵⁄₁₂", "¹¹⁄₁₂", "1"],
+                correctAnswer: 2
+            },
+            {
+                text: "Calculate: ⅗ × ½",
+                options: ["³⁄₁₀", "⅖", "½", "⅗"],
+                correctAnswer: 0
+            },
+            {
+                text: "What is 1⅓ - ¾?",
+                options: ["⁷⁄₁₂", "⁵⁄₁₂", "¹¹⁄₁₂", "¹³⁄₁₂"],
+                correctAnswer: 0
+            },
+            {
+                text: "Calculate: ²⁄₅ ÷ ⅓",
+                options: ["²⁄₁₅", "⁶⁄₁₅", "⁶⁄₅", "²⁄₃"],
+                correctAnswer: 2
+            },
+            {
+                text: "What is ¾ of 48?",
+                options: ["32", "34", "36", "38"],
+                correctAnswer: 2
+            },
+            {
+                text: "Calculate: 1½ × 2⅓",
+                options: ["2½", "3", "3½", "4"],
+                correctAnswer: 2
+            },
+            {
+                text: "What is ⁴⁄₉ + ²⁄₃?",
+                options: ["⁶⁄₉", "⁸⁄₉", "¹⁰⁄₉", "¹²⁄₉"],
+                correctAnswer: 2
+            },
+            {
+                text: "Calculate: 3⅕ - 1¾",
+                options: ["1¼", "1⁷⁄₂₀", "1½", "1⁹⁄₂₀"],
+                correctAnswer: 3
+            },
+            
+            // Decimals & Percentages (8 questions)
+            {
+                text: "What is 0.45 as a percentage?",
+                options: ["4.5%", "45%", "450%", "0.45%"],
+                correctAnswer: 1
+            },
+            {
+                text: "Calculate: 12.5 × 8",
+                options: ["96", "98", "100", "102"],
+                correctAnswer: 2
+            },
+            {
+                text: "What is 30% of 250?",
+                options: ["65", "70", "75", "80"],
+                correctAnswer: 2
+            },
+            {
+                text: "Convert ⅜ to a decimal",
+                options: ["0.325", "0.350", "0.375", "0.400"],
+                correctAnswer: 2
+            },
+            {
+                text: "What is 15% as a fraction in simplest form?",
+                options: ["¹⁵⁄₁₀₀", "³⁄₂₀", "¼", "³⁄₁₀"],
+                correctAnswer: 1
+            },
+            {
+                text: "Calculate: 56.8 ÷ 4",
+                options: ["13.2", "14.0", "14.2", "14.4"],
+                correctAnswer: 2
+            },
+            {
+                text: "What is 0.06 × 300?",
+                options: ["1.8", "18", "180", "1,800"],
+                correctAnswer: 1
+            },
+            {
+                text: "If 40% of a number is 120, what is the number?",
+                options: ["280", "300", "320", "340"],
+                correctAnswer: 1
+            },
+            
+            // Geometry & Measurement (8 questions)
+            {
+                text: "What is the area of a triangle with base 12cm and height 8cm?",
+                options: ["40 cm²", "48 cm²", "56 cm²", "64 cm²"],
+                correctAnswer: 1
+            },
+            {
+                text: "How many cubic centimeters in 2.5 liters?",
+                options: ["250 cm³", "1,500 cm³", "2,000 cm³", "2,500 cm³"],
+                correctAnswer: 3
+            },
+            {
+                text: "What is the volume of a rectangular prism 5cm × 4cm × 6cm?",
+                options: ["100 cm³", "110 cm³", "120 cm³", "130 cm³"],
+                correctAnswer: 2
+            },
+            {
+                text: "Convert 3.25 kilometers to meters",
+                options: ["325 m", "3,025 m", "3,250 m", "32,500 m"],
+                correctAnswer: 2
+            },
+            {
+                text: "What is the perimeter of a regular hexagon with 7cm sides?",
+                options: ["35 cm", "42 cm", "49 cm", "56 cm"],
+                correctAnswer: 1
+            },
+            {
+                text: "How many grams in 2.75 kilograms?",
+                options: ["275 g", "2,075 g", "2,750 g", "27,500 g"],
+                correctAnswer: 2
+            },
+            {
+                text: "What is the area of a circle with radius 5cm? (Use π=3.14)",
+                options: ["31.4 cm²", "62.8 cm²", "78.5 cm²", "157 cm²"],
+                correctAnswer: 2
+            },
+            {
+                text: "Convert 4 hours 25 minutes to minutes only",
+                options: ["245 min", "255 min", "265 min", "275 min"],
+                correctAnswer: 2
+            },
+            
+            // Advanced Word Problems (8 questions)
+            {
+                text: "A car travels at 75 km/h for 3.5 hours. Total distance?",
+                options: ["225 km", "240 km", "255 km", "262.5 km"],
+                correctAnswer: 3
+            },
+            {
+                text: "If ⅗ of students are boys and there are 240 girls, total students?",
+                options: ["400", "500", "600", "700"],
+                correctAnswer: 2
+            },
+            {
+                text: "A recipe needs 2¾ cups flour. For 4 batches, total flour?",
+                options: ["9 cups", "10 cups", "11 cups", "12 cups"],
+                correctAnswer: 2
+            },
+            {
+                text: "A shirt costs $45 with 20% discount. Sale price?",
+                options: ["$32", "$34", "$36", "$38"],
+                correctAnswer: 2
+            },
+            {
+                text: "A tank holds 180L. If it's ⅔ full, liters needed to fill?",
+                options: ["40 L", "50 L", "60 L", "70 L"],
+                correctAnswer: 2
+            },
+            {
+                text: "A rectangle's length is 50% more than its 12cm width. Area?",
+                options: ["180 cm²", "200 cm²", "216 cm²", "240 cm²"],
+                correctAnswer: 2
+            },
+            {
+                text: "If 4 workers complete a job in 15 days, how long for 6 workers?",
+                options: ["8 days", "9 days", "10 days", "12 days"],
+                correctAnswer: 2
+            },
+            {
+                text: "A number increased by 25% is 150. Original number?",
+                options: ["110", "115", "120", "125"],
+                correctAnswer: 2
+            }
+        ];
+
+        // Quiz Logic
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let timeLeft = 2700; // 45 minutes
+        let timerInterval;
+
+        function startTimer() {
+            updateTimer();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimer();
+                if (timeLeft <= 0) {
+                    submitQuiz();
+                } else if (timeLeft <= 300) {
+                    document.getElementById('quiz-timer').classList.add('warning');
+                }
+            }, 1000);
+        }
+
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function showQuestion(index) {
+            currentQuestion = index;
+            const question = questions[index];
+            
+            document.getElementById('question-number').textContent = 
+                `Question ${index + 1} of ${questions.length}`;
+            document.getElementById('question-text').textContent = question.text;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, optionIndex) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.textContent = option;
+                
+                if (userAnswers[index] === optionIndex) {
+                    optionElement.classList.add('selected');
+                }
+                
+                optionElement.addEventListener('click', () => selectAnswer(optionIndex));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            updateNavigation();
+            updateQuestionNumbers();
+        }
+
+        function selectAnswer(optionIndex) {
+            userAnswers[currentQuestion] = optionIndex;
+            updateOptions();
+            updateQuestionNumbers();
+        }
+
+        function updateOptions() {
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                if (index === userAnswers[currentQuestion]) {
+                    option.classList.add('selected');
+                } else {
+                    option.classList.remove('selected');
+                }
+            });
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                showQuestion(currentQuestion + 1);
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                showQuestion(currentQuestion - 1);
+            }
+        }
+
+        function jumpToQuestion(index) {
+            showQuestion(index);
+        }
+
+        function updateNavigation() {
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('next-btn').disabled = currentQuestion === questions.length - 1;
+        }
+
+        function generateQuestionNumbers() {
+            const container = document.getElementById('question-numbers');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < questions.length; i++) {
+                const numberElement = document.createElement('div');
+                numberElement.className = 'q-number';
+                numberElement.textContent = i + 1;
+                numberElement.addEventListener('click', () => jumpToQuestion(i));
+                container.appendChild(numberElement);
+            }
+            
+            updateQuestionNumbers();
+        }
+
+        function updateQuestionNumbers() {
+            const numbers = document.querySelectorAll('.q-number');
+            numbers.forEach((number, index) => {
+                number.classList.remove('current', 'answered');
+                
+                if (index === currentQuestion) {
+                    number.classList.add('current');
+                }
+                
+                if (userAnswers[index] !== null) {
+                    number.classList.add('answered');
+                }
+            });
+        }
+
+        function submitQuiz() {
+            clearInterval(timerInterval);
+            
+            const score = calculateScore();
+            showResults(score);
+        }
+
+        function calculateScore() {
+            let correct = 0;
+            
+            questions.forEach((question, index) => {
+                if (userAnswers[index] === question.correctAnswer) {
+                    correct++;
+                }
+            });
+            
+            const percentage = Math.round((correct / questions.length) * 100);
+            const unanswered = userAnswers.filter(answer => answer === null).length;
+            
+            return { correct, total: questions.length, percentage, unanswered };
+        }
+
+        function showResults(score) {
+            document.getElementById('quiz-content').style.display = 'none';
+            document.getElementById('results-content').style.display = 'block';
+            
+            document.getElementById('final-score').textContent = score.correct;
+            document.getElementById('total-questions').textContent = score.total;
+            document.getElementById('score-percentage').textContent = score.percentage;
+            
+            // Set CSS variable for score circle
+            document.documentElement.style.setProperty('--score-percent', `${score.percentage}%`);
+            
+            // Show recommendation
+            const recommendation = getRecommendation(score.percentage);
+            document.getElementById('recommendation-text').textContent = recommendation;
+            
+            // Show unanswered count if any
+            if (score.unanswered > 0) {
+                document.getElementById('unanswered-count').textContent = score.unanswered;
+                document.getElementById('unanswered-warning').style.display = 'block';
+            }
+        }
+
+        function getRecommendation(percentage) {
+            if (percentage >= 90) {
+                return "Outstanding! You're ready for Grade 6 math challenges!";
+            } else if (percentage >= 70) {
+                return "Excellent work! You have strong Grade 5 math skills.";
+            } else if (percentage >= 50) {
+                return "Good effort! Practice will make you even better.";
+            } else {
+                return "Keep practicing! You're building important math foundations.";
+            }
+        }
+
+        // Initialize quiz
+        document.addEventListener('DOMContentLoaded', function() {
+            startTimer();
+            showQuestion(0);
+            generateQuestionNumbers();
+            
+            // Set up event listeners
+            document.getElementById('next-btn').addEventListener('click', nextQuestion);
+            document.getElementById('prev-btn').addEventListener('click', prevQuestion);
+            document.getElementById('submit-btn').addEventListener('click', submitQuiz);
+            document.getElementById('retry-btn').addEventListener('click', () => window.location.reload());
+        });
+    </script>
+</body>
+</html>

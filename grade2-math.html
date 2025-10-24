@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideolix - Grade 2 Math Assessment</title>
+    <style>
+        /* Quiz Styles */
+        :root {
+            --ideolix-green: #10B981;
+            --ideolix-orange: #F97316;
+            --kid-blue: #3B82F6;
+            --kid-pink: #EC4899;
+            --light-bg: #f0f9ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .quiz-header {
+            background: linear-gradient(135deg, #10B981, #3B82F6);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .quiz-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .quiz-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Timer */
+        .quiz-timer {
+            background: #EC4899;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .quiz-timer.warning {
+            background: #EF4444;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* Question Container */
+        .question-container {
+            padding: 30px;
+        }
+
+        .question-number {
+            color: #3B82F6;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            color: #1F2937;
+        }
+
+        /* Options */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 18px 20px;
+            border: 3px solid #E5E7EB;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .option:hover {
+            border-color: #3B82F6;
+            background-color: #EFF6FF;
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            border-color: #10B981;
+            background-color: #D1FAE5;
+            transform: translateY(-2px);
+        }
+
+        /* Navigation */
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 30px;
+            background: #F9FAFB;
+            border-top: 2px solid #E5E7EB;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-prev {
+            background: #6B7280;
+            color: white;
+        }
+
+        .btn-next {
+            background: #10B981;
+            color: white;
+        }
+
+        .btn-submit {
+            background: #EC4899;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Question Numbers */
+        .question-numbers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            padding: 20px;
+            background: #F9FAFB;
+        }
+
+        .q-number {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #D1D5DB;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .q-number:hover {
+            border-color: #3B82F6;
+            background: #EFF6FF;
+        }
+
+        .q-number.answered {
+            background: #D1FAE5;
+            border-color: #10B981;
+        }
+
+        .q-number.current {
+            background: #3B82F6;
+            color: white;
+            border-color: #3B82F6;
+        }
+
+        /* Results Page */
+        .results-container {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(#10B981 0% var(--score-percent), #E5E7EB var(--score-percent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .score-circle::before {
+            content: '';
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .score-text {
+            position: relative;
+            z-index: 1;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #10B981;
+        }
+
+        .score-message {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #1F2937;
+        }
+
+        .recommendation {
+            background: #EFF6FF;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 4px solid #3B82F6;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .option {
+                padding: 15px;
+                font-size: 1rem;
+            }
+            
+            .quiz-navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <!-- Header -->
+        <div class="quiz-header">
+            <h1>Grade 2 Mathematics Assessment</h1>
+            <div class="quiz-info">
+                <span>40 Questions</span>
+                <span>•</span>
+                <span>45 Minutes</span>
+                <span>•</span>
+                <span>Advanced Level</span>
+            </div>
+        </div>
+        
+        <!-- Timer -->
+        <div class="quiz-timer" id="quiz-timer">
+            Time: <span id="timer">45:00</span>
+        </div>
+        
+        <!-- Quiz Content -->
+        <div id="quiz-content">
+            <div class="question-container">
+                <div class="question-number" id="question-number">Question 1 of 40</div>
+                <div class="question-text" id="question-text">Loading question...</div>
+                <div class="options-container" id="options-container">
+                    <!-- Options will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="quiz-navigation">
+                <button class="nav-btn btn-prev" id="prev-btn">Previous</button>
+                <div class="question-numbers" id="question-numbers">
+                    <!-- Question numbers will be generated here -->
+                </div>
+                <button class="nav-btn btn-next" id="next-btn">Next</button>
+            </div>
+            
+            <!-- Submit Button -->
+            <div style="text-align: center; padding: 20px;">
+                <button class="nav-btn btn-submit" id="submit-btn">Submit Test</button>
+            </div>
+        </div>
+        
+        <!-- Results Content (Hidden Initially) -->
+        <div id="results-content" style="display: none;">
+            <div class="results-container">
+                <h2>Test Complete! 🎉</h2>
+                
+                <div class="score-circle">
+                    <div class="score-text">
+                        <span id="final-score">0</span>/<span id="total-questions">40</span>
+                    </div>
+                </div>
+                
+                <div class="score-message">
+                    Your Score: <span id="score-percentage">0</span>%
+                </div>
+                
+                <div id="unanswered-warning" style="display: none; background: #FEF3C7; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    ⚠️ You left <span id="unanswered-count">0</span> questions unanswered
+                </div>
+                
+                <div class="recommendation">
+                    <h3>Recommendation</h3>
+                    <p id="recommendation-text">Loading recommendation...</p>
+                </div>
+                
+                <button class="nav-btn btn-submit" id="retry-btn">Take Another Test</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 40 CHALLENGING Grade 2 Math Questions
+        const questions = [
+            // Two-Digit Addition (8 questions)
+            {
+                text: "What is 45 + 28?",
+                options: ["63", "67", "73", "77"],
+                correctAnswer: 2
+            },
+            {
+                text: "If you have 56 marbles and get 37 more, how many total?",
+                options: ["83", "89", "93", "97"],
+                correctAnswer: 2
+            },
+            {
+                text: "67 + 25 = ?",
+                options: ["82", "87", "92", "97"],
+                correctAnswer: 2
+            },
+            {
+                text: "What is 38 + 49?",
+                options: ["77", "82", "87", "92"],
+                correctAnswer: 2
+            },
+            {
+                text: "74 + 18 = ?",
+                options: ["82", "87", "92", "97"],
+                correctAnswer: 2
+            },
+            {
+                text: "53 + 29 = ?",
+                options: ["72", "77", "82", "87"],
+                correctAnswer: 2
+            },
+            {
+                text: "What is 86 + 15?",
+                options: ["91", "96", "101", "106"],
+                correctAnswer: 2
+            },
+            {
+                text: "47 + 38 = ?",
+                options: ["75", "80", "85", "90"],
+                correctAnswer: 2
+            },
+            
+            // Two-Digit Subtraction (8 questions)
+            {
+                text: "What is 72 - 35?",
+                options: ["27", "32", "37", "42"],
+                correctAnswer: 2
+            },
+            {
+                text: "If you have 85 candies and eat 27, how many remain?",
+                options: ["48", "53", "58", "63"],
+                correctAnswer: 2
+            },
+            {
+                text: "63 - 28 = ?",
+                options: ["25", "30", "35", "40"],
+                correctAnswer: 2
+            },
+            {
+                text: "What is 90 - 42?",
+                options: ["38", "43", "48", "53"],
+                correctAnswer: 2
+            },
+            {
+                text: "57 - 19 = ?",
+                options: ["28", "33", "38", "43"],
+                correctAnswer: 2
+            },
+            {
+                text: "84 - 37 = ?",
+                options: ["37", "42", "47", "52"],
+                correctAnswer: 2
+            },
+            {
+                text: "What is 75 - 48?",
+                options: ["17", "22", "27", "32"],
+                correctAnswer: 2
+            },
+            {
+                text: "96 - 29 = ?",
+                options: ["57", "62", "67", "72"],
+                correctAnswer: 2
+            },
+            
+            // Word Problems (8 questions)
+            {
+                text: "Sarah has 45 stickers. She gives 18 to her friend. How many left?",
+                options: ["22", "27", "32", "37"],
+                correctAnswer: 1
+            },
+            {
+                text: "There are 28 students in Class A and 35 in Class B. Total students?",
+                options: ["53", "58", "63", "68"],
+                correctAnswer: 2
+            },
+            {
+                text: "A book has 96 pages. If you read 38 pages, how many pages left?",
+                options: ["48", "53", "58", "63"],
+                correctAnswer: 2
+            },
+            {
+                text: "Tom has 72 toy cars. He buys 25 more. How many now?",
+                options: ["87", "92", "97", "102"],
+                correctAnswer: 2
+            },
+            {
+                text: "There are 60 minutes in an hour. If 25 minutes passed, how many left?",
+                options: ["25", "30", "35", "40"],
+                correctAnswer: 2
+            },
+            {
+                text: "Maria saved 85 dollars. She spent 47 dollars. How much left?",
+                options: ["28", "33", "38", "43"],
+                correctAnswer: 2
+            },
+            {
+                text: "A farmer has 54 chickens and 37 ducks. Total animals?",
+                options: ["81", "86", "91", "96"],
+                correctAnswer: 2
+            },
+            {
+                text: "There are 100 seats in a theater. 68 are occupied. How many empty?",
+                options: ["22", "27", "32", "37"],
+                correctAnswer: 2
+            },
+            
+            // Place Value & Number Sense (8 questions)
+            {
+                text: "In the number 483, what digit is in the tens place?",
+                options: ["4", "8", "3", "0"],
+                correctAnswer: 1
+            },
+            {
+                text: "What is 300 + 40 + 5?",
+                options: ["345", "354", "435", "543"],
+                correctAnswer: 0
+            },
+            {
+                text: "Which number has 7 hundreds, 2 tens, and 9 ones?",
+                options: ["729", "792", "927", "972"],
+                correctAnswer: 0
+            },
+            {
+                text: "What is 10 more than 367?",
+                options: ["357", "367", "377", "387"],
+                correctAnswer: 2
+            },
+            {
+                text: "What is 100 less than 850?",
+                options: ["750", "760", "840", "950"],
+                correctAnswer: 0
+            },
+            {
+                text: "Which number is between 245 and 250?",
+                options: ["240", "247", "252", "255"],
+                correctAnswer: 1
+            },
+            {
+                text: "Round 78 to the nearest ten.",
+                options: ["70", "75", "80", "85"],
+                correctAnswer: 2
+            },
+            {
+                text: "What is the value of 6 in 562?",
+                options: ["6", "60", "600", "6000"],
+                correctAnswer: 1
+            },
+            
+            // Patterns & Sequencing (4 questions)
+            {
+                text: "What number completes: 15, 20, 25, 30, ___?",
+                options: ["32", "35", "40", "45"],
+                correctAnswer: 1
+            },
+            {
+                text: "Pattern: 100, 95, 90, 85, ___?",
+                options: ["75", "80", "82", "83"],
+                correctAnswer: 1
+            },
+            {
+                text: "What comes next: 2, 4, 8, 16, ___?",
+                options: ["18", "20", "24", "32"],
+                correctAnswer: 3
+            },
+            {
+                text: "Complete: 50, 45, 40, 35, ___?",
+                options: ["25", "30", "32", "34"],
+                correctAnswer: 1
+            },
+            
+            // Basic Multiplication (4 questions)
+            {
+                text: "What is 5 × 6?",
+                options: ["25", "30", "35", "40"],
+                correctAnswer: 1
+            },
+            {
+                text: "If 4 children have 3 cookies each, total cookies?",
+                options: ["7", "10", "12", "15"],
+                correctAnswer: 2
+            },
+            {
+                text: "7 × 4 = ?",
+                options: ["24", "28", "32", "36"],
+                correctAnswer: 1
+            },
+            {
+                text: "3 × 8 = ?",
+                options: ["16", "20", "24", "28"],
+                correctAnswer: 2
+            }
+        ];
+
+        // Quiz Logic
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let timeLeft = 2700; // 45 minutes
+        let timerInterval;
+
+        function startTimer() {
+            updateTimer();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimer();
+                if (timeLeft <= 0) {
+                    submitQuiz();
+                } else if (timeLeft <= 300) {
+                    document.getElementById('quiz-timer').classList.add('warning');
+                }
+            }, 1000);
+        }
+
+        function updateTimer() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function showQuestion(index) {
+            currentQuestion = index;
+            const question = questions[index];
+            
+            document.getElementById('question-number').textContent = 
+                `Question ${index + 1} of ${questions.length}`;
+            document.getElementById('question-text').textContent = question.text;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, optionIndex) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.textContent = option;
+                
+                if (userAnswers[index] === optionIndex) {
+                    optionElement.classList.add('selected');
+                }
+                
+                optionElement.addEventListener('click', () => selectAnswer(optionIndex));
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            updateNavigation();
+            updateQuestionNumbers();
+        }
+
+        function selectAnswer(optionIndex) {
+            userAnswers[currentQuestion] = optionIndex;
+            updateOptions();
+            updateQuestionNumbers();
+        }
+
+        function updateOptions() {
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, index) => {
+                if (index === userAnswers[currentQuestion]) {
+                    option.classList.add('selected');
+                } else {
+                    option.classList.remove('selected');
+                }
+            });
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                showQuestion(currentQuestion + 1);
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                showQuestion(currentQuestion - 1);
+            }
+        }
+
+        function jumpToQuestion(index) {
+            showQuestion(index);
+        }
+
+        function updateNavigation() {
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('next-btn').disabled = currentQuestion === questions.length - 1;
+        }
+
+        function generateQuestionNumbers() {
+            const container = document.getElementById('question-numbers');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < questions.length; i++) {
+                const numberElement = document.createElement('div');
+                numberElement.className = 'q-number';
+                numberElement.textContent = i + 1;
+                numberElement.addEventListener('click', () => jumpToQuestion(i));
+                container.appendChild(numberElement);
+            }
+            
+            updateQuestionNumbers();
+        }
+
+        function updateQuestionNumbers() {
+            const numbers = document.querySelectorAll('.q-number');
+            numbers.forEach((number, index) => {
+                number.classList.remove('current', 'answered');
+                
+                if (index === currentQuestion) {
+                    number.classList.add('current');
+                }
+                
+                if (userAnswers[index] !== null) {
+                    number.classList.add('answered');
+                }
+            });
+        }
+
+        function submitQuiz() {
+            clearInterval(timerInterval);
+            
+            const score = calculateScore();
+            showResults(score);
+        }
+
+        function calculateScore() {
+            let correct = 0;
+            
+            questions.forEach((question, index) => {
+                if (userAnswers[index] === question.correctAnswer) {
+                    correct++;
+                }
+            });
+            
+            const percentage = Math.round((correct / questions.length) * 100);
+            const unanswered = userAnswers.filter(answer => answer === null).length;
+            
+            return { correct, total: questions.length, percentage, unanswered };
+        }
+
+        function showResults(score) {
+            document.getElementById('quiz-content').style.display = 'none';
+            document.getElementById('results-content').style.display = 'block';
+            
+            document.getElementById('final-score').textContent = score.correct;
+            document.getElementById('total-questions').textContent = score.total;
+            document.getElementById('score-percentage').textContent = score.percentage;
+            
+            // Set CSS variable for score circle
+            document.documentElement.style.setProperty('--score-percent', `${score.percentage}%`);
+            
+            // Show recommendation
+            const recommendation = getRecommendation(score.percentage);
+            document.getElementById('recommendation-text').textContent = recommendation;
+            
+            // Show unanswered count if any
+            if (score.unanswered > 0) {
+                document.getElementById('unanswered-count').textContent = score.unanswered;
+                document.getElementById('unanswered-warning').style.display = 'block';
+            }
+        }
+
+        function getRecommendation(percentage) {
+            if (percentage >= 90) {
+                return "Outstanding! You're ready for Grade 3 math challenges!";
+            } else if (percentage >= 70) {
+                return "Excellent work! You have strong Grade 2 math skills.";
+            } else if (percentage >= 50) {
+                return "Good effort! Practice will make you even better.";
+            } else {
+                return "Keep practicing! You're building important math foundations.";
+            }
+        }
+
+        // Initialize quiz
+        document.addEventListener('DOMContentLoaded', function() {
+            startTimer();
+            showQuestion(0);
+            generateQuestionNumbers();
+            
+            // Set up event listeners
+            document.getElementById('next-btn').addEventListener('click', nextQuestion);
+            document.getElementById('prev-btn').addEventListener('click', prevQuestion);
+            document.getElementById('submit-btn').addEventListener('click', submitQuiz);
+            document.getElementById('retry-btn').addEventListener('click', () => window.location.reload());
+        });
+    </script>
+</body>
+</html>

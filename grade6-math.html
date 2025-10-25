@@ -4,291 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ideolix - Grade 6 Math Assessment</title>
+    <!-- Same CSS as previous grades -->
     <style>
-        /* Quiz Styles */
-        :root {
-            --ideolix-green: #10B981;
-            --ideolix-orange: #F97316;
-            --kid-blue: #3B82F6;
-            --kid-pink: #EC4899;
-            --light-bg: #f0f9ff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .quiz-container {
-            width: 100%;
-            max-width: 800px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-
-        /* Header */
-        .quiz-header {
-            background: linear-gradient(135deg, #10B981, #3B82F6);
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
-
-        .quiz-header h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .quiz-info {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* Timer */
-        .quiz-timer {
-            background: #EC4899;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .quiz-timer.warning {
-            background: #EF4444;
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-
-        /* Question Container */
-        .question-container {
-            padding: 30px;
-        }
-
-        .question-number {
-            color: #3B82F6;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .question-text {
-            font-size: 1.4rem;
-            line-height: 1.5;
-            margin-bottom: 25px;
-            color: #1F2937;
-        }
-
-        /* Options */
-        .options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .option {
-            padding: 18px 20px;
-            border: 3px solid #E5E7EB;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        .option:hover {
-            border-color: #3B82F6;
-            background-color: #EFF6FF;
-            transform: translateY(-2px);
-        }
-
-        .option.selected {
-            border-color: #10B981;
-            background-color: #D1FAE5;
-            transform: translateY(-2px);
-        }
-
-        /* Navigation */
-        .quiz-navigation {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 30px;
-            background: #F9FAFB;
-            border-top: 2px solid #E5E7EB;
-        }
-
-        .nav-btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-prev {
-            background: #6B7280;
-            color: white;
-        }
-
-        .btn-next {
-            background: #10B981;
-            color: white;
-        }
-
-        .btn-submit {
-            background: #EC4899;
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-        }
-
-        .nav-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        /* Question Numbers */
-        .question-numbers {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            padding: 20px;
-            background: #F9FAFB;
-        }
-
-        .q-number {
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #D1D5DB;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .q-number:hover {
-            border-color: #3B82F6;
-            background: #EFF6FF;
-        }
-
-        .q-number.answered {
-            background: #D1FAE5;
-            border-color: #10B981;
-        }
-
-        .q-number.current {
-            background: #3B82F6;
-            color: white;
-            border-color: #3B82F6;
-        }
-
-        /* Results Page */
-        .results-container {
-            padding: 40px;
-            text-align: center;
-        }
-
-        .score-circle {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: conic-gradient(#10B981 0% var(--score-percent), #E5E7EB var(--score-percent) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 30px;
-            position: relative;
-        }
-
-        .score-circle::before {
-            content: '';
-            width: 120px;
-            height: 120px;
-            background: white;
-            border-radius: 50%;
-            position: absolute;
-        }
-
-        .score-text {
-            position: relative;
-            z-index: 1;
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #10B981;
-        }
-
-        .score-message {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            color: #1F2937;
-        }
-
-        .recommendation {
-            background: #EFF6FF;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 4px solid #3B82F6;
-        }
-
-        @media (max-width: 768px) {
-            .quiz-header h1 {
-                font-size: 1.6rem;
-            }
-            
-            .question-text {
-                font-size: 1.2rem;
-            }
-            
-            .option {
-                padding: 15px;
-                font-size: 1rem;
-            }
-            
-            .quiz-navigation {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .nav-btn {
-                width: 100%;
-            }
-        }
+        :root { --ideolix-green: #10B981; --ideolix-orange: #F97316; --kid-blue: #3B82F6; --kid-pink: #EC4899; --light-bg: #f0f9ff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+        .quiz-container { width: 100%; max-width: 800px; background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); overflow: hidden; }
+        .quiz-header { background: linear-gradient(135deg, #10B981, #3B82F6); color: white; padding: 20px 25px; text-align: center; position: relative; }
+        .logo-container { display: flex; justify-content: center; align-items: center; margin-bottom: 15px; }
+        .logo { height: 60px; width: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        .quiz-header h1 { font-size: 1.8rem; margin-bottom: 8px; font-weight: 700; }
+        .quiz-info { display: flex; justify-content: center; gap: 15px; font-size: 1rem; opacity: 0.9; flex-wrap: wrap; }
+        .instructions-container { background: #FFFBEB; border-left: 4px solid #F59E0B; padding: 20px; margin: 0; }
+        .instructions-container h3 { color: #D97706; margin-bottom: 10px; font-size: 1.2rem; }
+        .instructions-list { list-style: none; padding: 0; }
+        .instructions-list li { padding: 5px 0; display: flex; align-items: flex-start; gap: 10px; }
+        .instructions-list li i { color: #10B981; margin-top: 2px; flex-shrink: 0; }
+        .start-quiz-btn { background: #10B981; color: white; border: none; padding: 12px 30px; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin-top: 10px; }
+        .start-quiz-btn:hover { background: #059669; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4); }
+        .quiz-timer { background: #EC4899; color: white; padding: 15px; text-align: center; font-size: 1.5rem; font-weight: bold; display: none; }
+        .quiz-timer.warning { background: #EF4444; animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+        .question-container { padding: 30px; display: none; }
+        .question-number { color: #3B82F6; font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
+        .question-text { font-size: 1.4rem; line-height: 1.5; margin-bottom: 25px; color: #1F2937; }
+        .options-container { display: flex; flex-direction: column; gap: 12px; }
+        .option { padding: 18px 20px; border: 3px solid #E5E7EB; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; font-size: 1.1rem; font-weight: 500; }
+        .option:hover { border-color: #3B82F6; background-color: #EFF6FF; transform: translateY(-2px); }
+        .option.selected { border-color: #10B981; background-color: #D1FAE5; transform: translateY(-2px); }
+        .quiz-navigation { display: flex; justify-content: space-between; padding: 20px 30px; background: #F9FAFB; border-top: 2px solid #E5E7EB; display: none; }
+        .nav-btn { padding: 12px 24px; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .btn-prev { background: #6B7280; color: white; }
+        .btn-next { background: #10B981; color: white; }
+        .btn-submit { background: #EC4899; color: white; padding: 15px 30px; font-size: 1.2rem; }
+        .nav-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .question-numbers { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 20px; background: #F9FAFB; display: none; }
+        .q-number { width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border: 2px solid #D1D5DB; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; }
+        .q-number:hover { border-color: #3B82F6; background: #EFF6FF; }
+        .q-number.answered { background: #D1FAE5; border-color: #10B981; }
+        .q-number.current { background: #3B82F6; color: white; border-color: #3B82F6; }
+        .results-container { padding: 40px; text-align: center; display: none; }
+        .score-circle { width: 150px; height: 150px; border-radius: 50%; background: conic-gradient(#10B981 0% var(--score-percent), #E5E7EB var(--score-percent) 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; position: relative; }
+        .score-circle::before { content: ''; width: 120px; height: 120px; background: white; border-radius: 50%; position: absolute; }
+        .score-text { position: relative; z-index: 1; font-size: 2.5rem; font-weight: bold; color: #10B981; }
+        .score-message { font-size: 1.4rem; margin-bottom: 20px; color: #1F2937; }
+        .recommendation { background: #EFF6FF; padding: 20px; border-radius: 12px; margin: 20px 0; border-left: 4px solid #3B82F6; }
+        .home-btn { background: #3B82F6; color: white; padding: 12px 24px; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin-left: 10px; }
+        .home-btn:hover { background: #2563EB; transform: translateY(-2px); }
+        @media (max-width: 768px) { .quiz-header h1 { font-size: 1.6rem; } .question-text { font-size: 1.2rem; } .option { padding: 15px; font-size: 1rem; } .quiz-navigation { flex-direction: column; gap: 10px; } .nav-btn { width: 100%; } .logo { height: 50px; } }
     </style>
 </head>
 <body>
     <div class="quiz-container">
-        <!-- Header -->
+        <!-- Header with Logo -->
         <div class="quiz-header">
+            <div class="logo-container">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" 
+                     alt="Ideolix Learning Hub" 
+                     class="logo"
+                     onerror="this.src='https://placehold.co/200x60/10B981/FFFFFF?text=Ideolix+Logo'">
+            </div>
             <h1>Grade 6 Mathematics Assessment</h1>
             <div class="quiz-info">
                 <span>40 Questions</span>
@@ -299,9 +74,25 @@
             </div>
         </div>
         
+        <!-- Instructions Section -->
+        <div id="instructions-content" class="instructions-container">
+            <h3>📝 Assessment Instructions</h3>
+            <ul class="instructions-list">
+                <li><i class="fas fa-clock"></i> <strong>Time Limit:</strong> 45 minutes for 40 questions</li>
+                <li><i class="fas fa-question-circle"></i> <strong>Questions:</strong> Multiple choice format</li>
+                <li><i class="fas fa-mouse-pointer"></i> <strong>Navigation:</strong> Click answers and use Next/Previous buttons</li>
+                <li><i class="fas fa-list-ol"></i> <strong>Progress:</strong> Track your progress with question numbers</li>
+                <li><i class="fas fa-flag-checkered"></i> <strong>Submission:</strong> Click "Submit Test" when finished</li>
+                <li><i class="fas fa-chart-line"></i> <strong>Results:</strong> Get instant scoring and recommendations</li>
+            </ul>
+            <button id="start-quiz-btn" class="start-quiz-btn">
+                <i class="fas fa-play-circle"></i> Start Assessment
+            </button>
+        </div>
+        
         <!-- Timer -->
         <div class="quiz-timer" id="quiz-timer">
-            Time: <span id="timer">45:00</span>
+            Time Remaining: <span id="timer">45:00</span>
         </div>
         
         <!-- Quiz Content -->
@@ -329,34 +120,40 @@
             </div>
         </div>
         
-        <!-- Results Content (Hidden Initially) -->
-        <div id="results-content" style="display: none;">
-            <div class="results-container">
-                <h2>Test Complete! 🎉</h2>
-                
-                <div class="score-circle">
-                    <div class="score-text">
-                        <span id="final-score">0</span>/<span id="total-questions">40</span>
-                    </div>
+        <!-- Results Content -->
+        <div id="results-content" class="results-container">
+            <h2>Assessment Complete! 🎉</h2>
+            
+            <div class="score-circle">
+                <div class="score-text">
+                    <span id="final-score">0</span>/<span id="total-questions">40</span>
                 </div>
-                
-                <div class="score-message">
-                    Your Score: <span id="score-percentage">0</span>%
-                </div>
-                
-                <div id="unanswered-warning" style="display: none; background: #FEF3C7; padding: 15px; border-radius: 10px; margin: 15px 0;">
-                    ⚠️ You left <span id="unanswered-count">0</span> questions unanswered
-                </div>
-                
-                <div class="recommendation">
-                    <h3>Recommendation</h3>
-                    <p id="recommendation-text">Loading recommendation...</p>
-                </div>
-                
-                <button class="nav-btn btn-submit" id="retry-btn">Take Another Test</button>
+            </div>
+            
+            <div class="score-message">
+                Your Score: <span id="score-percentage">0</span>%
+            </div>
+            
+            <div id="unanswered-warning" style="display: none; background: #FEF3C7; padding: 15px; border-radius: 10px; margin: 15px 0;">
+                ⚠️ You left <span id="unanswered-count">0</span> questions unanswered
+            </div>
+            
+            <div class="recommendation">
+                <h3>Recommendation</h3>
+                <p id="recommendation-text">Loading recommendation...</p>
+            </div>
+            
+            <div>
+                <button class="nav-btn btn-submit" id="retry-btn">Take Assessment Again</button>
+                <button class="home-btn" onclick="window.location.href='https://www.ideolixlearninghub.com'">
+                    <i class="fas fa-home"></i> Back to Home
+                </button>
             </div>
         </div>
     </div>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <script>
         // 40 CHALLENGING Grade 6 Math Questions
@@ -577,6 +374,20 @@
         let userAnswers = new Array(questions.length).fill(null);
         let timeLeft = 2700; // 45 minutes
         let timerInterval;
+        let quizStarted = false;
+
+        function startQuiz() {
+            quizStarted = true;
+            document.getElementById('instructions-content').style.display = 'none';
+            document.getElementById('quiz-timer').style.display = 'block';
+            document.querySelector('.question-container').style.display = 'block';
+            document.querySelector('.quiz-navigation').style.display = 'flex';
+            document.querySelector('.question-numbers').style.display = 'flex';
+            
+            startTimer();
+            showQuestion(0);
+            generateQuestionNumbers();
+        }
 
         function startTimer() {
             updateTimer();
@@ -752,11 +563,8 @@
 
         // Initialize quiz
         document.addEventListener('DOMContentLoaded', function() {
-            startTimer();
-            showQuestion(0);
-            generateQuestionNumbers();
-            
             // Set up event listeners
+            document.getElementById('start-quiz-btn').addEventListener('click', startQuiz);
             document.getElementById('next-btn').addEventListener('click', nextQuestion);
             document.getElementById('prev-btn').addEventListener('click', prevQuestion);
             document.getElementById('submit-btn').addEventListener('click', submitQuiz);

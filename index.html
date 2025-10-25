@@ -4,11 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ideolix Learning Hub – Online K-12 School with Tech Integration</title>
-  <!-- Add these with your other meta tags -->
-<meta name="robots" content="index, follow">
-<meta name="googlebot" content="index, follow">
-<meta name="google" content="notranslate">
-<meta name="google" content="nopagereadaloud">
 
   <!-- Primary SEO Meta Tags -->
   <meta name="title" content="Ideolix Learning Hub – Transforming Education in the Digital Age" />
@@ -137,6 +132,39 @@
     .typewriter { overflow: hidden; border-right: .15em solid #10B981; white-space: nowrap; margin: 0 auto; animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; }
     @keyframes typing { from { width: 0 } to { width: 100% } }
     @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #10B981; } }
+    
+    /* Active navigation states */
+    .active-nav-link {
+      background-color: rgba(255, 255, 255, 0.2) !important;
+      border-radius: 8px;
+      padding: 4px 12px !important;
+    }
+    
+    #navMenu .active-nav-link {
+      background-color: #10B981 !important;
+      color: white !important;
+    }
+    
+    /* Better image handling */
+    img {
+      transition: opacity 0.3s ease;
+    }
+
+    img[src=""], img:not([src]) {
+      opacity: 0;
+    }
+
+    /* Loading state for images */
+    img:not([loaded]) {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
   </style>
 </head>
 <body class="font-sans text-dark-text">
@@ -173,7 +201,7 @@
         <a href="#videos" class="text-white hover:text-gray-200 font-medium transition">Videos</a>
         <a href="#programs" class="text-white hover:text-gray-200 font-medium transition">Programs</a>
         <a href="#blog" class="text-white hover:text-gray-200 font-medium transition">Blog</a>
-        <a href="#blog" class="text-white hover:text-gray-200 font-medium transition">Assessments</a>
+        <a href="#assessments" class="text-white hover:text-gray-200 font-medium transition">Assessments</a>
         <a href="#hods" class="text-white hover:text-gray-200 font-medium transition">HODs</a>
         <a href="#testimonials" class="text-white hover:text-gray-200 font-medium transition">Testimonials</a>
         <a href="#admission" class="text-white hover:text-gray-200 font-medium transition">Admission</a>
@@ -181,7 +209,7 @@
       </div>
 
       <!-- Mobile Toggle -->
-      <button id="menuToggle" class="md:hidden text-white focus:outline-none" aria-label="Toggle navigation menu">
+      <button id="menuToggle" class="md:hidden text-white focus:outline-none" aria-label="Toggle navigation menu" aria-expanded="false">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
         </svg>
@@ -196,7 +224,7 @@
       <a href="#videos" class="block py-3 text-dark-text hover:bg-ideolix-green hover:text-white rounded-lg font-medium transition duration-200" onclick="toggleMobileMenu()">Class Videos</a>
       <a href="#programs" class="block py-3 text-dark-text hover:bg-ideolix-green hover:text-white rounded-lg font-medium transition duration-200" onclick="toggleMobileMenu()">Programs</a>
       <a href="#blog" class="block py-3 text-dark-text hover:bg-ideolix-green hover:text-white rounded-lg font-medium transition duration-200" onclick="toggleMobileMenu()">Blog</a>
-      <a href="#blog" class="block py-3 text-dark-text hover:bg-ideolix-green hover:text-white rounded-lg font-medium transition duration-200" onclick="toggleMobileMenu()">Assessments</a>
+      <a href="#assessments" class="block py-3 text-dark-text hover:bg-ideolix-green hover:text-white rounded-lg font-medium transition duration-200" onclick="toggleMobileMenu()">Assessments</a>
       <a href="#hods" class="block py-3 text-dark-text hover:bg-ideolix-green hover:text-white rounded-lg font-medium transition duration-200" onclick="toggleMobileMenu()">HODs</a>
       <a href="#testimonials" class="block py-3 text-dark-text hover:bg-ideolix-green hover:text-white rounded-lg font-medium transition duration-200" onclick="toggleMobileMenu()">Testimonials</a>
       <a href="#admission" class="block py-3 text-dark-text hover:bg-ideolix-green hover:text-white rounded-lg font-medium transition duration-200" onclick="toggleMobileMenu()">Admission</a>
@@ -606,7 +634,7 @@
       </div>
     </section>
 
-        <!-- Math Assessments Section -->
+    <!-- Math Assessments Section -->
     <section id="assessments" class="section-padding bg-gradient-to-br from-blue-50 to-cyan-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-center mb-4">Math Practice Assessments</h2>
@@ -754,6 +782,7 @@
         </div>
       </div>
     </section>
+
     <!-- 11. HODs Section -->
     <section id="hods" class="section-padding bg-white text-center">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1003,34 +1032,82 @@
   <!-- JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
-    // --- Initialization ---
-    AOS.init({ duration: 800, once: true });
-
-    // --- Mobile Menu ---
+    // --- Enhanced Navigation & Smooth Scrolling ---
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('navMenu');
+
     function toggleMobileMenu() {
       navMenu.classList.toggle('hidden');
+      const isExpanded = !navMenu.classList.contains('hidden');
+      menuToggle.setAttribute('aria-expanded', isExpanded);
     }
+
     menuToggle.addEventListener('click', toggleMobileMenu);
 
-    // --- Smooth Scroll + Mobile Menu Close ---
+    // Enhanced smooth scroll with offset for fixed navbar
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
+        
+        // Skip if it's just "#"
         if (targetId === '#') return;
+        
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
-          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Calculate offset for fixed navbar
+          const navbarHeight = document.getElementById('navbar').offsetHeight;
+          const targetPosition = targetElement.offsetTop - navbarHeight - 20;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+          
+          // Update URL without page jump
+          history.pushState(null, null, targetId);
         }
+        
+        // Close mobile menu if open
         if (!navMenu.classList.contains('hidden')) {
           navMenu.classList.add('hidden');
+          menuToggle.setAttribute('aria-expanded', 'false');
         }
       });
     });
 
-    // --- Navbar Scroll Effect ---
+    // Highlight active navigation link
+    function highlightActiveNavLink() {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('nav a[href^="#"]');
+      const mobileNavLinks = document.querySelectorAll('#navMenu a[href^="#"]');
+      
+      let currentSection = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        const navbarHeight = document.getElementById('navbar').offsetHeight;
+        
+        if (scrollY >= (sectionTop - navbarHeight - 100)) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+      
+      // Update all navigation links
+      const allNavLinks = [...navLinks, ...mobileNavLinks];
+      allNavLinks.forEach(link => {
+        link.classList.remove('active-nav-link');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+          link.classList.add('active-nav-link');
+        }
+      });
+    }
+
+    // --- Rest of your existing JavaScript remains the same ---
+    AOS.init({ duration: 800, once: true });
+
+    // Navbar scroll effect
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 100) {
@@ -1040,30 +1117,41 @@
         navbar.classList.add('nav-gradient');
         navbar.classList.remove('bg-ideolix-green', 'bg-opacity-95', 'backdrop-blur-sm');
       }
+      
+      // Update active nav links on scroll
+      highlightActiveNavLink();
     });
 
-    // --- Form Submission Feedback ---
+    // Form submission
     const contactForm = document.getElementById('contact-form');
     const statusMessage = document.getElementById('status-message');
     if (contactForm) {
       contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
         const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
         submitBtn.disabled = true;
+        
+        // Simulate form submission
         setTimeout(() => {
           statusMessage.textContent = 'Thank you! Your message has been sent successfully. We will contact you within 24 hours.';
           statusMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700');
           statusMessage.classList.add('bg-green-100', 'text-green-700');
+          
           setTimeout(() => {
-            submitBtn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i> Send Message';
+            submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
+            contactForm.reset();
           }, 3000);
+          
           setTimeout(() => statusMessage.classList.add('hidden'), 7000);
         }, 1000);
       });
     }
 
-    // --- Live Counter ---
+    // Live counter
     const liveCounters = document.querySelectorAll('.live-counter');
     const statsSection = document.getElementById('stats');
     if (statsSection) {
@@ -1091,7 +1179,7 @@
       observer.observe(statsSection);
     }
 
-    // --- Program Filter ---
+    // Program filter
     const filterButtons = document.querySelectorAll('.program-filter-btn');
     const programDescription = document.getElementById('program-description');
     const descriptions = {
@@ -1104,26 +1192,38 @@
         filterButtons.forEach(b => b.classList.remove('ring-4', 'ring-white', 'ring-opacity-50'));
         btn.classList.add('ring-4', 'ring-white', 'ring-opacity-50');
         programDescription.textContent = descriptions[btn.dataset.filter];
-        document.getElementById('programs').scrollIntoView({ behavior: 'smooth' });
+        
+        // Smooth scroll to programs section
+        const programsSection = document.getElementById('programs');
+        const navbarHeight = document.getElementById('navbar').offsetHeight;
+        const targetPosition = programsSection.offsetTop - navbarHeight - 20;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
       });
     });
 
-    // --- Demo Modal ---
+    // Demo modal
     const demoModal = document.getElementById('demo-modal');
     const demoBtn = document.getElementById('demo-class-btn');
     const closeModal = document.getElementById('close-modal');
     const cancelDemo = document.getElementById('cancel-demo');
     const demoForm = document.getElementById('demo-form');
+
     if (demoBtn) demoBtn.addEventListener('click', () => demoModal.classList.remove('hidden'));
     if (closeModal) closeModal.addEventListener('click', () => demoModal.classList.add('hidden'));
     if (cancelDemo) cancelDemo.addEventListener('click', () => demoModal.classList.add('hidden'));
+
     if (demoForm) demoForm.addEventListener('submit', (e) => {
       e.preventDefault();
       alert('Thank you! We will contact you shortly to confirm your demo class schedule.');
       demoModal.classList.add('hidden');
+      demoForm.reset();
     });
 
-    // --- Slideshows ---
+    // Slideshows
     let heroIndex = 0;
     const heroSlides = document.querySelectorAll('#hero-slideshow .hero-slide');
     function showHero() {
@@ -1148,18 +1248,17 @@
       });
     }
 
-    // --- Particles ---
+    // Particles (performance optimized)
     function createParticles() {
-      // Only create on desktop to improve mobile performance
       if (window.innerWidth <= 768) return;
       
       const container = document.getElementById('particles-container');
       if (!container) return;
-      const count = 20; // Reduced from 30
+      const count = 15;
       for (let i = 0; i < count; i++) {
         const p = document.createElement('div');
         p.classList.add('particle');
-        const size = Math.random() * 20 + 5;
+        const size = Math.random() * 15 + 5;
         p.style.width = `${size}px`;
         p.style.height = `${size}px`;
         p.style.left = `${Math.random() * 100}%`;
@@ -1169,7 +1268,7 @@
       }
     }
 
-    // --- Loading Screen ---
+    // Loading screen
     window.addEventListener('load', () => {
       setTimeout(() => {
         const loader = document.getElementById('loading-screen');
@@ -1177,10 +1276,10 @@
           loader.style.opacity = '0';
           setTimeout(() => loader.remove(), 500);
         }
-      }, 1000);
+      }, 800);
     });
 
-    // --- Start Everything ---
+    // Initialize everything
     document.addEventListener('DOMContentLoaded', () => {
       if (heroSlides.length > 0) {
         heroSlides[0].classList.add('active');
@@ -1188,6 +1287,7 @@
       }
       initProgramSlides();
       createParticles();
+      highlightActiveNavLink(); // Initialize nav highlighting
     });
   </script>
 </body>

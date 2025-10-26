@@ -132,33 +132,50 @@
             color: #374151;
         }
 
-        /* Learning Path */
-        .learning-path {
+        /* Topics Grid */
+        .topics-grid {
             padding: 30px;
         }
 
-        .path-step {
-            display: flex;
-            align-items: center;
+        .topics-grid h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1f2937;
+        }
+
+        .topics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            padding: 25px;
-            margin: 20px 0;
+        }
+
+        .topic-card {
             background: #f8fafc;
+            padding: 25px;
             border-radius: 15px;
             border-left: 5px solid var(--kid-blue);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .path-step:hover {
-            transform: translateX(10px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            background: white;
         }
 
-        .step-icon {
-            width: 60px;
-            height: 60px;
+        .topic-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .topic-icon {
+            width: 50px;
+            height: 50px;
             background: var(--kid-blue);
-            border-radius: 50%;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -167,85 +184,94 @@
             flex-shrink: 0;
         }
 
-        .step-content {
-            flex: 1;
-        }
-
-        .step-content h3 {
+        .topic-content h3 {
             color: #1f2937;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
-        .step-content p {
+        .topic-content p {
             color: #6b7280;
-            margin-bottom: 10px;
+            font-size: 0.9rem;
         }
 
-        .step-btn {
-            padding: 10px 20px;
+        .topic-progress {
+            background: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--ideolix-green);
+            transition: width 0.3s ease;
+        }
+
+        .practice-btn {
+            padding: 8px 16px;
             background: var(--ideolix-green);
             color: white;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 600;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
-            display: inline-block;
         }
 
-        .step-btn:hover {
+        .practice-btn:hover {
             background: #059669;
             transform: translateY(-2px);
         }
 
-        .step-completed .step-icon {
-            background: var(--ideolix-green);
-        }
-
-        /* Topics Grid */
-        .topics-grid {
+        /* Quick Actions */
+        .quick-actions {
             padding: 30px;
             background: #f8fafc;
-        }
-
-        .topics-grid h2 {
             text-align: center;
-            margin-bottom: 25px;
-            color: #1f2937;
         }
 
-        .topics {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        .action-buttons {
+            display: flex;
+            justify-content: center;
             gap: 20px;
+            flex-wrap: wrap;
         }
 
-        .topic-card {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        .action-btn {
+            padding: 15px 30px;
+            background: var(--ideolix-orange);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
         }
 
-        .topic-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        .action-btn:hover {
+            background: #ea580c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(249, 115, 22, 0.4);
         }
 
-        .topic-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
+        .action-btn.assessment {
+            background: var(--kid-pink);
         }
 
-        .topic-card h4 {
-            color: #1f2937;
-            margin-bottom: 8px;
-        }
-
-        .topic-card p {
-            color: #6b7280;
-            font-size: 0.9rem;
+        .action-btn.assessment:hover {
+            background: #db2777;
         }
 
         @media (max-width: 768px) {
@@ -263,9 +289,12 @@
                 height: 60px;
             }
             
-            .path-step {
+            .topics {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
                 flex-direction: column;
-                text-align: center;
             }
         }
     </style>
@@ -279,7 +308,7 @@
                  class="logo"
                  onerror="this.src='https://placehold.co/200x60/10B981/FFFFFF?text=Ideolix+Logo'">
             <h1>Grade 1 Mathematics</h1>
-            <p>Master basic math skills through interactive learning</p>
+            <p>Master counting, addition, subtraction, and more!</p>
         </div>
 
         <!-- Navigation -->
@@ -313,107 +342,97 @@
             </div>
         </div>
 
-        <!-- Learning Path -->
-        <div class="learning-path">
-            <h2 style="text-align: center; margin-bottom: 30px;">Your Learning Path</h2>
-            
-            <div class="path-step" id="practice-step">
-                <div class="step-icon">📚</div>
-                <div class="step-content">
-                    <h3>Interactive Practice</h3>
-                    <p>Build your skills with fun, interactive math problems. Get instant feedback and improve step by step.</p>
-                    <a href="practice.html" class="step-btn">Start Practicing</a>
-                </div>
-            </div>
-
-            <div class="path-step" id="assessment-step">
-                <div class="step-icon">📝</div>
-                <div class="step-content">
-                    <h3>Take Assessment</h3>
-                    <p>Test your knowledge with our comprehensive 40-question assessment. Get detailed results and recommendations.</p>
-                    <a href="assessment.html" class="step-btn">Take Assessment</a>
-                </div>
-            </div>
-
-            <div class="path-step" id="review-step">
-                <div class="step-icon">🔍</div>
-                <div class="step-content">
-                    <h3>Review & Improve</h3>
-                    <p>Based on your assessment results, focus on areas that need improvement with targeted practice.</p>
-                    <a href="practice.html" class="step-btn">Review Topics</a>
-                </div>
+        <!-- Topics Grid -->
+        <div class="topics-grid">
+            <h2>What You'll Learn in Grade 1</h2>
+            <div class="topics" id="topics-container">
+                <!-- Topics will be loaded by JavaScript -->
             </div>
         </div>
 
-        <!-- Topics Grid -->
-        <div class="topics-grid">
-            <h2>What You'll Learn</h2>
-            <div class="topics">
-                <div class="topic-card">
-                    <div class="topic-icon">➕</div>
-                    <h4>Addition</h4>
-                    <p>Learn to add numbers up to 20</p>
-                </div>
-                <div class="topic-card">
-                    <div class="topic-icon">➖</div>
-                    <h4>Subtraction</h4>
-                    <p>Subtract numbers within 20</p>
-                </div>
-                <div class="topic-card">
-                    <div class="topic-icon">🔢</div>
-                    <h4>Number Sense</h4>
-                    <p>Understand numbers 1-100</p>
-                </div>
-                <div class="topic-card">
-                    <div class="topic-icon">📊</div>
-                    <h4>Patterns</h4>
-                    <p>Recognize and create patterns</p>
-                </div>
-                <div class="topic-card">
-                    <div class="topic-icon">⚖️</div>
-                    <h4>Comparisons</h4>
-                    <p>Compare numbers and quantities</p>
-                </div>
-                <div class="topic-card">
-                    <div class="topic-icon">🕒</div>
-                    <h4>Time & Money</h4>
-                    <p>Tell time and count coins</p>
-                </div>
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h2 style="margin-bottom: 20px;">Quick Actions</h2>
+            <div class="action-buttons">
+                <a href="practice.html" class="action-btn">Start Practice Session</a>
+                <a href="assessment.html" class="action-btn assessment">Take Full Assessment</a>
             </div>
         </div>
     </div>
 
+    <script src="../../js/math-engine.js"></script>
     <script>
+        // Load Grade 1 curriculum
+        const curriculum = MathEngine.getCurriculum(1);
+        
         function loadProgress() {
-            // Load practice progress
+            // Load overall progress
             const practiceProgress = localStorage.getItem('grade1MathProgress');
+            let totalProblemsDone = 0;
+            let totalCorrect = 0;
+            let totalTopics = curriculum.topics.length;
+
             if (practiceProgress) {
                 const progress = JSON.parse(practiceProgress);
-                const practicePercent = Math.min((progress.problemsDone / 20) * 100, 100);
-                document.getElementById('practice-percent').textContent = Math.round(practicePercent) + '%';
-                document.getElementById('practice-progress').style.setProperty('--progress', practicePercent + '%');
-                
-                // Mark practice step as completed if any problems done
-                if (progress.problemsDone > 0) {
-                    document.getElementById('practice-step').classList.add('step-completed');
-                }
+                totalProblemsDone = progress.totalProblemsDone || 0;
+                totalCorrect = progress.totalCorrect || 0;
             }
 
-            // Load assessment progress (you can expand this later)
+            // Calculate overall percentages
+            const practicePercent = Math.min((totalProblemsDone / 50) * 100, 100);
+            document.getElementById('practice-percent').textContent = Math.round(practicePercent) + '%';
+            document.getElementById('practice-progress').style.setProperty('--progress', practicePercent + '%');
+
+            // Load assessment progress
             const assessmentScore = localStorage.getItem('grade1MathAssessment');
             if (assessmentScore) {
                 const score = JSON.parse(assessmentScore);
                 document.getElementById('assessment-percent').textContent = score.percentage + '%';
                 document.getElementById('assessment-progress').style.setProperty('--progress', score.percentage + '%');
-                document.getElementById('assessment-step').classList.add('step-completed');
                 
-                // Calculate mastery (average of practice and assessment)
-                const practiceData = JSON.parse(localStorage.getItem('grade1MathProgress') || '{"problemsDone":0}');
-                const practicePercent = Math.min((practiceData.problemsDone / 20) * 100, 100);
+                // Calculate mastery
                 const masteryPercent = (practicePercent + score.percentage) / 2;
                 document.getElementById('mastery-percent').textContent = Math.round(masteryPercent) + '%';
                 document.getElementById('mastery-progress').style.setProperty('--progress', masteryPercent + '%');
             }
+
+            // Load topic progress and render topics
+            renderTopics();
+        }
+
+        function renderTopics() {
+            const container = document.getElementById('topics-container');
+            container.innerHTML = '';
+
+            curriculum.topics.forEach(topic => {
+                const topicProgress = localStorage.getItem(`grade1${topic.id}Progress`) || '{"problemsDone":0, "correct":0}';
+                const progress = JSON.parse(topicProgress);
+                const progressPercent = Math.min((progress.problemsDone / 10) * 100, 100);
+
+                const topicCard = document.createElement('div');
+                topicCard.className = 'topic-card';
+                topicCard.onclick = () => window.location.href = `practice.html?topic=${topic.id}`;
+                
+                topicCard.innerHTML = `
+                    <div class="topic-header">
+                        <div class="topic-icon">${topic.icon}</div>
+                        <div class="topic-content">
+                            <h3>${topic.name}</h3>
+                            <p>${MathEngine.getTopicDescription(1, topic.id)}</p>
+                        </div>
+                    </div>
+                    <div class="topic-progress">
+                        <span>Progress</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${progressPercent}%"></div>
+                        </div>
+                        <span>${Math.round(progressPercent)}%</span>
+                        <a href="practice.html?topic=${topic.id}" class="practice-btn">Practice</a>
+                    </div>
+                `;
+                
+                container.appendChild(topicCard);
+            });
         }
 
         document.addEventListener('DOMContentLoaded', loadProgress);

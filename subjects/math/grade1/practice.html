@@ -78,11 +78,34 @@
             box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
         }
 
-        /* Progress */
-        .progress-section {
+        /* Topic Selection */
+        .topic-selection {
             padding: 20px;
             background: #f0fdf4;
             border-bottom: 2px solid #dcfce7;
+        }
+
+        .topic-select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: white;
+        }
+
+        .topic-info {
+            margin-top: 10px;
+            color: #065f46;
+            font-size: 0.9rem;
+        }
+
+        /* Progress */
+        .progress-section {
+            padding: 20px;
+            background: #f8fafc;
+            border-bottom: 2px solid #e5e7eb;
         }
 
         .progress-bar {
@@ -111,7 +134,7 @@
         }
 
         .problem-text {
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: #1f2937;
             margin: 20px 0;
@@ -119,6 +142,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            line-height: 1.5;
         }
 
         .answer-section {
@@ -131,9 +155,9 @@
         }
 
         .answer-input {
-            width: 120px;
+            width: 150px;
             padding: 15px;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             text-align: center;
             border: 3px solid #d1d5db;
             border-radius: 12px;
@@ -168,7 +192,7 @@
             margin: 20px 0;
             padding: 20px;
             border-radius: 12px;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             text-align: center;
             display: none;
             animation: slideIn 0.5s ease;
@@ -248,12 +272,12 @@
 
         @media (max-width: 768px) {
             .problem-text {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
             
             .answer-input {
-                width: 100px;
-                font-size: 1.5rem;
+                width: 120px;
+                font-size: 1.2rem;
             }
             
             .answer-section {
@@ -271,13 +295,23 @@
                  class="logo"
                  onerror="this.src='https://placehold.co/200x60/10B981/FFFFFF?text=Ideolix+Logo'">
             <h1>Grade 1 Math Practice</h1>
-            <p>Learn with interactive problems!</p>
+            <p>Master all Grade 1 math topics!</p>
         </div>
 
         <!-- Navigation -->
         <div class="navigation">
             <a href="index.html" class="nav-btn">← Back to Learning Hub</a>
             <a href="assessment.html" class="nav-btn">Take Assessment →</a>
+        </div>
+
+        <!-- Topic Selection -->
+        <div class="topic-selection">
+            <select class="topic-select" id="topic-select">
+                <option value="">Choose a topic to practice...</option>
+            </select>
+            <div class="topic-info" id="topic-info">
+                Select a topic to start practicing
+            </div>
         </div>
 
         <!-- Progress -->
@@ -294,12 +328,12 @@
         <!-- Practice Area -->
         <div class="practice-area">
             <div class="problem-display">
-                <div class="problem-text" id="problem-text">Loading practice problem...</div>
+                <div class="problem-text" id="problem-text">Please select a topic to start practicing</div>
             </div>
 
             <div class="answer-section">
-                <input type="number" class="answer-input" id="answer-input" placeholder="?" min="0" max="100">
-                <button class="check-btn" id="check-btn" onclick="checkAnswer()">Check Answer</button>
+                <input type="text" class="answer-input" id="answer-input" placeholder="Your answer" disabled>
+                <button class="check-btn" id="check-btn" onclick="checkAnswer()" disabled>Check Answer</button>
             </div>
 
             <div class="feedback" id="feedback">
@@ -331,6 +365,7 @@
     <script src="../../js/math-engine.js"></script>
     <script>
         let currentProblem = null;
+        let currentTopic = '';
         let userProgress = {
             correct: 0,
             total: 0,
@@ -338,16 +373,93 @@
             problemsDone: 0
         };
 
+        // Load curriculum
+        const curriculum = MathEngine.getCurriculum(1);
+
+        function initializeTopicSelector() {
+            const select = document.getElementById('topic-select');
+            curriculum.topics.forEach(topic => {
+                const option = document.createElement('option');
+                option.value = topic.id;
+                option.textContent = `${topic.icon} ${topic.name}`;
+                select.appendChild(option);
+            });
+
+            // Check for URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const topicParam = urlParams.get('topic');
+            if (topicParam && curriculum.topics.some(t => t.id === topicParam)) {
+                select.value = topicParam;
+                startTopicPractice(topicParam);
+            }
+
+            select.addEventListener('change', function() {
+                if (this.value) {
+                    startTopicPractice(this.value);
+                } else {
+                    resetPracticeArea();
+                }
+            });
+        }
+
+        function startTopicPractice(topic) {
+            currentTopic = topic;
+            const topicObj = curriculum.topics.find(t => t.id === topic);
+            document.getElementById('topic-info').textContent = topicObj ? MathEngine.getTopicDescription(1, topic) : '';
+            
+            loadProgress();
+            generateNewProblem();
+            
+            // Enable input and button
+            document.getElementById('answer-input').disabled = false;
+            document.getElementById('check-btn').disabled = false;
+            document.getElementById('answer-input').focus();
+        }
+
+        function resetPracticeArea() {
+            currentTopic = '';
+            document.getElementById('problem-text').textContent = 'Please select a topic to start practicing';
+            document.getElementById('answer-input').value = '';
+            document.getElementById('answer-input').disabled = true;
+            document.getElementById('check-btn').disabled = true;
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+        }
+
         function loadProgress() {
-            const saved = localStorage.getItem('grade1MathProgress');
+            const saved = localStorage.getItem(`grade1${currentTopic}Progress`);
             if (saved) {
                 userProgress = JSON.parse(saved);
+            } else {
+                userProgress = { correct: 0, total: 0, streak: 0, problemsDone: 0 };
             }
             updateProgressDisplay();
         }
 
         function saveProgress() {
-            localStorage.setItem('grade1MathProgress', JSON.stringify(userProgress));
+            localStorage.setItem(`grade1${currentTopic}Progress`, JSON.stringify(userProgress));
+            
+            // Update overall progress
+            updateOverallProgress();
+        }
+
+        function updateOverallProgress() {
+            let totalProblemsDone = 0;
+            let totalCorrect = 0;
+            
+            curriculum.topics.forEach(topic => {
+                const progress = localStorage.getItem(`grade1${topic.id}Progress`);
+                if (progress) {
+                    const data = JSON.parse(progress);
+                    totalProblemsDone += data.problemsDone || 0;
+                    totalCorrect += data.correct || 0;
+                }
+            });
+            
+            localStorage.setItem('grade1MathProgress', JSON.stringify({
+                totalProblemsDone,
+                totalCorrect
+            }));
         }
 
         function updateProgressDisplay() {
@@ -359,10 +471,13 @@
             
             const progressPercent = userProgress.problemsDone > 0 ? (userProgress.problemsDone / 20) * 100 : 0;
             document.getElementById('progress-fill').style.width = `${Math.min(progressPercent, 100)}%`;
+            document.getElementById('problems-total').textContent = '20';
         }
 
         function generateNewProblem() {
-            currentProblem = MathEngine.generateProblem(1);
+            if (!currentTopic) return;
+            
+            currentProblem = MathEngine.generateProblem(1, currentTopic);
             document.getElementById('problem-text').textContent = currentProblem.text;
             document.getElementById('answer-input').value = '';
             document.getElementById('feedback').style.display = 'none';
@@ -372,9 +487,11 @@
         }
 
         function checkAnswer() {
-            const userAnswer = parseInt(document.getElementById('answer-input').value);
-            if (isNaN(userAnswer)) {
-                alert('Please enter a number!');
+            if (!currentTopic) return;
+            
+            const userAnswer = document.getElementById('answer-input').value.trim();
+            if (!userAnswer) {
+                alert('Please enter an answer!');
                 return;
             }
 
@@ -388,13 +505,13 @@
 
             if (isCorrect) {
                 feedback.className = 'feedback correct';
-                feedbackText.textContent = `✅ Correct! ${currentProblem.text} = ${userAnswer}`;
-                hintText.textContent = currentProblem.explanation || 'Great job!';
+                feedbackText.textContent = `✅ Correct! ${currentProblem.explanation}`;
+                hintText.textContent = 'Great job! Keep going!';
                 userProgress.correct++;
                 userProgress.streak++;
             } else {
                 feedback.className = 'feedback incorrect';
-                feedbackText.textContent = `❌ Not quite. The correct answer is ${currentProblem.answer}`;
+                feedbackText.textContent = `❌ Not quite. ${currentProblem.explanation}`;
                 hintText.textContent = currentProblem.hint || 'Try again!';
                 userProgress.streak = 0;
             }
@@ -413,9 +530,7 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            loadProgress();
-            document.getElementById('problems-total').textContent = '20';
-            generateNewProblem();
+            initializeTopicSelector();
             
             document.getElementById('answer-input').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {

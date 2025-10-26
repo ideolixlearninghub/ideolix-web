@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideolix - Grade 2 Math Assessment</title>
+    <style>
+        /* Quiz Styles */
+        :root {
+            --ideolix-green: #10B981;
+            --ideolix-orange: #F97316;
+            --kid-blue: #3B82F6;
+            --kid-pink: #EC4899;
+            --light-bg: #f0f9ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* Header with Logo */
+        .quiz-header {
+            background: linear-gradient(135deg, #10B981, #3B82F6);
+            color: white;
+            padding: 20px 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .quiz-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .quiz-info {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-size: 1rem;
+            opacity: 0.9;
+            flex-wrap: wrap;
+        }
+
+        /* Instructions Section */
+        .instructions-container {
+            background: #FFFBEB;
+            border-left: 4px solid #F59E0B;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .instructions-container h3 {
+            color: #D97706;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .instructions-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .instructions-list li {
+            padding: 5px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .instructions-list li i {
+            color: #10B981;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .start-quiz-btn {
+            background: #10B981;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .start-quiz-btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Timer */
+        .quiz-timer {
+            background: #EC4899;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: none;
+        }
+
+        .quiz-timer.warning {
+            background: #EF4444;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* Question Container */
+        .question-container {
+            padding: 30px;
+            display: none;
+        }
+
+        .question-number {
+            color: #3B82F6;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            color: #1F2937;
+        }
+
+        /* Options */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 18px 20px;
+            border: 3px solid #E5E7EB;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .option:hover {
+            border-color: #3B82F6;
+            background-color: #EFF6FF;
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            border-color: #10B981;
+            background-color: #D1FAE5;
+            transform: translateY(-2px);
+        }
+
+        /* Navigation */
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 30px;
+            background: #F9FAFB;
+            border-top: 2px solid #E5E7EB;
+            display: none;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-prev {
+            background: #6B7280;
+            color: white;
+        }
+
+        .btn-next {
+            background: #10B981;
+            color: white;
+        }
+
+        .btn-submit {
+            background: #EC4899;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Question Numbers */
+        .question-numbers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            padding: 20px;
+            background: #F9FAFB;
+            display: none;
+        }
+
+        .q-number {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #D1D5DB;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .q-number:hover {
+            border-color: #3B82F6;
+            background: #EFF6FF;
+        }
+
+        .q-number.answered {
+            background: #D1FAE5;
+            border-color: #10B981;
+        }
+
+        .q-number.current {
+            background: #3B82F6;
+            color: white;
+            border-color: #3B82F6;
+        }
+
+        /* Results Page */
+        .results-container {
+            padding: 40px;
+            text-align: center;
+            display: none;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(#10B981 0% var(--score-percent), #E5E7EB var(--score-percent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .score-circle::before {
+            content: '';
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .score-text {
+            position: relative;
+            z-index: 1;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color

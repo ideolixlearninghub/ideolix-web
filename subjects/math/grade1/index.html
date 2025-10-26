@@ -1,1 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 1 Math - Ideolix Learning Hub</title>
+    <style>
+        :root {
+            --ideolix-green: #10B981;
+            --ideolix-orange: #F97316;
+            --kid-blue: #3B82F6;
+            --kid-pink: #EC4899;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .hub-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .hub-header {
+            background: linear-gradient(135deg, #10B981, #3B82F6);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .hub-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .hub-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            background: #f8fafc;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            background: var(--kid-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Progress Overview */
+        .progress-overview {
+            padding: 30px;
+            background: #f0fdf4;
+            text-align: center;
+        }
+
+        .progress-circles {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .progress-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: conic-gradient(var(--ideolix-green) 0% var(--progress), #e5e7eb var(--progress) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .progress-circle::before {
+            content: '';
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .progress-text {
+            position: relative;
+            z-index: 1;
+            font-weight: bold;
+            color: var(--ideolix-green);
+        }
+
+        .progress-label {
+            margin-top: 10px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        /* Learning Path */
+        .learning-path {
+            padding: 30px;
+        }
+
+        .path-step {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 25px;
+            margin: 20px 0;
+            background: #f8fafc;
+            border-radius: 15px;
+            border-left: 5px solid var(--kid-blue);
+            transition: all 0.3s ease;
+        }
+
+        .path-step:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--kid-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h3 {
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+
+        .step-btn {
+            padding: 10px 20px;
+            background: var(--ideolix-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .step-btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .step-completed .step-icon {
+            background: var(--ideolix-green);
+        }
+
+        /* Topics Grid */
+        .topics-grid {
+            padding: 30px;
+            background: #f8fafc;
+        }
+
+        .topics-grid h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #1f2937;
+        }
+
+        .topics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .topic-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .topic-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .topic-card h4 {
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .topic-card p {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .progress-circles {
+                gap: 15px;
+            }
+            
+            .progress-circle {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .progress-circle::before {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .path-step {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hub-container">
+        <!-- Header -->
+        <div class="hub-header">
+            <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" 
+                 alt="Ideolix Learning Hub" 
+                 class="logo"
+                 onerror="this.src='https://placehold.co/200x60/10B981/FFFFFF?text=Ideolix+Logo'">
+            <h1>Grade 1 Mathematics</h1>
+            <p>Master basic math skills through interactive learning</p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="main-nav">
+            <a href="../../index.html" class="nav-btn">🏠 All Subjects</a>
+            <a href="../grade2/index.html" class="nav-btn">Grade 2 →</a>
+        </div>
+
+        <!-- Progress Overview -->
+        <div class="progress-overview">
+            <h2>Your Learning Progress</h2>
+            <div class="progress-circles">
+                <div class="progress-item">
+                    <div class="progress-circle" id="practice-progress">
+                        <div class="progress-text" id="practice-percent">0%</div>
+                    </div>
+                    <div class="progress-label">Practice</div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-circle" id="assessment-progress">
+                        <div class="progress-text" id="assessment-percent">0%</div>
+                    </div>
+                    <div class="progress-label">Assessment</div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-circle" id="mastery-progress">
+                        <div class="progress-text" id="mastery-percent">0%</div>
+                    </div>
+                    <div class="progress-label">Mastery</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Path -->
+        <div class="learning-path">
+            <h2 style="text-align: center; margin-bottom: 30px;">Your Learning Path</h2>
+            
+            <div class="path-step" id="practice-step">
+                <div class="step-icon">📚</div>
+                <div class="step-content">
+                    <h3>Interactive Practice</h3>
+                    <p>Build your skills with fun, interactive math problems. Get instant feedback and improve step by step.</p>
+                    <a href="practice.html" class="step-btn">Start Practicing</a>
+                </div>
+            </div>
+
+            <div class="path-step" id="assessment-step">
+                <div class="step-icon">📝</div>
+                <div class="step-content">
+                    <h3>Take Assessment</h3>
+                    <p>Test your knowledge with our comprehensive 40-question assessment. Get detailed results and recommendations.</p>
+                    <a href="assessment.html" class="step-btn">Take Assessment</a>
+                </div>
+            </div>
+
+            <div class="path-step" id="review-step">
+                <div class="step-icon">🔍</div>
+                <div class="step-content">
+                    <h3>Review & Improve</h3>
+                    <p>Based on your assessment results, focus on areas that need improvement with targeted practice.</p>
+                    <a href="practice.html" class="step-btn">Review Topics</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Topics Grid -->
+        <div class="topics-grid">
+            <h2>What You'll Learn</h2>
+            <div class="topics">
+                <div class="topic-card">
+                    <div class="topic-icon">➕</div>
+                    <h4>Addition</h4>
+                    <p>Learn to add numbers up to 20</p>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-icon">➖</div>
+                    <h4>Subtraction</h4>
+                    <p>Subtract numbers within 20</p>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-icon">🔢</div>
+                    <h4>Number Sense</h4>
+                    <p>Understand numbers 1-100</p>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-icon">📊</div>
+                    <h4>Patterns</h4>
+                    <p>Recognize and create patterns</p>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-icon">⚖️</div>
+                    <h4>Comparisons</h4>
+                    <p>Compare numbers and quantities</p>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-icon">🕒</div>
+                    <h4>Time & Money</h4>
+                    <p>Tell time and count coins</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadProgress() {
+            // Load practice progress
+            const practiceProgress = localStorage.getItem('grade1MathProgress');
+            if (practiceProgress) {
+                const progress = JSON.parse(practiceProgress);
+                const practicePercent = Math.min((progress.problemsDone / 20) * 100, 100);
+                document.getElementById('practice-percent').textContent = Math.round(practicePercent) + '%';
+                document.getElementById('practice-progress').style.setProperty('--progress', practicePercent + '%');
+                
+                // Mark practice step as completed if any problems done
+                if (progress.problemsDone > 0) {
+                    document.getElementById('practice-step').classList.add('step-completed');
+                }
+            }
+
+            // Load assessment progress (you can expand this later)
+            const assessmentScore = localStorage.getItem('grade1MathAssessment');
+            if (assessmentScore) {
+                const score = JSON.parse(assessmentScore);
+                document.getElementById('assessment-percent').textContent = score.percentage + '%';
+                document.getElementById('assessment-progress').style.setProperty('--progress', score.percentage + '%');
+                document.getElementById('assessment-step').classList.add('step-completed');
+                
+                // Calculate mastery (average of practice and assessment)
+                const practiceData = JSON.parse(localStorage.getItem('grade1MathProgress') || '{"problemsDone":0}');
+                const practicePercent = Math.min((practiceData.problemsDone / 20) * 100, 100);
+                const masteryPercent = (practicePercent + score.percentage) / 2;
+                document.getElementById('mastery-percent').textContent = Math.round(masteryPercent) + '%';
+                document.getElementById('mastery-progress').style.setProperty('--progress', masteryPercent + '%');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadProgress);
+    </script>
+</body>
+</html>

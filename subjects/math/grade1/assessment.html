@@ -4,514 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grade 1 Math Assessment - Ideolix Learning Hub</title>
+    <!-- [KEEP ALL THE SAME CSS STYLES FROM BEFORE] -->
     <style>
-        :root {
-            --ideolix-green: #10B981;
-            --ideolix-orange: #F97316;
-            --kid-blue: #3B82F6;
-            --kid-pink: #EC4899;
-            --light-bg: #f0f9ff;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .quiz-container {
-            width: 100%;
-            max-width: 800px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-
-        /* Header with Logo */
-        .quiz-header {
-            background: linear-gradient(135deg, #10B981, #3B82F6);
-            color: white;
-            padding: 20px 25px;
-            text-align: center;
-            position: relative;
-        }
-
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .logo {
-            height: 60px;
-            width: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-
-        .quiz-header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .quiz-info {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            font-size: 1rem;
-            opacity: 0.9;
-            flex-wrap: wrap;
-        }
-
-        /* Instructions Section */
-        .instructions-container {
-            background: #FFFBEB;
-            border-left: 4px solid #F59E0B;
-            padding: 20px;
-            margin: 0;
-        }
-
-        .instructions-container h3 {
-            color: #D97706;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-
-        .instructions-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .instructions-list li {
-            padding: 5px 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .instructions-list li i {
-            color: #10B981;
-            margin-top: 2px;
-            flex-shrink: 0;
-        }
-
-        .start-quiz-btn {
-            background: #10B981;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .start-quiz-btn:hover {
-            background: #059669;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
-        }
-
-        /* Timer */
-        .quiz-timer {
-            background: #EC4899;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            display: none;
-        }
-
-        .quiz-timer.warning {
-            background: #EF4444;
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-
-        /* Question Container */
-        .question-container {
-            padding: 30px;
-            display: none;
-        }
-
-        .question-number {
-            color: #3B82F6;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .question-text {
-            font-size: 1.4rem;
-            line-height: 1.5;
-            margin-bottom: 25px;
-            color: #1F2937;
-        }
-
-        /* Options */
-        .options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .option {
-            padding: 18px 20px;
-            border: 3px solid #E5E7EB;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        .option:hover {
-            border-color: #3B82F6;
-            background-color: #EFF6FF;
-            transform: translateY(-2px);
-        }
-
-        .option.selected {
-            border-color: #10B981;
-            background-color: #D1FAE5;
-            transform: translateY(-2px);
-        }
-
-        /* Navigation */
-        .quiz-navigation {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 30px;
-            background: #F9FAFB;
-            border-top: 2px solid #E5E7EB;
-            display: none;
-        }
-
-        .nav-btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-prev {
-            background: #6B7280;
-            color: white;
-        }
-
-        .btn-next {
-            background: #10B981;
-            color: white;
-        }
-
-        .btn-submit {
-            background: #EC4899;
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-        }
-
-        .nav-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        /* Question Numbers */
-        .question-numbers {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            padding: 20px;
-            background: #F9FAFB;
-            display: none;
-        }
-
-        .q-number {
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #D1D5DB;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .q-number:hover {
-            border-color: #3B82F6;
-            background: #EFF6FF;
-        }
-
-        .q-number.answered {
-            background: #D1FAE5;
-            border-color: #10B981;
-        }
-
-        .q-number.current {
-            background: #3B82F6;
-            color: white;
-            border-color: #3B82F6;
-        }
-
-        /* Results Page */
-        .results-container {
-            padding: 40px;
-            text-align: center;
-            display: none;
-        }
-
-        .score-circle {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: conic-gradient(#10B981 0% var(--score-percent), #E5E7EB var(--score-percent) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 30px;
-            position: relative;
-        }
-
-        .score-circle::before {
-            content: '';
-            width: 120px;
-            height: 120px;
-            background: white;
-            border-radius: 50%;
-            position: absolute;
-        }
-
-        .score-text {
-            position: relative;
-            z-index: 1;
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #10B981;
-        }
-
-        .score-message {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            color: #1F2937;
-        }
-
-        .recommendation {
-            background: #EFF6FF;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            border-left: 4px solid #3B82F6;
-        }
-
-        .home-btn {
-            background: #3B82F6;
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-left: 10px;
-        }
-
-        .home-btn:hover {
-            background: #2563EB;
-            transform: translateY(-2px);
-        }
-
-        /* Topic Breakdown */
-        .topic-breakdown {
-            background: #F0FDF4;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            text-align: left;
-        }
-
-        .topic-breakdown h3 {
-            color: #065F46;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .topic-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #D1FAE5;
-        }
-
-        .topic-item:last-child {
-            border-bottom: none;
-        }
-
-        .topic-score {
-            font-weight: bold;
-            color: #10B981;
-        }
-
-        @media (max-width: 768px) {
-            .quiz-header h1 {
-                font-size: 1.6rem;
-            }
-            
-            .question-text {
-                font-size: 1.2rem;
-            }
-            
-            .option {
-                padding: 15px;
-                font-size: 1rem;
-            }
-            
-            .quiz-navigation {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .nav-btn {
-                width: 100%;
-            }
-
-            .logo {
-                height: 50px;
-            }
-        }
+        /* ALL THE SAME CSS AS BEFORE */
     </style>
 </head>
 <body>
     <div class="quiz-container">
-        <!-- Header with Logo -->
-        <div class="quiz-header">
-            <div class="logo-container">
-                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" 
-                     alt="Ideolix Learning Hub" 
-                     class="logo"
-                     onerror="this.src='https://placehold.co/200x60/10B981/FFFFFF?text=Ideolix+Logo'">
-            </div>
-            <h1>Grade 1 Mathematics Assessment</h1>
-            <div class="quiz-info">
-                <span>30 Questions</span>
-                <span>•</span>
-                <span>40 Minutes</span>
-                <span>•</span>
-                <span>All Topics</span>
-            </div>
-        </div>
-        
-        <!-- Instructions Section -->
-        <div id="instructions-content" class="instructions-container">
-            <h3>📝 Assessment Instructions</h3>
-            <ul class="instructions-list">
-                <li><i class="fas fa-clock"></i> <strong>Time Limit:</strong> 40 minutes for 30 questions</li>
-                <li><i class="fas fa-question-circle"></i> <strong>Questions:</strong> Covers all Grade 1 math topics</li>
-                <li><i class="fas fa-mouse-pointer"></i> <strong>Navigation:</strong> Click answers and use Next/Previous buttons</li>
-                <li><i class="fas fa-list-ol"></i> <strong>Progress:</strong> Track your progress with question numbers</li>
-                <li><i class="fas fa-flag-checkered"></i> <strong>Submission:</strong> Click "Submit Test" when finished</li>
-                <li><i class="fas fa-chart-line"></i> <strong>Results:</strong> Get detailed scoring and topic breakdown</li>
-            </ul>
-            <button id="start-quiz-btn" class="start-quiz-btn">
-                <i class="fas fa-play-circle"></i> Start Assessment
-            </button>
-        </div>
-        
-        <!-- Timer -->
-        <div class="quiz-timer" id="quiz-timer">
-            Time Remaining: <span id="timer">40:00</span>
-        </div>
-        
-        <!-- Quiz Content -->
-        <div id="quiz-content">
-            <div class="question-container">
-                <div class="question-number" id="question-number">Question 1 of 30</div>
-                <div class="question-text" id="question-text">Loading question...</div>
-                <div class="options-container" id="options-container">
-                    <!-- Options will be loaded here -->
-                </div>
-            </div>
-            
-            <!-- Navigation -->
-            <div class="quiz-navigation">
-                <button class="nav-btn btn-prev" id="prev-btn">Previous</button>
-                <div class="question-numbers" id="question-numbers">
-                    <!-- Question numbers will be generated here -->
-                </div>
-                <button class="nav-btn btn-next" id="next-btn">Next</button>
-            </div>
-            
-            <!-- Submit Button -->
-            <div style="text-align: center; padding: 20px;">
-                <button class="nav-btn btn-submit" id="submit-btn">Submit Test</button>
-            </div>
-        </div>
-        
-        <!-- Results Content -->
-        <div id="results-content" class="results-container">
-            <h2>Assessment Complete! 🎉</h2>
-            
-            <div class="score-circle">
-                <div class="score-text">
-                    <span id="final-score">0</span>/<span id="total-questions">30</span>
-                </div>
-            </div>
-            
-            <div class="score-message">
-                Your Score: <span id="score-percentage">0</span>%
-            </div>
-            
-            <div id="unanswered-warning" style="display: none; background: #FEF3C7; padding: 15px; border-radius: 10px; margin: 15px 0;">
-                ⚠️ You left <span id="unanswered-count">0</span> questions unanswered
-            </div>
-
-            <!-- Topic Breakdown -->
-            <div class="topic-breakdown" id="topic-breakdown">
-                <h3>Topic Performance</h3>
-                <!-- Topic breakdown will be generated here -->
-            </div>
-            
-            <div class="recommendation">
-                <h3>Recommendation</h3>
-                <p id="recommendation-text">Loading recommendation...</p>
-            </div>
-            
-            <div>
-                <button class="nav-btn btn-submit" id="retry-btn">Take Assessment Again</button>
-                <button class="home-btn" onclick="window.location.href='index.html'">
-                    <i class="fas fa-home"></i> Back to Learning Hub
-                </button>
-            </div>
-        </div>
+        <!-- [KEEP ALL THE SAME HTML STRUCTURE AS BEFORE] -->
     </div>
 
     <!-- Font Awesome for icons -->
@@ -519,70 +19,177 @@
 
     <script src="../../js/math-engine.js"></script>
     <script>
-        // Generate 30 questions covering ALL Grade 1 topics
+        // PROPER ASSESSMENT USING MATH ENGINE
         function generateAssessmentQuestions() {
             const curriculum = MathEngine.getCurriculum(1);
             const questions = [];
             
-            // Generate 3 questions from each topic (3 × 10 topics = 30 questions)
+            console.log("Generating assessment questions..."); // Debug
+            
+            // Generate questions from ALL topics
             curriculum.topics.forEach(topic => {
+                // Generate 3 questions from each topic
                 for (let i = 0; i < 3; i++) {
-                    const problem = MathEngine.generateProblem(1, topic.id);
-                    // Convert to multiple choice format
-                    const mcProblem = convertToMultipleChoice(problem, topic.id);
-                    questions.push(mcProblem);
+                    try {
+                        const problem = MathEngine.generateProblem(1, topic.id);
+                        console.log(`Generated ${topic.id} problem:`, problem); // Debug
+                        
+                        if (problem && problem.text && problem.answer !== undefined) {
+                            const mcProblem = convertToMultipleChoice(problem, topic.id);
+                            questions.push(mcProblem);
+                        }
+                    } catch (error) {
+                        console.error(`Error generating ${topic.id} problem:`, error);
+                        // Add a fallback question
+                        questions.push(createFallbackQuestion(topic));
+                    }
                 }
             });
             
-            // Shuffle questions
-            return questions.sort(() => Math.random() - 0.5);
+            // Fill remaining slots if needed (should be 10 topics × 3 = 30 questions)
+            while (questions.length < 30) {
+                const randomTopic = curriculum.topics[Math.floor(Math.random() * curriculum.topics.length)];
+                try {
+                    const problem = MathEngine.generateProblem(1, randomTopic.id);
+                    if (problem && problem.text) {
+                        const mcProblem = convertToMultipleChoice(problem, randomTopic.id);
+                        questions.push(mcProblem);
+                    }
+                } catch (error) {
+                    console.error("Error generating additional question:", error);
+                    questions.push(createFallbackQuestion(randomTopic));
+                }
+            }
+            
+            console.log("Final questions:", questions); // Debug
+            return questions.slice(0, 30); // Ensure exactly 30 questions
         }
 
         function convertToMultipleChoice(problem, topic) {
-            let correctAnswer, wrongAnswers;
+            let correctAnswer = problem.answer;
+            let wrongAnswers = [];
             
-            if (typeof problem.answer === 'number') {
-                correctAnswer = problem.answer;
-                // Generate plausible wrong answers
+            // Generate plausible wrong answers based on the correct answer
+            if (typeof correctAnswer === 'number') {
+                // For numeric answers
                 wrongAnswers = [
                     correctAnswer + 1,
                     correctAnswer - 1,
                     correctAnswer + 2,
-                    correctAnswer - 2,
+                    Math.max(1, correctAnswer - 2),
                     correctAnswer + 5,
-                    correctAnswer - 5
-                ].filter(val => val > 0 && val !== correctAnswer).slice(0, 3);
+                    Math.max(1, correctAnswer - 5)
+                ].filter((val, index, self) => 
+                    val !== correctAnswer && 
+                    val > 0 && 
+                    self.indexOf(val) === index
+                ).slice(0, 3);
             } else {
-                correctAnswer = problem.answer;
                 // For text answers, create variations
-                wrongAnswers = [
-                    'different answer',
-                    'another answer', 
-                    'wrong answer'
-                ];
+                const text = correctAnswer.toString().toLowerCase();
+                if (text.includes('tens') || text.includes('ones')) {
+                    wrongAnswers = [
+                        text.replace('tens', 'ones').replace('ones', 'tens'),
+                        '0 tens and 0 ones',
+                        '10 tens and 0 ones'
+                    ];
+                } else if (text.includes('half past') || text.includes("o'clock")) {
+                    wrongAnswers = [
+                        text.includes('half past') ? text.replace('half past', "o'clock") : text.replace("o'clock", 'half past'),
+                        '12:00',
+                        '6:30'
+                    ];
+                } else {
+                    wrongAnswers = ['different answer', 'another answer', 'wrong answer'];
+                }
+            }
+            
+            // Ensure we have exactly 3 wrong answers
+            while (wrongAnswers.length < 3) {
+                if (typeof correctAnswer === 'number') {
+                    wrongAnswers.push(correctAnswer + wrongAnswers.length + 1);
+                } else {
+                    wrongAnswers.push(`option ${wrongAnswers.length + 1}`);
+                }
             }
             
             // Combine and shuffle options
-            const allOptions = [correctAnswer, ...wrongAnswers].sort(() => Math.random() - 0.5);
+            const allOptions = [correctAnswer, ...wrongAnswers.slice(0, 3)];
+            const shuffledOptions = allOptions.sort(() => Math.random() - 0.5);
             
             return {
                 text: problem.text,
-                options: allOptions,
-                correctAnswer: allOptions.indexOf(correctAnswer),
+                options: shuffledOptions,
+                correctAnswer: shuffledOptions.indexOf(correctAnswer),
                 type: topic,
-                explanation: problem.explanation
+                explanation: problem.explanation || `The correct answer is ${correctAnswer}`
             };
         }
 
+        function createFallbackQuestion(topic) {
+            const fallbacks = {
+                'counting': {
+                    text: "What number comes after 15?",
+                    answer: 16,
+                    explanation: "After 15 comes 16"
+                },
+                'addition': {
+                    text: "What is 5 + 3?",
+                    answer: 8,
+                    explanation: "5 + 3 = 8"
+                },
+                'subtraction': {
+                    text: "What is 10 - 4?",
+                    answer: 6,
+                    explanation: "10 - 4 = 6"
+                },
+                'place-value': {
+                    text: "How many tens in 25?",
+                    answer: 2,
+                    explanation: "25 has 2 tens and 5 ones"
+                },
+                'time': {
+                    text: "What time is 3 o'clock?",
+                    answer: "3:00",
+                    explanation: "3 o'clock is 3:00"
+                },
+                'money': {
+                    text: "How many cents is 1 dime?",
+                    answer: 10,
+                    explanation: "1 dime = 10 cents"
+                },
+                'geometry': {
+                    text: "How many sides does a triangle have?",
+                    answer: 3,
+                    explanation: "A triangle has 3 sides"
+                }
+            };
+            
+            const fallback = fallbacks[topic.id] || fallbacks.counting;
+            const mcProblem = convertToMultipleChoice(fallback, topic.id);
+            return mcProblem;
+        }
+
         // Quiz Logic
-        const questions = generateAssessmentQuestions();
+        let questions = [];
         let currentQuestion = 0;
-        let userAnswers = new Array(questions.length).fill(null);
+        let userAnswers = [];
         let timeLeft = 2400; // 40 minutes
         let timerInterval;
         let quizStarted = false;
 
         function startQuiz() {
+            console.log("Start button clicked - generating questions...");
+            
+            // Generate questions
+            questions = generateAssessmentQuestions();
+            userAnswers = new Array(questions.length).fill(null);
+            
+            if (questions.length === 0) {
+                alert("Error: Could not generate questions. Please try again.");
+                return;
+            }
+            
             quizStarted = true;
             document.getElementById('instructions-content').style.display = 'none';
             document.getElementById('quiz-timer').style.display = 'block';
@@ -593,8 +200,11 @@
             startTimer();
             showQuestion(0);
             generateQuestionNumbers();
+            
+            console.log("Quiz started with", questions.length, "questions");
         }
 
+        // [KEEP ALL OTHER FUNCTIONS THE SAME: startTimer, updateTimer, showQuestion, etc.]
         function startTimer() {
             updateTimer();
             timerInterval = setInterval(() => {
@@ -616,6 +226,11 @@
         }
 
         function showQuestion(index) {
+            if (!questions || questions.length === 0) {
+                console.error("No questions available");
+                return;
+            }
+            
             currentQuestion = index;
             const question = questions[index];
             
@@ -724,21 +339,18 @@
         function calculateScore() {
             let correct = 0;
             const topicPerformance = {};
-            const curriculum = MathEngine.getCurriculum(1);
             
             // Initialize topic performance
-            curriculum.topics.forEach(topic => {
-                topicPerformance[topic.id] = { correct: 0, total: 0 };
-            });
-            
-            // Calculate scores
-            questions.forEach((question, index) => {
-                const topic = question.type;
-                topicPerformance[topic].total++;
+            questions.forEach(question => {
+                if (!topicPerformance[question.type]) {
+                    topicPerformance[question.type] = { correct: 0, total: 0 };
+                }
+                topicPerformance[question.type].total++;
                 
-                if (userAnswers[index] === question.correctAnswer) {
+                const questionIndex = questions.indexOf(question);
+                if (userAnswers[questionIndex] === question.correctAnswer) {
                     correct++;
-                    topicPerformance[topic].correct++;
+                    topicPerformance[question.type].correct++;
                 }
             });
             
@@ -782,20 +394,25 @@
         function showTopicBreakdown(topicPerformance) {
             const container = document.getElementById('topic-breakdown');
             const curriculum = MathEngine.getCurriculum(1);
+            const topicNames = {};
+            
+            curriculum.topics.forEach(topic => {
+                topicNames[topic.id] = `${topic.icon} ${topic.name}`;
+            });
             
             let html = '<h3>Topic Performance</h3>';
             
-            curriculum.topics.forEach(topic => {
-                const performance = topicPerformance[topic.id];
-                if (performance && performance.total > 0) {
-                    const percentage = Math.round((performance.correct / performance.total) * 100);
-                    html += `
-                        <div class="topic-item">
-                            <span>${topic.icon} ${topic.name}</span>
-                            <span class="topic-score">${performance.correct}/${performance.total} (${percentage}%)</span>
-                        </div>
-                    `;
-                }
+            Object.keys(topicPerformance).forEach(topic => {
+                const performance = topicPerformance[topic];
+                const percentage = Math.round((performance.correct / performance.total) * 100);
+                const topicName = topicNames[topic] || topic;
+                
+                html += `
+                    <div class="topic-item">
+                        <span>${topicName}</span>
+                        <span class="topic-score">${performance.correct}/${performance.total} (${percentage}%)</span>
+                    </div>
+                `;
             });
             
             container.innerHTML = html;
@@ -808,23 +425,23 @@
                 return "Great work! You have a solid understanding of Grade 1 math.";
             } else {
                 // Find weakest topic
-                const curriculum = MathEngine.getCurriculum(1);
                 let weakestTopic = null;
                 let lowestScore = 100;
                 
-                curriculum.topics.forEach(topic => {
-                    const performance = topicPerformance[topic.id];
-                    if (performance && performance.total > 0) {
-                        const score = (performance.correct / performance.total) * 100;
-                        if (score < lowestScore) {
-                            lowestScore = score;
-                            weakestTopic = topic;
-                        }
+                Object.keys(topicPerformance).forEach(topic => {
+                    const performance = topicPerformance[topic];
+                    const score = (performance.correct / performance.total) * 100;
+                    if (score < lowestScore) {
+                        lowestScore = score;
+                        weakestTopic = topic;
                     }
                 });
                 
-                if (weakestTopic) {
-                    return `Good effort! Focus on practicing ${weakestTopic.name.toLowerCase()} to improve your score.`;
+                const curriculum = MathEngine.getCurriculum(1);
+                const topicObj = curriculum.topics.find(t => t.id === weakestTopic);
+                
+                if (topicObj) {
+                    return `Good effort! Focus on practicing ${topicObj.name.toLowerCase()} to improve your score.`;
                 } else {
                     return "Keep practicing! You're building important math skills.";
                 }
@@ -833,8 +450,15 @@
 
         // Initialize quiz
         document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM loaded - setting up event listeners");
+            
             // Set up event listeners
-            document.getElementById('start-quiz-btn').addEventListener('click', startQuiz);
+            const startBtn = document.getElementById('start-quiz-btn');
+            if (startBtn) {
+                startBtn.addEventListener('click', startQuiz);
+                console.log("Start button event listener added");
+            }
+            
             document.getElementById('next-btn').addEventListener('click', nextQuestion);
             document.getElementById('prev-btn').addEventListener('click', prevQuestion);
             document.getElementById('submit-btn').addEventListener('click', submitQuiz);

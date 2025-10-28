@@ -1,11 +1,416 @@
-<script>
-  function startLearning() {
-    const name = document.getElementById('studentName').value.trim();
-    if (name) {
-      // Go to dashboard with name in URL
-      window.location.href = 'dashboard.html?name=' + encodeURIComponent(name);
-    } else {
-      alert("Please enter your name!");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ideolix Learning Platform</title>
+  <style>
+    /* === GLOBAL STYLES === */
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #f0f9f1, #fff8f0);
+      min-height: 100vh;
+      padding: 16px;
+      color: #333;
     }
-  }
-</script>
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .screen {
+      display: none;
+      padding: 20px 0;
+    }
+    .screen.active {
+      display: block;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .logo {
+      width: 80px;
+      height: auto;
+      margin-bottom: 12px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(46, 139, 87, 0.2);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .btn {
+      background: linear-gradient(90deg, #2E8B57, #FF8C00);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 6px 0;
+      width: 100%;
+    }
+    .btn:hover {
+      opacity: 0.95;
+    }
+    .back-btn {
+      background: #f0f0f0;
+      color: #555;
+      width: auto;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 2px solid #2E8B57;
+      border-radius: 10px;
+      box-sizing: border-box;
+      margin: 8px 0 16px;
+    }
+    h2 {
+      color: #2E8B57;
+      margin-top: 0;
+    }
+    /* Grid for cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .topic-card {
+      text-align: center;
+      padding: 16px 12px;
+    }
+    .topic-card h3 {
+      font-size: 15px;
+      margin: 0 0 10px;
+      color: #2E8B57;
+    }
+    /* Practice screen */
+    .question-box {
+      font-size: 22px;
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+      padding: 10px;
+      background: white;
+      border-radius: 12px;
+    }
+    .feedback {
+      min-height: 24px;
+      font-weight: bold;
+      margin: 12px 0;
+    }
+    .hint-box {
+      background: #fff9e6;
+      border-left: 4px solid #FF8C00;
+      padding: 12px;
+      border-radius: 0 10px 10px 0;
+      margin-top: 16px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- WELCOME SCREEN -->
+    <div id="welcomeScreen" class="screen active">
+      <div class="header">
+        <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix" class="logo" />
+        <h1 style="background: linear-gradient(90deg, #2E8B57, #FF8C00); -webkit-background-clip: text; color: transparent; margin: 0;">Ideolix Learning</h1>
+      </div>
+      <div class="card">
+        <h2>Enter Your Name</h2>
+        <input type="text" id="studentName" placeholder="e.g., Alex" maxlength="30" />
+        <button class="btn" onclick="startApp()">Continue</button>
+      </div>
+    </div>
+
+    <!-- DASHBOARD: GRADE SELECTION -->
+    <div id="gradeScreen" class="screen">
+      <div class="header">
+        <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix" class="logo" />
+        <div id="studentDisplay" style="font-weight:bold; color:#2E8B57;"></div>
+      </div>
+      <div class="card">
+        <button class="btn back-btn" onclick="showScreen('welcomeScreen')">← Logout</button>
+        <h2>Select Your Grade</h2>
+        <div class="grid" id="gradeGrid"></div>
+      </div>
+    </div>
+
+    <!-- SUBJECT SELECTION -->
+    <div id="subjectScreen" class="screen">
+      <div class="header">
+        <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix" class="logo" />
+        <div id="studentDisplay2" style="font-weight:bold; color:#2E8B57;"></div>
+      </div>
+      <div class="card">
+        <button class="btn back-btn" onclick="showScreen('gradeScreen')">← Back to Grades</button>
+        <h2 id="currentGrade">Grade</h2>
+        <div class="grid" id="subjectGrid"></div>
+      </div>
+    </div>
+
+    <!-- TOPIC SELECTION -->
+    <div id="topicScreen" class="screen">
+      <div class="header">
+        <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix" class="logo" />
+        <div id="studentDisplay3" style="font-weight:bold; color:#2E8B57;"></div>
+      </div>
+      <div class="card">
+        <button class="btn back-btn" onclick="showScreen('subjectScreen')">← Back to Subjects</button>
+        <h2 id="currentSubject">Topics</h2>
+        <div id="topicList"></div>
+      </div>
+    </div>
+
+    <!-- PRACTICE MODE -->
+    <div id="practiceScreen" class="screen">
+      <div class="header">
+        <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix" class="logo" />
+        <div id="breadcrumb" style="font-size:14px; color:#555;"></div>
+      </div>
+      <div class="card">
+        <button class="btn back-btn" onclick="showScreen('topicScreen')">← Back to Topics</button>
+        <div class="question-box" id="questionText">Loading...</div>
+        <input type="number" id="userAnswer" placeholder="Your answer" />
+        <button class="btn" onclick="checkAnswer()">Check Answer</button>
+        <button class="btn" style="background:linear-gradient(90deg, #FF8C00, #2E8B57)" onclick="loadNewQuestion()">Next Question</button>
+        <div class="feedback" id="feedback"></div>
+        <div class="hint-box" id="hintBox"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // === STUDENT DATA ===
+    let studentName = "";
+    let currentGrade = "";
+    let currentSubject = "";
+    let currentTopic = "";
+
+    // === CURRICULUM (Full from your list, but trimmed for demo) ===
+    const CURRICULUM = {
+      'Kindergarten': {
+        "Math": ["Counting 1-10", "Number Recognition", "Basic Shapes", "Simple Addition"],
+        "Science": ["Animals & Their Homes", "Plants & Growth", "Weather & Seasons"],
+        "Literature Arts": ["Alphabet Recognition", "Phonics & Sounds", "Rhyming Words"]
+      },
+      'Grade 1': {
+        "Math": ["Addition to 20", "Subtraction to 20", "Place Value"],
+        "Science": ["Living Things", "Earth Materials", "Forces & Motion"],
+        "Literature Arts": ["Reading Comprehension", "Sentence Writing", "Phonics"]
+      },
+      'Grade 2': {
+        "Math": ["Two-digit Addition", "Two-digit Subtraction", "Multiplication Basics"],
+        "Science": ["Life Cycles", "States of Matter", "Simple Machines"],
+        "Literature Arts": ["Paragraph Writing", "Grammar Basics", "Story Elements"]
+      },
+      'Grade 3': {
+        "Math": ["Multiplication Tables", "Division Basics", "Area & Perimeter", "Fractions"],
+        "Science": ["Ecosystems", "Weather Patterns", "Magnetism", "Human Body"],
+        "Literature Arts": ["Reading Fluency", "Writing Process", "Parts of Speech"]
+      },
+      'Grade 4': {
+        "Math": ["Multi-digit Multiplication", "Long Division", "Decimals & Fractions"],
+        "Science": ["Electricity & Circuits", "Rocks & Minerals", "Solar System"],
+        "Literature Arts": ["Essay Writing", "Reading Analysis", "Grammar Rules"]
+      },
+      'Grade 5': {
+        "Math": ["Fractions Operations", "Algebra Basics", "Volume & Capacity"],
+        "Science": ["Cells & Microorganisms", "Energy & Motion", "Climate & Weather"],
+        "Literature Arts": ["Literary Analysis", "Persuasive Writing", "Research Writing"]
+      }
+      // You can add Grades 6-12 later the same way
+    };
+
+    // === NAVIGATION ===
+    function showScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(screenId).classList.add('active');
+    }
+
+    function startApp() {
+      const name = document.getElementById('studentName').value.trim();
+      if (!name) {
+        alert("Please enter your name!");
+        return;
+      }
+      studentName = name;
+      document.getElementById('studentDisplay').textContent = name;
+      document.getElementById('studentDisplay2').textContent = name;
+      document.getElementById('studentDisplay3').textContent = name;
+      renderGrades();
+      showScreen('gradeScreen');
+    }
+
+    function renderGrades() {
+      const grid = document.getElementById('gradeGrid');
+      grid.innerHTML = '';
+      Object.keys(CURRICULUM).forEach(grade => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style.textAlign = 'center';
+        card.style.cursor = 'pointer';
+        card.innerHTML = `<strong>${grade}</strong>`;
+        card.onclick = () => {
+          currentGrade = grade;
+          document.getElementById('currentGrade').textContent = grade;
+          renderSubjects();
+          showScreen('subjectScreen');
+        };
+        grid.appendChild(card);
+      });
+    }
+
+    function renderSubjects() {
+      const grid = document.getElementById('subjectGrid');
+      grid.innerHTML = '';
+      const subjects = Object.keys(CURRICULUM[currentGrade]);
+      subjects.forEach(subject => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style.textAlign = 'center';
+        card.style.cursor = 'pointer';
+        card.innerHTML = `<strong>${subject}</strong>`;
+        card.onclick = () => {
+          currentSubject = subject;
+          document.getElementById('currentSubject').textContent = `${currentGrade} • ${subject}`;
+          renderTopics();
+          showScreen('topicScreen');
+        };
+        grid.appendChild(card);
+      });
+    }
+
+    function renderTopics() {
+      const list = document.getElementById('topicList');
+      list.innerHTML = '';
+      const topics = CURRICULUM[currentGrade][currentSubject];
+      topics.forEach(topic => {
+        const div = document.createElement('div');
+        div.className = 'topic-card';
+        div.innerHTML = `
+          <h3>${topic}</h3>
+          <button class="btn" onclick="startPractice('${topic}')">Practice</button>
+          <button class="btn" style="background:linear-gradient(90deg, #FF8C00, #2E8B57)" disabled>Assessment</button>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    // === PRACTICE MODE ===
+    let currentQuestion = null;
+
+    function startPractice(topic) {
+      currentTopic = topic;
+      document.getElementById('breadcrumb').textContent = 
+        `${studentName} • ${currentGrade} • ${currentSubject} • ${topic}`;
+      loadNewQuestion();
+      showScreen('practiceScreen');
+    }
+
+    function generateQuestion() {
+      // Only Math for now (you can expand later)
+      if (currentSubject !== "Math") {
+        return {
+          text: "Science & Literature coming soon! For now, try Math topics.",
+          correct: "demo",
+          hint: "This is a demo. Real content coming soon!"
+        };
+      }
+
+      if (currentTopic.includes("Multiplication")) {
+        const a = Math.floor(Math.random() * 12) + 1;
+        const b = Math.floor(Math.random() * 12) + 1;
+        return {
+          text: `What is ${a} × ${b}?`,
+          correct: (a * b).toString(),
+          hint: `Think: ${a} groups of ${b} equals?`
+        };
+      } else if (currentTopic.includes("Addition")) {
+        const a = Math.floor(Math.random() * 100) + 1;
+        const b = Math.floor(Math.random() * 100) + 1;
+        return {
+          text: `What is ${a} + ${b}?`,
+          correct: (a + b).toString(),
+          hint: "Add the two numbers together."
+        };
+      } else if (currentTopic.includes("Subtraction")) {
+        const a = Math.floor(Math.random() * 100) + 50;
+        const b = Math.floor(Math.random() * 50) + 1;
+        return {
+          text: `What is ${a} - ${b}?`,
+          correct: (a - b).toString(),
+          hint: "Subtract the second number from the first."
+        };
+      } else if (currentTopic.includes("Fractions")) {
+        return {
+          text: "What is 1/2 + 1/4? (Answer as decimal: 0.75)",
+          correct: "0.75",
+          hint: "Convert to decimals: 0.5 + 0.25 = ?"
+        };
+      } else if (currentTopic.includes("Area")) {
+        const l = Math.floor(Math.random() * 10) + 5;
+        const w = Math.floor(Math.random() * 10) + 3;
+        return {
+          text: `A rectangle is ${l}m long and ${w}m wide. What is its area?`,
+          correct: (l * w).toString(),
+          hint: "Area = length × width"
+        };
+      } else {
+        return {
+          text: "Solve: 10 + 5 × 2",
+          correct: "20",
+          hint: "Remember: Multiply first, then add!"
+        };
+      }
+    }
+
+    function loadNewQuestion() {
+      currentQuestion = generateQuestion();
+      document.getElementById('questionText').textContent = currentQuestion.text;
+      document.getElementById('userAnswer').value = '';
+      document.getElementById('feedback').textContent = '';
+      document.getElementById('feedback').style.color = '';
+      document.getElementById('hintBox').style.display = 'none';
+    }
+
+    function checkAnswer() {
+      const userAns = document.getElementById('userAnswer').value.trim();
+      const feedback = document.getElementById('feedback');
+      const hintBox = document.getElementById('hintBox');
+
+      if (!userAns) {
+        feedback.textContent = "Please enter an answer!";
+        feedback.style.color = "#FF8C00";
+        return;
+      }
+
+      if (userAns === currentQuestion.correct) {
+        feedback.textContent = "✅ Correct! Awesome work!";
+        feedback.style.color = "#2E8B57";
+        hintBox.style.display = 'none';
+      } else {
+        feedback.textContent = "❌ Not quite. Try again!";
+        feedback.style.color = "#FF8C00";
+        hintBox.textContent = currentQuestion.hint;
+        hintBox.style.display = 'block';
+      }
+    }
+
+    // Initialize
+    showScreen('welcomeScreen');
+  </script>
+</body>
+</html>

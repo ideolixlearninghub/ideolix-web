@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ideolix Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: linear-gradient(135deg, #f0f9f1, #fff8f0);
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .logo {
+      width: 80px;
+      margin-bottom: 12px;
+    }
+    .student-name {
+      font-size: 20px;
+      font-weight: bold;
+      color: #2E8B57;
+      margin-bottom: 8px;
+    }
+    .screen {
+      display: none;
+    }
+    .screen.active {
+      display: block;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(46, 139, 87, 0.2);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      border-color: rgba(46, 139, 87, 0.4);
+    }
+    .card h3 {
+      margin: 0;
+      font-size: 16px;
+      color: #2E8B57;
+    }
+    .btn {
+      background: linear-gradient(90deg, #2E8B57, #FF8C00);
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 8px;
+      display: block;
+      width: 100%;
+    }
+    .back-btn {
+      background: #eee;
+      color: #555;
+      margin-bottom: 20px;
+      width: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix" class="logo" />
+      <div class="student-name" id="displayName">Student</div>
+    </div>
+
+    <!-- Grade Selection -->
+    <div id="gradeScreen" class="screen active">
+      <h2>Select Your Grade</h2>
+      <div class="card-grid" id="gradeCards"></div>
+    </div>
+
+    <!-- Subject Selection -->
+    <div id="subjectScreen" class="screen">
+      <button class="btn back-btn" onclick="showScreen('gradeScreen')">← Back to Grades</button>
+      <h2 id="selectedGradeTitle">Grade</h2>
+      <div class="card-grid" id="subjectCards"></div>
+    </div>
+
+    <!-- Topic Selection -->
+    <div id="topicScreen" class="screen">
+      <button class="btn back-btn" onclick="showScreen('subjectScreen')">← Back to Subjects</button>
+      <h2 id="selectedSubjectTitle">Topics</h2>
+      <div id="topicList"></div>
+    </div>
+  </div>
+
+  <script>
+    // === CURRICULUM (simplified from your list) ===
+    const CURRICULUM = {
+      'Kindergarten': { "Math": ["Counting 1-10", "Number Recognition"], "Science": ["Animals & Their Homes"], "Literature Arts": ["Alphabet Recognition"] },
+      'Grade 1': { "Math": ["Addition to 20", "Subtraction to 20"], "Science": ["Living Things"], "Literature Arts": ["Reading Comprehension"] },
+      'Grade 2': { "Math": ["Two-digit Addition"], "Science": ["Life Cycles"], "Literature Arts": ["Paragraph Writing"] },
+      'Grade 3': { "Math": ["Multiplication Tables", "Division Basics"], "Science": ["Ecosystems"], "Literature Arts": ["Reading Fluency"] },
+      'Grade 4': { "Math": ["Multi-digit Multiplication"], "Science": ["Electricity & Circuits"], "Literature Arts": ["Essay Writing"] },
+      'Grade 5': { "Math": ["Fractions Operations", "Algebra Basics"], "Science": ["Cells & Microorganisms"], "Literature Arts": ["Literary Analysis"] },
+      'Grade 6': { "Math": ["Ratios & Proportions"], "Science": ["Genetics & Heredity"], "Literature Arts": ["Thematic Analysis"] },
+      'Grade 7': { "Math": ["Algebraic Equations"], "Science": ["Human Biology"], "Literature Arts": ["Critical Reading"] },
+      'Grade 8': { "Math": ["Linear Equations"], "Science": ["Chemistry & Reactions"], "Literature Arts": ["Literary Criticism"] },
+      'Grade 9': { "Math": ["Quadratic Equations"], "Science": ["Biology Fundamentals"], "Literature Arts": ["Shakespeare Studies"] },
+      'Grade 10': { "Math": ["Polynomial Functions"], "Science": ["Advanced Biology"], "Literature Arts": ["World Literature"] },
+      'Grade 11': { "Math": ["Calculus Basics"], "Science": ["Advanced Physics"], "Literature Arts": ["American Literature"] },
+      'Grade 12': { "Math": ["Calculus Applications"], "Science": ["Advanced Chemistry"], "Literature Arts": ["British Literature"] }
+    };
+
+    // Get student name from URL or default
+    const urlParams = new URLSearchParams(window.location.search);
+    const studentName = urlParams.get('name') || 'Student';
+    document.getElementById('displayName').textContent = studentName;
+
+    // Generate grade cards
+    const gradeCards = document.getElementById('gradeCards');
+    Object.keys(CURRICULUM).forEach(grade => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `<h3>${grade}</h3>`;
+      card.onclick = () => {
+        window.selectedGrade = grade;
+        document.getElementById('selectedGradeTitle').textContent = grade;
+        showScreen('subjectScreen');
+        renderSubjects();
+      };
+      gradeCards.appendChild(card);
+    });
+
+    function renderSubjects() {
+      const subjectCards = document.getElementById('subjectCards');
+      subjectCards.innerHTML = '';
+      const subjects = Object.keys(CURRICULUM[window.selectedGrade]);
+      subjects.forEach(subject => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<h3>${subject}</h3>`;
+        card.onclick = () => {
+          window.selectedSubject = subject;
+          document.getElementById('selectedSubjectTitle').textContent = `${window.selectedGrade} • ${subject}`;
+          showScreen('topicScreen');
+          renderTopics();
+        };
+        subjectCards.appendChild(card);
+      });
+    }
+
+    function renderTopics() {
+      const topicList = document.getElementById('topicList');
+      topicList.innerHTML = '';
+      const topics = CURRICULUM[window.selectedGrade][window.selectedSubject];
+      topics.forEach(topic => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.innerHTML = `
+          <h3>${topic}</h3>
+          <button class="btn" onclick="startMode('practice', '${topic}')">Practice</button>
+          <button class="btn" style="background:linear-gradient(90deg, #FF8C00, #2E8B57)" onclick="startMode('assessment', '${topic}')">Assessment</button>
+        `;
+        topicList.appendChild(div);
+      });
+    }
+
+    function showScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(screenId).classList.add('active');
+    }
+
+    function startMode(mode, topic) {
+      alert(`${mode === 'practice' ? '📚 Practice' : '📝 Assessment'} started for:\n${window.selectedGrade} • ${window.selectedSubject} • ${topic}`);
+      // Later: we’ll load real questions!
+    }
+  </script>
+</body>
+</html>

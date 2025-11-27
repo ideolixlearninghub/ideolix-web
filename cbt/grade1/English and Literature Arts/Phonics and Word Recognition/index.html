@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 1 English - Phonics and Word Recognition | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Dark Theme */
+        :root {
+            --primary-green: #00C853;
+            --secondary-orange: #FF6D00;
+            --accent-purple: #7C4DFF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 200, 83, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00B248;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #E65C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 109, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 1 English – Phonics and Word Recognition</h1>
+            <p class="welcome-subtitle">Welcome to our interactive phonics module! Here you'll practice beginning and ending sounds, rhyming words, short and long vowels, consonant blends, sight words, and much more. Get ready to become a reading expert!</p>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Practice Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Practice Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Retry Topic</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - All questions from the document
+        const questions = [
+            // Section A: Beginning Sounds
+            {
+                question: "What is the beginning sound of the word \"cat\"?",
+                options: ["/b/", "/k/", "/t/", "/s/"],
+                answer: "B",
+                explanation: "The word \"cat\" begins with the /k/ sound."
+            },
+            {
+                question: "Which word starts with the /m/ sound?",
+                options: ["nap", "map", "lap", "tap"],
+                answer: "B",
+                explanation: "\"Map\" starts with the /m/ sound."
+            },
+            {
+                question: "What is the first sound you hear in \"sun\"?",
+                options: ["/sh/", "/s/", "/f/", "/th/"],
+                answer: "B",
+                explanation: "\"Sun\" begins with the /s/ sound."
+            },
+            {
+                question: "Which picture's name starts with a different sound?",
+                options: ["ball", "bat", "dog", "bag"],
+                answer: "C",
+                explanation: "\"Dog\" starts with /d/, while the others start with /b/."
+            },
+            {
+                question: "What is the beginning sound of \"fish\"?",
+                options: ["/v/", "/f/", "/p/", "/th/"],
+                answer: "B",
+                explanation: "\"Fish\" begins with the /f/ sound."
+            },
+            // Section B: Ending Sounds
+            {
+                question: "What is the ending sound in \"bed\"?",
+                options: ["/b/", "/d/", "/p/", "/e/"],
+                answer: "B",
+                explanation: "\"Bed\" ends with the /d/ sound."
+            },
+            {
+                question: "Which word ends with the /g/ sound?",
+                options: ["leg", "bag", "pen", "bus"],
+                answer: "B",
+                explanation: "\"Bag\" ends with the /g/ sound."
+            },
+            {
+                question: "What is the last sound you hear in \"mitten\"?",
+                options: ["/m/", "/i/", "/t/", "/n/"],
+                answer: "D",
+                explanation: "\"Mitten\" ends with the /n/ sound."
+            },
+            {
+                question: "Which word ends with a /t/ sound?",
+                options: ["cab", "cat", "can", "cap"],
+                answer: "B",
+                explanation: "\"Cat\" ends with the /t/ sound."
+            },
+            {
+                question: "What is the final sound in \"wash\"?",
+                options: ["/w/", "/s/", "/sh/", "/h/"],
+                answer: "C",
+                explanation: "\"Wash\" ends with the /sh/ sound."
+            },
+            // Section C: Rhyming Words
+            {
+                question: "Which word rhymes with \"hat\"?",
+                options: ["hot", "hit", "cat", "hut"],
+                answer: "C",
+                explanation: "\"Cat\" rhymes with \"hat\"."
+            },
+            {
+                question: "Find the word that rhymes with \"log\".",
+                options: ["leg", "dog", "lag", "big"],
+                answer: "B",
+                explanation: "\"Dog\" rhymes with \"log\"."
+            },
+            {
+                question: "Which word does NOT rhyme with \"bug\"?",
+                options: ["hug", "rug", "bag", "mug"],
+                answer: "C",
+                explanation: "\"Bag\" does not rhyme with \"bug\"."
+            },
+            {
+                question: "Which word rhymes with \"cake\"?",
+                options: ["cook", "back", "rake", "kick"],
+                answer: "C",
+                explanation: "\"Rake\" rhymes with \"cake\"."
+            },
+            {
+                question: "\"Pen\" rhymes with...",
+                options: ["pan", "pin", "ten", "run"],
+                answer: "C",
+                explanation: "\"Ten\" rhymes with \"pen\"."
+            },
+            // Section D: Short Vowel Sounds (CVC Words)
+            {
+                question: "What is the middle sound in \"pig\"?",
+                options: ["/a/", "/e/", "/i/", "/o/"],
+                answer: "C",
+                explanation: "\"Pig\" has the short /i/ sound in the middle."
+            },
+            {
+                question: "Which word has the same middle sound as \"red\"?",
+                options: ["rid", "rod", "bed", "raid"],
+                answer: "C",
+                explanation: "\"Bed\" has the same short /e/ sound as \"red\"."
+            },
+            {
+                question: "What is the vowel sound in \"cup\"?",
+                options: ["/a/", "/e/", "/i/", "/u/"],
+                answer: "D",
+                explanation: "\"Cup\" has the short /u/ sound."
+            },
+            {
+                question: "Which word has the short /o/ sound?",
+                options: ["cop", "cape", "cope", "cup"],
+                answer: "A",
+                explanation: "\"Cop\" has the short /o/ sound."
+            },
+            {
+                question: "Find the word with the short /a/ sound.",
+                options: ["ape", "apple", "ate", "ace"],
+                answer: "B",
+                explanation: "\"Apple\" has the short /a/ sound."
+            },
+            // Section E: Consonant Digraphs (sh, ch, th, wh)
+            {
+                question: "What sound do the letters 'sh' make in \"ship\"?",
+                options: ["/s/", "/h/", "/sh/", "/ch/"],
+                answer: "C",
+                explanation: "\"Sh\" makes the /sh/ sound in \"ship\"."
+            },
+            {
+                question: "Which word begins with the 'ch' sound?",
+                options: ["shop", "chin", "thin", "ship"],
+                answer: "B",
+                explanation: "\"Chin\" begins with the /ch/ sound."
+            },
+            {
+                question: "What is the beginning digraph in \"this\"?",
+                options: ["/sh/", "/s/", "/th/ (voiced)", "/t/"],
+                answer: "C",
+                explanation: "\"This\" begins with the voiced /th/ sound."
+            },
+            {
+                question: "Which word ends with the 'ch' sound?",
+                options: ["wish", "math", "much", "moth"],
+                answer: "C",
+                explanation: "\"Much\" ends with the /ch/ sound."
+            },
+            {
+                question: "What sound does 'wh' make in \"whale\"?",
+                options: ["/w/", "/h/", "/f/", "/wh/"],
+                answer: "A",
+                explanation: "\"Wh\" makes the /w/ sound in \"whale\"."
+            },
+            // Section F: Consonant Blends (L-Blends, R-Blends, S-Blends)
+            {
+                question: "What is the beginning blend in \"frog\"?",
+                options: ["fl", "fr", "fg", "rg"],
+                answer: "B",
+                explanation: "\"Frog\" begins with the \"fr\" blend."
+            },
+            {
+                question: "Which word begins with an 's' blend?",
+                options: ["sit", "stop", "ship", "tip"],
+                answer: "B",
+                explanation: "\"Stop\" begins with the \"st\" blend."
+            },
+            {
+                question: "What blend do you hear at the start of \"clock\"?",
+                options: ["cl", "cr", "ck", "lk"],
+                answer: "A",
+                explanation: "\"Clock\" begins with the \"cl\" blend."
+            },
+            {
+                question: "Which word has the 'pl' blend?",
+                options: ["plane", "pane", "lane", "pain"],
+                answer: "A",
+                explanation: "\"Plane\" has the \"pl\" blend."
+            },
+            {
+                question: "What is the blend in \"grass\"?",
+                options: ["gr", "gl", "gs", "rs"],
+                answer: "A",
+                explanation: "\"Grass\" begins with the \"gr\" blend."
+            },
+            // Section G: Long Vowel Sounds (Silent E)
+            {
+                question: "How does the 'e' change the word \"cap\"?",
+                options: ["It makes the 'a' say its name. (cape)", "It makes the 'c' say /s/.", "It makes the word shorter.", "It doesn't change anything."],
+                answer: "A",
+                explanation: "The silent 'e' makes the 'a' say its name, changing \"cap\" to \"cape\"."
+            },
+            {
+                question: "Which word has a long vowel sound?",
+                options: ["hop", "hope", "hot", "hut"],
+                answer: "B",
+                explanation: "\"Hope\" has a long 'o' sound."
+            },
+            {
+                question: "What is the vowel sound in \"kite\"?",
+                options: ["/i/ (short)", "/e/ (long)", "/i/ (long)", "/a/ (long)"],
+                answer: "C",
+                explanation: "\"Kite\" has a long 'i' sound."
+            },
+            {
+                question: "Which word follows the \"silent e\" pattern?",
+                options: ["met", "mate", "matt", "mut"],
+                answer: "B",
+                explanation: "\"Mate\" follows the silent 'e' pattern."
+            },
+            {
+                question: "\"Tube\" has a long _____ sound.",
+                options: ["u", "a", "e", "o"],
+                answer: "A",
+                explanation: "\"Tube\" has a long 'u' sound."
+            },
+            // Section H: Common Vowel Teams
+            {
+                question: "What sound does 'ee' make in \"seed\"?",
+                options: ["/e/ (short)", "/a/ (long)", "/e/ (long)", "/i/ (long)"],
+                answer: "C",
+                explanation: "\"Ee\" makes the long /e/ sound in \"seed\"."
+            },
+            {
+                question: "Which word has the 'ai' vowel team like in \"rain\"?",
+                options: ["ran", "train", "ruin", "turn"],
+                answer: "B",
+                explanation: "\"Train\" has the \"ai\" vowel team."
+            },
+            {
+                question: "What sound do the letters 'oa' make?",
+                options: ["/o/ (short)", "/o/ (long)", "/a/ (long)", "/aw/"],
+                answer: "B",
+                explanation: "\"Oa\" makes the long /o/ sound."
+            },
+            {
+                question: "The word \"boat\" has the same vowel sound as...",
+                options: ["boot", "bought", "coat", "cat"],
+                answer: "C",
+                explanation: "\"Boat\" and \"coat\" both have the long /o/ sound."
+            },
+            {
+                question: "Which word has the 'ay' vowel team?",
+                options: ["play", "ply", "pal", "pole"],
+                answer: "A",
+                explanation: "\"Play\" has the \"ay\" vowel team."
+            },
+            // Section I: Sight Word Recognition
+            {
+                question: "Which word is \"the\"?",
+                options: ["teh", "tha", "the", "then"],
+                answer: "C",
+                explanation: "\"The\" is spelled T-H-E."
+            },
+            {
+                question: "Find the word \"was\".",
+                options: ["saw", "waz", "wus", "was"],
+                answer: "D",
+                explanation: "\"Was\" is spelled W-A-S."
+            },
+            {
+                question: "Which one is the word \"said\"?",
+                options: ["sad", "sied", "said", "sed"],
+                answer: "C",
+                explanation: "\"Said\" is spelled S-A-I-D."
+            },
+            {
+                question: "Pick the correct spelling for \"they\".",
+                options: ["thay", "they", "thei", "thy"],
+                answer: "B",
+                explanation: "\"They\" is spelled T-H-E-Y."
+            },
+            {
+                question: "Identify the word \"where\".",
+                options: ["were", "whare", "where", "wheir"],
+                answer: "C",
+                explanation: "\"Where\" is spelled W-H-E-R-E."
+            },
+            // Section J: Word Families
+            {
+                question: "Which word belongs to the \"-at\" family?",
+                options: ["bet", "sat", "pot", "bit"],
+                answer: "B",
+                explanation: "\"Sat\" belongs to the \"-at\" word family."
+            },
+            {
+                question: "Find the word in the \"-op\" family.",
+                options: ["hop", "hip", "heap", "harp"],
+                answer: "A",
+                explanation: "\"Hop\" belongs to the \"-op\" word family."
+            },
+            {
+                question: "Which word is part of the \"-ig\" family?",
+                options: ["hog", "tag", "wig", "rug"],
+                answer: "C",
+                explanation: "\"Wig\" belongs to the \"-ig\" word family."
+            },
+            {
+                question: "\"Cake\" belongs to the _____ family.",
+                options: ["-ack", "-ake", "-ike", "-oke"],
+                answer: "B",
+                explanation: "\"Cake\" belongs to the \"-ake\" word family."
+            },
+            {
+                question: "Which word fits in the \"-ell\" family?",
+                options: ["ball", "bell", "bill", "bull"],
+                answer: "B",
+                explanation: "\"Bell\" belongs to the \"-ell\" word family."
+            },
+            // Section K: Segmenting and Blending Sounds
+            {
+                question: "What word do these sounds make: /b/ /a/ /t/?",
+                options: ["bat", "bet", "bit", "but"],
+                answer: "A",
+                explanation: "/b/ /a/ /t/ makes the word \"bat\"."
+            },
+            {
+                question: "How many sounds are in the word \"ship\"?",
+                options: ["2", "3", "4", "5"],
+                answer: "B",
+                explanation: "\"Ship\" has 3 sounds: /sh/ /i/ /p/."
+            },
+            {
+                question: "Blend these sounds: /m/ /o/ /p/. What is the word?",
+                options: ["map", "mop", "mob", "top"],
+                answer: "B",
+                explanation: "/m/ /o/ /p/ makes the word \"mop\"."
+            },
+            {
+                question: "What word is made from /s/ /l/ /ee/ /p/?",
+                options: ["slip", "sleep", "slap", "seep"],
+                answer: "B",
+                explanation: "/s/ /l/ /ee/ /p/ makes the word \"sleep\"."
+            },
+            {
+                question: "Segment the word \"frog\" into its individual sounds.",
+                options: ["/f/ /r/ /o/ /g/", "/f/ /or/ /g/", "/fr/ /o/ /g/", "/f/ /r/ /og/"],
+                answer: "A",
+                explanation: "\"Frog\" has 4 sounds: /f/ /r/ /o/ /g/."
+            },
+            // Section L: Simple Sentences & Context
+            {
+                question: "I see a big, red _____.",
+                options: ["bog", "bug", "bag", "beg"],
+                answer: "B",
+                explanation: "The sentence should be: \"I see a big, red bug.\""
+            },
+            {
+                question: "The cat sat on the _____.",
+                options: ["met", "mut", "mat", "mot"],
+                answer: "C",
+                explanation: "The sentence should be: \"The cat sat on the mat.\""
+            },
+            {
+                question: "My mom will _____ me a story.",
+                options: ["reed", "road", "read", "raid"],
+                answer: "C",
+                explanation: "The sentence should be: \"My mom will read me a story.\""
+            },
+            {
+                question: "I _____ with my hands.",
+                options: ["chap", "clap", "clip", "clam"],
+                answer: "B",
+                explanation: "The sentence should be: \"I clap with my hands.\""
+            },
+            {
+                question: "The fish is in the _____.",
+                options: ["pind", "pond", "pand", "pend"],
+                answer: "B",
+                explanation: "The sentence should be: \"The fish is in the pond.\""
+            },
+            // Section M: Mixed Practice (Challenging)
+            {
+                question: "Which word has a digraph at the end?",
+                options: ["with", "win", "will", "wink"],
+                answer: "A",
+                explanation: "\"With\" has the \"th\" digraph at the end."
+            },
+            {
+                question: "Identify the word with a blend at the beginning.",
+                options: ["spin", "sin", "in", "pin"],
+                answer: "A",
+                explanation: "\"Spin\" has the \"sp\" blend at the beginning."
+            },
+            {
+                question: "Which word has a long vowel sound because of silent 'e'?",
+                options: ["cut", "cute", "cub", "cuff"],
+                answer: "B",
+                explanation: "\"Cute\" has a long 'u' sound because of the silent 'e'."
+            },
+            {
+                question: "What is the vowel team in \"green\"?",
+                options: ["gr", "ee", "en", "n"],
+                answer: "B",
+                explanation: "\"Green\" has the \"ee\" vowel team."
+            },
+            {
+                question: "The 'y' in \"fly\" makes what sound?",
+                options: ["/y/", "long i", "long e", "short i"],
+                answer: "B",
+                explanation: "In \"fly\", the 'y' makes the long 'i' sound."
+            },
+            // Section N: Matching Pictures to Words
+            {
+                question: "(Picture of a shell) Which word is this?",
+                options: ["sell", "shell", "shall", "shock"],
+                answer: "B",
+                explanation: "The picture shows a shell."
+            },
+            {
+                question: "(Picture of a clock) What is the word?",
+                options: ["cock", "click", "clock", "cluck"],
+                answer: "C",
+                explanation: "The picture shows a clock."
+            },
+            {
+                question: "(Picture of a queen) Which word matches?",
+                options: ["queen", "green", "quean", "keen"],
+                answer: "A",
+                explanation: "The picture shows a queen."
+            },
+            {
+                question: "(Picture of a star) What is the correct word?",
+                options: ["stair", "store", "star", "stir"],
+                answer: "C",
+                explanation: "The picture shows a star."
+            },
+            {
+                question: "(Picture of a truck) Which word is it?",
+                options: ["track", "trick", "truck", "trunk"],
+                answer: "C",
+                explanation: "The picture shows a truck."
+            },
+            // Section O: Completing Words with Correct Vowel
+            {
+                question: "Complete the word: b _ g (meaning: a large black insect)",
+                options: ["a", "e", "i", "u"],
+                answer: "D",
+                explanation: "The word is \"bug\"."
+            },
+            {
+                question: "Complete the word: r _ n (meaning: water from the sky)",
+                options: ["a", "e", "i", "u"],
+                answer: "A",
+                explanation: "The word is \"rain\"."
+            },
+            {
+                question: "Complete the word: h _ t (meaning: not cold)",
+                options: ["a", "e", "i", "o"],
+                answer: "A",
+                explanation: "The word is \"hot\"."
+            },
+            {
+                question: "Complete the word: f _ n (meaning: something that cools you down)",
+                options: ["a", "e", "i", "u"],
+                answer: "A",
+                explanation: "The word is \"fan\"."
+            },
+            {
+                question: "Complete the word: l _ g (meaning: a part of your body)",
+                options: ["a", "e", "i", "o"],
+                answer: "B",
+                explanation: "The word is \"leg\"."
+            },
+            // Section P: Identifying the Correctly Spelled Word
+            {
+                question: "Which is the correct spelling?",
+                options: ["whent", "whent", "went", "whant"],
+                answer: "C",
+                explanation: "\"Went\" is spelled correctly."
+            },
+            {
+                question: "Which spelling is right?",
+                options: ["thay", "they", "theye", "thei"],
+                answer: "B",
+                explanation: "\"They\" is spelled correctly."
+            },
+            {
+                question: "Find the correctly spelled word.",
+                options: ["becuz", "because", "becose", "becaus"],
+                answer: "B",
+                explanation: "\"Because\" is spelled correctly."
+            },
+            {
+                question: "Which one is spelled correctly?",
+                options: ["hav", "haf", "have", "haev"],
+                answer: "C",
+                explanation: "\"Have\" is spelled correctly."
+            },
+            {
+                question: "Pick the right spelling.",
+                options: ["sed", "sayd", "saed", "said"],
+                answer: "D",
+                explanation: "\"Said\" is spelled correctly."
+            },
+            // Section Q: Real vs. Nonsense Words
+            {
+                question: "Which one is a real word?",
+                options: ["zop", "mip", "hop", "gep"],
+                answer: "C",
+                explanation: "\"Hop\" is a real word."
+            },
+            {
+                question: "Which one is a nonsense word?",
+                options: ["fan", "van", "ran", "vop"],
+                answer: "D",
+                explanation: "\"Vop\" is a nonsense word."
+            },
+            {
+                question: "Identify the real word.",
+                options: ["blim", "slim", "glim", "prim"],
+                answer: "B",
+                explanation: "\"Slim\" is a real word."
+            },
+            {
+                question: "Which is a nonsense word?",
+                options: ["shop", "chop", "thop", "stop"],
+                answer: "C",
+                explanation: "\"Thop\" is a nonsense word."
+            },
+            {
+                question: "Find the real word.",
+                options: ["dribe", "vibe", "gribe", "jibe"],
+                answer: "B",
+                explanation: "\"Vibe\" is a real word."
+            },
+            // Section R: Synonyms & Antonyms (Simple)
+            {
+                question: "Which word means the same as \"big\"?",
+                options: ["small", "large", "tiny", "little"],
+                answer: "B",
+                explanation: "\"Large\" means the same as \"big\"."
+            },
+            {
+                question: "What is the opposite of \"hot\"?",
+                options: ["warm", "cold", "sunny", "fiery"],
+                answer: "B",
+                explanation: "\"Cold\" is the opposite of \"hot\"."
+            },
+            {
+                question: "Which word means the same as \"happy\"?",
+                options: ["sad", "mad", "glad", "sleepy"],
+                answer: "C",
+                explanation: "\"Glad\" means the same as \"happy\"."
+            },
+            {
+                question: "What is the opposite of \"up\"?",
+                options: ["high", "down", "above", "over"],
+                answer: "B",
+                explanation: "\"Down\" is the opposite of \"up\"."
+            },
+            {
+                question: "Which word means the same as \"fast\"?",
+                options: ["slow", "quick", "stop", "go"],
+                answer: "B",
+                explanation: "\"Quick\" means the same as \"fast\"."
+            },
+            // Section S: Compound Words
+            {
+                question: "What word is made from \"cup\" and \"cake\"?",
+                options: ["cupcake", "cakecup", "cupocake", "cupacake"],
+                answer: "A",
+                explanation: "\"Cup\" + \"cake\" = \"cupcake\"."
+            },
+            {
+                question: "\"Sun\" and \"shine\" make...",
+                options: ["sunship", "sunshine", "shinesun", "sunshone"],
+                answer: "B",
+                explanation: "\"Sun\" + \"shine\" = \"sunshine\"."
+            },
+            {
+                question: "What is the compound word for \"base\" and \"ball\"?",
+                options: ["baseaball", "ballbase", "baseball", "basball"],
+                answer: "C",
+                explanation: "\"Base\" + \"ball\" = \"baseball\"."
+            },
+            {
+                question: "\"Dog\" and \"house\" make...",
+                options: ["housedog", "doghouse", "doghome", "housedoggy"],
+                answer: "B",
+                explanation: "\"Dog\" + \"house\" = \"doghouse\"."
+            },
+            {
+                question: "\"Foot\" and \"print\" make...",
+                options: ["printfoot", "footprintfoot", "footprint", "printfoot"],
+                answer: "C",
+                explanation: "\"Foot\" + \"print\" = \"footprint\"."
+            },
+            // Section T: Final Review
+            {
+                question: "The word \"sheep\" starts with which two letters making one sound?",
+                options: ["sp", "sh", "se", "hp"],
+                answer: "B",
+                explanation: "\"Sheep\" starts with \"sh\" making one sound."
+            },
+            {
+                question: "Which word has the same vowel sound as \"time\"?",
+                options: ["Tim", "trim", "lime", "team"],
+                answer: "C",
+                explanation: "\"Lime\" has the same long 'i' sound as \"time\"."
+            },
+            {
+                question: "The sight word \"once\" is pronounced like...",
+                options: ["own-see", "wunss", "on-kay", "on-see"],
+                answer: "B",
+                explanation: "\"Once\" is pronounced \"wunss\"."
+            },
+            {
+                question: "What is the middle sound in the word \"jump\"?",
+                options: ["/a/", "/e/", "/i/", "/u/"],
+                answer: "D",
+                explanation: "\"Jump\" has the short /u/ sound in the middle."
+            },
+            {
+                question: "Which word correctly completes this sentence: \"Can you _____ the ball?\"",
+                options: ["thruw", "throw", "throe", "frow"],
+                answer: "B",
+                explanation: "The sentence should be: \"Can you throw the ball?\""
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent!",
+            "Fantastic!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a phonics expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixEnglishPhonics');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixEnglishPhonics', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Create a copy of questions and shuffle them
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixEnglishPhonics_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixEnglishPhonics_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a phonics expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You understand phonics very well!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a reading master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the questions you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better at reading with more practice!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                feedbackMessage.textContent = `Correct answer: ${correctAnswer}`;
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade1-english-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 2 Math - Telling Time | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Dark Theme */
+        :root {
+            --primary-green: #00C853;
+            --secondary-orange: #FF6D00;
+            --accent-purple: #7C4DFF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 200, 83, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00B248;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #E65C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 109, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1507413245164-6160d8298b31?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 2 Math - Telling Time</h1>
+            <p class="welcome-subtitle">Master telling time! Practice reading analog clocks, understanding AM/PM, calculating elapsed time, and solving real-life time problems. Build your time-telling skills step by step!</p>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Practice Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 65</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Practice Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Retry Topic</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 65 Grade 2 Telling Time questions
+        const questions = [
+            // Section A: Reading Analog Clocks (Hour and Half Hour)
+            {
+                question: "What time is shown on the clock? (Hour hand on 3, minute hand on 12)",
+                options: ["3:00", "12:03", "3:12", "12:00"],
+                answer: "A",
+                explanation: "When the hour hand is on 3 and the minute hand is on 12, it shows 3:00"
+            },
+            {
+                question: "What time is shown? (Hour hand on 7, minute hand on 12)",
+                options: ["7:30", "7:00", "12:07", "7:12"],
+                answer: "B",
+                explanation: "When the hour hand is on 7 and the minute hand is on 12, it shows 7:00"
+            },
+            {
+                question: "What time is shown? (Hour hand between 4 and 5, minute hand on 6)",
+                options: ["4:30", "5:30", "4:06", "6:30"],
+                answer: "A",
+                explanation: "When the hour hand is between 4 and 5 and the minute hand is on 6, it shows 4:30"
+            },
+            {
+                question: "What time is 30 minutes after 2:00?",
+                options: ["2:30", "3:00", "2:03", "1:30"],
+                answer: "A",
+                explanation: "30 minutes after 2:00 is 2:30"
+            },
+            {
+                question: "What time is 30 minutes after 9:00?",
+                options: ["8:30", "9:03", "9:30", "10:00"],
+                answer: "C",
+                explanation: "30 minutes after 9:00 is 9:30"
+            },
+            {
+                question: "What time is half past 11?",
+                options: ["11:02", "11:15", "11:30", "12:11"],
+                answer: "C",
+                explanation: "Half past 11 means 11:30"
+            },
+            {
+                question: "What time is half past 6?",
+                options: ["6:02", "6:15", "6:30", "7:30"],
+                answer: "C",
+                explanation: "Half past 6 means 6:30"
+            },
+            {
+                question: "School starts at 8:00. What time is 1 hour later?",
+                options: ["7:00", "8:01", "9:00", "10:00"],
+                answer: "C",
+                explanation: "1 hour after 8:00 is 9:00"
+            },
+            {
+                question: "Lunch is at 12:00. What time was 1 hour before lunch?",
+                options: ["11:00", "12:01", "1:00", "2:00"],
+                answer: "A",
+                explanation: "1 hour before 12:00 is 11:00"
+            },
+            {
+                question: "Dinner is at 6:30. What time is 30 minutes before dinner?",
+                options: ["5:30", "6:00", "7:00", "7:30"],
+                answer: "B",
+                explanation: "30 minutes before 6:30 is 6:00"
+            },
+            // Section B: Time Concepts and Sequencing
+            {
+                question: "Which activity would you most likely do at 8:00 AM?",
+                options: ["Eat dinner", "Go to bed", "Go to school", "Watch evening cartoons"],
+                answer: "C",
+                explanation: "8:00 AM is morning time when children go to school"
+            },
+            {
+                question: "Which activity would you most likely do at 8:00 PM?",
+                options: ["Eat breakfast", "Go to school", "Go to bed", "Do morning exercises"],
+                answer: "C",
+                explanation: "8:00 PM is evening time when children go to bed"
+            },
+            {
+                question: "School ends at 3:00. Playtime starts 1 hour later. When does playtime start?",
+                options: ["2:00", "3:01", "4:00", "5:00"],
+                answer: "C",
+                explanation: "1 hour after 3:00 is 4:00"
+            },
+            {
+                question: "Breakfast at 7:30. School starts at 8:30. How much time between them?",
+                options: ["30 minutes", "1 hour", "2 hours", "15 minutes"],
+                answer: "B",
+                explanation: "From 7:30 to 8:30 is 1 hour"
+            },
+            {
+                question: "Put these times in order: 3:00, 1:00, 2:00",
+                options: ["1:00, 2:00, 3:00", "3:00, 2:00, 1:00", "2:00, 1:00, 3:00", "3:00, 1:00, 2:00"],
+                answer: "A",
+                explanation: "1:00 comes before 2:00, which comes before 3:00"
+            },
+            {
+                question: "Which comes first: 10:30 or 11:00?",
+                options: ["10:30", "11:00", "They are the same", "Cannot tell"],
+                answer: "A",
+                explanation: "10:30 comes before 11:00"
+            },
+            {
+                question: "Movie starts at 4:00, ends at 5:30. How long is the movie?",
+                options: ["1 hour", "1 hour 30 minutes", "2 hours", "30 minutes"],
+                answer: "B",
+                explanation: "From 4:00 to 5:30 is 1 hour and 30 minutes"
+            },
+            {
+                question: "Soccer practice: 5:00 to 6:00. How long is practice?",
+                options: ["30 minutes", "1 hour", "2 hours", "3 hours"],
+                answer: "B",
+                explanation: "From 5:00 to 6:00 is 1 hour"
+            },
+            {
+                question: "Which is earlier: 9:15 AM or 9:30 AM?",
+                options: ["9:15 AM", "9:30 AM", "They are the same", "Cannot tell"],
+                answer: "A",
+                explanation: "9:15 AM comes before 9:30 AM"
+            },
+            {
+                question: "Bedtime is 8:00 PM. What time is 2 hours before bedtime?",
+                options: ["6:00 PM", "7:00 PM", "9:00 PM", "10:00 PM"],
+                answer: "A",
+                explanation: "2 hours before 8:00 PM is 6:00 PM"
+            },
+            // Section C: Days, Weeks, Months
+            {
+                question: "How many days are in one week?",
+                options: ["5", "6", "7", "8"],
+                answer: "C",
+                explanation: "There are 7 days in one week"
+            },
+            {
+                question: "Which day comes after Tuesday?",
+                options: ["Monday", "Wednesday", "Thursday", "Friday"],
+                answer: "B",
+                explanation: "Wednesday comes after Tuesday"
+            },
+            {
+                question: "Which day comes before Friday?",
+                options: ["Wednesday", "Thursday", "Saturday", "Sunday"],
+                answer: "B",
+                explanation: "Thursday comes before Friday"
+            },
+            {
+                question: "How many months are in one year?",
+                options: ["10", "11", "12", "13"],
+                answer: "C",
+                explanation: "There are 12 months in one year"
+            },
+            {
+                question: "Which month comes after December?",
+                options: ["November", "January", "February", "October"],
+                answer: "B",
+                explanation: "January comes after December"
+            },
+            {
+                question: "How many hours are in one day?",
+                options: ["12", "24", "30", "60"],
+                answer: "B",
+                explanation: "There are 24 hours in one day"
+            },
+            {
+                question: "How many minutes are in one hour?",
+                options: ["12", "24", "30", "60"],
+                answer: "D",
+                explanation: "There are 60 minutes in one hour"
+            },
+            {
+                question: "Today is Monday. What day was yesterday?",
+                options: ["Sunday", "Tuesday", "Wednesday", "Saturday"],
+                answer: "A",
+                explanation: "Yesterday was Sunday if today is Monday"
+            },
+            {
+                question: "Today is Thursday. What day is tomorrow?",
+                options: ["Wednesday", "Friday", "Saturday", "Sunday"],
+                answer: "B",
+                explanation: "Tomorrow is Friday if today is Thursday"
+            },
+            {
+                question: "Which season comes after winter?",
+                options: ["Spring", "Summer", "Fall", "Winter"],
+                answer: "A",
+                explanation: "Spring comes after winter"
+            },
+            // Section D: Quarter Hours
+            {
+                question: "What time is shown? (Hour hand on 2, minute hand on 3)",
+                options: ["2:03", "2:15", "3:02", "2:30"],
+                answer: "B",
+                explanation: "When the minute hand is on 3, it shows 15 minutes past the hour"
+            },
+            {
+                question: "What time is quarter past 4?",
+                options: ["4:00", "4:15", "4:30", "4:45"],
+                answer: "B",
+                explanation: "Quarter past 4 means 4:15"
+            },
+            {
+                question: "What time is quarter to 5?",
+                options: ["4:45", "5:00", "5:15", "5:30"],
+                answer: "A",
+                explanation: "Quarter to 5 means 4:45"
+            },
+            {
+                question: "What time is 15 minutes after 3:00?",
+                options: ["3:15", "3:30", "3:45", "4:00"],
+                answer: "A",
+                explanation: "15 minutes after 3:00 is 3:15"
+            },
+            {
+                question: "What time is 15 minutes before 6:00?",
+                options: ["5:15", "5:45", "6:15", "6:45"],
+                answer: "B",
+                explanation: "15 minutes before 6:00 is 5:45"
+            },
+            {
+                question: "What time is shown? (Hour hand on 7, minute hand on 9)",
+                options: ["7:09", "7:45", "9:07", "7:30"],
+                answer: "B",
+                explanation: "When the minute hand is on 9, it shows 45 minutes past the hour"
+            },
+            {
+                question: "What time is 5 minutes after 8:00?",
+                options: ["8:05", "8:15", "8:30", "8:50"],
+                answer: "A",
+                explanation: "5 minutes after 8:00 is 8:05"
+            },
+            {
+                question: "What time is 10 minutes before 9:00?",
+                options: ["8:10", "8:50", "9:10", "9:50"],
+                answer: "B",
+                explanation: "10 minutes before 9:00 is 8:50"
+            },
+            {
+                question: "What time is 20 minutes after 10:00?",
+                options: ["9:40", "10:02", "10:20", "10:40"],
+                answer: "C",
+                explanation: "20 minutes after 10:00 is 10:20"
+            },
+            {
+                question: "What time is 25 minutes after 1:00?",
+                options: ["1:25", "1:35", "12:35", "2:25"],
+                answer: "A",
+                explanation: "25 minutes after 1:00 is 1:25"
+            },
+            // Section E: Elapsed Time
+            {
+                question: "Start: 3:00, End: 4:00. How much time passed?",
+                options: ["30 minutes", "1 hour", "2 hours", "3 hours"],
+                answer: "B",
+                explanation: "From 3:00 to 4:00 is 1 hour"
+            },
+            {
+                question: "Start: 2:30, End: 3:30. How much time passed?",
+                options: ["30 minutes", "1 hour", "2 hours", "3 hours"],
+                answer: "B",
+                explanation: "From 2:30 to 3:30 is 1 hour"
+            },
+            {
+                question: "Start: 9:00 AM, End: 10:30 AM. How much time passed?",
+                options: ["30 minutes", "1 hour", "1 hour 30 minutes", "2 hours"],
+                answer: "C",
+                explanation: "From 9:00 AM to 10:30 AM is 1 hour 30 minutes"
+            },
+            {
+                question: "Start: 4:15, End: 5:00. How much time passed?",
+                options: ["15 minutes", "30 minutes", "45 minutes", "1 hour"],
+                answer: "C",
+                explanation: "From 4:15 to 5:00 is 45 minutes"
+            },
+            {
+                question: "Start: 1:45, End: 2:30. How much time passed?",
+                options: ["15 minutes", "30 minutes", "45 minutes", "1 hour"],
+                answer: "C",
+                explanation: "From 1:45 to 2:30 is 45 minutes"
+            },
+            {
+                question: "It takes 30 minutes to get ready for school. If you start at 7:30 AM, when will you finish?",
+                options: ["7:00 AM", "8:00 AM", "8:30 AM", "9:00 AM"],
+                answer: "B",
+                explanation: "30 minutes after 7:30 AM is 8:00 AM"
+            },
+            {
+                question: "A movie is 2 hours long. It starts at 5:00 PM. When does it end?",
+                options: ["6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM"],
+                answer: "B",
+                explanation: "2 hours after 5:00 PM is 7:00 PM"
+            },
+            {
+                question: "Dinner takes 45 minutes to cook. You start at 5:15 PM. When will it be ready?",
+                options: ["5:30 PM", "5:45 PM", "6:00 PM", "6:15 PM"],
+                answer: "C",
+                explanation: "45 minutes after 5:15 PM is 6:00 PM"
+            },
+            {
+                question: "A car trip takes 3 hours. You leave at 9:00 AM. When will you arrive?",
+                options: ["11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM"],
+                answer: "B",
+                explanation: "3 hours after 9:00 AM is 12:00 PM"
+            },
+            {
+                question: "Homework takes 1 hour 15 minutes. You start at 4:00 PM. When will you finish?",
+                options: ["4:15 PM", "4:45 PM", "5:00 PM", "5:15 PM"],
+                answer: "D",
+                explanation: "1 hour 15 minutes after 4:00 PM is 5:15 PM"
+            },
+            // Section F: Calendar and Seasons
+            {
+                question: "How many days are in February (non-leap year)?",
+                options: ["28", "29", "30", "31"],
+                answer: "A",
+                explanation: "February has 28 days in a non-leap year"
+            },
+            {
+                question: "How many days are in April?",
+                options: ["28", "29", "30", "31"],
+                answer: "C",
+                explanation: "April has 30 days"
+            },
+            {
+                question: "Which month has 31 days?",
+                options: ["February", "April", "June", "July"],
+                answer: "D",
+                explanation: "July has 31 days"
+            },
+            {
+                question: "How many weeks are in 28 days?",
+                options: ["2", "3", "4", "5"],
+                answer: "C",
+                explanation: "28 days ÷ 7 days/week = 4 weeks"
+            },
+            {
+                question: "How many days are in 2 weeks?",
+                options: ["7", "10", "14", "21"],
+                answer: "C",
+                explanation: "2 weeks × 7 days/week = 14 days"
+            },
+            {
+                question: "If today is January 31st, what is tomorrow's date?",
+                options: ["January 30th", "January 32nd", "February 1st", "March 1st"],
+                answer: "C",
+                explanation: "After January 31st comes February 1st"
+            },
+            {
+                question: "Which season has the coldest weather?",
+                options: ["Spring", "Summer", "Fall", "Winter"],
+                answer: "D",
+                explanation: "Winter has the coldest weather"
+            },
+            {
+                question: "Which season has the warmest weather?",
+                options: ["Spring", "Summer", "Fall", "Winter"],
+                answer: "B",
+                explanation: "Summer has the warmest weather"
+            },
+            {
+                question: "In which season do leaves change color and fall?",
+                options: ["Spring", "Summer", "Fall", "Winter"],
+                answer: "C",
+                explanation: "In fall, leaves change color and fall"
+            },
+            {
+                question: "In which season do flowers bloom?",
+                options: ["Spring", "Summer", "Fall", "Winter"],
+                answer: "A",
+                explanation: "In spring, flowers bloom"
+            },
+            // Section G: Mixed Time Problems
+            {
+                question: "You start reading at 4:10 PM and read for 25 minutes. What time do you finish?",
+                options: ["4:25 PM", "4:35 PM", "4:45 PM", "5:35 PM"],
+                answer: "B",
+                explanation: "25 minutes after 4:10 PM is 4:35 PM"
+            },
+            {
+                question: "Soccer practice lasts from 5:30 PM to 6:45 PM. How long is practice?",
+                options: ["1 hour", "1 hour 15 minutes", "1 hour 30 minutes", "2 hours"],
+                answer: "B",
+                explanation: "From 5:30 PM to 6:45 PM is 1 hour 15 minutes"
+            },
+            {
+                question: "Breakfast takes 20 minutes. If you start at 7:45 AM, when do you finish?",
+                options: ["8:00 AM", "8:05 AM", "8:15 AM", "8:25 AM"],
+                answer: "B",
+                explanation: "20 minutes after 7:45 AM is 8:05 AM"
+            },
+            {
+                question: "The bus ride to school takes 35 minutes. If you need to arrive at 8:15 AM, when should you leave?",
+                options: ["7:30 AM", "7:40 AM", "7:50 AM", "8:00 AM"],
+                answer: "B",
+                explanation: "35 minutes before 8:15 AM is 7:40 AM"
+            },
+            {
+                question: "A TV show starts at 6:00 PM and ends at 6:45 PM. How long is the show?",
+                options: ["30 minutes", "45 minutes", "1 hour", "1 hour 15 minutes"],
+                answer: "B",
+                explanation: "From 6:00 PM to 6:45 PM is 45 minutes"
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent!",
+            "Fantastic!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a time-telling expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade2Time');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade2Time', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Create a copy of questions and shuffle them
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixGrade2Time_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade2Time_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a time-telling expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You understand telling time very well!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a time master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the questions you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better with more practice!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                feedbackMessage.textContent = `Correct answer: ${correctAnswer}`;
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade2-math-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

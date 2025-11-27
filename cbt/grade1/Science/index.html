@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 1 Science | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Dark Theme */
+        :root {
+            --primary-green: #00C853;
+            --secondary-orange: #FF6D00;
+            --accent-purple: #7C4DFF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 200, 83, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00B248;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #E65C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 109, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1507413245164-6160d8298b31?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 1 Science</h1>
+            <p class="welcome-subtitle">Welcome to our interactive science module! Explore the five senses, living vs. non-living things, plants, animals, weather, seasons, light, and sound. Get ready to become a science expert!</p>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Practice Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 150</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Practice Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Retry Topic</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 150 science questions for Grade 1
+        const questions = [
+            // Five Senses
+            {
+                question: "What sense do you use to listen to music?",
+                options: ["sight", "hearing", "touch"],
+                answer: "B",
+                explanation: "You use your sense of hearing to listen to music."
+            },
+            {
+                question: "You use your eyes to see a rainbow. What sense is this?",
+                options: ["sight", "taste", "smell"],
+                answer: "A",
+                explanation: "You use your sense of sight to see a rainbow."
+            },
+            {
+                question: "What sense do you use to feel if a cat's fur is soft?",
+                options: ["hearing", "touch", "taste"],
+                answer: "B",
+                explanation: "You use your sense of touch to feel if a cat's fur is soft."
+            },
+            {
+                question: "You use your tongue to taste an ice cream cone. What does it probably taste like?",
+                options: ["loud", "sweet", "rough"],
+                answer: "B",
+                explanation: "Ice cream usually tastes sweet."
+            },
+            {
+                question: "What sense do you use to smell a flower?",
+                options: ["touch", "smell", "hearing"],
+                answer: "B",
+                explanation: "You use your sense of smell to smell a flower."
+            },
+            {
+                question: "You see a bright, red apple. What sense are you using?",
+                options: ["taste", "sight", "smell"],
+                answer: "B",
+                explanation: "You use your sense of sight to see a bright, red apple."
+            },
+            {
+                question: "What sense tells you that a fire truck siren is loud?",
+                options: ["hearing", "sight", "touch"],
+                answer: "A",
+                explanation: "You use your sense of hearing to know a fire truck siren is loud."
+            },
+            {
+                question: "You use your hands to feel a prickly pinecone. What sense is this?",
+                options: ["touch", "smell", "taste"],
+                answer: "A",
+                explanation: "You use your sense of touch to feel a prickly pinecone."
+            },
+            {
+                question: "What sense tells you that lemonade is sour?",
+                options: ["smell", "taste", "hearing"],
+                answer: "B",
+                explanation: "You use your sense of taste to know that lemonade is sour."
+            },
+            {
+                question: "You can tell that garbage smells bad. What sense are you using?",
+                options: ["sight", "touch", "smell"],
+                answer: "C",
+                explanation: "You use your sense of smell to know that garbage smells bad."
+            },
+            {
+                question: "What sense do you use to read a book?",
+                options: ["hearing", "sight", "taste"],
+                answer: "B",
+                explanation: "You use your sense of sight to read a book."
+            },
+            {
+                question: "You can feel that a blanket is warm. What sense is this?",
+                options: ["touch", "smell", "hearing"],
+                answer: "A",
+                explanation: "You use your sense of touch to feel that a blanket is warm."
+            },
+            {
+                question: "What sense tells you that popcorn is salty?",
+                options: ["taste", "smell", "sight"],
+                answer: "A",
+                explanation: "You use your sense of taste to know that popcorn is salty."
+            },
+            {
+                question: "You hear a bird chirping outside. What sense are you using?",
+                options: ["sight", "hearing", "touch"],
+                answer: "B",
+                explanation: "You use your sense of hearing to hear a bird chirping."
+            },
+            {
+                question: "You can tell that a rose has a nice fragrance. What sense is this?",
+                options: ["taste", "smell", "touch"],
+                answer: "B",
+                explanation: "You use your sense of smell to know that a rose has a nice fragrance."
+            },
+            // Living vs. Non-Living Things
+            {
+                question: "Which one is a living thing?",
+                options: ["rock", "tree", "chair"],
+                answer: "B",
+                explanation: "A tree is a living thing because it grows, needs water, and can reproduce."
+            },
+            {
+                question: "Which one is a non-living thing?",
+                options: ["dog", "butterfly", "ball"],
+                answer: "C",
+                explanation: "A ball is a non-living thing because it doesn't grow, eat, or reproduce."
+            },
+            {
+                question: "What do living things need to breathe?",
+                options: ["water", "air", "soil"],
+                answer: "B",
+                explanation: "Living things need air to breathe."
+            },
+            {
+                question: "Which of these can grow?",
+                options: ["a teddy bear", "a child", "a car"],
+                answer: "B",
+                explanation: "A child is a living thing and can grow."
+            },
+            {
+                question: "Which one is a non-living thing?",
+                options: ["fish", "cloud", "flower"],
+                answer: "B",
+                explanation: "A cloud is a non-living thing made of water droplets."
+            },
+            {
+                question: "What do all living things need to drink?",
+                options: ["juice", "water", "soda"],
+                answer: "B",
+                explanation: "All living things need water to survive."
+            },
+            {
+                question: "Which of these is a living thing?",
+                options: ["sun", "bird", "pencil"],
+                answer: "B",
+                explanation: "A bird is a living thing because it can move, eat, and reproduce."
+            },
+            {
+                question: "A book is non-living because it cannot...",
+                options: ["be colorful", "grow or eat", "have pages"],
+                answer: "B",
+                explanation: "A book is non-living because it cannot grow or eat."
+            },
+            {
+                question: "Which one is a living thing?",
+                options: ["river", "mountain", "rabbit"],
+                answer: "C",
+                explanation: "A rabbit is a living thing because it can move, eat, and reproduce."
+            },
+            {
+                question: "Which of these is a non-living thing?",
+                options: ["worm", "shoe", "plant"],
+                answer: "B",
+                explanation: "A shoe is a non-living thing because it doesn't grow, eat, or reproduce."
+            },
+            {
+                question: "What is one thing that all living things do?",
+                options: ["fly", "change color", "reproduce (make babies)"],
+                answer: "C",
+                explanation: "All living things can reproduce (make babies or new plants)."
+            },
+            {
+                question: "Which one is a non-living thing?",
+                options: ["a person", "a table", "a cat"],
+                answer: "B",
+                explanation: "A table is a non-living thing because it doesn't grow, eat, or reproduce."
+            },
+            {
+                question: "A living thing, like a plant, needs food and ______ to stay alive.",
+                options: ["toys", "water", "clothes"],
+                answer: "B",
+                explanation: "Living things need food and water to stay alive."
+            },
+            {
+                question: "Which of these is a living thing?",
+                options: ["starfish", "star", "stone"],
+                answer: "A",
+                explanation: "A starfish is a living thing found in the ocean."
+            },
+            {
+                question: "Which one is a non-living thing?",
+                options: ["a running river", "a growing child", "a crawling ant"],
+                answer: "A",
+                explanation: "A river is non-living even though the water is moving."
+            },
+            // Plants and Their Parts
+            {
+                question: "Which part of the plant is in the soil and takes in water?",
+                options: ["stem", "root", "leaf"],
+                answer: "B",
+                explanation: "The roots are in the soil and take in water."
+            },
+            {
+                question: "What part of the plant grows into a new plant?",
+                options: ["seed", "flower", "branch"],
+                answer: "A",
+                explanation: "A seed grows into a new plant."
+            },
+            {
+                question: "Which part of the plant makes food using sunlight?",
+                options: ["root", "leaf", "flower"],
+                answer: "B",
+                explanation: "Leaves make food for the plant using sunlight."
+            },
+            {
+                question: "What is the job of the stem?",
+                options: ["to make seeds", "to hold the plant up and carry water", "to absorb sunlight"],
+                answer: "B",
+                explanation: "The stem holds the plant up and carries water to the leaves."
+            },
+            {
+                question: "Which part of the plant is often colorful and smells nice?",
+                options: ["root", "stem", "flower"],
+                answer: "C",
+                explanation: "Flowers are often colorful and smell nice."
+            },
+            {
+                question: "What do plants need to make their own food?",
+                options: ["sunlight, water, air", "music and toys", "candy and soda"],
+                answer: "A",
+                explanation: "Plants need sunlight, water, and air to make their own food."
+            },
+            {
+                question: "Which part of the plant absorbs water from the soil?",
+                options: ["leaves", "roots", "petals"],
+                answer: "B",
+                explanation: "Roots absorb water from the soil."
+            },
+            {
+                question: "What do the leaves of a plant do?",
+                options: ["They look pretty.", "They make food for the plant.", "They hold the plant in the ground."],
+                answer: "B",
+                explanation: "Leaves make food for the plant through photosynthesis."
+            },
+            {
+                question: "Where do seeds usually come from?",
+                options: ["the roots", "the flowers", "the stem"],
+                answer: "B",
+                explanation: "Seeds usually come from flowers."
+            },
+            {
+                question: "What is the first thing that happens when a seed grows?",
+                options: ["A flower blooms.", "A root grows down.", "A leaf grows up."],
+                answer: "B",
+                explanation: "The first thing that happens when a seed grows is a root grows down into the soil."
+            },
+            {
+                question: "Which part of the plant is like its food factory?",
+                options: ["the root", "the leaf", "the stem"],
+                answer: "B",
+                explanation: "The leaf is like the plant's food factory."
+            },
+            {
+                question: "What do plants give off that animals need to breathe?",
+                options: ["carbon dioxide", "oxygen", "sunlight"],
+                answer: "B",
+                explanation: "Plants give off oxygen that animals need to breathe."
+            },
+            {
+                question: "Which part of the plant connects the roots to the leaves?",
+                options: ["flower", "seed", "stem"],
+                answer: "C",
+                explanation: "The stem connects the roots to the leaves."
+            },
+            {
+                question: "A carrot is what kind of plant part?",
+                options: ["a stem", "a root", "a leaf"],
+                answer: "B",
+                explanation: "A carrot is a root that grows underground."
+            },
+            {
+                question: "Which plant part do we often eat that is a leaf?",
+                options: ["celery", "lettuce", "carrot"],
+                answer: "B",
+                explanation: "Lettuce is a leaf that we often eat."
+            },
+            // Animal Habitats
+            {
+                question: "Which animal lives in a pond?",
+                options: ["camel", "frog", "polar bear"],
+                answer: "B",
+                explanation: "Frogs live in or near ponds."
+            },
+            {
+                question: "A bear lives in a...",
+                options: ["ocean", "desert", "forest"],
+                answer: "C",
+                explanation: "Bears live in forests."
+            },
+            {
+                question: "Which animal's habitat is the desert?",
+                options: ["penguin", "camel", "whale"],
+                answer: "B",
+                explanation: "Camels live in the desert."
+            },
+            {
+                question: "A whale lives in the...",
+                options: ["sky", "ocean", "forest"],
+                answer: "B",
+                explanation: "Whales live in the ocean."
+            },
+            {
+                question: "What is a habitat?",
+                options: ["an animal's toy", "an animal's home", "an animal's food"],
+                answer: "B",
+                explanation: "A habitat is an animal's home."
+            },
+            {
+                question: "Which animal builds a nest in a tree?",
+                options: ["fish", "bird", "mole"],
+                answer: "B",
+                explanation: "Birds build nests in trees."
+            },
+            {
+                question: "A beaver builds its home, called a lodge, in...",
+                options: ["a river", "a tree", "a cave"],
+                answer: "A",
+                explanation: "Beavers build lodges in rivers."
+            },
+            {
+                question: "Which animal lives in a cold, snowy habitat?",
+                options: ["penguin", "lizard", "elephant"],
+                answer: "A",
+                explanation: "Penguins live in cold, snowy habitats."
+            },
+            {
+                question: "A rabbit might live in a hole in the ground called a...",
+                options: ["nest", "web", "burrow"],
+                answer: "C",
+                explanation: "Rabbits live in burrows, which are holes in the ground."
+            },
+            {
+                question: "Which animal's habitat is the grassland?",
+                options: ["lion", "shark", "bat"],
+                answer: "A",
+                explanation: "Lions live in grasslands."
+            },
+            {
+                question: "A spider lives in a...",
+                options: ["web", "hive", "den"],
+                answer: "A",
+                explanation: "Spiders live in webs."
+            },
+            {
+                question: "Which animal lives in a hive?",
+                options: ["bee", "bird", "fox"],
+                answer: "A",
+                explanation: "Bees live in hives."
+            },
+            {
+                question: "A monkey's habitat is the...",
+                options: ["jungle", "desert", "ocean"],
+                answer: "A",
+                explanation: "Monkeys live in the jungle."
+            },
+            {
+                question: "Which animal lives in both water and on land?",
+                options: ["duck", "fish", "horse"],
+                answer: "A",
+                explanation: "Ducks live in both water and on land."
+            },
+            {
+                question: "What is a fish's habitat?",
+                options: ["water", "sand", "grass"],
+                answer: "A",
+                explanation: "A fish's habitat is water."
+            },
+            // Weather and Seasons
+            {
+                question: "On a rainy day, you should bring an...",
+                options: ["umbrella", "ice cream", "sunglasses"],
+                answer: "A",
+                explanation: "You should bring an umbrella on a rainy day."
+            },
+            {
+                question: "Which season comes after winter?",
+                options: ["spring", "fall", "summer"],
+                answer: "A",
+                explanation: "Spring comes after winter."
+            },
+            {
+                question: "What do you see in the sky on a sunny day?",
+                options: ["clouds", "moon", "sun"],
+                answer: "C",
+                explanation: "You see the sun in the sky on a sunny day."
+            },
+            {
+                question: "In which season do leaves fall from trees?",
+                options: ["winter", "spring", "fall"],
+                answer: "C",
+                explanation: "Leaves fall from trees in the fall."
+            },
+            {
+                question: "What falls from the sky in winter?",
+                options: ["rain", "leaves", "snow"],
+                answer: "C",
+                explanation: "Snow falls from the sky in winter."
+            },
+            {
+                question: "Which season is the hottest?",
+                options: ["winter", "summer", "fall"],
+                answer: "B",
+                explanation: "Summer is the hottest season."
+            },
+            {
+                question: "What do you call the moving air that you can feel but not see?",
+                options: ["rain", "wind", "cloud"],
+                answer: "B",
+                explanation: "Wind is moving air that you can feel but not see."
+            },
+            {
+                question: "In which season do flowers start to bloom?",
+                options: ["spring", "winter", "fall"],
+                answer: "A",
+                explanation: "Flowers start to bloom in spring."
+            },
+            {
+                question: "A loud, booming sound you hear during a storm is called...",
+                options: ["lightning", "thunder", "wind"],
+                answer: "B",
+                explanation: "Thunder is the loud, booming sound during a storm."
+            },
+            {
+                question: "Which season comes after summer?",
+                options: ["spring", "fall", "winter"],
+                answer: "B",
+                explanation: "Fall comes after summer."
+            },
+            {
+                question: "What do you need on a very hot, sunny day?",
+                options: ["a coat", "sunscreen and a hat", "boots"],
+                answer: "B",
+                explanation: "You need sunscreen and a hat on a very hot, sunny day."
+            },
+            {
+                question: "What is water that falls from the sky called?",
+                options: ["precipitation", "evaporation", "condensation"],
+                answer: "A",
+                explanation: "Precipitation is water that falls from the sky."
+            },
+            {
+                question: "Which season is known for very cold weather?",
+                options: ["summer", "spring", "winter"],
+                answer: "C",
+                explanation: "Winter is known for very cold weather."
+            },
+            {
+                question: "What do you see in the sky before it rains?",
+                options: ["clear, blue sky", "dark clouds", "a bright sun"],
+                answer: "B",
+                explanation: "You see dark clouds in the sky before it rains."
+            },
+            {
+                question: "In fall, the weather gets...",
+                options: ["warmer", "colder", "stays the same"],
+                answer: "B",
+                explanation: "In fall, the weather gets colder."
+            },
+            // Light and Sound
+            {
+                question: "What is the main source of light for the Earth during the day?",
+                options: ["the moon", "a lamp", "the sun"],
+                answer: "C",
+                explanation: "The sun is the main source of light for the Earth during the day."
+            },
+            {
+                question: "What do you hear with?",
+                options: ["eyes", "ears", "nose"],
+                answer: "B",
+                explanation: "You hear with your ears."
+            },
+            {
+                question: "What do you use to see in a dark room?",
+                options: ["a mirror", "a flashlight", "a book"],
+                answer: "B",
+                explanation: "You use a flashlight to see in a dark room."
+            },
+            {
+                question: "A fire truck siren makes a...",
+                options: ["soft sound", "loud sound", "no sound"],
+                answer: "B",
+                explanation: "A fire truck siren makes a loud sound."
+            },
+            {
+                question: "Which object makes light?",
+                options: ["a chair", "a light bulb", "a rock"],
+                answer: "B",
+                explanation: "A light bulb makes light."
+            },
+            {
+                question: "A whisper is a...",
+                options: ["loud sound", "quiet sound", "vibrating sound"],
+                answer: "B",
+                explanation: "A whisper is a quiet sound."
+            },
+            {
+                question: "Which object is a source of light?",
+                options: ["a candle", "a pillow", "a shoe"],
+                answer: "A",
+                explanation: "A candle is a source of light."
+            },
+            {
+                question: "What sense do you use to see a movie?",
+                options: ["hearing", "touch", "sight"],
+                answer: "C",
+                explanation: "You use your sense of sight to see a movie."
+            },
+            {
+                question: "What happens when light hits a mirror?",
+                options: ["It stops.", "It reflects (bounces off).", "It gets louder."],
+                answer: "B",
+                explanation: "When light hits a mirror, it reflects (bounces off)."
+            },
+            {
+                question: "Which one makes a high-pitched sound?",
+                options: ["a big drum", "a mouse squeaking", "a truck engine"],
+                answer: "B",
+                explanation: "A mouse squeaking makes a high-pitched sound."
+            },
+            {
+                question: "Which object is transparent and lets all light through?",
+                options: ["a brick wall", "a clear window", "a wooden door"],
+                answer: "B",
+                explanation: "A clear window is transparent and lets all light through."
+            },
+            {
+                question: "What is vibration?",
+                options: ["a back and forth movement that makes sound", "a bright light", "a type of weather"],
+                answer: "A",
+                explanation: "Vibration is a back and forth movement that makes sound."
+            },
+            {
+                question: "Which object would make the best shadow?",
+                options: ["a glass of water", "a teddy bear", "a clear plastic bag"],
+                answer: "B",
+                explanation: "A teddy bear would make the best shadow because it blocks light."
+            },
+            {
+                question: "A guitar makes sound when its strings...",
+                options: ["get hot", "vibrate", "change color"],
+                answer: "B",
+                explanation: "A guitar makes sound when its strings vibrate."
+            },
+            {
+                question: "You see a rainbow when light passes through...",
+                options: ["a rock", "raindrops", "a tree"],
+                answer: "B",
+                explanation: "You see a rainbow when light passes through raindrops."
+            },
+            // Mixed Review (The Five Senses)
+            {
+                question: "What sense are you using if you know a bell is ringing?",
+                options: ["sight", "hearing", "touch"],
+                answer: "B",
+                explanation: "You use your sense of hearing to know a bell is ringing."
+            },
+            {
+                question: "You can feel that sandpaper is rough. What sense is this?",
+                options: ["smell", "touch", "taste"],
+                answer: "B",
+                explanation: "You use your sense of touch to feel that sandpaper is rough."
+            },
+            {
+                question: "What sense tells you that a pizza is yummy?",
+                options: ["taste", "smell", "sight"],
+                answer: "A",
+                explanation: "You use your sense of taste to know that pizza is yummy."
+            },
+            {
+                question: "You see that the grass is green. What sense is this?",
+                options: ["hearing", "sight", "touch"],
+                answer: "B",
+                explanation: "You use your sense of sight to see that the grass is green."
+            },
+            {
+                question: "What sense tells you that perfume has a strong smell?",
+                options: ["taste", "touch", "smell"],
+                answer: "C",
+                explanation: "You use your sense of smell to know that perfume has a strong smell."
+            },
+            // Mixed Review (Living vs. Non-Living)
+            {
+                question: "Which of these is a living thing?",
+                options: ["a computer", "a butterfly", "a ball"],
+                answer: "B",
+                explanation: "A butterfly is a living thing because it can move, eat, and reproduce."
+            },
+            {
+                question: "Which of these is a non-living thing?",
+                options: ["a growing tree", "a flying bird", "a rolling ball"],
+                answer: "C",
+                explanation: "A rolling ball is a non-living thing even though it can move."
+            },
+            {
+                question: "What is one thing all living things need?",
+                options: ["electricity", "food", "wheels"],
+                answer: "B",
+                explanation: "All living things need food."
+            },
+            {
+                question: "A rock is non-living because it cannot...",
+                options: ["be found outside", "grow or reproduce", "be heavy"],
+                answer: "B",
+                explanation: "A rock is non-living because it cannot grow or reproduce."
+            },
+            {
+                question: "Which one is a living thing?",
+                options: ["a river", "a cloud", "a worm"],
+                answer: "C",
+                explanation: "A worm is a living thing because it can move, eat, and reproduce."
+            },
+            // Mixed Review (Plants and Their Parts)
+            {
+                question: "Which part of the plant is underground?",
+                options: ["leaf", "root", "flower"],
+                answer: "B",
+                explanation: "The root is the part of the plant that is underground."
+            },
+            {
+                question: "What is the job of the flower?",
+                options: ["to make food", "to make seeds", "to absorb water"],
+                answer: "B",
+                explanation: "The job of the flower is to make seeds."
+            },
+            {
+                question: "A celery stalk is what part of the plant?",
+                options: ["root", "stem", "leaf"],
+                answer: "B",
+                explanation: "A celery stalk is a stem."
+            },
+            {
+                question: "What do plants need from the sun?",
+                options: ["light energy to make food", "warmth to sleep", "color to be green"],
+                answer: "A",
+                explanation: "Plants need light energy from the sun to make food."
+            },
+            {
+                question: "What part of the plant grows into a fruit?",
+                options: ["the root", "the flower", "the stem"],
+                answer: "B",
+                explanation: "The flower grows into a fruit."
+            },
+            // Mixed Review (Animal Habitats)
+            {
+                question: "A frog lives in a...",
+                options: ["desert", "pond", "iceberg"],
+                answer: "B",
+                explanation: "A frog lives in a pond."
+            },
+            {
+                question: "Which animal lives in a barn?",
+                options: ["cow", "whale", "lion"],
+                answer: "A",
+                explanation: "A cow lives in a barn."
+            },
+            {
+                question: "A polar bear lives in a...",
+                options: ["hot desert", "cold Arctic", "jungle"],
+                answer: "B",
+                explanation: "A polar bear lives in the cold Arctic."
+            },
+            {
+                question: "Which animal lives in a web?",
+                options: ["ant", "spider", "bee"],
+                answer: "B",
+                explanation: "A spider lives in a web."
+            },
+            {
+                question: "A beaver lives in a...",
+                options: ["lodge in the water", "nest in a tree", "cave on a mountain"],
+                answer: "A",
+                explanation: "A beaver lives in a lodge in the water."
+            },
+            // Mixed Review (Weather and Seasons)
+            {
+                question: "What do you call a day with lots of clouds?",
+                options: ["sunny", "cloudy", "snowy"],
+                answer: "B",
+                explanation: "A day with lots of clouds is called cloudy."
+            },
+            {
+                question: "In which season might you go swimming?",
+                options: ["winter", "summer", "fall"],
+                answer: "B",
+                explanation: "You might go swimming in summer."
+            },
+            {
+                question: "What falls from the sky during a storm?",
+                options: ["rain", "sun", "leaves"],
+                answer: "A",
+                explanation: "Rain falls from the sky during a storm."
+            },
+            {
+                question: "Which season has the most colorful falling leaves?",
+                options: ["spring", "summer", "fall"],
+                answer: "C",
+                explanation: "Fall has the most colorful falling leaves."
+            },
+            {
+                question: "What is a very strong wind called?",
+                options: ["a breeze", "a hurricane", "a puddle"],
+                answer: "B",
+                explanation: "A very strong wind is called a hurricane."
+            },
+            // Mixed Review (Light and Sound)
+            {
+                question: "What is the source of most natural light on Earth?",
+                options: ["the moon", "the sun", "stars"],
+                answer: "B",
+                explanation: "The sun is the source of most natural light on Earth."
+            },
+            {
+                question: "What do you feel when a speaker is playing loud music?",
+                options: ["light", "vibrations", "cold"],
+                answer: "B",
+                explanation: "You feel vibrations when a speaker is playing loud music."
+            },
+            {
+                question: "Which object is a source of artificial light?",
+                options: ["the sun", "a star", "a lamp"],
+                answer: "C",
+                explanation: "A lamp is a source of artificial light."
+            },
+            {
+                question: "A shadow is made when an object...",
+                options: ["blocks light", "makes a sound", "lets light through"],
+                answer: "A",
+                explanation: "A shadow is made when an object blocks light."
+            },
+            {
+                question: "What is a form of energy that helps us see?",
+                options: ["sound", "light", "heat"],
+                answer: "B",
+                explanation: "Light is a form of energy that helps us see."
+            },
+            // Final Comprehensive Review
+            {
+                question: "You are eating a sour lemon. What sense are you using?",
+                options: ["smell", "taste", "touch"],
+                answer: "B",
+                explanation: "You use your sense of taste when eating a sour lemon."
+            },
+            {
+                question: "Which of these is a living thing?",
+                options: ["a running boy", "a rolling car", "a floating balloon"],
+                answer: "A",
+                explanation: "A running boy is a living thing."
+            },
+            {
+                question: "Which plant part takes in water from the soil?",
+                options: ["stem", "leaf", "root"],
+                answer: "C",
+                explanation: "The root takes in water from the soil."
+            },
+            {
+                question: "A camel's habitat is the...",
+                options: ["ocean", "desert", "forest"],
+                answer: "B",
+                explanation: "A camel's habitat is the desert."
+            },
+            {
+                question: "What season is it if it is snowing?",
+                options: ["summer", "winter", "spring"],
+                answer: "B",
+                explanation: "It is winter if it is snowing."
+            },
+            {
+                question: "What do you need to see things around you?",
+                options: ["sound", "light", "vibration"],
+                answer: "B",
+                explanation: "You need light to see things around you."
+            },
+            {
+                question: "What sense tells you that a trumpet is loud?",
+                options: ["sight", "hearing", "touch"],
+                answer: "B",
+                explanation: "Your sense of hearing tells you that a trumpet is loud."
+            },
+            {
+                question: "A book is non-living because it does not...",
+                options: ["have pages", "need food", "have words"],
+                answer: "B",
+                explanation: "A book is non-living because it does not need food."
+            },
+            {
+                question: "What is the job of a plant's stem?",
+                options: ["to make food", "to make seeds", "to support the plant"],
+                answer: "C",
+                explanation: "The job of a plant's stem is to support the plant."
+            },
+            {
+                question: "A fish's habitat is...",
+                options: ["the sky", "the water", "the desert"],
+                answer: "B",
+                explanation: "A fish's habitat is the water."
+            },
+            {
+                question: "What do you see in the sky during the day?",
+                options: ["the moon and stars", "the sun", "the Milky Way"],
+                answer: "B",
+                explanation: "You see the sun in the sky during the day."
+            },
+            {
+                question: "What is created when an object blocks light?",
+                options: ["a reflection", "a shadow", "a sound"],
+                answer: "B",
+                explanation: "A shadow is created when an object blocks light."
+            },
+            {
+                question: "You can feel that an ice cube is cold. What sense is this?",
+                options: ["touch", "sight", "hearing"],
+                answer: "A",
+                explanation: "You use your sense of touch to feel that an ice cube is cold."
+            },
+            {
+                question: "Which of these is a living thing?",
+                options: ["a flying kite", "a swimming fish", "a glowing light bulb"],
+                answer: "B",
+                explanation: "A swimming fish is a living thing."
+            },
+            {
+                question: "Which plant part is often green and flat?",
+                options: ["root", "flower", "leaf"],
+                answer: "C",
+                explanation: "A leaf is often green and flat."
+            },
+            {
+                question: "A bird's habitat is a...",
+                options: ["nest in a tree", "web", "hive"],
+                answer: "A",
+                explanation: "A bird's habitat is a nest in a tree."
+            },
+            {
+                question: "In which season do the days get longer and warmer?",
+                options: ["winter", "spring", "fall"],
+                answer: "B",
+                explanation: "In spring, the days get longer and warmer."
+            },
+            {
+                question: "A drum makes a sound when you...",
+                options: ["shine a light on it", "hit it, making it vibrate", "paint it a color"],
+                answer: "B",
+                explanation: "A drum makes a sound when you hit it, making it vibrate."
+            },
+            {
+                question: "What sense do you use to enjoy the smell of cookies baking?",
+                options: ["taste", "smell", "hearing"],
+                answer: "B",
+                explanation: "You use your sense of smell to enjoy the smell of cookies baking."
+            },
+            {
+                question: "Which of these is a non-living thing?",
+                options: ["a crawling snail", "a blooming flower", "a moving bicycle"],
+                answer: "C",
+                explanation: "A moving bicycle is a non-living thing."
+            },
+            {
+                question: "What do plants get from the air that they need to make food?",
+                options: ["oxygen", "carbon dioxide", "sunlight"],
+                answer: "B",
+                explanation: "Plants get carbon dioxide from the air to make food."
+            },
+            {
+                question: "A squirrel's habitat is a...",
+                options: ["hive", "drey (nest) in a tree", "ocean"],
+                answer: "B",
+                explanation: "A squirrel's habitat is a drey (nest) in a tree."
+            },
+            {
+                question: "What do you call the light from the sun?",
+                options: ["artificial light", "sunlight", "moonlight"],
+                answer: "B",
+                explanation: "Light from the sun is called sunlight."
+            },
+            {
+                question: "What sense do you use to read these words?",
+                options: ["hearing", "touch", "sight"],
+                answer: "C",
+                explanation: "You use your sense of sight to read these words."
+            },
+            {
+                question: "Which one is a living thing?",
+                options: ["soil", "mushroom", "water"],
+                answer: "B",
+                explanation: "A mushroom is a living thing."
+            },
+            {
+                question: "Bees help flowers by...",
+                options: ["taking their water", "carrying pollen between them", "eating their leaves"],
+                answer: "B",
+                explanation: "Bees help flowers by carrying pollen between them."
+            },
+            {
+                question: "A loud rumble you hear during a storm is called...",
+                options: ["lightning", "thunder", "wind"],
+                answer: "B",
+                explanation: "A loud rumble you hear during a storm is called thunder."
+            },
+            {
+                question: "Which object is a source of sound?",
+                options: ["a quiet rock", "a ringing bell", "a dark shadow"],
+                answer: "B",
+                explanation: "A ringing bell is a source of sound."
+            },
+            {
+                question: "What is one thing that both plants and animals need to live?",
+                options: ["water", "toys", "cars"],
+                answer: "A",
+                explanation: "Both plants and animals need water to live."
+            },
+            {
+                question: "You can see your reflection in a still pond because light...",
+                options: ["is absorbed", "is reflected", "stops"],
+                answer: "B",
+                explanation: "You can see your reflection in a still pond because light is reflected."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent!",
+            "Fantastic!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a science expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade1Science');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade1Science', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Create a copy of questions and shuffle them
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixGrade1Science_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade1Science_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a science expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You understand science concepts very well!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a science master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the questions you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better with more practice!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                feedbackMessage.textContent = `Correct answer: ${correctAnswer}`;
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade1-science-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

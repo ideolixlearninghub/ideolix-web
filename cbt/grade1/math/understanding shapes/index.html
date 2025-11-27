@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 1 Math - Understanding Shapes | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Dark Theme */
+        :root {
+            --primary-green: #00C853;
+            --secondary-orange: #FF6D00;
+            --accent-purple: #7C4DFF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 200, 83, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00B248;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #E65C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 109, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 1 Math – Understanding Shapes</h1>
+            <p class="welcome-subtitle">Welcome to our interactive shapes module! Here you'll learn about 2D and 3D shapes, their properties, and how to identify them in the real world. Get ready to become a shape expert!</p>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Practice Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Practice Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Retry Topic</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - All questions from the document
+        const questions = [
+            // Section A: Identifying 2D Shapes
+            {
+                question: "Which shape has 3 sides and 3 corners?",
+                options: ["Square", "Triangle", "Circle", "Rectangle"],
+                answer: "B",
+                explanation: "A triangle has 3 sides and 3 corners."
+            },
+            {
+                question: "Which shape is round with no corners?",
+                options: ["Square", "Triangle", "Circle", "Rectangle"],
+                answer: "C",
+                explanation: "A circle is round and has no corners."
+            },
+            {
+                question: "Which shape has 4 equal sides?",
+                options: ["Rectangle", "Triangle", "Square", "Circle"],
+                answer: "C",
+                explanation: "A square has 4 sides that are all equal in length."
+            },
+            {
+                question: "Which shape has 4 sides where opposite sides are equal?",
+                options: ["Square", "Triangle", "Circle", "Rectangle"],
+                answer: "D",
+                explanation: "A rectangle has 4 sides where opposite sides are equal."
+            },
+            {
+                question: "What shape looks like a door?",
+                options: ["Circle", "Rectangle", "Triangle", "Square"],
+                answer: "B",
+                explanation: "A door is usually shaped like a rectangle."
+            },
+            {
+                question: "Which shape looks like a piece of pizza?",
+                options: ["Square", "Circle", "Triangle", "Rectangle"],
+                answer: "C",
+                explanation: "A piece of pizza is usually shaped like a triangle."
+            },
+            {
+                question: "What shape has 4 corners?",
+                options: ["Circle", "Triangle", "Square", "Oval"],
+                answer: "C",
+                explanation: "A square has 4 corners."
+            },
+            {
+                question: "Which shape has no straight sides?",
+                options: ["Square", "Triangle", "Circle", "Rectangle"],
+                answer: "C",
+                explanation: "A circle has no straight sides."
+            },
+            {
+                question: "What shape looks like a wheel?",
+                options: ["Triangle", "Square", "Circle", "Rectangle"],
+                answer: "C",
+                explanation: "A wheel is shaped like a circle."
+            },
+            {
+                question: "Which shape has 3 corners?",
+                options: ["Square", "Rectangle", "Triangle", "Circle"],
+                answer: "C",
+                explanation: "A triangle has 3 corners."
+            },
+            // Section B: Identifying 3D Shapes
+            {
+                question: "Which shape looks like a ball?",
+                options: ["Cube", "Sphere", "Cylinder", "Cone"],
+                answer: "B",
+                explanation: "A sphere looks like a ball."
+            },
+            {
+                question: "Which shape looks like a can of soup?",
+                options: ["Cube", "Sphere", "Cylinder", "Pyramid"],
+                answer: "C",
+                explanation: "A cylinder looks like a can of soup."
+            },
+            {
+                question: "Which shape looks like a dice?",
+                options: ["Sphere", "Cube", "Cone", "Cylinder"],
+                answer: "B",
+                explanation: "A cube looks like a dice."
+            },
+            {
+                question: "Which shape looks like an ice cream cone?",
+                options: ["Cube", "Sphere", "Cone", "Cylinder"],
+                answer: "C",
+                explanation: "A cone looks like an ice cream cone."
+            },
+            {
+                question: "Which shape has 6 square faces?",
+                options: ["Sphere", "Cylinder", "Cube", "Cone"],
+                answer: "C",
+                explanation: "A cube has 6 square faces."
+            },
+            {
+                question: "Which shape can roll?",
+                options: ["Cube", "Cone", "Sphere", "Pyramid"],
+                answer: "C",
+                explanation: "A sphere can roll."
+            },
+            {
+                question: "Which shape has a point at the top?",
+                options: ["Cube", "Cylinder", "Cone", "Sphere"],
+                answer: "C",
+                explanation: "A cone has a point at the top."
+            },
+            {
+                question: "What shape looks like a party hat?",
+                options: ["Cube", "Cone", "Cylinder", "Sphere"],
+                answer: "B",
+                explanation: "A cone looks like a party hat."
+            },
+            {
+                question: "Which shape has two circular faces?",
+                options: ["Cube", "Sphere", "Cylinder", "Cone"],
+                answer: "C",
+                explanation: "A cylinder has two circular faces."
+            },
+            {
+                question: "Which shape has no flat faces?",
+                options: ["Cube", "Sphere", "Cylinder", "Cone"],
+                answer: "B",
+                explanation: "A sphere has no flat faces."
+            },
+            // Section C: Real-World Object Matching
+            {
+                question: "Which object is shaped like a sphere?",
+                options: ["Book", "Basketball", "Can of soda", "Ice cream cone"],
+                answer: "B",
+                explanation: "A basketball is shaped like a sphere."
+            },
+            {
+                question: "Which object is shaped like a cube?",
+                options: ["Orange", "Dice", "Soup can", "Party hat"],
+                answer: "B",
+                explanation: "A dice is shaped like a cube."
+            },
+            {
+                question: "Which object is shaped like a cylinder?",
+                options: ["Soccer ball", "Book", "Soda can", "Pyramid"],
+                answer: "C",
+                explanation: "A soda can is shaped like a cylinder."
+            },
+            {
+                question: "Which object is shaped like a cone?",
+                options: ["Ice cream cone", "Ball", "Box", "Can"],
+                answer: "A",
+                explanation: "An ice cream cone is shaped like a cone."
+            },
+            {
+                question: "A window is usually what shape?",
+                options: ["Circle", "Triangle", "Square or rectangle", "Oval"],
+                answer: "C",
+                explanation: "A window is usually a square or rectangle."
+            },
+            {
+                question: "A clock is usually what shape?",
+                options: ["Triangle", "Square", "Circle", "Rectangle"],
+                answer: "C",
+                explanation: "A clock is usually a circle."
+            },
+            {
+                question: "A slice of pizza is what shape?",
+                options: ["Square", "Circle", "Triangle", "Rectangle"],
+                answer: "C",
+                explanation: "A slice of pizza is a triangle."
+            },
+            {
+                question: "A book is what shape?",
+                options: ["Sphere", "Cube", "Rectangle (2D)", "Cone"],
+                answer: "C",
+                explanation: "A book is shaped like a rectangle."
+            },
+            {
+                question: "A door is what shape?",
+                options: ["Triangle", "Circle", "Rectangle", "Square"],
+                answer: "C",
+                explanation: "A door is shaped like a rectangle."
+            },
+            {
+                question: "A coin is what shape?",
+                options: ["Square", "Triangle", "Circle", "Rectangle"],
+                answer: "C",
+                explanation: "A coin is shaped like a circle."
+            },
+            // Section D: Shape Properties - Sides and Corners
+            {
+                question: "How many sides does a triangle have?",
+                options: ["2", "3", "4", "5"],
+                answer: "B",
+                explanation: "A triangle has 3 sides."
+            },
+            {
+                question: "How many corners does a square have?",
+                options: ["3", "4", "5", "6"],
+                answer: "B",
+                explanation: "A square has 4 corners."
+            },
+            {
+                question: "How many sides does a circle have?",
+                options: ["0", "1", "2", "3"],
+                answer: "A",
+                explanation: "A circle has 0 sides."
+            },
+            {
+                question: "How many corners does a rectangle have?",
+                options: ["2", "3", "4", "5"],
+                answer: "C",
+                explanation: "A rectangle has 4 corners."
+            },
+            {
+                question: "Which shape has the most sides?",
+                options: ["Triangle", "Square", "Rectangle", "They all have the same"],
+                answer: "D",
+                explanation: "Triangle, square, and rectangle all have the same number of sides."
+            },
+            {
+                question: "How many straight sides does a circle have?",
+                options: ["0", "1", "2", "3"],
+                answer: "A",
+                explanation: "A circle has 0 straight sides."
+            },
+            {
+                question: "Which shape has 3 corners?",
+                options: ["Square", "Triangle", "Circle", "Rectangle"],
+                answer: "B",
+                explanation: "A triangle has 3 corners."
+            },
+            {
+                question: "How many sides does a square have?",
+                options: ["3", "4", "5", "6"],
+                answer: "B",
+                explanation: "A square has 4 sides."
+            },
+            {
+                question: "Which shape has no corners?",
+                options: ["Square", "Triangle", "Circle", "Rectangle"],
+                answer: "C",
+                explanation: "A circle has no corners."
+            },
+            {
+                question: "How many corners does a triangle have?",
+                options: ["2", "3", "4", "5"],
+                answer: "B",
+                explanation: "A triangle has 3 corners."
+            },
+            // Section E: 3D Shape Properties - Faces, Edges, Vertices
+            {
+                question: "How many faces does a cube have?",
+                options: ["4", "5", "6", "8"],
+                answer: "C",
+                explanation: "A cube has 6 faces."
+            },
+            {
+                question: "Which 3D shape has only 1 face?",
+                options: ["Cube", "Sphere", "Cylinder", "Cone"],
+                answer: "B",
+                explanation: "A sphere has only 1 face."
+            },
+            {
+                question: "How many flat faces does a cylinder have?",
+                options: ["0", "1", "2", "3"],
+                answer: "C",
+                explanation: "A cylinder has 2 flat faces."
+            },
+            {
+                question: "Which shape can stack easily?",
+                options: ["Sphere", "Cube", "Cone", "All of them"],
+                answer: "B",
+                explanation: "A cube can stack easily because it has flat faces."
+            },
+            {
+                question: "Which shape can roll?",
+                options: ["Cube", "Cone", "Sphere", "Both b and c"],
+                answer: "D",
+                explanation: "Both a cone and a sphere can roll."
+            },
+            {
+                question: "How many circular faces does a cylinder have?",
+                options: ["0", "1", "2", "3"],
+                answer: "C",
+                explanation: "A cylinder has 2 circular faces."
+            },
+            {
+                question: "Which shape has a curved surface and a point?",
+                options: ["Cube", "Cylinder", "Cone", "Sphere"],
+                answer: "C",
+                explanation: "A cone has a curved surface and a point."
+            },
+            {
+                question: "How many flat faces does a cone have?",
+                options: ["0", "1", "2", "3"],
+                answer: "B",
+                explanation: "A cone has 1 flat face."
+            },
+            {
+                question: "Which shape has all faces the same?",
+                options: ["Cylinder", "Cone", "Cube", "Pyramid"],
+                answer: "C",
+                explanation: "A cube has all faces the same."
+            },
+            {
+                question: "How many edges does a cube have?",
+                options: ["6", "8", "12", "4"],
+                answer: "C",
+                explanation: "A cube has 12 edges."
+            },
+            // Section F: Comparing and Sorting Shapes
+            {
+                question: "Which two shapes both have 4 sides?",
+                options: ["Triangle and square", "Square and rectangle", "Circle and triangle", "Rectangle and triangle"],
+                answer: "B",
+                explanation: "Both a square and a rectangle have 4 sides."
+            },
+            {
+                question: "Which shape is different?",
+                options: ["Square", "Triangle", "Circle", "Rectangle"],
+                answer: "C",
+                explanation: "A circle is different because it has no straight sides or corners."
+            },
+            {
+                question: "Which two shapes can roll?",
+                options: ["Cube and sphere", "Sphere and cylinder", "Cone and cube", "Pyramid and cylinder"],
+                answer: "B",
+                explanation: "Both a sphere and a cylinder can roll."
+            },
+            {
+                question: "Which shape does NOT belong?",
+                options: ["Basketball", "Orange", "Marble", "Book"],
+                answer: "D",
+                explanation: "A book does not belong because it's not round like the others."
+            },
+            {
+                question: "Which shapes have corners?",
+                options: ["Circle and oval", "Square and triangle", "Sphere and cylinder", "All shapes"],
+                answer: "B",
+                explanation: "Both a square and a triangle have corners."
+            },
+            // Section G: Shape Patterns
+            {
+                question: "What shape comes next? □, △, □, △, □, ___",
+                options: ["□", "△", "○", "◇"],
+                answer: "B",
+                explanation: "The pattern is □, △ repeating, so △ comes next."
+            },
+            {
+                question: "Complete the pattern: ○, □, ○, □, ○, ___",
+                options: ["○", "□", "△", "◇"],
+                answer: "B",
+                explanation: "The pattern is ○, □ repeating, so □ comes next."
+            },
+            {
+                question: "What shape is missing? △, □, △, ___, △, □",
+                options: ["△", "□", "○", "◇"],
+                answer: "B",
+                explanation: "The pattern is △, □, △, □, so □ is missing."
+            },
+            {
+                question: "Which pattern shows ABAB pattern?",
+                options: ["△, △, △, △", "△, □, △, □", "△, △, □, □", "△, □, □, △"],
+                answer: "B",
+                explanation: "△, □, △, □ shows an ABAB pattern."
+            },
+            {
+                question: "What comes next? ○, ○, □, ○, ○, □, ___",
+                options: ["○", "□", "△", "◇"],
+                answer: "A",
+                explanation: "The pattern is ○, ○, □ repeating, so ○ comes next."
+            },
+            // Section H: Position and Location Words
+            {
+                question: "The ball is ___ the box. (Picture showing ball inside box)",
+                options: ["beside", "inside", "under", "above"],
+                answer: "B",
+                explanation: "The ball is inside the box."
+            },
+            {
+                question: "The cat is ___ the table. (Picture showing cat under table)",
+                options: ["above", "beside", "under", "inside"],
+                answer: "C",
+                explanation: "The cat is under the table."
+            },
+            {
+                question: "The book is ___ the shelf. (Picture showing book on shelf)",
+                options: ["under", "on", "beside", "inside"],
+                answer: "B",
+                explanation: "The book is on the shelf."
+            },
+            {
+                question: "The car is ___ the house. (Picture showing car next to house)",
+                options: ["above", "under", "beside", "inside"],
+                answer: "C",
+                explanation: "The car is beside the house."
+            },
+            {
+                question: "The bird is ___ the tree. (Picture showing bird above tree)",
+                options: ["under", "beside", "above", "inside"],
+                answer: "C",
+                explanation: "The bird is above the tree."
+            },
+            // Section I: Shape Composition - Making Pictures
+            {
+                question: "What shapes can make a house?",
+                options: ["Square and triangle", "Circle and rectangle", "Triangle and circle", "Square and circle"],
+                answer: "A",
+                explanation: "A house can be made with a square and a triangle."
+            },
+            {
+                question: "What shape is the sun usually drawn as?",
+                options: ["Square", "Triangle", "Circle", "Rectangle"],
+                answer: "C",
+                explanation: "The sun is usually drawn as a circle."
+            },
+            {
+                question: "What shapes make a snowman?",
+                options: ["Squares", "Triangles", "Circles", "Rectangles"],
+                answer: "C",
+                explanation: "A snowman is made with circles."
+            },
+            {
+                question: "What shape is a tree trunk?",
+                options: ["Circle", "Triangle", "Rectangle", "Square"],
+                answer: "C",
+                explanation: "A tree trunk is shaped like a rectangle."
+            },
+            {
+                question: "What shape is a Christmas tree?",
+                options: ["Circle", "Triangle", "Square", "Rectangle"],
+                answer: "B",
+                explanation: "A Christmas tree is shaped like a triangle."
+            },
+            // Section J: Shape Transformation (Flip, Slide, Turn)
+            {
+                question: "When you flip a shape, it:",
+                options: ["Turns around", "Mirrors or reflects", "Moves to a new spot", "Gets bigger"],
+                answer: "B",
+                explanation: "Flipping a shape mirrors or reflects it."
+            },
+            {
+                question: "When you slide a shape, it:",
+                options: ["Turns upside down", "Moves to a new place", "Gets smaller", "Changes shape"],
+                answer: "B",
+                explanation: "Sliding a shape moves it to a new place."
+            },
+            {
+                question: "When you turn a shape, it:",
+                options: ["Rotates or spins", "Moves sideways", "Flips over", "Disappears"],
+                answer: "A",
+                explanation: "Turning a shape rotates or spins it."
+            },
+            {
+                question: "Which shows a flip?",
+                options: ["△ → △", "△ → ▽", "△ → ◁", "△ moving right"],
+                answer: "B",
+                explanation: "△ → ▽ shows a flip (mirror image)."
+            },
+            {
+                question: "Which shows a slide?",
+                options: ["□ moving to the right", "□ turning", "□ flipping over", "□ getting bigger"],
+                answer: "A",
+                explanation: "□ moving to the right shows a slide."
+            },
+            // Section K: Symmetry
+            {
+                question: "Which shape is symmetrical?",
+                options: ["A heart", "A star", "A circle", "All of the above"],
+                answer: "D",
+                explanation: "All of these shapes are symmetrical."
+            },
+            {
+                question: "When a shape is symmetrical, it:",
+                options: ["Can be divided into two matching halves", "Has no corners", "Can roll", "Has many sides"],
+                answer: "A",
+                explanation: "A symmetrical shape can be divided into two matching halves."
+            },
+            {
+                question: "Which shape is NOT symmetrical?",
+                options: ["Square", "Circle", "Rectangle", "Scissors"],
+                answer: "D",
+                explanation: "Scissors are not symmetrical."
+            },
+            {
+                question: "How many lines of symmetry does a square have?",
+                options: ["1", "2", "3", "4"],
+                answer: "D",
+                explanation: "A square has 4 lines of symmetry."
+            },
+            {
+                question: "Which shape has infinite lines of symmetry?",
+                options: ["Square", "Triangle", "Circle", "Rectangle"],
+                answer: "C",
+                explanation: "A circle has infinite lines of symmetry."
+            },
+            // Section L: Measurement with Shapes
+            {
+                question: "Which shape has the longest perimeter?",
+                options: ["Small square", "Large square", "Small triangle", "They are all the same"],
+                answer: "B",
+                explanation: "A large square has the longest perimeter."
+            },
+            {
+                question: "Which shape takes up the most space?",
+                options: ["Small circle", "Large circle", "Small square", "They are equal"],
+                answer: "B",
+                explanation: "A large circle takes up the most space."
+            },
+            {
+                question: "Which shape has the smallest area?",
+                options: ["Large rectangle", "Small rectangle", "Large triangle", "Small triangle"],
+                answer: "B",
+                explanation: "A small rectangle has the smallest area."
+            },
+            {
+                question: "Which container holds the most?",
+                options: ["Small box", "Large box", "Small can", "They hold the same"],
+                answer: "B",
+                explanation: "A large box holds the most."
+            },
+            {
+                question: "Which shape has the shortest distance around?",
+                options: ["Large square", "Small square", "Large circle", "Small circle"],
+                answer: "B",
+                explanation: "A small square has the shortest distance around."
+            },
+            // Section M: Shape Vocabulary
+            {
+                question: "What are the flat surfaces of 3D shapes called?",
+                options: ["Corners", "Faces", "Edges", "Sides"],
+                answer: "B",
+                explanation: "The flat surfaces of 3D shapes are called faces."
+            },
+            {
+                question: "What are the line segments where faces meet called?",
+                options: ["Vertices", "Faces", "Edges", "Sides"],
+                answer: "C",
+                explanation: "The line segments where faces meet are called edges."
+            },
+            {
+                question: "What are the points where edges meet called?",
+                options: ["Faces", "Edges", "Vertices", "Sides"],
+                answer: "C",
+                explanation: "The points where edges meet are called vertices."
+            },
+            {
+                question: "What is another name for a corner?",
+                options: ["Face", "Edge", "Vertex", "Side"],
+                answer: "C",
+                explanation: "Another name for a corner is vertex."
+            },
+            {
+                question: "What do we call shapes that are flat?",
+                options: ["3D shapes", "Solid shapes", "2D shapes", "Round shapes"],
+                answer: "C",
+                explanation: "Flat shapes are called 2D shapes."
+            },
+            // Section N: Final Mixed Review
+            {
+                question: "How many sides does a rectangle have?",
+                options: ["3", "4", "5", "6"],
+                answer: "B",
+                explanation: "A rectangle has 4 sides."
+            },
+            {
+                question: "Which shape has no edges or vertices?",
+                options: ["Cube", "Sphere", "Pyramid", "Cylinder"],
+                answer: "B",
+                explanation: "A sphere has no edges or vertices."
+            },
+            {
+                question: "What shape is a stop sign?",
+                options: ["Circle", "Triangle", "Octagon", "Square"],
+                answer: "C",
+                explanation: "A stop sign is an octagon."
+            },
+            {
+                question: "Which shape has all sides equal?",
+                options: ["Rectangle", "Triangle", "Square", "Oval"],
+                answer: "C",
+                explanation: "A square has all sides equal."
+            },
+            {
+                question: "What 3D shape has 6 square faces?",
+                options: ["Cylinder", "Sphere", "Cube", "Cone"],
+                answer: "C",
+                explanation: "A cube has 6 square faces."
+            },
+            // Section O: Challenge Questions
+            {
+                question: "How many triangles make a square?",
+                options: ["1", "2", "3", "4"],
+                answer: "B",
+                explanation: "Two triangles can make a square."
+            },
+            {
+                question: "What shape has 5 sides?",
+                options: ["Pentagon", "Hexagon", "Octagon", "Triangle"],
+                answer: "A",
+                explanation: "A pentagon has 5 sides."
+            },
+            {
+                question: "Which shape has 8 sides?",
+                options: ["Pentagon", "Hexagon", "Octagon", "Decagon"],
+                answer: "C",
+                explanation: "An octagon has 8 sides."
+            },
+            {
+                question: "What do you get when you put two squares together?",
+                options: ["A larger square", "A rectangle", "A triangle", "A circle"],
+                answer: "B",
+                explanation: "Putting two squares together makes a rectangle."
+            },
+            {
+                question: "Which shape can tessellate (fit together with no gaps)?",
+                options: ["Circle", "Square", "Triangle", "Both b and c"],
+                answer: "D",
+                explanation: "Both squares and triangles can tessellate."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent!",
+            "Fantastic!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a shape expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixMathShapes');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixMathShapes', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Create a copy of questions and shuffle them
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixMathShapes_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixMathShapes_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a shape expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You understand shapes very well!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a shape master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the questions you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better at identifying shapes with more practice!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                feedbackMessage.textContent = `Correct answer: ${correctAnswer}`;
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade1-math-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

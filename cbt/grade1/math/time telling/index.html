@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 1 Math - Time Telling | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Dark Theme */
+        :root {
+            --primary-green: #00C853;
+            --secondary-orange: #FF6D00;
+            --accent-purple: #7C4DFF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 200, 83, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00B248;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #E65C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 109, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 1 Math – Time Telling</h1>
+            <p class="welcome-subtitle">Welcome to our interactive practice module! Here you'll learn how to tell time on analog and digital clocks, understand time concepts like hours and minutes, and solve time-related word problems!</p>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Practice Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Practice Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Retry Topic</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - All questions from the document
+        const questions = [
+            // Section A: Time to the Hour (Analog Clocks)
+            {
+                question: "What time is shown on the clock? (Picture of clock showing 3:00)",
+                options: ["3:00", "12:00", "6:00", "9:00"],
+                answer: "A",
+                explanation: "When the hour hand points to 3 and the minute hand points to 12, it's 3:00."
+            },
+            {
+                question: "What time is it? (Picture of clock showing 7:00)",
+                options: ["2:00", "7:00", "12:00", "5:00"],
+                answer: "B",
+                explanation: "When the hour hand points to 7 and the minute hand points to 12, it's 7:00."
+            },
+            {
+                question: "Which clock shows 9:00?",
+                options: ["Short hand on 9, long hand on 12", "Short hand on 12, long hand on 9", "Short hand on 3, long hand on 12", "Short hand on 6, long hand on 12"],
+                answer: "A",
+                explanation: "At 9:00, the hour hand (short hand) points to 9 and the minute hand (long hand) points to 12."
+            },
+            {
+                question: "What time is shown? (Picture of clock showing 1:00)",
+                options: ["12:00", "1:00", "6:00", "10:00"],
+                answer: "B",
+                explanation: "When the hour hand points to 1 and the minute hand points to 12, it's 1:00."
+            },
+            {
+                question: "Which time is the same as \"four o'clock\"?",
+                options: ["4:00", "5:00", "12:00", "8:00"],
+                answer: "A",
+                explanation: "\"Four o'clock\" means exactly 4:00."
+            },
+            {
+                question: "What time is shown? (Picture of clock showing 12:00)",
+                options: ["6:00", "9:00", "12:00", "3:00"],
+                answer: "C",
+                explanation: "When both hands point to 12, it's 12:00."
+            },
+            {
+                question: "Which clock shows 6:00?",
+                options: ["Short hand on 6, long hand on 12", "Short hand on 12, long hand on 6", "Short hand on 3, long hand on 6", "Short hand on 6, long hand on 3"],
+                answer: "A",
+                explanation: "At 6:00, the hour hand (short hand) points to 6 and the minute hand (long hand) points to 12."
+            },
+            {
+                question: "What time is \"eight o'clock\"?",
+                options: ["7:00", "8:00", "9:00", "10:00"],
+                answer: "B",
+                explanation: "\"Eight o'clock\" means exactly 8:00."
+            },
+            {
+                question: "What time is shown? (Picture of clock showing 10:00)",
+                options: ["2:00", "10:00", "12:00", "4:00"],
+                answer: "B",
+                explanation: "When the hour hand points to 10 and the minute hand points to 12, it's 10:00."
+            },
+            {
+                question: "Which time matches \"eleven o'clock\"?",
+                options: ["11:00", "10:00", "12:00", "1:00"],
+                answer: "A",
+                explanation: "\"Eleven o'clock\" means exactly 11:00."
+            },
+            // Section B: Time to the Half-Hour (Analog Clocks)
+            {
+                question: "What time is shown? (Picture of clock showing 3:30)",
+                options: ["3:00", "3:30", "6:00", "6:30"],
+                answer: "B",
+                explanation: "When the hour hand is between 3 and 4 and the minute hand points to 6, it's 3:30."
+            },
+            {
+                question: "What time is it? (Picture of clock showing 8:30)",
+                options: ["8:00", "8:30", "7:30", "9:30"],
+                answer: "B",
+                explanation: "When the hour hand is between 8 and 9 and the minute hand points to 6, it's 8:30."
+            },
+            {
+                question: "Which clock shows 1:30?",
+                options: ["Short hand between 1 and 2, long hand on 6", "Short hand on 1, long hand on 12", "Short hand on 6, long hand on 12", "Short hand between 6 and 7, long hand on 6"],
+                answer: "A",
+                explanation: "At 1:30, the hour hand is between 1 and 2 and the minute hand points to 6."
+            },
+            {
+                question: "What time is shown? (Picture of clock showing 5:30)",
+                options: ["5:00", "5:30", "6:00", "6:30"],
+                answer: "B",
+                explanation: "When the hour hand is between 5 and 6 and the minute hand points to 6, it's 5:30."
+            },
+            {
+                question: "Which time is the same as \"half past two\"?",
+                options: ["2:00", "2:30", "1:30", "3:30"],
+                answer: "B",
+                explanation: "\"Half past two\" means 2:30."
+            },
+            {
+                question: "What time is shown? (Picture of clock showing 11:30)",
+                options: ["11:00", "11:30", "12:30", "10:30"],
+                answer: "B",
+                explanation: "When the hour hand is between 11 and 12 and the minute hand points to 6, it's 11:30."
+            },
+            {
+                question: "Which clock shows 9:30?",
+                options: ["Short hand between 9 and 10, long hand on 6", "Short hand on 9, long hand on 12", "Short hand on 6, long hand on 9", "Short hand between 8 and 9, long hand on 6"],
+                answer: "A",
+                explanation: "At 9:30, the hour hand is between 9 and 10 and the minute hand points to 6."
+            },
+            {
+                question: "What time is \"half past seven\"?",
+                options: ["7:00", "7:30", "6:30", "8:30"],
+                answer: "B",
+                explanation: "\"Half past seven\" means 7:30."
+            },
+            {
+                question: "What time is shown? (Picture of clock showing 4:30)",
+                options: ["4:00", "4:30", "5:00", "3:30"],
+                answer: "B",
+                explanation: "When the hour hand is between 4 and 5 and the minute hand points to 6, it's 4:30."
+            },
+            {
+                question: "Which time matches \"half past twelve\"?",
+                options: ["12:00", "12:30", "1:30", "11:30"],
+                answer: "B",
+                explanation: "\"Half past twelve\" means 12:30."
+            },
+            // Section C: Digital Time Matching
+            {
+                question: "Which digital clock shows 3:00?",
+                options: ["3:30", "3:00", "12:03", "6:00"],
+                answer: "B",
+                explanation: "3:00 on a digital clock shows exactly 3:00."
+            },
+            {
+                question: "What digital time matches this clock? (Picture of analog clock showing 6:30)",
+                options: ["6:00", "6:30", "3:30", "12:06"],
+                answer: "B",
+                explanation: "When an analog clock shows 6:30, the digital time is 6:30."
+            },
+            {
+                question: "Which digital clock shows \"eight o'clock\"?",
+                options: ["8:30", "8:00", "7:00", "9:00"],
+                answer: "B",
+                explanation: "\"Eight o'clock\" means 8:00 on a digital clock."
+            },
+            {
+                question: "What digital time matches \"half past ten\"?",
+                options: ["10:00", "10:30", "9:30", "11:30"],
+                answer: "B",
+                explanation: "\"Half past ten\" means 10:30 on a digital clock."
+            },
+            {
+                question: "Which digital clock shows 1:30?",
+                options: ["1:00", "1:30", "2:30", "12:01"],
+                answer: "B",
+                explanation: "1:30 on a digital clock shows exactly 1:30."
+            },
+            // Section D: Time Words and Phrases
+            {
+                question: "What does \"o'clock\" mean?",
+                options: ["Half past the hour", "Exactly on the hour", "Quarter past the hour", "Quarter to the hour"],
+                answer: "B",
+                explanation: "\"O'clock\" means exactly on the hour."
+            },
+            {
+                question: "What does \"half past\" mean?",
+                options: ["15 minutes after the hour", "30 minutes after the hour", "45 minutes after the hour", "Exactly on the hour"],
+                answer: "B",
+                explanation: "\"Half past\" means 30 minutes after the hour."
+            },
+            {
+                question: "Which phrase means 5:30?",
+                options: ["Five o'clock", "Half past five", "Half past four", "Six o'clock"],
+                answer: "B",
+                explanation: "\"Half past five\" means 5:30."
+            },
+            {
+                question: "What is another way to say 9:00?",
+                options: ["Half past nine", "Nine thirty", "Nine o'clock", "Half past eight"],
+                answer: "C",
+                explanation: "\"Nine o'clock\" means 9:00."
+            },
+            {
+                question: "Which phrase means 2:30?",
+                options: ["Two o'clock", "Half past three", "Half past two", "Three o'clock"],
+                answer: "C",
+                explanation: "\"Half past two\" means 2:30."
+            },
+            // Section E: Daily Routines and Times
+            {
+                question: "School usually starts at 8:00. Which clock shows 8:00?",
+                options: ["Short hand on 8, long hand on 12", "Short hand between 8 and 9, long hand on 6", "Short hand on 7, long hand on 12", "Short hand on 9, long hand on 12"],
+                answer: "A",
+                explanation: "At 8:00, the hour hand points to 8 and the minute hand points to 12."
+            },
+            {
+                question: "Lunch time is at 12:00. What time is this?",
+                options: ["Twelve o'clock", "Half past twelve", "Eleven o'clock", "One o'clock"],
+                answer: "A",
+                explanation: "12:00 is \"twelve o'clock\"."
+            },
+            {
+                question: "Bedtime is at 8:30. Which clock shows 8:30?",
+                options: ["Short hand on 8, long hand on 12", "Short hand between 8 and 9, long hand on 6", "Short hand on 9, long hand on 12", "Short hand between 7 and 8, long hand on 6"],
+                answer: "B",
+                explanation: "At 8:30, the hour hand is between 8 and 9 and the minute hand points to 6."
+            },
+            {
+                question: "Dinner time is at 6:00. What time is this?",
+                options: ["Six thirty", "Half past six", "Six o'clock", "Seven o'clock"],
+                answer: "C",
+                explanation: "6:00 is \"six o'clock\"."
+            },
+            {
+                question: "TV time is at 4:30. Which phrase describes this time?",
+                options: ["Four o'clock", "Half past four", "Half past five", "Five o'clock"],
+                answer: "B",
+                explanation: "4:30 is \"half past four\"."
+            },
+            // Section F: AM vs PM (Basic Understanding)
+            {
+                question: "School starts in the morning. This is called:",
+                options: ["AM", "PM", "Noon", "Midnight"],
+                answer: "A",
+                explanation: "Morning times use AM."
+            },
+            {
+                question: "Dinner time is in the evening. This is called:",
+                options: ["AM", "PM", "Morning", "Noon"],
+                answer: "B",
+                explanation: "Evening times use PM."
+            },
+            {
+                question: "Which happens in the AM?",
+                options: ["Eating breakfast", "Eating dinner", "Watching evening TV", "Going to bed"],
+                answer: "A",
+                explanation: "Breakfast is typically eaten in the morning (AM)."
+            },
+            {
+                question: "Which happens in the PM?",
+                options: ["Waking up", "Eating lunch", "Eating dinner", "Eating breakfast"],
+                answer: "C",
+                explanation: "Dinner is typically eaten in the evening (PM)."
+            },
+            {
+                question: "Noon is 12:00 ____.",
+                options: ["AM", "PM", "Morning", "Night"],
+                answer: "B",
+                explanation: "Noon is 12:00 PM."
+            },
+            // Continue with remaining sections...
+            {
+                question: "Which comes first?",
+                options: ["3:00", "4:00", "5:00", "6:00"],
+                answer: "A",
+                explanation: "3:00 comes before 4:00, 5:00, and 6:00."
+            },
+            {
+                question: "Put these times in order: 2:00, 4:00, 1:00",
+                options: ["1:00, 2:00, 4:00", "4:00, 2:00, 1:00", "2:00, 4:00, 1:00", "4:00, 1:00, 2:00"],
+                answer: "A",
+                explanation: "1:00 comes before 2:00, which comes before 4:00."
+            },
+            {
+                question: "Which time comes between 10:00 and 12:00?",
+                options: ["9:00", "11:00", "1:00", "2:00"],
+                answer: "B",
+                explanation: "11:00 comes between 10:00 and 12:00."
+            },
+            {
+                question: "What time comes after 7:30?",
+                options: ["7:00", "6:30", "8:00", "7:30"],
+                answer: "C",
+                explanation: "8:00 comes after 7:30."
+            },
+            {
+                question: "Which time comes before 9:00?",
+                options: ["9:30", "10:00", "8:00", "9:00"],
+                answer: "C",
+                explanation: "8:00 comes before 9:00."
+            },
+            // Section H: Time Duration (Basic Concepts)
+            {
+                question: "If you start playing at 3:00 and play for 1 hour, what time do you finish?",
+                options: ["3:30", "4:00", "2:00", "5:00"],
+                answer: "B",
+                explanation: "3:00 + 1 hour = 4:00"
+            },
+            {
+                question: "Lunch starts at 12:00 and ends at 1:00. How long is lunch?",
+                options: ["30 minutes", "1 hour", "2 hours", "15 minutes"],
+                answer: "B",
+                explanation: "From 12:00 to 1:00 is 1 hour."
+            },
+            {
+                question: "A movie starts at 5:00 and ends at 7:00. How long is the movie?",
+                options: ["1 hour", "2 hours", "3 hours", "4 hours"],
+                answer: "B",
+                explanation: "From 5:00 to 7:00 is 2 hours."
+            },
+            {
+                question: "If you start reading at 6:30 and read for 30 minutes, what time do you finish?",
+                options: ["6:00", "7:00", "7:30", "8:00"],
+                answer: "B",
+                explanation: "6:30 + 30 minutes = 7:00"
+            },
+            {
+                question: "School lasts from 8:00 AM to 3:00 PM. How many hours is that?",
+                options: ["5 hours", "6 hours", "7 hours", "8 hours"],
+                answer: "C",
+                explanation: "From 8:00 AM to 3:00 PM is 7 hours."
+            },
+            // Continue with remaining sections...
+            {
+                question: "What time is shown? (Picture of clock showing 2:30)",
+                options: ["2:00", "2:30", "6:00", "12:30"],
+                answer: "B",
+                explanation: "When the hour hand is between 2 and 3 and the minute hand points to 6, it's 2:30."
+            },
+            {
+                question: "What time is shown? (Picture of clock showing 7:00)",
+                options: ["7:00", "7:30", "12:00", "1:00"],
+                answer: "A",
+                explanation: "When the hour hand points to 7 and the minute hand points to 12, it's 7:00."
+            },
+            {
+                question: "Which clock shows 11:30?",
+                options: ["Short hand on 11, long hand on 12", "Short hand between 11 and 12, long hand on 6", "Short hand on 6, long hand on 11", "Short hand between 10 and 11, long hand on 6"],
+                answer: "B",
+                explanation: "At 11:30, the hour hand is between 11 and 12 and the minute hand points to 6."
+            },
+            {
+                question: "What time is shown? (Picture of clock showing 6:30)",
+                options: ["6:00", "6:30", "3:00", "12:30"],
+                answer: "B",
+                explanation: "When the hour hand is between 6 and 7 and the minute hand points to 6, it's 6:30."
+            },
+            {
+                question: "Which clock shows 12:00?",
+                options: ["Short hand on 12, long hand on 12", "Short hand on 6, long hand on 12", "Short hand on 12, long hand on 6", "Short hand on 3, long hand on 12"],
+                answer: "A",
+                explanation: "At 12:00, both hands point to 12."
+            },
+            // Section J: Mixed Review - Digital Clocks
+            {
+                question: "Which digital clock shows \"half past three\"?",
+                options: ["3:00", "3:30", "4:30", "2:30"],
+                answer: "B",
+                explanation: "\"Half past three\" is 3:30."
+            },
+            {
+                question: "What digital time matches \"five o'clock\"?",
+                options: ["5:30", "5:00", "4:00", "6:00"],
+                answer: "B",
+                explanation: "\"Five o'clock\" is 5:00."
+            },
+            {
+                question: "Which digital clock shows 9:30?",
+                options: ["9:00", "9:30", "8:30", "10:30"],
+                answer: "B",
+                explanation: "9:30 is shown as 9:30 on a digital clock."
+            },
+            {
+                question: "What digital time matches \"twelve o'clock\"?",
+                options: ["12:30", "12:00", "1:00", "11:00"],
+                answer: "B",
+                explanation: "\"Twelve o'clock\" is 12:00."
+            },
+            {
+                question: "Which digital clock shows \"half past eight\"?",
+                options: ["8:00", "8:30", "7:30", "9:30"],
+                answer: "B",
+                explanation: "\"Half past eight\" is 8:30."
+            },
+            // Continue with remaining sections...
+            {
+                question: "Which hand on the clock is the hour hand?",
+                options: ["The short hand", "The long hand", "The red hand", "The second hand"],
+                answer: "A",
+                explanation: "The short hand is the hour hand."
+            },
+            {
+                question: "Which hand on the clock is the minute hand?",
+                options: ["The short hand", "The long hand", "The thick hand", "The hour hand"],
+                answer: "B",
+                explanation: "The long hand is the minute hand."
+            },
+            {
+                question: "Where does the minute hand point when it's exactly on the hour?",
+                options: ["At the 6", "At the 3", "At the 12", "At the 9"],
+                answer: "C",
+                explanation: "At exactly on the hour, the minute hand points to 12."
+            },
+            {
+                question: "Where does the minute hand point when it's half past the hour?",
+                options: ["At the 12", "At the 3", "At the 6", "At the 9"],
+                answer: "C",
+                explanation: "At half past the hour, the minute hand points to 6."
+            },
+            {
+                question: "How many numbers are on a clock face?",
+                options: ["10", "12", "24", "60"],
+                answer: "B",
+                explanation: "There are 12 numbers on a clock face."
+            },
+            // Continue with remaining sections...
+            {
+                question: "How many hours are between 1:00 and 3:00?",
+                options: ["1 hour", "2 hours", "3 hours", "4 hours"],
+                answer: "B",
+                explanation: "From 1:00 to 3:00 is 2 hours."
+            },
+            {
+                question: "How many minutes are in half an hour?",
+                options: ["15 minutes", "30 minutes", "45 minutes", "60 minutes"],
+                answer: "B",
+                explanation: "Half an hour is 30 minutes."
+            },
+            {
+                question: "How many minutes are in one hour?",
+                options: ["30 minutes", "45 minutes", "60 minutes", "100 minutes"],
+                answer: "C",
+                explanation: "One hour is 60 minutes."
+            },
+            {
+                question: "What time is 1 hour after 2:00?",
+                options: ["1:00", "2:30", "3:00", "4:00"],
+                answer: "C",
+                explanation: "2:00 + 1 hour = 3:00"
+            },
+            {
+                question: "What time is 30 minutes after 4:00?",
+                options: ["3:30", "4:00", "4:30", "5:00"],
+                answer: "C",
+                explanation: "4:00 + 30 minutes = 4:30"
+            },
+            // Continue with remaining sections...
+            {
+                question: "If breakfast is at 7:00 and lunch is at 12:00, how many hours between them?",
+                options: ["3 hours", "4 hours", "5 hours", "6 hours"],
+                answer: "C",
+                explanation: "From 7:00 to 12:00 is 5 hours."
+            },
+            {
+                question: "You start homework at 4:00 and finish at 5:00. How long did you work?",
+                options: ["30 minutes", "1 hour", "2 hours", "3 hours"],
+                answer: "B",
+                explanation: "From 4:00 to 5:00 is 1 hour."
+            },
+            {
+                question: "A party starts at 2:00 and ends at 5:00. How long is the party?",
+                options: ["2 hours", "3 hours", "4 hours", "5 hours"],
+                answer: "B",
+                explanation: "From 2:00 to 5:00 is 3 hours."
+            },
+            {
+                question: "If you go to bed at 8:00 PM and wake up at 7:00 AM, how long did you sleep?",
+                options: ["10 hours", "11 hours", "12 hours", "13 hours"],
+                answer: "B",
+                explanation: "From 8:00 PM to 7:00 AM is 11 hours."
+            },
+            {
+                question: "TV show starts at 6:30 and ends at 7:00. How long is the show?",
+                options: ["15 minutes", "30 minutes", "45 minutes", "1 hour"],
+                answer: "B",
+                explanation: "From 6:30 to 7:00 is 30 minutes."
+            },
+            // Continue with remaining sections...
+            {
+                question: "What time comes next? 1:00, 2:00, 3:00, ___",
+                options: ["3:30", "4:00", "4:30", "5:00"],
+                answer: "B",
+                explanation: "The pattern is adding 1 hour each time, so after 3:00 comes 4:00."
+            },
+            {
+                question: "What time comes next? 5:30, 6:30, 7:30, ___",
+                options: ["7:00", "8:00", "8:30", "9:00"],
+                answer: "C",
+                explanation: "The pattern is adding 1 hour each time, so after 7:30 comes 8:30."
+            },
+            {
+                question: "Complete the pattern: 8:00, 9:00, 10:00, ___",
+                options: ["10:30", "11:00", "11:30", "12:00"],
+                answer: "B",
+                explanation: "The pattern is adding 1 hour each time, so after 10:00 comes 11:00."
+            },
+            {
+                question: "What's the pattern? 4:30, 5:30, 6:30",
+                options: ["Adding 30 minutes", "Adding 1 hour", "Adding 2 hours", "Subtracting 1 hour"],
+                answer: "B",
+                explanation: "The pattern is adding 1 hour each time."
+            },
+            {
+                question: "Complete: 11:00, 12:00, 1:00, ___",
+                options: ["1:30", "2:00", "2:30", "3:00"],
+                answer: "B",
+                explanation: "The pattern is adding 1 hour each time, so after 1:00 comes 2:00."
+            },
+            // Continue with remaining sections...
+            {
+                question: "How many days are in one week?",
+                options: ["5 days", "6 days", "7 days", "8 days"],
+                answer: "C",
+                explanation: "There are 7 days in one week."
+            },
+            {
+                question: "What day comes after Monday?",
+                options: ["Sunday", "Tuesday", "Wednesday", "Friday"],
+                answer: "B",
+                explanation: "Tuesday comes after Monday."
+            },
+            {
+                question: "How many months are in one year?",
+                options: ["10 months", "11 months", "12 months", "13 months"],
+                answer: "C",
+                explanation: "There are 12 months in one year."
+            },
+            {
+                question: "What day comes before Friday?",
+                options: ["Wednesday", "Thursday", "Saturday", "Sunday"],
+                answer: "B",
+                explanation: "Thursday comes before Friday."
+            },
+            {
+                question: "How many hours are in one day?",
+                options: ["12 hours", "20 hours", "24 hours", "30 hours"],
+                answer: "C",
+                explanation: "There are 24 hours in one day."
+            },
+            // Continue with remaining sections...
+            {
+                question: "What time is shown? (Picture of clock showing 8:00)",
+                options: ["8:00", "8:30", "12:00", "4:00"],
+                answer: "A",
+                explanation: "When the hour hand points to 8 and the minute hand points to 12, it's 8:00."
+            },
+            {
+                question: "What time is \"half past one\"?",
+                options: ["1:00", "1:30", "2:00", "2:30"],
+                answer: "B",
+                explanation: "\"Half past one\" means 1:30."
+            },
+            {
+                question: "Which digital clock shows 10:30?",
+                options: ["10:00", "10:30", "9:30", "11:30"],
+                answer: "B",
+                explanation: "10:30 is shown as 10:30 on a digital clock."
+            },
+            {
+                question: "What time is 2 hours after 3:00?",
+                options: ["4:00", "5:00", "6:00", "7:00"],
+                answer: "B",
+                explanation: "3:00 + 2 hours = 5:00"
+            },
+            {
+                question: "Which activity usually happens at 7:00 AM?",
+                options: ["Eating dinner", "Going to bed", "Eating breakfast", "Watching evening TV"],
+                answer: "C",
+                explanation: "Breakfast is typically eaten at 7:00 AM."
+            },
+            // Section Q: Challenge Questions
+            {
+                question: "If it's 3:00 now, what time was it 1 hour ago?",
+                options: ["2:00", "2:30", "3:30", "4:00"],
+                answer: "A",
+                explanation: "3:00 - 1 hour = 2:00"
+            },
+            {
+                question: "If it's 5:30 now, what time was it 30 minutes ago?",
+                options: ["4:30", "5:00", "6:00", "6:30"],
+                answer: "B",
+                explanation: "5:30 - 30 minutes = 5:00"
+            },
+            {
+                question: "What time is exactly in the middle of 2:00 and 4:00?",
+                options: ["2:30", "3:00", "3:30", "4:00"],
+                answer: "B",
+                explanation: "The middle of 2:00 and 4:00 is 3:00."
+            },
+            {
+                question: "If a clock shows 6:00, where is the hour hand pointing?",
+                options: ["At the 12", "At the 3", "At the 6", "At the 9"],
+                answer: "C",
+                explanation: "At 6:00, the hour hand points to 6."
+            },
+            {
+                question: "If a clock shows 9:30, where is the minute hand pointing?",
+                options: ["At the 12", "At the 3", "At the 6", "At the 9"],
+                answer: "C",
+                explanation: "At 9:30, the minute hand points to 6."
+            },
+            // Section R: Final Review
+            {
+                question: "What does the short hand on a clock show?",
+                options: ["Minutes", "Hours", "Seconds", "Days"],
+                answer: "B",
+                explanation: "The short hand shows the hours."
+            },
+            {
+                question: "What does the long hand on a clock show?",
+                options: ["Hours", "Minutes", "Days", "Weeks"],
+                answer: "B",
+                explanation: "The long hand shows the minutes."
+            },
+            {
+                question: "Where is the minute hand at 7:30?",
+                options: ["At the 12", "At the 3", "At the 6", "At the 9"],
+                answer: "C",
+                explanation: "At 7:30, the minute hand points to 6."
+            },
+            {
+                question: "What time is \"seven o'clock\"?",
+                options: ["7:00", "7:30", "6:00", "8:00"],
+                answer: "A",
+                explanation: "\"Seven o'clock\" means 7:00."
+            },
+            {
+                question: "Which clock shows 4:30?",
+                options: ["Short hand on 4, long hand on 12", "Short hand between 4 and 5, long hand on 6", "Short hand on 6, long hand on 4", "Short hand between 3 and 4, long hand on 6"],
+                answer: "B",
+                explanation: "At 4:30, the hour hand is between 4 and 5 and the minute hand points to 6."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent!",
+            "Fantastic!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a time telling expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixMathTimeTelling');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixMathTimeTelling', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Create a copy of questions and shuffle them
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixMathTimeTelling_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixMathTimeTelling_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a time telling expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You understand how to tell time!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a time telling master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the questions you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better at telling time with more practice!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                feedbackMessage.textContent = `Correct answer: ${correctAnswer}`;
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade1-math-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

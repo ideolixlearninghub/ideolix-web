@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 1 Math - Number and Place Value | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Dark Theme */
+        :root {
+            --primary-green: #00C853;
+            --secondary-orange: #FF6D00;
+            --accent-purple: #7C4DFF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 200, 83, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00B248;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #E65C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 109, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 1 Math – Number and Place Value</h1>
+            <p class="welcome-subtitle">Welcome to our interactive place value module! Here you'll learn about ones and tens, how to identify digits in different place values, and understand how numbers are built. Get ready to become a place value expert!</p>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Practice Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Practice Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Retry Topic</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - All questions from the document
+        const questions = [
+            // Section A: Recognizing Numbers and Counting
+            {
+                question: "What number comes right after 19?",
+                options: ["18", "20", "21", "10"],
+                answer: "B",
+                explanation: "After 19 comes 20."
+            },
+            {
+                question: "What number is one less than 30?",
+                options: ["29", "31", "20", "30"],
+                answer: "A",
+                explanation: "One less than 30 is 29."
+            },
+            {
+                question: "How many stars are there: ★★★★★ ★★★★★ ★★?",
+                options: ["7", "10", "12", "5"],
+                answer: "C",
+                explanation: "There are 5 + 5 + 2 = 12 stars."
+            },
+            {
+                question: "Which number is the same as 'thirty-five'?",
+                options: ["53", "35", "305", "350"],
+                answer: "B",
+                explanation: "Thirty-five is written as 35."
+            },
+            {
+                question: "What number comes between 49 and 51?",
+                options: ["48", "50", "52", "49"],
+                answer: "B",
+                explanation: "50 comes between 49 and 51."
+            },
+            {
+                question: "Count by tens. What number comes after 40?",
+                options: ["41", "50", "30", "60"],
+                answer: "B",
+                explanation: "After 40 comes 50 when counting by tens."
+            },
+            {
+                question: "Which number is the smallest?",
+                options: ["42", "24", "33", "40"],
+                answer: "B",
+                explanation: "24 is the smallest number."
+            },
+            {
+                question: "Which number is the greatest?",
+                options: ["67", "76", "70", "60"],
+                answer: "B",
+                explanation: "76 is the greatest number."
+            },
+            {
+                question: "What number is ten more than 28?",
+                options: ["29", "38", "30", "18"],
+                answer: "B",
+                explanation: "28 + 10 = 38"
+            },
+            {
+                question: "What number is ten less than 55?",
+                options: ["56", "54", "65", "45"],
+                answer: "D",
+                explanation: "55 - 10 = 45"
+            },
+            // Section B: Identifying Tens and Ones
+            {
+                question: "In the number 36, which digit is in the tens place?",
+                options: ["3", "6", "36", "0"],
+                answer: "A",
+                explanation: "In 36, the 3 is in the tens place."
+            },
+            {
+                question: "In the number 72, which digit is in the ones place?",
+                options: ["7", "2", "72", "0"],
+                answer: "B",
+                explanation: "In 72, the 2 is in the ones place."
+            },
+            {
+                question: "How many tens are in the number 80?",
+                options: ["0", "8", "80", "1"],
+                answer: "B",
+                explanation: "80 has 8 tens."
+            },
+            {
+                question: "How many ones are in the number 80?",
+                options: ["0", "8", "80", "1"],
+                answer: "A",
+                explanation: "80 has 0 ones."
+            },
+            {
+                question: "What does the 4 represent in the number 47?",
+                options: ["4 ones", "4 tens", "47", "7"],
+                answer: "B",
+                explanation: "In 47, the 4 represents 4 tens."
+            },
+            {
+                question: "What does the 5 represent in the number 65?",
+                options: ["5 ones", "5 tens", "50", "6"],
+                answer: "A",
+                explanation: "In 65, the 5 represents 5 ones."
+            },
+            {
+                question: "Which number has 5 tens and 3 ones?",
+                options: ["35", "53", "503", "8"],
+                answer: "B",
+                explanation: "53 has 5 tens and 3 ones."
+            },
+            {
+                question: "Which number has 2 ones and 7 tens?",
+                options: ["27", "72", "207", "9"],
+                answer: "B",
+                explanation: "72 has 7 tens and 2 ones."
+            },
+            {
+                question: "How many tens and ones are in 19?",
+                options: ["1 ten and 9 ones", "9 tens and 1 one", "0 tens and 19 ones", "10 tens and 9 ones"],
+                answer: "A",
+                explanation: "19 has 1 ten and 9 ones."
+            },
+            {
+                question: "What number has 0 tens and 8 ones?",
+                options: ["80", "8", "08", "88"],
+                answer: "B",
+                explanation: "8 has 0 tens and 8 ones."
+            },
+            // Section C: Base Ten Blocks (Pictorial Representation)
+            {
+                question: "These blocks show 3 ten rods and 4 unit cubes. What number is it?",
+                options: ["34", "43", "7", "304"],
+                answer: "A",
+                explanation: "3 tens and 4 ones make 34."
+            },
+            {
+                question: "These blocks show 2 ten rods and 8 unit cubes. What number is it?",
+                options: ["28", "82", "10", "208"],
+                answer: "A",
+                explanation: "2 tens and 8 ones make 28."
+            },
+            {
+                question: "Which group of blocks shows the number 61?",
+                options: ["6 ten rods and 1 unit cube", "1 ten rod and 6 unit cubes", "6 unit cubes and 1 ten rod", "60 ten rods and 1 unit cube"],
+                answer: "A",
+                explanation: "6 tens and 1 one make 61."
+            },
+            {
+                question: "How would you show 17 with base ten blocks?",
+                options: ["1 ten rod and 7 unit cubes", "7 ten rods and 1 unit cube", "17 unit cubes", "1 ten rod and 17 unit cubes"],
+                answer: "A",
+                explanation: "17 has 1 ten and 7 ones."
+            },
+            {
+                question: "What number is shown by 5 ten rods and 0 unit cubes?",
+                options: ["50", "5", "55", "500"],
+                answer: "A",
+                explanation: "5 tens and 0 ones make 50."
+            },
+            // Section D: Expanded Form
+            {
+                question: "What is 40 + 6?",
+                options: ["46", "64", "406", "10"],
+                answer: "A",
+                explanation: "40 + 6 = 46"
+            },
+            {
+                question: "What is 30 + 5?",
+                options: ["35", "53", "305", "8"],
+                answer: "A",
+                explanation: "30 + 5 = 35"
+            },
+            {
+                question: "Which is the expanded form for 28?",
+                options: ["20 + 8", "2 + 8", "80 + 2", "20 + 80"],
+                answer: "A",
+                explanation: "28 = 20 + 8"
+            },
+            {
+                question: "Which is the expanded form for 91?",
+                options: ["9 + 1", "90 + 1", "1 + 90", "9 + 10"],
+                answer: "B",
+                explanation: "91 = 90 + 1"
+            },
+            {
+                question: "What number is 70 + 2?",
+                options: ["72", "27", "702", "9"],
+                answer: "A",
+                explanation: "70 + 2 = 72"
+            },
+            // Section E: Comparing Numbers
+            {
+                question: "Which is true?",
+                options: ["45 > 54", "45 < 54", "45 = 54", "54 < 45"],
+                answer: "B",
+                explanation: "45 is less than 54."
+            },
+            {
+                question: "Which symbol makes this true? 63 [] 36",
+                options: [">", "<", "=", "+"],
+                answer: "A",
+                explanation: "63 > 36"
+            },
+            {
+                question: "Which number is less than 37?",
+                options: ["40", "39", "37", "30"],
+                answer: "D",
+                explanation: "30 is less than 37."
+            },
+            {
+                question: "Which number is greater than 68?",
+                options: ["66", "58", "68", "70"],
+                answer: "D",
+                explanation: "70 is greater than 68."
+            },
+            {
+                question: "Which set is in order from smallest to largest?",
+                options: ["25, 35, 15", "15, 25, 35", "35, 25, 15", "25, 15, 35"],
+                answer: "B",
+                explanation: "15, 25, 35 is in order from smallest to largest."
+            },
+            // Section F: Number Patterns
+            {
+                question: "What number is missing? 22, 24, 26, __, 30",
+                options: ["27", "28", "29", "25"],
+                answer: "B",
+                explanation: "The pattern is +2, so 26 + 2 = 28."
+            },
+            {
+                question: "What is the rule? 50, 60, 70, 80",
+                options: ["Add 1", "Add 5", "Add 10", "Subtract 10"],
+                answer: "C",
+                explanation: "The pattern is adding 10 each time."
+            },
+            {
+                question: "What number comes next? 85, 80, 75, 70, ___",
+                options: ["65", "71", "75", "60"],
+                answer: "A",
+                explanation: "The pattern is -5, so 70 - 5 = 65."
+            },
+            {
+                question: "What is the missing number? 33, 43, 53, __, 73",
+                options: ["54", "52", "63", "53"],
+                answer: "C",
+                explanation: "The pattern is +10, so 53 + 10 = 63."
+            },
+            {
+                question: "Count by fives. What comes after 25?",
+                options: ["26", "30", "20", "35"],
+                answer: "B",
+                explanation: "After 25 comes 30 when counting by fives."
+            },
+            // Section G: Word Problems and Applications
+            {
+                question: "Sam has 2 packs of 10 crayons and 4 loose crayons. How many crayons does he have?",
+                options: ["6 crayons", "16 crayons", "24 crayons", "42 crayons"],
+                answer: "C",
+                explanation: "2 packs of 10 = 20, plus 4 loose = 24 crayons."
+            },
+            {
+                question: "There are 10 apples in a basket. Mom puts 7 more apples in. How many apples are there now?",
+                options: ["3 apples", "17 apples", "70 apples", "10 apples"],
+                answer: "B",
+                explanation: "10 + 7 = 17 apples."
+            },
+            {
+                question: "A box holds 10 donuts. How many donuts are in 3 boxes?",
+                options: ["13 donuts", "30 donuts", "3 donuts", "10 donuts"],
+                answer: "B",
+                explanation: "3 × 10 = 30 donuts."
+            },
+            {
+                question: "Lily has 4 tens and 2 ones. How many stickers does she have?",
+                options: ["6 stickers", "24 stickers", "42 stickers", "402 stickers"],
+                answer: "C",
+                explanation: "4 tens and 2 ones = 42 stickers."
+            },
+            {
+                question: "Max has 28 marbles. He finds 10 more. How many does he have now?",
+                options: ["18 marbles", "29 marbles", "38 marbles", "30 marbles"],
+                answer: "C",
+                explanation: "28 + 10 = 38 marbles."
+            },
+            // Section H: Mixed Review
+            {
+                question: "What number has 8 ones and 4 tens?",
+                options: ["48", "84", "12", "408"],
+                answer: "A",
+                explanation: "4 tens and 8 ones = 48."
+            },
+            {
+                question: "Which number means 9 tens?",
+                options: ["9", "90", "19", "99"],
+                answer: "B",
+                explanation: "9 tens = 90."
+            },
+            {
+                question: "What is 20 + 7?",
+                options: ["27", "72", "207", "9"],
+                answer: "A",
+                explanation: "20 + 7 = 27."
+            },
+            {
+                question: "Which number is greater than 50 but less than 52?",
+                options: ["49", "51", "53", "50"],
+                answer: "B",
+                explanation: "51 is greater than 50 and less than 52."
+            },
+            {
+                question: "What number is ten less than 100?",
+                options: ["99", "90", "10", "0"],
+                answer: "B",
+                explanation: "100 - 10 = 90."
+            },
+            // Section I: True or False Style Questions
+            {
+                question: "In the number 16, the 1 is in the ones place.",
+                options: ["True", "False"],
+                answer: "B",
+                explanation: "In 16, the 1 is in the tens place, not the ones place."
+            },
+            {
+                question: "The number 70 has 7 tens and 0 ones.",
+                options: ["True", "False"],
+                answer: "A",
+                explanation: "70 has 7 tens and 0 ones."
+            },
+            {
+                question: "30 + 6 is the same as 36.",
+                options: ["True", "False"],
+                answer: "A",
+                explanation: "30 + 6 = 36"
+            },
+            {
+                question: "5 tens and 3 ones is the same as 35.",
+                options: ["True", "False"],
+                answer: "B",
+                explanation: "5 tens and 3 ones = 53, not 35."
+            },
+            {
+                question: "The number 42 is greater than 24.",
+                options: ["True", "False"],
+                answer: "A",
+                explanation: "42 > 24"
+            },
+            // Section J: Challenge Questions
+            {
+                question: "What number is 1 ten and 12 ones?",
+                options: ["13", "22", "112", "121"],
+                answer: "B",
+                explanation: "1 ten and 12 ones = 10 + 12 = 22."
+            },
+            {
+                question: "Which two numbers have the same digit in the tens place? 25, 52, 36, 61",
+                options: ["25 and 52", "52 and 36", "36 and 61", "25 and 36"],
+                answer: "A",
+                explanation: "25 and 52 both have 2 in the tens place."
+            },
+            {
+                question: "What number is 10 more than 89?",
+                options: ["90", "99", "100", "89"],
+                answer: "B",
+                explanation: "89 + 10 = 99"
+            },
+            {
+                question: "If you have 3 tens and 15 ones, how many do you have in total?",
+                options: ["18", "35", "45", "315"],
+                answer: "C",
+                explanation: "3 tens = 30, 15 ones = 15, total = 45."
+            },
+            {
+                question: "Which number does NOT have 5 ones? 15, 25, 50, 45",
+                options: ["15", "25", "50", "45"],
+                answer: "C",
+                explanation: "50 has 0 ones, not 5 ones."
+            },
+            // Section K: More Place Value Practice
+            {
+                question: "What is the value of 7 in 75?",
+                options: ["7", "70", "5", "75"],
+                answer: "B",
+                explanation: "In 75, the 7 represents 70."
+            },
+            {
+                question: "What is the value of 4 in 94?",
+                options: ["4", "40", "90", "94"],
+                answer: "A",
+                explanation: "In 94, the 4 represents 4."
+            },
+            {
+                question: "Which number has 0 tens?",
+                options: ["10", "5", "50", "100"],
+                answer: "B",
+                explanation: "5 has 0 tens."
+            },
+            {
+                question: "Which number has 6 ones?",
+                options: ["60", "16", "61", "66"],
+                answer: "B",
+                explanation: "16 has 6 ones."
+            },
+            {
+                question: "In 88, both digits are the same, but do they have the same value?",
+                options: ["Yes", "No"],
+                answer: "B",
+                explanation: "No, the first 8 represents 80, the second 8 represents 8."
+            },
+            // Section L: Number Sequencing
+            {
+                question: "What number comes before 40?",
+                options: ["41", "39", "50", "30"],
+                answer: "B",
+                explanation: "39 comes before 40."
+            },
+            {
+                question: "What number comes after 99?",
+                options: ["98", "100", "90", "10"],
+                answer: "B",
+                explanation: "100 comes after 99."
+            },
+            {
+                question: "Fill in the missing number: 57, 58, 59, __, 61",
+                options: ["60", "62", "58", "57"],
+                answer: "A",
+                explanation: "The pattern is +1, so 59 + 1 = 60."
+            },
+            {
+                question: "What are the next three numbers? 80, 82, 84, __, __, __",
+                options: ["85, 86, 87", "86, 88, 90", "84, 86, 88", "86, 87, 88"],
+                answer: "B",
+                explanation: "The pattern is +2, so 84 + 2 = 86, 86 + 2 = 88, 88 + 2 = 90."
+            },
+            {
+                question: "What number is missing? 95, __, 75, 65",
+                options: ["94", "85", "65", "100"],
+                answer: "B",
+                explanation: "The pattern is -10, so 95 - 10 = 85."
+            },
+            // Section M: Comparing with Symbols
+            {
+                question: "Which symbol is correct? 47 [] 74",
+                options: [">", "<", "=", "+"],
+                answer: "B",
+                explanation: "47 < 74"
+            },
+            {
+                question: "Which symbol is correct? 90 [] 90",
+                options: [">", "<", "=", "+"],
+                answer: "C",
+                explanation: "90 = 90"
+            },
+            {
+                question: "Which symbol makes this true? 36 [] 63",
+                options: [">", "<", "=", "+"],
+                answer: "B",
+                explanation: "36 < 63"
+            },
+            {
+                question: "Which is true? 50 [] 50 + 0",
+                options: [">", "<", "=", "+"],
+                answer: "C",
+                explanation: "50 = 50 + 0"
+            },
+            {
+                question: "Which symbol makes this true? 8 tens [] 80",
+                options: [">", "<", "=", "+"],
+                answer: "C",
+                explanation: "8 tens = 80"
+            },
+            // Section N: Building Numbers
+            {
+                question: "What number is made with 2 tens and 9 ones?",
+                options: ["29", "92", "11", "209"],
+                answer: "A",
+                explanation: "2 tens and 9 ones = 29."
+            },
+            {
+                question: "What number is made with 7 ones and 3 tens?",
+                options: ["37", "73", "10", "703"],
+                answer: "A",
+                explanation: "3 tens and 7 ones = 37."
+            },
+            {
+                question: "If you have 4 tens, what number do you have?",
+                options: ["4", "40", "14", "44"],
+                answer: "B",
+                explanation: "4 tens = 40."
+            },
+            {
+                question: "What number has 8 in the tens place and 2 in the ones place?",
+                options: ["28", "82", "10", "802"],
+                answer: "B",
+                explanation: "8 tens and 2 ones = 82."
+            },
+            {
+                question: "What number has 5 in the ones place and 1 in the tens place?",
+                options: ["15", "51", "6", "105"],
+                answer: "A",
+                explanation: "1 ten and 5 ones = 15."
+            },
+            // Section O: Final Review
+            {
+                question: "How many tens are in 60?",
+                options: ["0", "6", "60", "10"],
+                answer: "B",
+                explanation: "60 has 6 tens."
+            },
+            {
+                question: "What number is ten more than 76?",
+                options: ["77", "86", "96", "75"],
+                answer: "B",
+                explanation: "76 + 10 = 86."
+            },
+            {
+                question: "Which number is the same as 9 tens?",
+                options: ["9", "19", "90", "99"],
+                answer: "C",
+                explanation: "9 tens = 90."
+            },
+            {
+                question: "What is 80 + 4?",
+                options: ["48", "84", "12", "804"],
+                answer: "B",
+                explanation: "80 + 4 = 84."
+            },
+            {
+                question: "Which number is less than 29?",
+                options: ["30", "29", "39", "20"],
+                answer: "D",
+                explanation: "20 < 29"
+            },
+            // Section P: Advanced Applications
+            {
+                question: "Sara has 24 cookies. She wants to put them in boxes of 10. How many full boxes can she make?",
+                options: ["2 boxes", "4 boxes", "24 boxes", "1 box"],
+                answer: "A",
+                explanation: "24 cookies ÷ 10 per box = 2 full boxes (with 4 left over)."
+            },
+            {
+                question: "There are 10 pencils in a pack. The teacher has 5 packs. How many pencils are there?",
+                options: ["15 pencils", "50 pencils", "5 pencils", "10 pencils"],
+                answer: "B",
+                explanation: "5 packs × 10 pencils = 50 pencils."
+            },
+            {
+                question: "Which number has a tens digit that is greater than its ones digit? 34, 56, 28, 66",
+                options: ["34", "56", "28", "66"],
+                answer: "C",
+                explanation: "In 28, 2 > 8 is false, but 2 tens is greater than 8 ones."
+            },
+            {
+                question: "If you exchange 10 ones for 1 ten, what happens to the number?",
+                options: ["It gets smaller", "It stays the same", "It gets larger", "It disappears"],
+                answer: "B",
+                explanation: "The value stays the same, just represented differently."
+            },
+            {
+                question: "What is the largest two-digit number you can make?",
+                options: ["10", "99", "90", "100"],
+                answer: "B",
+                explanation: "99 is the largest two-digit number."
+            },
+            // Section Q: Quick Thinking
+            {
+                question: "What number is 1 less than 100?",
+                options: ["99", "101", "90", "0"],
+                answer: "A",
+                explanation: "100 - 1 = 99"
+            },
+            {
+                question: "What number is 10 more than 90?",
+                options: ["91", "100", "80", "90"],
+                answer: "B",
+                explanation: "90 + 10 = 100"
+            },
+            {
+                question: "Which number has no tens? 7, 17, 70, 27",
+                options: ["7", "17", "70", "27"],
+                answer: "A",
+                explanation: "7 has 0 tens."
+            },
+            {
+                question: "What is the value of the 1 in 18?",
+                options: ["1", "10", "8", "18"],
+                answer: "B",
+                explanation: "In 18, the 1 represents 10."
+            },
+            {
+                question: "Which is equal to 6 tens?",
+                options: ["16", "60", "6", "66"],
+                answer: "B",
+                explanation: "6 tens = 60."
+            },
+            // Section R: Final Check
+            {
+                question: "In 53, the 5 stands for:",
+                options: ["5 ones", "5 tens", "53", "3"],
+                answer: "B",
+                explanation: "In 53, the 5 represents 5 tens."
+            },
+            {
+                question: "What number is shown by 4 tens and 13 ones?",
+                options: ["17", "53", "413", "413"],
+                answer: "B",
+                explanation: "4 tens = 40, 13 ones = 13, total = 53."
+            },
+            {
+                question: "Which number is between 45 and 50?",
+                options: ["44", "51", "47", "40"],
+                answer: "C",
+                explanation: "47 is between 45 and 50."
+            },
+            {
+                question: "Complete the pattern: 22, 32, 42, 52, __",
+                options: ["53", "62", "50", "60"],
+                answer: "B",
+                explanation: "The pattern is +10, so 52 + 10 = 62."
+            },
+            {
+                question: "What is the smallest two-digit number?",
+                options: ["0", "1", "10", "11"],
+                answer: "C",
+                explanation: "10 is the smallest two-digit number."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent!",
+            "Fantastic!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a place value expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixMathPlaceValue');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixMathPlaceValue', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Create a copy of questions and shuffle them
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixMathPlaceValue_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixMathPlaceValue_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a place value expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You understand place value very well!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a place value master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the questions you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better at place value with more practice!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                feedbackMessage.textContent = `Correct answer: ${correctAnswer}`;
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade1-math-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

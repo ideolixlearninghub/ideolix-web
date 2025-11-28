@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 3 Math - Fractions & Decimals | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Dark Theme */
+        :root {
+            --primary-green: #00C853;
+            --secondary-orange: #FF6D00;
+            --accent-purple: #7C4DFF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 200, 83, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00B248;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #E65C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 109, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* Special styling for fractions */
+        .fraction {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1509228468518-180dd4864904?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 3 Math - Fractions & Decimals</h1>
+            <p class="welcome-subtitle">Discover the world of parts and pieces! Learn about fractions like ½, ⅓, ¼ and decimals like 0.1, 0.2, 0.3 through fun, interactive practice.</p>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Practice Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 60</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Practice Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Retry Topic</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 60 Grade 3 Math questions covering fractions and decimals
+        const questions = [
+            // Basic Fractions (1-15)
+            {
+                question: "What fraction of the circle is shaded? (Half is shaded)",
+                options: ["¼", "½", "⅓", "⅕"],
+                answer: "B",
+                explanation: "When half of a shape is shaded, we write this as ½. The numerator (top number) shows 1 part is shaded, and the denominator (bottom number) shows 2 equal parts total."
+            },
+            {
+                question: "If a pizza is cut into 4 equal slices and you eat 1 slice, what fraction did you eat?",
+                options: ["¼", "½", "⅓", "¾"],
+                answer: "A",
+                explanation: "The pizza is divided into 4 equal parts (denominator = 4) and you ate 1 part (numerator = 1), so you ate ¼ of the pizza."
+            },
+            {
+                question: "What fraction represents one part out of three equal parts?",
+                options: ["½", "¼", "⅓", "⅕"],
+                answer: "C",
+                explanation: "When something is divided into 3 equal parts, each part is ⅓ (one-third)."
+            },
+            {
+                question: "If a chocolate bar is divided into 6 equal pieces and you have 1 piece, what fraction do you have?",
+                options: ["⅙", "½", "⅓", "¼"],
+                answer: "A",
+                explanation: "The chocolate bar has 6 equal parts (denominator = 6) and you have 1 part (numerator = 1), so you have ⅙ of the chocolate bar."
+            },
+            {
+                question: "What fraction is shown by 1 part out of 5 equal parts?",
+                options: ["⅕", "½", "⅓", "¼"],
+                answer: "A",
+                explanation: "When something is divided into 5 equal parts, each part is ⅕ (one-fifth)."
+            },
+            {
+                question: "If a cake is cut into 8 equal slices and you take 3 slices, what fraction of the cake did you take?",
+                options: ["⅜", "½", "¼", "⅝"],
+                answer: "A",
+                explanation: "The cake has 8 equal parts (denominator = 8) and you took 3 parts (numerator = 3), so you took ⅜ of the cake."
+            },
+            {
+                question: "What fraction represents three out of four equal parts?",
+                options: ["¾", "½", "⅓", "¼"],
+                answer: "A",
+                explanation: "When something is divided into 4 equal parts and 3 parts are taken, this is written as ¾ (three-quarters)."
+            },
+            {
+                question: "If a rectangle is divided into 2 equal parts and 1 part is colored, what fraction is colored?",
+                options: ["½", "¼", "⅓", "⅕"],
+                answer: "A",
+                explanation: "The rectangle has 2 equal parts (denominator = 2) and 1 part is colored (numerator = 1), so ½ is colored."
+            },
+            {
+                question: "What fraction represents two out of three equal parts?",
+                options: ["⅔", "½", "¼", "¾"],
+                answer: "A",
+                explanation: "When something is divided into 3 equal parts and 2 parts are taken, this is written as ⅔ (two-thirds)."
+            },
+            {
+                question: "If a pie is divided into 5 equal slices and you eat 2 slices, what fraction of the pie did you eat?",
+                options: ["⅖", "½", "⅓", "⅗"],
+                answer: "A",
+                explanation: "The pie has 5 equal parts (denominator = 5) and you ate 2 parts (numerator = 2), so you ate ⅖ of the pie."
+            },
+            {
+                question: "What fraction of the shape is shaded? (One out of four parts is shaded)",
+                options: ["¼", "½", "⅓", "¾"],
+                answer: "A",
+                explanation: "When 1 out of 4 equal parts is shaded, we write this as ¼."
+            },
+            {
+                question: "If a ribbon is divided into 3 equal pieces and you use 2 pieces, what fraction did you use?",
+                options: ["⅔", "½", "⅓", "¾"],
+                answer: "A",
+                explanation: "The ribbon has 3 equal parts (denominator = 3) and you used 2 parts (numerator = 2), so you used ⅔ of the ribbon."
+            },
+            {
+                question: "What fraction represents four out of six equal parts?",
+                options: ["⅔", "⅓", "¼", "⅚"],
+                answer: "A",
+                explanation: "4 out of 6 equal parts can be simplified to ⅔ (four-sixths equals two-thirds)."
+            },
+            {
+                question: "If a box has 10 equal compartments and 3 are filled, what fraction is filled?",
+                options: ["³⁄₁₀", "½", "⅓", "¼"],
+                answer: "A",
+                explanation: "The box has 10 equal parts (denominator = 10) and 3 parts are filled (numerator = 3), so ³⁄₁₀ is filled."
+            },
+            {
+                question: "What fraction represents five out of eight equal parts?",
+                options: ["⅝", "½", "⅓", "¾"],
+                answer: "A",
+                explanation: "When something is divided into 8 equal parts and 5 parts are taken, this is written as ⅝ (five-eighths)."
+            },
+
+            // Equivalent Fractions (16-30)
+            {
+                question: "Which fraction is equivalent to ½?",
+                options: ["²⁄₄", "⅓", "¼", "⅕"],
+                answer: "A",
+                explanation: "²⁄₄ is equivalent to ½ because if you divide both numerator and denominator by 2, you get ½."
+            },
+            {
+                question: "What is an equivalent fraction for ¼?",
+                options: ["²⁄₈", "⅓", "½", "⅖"],
+                answer: "A",
+                explanation: "²⁄₈ is equivalent to ¼ because if you divide both numerator and denominator by 2, you get ¼."
+            },
+            {
+                question: "Which fraction is equivalent to ⅔?",
+                options: ["⁴⁄₆", "½", "¼", "⅗"],
+                answer: "A",
+                explanation: "⁴⁄₆ is equivalent to ⅔ because if you divide both numerator and denominator by 2, you get ⅔."
+            },
+            {
+                question: "What fraction is equivalent to ⅖?",
+                options: ["⁴⁄₁₀", "½", "⅓", "¼"],
+                answer: "A",
+                explanation: "⁴⁄₁₀ is equivalent to ⅖ because if you divide both numerator and denominator by 2, you get ⅖."
+            },
+            {
+                question: "Which of these is equivalent to ¾?",
+                options: ["⁶⁄₈", "½", "⅓", "⅖"],
+                answer: "A",
+                explanation: "⁶⁄₈ is equivalent to ¾ because if you divide both numerator and denominator by 2, you get ¾."
+            },
+            {
+                question: "What is an equivalent fraction for ⅗?",
+                options: ["⁶⁄₁₀", "½", "⅓", "¼"],
+                answer: "A",
+                explanation: "⁶⁄₁₀ is equivalent to ⅗ because if you divide both numerator and denominator by 2, you get ⅗."
+            },
+            {
+                question: "Which fraction is equivalent to ⅙?",
+                options: ["²⁄₁₂", "½", "⅓", "¼"],
+                answer: "A",
+                explanation: "²⁄₁₂ is equivalent to ⅙ because if you divide both numerator and denominator by 2, you get ⅙."
+            },
+            {
+                question: "What fraction is equivalent to ⅜?",
+                options: ["⁶⁄₁₆", "½", "⅓", "¼"],
+                answer: "A",
+                explanation: "⁶⁄₁₆ is equivalent to ⅜ because if you divide both numerator and denominator by 2, you get ⅜."
+            },
+            {
+                question: "Which of these is equivalent to ⅘?",
+                options: ["⁸⁄₁₀", "½", "⅓", "¼"],
+                answer: "A",
+                explanation: "⁸⁄₁₀ is equivalent to ⅘ because if you divide both numerator and denominator by 2, you get ⅘."
+            },
+            {
+                question: "What is an equivalent fraction for ²⁄₃?",
+                options: ["⁴⁄₆", "½", "¼", "⅕"],
+                answer: "A",
+                explanation: "⁴⁄₆ is equivalent to ²⁄₃ because if you divide both numerator and denominator by 2, you get ²⁄₃."
+            },
+            {
+                question: "Which fraction is equivalent to ³⁄₄?",
+                options: ["⁹⁄₁₂", "½", "⅓", "⅖"],
+                answer: "A",
+                explanation: "⁹⁄₁₂ is equivalent to ³⁄₄ because if you divide both numerator and denominator by 3, you get ³⁄₄."
+            },
+            {
+                question: "What fraction is equivalent to ⅚?",
+                options: ["¹⁰⁄₁₂", "½", "⅓", "¼"],
+                answer: "A",
+                explanation: "¹⁰⁄₁₂ is equivalent to ⅚ because if you divide both numerator and denominator by 2, you get ⅚."
+            },
+            {
+                question: "Which of these is equivalent to ⅞?",
+                options: ["¹⁴⁄₁₆", "½", "⅓", "¼"],
+                answer: "A",
+                explanation: "¹⁴⁄₁₆ is equivalent to ⅞ because if you divide both numerator and denominator by 2, you get ⅞."
+            },
+            {
+                question: "What is an equivalent fraction for ⅛?",
+                options: ["²⁄₁₆", "½", "⅓", "¼"],
+                answer: "A",
+                explanation: "²⁄₁₆ is equivalent to ⅛ because if you divide both numerator and denominator by 2, you get ⅛."
+            },
+            {
+                question: "Which fraction is equivalent to ⁴⁄₅?",
+                options: ["⁸⁄₁₀", "½", "⅓", "¼"],
+                answer: "A",
+                explanation: "⁸⁄₁₀ is equivalent to ⁴⁄₅ because if you divide both numerator and denominator by 2, you get ⁴⁄₅."
+            },
+
+            // Comparing Fractions (31-40)
+            {
+                question: "Which is larger: ½ or ⅓?",
+                options: ["½", "⅓", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "½ is larger than ⅓. When the whole is divided into fewer pieces, each piece is larger. Half of something is bigger than one-third of the same thing."
+            },
+            {
+                question: "Which fraction is smaller: ¼ or ⅕?",
+                options: ["⅕", "¼", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "⅕ is smaller than ¼. When the whole is divided into more pieces, each piece is smaller. One-fifth of something is smaller than one-fourth of the same thing."
+            },
+            {
+                question: "Which is greater: ⅔ or ½?",
+                options: ["⅔", "½", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "⅔ is greater than ½. Two-thirds means two out of three equal parts, which is more than half (one out of two equal parts)."
+            },
+            {
+                question: "Which fraction is smaller: ⅖ or ⅗?",
+                options: ["⅖", "⅗", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "⅖ is smaller than ⅗. When fractions have the same denominator, the fraction with the smaller numerator is smaller."
+            },
+            {
+                question: "Which is larger: ¾ or ⅘?",
+                options: ["⅘", "¾", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "⅘ is larger than ¾. Four-fifths (⅘) is 80% of the whole, while three-fourths (¾) is 75% of the whole."
+            },
+            {
+                question: "Which fraction is greater: ⅓ or ¼?",
+                options: ["⅓", "¼", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "⅓ is greater than ¼. One-third of something is larger than one-fourth of the same thing."
+            },
+            {
+                question: "Which is smaller: ⅙ or ⅛?",
+                options: ["⅛", "⅙", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "⅛ is smaller than ⅙. When the whole is divided into more pieces, each piece is smaller. One-eighth is smaller than one-sixth."
+            },
+            {
+                question: "Which fraction is larger: ⅞ or ¾?",
+                options: ["⅞", "¾", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "⅞ is larger than ¾. Seven-eighths (⅞) is 87.5% of the whole, while three-fourths (¾) is 75% of the whole."
+            },
+            {
+                question: "Which is greater: ½ or ⅗?",
+                options: ["⅗", "½", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "⅗ is greater than ½. Three-fifths (⅗) is 60% of the whole, while one-half (½) is 50% of the whole."
+            },
+            {
+                question: "Which fraction is smaller: ²⁄₅ or ³⁄₁₀?",
+                options: ["³⁄₁₀", "²⁄₅", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "³⁄₁₀ is smaller than ²⁄₅. ²⁄₅ is equivalent to ⁴⁄₁₀, which is larger than ³⁄₁₀."
+            },
+
+            // Decimals - Tenths (41-60)
+            {
+                question: "How do you write 'three tenths' as a decimal?",
+                options: ["0.3", "0.03", "3.0", "0.33"],
+                answer: "A",
+                explanation: "Three tenths is written as 0.3. The first digit after the decimal point represents tenths."
+            },
+            {
+                question: "What decimal represents 'seven tenths'?",
+                options: ["0.7", "0.07", "7.0", "0.77"],
+                answer: "A",
+                explanation: "Seven tenths is written as 0.7. The digit 7 in the tenths place means 7/10."
+            },
+            {
+                question: "How is 'one tenth' written as a decimal?",
+                options: ["0.1", "0.01", "1.0", "0.11"],
+                answer: "A",
+                explanation: "One tenth is written as 0.1. This means 1 part out of 10 equal parts."
+            },
+            {
+                question: "What is the decimal for 'five tenths'?",
+                options: ["0.5", "0.05", "5.0", "0.55"],
+                answer: "A",
+                explanation: "Five tenths is written as 0.5. This is equivalent to ½."
+            },
+            {
+                question: "How do you write 'nine tenths' as a decimal?",
+                options: ["0.9", "0.09", "9.0", "0.99"],
+                answer: "A",
+                explanation: "Nine tenths is written as 0.9. This means 9 parts out of 10 equal parts."
+            },
+            {
+                question: "What decimal represents 'two tenths'?",
+                options: ["0.2", "0.02", "2.0", "0.22"],
+                answer: "A",
+                explanation: "Two tenths is written as 0.2. This means 2 parts out of 10 equal parts."
+            },
+            {
+                question: "How is 'eight tenths' written as a decimal?",
+                options: ["0.8", "0.08", "8.0", "0.88"],
+                answer: "A",
+                explanation: "Eight tenths is written as 0.8. This means 8 parts out of 10 equal parts."
+            },
+            {
+                question: "What is the decimal for 'four tenths'?",
+                options: ["0.4", "0.04", "4.0", "0.44"],
+                answer: "A",
+                explanation: "Four tenths is written as 0.4. This means 4 parts out of 10 equal parts."
+            },
+            {
+                question: "How do you write 'six tenths' as a decimal?",
+                options: ["0.6", "0.06", "6.0", "0.66"],
+                answer: "A",
+                explanation: "Six tenths is written as 0.6. This means 6 parts out of 10 equal parts."
+            },
+            {
+                question: "Which decimal is equivalent to the fraction ⁷⁄₁₀?",
+                options: ["0.7", "0.07", "7.0", "0.77"],
+                answer: "A",
+                explanation: "The fraction ⁷⁄₁₀ means 7 tenths, which is written as 0.7 as a decimal."
+            },
+            {
+                question: "What is ⁵⁄₁₀ as a decimal?",
+                options: ["0.5", "0.05", "5.0", "0.55"],
+                answer: "A",
+                explanation: "The fraction ⁵⁄₁₀ means 5 tenths, which is written as 0.5 as a decimal."
+            },
+            {
+                question: "Which decimal represents the fraction ³⁄₁₀?",
+                options: ["0.3", "0.03", "3.0", "0.33"],
+                answer: "A",
+                explanation: "The fraction ³⁄₁₀ means 3 tenths, which is written as 0.3 as a decimal."
+            },
+            {
+                question: "What is ¹⁄₁₀ as a decimal?",
+                options: ["0.1", "0.01", "1.0", "0.11"],
+                answer: "A",
+                explanation: "The fraction ¹⁄₁₀ means 1 tenth, which is written as 0.1 as a decimal."
+            },
+            {
+                question: "Which decimal is equal to ⁹⁄₁₀?",
+                options: ["0.9", "0.09", "9.0", "0.99"],
+                answer: "A",
+                explanation: "The fraction ⁹⁄₁₀ means 9 tenths, which is written as 0.9 as a decimal."
+            },
+            {
+                question: "What is ²⁄₁₀ as a decimal?",
+                options: ["0.2", "0.02", "2.0", "0.22"],
+                answer: "A",
+                explanation: "The fraction ²⁄₁₀ means 2 tenths, which is written as 0.2 as a decimal."
+            },
+            {
+                question: "Which decimal represents ⁸⁄₁₀?",
+                options: ["0.8", "0.08", "8.0", "0.88"],
+                answer: "A",
+                explanation: "The fraction ⁸⁄₁₀ means 8 tenths, which is written as 0.8 as a decimal."
+            },
+            {
+                question: "What is ⁴⁄₁₀ as a decimal?",
+                options: ["0.4", "0.04", "4.0", "0.44"],
+                answer: "A",
+                explanation: "The fraction ⁴⁄₁₀ means 4 tenths, which is written as 0.4 as a decimal."
+            },
+            {
+                question: "Which decimal is equivalent to ⁶⁄₁₀?",
+                options: ["0.6", "0.06", "6.0", "0.66"],
+                answer: "A",
+                explanation: "The fraction ⁶⁄₁₀ means 6 tenths, which is written as 0.6 as a decimal."
+            },
+            {
+                question: "What decimal represents 'zero tenths'?",
+                options: ["0.0", "0.00", "0", "0.1"],
+                answer: "A",
+                explanation: "Zero tenths is written as 0.0. This means 0 parts out of 10 equal parts."
+            },
+            {
+                question: "How is 'ten tenths' written as a decimal?",
+                options: ["1.0", "0.10", "10.0", "1.1"],
+                answer: "A",
+                explanation: "Ten tenths is equal to one whole, which is written as 1.0 as a decimal."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent fraction skills!",
+            "Fantastic decimal understanding!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a fractions expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade3MathFractionsDecimals');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade3MathFractionsDecimals', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Create a copy of questions and shuffle them
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixGrade3MathFractionsDecimals_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade3MathFractionsDecimals_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a fractions and decimals expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have a strong understanding of fractions and decimals!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a fractions and decimals master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the questions you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better with more practice!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    feedbackMessage.textContent = `Correct answer: ${String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65))}`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade3-math-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

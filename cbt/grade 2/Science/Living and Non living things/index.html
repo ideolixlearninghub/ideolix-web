@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 2 Science - Living and Non-Living Things | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Dark Theme */
+        :root {
+            --primary-green: #00C853;
+            --secondary-orange: #FF6D00;
+            --accent-purple: #7C4DFF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 200, 83, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00B248;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #E65C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 109, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 2 Science - Living and Non-Living Things</h1>
+            <p class="welcome-subtitle">Explore the fascinating world around you! Learn to identify living things, non-living things, and understand what makes them different through interactive questions.</p>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Practice Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 60</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Practice Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Retry Topic</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 60 Grade 2 Science: Living and Non-Living Things questions
+        const questions = [
+            // Section A: Identifying Living Things (1-20)
+            {
+                question: "Which of these is a living thing?",
+                options: ["Rock", "Water", "Tree", "Chair"],
+                answer: "C",
+                explanation: "A tree is a living thing because it grows, needs water and sunlight, and can reproduce."
+            },
+            {
+                question: "Which of these is NOT a living thing?",
+                options: ["Dog", "Butterfly", "Car", "Flower"],
+                answer: "C",
+                explanation: "A car is not a living thing because it doesn't grow, eat, breathe, or reproduce."
+            },
+            {
+                question: "What do all living things need to survive?",
+                options: ["Water", "Money", "Toys", "Cars"],
+                answer: "A",
+                explanation: "All living things need water to survive. Without water, living things cannot live."
+            },
+            {
+                question: "Which of these can grow?",
+                options: ["Pencil", "Book", "Child", "Table"],
+                answer: "C",
+                explanation: "A child can grow. Living things grow, while non-living things do not grow on their own."
+            },
+            {
+                question: "Which of these can move on its own?",
+                options: ["Ball", "Bird", "Bicycle", "Balloon"],
+                answer: "B",
+                explanation: "A bird can move on its own. Living things can move by themselves, while non-living things need someone or something to move them."
+            },
+            {
+                question: "Which of these needs food?",
+                options: ["Computer", "Cat", "Cup", "Crayon"],
+                answer: "B",
+                explanation: "A cat needs food to survive. All living things need food for energy."
+            },
+            {
+                question: "Which of these can have babies?",
+                options: ["Robot", "Rabbit", "Radio", "Ruler"],
+                answer: "B",
+                explanation: "A rabbit can have babies. Living things can reproduce and have young ones."
+            },
+            {
+                question: "Which of these breathes?",
+                options: ["Fish", "Fan", "Fork", "Flag"],
+                answer: "A",
+                explanation: "A fish breathes through its gills. All living things need to breathe in some way."
+            },
+            {
+                question: "Which of these responds to its environment?",
+                options: ["Plant turning toward sunlight", "Book on a shelf", "Shoe in a closet", "Plate on a table"],
+                answer: "A",
+                explanation: "A plant turning toward sunlight is responding to its environment. Living things respond to changes around them."
+            },
+            {
+                question: "Which of these is a living thing that can fly?",
+                options: ["Airplane", "Butterfly", "Kite", "Helicopter"],
+                answer: "B",
+                explanation: "A butterfly is a living thing that can fly. Airplanes, kites, and helicopters are not living things."
+            },
+            {
+                question: "Which of these is a plant?",
+                options: ["Plastic flower", "Grass", "Paper", "Cotton shirt"],
+                answer: "B",
+                explanation: "Grass is a living plant. Plastic flowers, paper, and cotton shirts are made from materials but are not living plants themselves."
+            },
+            {
+                question: "Which of these is an animal?",
+                options: ["Teddy bear", "Lion", "Doll", "Toy car"],
+                answer: "B",
+                explanation: "A lion is a living animal. Teddy bears, dolls, and toy cars are not living things."
+            },
+            {
+                question: "Which of these can feel pain?",
+                options: ["Stone", "Pencil", "Human", "Eraser"],
+                answer: "C",
+                explanation: "A human can feel pain. Living things can feel sensations like pain, while non-living things cannot."
+            },
+            {
+                question: "Which of these gets energy from the sun?",
+                options: ["Solar panel", "Plant", "Window", "Mirror"],
+                answer: "B",
+                explanation: "Plants get energy from the sun through a process called photosynthesis. Solar panels collect energy but are not living."
+            },
+            {
+                question: "Which of these can die?",
+                options: ["Robot", "Rock", "Flower", "Computer"],
+                answer: "C",
+                explanation: "A flower can die. All living things have a lifespan and eventually die."
+            },
+            {
+                question: "Which of these needs air to survive?",
+                options: ["Fish", "Ball", "Shoe", "Book"],
+                answer: "A",
+                explanation: "A fish needs air (oxygen in water) to survive. All living things need air or oxygen in some form."
+            },
+            {
+                question: "Which of these can heal itself when injured?",
+                options: ["Broken cup", "Scratched car", "Cut finger", "Torn paper"],
+                answer: "C",
+                explanation: "A cut finger can heal itself. Living things can repair themselves when injured."
+            },
+            {
+                question: "Which of these changes with seasons?",
+                options: ["Deciduous tree", "Plastic tree", "Metal pole", "Concrete wall"],
+                answer: "A",
+                explanation: "A deciduous tree changes with seasons - it loses leaves in autumn and grows new ones in spring. Living things respond to seasonal changes."
+            },
+            {
+                question: "Which of these can make its own food?",
+                options: ["Car", "Plant", "Animal", "Human"],
+                answer: "B",
+                explanation: "Plants can make their own food through photosynthesis. Animals and humans need to eat other living things for food."
+            },
+            {
+                question: "Which of these has a life cycle?",
+                options: ["Butterfly", "Light bulb", "Battery", "Candle"],
+                answer: "A",
+                explanation: "A butterfly has a life cycle (egg, caterpillar, chrysalis, butterfly). Living things go through different stages in their lives."
+            },
+            // Section B: Identifying Non-Living Things (21-40)
+            {
+                question: "Which of these is a non-living thing?",
+                options: ["Bird", "Fish", "Rock", "Insect"],
+                answer: "C",
+                explanation: "A rock is a non-living thing because it doesn't grow, eat, breathe, or reproduce."
+            },
+            {
+                question: "Which of these is NOT a non-living thing?",
+                options: ["Water", "Sun", "Mushroom", "Soil"],
+                answer: "C",
+                explanation: "A mushroom is a living thing (a type of fungus). Water, sun, and soil are non-living things."
+            },
+            {
+                question: "Which of these does NOT need food?",
+                options: ["Table", "Dog", "Plant", "Human"],
+                answer: "A",
+                explanation: "A table does not need food. Only living things need food for energy."
+            },
+            {
+                question: "Which of these cannot grow?",
+                options: ["Child", "Puppy", "Mountain", "Seedling"],
+                answer: "C",
+                explanation: "A mountain cannot grow on its own. While mountains change over very long periods, they don't grow like living things do."
+            },
+            {
+                question: "Which of these cannot move by itself?",
+                options: ["Car", "Bird", "Fish", "Butterfly"],
+                answer: "A",
+                explanation: "A car cannot move by itself - it needs a person to drive it. Birds, fish, and butterflies can move on their own."
+            },
+            {
+                question: "Which of these cannot reproduce?",
+                options: ["Rabbit", "Flower", "Cloud", "Cat"],
+                answer: "C",
+                explanation: "A cloud cannot reproduce. Only living things can reproduce and make more of their kind."
+            },
+            {
+                question: "Which of these does not breathe?",
+                options: ["Book", "Fish", "Human", "Bird"],
+                answer: "A",
+                explanation: "A book does not breathe. All living things need to breathe in some way."
+            },
+            {
+                question: "Which of these does not respond to its environment?",
+                options: ["Plant growing toward light", "Pencil on a desk", "Dog barking at a stranger", "Person putting on a jacket when cold"],
+                answer: "B",
+                explanation: "A pencil on a desk does not respond to its environment. Living things respond to changes around them."
+            },
+            {
+                question: "Which of these is man-made and non-living?",
+                options: ["Tree", "House", "Bird", "Fish"],
+                answer: "B",
+                explanation: "A house is man-made and non-living. Trees, birds, and fish are natural and living."
+            },
+            {
+                question: "Which of these does not need water?",
+                options: ["Rock", "Plant", "Animal", "Human"],
+                answer: "A",
+                explanation: "A rock does not need water. All living things need water to survive."
+            },
+            {
+                question: "Which of these cannot feel pain?",
+                options: ["Table", "Dog", "Cat", "Human"],
+                answer: "A",
+                explanation: "A table cannot feel pain. Only living things with nervous systems can feel pain."
+            },
+            {
+                question: "Which of these does not have a life cycle?",
+                options: ["Butterfly", "Frog", "Rock", "Plant"],
+                answer: "C",
+                explanation: "A rock does not have a life cycle. Only living things go through different stages in their lives."
+            },
+            {
+                question: "Which of these cannot die?",
+                options: ["Pencil", "Flower", "Animal", "Human"],
+                answer: "A",
+                explanation: "A pencil cannot die because it was never alive. Only living things can die."
+            },
+            {
+                question: "Which of these is natural but non-living?",
+                options: ["River", "Tree", "Bird", "Insect"],
+                answer: "A",
+                explanation: "A river is natural but non-living. Trees, birds, and insects are natural and living."
+            },
+            {
+                question: "Which of these does not need air?",
+                options: ["Stone", "Fish", "Bird", "Human"],
+                answer: "A",
+                explanation: "A stone does not need air. All living things need air or oxygen to survive."
+            },
+            {
+                question: "Which of these cannot heal itself?",
+                options: ["Broken pencil", "Cut skin", "Broken bone", "Scratched plant stem"],
+                answer: "A",
+                explanation: "A broken pencil cannot heal itself. Living things can repair themselves when injured."
+            },
+            {
+                question: "Which of these does not change with seasons?",
+                options: ["Plastic toy", "Deciduous tree", "Migratory bird", "Hibernating bear"],
+                answer: "A",
+                explanation: "A plastic toy does not change with seasons. Living things respond to seasonal changes in their environment."
+            },
+            {
+                question: "Which of these cannot make its own food?",
+                options: ["All non-living things", "Plants", "Some bacteria", "Algae"],
+                answer: "A",
+                explanation: "All non-living things cannot make their own food. Only some living things like plants can make their own food."
+            },
+            {
+                question: "Which of these does not have cells?",
+                options: ["Rock", "Human", "Plant", "Animal"],
+                answer: "A",
+                explanation: "A rock does not have cells. All living things are made of cells."
+            },
+            {
+                question: "Which of these cannot evolve over time?",
+                options: ["Stone", "Bird species", "Plant species", "Animal species"],
+                answer: "A",
+                explanation: "A stone cannot evolve. Only living things can evolve and change over many generations."
+            },
+            // Section C: Characteristics and Differences (41-60)
+            {
+                question: "What is the main difference between living and non-living things?",
+                options: ["Living things can move", "Living things can grow and reproduce", "Living things are colorful", "Living things are bigger"],
+                answer: "B",
+                explanation: "The main difference is that living things can grow and reproduce, while non-living things cannot."
+            },
+            {
+                question: "Which characteristic do ALL living things share?",
+                options: ["They can talk", "They need food", "They have legs", "They can fly"],
+                answer: "B",
+                explanation: "All living things need food for energy. Not all living things can talk, have legs, or fly."
+            },
+            {
+                question: "Why is a car not a living thing?",
+                options: ["It doesn't need food", "It can move", "It's made of metal", "It has wheels"],
+                answer: "A",
+                explanation: "A car is not a living thing because it doesn't need food, cannot grow, and cannot reproduce."
+            },
+            {
+                question: "What do we call things that were once living but are now dead?",
+                options: ["Non-living", "Once-living", "Sleeping", "Paused"],
+                answer: "B",
+                explanation: "Things that were once living but are now dead are called once-living things, like wood from a tree or leather from an animal."
+            },
+            {
+                question: "Which of these is a characteristic of non-living things?",
+                options: ["They can breathe", "They can grow", "They do not reproduce", "They need water"],
+                answer: "C",
+                explanation: "Non-living things do not reproduce. Only living things can reproduce."
+            },
+            {
+                question: "What do plants need that non-living things don't need?",
+                options: ["Sunlight", "Space", "Color", "Shape"],
+                answer: "A",
+                explanation: "Plants need sunlight to make food through photosynthesis. Non-living things don't need sunlight to survive."
+            },
+            {
+                question: "How can you tell if something is living?",
+                options: ["It is expensive", "It can grow and change", "It is heavy", "It is pretty"],
+                answer: "B",
+                explanation: "You can tell something is living if it can grow and change, needs food and water, and can reproduce."
+            },
+            {
+                question: "Why is water considered a non-living thing?",
+                options: ["It is clear", "It is wet", "It cannot grow or reproduce", "It flows"],
+                answer: "C",
+                explanation: "Water is considered non-living because it cannot grow, reproduce, or respond to its environment like living things do."
+            },
+            {
+                question: "What happens to living things that don't get what they need?",
+                options: ["They become non-living", "They die", "They change color", "They get smaller"],
+                answer: "B",
+                explanation: "Living things that don't get what they need (like food, water, or air) will eventually die."
+            },
+            {
+                question: "Which of these is true about both living and non-living things?",
+                options: ["They both need food", "They both can move", "They both take up space", "They both can reproduce"],
+                answer: "C",
+                explanation: "Both living and non-living things take up space. Only living things need food, can move on their own, and can reproduce."
+            },
+            {
+                question: "What is the main way plants are different from most non-living things?",
+                options: ["Plants are green", "Plants can make their own food", "Plants don't move", "Plants are tall"],
+                answer: "B",
+                explanation: "Plants can make their own food through photosynthesis, which non-living things cannot do."
+            },
+            {
+                question: "Why is fire not considered a living thing?",
+                options: ["It is too hot", "It doesn't grow and reproduce like living things", "It is not colorful", "It doesn't make sound"],
+                answer: "B",
+                explanation: "Fire is not considered living because it doesn't grow and reproduce in the same way living things do, and it doesn't have cells."
+            },
+            {
+                question: "What do animals do that non-living things cannot do?",
+                options: ["Take up space", "Respond to their environment", "Have weight", "Have color"],
+                answer: "B",
+                explanation: "Animals can respond to their environment in complex ways, which non-living things cannot do."
+            },
+            {
+                question: "How are seeds different from rocks?",
+                options: ["Seeds are smaller", "Seeds can grow into living plants", "Rocks are heavier", "Rocks are smoother"],
+                answer: "B",
+                explanation: "Seeds can grow into living plants, while rocks cannot grow into living things."
+            },
+            {
+                question: "What is one way living things change that non-living things do not?",
+                options: ["They get older", "They change color in the sun", "They can be moved", "They can be broken"],
+                answer: "A",
+                explanation: "Living things go through life cycles and get older, while non-living things do not age in the same way."
+            },
+            {
+                question: "Why is a cloud not considered a living thing?",
+                options: ["It is in the sky", "It is made of water", "It cannot reproduce or grow", "It is white"],
+                answer: "C",
+                explanation: "A cloud is not considered living because it cannot reproduce, grow, or respond to its environment like living things do."
+            },
+            {
+                question: "What do we call the process where living things make more of their own kind?",
+                options: ["Reproduction", "Movement", "Growth", "Breathing"],
+                answer: "A",
+                explanation: "Reproduction is the process where living things make more of their own kind."
+            },
+            {
+                question: "How is a river different from a fish?",
+                options: ["The river is bigger", "The fish is a living thing that can reproduce", "The river has water", "The fish can swim"],
+                answer: "B",
+                explanation: "A fish is a living thing that can reproduce, while a river is a non-living thing that cannot reproduce."
+            },
+            {
+                question: "What is one way non-living things can change?",
+                options: ["They can grow taller", "They can have babies", "They can be moved by outside forces", "They can eat food"],
+                answer: "C",
+                explanation: "Non-living things can be moved by outside forces like wind, water, or people, but they cannot move on their own."
+            },
+            {
+                question: "Why is it important to know the difference between living and non-living things?",
+                options: ["To understand how to care for living things", "To know which things are expensive", "To learn colors", "To count better"],
+                answer: "A",
+                explanation: "It's important to know the difference so we understand how to care for living things and respect all forms of life."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent science knowledge!",
+            "Fantastic observation skills!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a science expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade2ScienceLivingThings');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade2ScienceLivingThings', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Create a copy of questions and shuffle them
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixGrade2ScienceLivingThings_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade2ScienceLivingThings_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a science expert who understands living and non-living things perfectly!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have a strong understanding of living and non-living things!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a science master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the questions you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better with more practice!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    feedbackMessage.textContent = `Correct answer: ${String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65))}`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade2-science-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

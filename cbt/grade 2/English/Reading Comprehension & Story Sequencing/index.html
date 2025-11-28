@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 2 English - Reading Comprehension & Story Sequencing | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Dark Theme */
+        :root {
+            --primary-green: #00C853;
+            --secondary-orange: #FF6D00;
+            --accent-purple: #7C4DFF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 200, 83, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00B248;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #E65C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 109, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .story-passage {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-purple);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .sequencing-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .sequence-option {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid var(--dark-border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .sequence-option:hover {
+            border-color: var(--primary-green);
+            transform: translateX(5px);
+        }
+
+        .sequence-option.selected {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+        }
+
+        .sequence-option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .sequence-option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336);
+        }
+
+        .sequence-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .sequence-option.selected .sequence-number {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .sequence-option.correct .sequence-number {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .sequence-option.incorrect .sequence-number {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 2 English - Reading Comprehension & Story Sequencing</h1>
+            <p class="welcome-subtitle">Develop your reading skills and learn to understand story structure! Practice comprehension questions and sequence story events in the correct order to become a better reader!</p>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Practice Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 50</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div id="storyPassage" class="story-passage" style="display: none;"></div>
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div id="optionsContainer" class="options-container"></div>
+                <div id="sequencingContainer" class="sequencing-container" style="display: none;"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Practice Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Retry Topic</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 50 Grade 2 Reading Comprehension & Story Sequencing questions
+        const questions = [
+            // Section A: Basic Reading Comprehension (1-15)
+            {
+                type: "comprehension",
+                passage: "Tom had a red ball. He liked to play with it in the park. One day, the ball rolled into the street. Tom's dad saw this and got the ball for him.",
+                question: "What color was Tom's ball?",
+                options: ["Blue", "Red", "Green", "Yellow"],
+                answer: "B",
+                explanation: "The story says 'Tom had a red ball.'"
+            },
+            {
+                type: "comprehension", 
+                passage: "Tom had a red ball. He liked to play with it in the park. One day, the ball rolled into the street. Tom's dad saw this and got the ball for him.",
+                question: "Where did Tom like to play with his ball?",
+                options: ["In his room", "At school", "In the park", "At the beach"],
+                answer: "C",
+                explanation: "The story says 'He liked to play with it in the park.'"
+            },
+            {
+                type: "comprehension",
+                passage: "Tom had a red ball. He liked to play with it in the park. One day, the ball rolled into the street. Tom's dad saw this and got the ball for him.",
+                question: "Who got the ball from the street?",
+                options: ["Tom's mom", "Tom's dad", "Tom's friend", "Tom"],
+                answer: "B",
+                explanation: "The story says 'Tom's dad saw this and got the ball for him.'"
+            },
+            {
+                type: "comprehension",
+                passage: "Sara wanted to bake cookies. She got flour, sugar, and eggs from the kitchen. She mixed everything in a big bowl. Then she put the cookies in the oven. The cookies smelled delicious when they were done.",
+                question: "What did Sara want to bake?",
+                options: ["Cake", "Pie", "Cookies", "Bread"],
+                answer: "C",
+                explanation: "The story says 'Sara wanted to bake cookies.'"
+            },
+            {
+                type: "comprehension",
+                passage: "Sara wanted to bake cookies. She got flour, sugar, and eggs from the kitchen. She mixed everything in a big bowl. Then she put the cookies in the oven. The cookies smelled delicious when they were done.",
+                question: "Where did Sara get the ingredients?",
+                options: ["From the store", "From her friend", "From the kitchen", "From school"],
+                answer: "C",
+                explanation: "The story says 'She got flour, sugar, and eggs from the kitchen.'"
+            },
+            {
+                type: "comprehension",
+                passage: "The little seed was in the dark soil. The sun shone and the rain fell. The seed began to grow. First a small root came out. Then a green stem pushed up through the soil.",
+                question: "Where was the little seed at the beginning?",
+                options: ["In the water", "In the dark soil", "On a tree", "In a box"],
+                answer: "B",
+                explanation: "The story says 'The little seed was in the dark soil.'"
+            },
+            {
+                type: "comprehension",
+                passage: "The little seed was in the dark soil. The sun shone and the rain fell. The seed began to grow. First a small root came out. Then a green stem pushed up through the soil.",
+                question: "What helped the seed grow?",
+                options: ["The sun and rain", "The wind", "Snow", "The moon"],
+                answer: "A",
+                explanation: "The story says 'The sun shone and the rain fell. The seed began to grow.'"
+            },
+            {
+                type: "comprehension",
+                passage: "Ben had a new bicycle. It was blue with red stripes. He practiced riding every day after school. At first, he fell many times. But soon he could ride without falling.",
+                question: "What color was Ben's bicycle?",
+                options: ["Red with blue stripes", "Green with yellow stripes", "Blue with red stripes", "All blue"],
+                answer: "C",
+                explanation: "The story says 'It was blue with red stripes.'"
+            },
+            {
+                type: "comprehension",
+                passage: "Ben had a new bicycle. It was blue with red stripes. He practiced riding every day after school. At first, he fell many times. But soon he could ride without falling.",
+                question: "When did Ben practice riding his bicycle?",
+                options: ["Before school", "During school", "After school", "On weekends only"],
+                answer: "C",
+                explanation: "The story says 'He practiced riding every day after school.'"
+            },
+            {
+                type: "comprehension",
+                passage: "The zoo had many animals. Lily saw elephants, monkeys, and lions. Her favorite was the giraffe because it had a long neck. The giraffe ate leaves from tall trees.",
+                question: "What was Lily's favorite animal at the zoo?",
+                options: ["The elephant", "The monkey", "The lion", "The giraffe"],
+                answer: "D",
+                explanation: "The story says 'Her favorite was the giraffe...'"
+            },
+            {
+                type: "comprehension",
+                passage: "The zoo had many animals. Lily saw elephants, monkeys, and lions. Her favorite was the giraffe because it had a long neck. The giraffe ate leaves from tall trees.",
+                question: "What did the giraffe eat?",
+                options: ["Meat", "Fish", "Leaves from tall trees", "Fruit"],
+                answer: "C",
+                explanation: "The story says 'The giraffe ate leaves from tall trees.'"
+            },
+            {
+                type: "comprehension",
+                passage: "It was a rainy day. Anna looked out the window and saw puddles. She put on her yellow raincoat and red boots. Then she went outside to jump in the puddles.",
+                question: "What did Anna see out the window?",
+                options: ["Snow", "Puddles", "Sunshine", "A rainbow"],
+                answer: "B",
+                explanation: "The story says 'Anna looked out the window and saw puddles.'"
+            },
+            {
+                type: "comprehension",
+                passage: "It was a rainy day. Anna looked out the window and saw puddles. She put on her yellow raincoat and red boots. Then she went outside to jump in the puddles.",
+                question: "What color were Anna's boots?",
+                options: ["Yellow", "Blue", "Red", "Green"],
+                answer: "C",
+                explanation: "The story says 'She put on her yellow raincoat and red boots.'"
+            },
+            {
+                type: "comprehension",
+                passage: "Mom planted flowers in the garden. She watered them every morning. The flowers grew tall and beautiful. They had pretty colors like pink, purple, and yellow.",
+                question: "Who planted flowers in the garden?",
+                options: ["Dad", "Mom", "The children", "The neighbor"],
+                answer: "B",
+                explanation: "The story says 'Mom planted flowers in the garden.'"
+            },
+            {
+                type: "comprehension",
+                passage: "Mom planted flowers in the garden. She watered them every morning. The flowers grew tall and beautiful. They had pretty colors like pink, purple, and yellow.",
+                question: "When did she water the flowers?",
+                options: ["Every evening", "Every afternoon", "Every morning", "Once a week"],
+                answer: "C",
+                explanation: "The story says 'She watered them every morning.'"
+            },
+            // Section B: Story Sequencing (16-35)
+            {
+                type: "sequencing",
+                question: "What happened first in the story about the caterpillar?",
+                options: [
+                    "The caterpillar ate many leaves.",
+                    "A butterfly came out of the cocoon.",
+                    "The caterpillar made a cocoon.",
+                    "A tiny caterpillar hatched from an egg."
+                ],
+                answer: "D",
+                explanation: "First the caterpillar hatches from an egg, then it eats leaves, then makes a cocoon, and finally becomes a butterfly."
+            },
+            {
+                type: "sequencing",
+                question: "What happened after the caterpillar ate many leaves?",
+                options: [
+                    "A butterfly came out of the cocoon.",
+                    "The caterpillar made a cocoon.",
+                    "A tiny caterpillar hatched from an egg.",
+                    "The caterpillar turned into a butterfly."
+                ],
+                answer: "B",
+                explanation: "After eating leaves, the caterpillar makes a cocoon before becoming a butterfly."
+            },
+            {
+                type: "sequencing",
+                question: "What is the correct order for baking a cake?",
+                options: [
+                    "Mix ingredients, then bake, then decorate",
+                    "Bake, then mix ingredients, then decorate",
+                    "Decorate, then mix ingredients, then bake",
+                    "Mix ingredients, then decorate, then bake"
+                ],
+                answer: "A",
+                explanation: "First you mix the ingredients, then bake the cake, then decorate it when it's cool."
+            },
+            {
+                type: "sequencing",
+                question: "What happens first when building a snowman?",
+                options: [
+                    "Put a carrot for the nose",
+                    "Make a big snowball for the body",
+                    "The snowman melts in the sun",
+                    "Add sticks for arms"
+                ],
+                answer: "B",
+                explanation: "First you make snowballs for the body, then add features like the nose and arms."
+            },
+            {
+                type: "sequencing",
+                question: "What is the last step in making a peanut butter sandwich?",
+                options: [
+                    "Get two slices of bread",
+                    "Spread peanut butter on bread",
+                    "Put the slices together",
+                    "Open the peanut butter jar"
+                ],
+                answer: "C",
+                explanation: "After spreading peanut butter, you put the slices together to complete the sandwich."
+            },
+            {
+                type: "sequencing",
+                question: "What happens after a bird finds a worm?",
+                options: [
+                    "The baby birds chirp for food",
+                    "The bird flies back to its nest",
+                    "The mother bird feeds her babies",
+                    "The bird looks for worms"
+                ],
+                answer: "B",
+                explanation: "After finding a worm, the bird flies back to the nest to feed its babies."
+            },
+            {
+                type: "sequencing",
+                question: "What is the first thing you do when washing your hands?",
+                options: [
+                    "Dry your hands with a towel",
+                    "Rub soap on your hands",
+                    "Turn on the water",
+                    "Rinse your hands"
+                ],
+                answer: "C",
+                explanation: "First you turn on the water, then wet your hands, then use soap, then rinse, then dry."
+            },
+            {
+                type: "sequencing",
+                question: "What happens last when planting a seed?",
+                options: [
+                    "Put the seed in soil",
+                    "Water the soil",
+                    "Cover the seed with soil",
+                    "Choose a sunny spot"
+                ],
+                answer: "B",
+                explanation: "After planting and covering the seed, you water it to help it grow."
+            },
+            {
+                type: "sequencing",
+                question: "What do you do first when reading a book?",
+                options: [
+                    "Turn to the last page",
+                    "Look at the pictures",
+                    "Open the cover",
+                    "Read the words"
+                ],
+                answer: "C",
+                explanation: "First you open the book cover, then you can look at pictures and read the words."
+            },
+            {
+                type: "sequencing",
+                question: "What is the correct order for getting ready for school?",
+                options: [
+                    "Eat breakfast, then get dressed, then brush teeth",
+                    "Get dressed, then eat breakfast, then brush teeth",
+                    "Brush teeth, then get dressed, then eat breakfast",
+                    "Get dressed, then brush teeth, then eat breakfast"
+                ],
+                answer: "D",
+                explanation: "Most people get dressed first, then brush teeth, then eat breakfast before school."
+            },
+            // Section C: Inference Questions (36-50)
+            {
+                type: "comprehension",
+                passage: "Maria put on her swimsuit and grabbed her towel. She ran outside where her brother was filling a big blue pool with water. The sun was very hot.",
+                question: "Where was Maria probably going?",
+                options: ["To school", "To the beach", "To swim in a pool", "To take a bath"],
+                answer: "C",
+                explanation: "The swimsuit, towel, and pool being filled suggest she's going swimming."
+            },
+            {
+                type: "comprehension",
+                passage: "Carlos put on his warm coat, hat, and mittens. He picked up his wooden sled and went outside. The ground was covered in white.",
+                question: "What season is it probably?",
+                options: ["Spring", "Summer", "Fall", "Winter"],
+                answer: "D",
+                explanation: "The warm clothes, sled, and white ground suggest it's winter with snow."
+            },
+            {
+                type: "comprehension",
+                passage: "The bell rang and children put their books away. They lined up at the door and walked to the cafeteria. They were very hungry.",
+                question: "What time of day is it probably?",
+                options: ["Morning", "Lunchtime", "After school", "Bedtime"],
+                answer: "B",
+                explanation: "The bell, going to cafeteria, and being hungry suggest it's lunchtime."
+            },
+            {
+                type: "comprehension",
+                passage: "Jenny heard a loud 'meow' at her door. When she opened it, a small furry animal ran inside. It had stripes and a long tail.",
+                question: "What animal was at Jenny's door?",
+                options: ["A dog", "A cat", "A rabbit", "A squirrel"],
+                answer: "B",
+                explanation: "The 'meow' sound and description suggest it's a cat."
+            },
+            {
+                type: "comprehension",
+                passage: "Dad was mixing flour and eggs in a bowl. The oven was getting hot. The kitchen smelled like cinnamon and sugar.",
+                question: "What was Dad probably making?",
+                options: ["Dinner", "Cookies or cake", "Soup", "Sandwiches"],
+                answer: "B",
+                explanation: "The sweet smells and oven suggest he's baking something sweet."
+            },
+            {
+                type: "comprehension",
+                passage: "The sky grew dark and the wind started to blow. Tim could hear loud rumbles in the distance. His dog hid under the bed.",
+                question: "What kind of weather is coming?",
+                options: ["Sunny day", "Rainstorm", "Snowstorm", "Windy day"],
+                answer: "B",
+                explanation: "Dark sky, wind, and rumbles suggest a thunderstorm is coming."
+            },
+            {
+                type: "comprehension",
+                passage: "Mom put a bandage on Sam's knee. She gave him a hug and told him it would stop hurting soon. Sam had fallen off his bicycle.",
+                question: "How was Sam probably feeling?",
+                options: ["Happy", "Sad or hurt", "Angry", "Sleepy"],
+                answer: "B",
+                explanation: "Falling off a bicycle and needing a bandage suggests he got hurt."
+            },
+            {
+                type: "comprehension",
+                passage: "The classroom was very quiet. All the children had pencils in their hands and were looking down at their papers. The teacher was walking around the room.",
+                question: "What were the children probably doing?",
+                options: ["Playing a game", "Taking a test", "Eating lunch", "Reading books"],
+                answer: "B",
+                explanation: "The quiet room, pencils, and papers suggest they're taking a test."
+            },
+            {
+                type: "comprehension",
+                passage: "Maria blew out the candles on the cake. Everyone clapped and sang. Then she opened her presents.",
+                question: "What special day was it probably?",
+                options: ["Christmas", "Birthday", "First day of school", "Halloween"],
+                answer: "B",
+                explanation: "Blowing out candles on a cake and opening presents suggests a birthday."
+            },
+            {
+                type: "comprehension",
+                passage: "The car was packed with suitcases. The family got in and Dad started driving. They were going to visit Grandma who lived far away.",
+                question: "What were they probably going to do?",
+                options: ["Go to school", "Go on a trip", "Go shopping", "Go to the park"],
+                answer: "B",
+                explanation: "Suitcases and visiting someone far away suggests a trip."
+            },
+            {
+                type: "comprehension",
+                passage: "The farmer carried a basket into the field. He picked red, round fruits from the plants and put them in his basket.",
+                question: "What was the farmer probably picking?",
+                options: ["Apples", "Tomatoes", "Potatoes", "Carrots"],
+                answer: "B",
+                explanation: "Red, round fruits growing on plants suggests tomatoes."
+            },
+            {
+                type: "comprehension",
+                passage: "The children put on costumes. One was a ghost, one was a witch, and one was a superhero. They carried bags and went from house to house.",
+                question: "What holiday was it probably?",
+                options: ["Christmas", "Easter", "Halloween", "Thanksgiving"],
+                answer: "C",
+                explanation: "Costumes and going house to house suggests Halloween trick-or-treating."
+            },
+            {
+                type: "comprehension",
+                passage: "The little bird hopped along the ground. It tried to flap its wings but couldn't fly. Its mother watched from a nearby tree.",
+                question: "What was the little bird probably learning to do?",
+                options: ["Sing", "Fly", "Find food", "Build a nest"],
+                answer: "B",
+                explanation: "Trying to flap wings but can't fly yet suggests it's learning to fly."
+            },
+            {
+                type: "comprehension",
+                passage: "The campers gathered sticks and logs. They arranged them in a pile and one camper lit them with a match. Soon warm flames were dancing.",
+                question: "What were the campers probably making?",
+                options: ["A fort", "A campfire", "A sculpture", "A shelter"],
+                answer: "B",
+                explanation: "Gathering sticks, lighting them, and flames suggest a campfire."
+            },
+            {
+                type: "comprehension",
+                passage: "The team jumped up and down cheering. They had worked hard all season and now they were holding a shiny trophy.",
+                question: "What had the team probably just done?",
+                options: ["Finished practice", "Won a game", "Lost a game", "Started a new season"],
+                answer: "B",
+                explanation: "Cheering and holding a trophy suggests they won a championship."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent reading!",
+            "Fantastic comprehension!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a reading expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const storyPassage = document.getElementById('storyPassage');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const sequencingContainer = document.getElementById('sequencingContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade2ReadingComprehension');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade2ReadingComprehension', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Create a copy of questions and shuffle them
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixGrade2ReadingComprehension_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade2ReadingComprehension_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a reading comprehension expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You understand stories very well!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a reading master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the questions you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better with more reading!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Clear previous content
+            optionsContainer.innerHTML = '';
+            sequencingContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Handle different question types
+            if (question.type === "comprehension") {
+                // Show story passage
+                storyPassage.textContent = question.passage;
+                storyPassage.style.display = 'block';
+                sequencingContainer.style.display = 'none';
+                
+                // Create option elements
+                question.options.forEach((option, index) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.className = 'option';
+                    optionElement.innerHTML = `
+                        <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                        <div class="option-text">${option}</div>
+                    `;
+                    
+                    optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                    optionsContainer.appendChild(optionElement);
+                });
+            } else if (question.type === "sequencing") {
+                // Hide story passage for sequencing questions
+                storyPassage.style.display = 'none';
+                sequencingContainer.style.display = 'flex';
+                
+                // Create option elements for sequencing questions
+                question.options.forEach((option, index) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.className = 'option';
+                    optionElement.innerHTML = `
+                        <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                        <div class="option-text">${option}</div>
+                    `;
+                    
+                    optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                    optionsContainer.appendChild(optionElement);
+                });
+            }
+        }
+
+        // Handle option selection for all question types
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    feedbackMessage.textContent = `Correct answer: ${String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65))}`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade2-english-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

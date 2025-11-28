@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 2 Science - Plants & Animal Habitats | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Dark Theme */
+        :root {
+            --primary-green: #00C853;
+            --secondary-orange: #FF6D00;
+            --accent-purple: #7C4DFF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 200, 83, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00B248;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #E65C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 109, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 2 Science - Plants & Animal Habitats</h1>
+            <p class="welcome-subtitle">Discover the amazing world of plants and animals! Learn about plant parts and their functions, and explore different animal habitats through interactive questions.</p>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Practice Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 60</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Practice Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Retry Topic</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 60 Grade 2 Science: Plants & Animal Habitats questions
+        const questions = [
+            // Section A: Parts of Plants and Their Functions (1-30)
+            {
+                question: "Which part of the plant absorbs water and nutrients from the soil?",
+                options: ["Leaves", "Roots", "Stem", "Flowers"],
+                answer: "B",
+                explanation: "Roots absorb water and nutrients from the soil to help the plant grow."
+            },
+            {
+                question: "What is the main function of leaves?",
+                options: ["To make food for the plant", "To attract insects", "To support the plant", "To absorb water"],
+                answer: "A",
+                explanation: "Leaves use sunlight to make food for the plant through a process called photosynthesis."
+            },
+            {
+                question: "Which part of the plant carries water and nutrients to other parts?",
+                options: ["Roots", "Flowers", "Stem", "Leaves"],
+                answer: "C",
+                explanation: "The stem acts like a pipeline, carrying water and nutrients from roots to other plant parts."
+            },
+            {
+                question: "What do flowers produce that can grow into new plants?",
+                options: ["Leaves", "Seeds", "Roots", "Stems"],
+                answer: "B",
+                explanation: "Flowers produce seeds that can grow into new plants when planted in soil."
+            },
+            {
+                question: "Which part of the plant is usually underground?",
+                options: ["Leaves", "Flowers", "Stem", "Roots"],
+                answer: "D",
+                explanation: "Roots are usually found underground, anchoring the plant and absorbing nutrients."
+            },
+            {
+                question: "What do plants need from the air to make food?",
+                options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Dust"],
+                answer: "B",
+                explanation: "Plants use carbon dioxide from the air, along with sunlight and water, to make food."
+            },
+            {
+                question: "Which part of the plant makes most of the food?",
+                options: ["Roots", "Stem", "Leaves", "Flowers"],
+                answer: "C",
+                explanation: "Leaves are the main food factories of the plant through photosynthesis."
+            },
+            {
+                question: "What is the process called when plants make their own food?",
+                options: ["Respiration", "Photosynthesis", "Germination", "Pollination"],
+                answer: "B",
+                explanation: "Photosynthesis is the process where plants use sunlight to make food from water and carbon dioxide."
+            },
+            {
+                question: "Which part of the plant holds it upright?",
+                options: ["Roots", "Leaves", "Stem", "Flowers"],
+                answer: "C",
+                explanation: "The stem supports the plant and holds it upright towards sunlight."
+            },
+            {
+                question: "What do roots help prevent?",
+                options: ["The plant from making food", "The plant from blowing away", "The plant from growing", "The plant from flowering"],
+                answer: "B",
+                explanation: "Roots anchor the plant in the soil, preventing it from being blown away by wind."
+            },
+            {
+                question: "Which part of the plant is often colorful and fragrant?",
+                options: ["Roots", "Stem", "Leaves", "Flowers"],
+                answer: "D",
+                explanation: "Flowers are often colorful and fragrant to attract pollinators like bees and butterflies."
+            },
+            {
+                question: "What grows from seeds?",
+                options: ["New plants", "New roots only", "New leaves only", "New flowers only"],
+                answer: "A",
+                explanation: "Seeds can grow into complete new plants with roots, stems, leaves, and flowers."
+            },
+            {
+                question: "Which part of the plant takes in carbon dioxide?",
+                options: ["Roots", "Stem", "Leaves", "Flowers"],
+                answer: "C",
+                explanation: "Leaves have tiny openings called stomata that take in carbon dioxide from the air."
+            },
+            {
+                question: "What do plants release during photosynthesis?",
+                options: ["Carbon dioxide", "Oxygen", "Water vapor", "Soil"],
+                answer: "B",
+                explanation: "Plants release oxygen during photosynthesis, which is important for animals and humans to breathe."
+            },
+            {
+                question: "Which part of the plant can store food?",
+                options: ["Roots (in some plants)", "Leaves only", "Flowers only", "Stem only"],
+                answer: "A",
+                explanation: "Some plant roots, like carrots and potatoes, can store food for the plant."
+            },
+            {
+                question: "What is the main purpose of flowers?",
+                options: ["To make food", "To reproduce", "To absorb water", "To provide shade"],
+                answer: "B",
+                explanation: "The main purpose of flowers is reproduction - they produce seeds to make new plants."
+            },
+            {
+                question: "Which part of the plant grows first from a seed?",
+                options: ["Leaves", "Flower", "Root", "Stem"],
+                answer: "C",
+                explanation: "The root is usually the first part to grow from a seed, anchoring the plant and absorbing water."
+            },
+            {
+                question: "What do plants need for photosynthesis besides sunlight and carbon dioxide?",
+                options: ["Water", "Soil", "Rocks", "Air"],
+                answer: "A",
+                explanation: "Plants need water along with sunlight and carbon dioxide to perform photosynthesis."
+            },
+            {
+                question: "Which part of the plant is like its 'food factory'?",
+                options: ["Roots", "Stem", "Leaves", "Flowers"],
+                answer: "C",
+                explanation: "Leaves are often called the 'food factories' of the plant because they make food through photosynthesis."
+            },
+            {
+                question: "What happens if a plant doesn't get enough water?",
+                options: ["It grows faster", "It wilts and may die", "It changes color", "It makes more flowers"],
+                answer: "B",
+                explanation: "Without enough water, plants wilt and can eventually die because they need water for photosynthesis and to stay firm."
+            },
+            {
+                question: "Which part of the plant is typically green?",
+                options: ["Roots", "Flowers", "Leaves", "Seeds"],
+                answer: "C",
+                explanation: "Leaves are typically green because they contain chlorophyll, which helps with photosynthesis."
+            },
+            {
+                question: "What do stems do besides supporting the plant?",
+                options: ["Make food", "Produce seeds", "Transport materials", "Absorb water from air"],
+                answer: "C",
+                explanation: "Stems transport water, nutrients, and food between different parts of the plant."
+            },
+            {
+                question: "Which plant part is not always present?",
+                options: ["Roots", "Leaves", "Flowers", "Stem"],
+                answer: "C",
+                explanation: "Flowers are not always present on plants - they only appear during certain seasons for reproduction."
+            },
+            {
+                question: "What do roots absorb from the soil besides water?",
+                options: ["Sunlight", "Minerals and nutrients", "Air", "Carbon dioxide"],
+                answer: "B",
+                explanation: "Roots absorb minerals and nutrients from the soil that the plant needs to grow healthy."
+            },
+            {
+                question: "Which part of the plant is responsible for most gas exchange?",
+                options: ["Roots", "Stem", "Leaves", "Flowers"],
+                answer: "C",
+                explanation: "Leaves are responsible for most gas exchange, taking in carbon dioxide and releasing oxygen."
+            },
+            {
+                question: "What is the name for the tiny openings on leaves?",
+                options: ["Pores", "Stomata", "Vents", "Holes"],
+                answer: "B",
+                explanation: "Stomata are the tiny openings on leaves that allow gases to enter and exit the plant."
+            },
+            {
+                question: "Which plant part can sometimes perform photosynthesis?",
+                options: ["Roots", "Flowers", "Stems (in some plants)", "Seeds"],
+                answer: "C",
+                explanation: "In some plants like cacti, the stems can perform photosynthesis when leaves are reduced or absent."
+            },
+            {
+                question: "What do flowers often need to produce seeds?",
+                options: ["Pollination", "More water", "Less sunlight", "Colder temperatures"],
+                answer: "A",
+                explanation: "Flowers often need pollination (transfer of pollen) to produce seeds that can grow into new plants."
+            },
+            {
+                question: "Which part of the plant grows toward sunlight?",
+                options: ["Roots", "Stems", "Leaves", "Both stems and leaves"],
+                answer: "D",
+                explanation: "Both stems and leaves grow toward sunlight to maximize photosynthesis."
+            },
+            {
+                question: "What is the first thing a seed needs to start growing?",
+                options: ["Sunlight", "Water", "Soil", "Air"],
+                answer: "B",
+                explanation: "Seeds need water to soften and start the germination process before they can grow."
+            },
+            // Section B: Animals and Their Habitats (31-60)
+            {
+                question: "Where do fish live?",
+                options: ["In trees", "In water", "In deserts", "On mountains"],
+                answer: "B",
+                explanation: "Fish live in water - they have gills to breathe underwater and fins to swim."
+            },
+            {
+                question: "Which animal would you find in a very cold habitat like the Arctic?",
+                options: ["Camel", "Polar bear", "Lion", "Kangaroo"],
+                answer: "B",
+                explanation: "Polar bears live in the Arctic where it's very cold - they have thick fur and fat to keep warm."
+            },
+            {
+                question: "What is a habitat?",
+                options: ["An animal's food", "An animal's home", "An animal's baby", "An animal's color"],
+                answer: "B",
+                explanation: "A habitat is where an animal lives - it provides food, water, shelter, and space."
+            },
+            {
+                question: "Which animal builds dams in rivers?",
+                options: ["Beavers", "Bears", "Fish", "Birds"],
+                answer: "A",
+                explanation: "Beavers build dams in rivers using trees and mud to create ponds where they live."
+            },
+            {
+                question: "Where do birds typically build their nests?",
+                options: ["Underground", "In trees", "In water", "On rocks"],
+                answer: "B",
+                explanation: "Most birds build nests in trees to keep their eggs and babies safe from predators."
+            },
+            {
+                question: "Which habitat is very dry with little water?",
+                options: ["Ocean", "Desert", "Forest", "Wetland"],
+                answer: "B",
+                explanation: "Deserts are very dry habitats with little rainfall - animals there have special adaptations to save water."
+            },
+            {
+                question: "What do we call animals that are active at night?",
+                options: ["Diurnal", "Nocturnal", "Hibernating", "Migrating"],
+                answer: "B",
+                explanation: "Nocturnal animals are active at night and sleep during the day, like owls and bats."
+            },
+            {
+                question: "Which animal would you find in a forest habitat?",
+                options: ["Whale", "Camel", "Deer", "Seal"],
+                answer: "C",
+                explanation: "Deer live in forest habitats where they can find plants to eat and trees for shelter."
+            },
+            {
+                question: "What is migration?",
+                options: ["Sleeping through winter", "Changing color", "Moving to a new habitat seasonally", "Building a home"],
+                answer: "C",
+                explanation: "Migration is when animals move from one habitat to another seasonally, usually to find food or better weather."
+            },
+            {
+                question: "Which animal lives in the ocean?",
+                options: ["Elephant", "Dolphin", "Giraffe", "Kangaroo"],
+                answer: "B",
+                explanation: "Dolphins live in the ocean - they are mammals that breathe air but live their entire lives in water."
+            },
+            {
+                question: "What do we call the place where a bird lives?",
+                options: ["Burrow", "Nest", "Den", "Web"],
+                answer: "B",
+                explanation: "Birds typically live in nests that they build in trees, on cliffs, or sometimes on the ground."
+            },
+            {
+                question: "Which animal hibernates during winter?",
+                options: ["Bear", "Deer", "Wolf", "Rabbit"],
+                answer: "A",
+                explanation: "Bears hibernate during winter - they sleep through the cold months when food is scarce."
+            },
+            {
+                question: "Where do rabbits often live?",
+                options: ["In burrows underground", "In tall trees", "In the ocean", "On mountain tops"],
+                answer: "A",
+                explanation: "Rabbits often live in burrows underground to stay safe from predators and extreme weather."
+            },
+            {
+                question: "Which habitat has many trees and receives lots of rain?",
+                options: ["Desert", "Rainforest", "Grassland", "Tundra"],
+                answer: "B",
+                explanation: "Rainforests have many trees and receive lots of rain - they're home to countless animal species."
+            },
+            {
+                question: "What adaptation helps camels live in deserts?",
+                options: ["Thick fur", "Humps that store fat", "Webbed feet", "Gills"],
+                answer: "B",
+                explanation: "Camels have humps that store fat, which they can use for energy when food and water are scarce in deserts."
+            },
+            {
+                question: "Where do frogs live?",
+                options: ["In dry deserts", "Near water", "High in mountains", "In the deep ocean"],
+                answer: "B",
+                explanation: "Frogs live near water - they need moist environments and water to lay their eggs."
+            },
+            {
+                question: "What is a predator?",
+                options: ["An animal that eats plants", "An animal that is hunted", "An animal that hunts other animals", "An animal that migrates"],
+                answer: "C",
+                explanation: "A predator is an animal that hunts and eats other animals for food."
+            },
+            {
+                question: "Which animal builds webs to catch food?",
+                options: ["Ant", "Spider", "Bee", "Bird"],
+                answer: "B",
+                explanation: "Spiders build webs to catch insects for food - the sticky silk traps flying bugs."
+            },
+            {
+                question: "What do we call animals that eat both plants and other animals?",
+                options: ["Herbivores", "Carnivores", "Omnivores", "Insectivores"],
+                answer: "C",
+                explanation: "Omnivores eat both plants and other animals - humans, bears, and raccoons are examples."
+            },
+            {
+                question: "Which habitat is covered with grass and has few trees?",
+                options: ["Forest", "Grassland", "Wetland", "Desert"],
+                answer: "B",
+                explanation: "Grasslands are habitats covered with grass and have few trees - animals like bison and zebras live there."
+            },
+            {
+                question: "What do butterflies need from flowers?",
+                options: ["Nectar", "Pollen", "Leaves", "Stems"],
+                answer: "A",
+                explanation: "Butterflies drink nectar from flowers using their long proboscis (like a drinking straw)."
+            },
+            {
+                question: "Where do bees live?",
+                options: ["In hives", "In nests", "In burrows", "In webs"],
+                answer: "A",
+                explanation: "Bees live in hives that they build - these can be in trees, or man-made bee boxes."
+            },
+            {
+                question: "What is prey?",
+                options: ["An animal that hunts", "An animal that is hunted", "An animal that eats plants", "An animal that migrates"],
+                answer: "B",
+                explanation: "Prey is an animal that is hunted and eaten by other animals (predators)."
+            },
+            {
+                question: "Which animal is best adapted for climbing trees?",
+                options: ["Fish", "Monkey", "Horse", "Cow"],
+                answer: "B",
+                explanation: "Monkeys are well adapted for climbing trees with their grasping hands, feet, and sometimes tails."
+            },
+            {
+                question: "What do we call animals that only eat plants?",
+                options: ["Carnivores", "Herbivores", "Omnivores", "Insectivores"],
+                answer: "B",
+                explanation: "Herbivores are animals that only eat plants - deer, rabbits, and cows are examples."
+            },
+            {
+                question: "Where do penguins live?",
+                options: ["In hot deserts", "In cold polar regions", "In tropical forests", "In grasslands"],
+                answer: "B",
+                explanation: "Penguins live in cold polar regions - they have thick feathers and fat to keep warm in icy conditions."
+            },
+            {
+                question: "What adaptation helps birds fly?",
+                options: ["Fins", "Wings", "Legs", "Antlers"],
+                answer: "B",
+                explanation: "Birds have wings and lightweight bodies that help them fly through the air."
+            },
+            {
+                question: "Which animal would you find in a pond habitat?",
+                options: ["Turtle", "Camel", "Mountain goat", "Polar bear"],
+                answer: "A",
+                explanation: "Turtles are often found in pond habitats where they can swim and find food."
+            },
+            {
+                question: "What do animals need in their habitat?",
+                options: ["Food, water, shelter, space", "Toys, games, friends, music", "Cars, houses, schools, parks", "Books, computers, phones, TVs"],
+                answer: "A",
+                explanation: "Animals need four basic things in their habitat: food, water, shelter, and space to live."
+            },
+            {
+                question: "Why is it important to protect animal habitats?",
+                options: ["So animals have places to live", "So we can build more cities", "So we can hunt more animals", "So plants can grow taller"],
+                answer: "A",
+                explanation: "Protecting habitats ensures animals have the food, water, shelter, and space they need to survive."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent science knowledge!",
+            "Fantastic observation skills!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a science expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade2SciencePlantsHabitats');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade2SciencePlantsHabitats', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Create a copy of questions and shuffle them
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixGrade2SciencePlantsHabitats_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade2SciencePlantsHabitats_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a science expert who understands plants and animal habitats perfectly!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have a strong understanding of plant parts and animal habitats!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a science master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the questions you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better with more practice!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    feedbackMessage.textContent = `Correct answer: ${String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65))}`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade2-science-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

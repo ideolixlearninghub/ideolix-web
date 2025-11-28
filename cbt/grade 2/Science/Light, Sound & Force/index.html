@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 2 Science - Light, Sound & Force | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Dark Theme */
+        :root {
+            --primary-green: #00C853;
+            --secondary-orange: #FF6D00;
+            --accent-purple: #7C4DFF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 200, 83, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00B248;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #E65C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 109, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1516549655669-dfbf54c5a709?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1576091160558-8556e3c2d384?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 2 Science - Light, Sound & Force</h1>
+            <p class="welcome-subtitle">Discover how light creates shadows, where sounds come from, and how forces make things move! Explore these exciting science concepts through interactive questions.</p>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Practice Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 60</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Practice Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Retry Topic</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 60 Grade 2 Science questions covering three topics
+        const questions = [
+            // Section A: Light and Shadows (1-20)
+            {
+                question: "What do we need to see objects around us?",
+                options: ["Sound", "Light", "Wind", "Water"],
+                answer: "B",
+                explanation: "We need light to see objects. Light bounces off objects and enters our eyes."
+            },
+            {
+                question: "What is a shadow?",
+                options: ["A dark area where light is blocked", "A bright spot of light", "A colorful rainbow", "A reflection"],
+                answer: "A",
+                explanation: "A shadow is a dark area that forms when an object blocks light."
+            },
+            {
+                question: "What creates a shadow?",
+                options: ["When light passes through an object", "When light is blocked by an object", "When there is no light anywhere", "When light is very bright"],
+                answer: "B",
+                explanation: "Shadows are created when an object blocks light from reaching a surface."
+            },
+            {
+                question: "Which of these is a natural source of light?",
+                options: ["Lamp", "Flashlight", "Sun", "Light bulb"],
+                answer: "C",
+                explanation: "The sun is a natural source of light that gives us daylight."
+            },
+            {
+                question: "Which of these is a man-made source of light?",
+                options: ["Sun", "Stars", "Moon", "Candle"],
+                answer: "D",
+                explanation: "A candle is a man-made source of light created by people."
+            },
+            {
+                question: "What happens to shadows when the light source moves?",
+                options: ["Shadows stay the same", "Shadows change position and shape", "Shadows disappear", "Shadows get brighter"],
+                answer: "B",
+                explanation: "When the light source moves, shadows change their position, size, and shape."
+            },
+            {
+                question: "When are shadows longest outside?",
+                options: ["At noon", "In the morning and evening", "At midnight", "They're always the same"],
+                answer: "B",
+                explanation: "Shadows are longest in the morning and evening when the sun is low in the sky."
+            },
+            {
+                question: "What do we call objects that light can pass through completely?",
+                options: ["Opaque", "Translucent", "Transparent", "Solid"],
+                answer: "C",
+                explanation: "Transparent objects allow light to pass through completely, like clear glass."
+            },
+            {
+                question: "What do we call objects that block all light?",
+                options: ["Transparent", "Translucent", "Opaque", "Clear"],
+                answer: "C",
+                explanation: "Opaque objects block all light and create dark shadows."
+            },
+            {
+                question: "What do we call objects that let some light through but not clearly?",
+                options: ["Transparent", "Opaque", "Translucent", "Solid"],
+                answer: "C",
+                explanation: "Translucent objects let some light through but scatter it, like frosted glass."
+            },
+            {
+                question: "Which object would create the darkest shadow?",
+                options: ["Clear glass", "Water", "Wooden block", "Plastic wrap"],
+                answer: "C",
+                explanation: "A wooden block is opaque and would block all light, creating a dark shadow."
+            },
+            {
+                question: "What happens to your shadow when you move closer to a light source?",
+                options: ["It gets smaller", "It gets larger", "It disappears", "It changes color"],
+                answer: "B",
+                explanation: "When you move closer to a light source, your shadow gets larger."
+            },
+            {
+                question: "Why can't we see in a completely dark room?",
+                options: ["Our eyes don't work", "There's no light to bounce off objects", "Shadows block our vision", "Our eyes are closed"],
+                answer: "B",
+                explanation: "We need light to see. In complete darkness, there's no light to bounce off objects into our eyes."
+            },
+            {
+                question: "What is reflection?",
+                options: ["When light is blocked", "When light bounces off a surface", "When light is absorbed", "When light changes color"],
+                answer: "B",
+                explanation: "Reflection is when light bounces off a surface, like a mirror or water."
+            },
+            {
+                question: "Which surface is best for reflecting light?",
+                options: ["Rough black paper", "Smooth mirror", "Wooden table", "Carpet"],
+                answer: "B",
+                explanation: "Smooth, shiny surfaces like mirrors are best for reflecting light clearly."
+            },
+            {
+                question: "What happens to light when it hits a rough surface?",
+                options: ["It reflects in one direction", "It scatters in many directions", "It disappears", "It changes color"],
+                answer: "B",
+                explanation: "Rough surfaces scatter light in many directions, which is called diffuse reflection."
+            },
+            {
+                question: "Why does a pencil look bent when placed in a glass of water?",
+                options: ["The water bends the pencil", "Light bends when it passes through water", "The pencil actually bends", "It's an illusion"],
+                answer: "B",
+                explanation: "Light bends when it passes from air to water, making the pencil look bent."
+            },
+            {
+                question: "What do we see when light passes through raindrops?",
+                options: ["Shadows", "Reflections", "Rainbow", "Darkness"],
+                answer: "C",
+                explanation: "When sunlight passes through raindrops, it separates into colors, creating a rainbow."
+            },
+            {
+                question: "Which color reflects the most light?",
+                options: ["Black", "White", "Red", "Blue"],
+                answer: "B",
+                explanation: "White reflects most light, which is why we see it as bright."
+            },
+            {
+                question: "Which color absorbs the most light?",
+                options: ["White", "Yellow", "Black", "Silver"],
+                answer: "C",
+                explanation: "Black absorbs most light, which is why we see it as dark."
+            },
+
+            // Section B: Sound - Sources of Sound (21-40)
+            {
+                question: "What is sound?",
+                options: ["Something we see", "Something we feel", "Something we hear", "Something we taste"],
+                answer: "C",
+                explanation: "Sound is what we hear with our ears."
+            },
+            {
+                question: "How is sound created?",
+                options: ["When objects are still", "When objects vibrate", "When light shines", "When water flows"],
+                answer: "B",
+                explanation: "Sound is created when objects vibrate (move back and forth quickly)."
+            },
+            {
+                question: "What do vibrations travel through to reach our ears?",
+                options: ["Air", "Water", "Solids", "All of the above"],
+                answer: "D",
+                explanation: "Sound vibrations can travel through air, water, and solids to reach our ears."
+            },
+            {
+                question: "Which of these is a natural source of sound?",
+                options: ["Thunder", "Radio", "Doorbell", "Car horn"],
+                answer: "A",
+                explanation: "Thunder is a natural sound created by weather."
+            },
+            {
+                question: "Which of these is a man-made source of sound?",
+                options: ["Bird singing", "Waterfall", "Wind blowing", "Guitar playing"],
+                answer: "D",
+                explanation: "A guitar is a man-made instrument that creates sound when played."
+            },
+            {
+                question: "What part of our body do we use to hear sounds?",
+                options: ["Eyes", "Nose", "Ears", "Mouth"],
+                answer: "C",
+                explanation: "We use our ears to detect and hear sounds."
+            },
+            {
+                question: "What do we call a very loud sound?",
+                options: ["Quiet", "Soft", "Noisy", "Silent"],
+                answer: "C",
+                explanation: "A loud sound is often called noisy."
+            },
+            {
+                question: "What do we call a very soft sound?",
+                options: ["Loud", "Quiet", "Noisy", "Shrill"],
+                answer: "B",
+                explanation: "A soft sound is often called quiet."
+            },
+            {
+                question: "Which animal makes a buzzing sound?",
+                options: ["Dog", "Cat", "Bee", "Cow"],
+                answer: "C",
+                explanation: "Bees make a buzzing sound with their wings."
+            },
+            {
+                question: "What sound does a drum make when you hit it?",
+                options: ["Ring", "Buzz", "Boom", "Click"],
+                answer: "C",
+                explanation: "Drums make a booming sound when you hit them."
+            },
+            {
+                question: "Why can't sound travel in space?",
+                options: ["It's too cold", "There's no air", "There's too much light", "It's too hot"],
+                answer: "B",
+                explanation: "Sound needs a medium like air to travel through. Space has no air, so sound can't travel."
+            },
+            {
+                question: "What do we call how high or low a sound is?",
+                options: ["Volume", "Pitch", "Echo", "Vibration"],
+                answer: "B",
+                explanation: "Pitch describes how high or low a sound is."
+            },
+            {
+                question: "Which makes a higher pitched sound?",
+                options: ["A large drum", "A small bell", "A truck horn", "A bass guitar"],
+                answer: "B",
+                explanation: "Smaller objects usually vibrate faster and make higher pitched sounds."
+            },
+            {
+                question: "What do we call a sound that bounces back to us?",
+                options: ["Vibration", "Echo", "Pitch", "Volume"],
+                answer: "B",
+                explanation: "An echo is a sound that bounces off a surface and comes back to us."
+            },
+            {
+                question: "Where might you hear an echo?",
+                options: ["In an open field", "In a small room", "In a large empty hall", "Underwater"],
+                answer: "C",
+                explanation: "You're more likely to hear echoes in large, empty spaces with hard surfaces."
+            },
+            {
+                question: "What happens when you speak into a cup with a string attached to another cup?",
+                options: ["The cups break", "Sound travels through the string", "Light shines through", "Nothing happens"],
+                answer: "B",
+                explanation: "Sound vibrations can travel through the string from one cup to the other."
+            },
+            {
+                question: "Which material would be best for blocking sound?",
+                options: ["Thick foam", "Thin paper", "Clear glass", "Metal mesh"],
+                answer: "A",
+                explanation: "Thick, soft materials like foam are good at absorbing sound and blocking it."
+            },
+            {
+                question: "What musical instrument makes sound by blowing air?",
+                options: ["Drum", "Guitar", "Flute", "Piano"],
+                answer: "C",
+                explanation: "Wind instruments like flutes make sound when you blow air through them."
+            },
+            {
+                question: "What do we call the loudness of sound?",
+                options: ["Pitch", "Volume", "Echo", "Vibration"],
+                answer: "B",
+                explanation: "Volume describes how loud or soft a sound is."
+            },
+            {
+                question: "Why should we protect our ears from very loud sounds?",
+                options: ["They might fall off", "Loud sounds can damage hearing", "They might change color", "They might grow bigger"],
+                answer: "B",
+                explanation: "Very loud sounds can damage the delicate parts inside our ears that help us hear."
+            },
+
+            // Section C: Force and Movement - Push and Pull (41-60)
+            {
+                question: "What is a force?",
+                options: ["A push or pull", "A sound or light", "A color or shape", "A taste or smell"],
+                answer: "A",
+                explanation: "A force is a push or pull that can make objects move, stop, or change direction."
+            },
+            {
+                question: "What happens when you push something?",
+                options: ["You pull it toward you", "You move it away from you", "You lift it up", "You turn it around"],
+                answer: "B",
+                explanation: "When you push something, you apply force to move it away from you."
+            },
+            {
+                question: "What happens when you pull something?",
+                options: ["You move it away from you", "You bring it toward you", "You lift it up", "You turn it around"],
+                answer: "B",
+                explanation: "When you pull something, you apply force to bring it toward you."
+            },
+            {
+                question: "Which action is a pull?",
+                options: ["Kicking a ball", "Opening a drawer", "Throwing a paper airplane", "Pushing a swing"],
+                answer: "B",
+                explanation: "Opening a drawer involves pulling it toward you."
+            },
+            {
+                question: "Which action is a push?",
+                options: ["Closing a door", "Tugging a rope", "Pulling a wagon", "Lifting a backpack"],
+                answer: "A",
+                explanation: "Closing a door involves pushing it away from you."
+            },
+            {
+                question: "What force pulls everything toward the center of the Earth?",
+                options: ["Magnetism", "Friction", "Gravity", "Wind"],
+                answer: "C",
+                explanation: "Gravity is the force that pulls everything toward the Earth's center."
+            },
+            {
+                question: "Why do objects fall to the ground when you drop them?",
+                options: ["Because of magnetism", "Because of gravity", "Because of friction", "Because they're heavy"],
+                answer: "B",
+                explanation: "Gravity pulls objects toward the Earth, making them fall when dropped."
+            },
+            {
+                question: "What do we call a force that slows down moving objects?",
+                options: ["Gravity", "Magnetism", "Friction", "Push"],
+                answer: "C",
+                explanation: "Friction is a force that acts between surfaces and slows down moving objects."
+            },
+            {
+                question: "Which surface would have the most friction?",
+                options: ["Ice", "Carpet", "Wet floor", "Smooth glass"],
+                answer: "B",
+                explanation: "Rough surfaces like carpet create more friction than smooth surfaces."
+            },
+            {
+                question: "What happens to a ball when you kick it?",
+                options: ["It stops moving", "It changes direction and moves", "It disappears", "It changes color"],
+                answer: "B",
+                explanation: "When you kick a ball, you apply force that makes it move in a new direction."
+            },
+            {
+                question: "Why is it harder to push a heavy box than a light box?",
+                options: ["Heavy boxes are stickier", "Heavy boxes have more gravity", "Heavy boxes have more friction", "You need more force to move heavier objects"],
+                answer: "D",
+                explanation: "Heavier objects need more force to overcome their inertia and make them move."
+            },
+            {
+                question: "What do we call it when an object stays still unless a force acts on it?",
+                options: ["Gravity", "Friction", "Inertia", "Magnetism"],
+                answer: "C",
+                explanation: "Inertia is the tendency of objects to stay still if they're still, or keep moving if they're moving."
+            },
+            {
+                question: "What force makes a magnet attract metal objects?",
+                options: ["Gravity", "Friction", "Magnetism", "Push"],
+                answer: "C",
+                explanation: "Magnetism is the force that makes magnets attract certain metals like iron."
+            },
+            {
+                question: "Which of these is an example of using force to change an object's shape?",
+                options: ["Kicking a ball", "Squeezing clay", "Rolling a toy car", "Pushing a book"],
+                answer: "B",
+                explanation: "Squeezing clay uses force to change its shape."
+            },
+            {
+                question: "Why does a bicycle eventually stop when you stop pedaling?",
+                options: ["Gravity pulls it down", "Friction slows it down", "Magnetism stops it", "It runs out of energy"],
+                answer: "B",
+                explanation: "Friction between the tires and road, and air resistance, slow down the bicycle."
+            },
+            {
+                question: "What do we call the force that pulls objects toward each other?",
+                options: ["Friction", "Gravity", "Magnetism", "Both B and C"],
+                answer: "D",
+                explanation: "Both gravity and magnetism are forces that can pull objects toward each other."
+            },
+            {
+                question: "Why do we need to push harder to start moving a heavy object than to keep it moving?",
+                options: ["Static friction is stronger than moving friction", "Gravity increases when objects move", "Objects get lighter when moving", "Air pushes back harder"],
+                answer: "A",
+                explanation: "Static friction (when objects aren't moving) is usually stronger than kinetic friction (when objects are moving)."
+            },
+            {
+                question: "What happens when two forces push in opposite directions with equal strength?",
+                options: ["The object moves quickly", "The object doesn't move", "The object breaks", "The object changes shape"],
+                answer: "B",
+                explanation: "When balanced forces act on an object, it doesn't move."
+            },
+            {
+                question: "Why do astronauts float in space?",
+                options: ["There's no gravity in space", "There's less gravity in space", "They're wearing special suits", "Space has different air"],
+                answer: "B",
+                explanation: "Astronauts float because there's much less gravity in space compared to Earth."
+            },
+            {
+                question: "What simple machine helps us lift heavy objects using less force?",
+                options: ["Wheel", "Lever", "Magnet", "Spring"],
+                answer: "B",
+                explanation: "A lever is a simple machine that helps us lift heavy objects using less force."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent science knowledge!",
+            "Fantastic observation skills!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a science expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade2ScienceLightSoundForce');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade2ScienceLightSoundForce', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Create a copy of questions and shuffle them
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixGrade2ScienceLightSoundForce_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade2ScienceLightSoundForce_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a science expert who understands light, sound, and forces perfectly!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have a strong understanding of how light creates shadows, how sound works, and how forces move objects!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a science master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the questions you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better with more practice!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    feedbackMessage.textContent = `Correct answer: ${String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65))}`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade2-science-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

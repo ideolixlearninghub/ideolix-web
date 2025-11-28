@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 3 Math - Measurement & Geometry | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Dark Theme */
+        :root {
+            --primary-green: #00C853;
+            --secondary-orange: #FF6D00;
+            --accent-purple: #7C4DFF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 200, 83, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00B248;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #E65C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 109, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* Special styling for measurement units */
+        .unit {
+            font-weight: bold;
+            color: var(--accent-purple);
+        }
+
+        /* Shape styling */
+        .shape-name {
+            font-weight: bold;
+            color: var(--secondary-orange);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1509228468518-180dd4864904?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 3 Math - Measurement & Geometry</h1>
+            <p class="welcome-subtitle">Explore the world of measurement and shapes! Learn about length, mass, capacity, perimeter, area, and discover the properties of 2D and 3D shapes through interactive practice.</p>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Practice Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Practice Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Retry Topic</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 100 Grade 3 Math questions covering measurement and geometry
+        const questions = [
+            // Length Measurement (1-15)
+            {
+                question: "Which unit would you use to measure the length of a pencil?",
+                options: ["Centimeters", "Meters", "Kilometers", "Kilograms"],
+                answer: "A",
+                explanation: "Centimeters are used for small objects like pencils. Meters are for larger objects, kilometers for long distances, and kilograms measure weight."
+            },
+            {
+                question: "How many centimeters are in 1 meter?",
+                options: ["100 cm", "10 cm", "1000 cm", "50 cm"],
+                answer: "A",
+                explanation: "There are 100 centimeters in 1 meter. This is a standard conversion in the metric system."
+            },
+            {
+                question: "Which is longer: 1 meter or 100 centimeters?",
+                options: ["They are equal", "1 meter", "100 centimeters", "Cannot compare"],
+                answer: "A",
+                explanation: "1 meter equals 100 centimeters, so they are the same length."
+            },
+            {
+                question: "What is the best unit to measure the length of a classroom?",
+                options: ["Meters", "Centimeters", "Millimeters", "Kilograms"],
+                answer: "A",
+                explanation: "Meters are appropriate for room sizes. Centimeters would give very large numbers, and millimeters would be even larger."
+            },
+            {
+                question: "If a ribbon is 25 cm long and you cut off 10 cm, how long is the remaining piece?",
+                options: ["15 cm", "20 cm", "35 cm", "10 cm"],
+                answer: "A",
+                explanation: "25 cm - 10 cm = 15 cm. Subtract the length cut off from the original length."
+            },
+            {
+                question: "Which object is about 1 meter long?",
+                options: ["A baseball bat", "A pencil", "A paperclip", "A car"],
+                answer: "A",
+                explanation: "A baseball bat is typically about 1 meter long. A pencil is about 15-20 cm, a paperclip is about 3 cm, and a car is about 4-5 meters."
+            },
+            {
+                question: "How many meters are in 2 kilometers?",
+                options: ["2000 m", "200 m", "20 m", "20000 m"],
+                answer: "A",
+                explanation: "1 kilometer = 1000 meters, so 2 kilometers = 2000 meters."
+            },
+            {
+                question: "Which is the shortest length?",
+                options: ["5 mm", "5 cm", "5 m", "5 km"],
+                answer: "A",
+                explanation: "Millimeters are the smallest unit. 5 mm is much shorter than 5 cm, 5 m, or 5 km."
+            },
+            {
+                question: "A book is 3 cm thick. How many books would stack to make 15 cm?",
+                options: ["5 books", "3 books", "15 books", "45 books"],
+                answer: "A",
+                explanation: "15 cm ÷ 3 cm per book = 5 books. Divide the total height by the height of one book."
+            },
+            {
+                question: "What is the best tool to measure the length of a table?",
+                options: ["Meter stick", "Ruler", "Scale", "Measuring cup"],
+                answer: "A",
+                explanation: "A meter stick is ideal for table length. A ruler is too short, a scale measures weight, and a measuring cup measures volume."
+            },
+            {
+                question: "Which is longer: 250 cm or 3 m?",
+                options: ["3 m", "250 cm", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "3 m = 300 cm, which is longer than 250 cm."
+            },
+            {
+                question: "How many millimeters are in 1 centimeter?",
+                options: ["10 mm", "100 mm", "1000 mm", "1 mm"],
+                answer: "A",
+                explanation: "There are 10 millimeters in 1 centimeter."
+            },
+            {
+                question: "A rope is 4 m long. You cut it into 8 equal pieces. How long is each piece?",
+                options: ["50 cm", "40 cm", "80 cm", "20 cm"],
+                answer: "A",
+                explanation: "4 m = 400 cm. 400 cm ÷ 8 = 50 cm per piece."
+            },
+            {
+                question: "Which unit would you use to measure the distance between two cities?",
+                options: ["Kilometers", "Meters", "Centimeters", "Millimeters"],
+                answer: "A",
+                explanation: "Kilometers are used for long distances like between cities. Meters would give very large numbers."
+            },
+            {
+                question: "If your stride is about 1 meter, how many steps to walk 10 meters?",
+                options: ["10 steps", "1 step", "100 steps", "5 steps"],
+                answer: "A",
+                explanation: "If each step is 1 meter, then 10 meters ÷ 1 meter per step = 10 steps."
+            },
+
+            // Mass Measurement (16-30)
+            {
+                question: "Which unit would you use to measure the weight of an apple?",
+                options: ["Grams", "Kilograms", "Liters", "Meters"],
+                answer: "A",
+                explanation: "Grams are used for light objects like apples. Kilograms are for heavier objects, liters measure volume, and meters measure length."
+            },
+            {
+                question: "How many grams are in 1 kilogram?",
+                options: ["1000 g", "100 g", "10 g", "500 g"],
+                answer: "A",
+                explanation: "There are 1000 grams in 1 kilogram."
+            },
+            {
+                question: "Which is heavier: 1 kg of feathers or 1 kg of rocks?",
+                options: ["They weigh the same", "1 kg of feathers", "1 kg of rocks", "Cannot compare"],
+                answer: "A",
+                explanation: "Both weigh 1 kilogram, so they are the same weight. Weight doesn't depend on what the material is."
+            },
+            {
+                question: "What is the best unit to measure your body weight?",
+                options: ["Kilograms", "Grams", "Milliliters", "Centimeters"],
+                answer: "A",
+                explanation: "Kilograms are used for body weight. Grams would give a very large number."
+            },
+            {
+                question: "If a package weighs 500 g and another weighs 300 g, what is their total weight?",
+                options: ["800 g", "200 g", "1500 g", "2 kg"],
+                answer: "A",
+                explanation: "500 g + 300 g = 800 g. Add the weights together."
+            },
+            {
+                question: "Which object weighs about 1 kilogram?",
+                options: ["A liter of water", "A paperclip", "A pencil", "A car"],
+                answer: "A",
+                explanation: "A liter of water weighs about 1 kilogram. A paperclip weighs about 1 gram, a pencil about 10 grams, and a car about 1000 kilograms."
+            },
+            {
+                question: "How many kilograms are in 3000 grams?",
+                options: ["3 kg", "30 kg", "300 kg", "0.3 kg"],
+                answer: "A",
+                explanation: "1000 g = 1 kg, so 3000 g = 3 kg."
+            },
+            {
+                question: "Which is lighter: 750 g or 1 kg?",
+                options: ["750 g", "1 kg", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "750 g is less than 1000 g (1 kg), so 750 g is lighter."
+            },
+            {
+                question: "A bag of flour weighs 2 kg. How many grams is this?",
+                options: ["2000 g", "20 g", "200 g", "20000 g"],
+                answer: "A",
+                explanation: "2 kg × 1000 = 2000 g."
+            },
+            {
+                question: "What tool is used to measure weight?",
+                options: ["Scale", "Ruler", "Measuring cup", "Thermometer"],
+                answer: "A",
+                explanation: "A scale measures weight. A ruler measures length, a measuring cup measures volume, and a thermometer measures temperature."
+            },
+            {
+                question: "If 10 apples weigh 2 kg, how much does 1 apple weigh?",
+                options: ["200 g", "20 g", "2 kg", "500 g"],
+                answer: "A",
+                explanation: "2 kg = 2000 g. 2000 g ÷ 10 apples = 200 g per apple."
+            },
+            {
+                question: "Which unit would you use to measure a grain of rice?",
+                options: ["Milligrams", "Grams", "Kilograms", "Liters"],
+                answer: "A",
+                explanation: "Milligrams are used for very light objects. A grain of rice weighs about 20-30 milligrams."
+            },
+            {
+                question: "How many milligrams are in 1 gram?",
+                options: ["1000 mg", "100 mg", "10 mg", "500 mg"],
+                answer: "A",
+                explanation: "There are 1000 milligrams in 1 gram."
+            },
+            {
+                question: "A box weighs 1.5 kg. How many grams is this?",
+                options: ["1500 g", "15 g", "150 g", "15000 g"],
+                answer: "A",
+                explanation: "1.5 kg × 1000 = 1500 g."
+            },
+            {
+                question: "Which is heavier: 2 kg or 2500 g?",
+                options: ["2500 g", "2 kg", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "2 kg = 2000 g, so 2500 g is heavier than 2000 g."
+            },
+
+            // Capacity Measurement (31-45)
+            {
+                question: "Which unit would you use to measure the amount of water in a swimming pool?",
+                options: ["Liters", "Milliliters", "Grams", "Meters"],
+                answer: "A",
+                explanation: "Liters are used for large volumes like swimming pools. Milliliters are for small amounts."
+            },
+            {
+                question: "How many milliliters are in 1 liter?",
+                options: ["1000 mL", "100 mL", "10 mL", "500 mL"],
+                answer: "A",
+                explanation: "There are 1000 milliliters in 1 liter."
+            },
+            {
+                question: "Which container holds about 1 liter?",
+                options: ["A large water bottle", "A teaspoon", "A swimming pool", "A raindrop"],
+                answer: "A",
+                explanation: "A large water bottle typically holds about 1 liter. A teaspoon holds about 5 mL, a swimming pool holds thousands of liters."
+            },
+            {
+                question: "If a jug holds 2 liters and you pour out 500 mL, how much is left?",
+                options: ["1.5 L", "1 L", "2.5 L", "1500 mL"],
+                answer: "A",
+                explanation: "2 L = 2000 mL. 2000 mL - 500 mL = 1500 mL = 1.5 L."
+            },
+            {
+                question: "What is the best unit to measure medicine dosage?",
+                options: ["Milliliters", "Liters", "Grams", "Meters"],
+                answer: "A",
+                explanation: "Milliliters are used for small liquid amounts like medicine. Liters would be too large."
+            },
+            {
+                question: "How many 250 mL cups can you fill from a 1 liter bottle?",
+                options: ["4 cups", "2 cups", "5 cups", "3 cups"],
+                answer: "A",
+                explanation: "1 L = 1000 mL. 1000 mL ÷ 250 mL = 4 cups."
+            },
+            {
+                question: "Which is more: 2 L or 1500 mL?",
+                options: ["2 L", "1500 mL", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "2 L = 2000 mL, which is more than 1500 mL."
+            },
+            {
+                question: "A recipe calls for 500 mL of milk. How many liters is this?",
+                options: ["0.5 L", "5 L", "50 L", "0.05 L"],
+                answer: "A",
+                explanation: "500 mL = 0.5 L (since 1000 mL = 1 L)."
+            },
+            {
+                question: "What tool is used to measure liquid volume?",
+                options: ["Measuring cup", "Ruler", "Scale", "Thermometer"],
+                answer: "A",
+                explanation: "A measuring cup measures liquid volume. A ruler measures length, a scale measures weight."
+            },
+            {
+                question: "If a tank holds 10 L and is filled with 7 L, how much more can it hold?",
+                options: ["3 L", "7 L", "10 L", "17 L"],
+                answer: "A",
+                explanation: "10 L - 7 L = 3 L remaining capacity."
+            },
+            {
+                question: "Which container has the greatest capacity?",
+                options: ["Bathtub", "Teaspoon", "Water bottle", "Medicine dropper"],
+                answer: "A",
+                explanation: "A bathtub holds the most liquid. A teaspoon holds about 5 mL, a water bottle about 1 L, a medicine dropper about 1 mL."
+            },
+            {
+                question: "How many liters are in 5000 milliliters?",
+                options: ["5 L", "50 L", "0.5 L", "500 L"],
+                answer: "A",
+                explanation: "5000 mL ÷ 1000 = 5 L."
+            },
+            {
+                question: "A jug contains 1.2 L of juice. How many milliliters is this?",
+                options: ["1200 mL", "12 mL", "120 mL", "12000 mL"],
+                answer: "A",
+                explanation: "1.2 L × 1000 = 1200 mL."
+            },
+            {
+                question: "If you have 3 containers each holding 250 mL, what is the total volume?",
+                options: ["750 mL", "250 mL", "500 mL", "1000 mL"],
+                answer: "A",
+                explanation: "3 × 250 mL = 750 mL."
+            },
+            {
+                question: "Which is less: 800 mL or 0.9 L?",
+                options: ["800 mL", "0.9 L", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "0.9 L = 900 mL, so 800 mL is less than 900 mL."
+            },
+
+            // Perimeter (46-60)
+            {
+                question: "What is the perimeter of a square with 5 cm sides?",
+                options: ["20 cm", "10 cm", "25 cm", "15 cm"],
+                answer: "A",
+                explanation: "Perimeter of a square = 4 × side length. 4 × 5 cm = 20 cm."
+            },
+            {
+                question: "A rectangle is 6 cm long and 4 cm wide. What is its perimeter?",
+                options: ["20 cm", "10 cm", "24 cm", "12 cm"],
+                answer: "A",
+                explanation: "Perimeter of rectangle = 2 × (length + width) = 2 × (6 cm + 4 cm) = 2 × 10 cm = 20 cm."
+            },
+            {
+                question: "What is the distance around a shape called?",
+                options: ["Perimeter", "Area", "Volume", "Circumference"],
+                answer: "A",
+                explanation: "Perimeter is the distance around a 2D shape. Area is the space inside, volume is for 3D shapes."
+            },
+            {
+                question: "A triangle has sides 3 cm, 4 cm, and 5 cm. What is its perimeter?",
+                options: ["12 cm", "7 cm", "9 cm", "15 cm"],
+                answer: "A",
+                explanation: "Perimeter = sum of all sides = 3 cm + 4 cm + 5 cm = 12 cm."
+            },
+            {
+                question: "If a square has a perimeter of 24 cm, how long is each side?",
+                options: ["6 cm", "4 cm", "8 cm", "12 cm"],
+                answer: "A",
+                explanation: "For a square, perimeter = 4 × side. So side = perimeter ÷ 4 = 24 cm ÷ 4 = 6 cm."
+            },
+            {
+                question: "A rectangular garden is 8 m long and 5 m wide. What is the perimeter?",
+                options: ["26 m", "13 m", "40 m", "20 m"],
+                answer: "A",
+                explanation: "Perimeter = 2 × (length + width) = 2 × (8 m + 5 m) = 2 × 13 m = 26 m."
+            },
+            {
+                question: "What is the perimeter of a regular hexagon with 4 cm sides?",
+                options: ["24 cm", "16 cm", "20 cm", "12 cm"],
+                answer: "A",
+                explanation: "A regular hexagon has 6 equal sides. Perimeter = 6 × side length = 6 × 4 cm = 24 cm."
+            },
+            {
+                question: "If you walk around a rectangular field that is 100 m long and 50 m wide, how far do you walk?",
+                options: ["300 m", "150 m", "200 m", "500 m"],
+                answer: "A",
+                explanation: "Perimeter = 2 × (length + width) = 2 × (100 m + 50 m) = 2 × 150 m = 300 m."
+            },
+            {
+                question: "A triangle has a perimeter of 15 cm. Two sides are 5 cm and 4 cm. How long is the third side?",
+                options: ["6 cm", "9 cm", "11 cm", "5 cm"],
+                answer: "A",
+                explanation: "Perimeter = sum of all sides. 15 cm - 5 cm - 4 cm = 6 cm for the third side."
+            },
+            {
+                question: "What is the perimeter of a square with 7 cm sides?",
+                options: ["28 cm", "14 cm", "21 cm", "49 cm"],
+                answer: "A",
+                explanation: "Perimeter of square = 4 × side = 4 × 7 cm = 28 cm."
+            },
+            {
+                question: "A rectangle has a perimeter of 30 cm. Its length is 10 cm. What is its width?",
+                options: ["5 cm", "10 cm", "15 cm", "20 cm"],
+                answer: "A",
+                explanation: "Perimeter = 2 × (length + width). 30 cm = 2 × (10 cm + width). So 15 cm = 10 cm + width, therefore width = 5 cm."
+            },
+            {
+                question: "What is the perimeter of an equilateral triangle with 9 cm sides?",
+                options: ["27 cm", "18 cm", "9 cm", "36 cm"],
+                answer: "A",
+                explanation: "Equilateral triangle has 3 equal sides. Perimeter = 3 × side = 3 × 9 cm = 27 cm."
+            },
+            {
+                question: "A pentagon has sides 2 cm, 3 cm, 4 cm, 5 cm, and 6 cm. What is its perimeter?",
+                options: ["20 cm", "15 cm", "18 cm", "22 cm"],
+                answer: "A",
+                explanation: "Perimeter = sum of all sides = 2 cm + 3 cm + 4 cm + 5 cm + 6 cm = 20 cm."
+            },
+            {
+                question: "If a rectangle has length 12 m and width 8 m, what is its perimeter?",
+                options: ["40 m", "20 m", "48 m", "32 m"],
+                answer: "A",
+                explanation: "Perimeter = 2 × (length + width) = 2 × (12 m + 8 m) = 2 × 20 m = 40 m."
+            },
+            {
+                question: "A square has a perimeter of 36 cm. What is the length of one side?",
+                options: ["9 cm", "6 cm", "12 cm", "18 cm"],
+                answer: "A",
+                explanation: "For a square, perimeter = 4 × side. So side = perimeter ÷ 4 = 36 cm ÷ 4 = 9 cm."
+            },
+
+            // Area (61-75)
+            {
+                question: "What is the area of a rectangle that is 5 cm long and 3 cm wide?",
+                options: ["15 cm²", "8 cm²", "16 cm²", "30 cm²"],
+                answer: "A",
+                explanation: "Area of rectangle = length × width = 5 cm × 3 cm = 15 cm²."
+            },
+            {
+                question: "What does area measure?",
+                options: ["The space inside a shape", "The distance around a shape", "How heavy a shape is", "How tall a shape is"],
+                answer: "A",
+                explanation: "Area measures the amount of space inside a 2D shape. Perimeter measures the distance around it."
+            },
+            {
+                question: "What is the area of a square with 4 cm sides?",
+                options: ["16 cm²", "8 cm²", "12 cm²", "4 cm²"],
+                answer: "A",
+                explanation: "Area of square = side × side = 4 cm × 4 cm = 16 cm²."
+            },
+            {
+                question: "A rectangle has an area of 24 cm² and a length of 6 cm. What is its width?",
+                options: ["4 cm", "3 cm", "8 cm", "12 cm"],
+                answer: "A",
+                explanation: "Area = length × width. 24 cm² = 6 cm × width. So width = 24 cm² ÷ 6 cm = 4 cm."
+            },
+            {
+                question: "What is the area of a rectangle that is 7 m long and 2 m wide?",
+                options: ["14 m²", "9 m²", "5 m²", "28 m²"],
+                answer: "A",
+                explanation: "Area = length × width = 7 m × 2 m = 14 m²."
+            },
+            {
+                question: "If a square has an area of 25 cm², how long is each side?",
+                options: ["5 cm", "10 cm", "25 cm", "12.5 cm"],
+                answer: "A",
+                explanation: "Area of square = side × side. So side = √25 cm² = 5 cm."
+            },
+            {
+                question: "What is the area of a rectangle with length 8 cm and width 5 cm?",
+                options: ["40 cm²", "13 cm²", "26 cm²", "45 cm²"],
+                answer: "A",
+                explanation: "Area = length × width = 8 cm × 5 cm = 40 cm²."
+            },
+            {
+                question: "A rectangular garden is 10 m long and has an area of 50 m². How wide is it?",
+                options: ["5 m", "10 m", "15 m", "20 m"],
+                answer: "A",
+                explanation: "Area = length × width. 50 m² = 10 m × width. So width = 50 m² ÷ 10 m = 5 m."
+            },
+            {
+                question: "What is the area of a square with 9 cm sides?",
+                options: ["81 cm²", "18 cm²", "36 cm²", "27 cm²"],
+                answer: "A",
+                explanation: "Area of square = side × side = 9 cm × 9 cm = 81 cm²."
+            },
+            {
+                question: "A room is 6 m long and 4 m wide. What is its area?",
+                options: ["24 m²", "10 m²", "20 m²", "28 m²"],
+                answer: "A",
+                explanation: "Area = length × width = 6 m × 4 m = 24 m²."
+            },
+            {
+                question: "If a rectangle has area 30 cm² and width 5 cm, what is its length?",
+                options: ["6 cm", "5 cm", "10 cm", "15 cm"],
+                answer: "A",
+                explanation: "Area = length × width. 30 cm² = length × 5 cm. So length = 30 cm² ÷ 5 cm = 6 cm."
+            },
+            {
+                question: "What is the area of a square with 10 m sides?",
+                options: ["100 m²", "20 m²", "40 m²", "50 m²"],
+                answer: "A",
+                explanation: "Area of square = side × side = 10 m × 10 m = 100 m²."
+            },
+            {
+                question: "A rectangular field is 12 m long and 8 m wide. What is its area?",
+                options: ["96 m²", "20 m²", "40 m²", "48 m²"],
+                answer: "A",
+                explanation: "Area = length × width = 12 m × 8 m = 96 m²."
+            },
+            {
+                question: "If a square has area 64 cm², what is the length of one side?",
+                options: ["8 cm", "16 cm", "32 cm", "4 cm"],
+                answer: "A",
+                explanation: "Area of square = side × side. So side = √64 cm² = 8 cm."
+            },
+            {
+                question: "What is the area of a rectangle with length 15 cm and width 6 cm?",
+                options: ["90 cm²", "21 cm²", "30 cm²", "75 cm²"],
+                answer: "A",
+                explanation: "Area = length × width = 15 cm × 6 cm = 90 cm²."
+            },
+
+            // 2D Shapes (76-85)
+            {
+                question: "How many sides does a triangle have?",
+                options: ["3", "4", "5", "6"],
+                answer: "A",
+                explanation: "A triangle has 3 sides. The prefix 'tri-' means three."
+            },
+            {
+                question: "What is the name of a shape with 4 equal sides and 4 right angles?",
+                options: ["Square", "Rectangle", "Triangle", "Circle"],
+                answer: "A",
+                explanation: "A square has 4 equal sides and 4 right angles. A rectangle has 4 right angles but not necessarily equal sides."
+            },
+            {
+                question: "How many sides does a pentagon have?",
+                options: ["5", "4", "6", "8"],
+                answer: "A",
+                explanation: "A pentagon has 5 sides. The prefix 'penta-' means five."
+            },
+            {
+                question: "What shape has no sides and is perfectly round?",
+                options: ["Circle", "Square", "Triangle", "Rectangle"],
+                answer: "A",
+                explanation: "A circle is a curved shape with no straight sides."
+            },
+            {
+                question: "How many vertices does a rectangle have?",
+                options: ["4", "2", "3", "5"],
+                answer: "A",
+                explanation: "A rectangle has 4 vertices (corners)."
+            },
+            {
+                question: "What is the name of an 8-sided shape?",
+                options: ["Octagon", "Hexagon", "Pentagon", "Decagon"],
+                answer: "A",
+                explanation: "An octagon has 8 sides. The prefix 'octa-' means eight."
+            },
+            {
+                question: "Which shape has 6 sides?",
+                options: ["Hexagon", "Pentagon", "Octagon", "Triangle"],
+                answer: "A",
+                explanation: "A hexagon has 6 sides. The prefix 'hexa-' means six."
+            },
+            {
+                question: "What is a shape with 3 sides called?",
+                options: ["Triangle", "Square", "Pentagon", "Hexagon"],
+                answer: "A",
+                explanation: "A triangle has 3 sides. The prefix 'tri-' means three."
+            },
+            {
+                question: "How many sides does a quadrilateral have?",
+                options: ["4", "3", "5", "6"],
+                answer: "A",
+                explanation: "A quadrilateral has 4 sides. The prefix 'quad-' means four."
+            },
+            {
+                question: "Which shape has all sides equal and all angles equal?",
+                options: ["Regular polygon", "Irregular polygon", "Circle", "Oval"],
+                answer: "A",
+                explanation: "A regular polygon has all sides equal and all angles equal. Examples include equilateral triangles and squares."
+            },
+
+            // 3D Shapes (86-100)
+            {
+                question: "What 3D shape has 6 square faces?",
+                options: ["Cube", "Sphere", "Cylinder", "Pyramid"],
+                answer: "A",
+                explanation: "A cube has 6 square faces, 12 edges, and 8 vertices."
+            },
+            {
+                question: "How many faces does a rectangular prism have?",
+                options: ["6", "4", "5", "8"],
+                answer: "A",
+                explanation: "A rectangular prism has 6 faces (all rectangles)."
+            },
+            {
+                question: "What 3D shape is shaped like a ball?",
+                options: ["Sphere", "Cube", "Cone", "Cylinder"],
+                answer: "A",
+                explanation: "A sphere is perfectly round like a ball."
+            },
+            {
+                question: "What 3D shape has a circular base and comes to a point?",
+                options: ["Cone", "Cylinder", "Sphere", "Cube"],
+                answer: "A",
+                explanation: "A cone has a circular base and tapers to a point (apex)."
+            },
+            {
+                question: "How many edges does a cube have?",
+                options: ["12", "6", "8", "10"],
+                answer: "A",
+                explanation: "A cube has 12 edges (the lines where faces meet)."
+            },
+            {
+                question: "What 3D shape has 2 circular bases?",
+                options: ["Cylinder", "Cone", "Sphere", "Pyramid"],
+                answer: "A",
+                explanation: "A cylinder has 2 circular bases and a curved surface."
+            },
+            {
+                question: "How many vertices does a cube have?",
+                options: ["8", "6", "12", "10"],
+                answer: "A",
+                explanation: "A cube has 8 vertices (corners)."
+            },
+            {
+                question: "What 3D shape has a square base and triangular faces?",
+                options: ["Square pyramid", "Cube", "Cone", "Cylinder"],
+                answer: "A",
+                explanation: "A square pyramid has a square base and 4 triangular faces that meet at a point."
+            },
+            {
+                question: "Which 3D shape has no edges or vertices?",
+                options: ["Sphere", "Cube", "Cone", "Pyramid"],
+                answer: "A",
+                explanation: "A sphere is perfectly round with no edges or vertices."
+            },
+            {
+                question: "How many faces does a triangular prism have?",
+                options: ["5", "4", "6", "3"],
+                answer: "A",
+                explanation: "A triangular prism has 5 faces: 2 triangles and 3 rectangles."
+            },
+            {
+                question: "What 3D shape looks like a can?",
+                options: ["Cylinder", "Sphere", "Cube", "Cone"],
+                answer: "A",
+                explanation: "A cylinder is shaped like a can with circular bases and a curved surface."
+            },
+            {
+                question: "How many edges does a rectangular prism have?",
+                options: ["12", "6", "8", "10"],
+                answer: "A",
+                explanation: "A rectangular prism has 12 edges, just like a cube."
+            },
+            {
+                question: "What 3D shape has all points on its surface equidistant from its center?",
+                options: ["Sphere", "Cube", "Cone", "Pyramid"],
+                answer: "A",
+                explanation: "A sphere is perfectly round with all points on its surface the same distance from the center."
+            },
+            {
+                question: "How many vertices does a triangular pyramid have?",
+                options: ["4", "3", "5", "6"],
+                answer: "A",
+                explanation: "A triangular pyramid (tetrahedron) has 4 vertices."
+            },
+            {
+                question: "What 3D shape has a circular base, curved surface, and one vertex?",
+                options: ["Cone", "Cylinder", "Sphere", "Cube"],
+                answer: "A",
+                explanation: "A cone has a circular base, a curved surface, and one vertex (apex)."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent measurement skills!",
+            "Fantastic geometry knowledge!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a measurement and geometry expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade3MathMeasurementGeometry');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade3MathMeasurementGeometry', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Create a copy of questions and shuffle them
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixGrade3MathMeasurementGeometry_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade3MathMeasurementGeometry_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a measurement and geometry expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have strong measurement and geometry skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a measurement and geometry master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the concepts you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better with more practice!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    feedbackMessage.textContent = `Correct answer: ${String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65))}`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade3-math-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

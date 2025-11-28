@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 3 Math - Word Problems | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Dark Theme */
+        :root {
+            --primary-green: #00C853;
+            --secondary-orange: #FF6D00;
+            --accent-purple: #7C4DFF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 200, 83, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00B248;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #E65C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 109, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1509228468518-180dd4864904?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 3 Math - Word Problems</h1>
+            <p class="welcome-subtitle">Master real-world math problems! Practice solving word problems using addition, subtraction, multiplication, and division in everyday scenarios.</p>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Practice Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 60</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Practice Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Retry Topic</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 60 Grade 3 Math word problems covering all four operations
+        const questions = [
+            // Addition Word Problems (1-15)
+            {
+                question: "Maria has 15 stickers. Her friend gives her 8 more stickers. How many stickers does Maria have now?",
+                options: ["21", "22", "23", "24"],
+                answer: "C",
+                explanation: "15 + 8 = 23. Maria had 15 stickers and got 8 more, so she now has 23 stickers."
+            },
+            {
+                question: "There are 27 students in Class A and 34 students in Class B. How many students are there in both classes?",
+                options: ["59", "60", "61", "62"],
+                answer: "C",
+                explanation: "27 + 34 = 61. Add the students from both classes: 27 + 34 = 61 students."
+            },
+            {
+                question: "A farmer harvested 128 apples from one tree and 95 apples from another tree. How many apples did he harvest in total?",
+                options: ["221", "222", "223", "224"],
+                answer: "C",
+                explanation: "128 + 95 = 223. Add the apples from both trees: 128 + 95 = 223 apples."
+            },
+            {
+                question: "Tom saved $45 in January and $38 in February. How much money did he save in both months?",
+                options: ["$81", "$82", "$83", "$84"],
+                answer: "C",
+                explanation: "45 + 38 = 83. Add the savings from both months: 45 + 38 = $83."
+            },
+            {
+                question: "A library has 234 fiction books and 187 non-fiction books. How many books are in the library?",
+                options: ["419", "420", "421", "422"],
+                answer: "C",
+                explanation: "234 + 187 = 421. Add the fiction and non-fiction books: 234 + 187 = 421 books."
+            },
+            {
+                question: "Sarah read 56 pages on Monday and 47 pages on Tuesday. How many pages did she read in total?",
+                options: ["101", "102", "103", "104"],
+                answer: "C",
+                explanation: "56 + 47 = 103. Add the pages from both days: 56 + 47 = 103 pages."
+            },
+            {
+                question: "A store sold 315 pencils in the morning and 289 pencils in the afternoon. How many pencils were sold that day?",
+                options: ["602", "603", "604", "605"],
+                answer: "C",
+                explanation: "315 + 289 = 604. Add the pencils sold in the morning and afternoon: 315 + 289 = 604 pencils."
+            },
+            {
+                question: "A baker made 168 cookies and 125 muffins. How many baked goods did he make in total?",
+                options: ["291", "292", "293", "294"],
+                answer: "C",
+                explanation: "168 + 125 = 293. Add the cookies and muffins: 168 + 125 = 293 baked goods."
+            },
+            {
+                question: "There are 142 boys and 158 girls in a school. How many students are in the school?",
+                options: ["298", "299", "300", "301"],
+                answer: "C",
+                explanation: "142 + 158 = 300. Add the boys and girls: 142 + 158 = 300 students."
+            },
+            {
+                question: "A toy store had 234 dolls. They received a shipment of 189 more dolls. How many dolls do they have now?",
+                options: ["421", "422", "423", "424"],
+                answer: "C",
+                explanation: "234 + 189 = 423. Add the original dolls and the new shipment: 234 + 189 = 423 dolls."
+            },
+            {
+                question: "Mike ran 5 miles on Monday, 7 miles on Tuesday, and 6 miles on Wednesday. How many miles did he run in total?",
+                options: ["17", "18", "19", "20"],
+                answer: "B",
+                explanation: "5 + 7 + 6 = 18. Add the miles from all three days: 5 + 7 + 6 = 18 miles."
+            },
+            {
+                question: "A school collected 345 cans in the first week and 278 cans in the second week. How many cans were collected in total?",
+                options: ["621", "622", "623", "624"],
+                answer: "C",
+                explanation: "345 + 278 = 623. Add the cans from both weeks: 345 + 278 = 623 cans."
+            },
+            {
+                question: "Lisa had 128 stickers. She bought 45 more. Then her friend gave her 32 stickers. How many stickers does she have now?",
+                options: ["203", "204", "205", "206"],
+                answer: "C",
+                explanation: "128 + 45 + 32 = 205. Add all the stickers: 128 + 45 + 32 = 205 stickers."
+            },
+            {
+                question: "A farmer has 156 sheep and 129 cows. How many animals does he have?",
+                options: ["283", "284", "285", "286"],
+                answer: "C",
+                explanation: "156 + 129 = 285. Add the sheep and cows: 156 + 129 = 285 animals."
+            },
+            {
+                question: "A book has 245 pages. The sequel has 198 pages. How many pages are in both books?",
+                options: ["441", "442", "443", "444"],
+                answer: "C",
+                explanation: "245 + 198 = 443. Add the pages from both books: 245 + 198 = 443 pages."
+            },
+
+            // Subtraction Word Problems (16-30)
+            {
+                question: "James had 45 marbles. He gave 18 to his friend. How many marbles does James have left?",
+                options: ["26", "27", "28", "29"],
+                answer: "B",
+                explanation: "45 - 18 = 27. James had 45 marbles and gave away 18, so he has 27 left."
+            },
+            {
+                question: "There were 63 students on a field trip. 28 students went back to school early. How many students are left on the field trip?",
+                options: ["34", "35", "36", "37"],
+                answer: "B",
+                explanation: "63 - 28 = 35. There were 63 students and 28 left, so 35 students remain."
+            },
+            {
+                question: "A bakery had 125 cupcakes. They sold 87 cupcakes. How many cupcakes are left?",
+                options: ["37", "38", "39", "40"],
+                answer: "B",
+                explanation: "125 - 87 = 38. The bakery had 125 cupcakes and sold 87, so 38 cupcakes remain."
+            },
+            {
+                question: "Sarah had $75. She spent $38 on a book. How much money does she have left?",
+                options: ["$36", "$37", "$38", "$39"],
+                answer: "B",
+                explanation: "75 - 38 = 37. Sarah had $75 and spent $38, so she has $37 left."
+            },
+            {
+                question: "A library had 342 books. 129 books were checked out. How many books are still in the library?",
+                options: ["211", "212", "213", "214"],
+                answer: "C",
+                explanation: "342 - 129 = 213. The library had 342 books and 129 were checked out, so 213 books remain."
+            },
+            {
+                question: "There were 256 people at a concert. 139 people left early. How many people stayed until the end?",
+                options: ["115", "116", "117", "118"],
+                answer: "C",
+                explanation: "256 - 139 = 117. There were 256 people and 139 left, so 117 people stayed."
+            },
+            {
+                question: "A farmer had 415 eggs. He sold 278 eggs. How many eggs does he have left?",
+                options: ["135", "136", "137", "138"],
+                answer: "C",
+                explanation: "415 - 278 = 137. The farmer had 415 eggs and sold 278, so he has 137 eggs left."
+            },
+            {
+                question: "Maria had 500 stickers. She used 324 stickers for her project. How many stickers does she have left?",
+                options: ["174", "175", "176", "177"],
+                answer: "C",
+                explanation: "500 - 324 = 176. Maria had 500 stickers and used 324, so she has 176 stickers left."
+            },
+            {
+                question: "A store had 238 bottles of juice. They sold 159 bottles. How many bottles are left?",
+                options: ["77", "78", "79", "80"],
+                answer: "C",
+                explanation: "238 - 159 = 79. The store had 238 bottles and sold 159, so 79 bottles remain."
+            },
+            {
+                question: "There were 187 birds in a tree. 98 birds flew away. How many birds are still in the tree?",
+                options: ["87", "88", "89", "90"],
+                answer: "C",
+                explanation: "187 - 98 = 89. There were 187 birds and 98 flew away, so 89 birds remain."
+            },
+            {
+                question: "Tom had 350 baseball cards. He gave 125 to his brother. How many cards does Tom have now?",
+                options: ["223", "224", "225", "226"],
+                answer: "C",
+                explanation: "350 - 125 = 225. Tom had 350 cards and gave away 125, so he has 225 cards left."
+            },
+            {
+                question: "A school had 467 students. 238 students went on a field trip. How many students are left at school?",
+                options: ["227", "228", "229", "230"],
+                answer: "C",
+                explanation: "467 - 238 = 229. The school had 467 students and 238 went on a trip, so 229 students remain."
+            },
+            {
+                question: "Lisa had 600 points in a game. She lost 275 points. How many points does she have now?",
+                options: ["323", "324", "325", "326"],
+                answer: "C",
+                explanation: "600 - 275 = 325. Lisa had 600 points and lost 275, so she has 325 points left."
+            },
+            {
+                question: "A factory made 825 toys. They shipped 489 toys to stores. How many toys are left in the factory?",
+                options: ["334", "335", "336", "337"],
+                answer: "C",
+                explanation: "825 - 489 = 336. The factory made 825 toys and shipped 489, so 336 toys remain."
+            },
+            {
+                question: "There were 750 people in a park. 326 people went home. How many people are still in the park?",
+                options: ["422", "423", "424", "425"],
+                answer: "C",
+                explanation: "750 - 326 = 424. There were 750 people and 326 left, so 424 people remain."
+            },
+
+            // Multiplication Word Problems (31-45)
+            {
+                question: "There are 5 rows of chairs with 8 chairs in each row. How many chairs are there in total?",
+                options: ["38", "40", "42", "45"],
+                answer: "B",
+                explanation: "5 × 8 = 40. There are 5 rows with 8 chairs each, so 5 × 8 = 40 chairs."
+            },
+            {
+                question: "A pizza has 8 slices. If 4 friends each eat 3 slices, how many slices are eaten?",
+                options: ["10", "11", "12", "13"],
+                answer: "C",
+                explanation: "4 × 3 = 12. Each of the 4 friends eats 3 slices, so 4 × 3 = 12 slices."
+            },
+            {
+                question: "There are 7 days in a week. How many days are there in 5 weeks?",
+                options: ["33", "34", "35", "36"],
+                answer: "C",
+                explanation: "7 × 5 = 35. There are 7 days in each week, so 5 weeks have 7 × 5 = 35 days."
+            },
+            {
+                question: "A pack of pencils has 12 pencils. How many pencils are in 6 packs?",
+                options: ["70", "71", "72", "73"],
+                answer: "C",
+                explanation: "12 × 6 = 72. Each pack has 12 pencils, so 6 packs have 12 × 6 = 72 pencils."
+            },
+            {
+                question: "There are 9 classrooms with 25 students in each. How many students are there in total?",
+                options: ["223", "224", "225", "226"],
+                answer: "C",
+                explanation: "9 × 25 = 225. Each classroom has 25 students, so 9 classrooms have 9 × 25 = 225 students."
+            },
+            {
+                question: "A box contains 24 cookies. How many cookies are in 8 boxes?",
+                options: ["190", "191", "192", "193"],
+                answer: "C",
+                explanation: "24 × 8 = 192. Each box has 24 cookies, so 8 boxes have 24 × 8 = 192 cookies."
+            },
+            {
+                question: "A car has 4 wheels. How many wheels do 9 cars have?",
+                options: ["34", "35", "36", "37"],
+                answer: "C",
+                explanation: "4 × 9 = 36. Each car has 4 wheels, so 9 cars have 4 × 9 = 36 wheels."
+            },
+            {
+                question: "There are 3 feet in a yard. How many feet are in 12 yards?",
+                options: ["34", "35", "36", "37"],
+                answer: "C",
+                explanation: "3 × 12 = 36. Each yard has 3 feet, so 12 yards have 3 × 12 = 36 feet."
+            },
+            {
+                question: "A book has 15 chapters. How many chapters are in 7 books?",
+                options: ["103", "104", "105", "106"],
+                answer: "C",
+                explanation: "15 × 7 = 105. Each book has 15 chapters, so 7 books have 15 × 7 = 105 chapters."
+            },
+            {
+                question: "A baker makes 36 muffins each day. How many muffins does he make in 5 days?",
+                options: ["178", "179", "180", "181"],
+                answer: "C",
+                explanation: "36 × 5 = 180. The baker makes 36 muffins each day, so in 5 days he makes 36 × 5 = 180 muffins."
+            },
+            {
+                question: "There are 8 crayons in a box. How many crayons are in 9 boxes?",
+                options: ["70", "71", "72", "73"],
+                answer: "C",
+                explanation: "8 × 9 = 72. Each box has 8 crayons, so 9 boxes have 8 × 9 = 72 crayons."
+            },
+            {
+                question: "A train has 6 cars with 42 passengers in each car. How many passengers are on the train?",
+                options: ["250", "251", "252", "253"],
+                answer: "C",
+                explanation: "6 × 42 = 252. Each car has 42 passengers, so 6 cars have 6 × 42 = 252 passengers."
+            },
+            {
+                question: "A store sells 15 apples each day. How many apples do they sell in 7 days?",
+                options: ["103", "104", "105", "106"],
+                answer: "C",
+                explanation: "15 × 7 = 105. The store sells 15 apples each day, so in 7 days they sell 15 × 7 = 105 apples."
+            },
+            {
+                question: "There are 4 quarters in a dollar. How many quarters are in 9 dollars?",
+                options: ["34", "35", "36", "37"],
+                answer: "C",
+                explanation: "4 × 9 = 36. Each dollar has 4 quarters, so 9 dollars have 4 × 9 = 36 quarters."
+            },
+            {
+                question: "A classroom has 8 tables with 4 students at each table. How many students are in the classroom?",
+                options: ["30", "31", "32", "33"],
+                answer: "C",
+                explanation: "8 × 4 = 32. Each table has 4 students, so 8 tables have 8 × 4 = 32 students."
+            },
+
+            // Division Word Problems (46-60)
+            {
+                question: "There are 24 cookies to be shared equally among 6 friends. How many cookies does each friend get?",
+                options: ["3", "4", "5", "6"],
+                answer: "B",
+                explanation: "24 ÷ 6 = 4. Divide 24 cookies equally among 6 friends: 24 ÷ 6 = 4 cookies each."
+            },
+            {
+                question: "A teacher has 35 pencils to give to 5 students equally. How many pencils does each student get?",
+                options: ["6", "7", "8", "9"],
+                answer: "B",
+                explanation: "35 ÷ 5 = 7. Divide 35 pencils equally among 5 students: 35 ÷ 5 = 7 pencils each."
+            },
+            {
+                question: "There are 48 students going on a field trip. If 6 students can fit in each van, how many vans are needed?",
+                options: ["7", "8", "9", "10"],
+                answer: "B",
+                explanation: "48 ÷ 6 = 8. Divide 48 students into groups of 6: 48 ÷ 6 = 8 vans needed."
+            },
+            {
+                question: "A baker has 56 muffins to put into boxes of 8. How many boxes does he need?",
+                options: ["6", "7", "8", "9"],
+                answer: "B",
+                explanation: "56 ÷ 8 = 7. Divide 56 muffins into groups of 8: 56 ÷ 8 = 7 boxes needed."
+            },
+            {
+                question: "There are 63 books to be placed on 7 shelves equally. How many books go on each shelf?",
+                options: ["8", "9", "10", "11"],
+                answer: "B",
+                explanation: "63 ÷ 7 = 9. Divide 63 books equally among 7 shelves: 63 ÷ 7 = 9 books per shelf."
+            },
+            {
+                question: "A farmer has 42 eggs to put into cartons of 6. How many cartons does he need?",
+                options: ["6", "7", "8", "9"],
+                answer: "B",
+                explanation: "42 ÷ 6 = 7. Divide 42 eggs into groups of 6: 42 ÷ 6 = 7 cartons needed."
+            },
+            {
+                question: "There are 54 stickers to be shared equally among 9 children. How many stickers does each child get?",
+                options: ["5", "6", "7", "8"],
+                answer: "B",
+                explanation: "54 ÷ 9 = 6. Divide 54 stickers equally among 9 children: 54 ÷ 9 = 6 stickers each."
+            },
+            {
+                question: "A class has 36 students. If they form groups of 4 for a project, how many groups will there be?",
+                options: ["8", "9", "10", "11"],
+                answer: "B",
+                explanation: "36 ÷ 4 = 9. Divide 36 students into groups of 4: 36 ÷ 4 = 9 groups."
+            },
+            {
+                question: "There are 40 apples to be packed into bags of 5. How many bags are needed?",
+                options: ["7", "8", "9", "10"],
+                answer: "B",
+                explanation: "40 ÷ 5 = 8. Divide 40 apples into groups of 5: 40 ÷ 5 = 8 bags needed."
+            },
+            {
+                question: "A store has 72 cans of soda to display in rows of 8. How many rows are needed?",
+                options: ["8", "9", "10", "11"],
+                answer: "B",
+                explanation: "72 ÷ 8 = 9. Divide 72 cans into rows of 8: 72 ÷ 8 = 9 rows needed."
+            },
+            {
+                question: "There are 28 days in 4 weeks. How many days are in each week?",
+                options: ["6", "7", "8", "9"],
+                answer: "B",
+                explanation: "28 ÷ 4 = 7. Divide 28 days into 4 weeks: 28 ÷ 4 = 7 days per week."
+            },
+            {
+                question: "A teacher has 45 minutes for 5 activities. How many minutes for each activity?",
+                options: ["8", "9", "10", "11"],
+                answer: "B",
+                explanation: "45 ÷ 5 = 9. Divide 45 minutes among 5 activities: 45 ÷ 5 = 9 minutes each."
+            },
+            {
+                question: "There are 32 students to be divided into teams of 4. How many teams will there be?",
+                options: ["7", "8", "9", "10"],
+                answer: "B",
+                explanation: "32 ÷ 4 = 8. Divide 32 students into teams of 4: 32 ÷ 4 = 8 teams."
+            },
+            {
+                question: "A baker has 60 cupcakes to put into boxes of 6. How many boxes does she need?",
+                options: ["9", "10", "11", "12"],
+                answer: "B",
+                explanation: "60 ÷ 6 = 10. Divide 60 cupcakes into boxes of 6: 60 ÷ 6 = 10 boxes needed."
+            },
+            {
+                question: "There are 27 students in 3 classes with the same number in each. How many students in each class?",
+                options: ["8", "9", "10", "11"],
+                answer: "B",
+                explanation: "27 ÷ 3 = 9. Divide 27 students equally among 3 classes: 27 ÷ 3 = 9 students per class."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent problem-solving skills!",
+            "Fantastic word problem work!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a math expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade3MathWordProblems');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade3MathWordProblems', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Create a copy of questions and shuffle them
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixGrade3MathWordProblems_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade3MathWordProblems_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a word problem expert who can solve any real-world math challenge!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have strong problem-solving skills for word problems!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a word problem master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the problems you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better with more practice!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    feedbackMessage.textContent = `Correct answer: ${String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65))}`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade3-math-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

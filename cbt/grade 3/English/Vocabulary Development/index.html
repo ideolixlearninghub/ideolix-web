@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 3 English - Vocabulary Development | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Dark Theme */
+        :root {
+            --primary-green: #00C853;
+            --secondary-orange: #FF6D00;
+            --accent-purple: #7C4DFF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 200, 83, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00B248;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #E65C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 109, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Topic Selection Page */
+        .topics-page {
+            display: none;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .topic-card {
+            background: var(--dark-surface);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-green);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        .topic-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            background: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .topic-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .topic-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Vocabulary Activities */
+        .activities-page {
+            display: none;
+        }
+
+        .activity-section {
+            margin-bottom: 40px;
+        }
+
+        .activity-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--primary-green);
+            padding-bottom: 10px;
+        }
+
+        .word-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .word-card {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .word-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-purple);
+            box-shadow: 0 5px 15px rgba(124, 77, 255, 0.3);
+        }
+
+        .word-card.active {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.1);
+        }
+
+        .word-term {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .word-definition {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .word-example {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 8px;
+            line-height: 1.3;
+        }
+
+        /* Matching Game */
+        .matching-game {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .matching-game {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .matching-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .matching-item {
+            background: var(--dark-surface);
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+
+        .matching-item:hover {
+            border-color: var(--secondary-orange);
+        }
+
+        .matching-item.matched {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        /* Fill in the Blanks */
+        .fill-blanks {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .sentence-with-blank {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 120px;
+            border-bottom: 2px dashed var(--text-secondary);
+            text-align: center;
+            margin: 0 5px;
+            padding: 5px 0;
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+
+        .word-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .word-option {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .word-option:hover {
+            border-color: var(--accent-purple);
+        }
+
+        .word-option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .word-option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        /* Word Categories */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .category-card {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--secondary-orange);
+            box-shadow: 0 5px 15px rgba(255, 109, 0, 0.3);
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .category-words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .category-word {
+            background: var(--dark-card);
+            border-radius: 6px;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Progress Tracking */
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Vocabulary Journal */
+        .vocabulary-journal {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .journal-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-green);
+        }
+
+        .journal-words {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .journal-word {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid var(--accent-purple);
+        }
+
+        .journal-word-term {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .journal-word-definition {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .word-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        .bounce {
+            animation: bounce 1s;
+        }
+
+        /* Special styling for vocabulary examples */
+        .vocab-example {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid var(--accent-purple);
+            line-height: 1.6;
+        }
+
+        .correct-word {
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+
+        .incorrect-word {
+            color: #F44336;
+            text-decoration: line-through;
+        }
+
+        .highlight {
+            background-color: rgba(255, 215, 0, 0.2);
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1509228468518-180dd4864904?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 3 English - Vocabulary Development</h1>
+            <p class="welcome-subtitle">Expand your word power! Learn new vocabulary through interactive games, word categories, context clues, and fun activities that make learning words exciting and memorable.</p>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startLearning">
+                    <span>Start Learning</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Topics Selection Page -->
+        <div class="topics-page card fade-in" id="topicsPage">
+            <h2 class="welcome-title">Choose a Vocabulary Activity</h2>
+            <p class="welcome-subtitle">Select an activity to build your vocabulary skills in different ways.</p>
+            
+            <div class="topics-grid">
+                <div class="topic-card" data-topic="word-explorer">
+                    <div class="topic-icon">🔍</div>
+                    <h3 class="topic-title">Word Explorer</h3>
+                    <p class="topic-description">Discover new words with definitions, examples, and interactive flashcards.</p>
+                </div>
+                
+                <div class="topic-card" data-topic="word-categories">
+                    <div class="topic-icon">📂</div>
+                    <h3 class="topic-title">Word Categories</h3>
+                    <p class="topic-description">Learn words grouped by themes like animals, food, emotions, and more.</p>
+                </div>
+                
+                <div class="topic-card" data-topic="context-clues">
+                    <div class="topic-icon">🧩</div>
+                    <h3 class="topic-title">Context Clues</h3>
+                    <p class="topic-description">Use sentence context to figure out the meaning of unfamiliar words.</p>
+                </div>
+                
+                <div class="topic-card" data-topic="word-games">
+                    <div class="topic-icon">🎮</div>
+                    <h3 class="topic-title">Word Games</h3>
+                    <p class="topic-description">Play matching games, fill-in-the-blanks, and other vocabulary challenges.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activities Page -->
+        <div class="activities-page card fade-in" id="activitiesPage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Activity 1 of 4</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 25%"></div>
+                </div>
+            </div>
+
+            <!-- Word Explorer Activity -->
+            <div class="activity-section" id="wordExplorerActivity">
+                <h2 class="activity-title">Word Explorer</h2>
+                <p class="welcome-subtitle">Click on each word card to learn its meaning and see it used in a sentence.</p>
+                
+                <div class="word-grid" id="wordExplorerGrid">
+                    <!-- Words will be populated by JavaScript -->
+                </div>
+                
+                <div class="vocab-example" id="wordDetail" style="display: none;">
+                    <h3 id="selectedWord"></h3>
+                    <p><strong>Definition:</strong> <span id="wordDefinition"></span></p>
+                    <p><strong>Example:</strong> <span id="wordExample"></span></p>
+                    <p><strong>Part of Speech:</strong> <span id="wordPartOfSpeech"></span></p>
+                </div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-outline" id="nextActivity">Next Activity</button>
+                </div>
+            </div>
+
+            <!-- Word Categories Activity -->
+            <div class="activity-section" id="wordCategoriesActivity" style="display: none;">
+                <h2 class="activity-title">Word Categories</h2>
+                <p class="welcome-subtitle">Explore words grouped by common themes and categories.</p>
+                
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Categories will be populated by JavaScript -->
+                </div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-outline" id="prevActivity">Previous Activity</button>
+                    <button class="btn btn-primary" id="nextActivity2">Next Activity</button>
+                </div>
+            </div>
+
+            <!-- Context Clues Activity -->
+            <div class="activity-section" id="contextCluesActivity" style="display: none;">
+                <h2 class="activity-title">Context Clues</h2>
+                <p class="welcome-subtitle">Read each sentence and use the context to figure out the meaning of the underlined word.</p>
+                
+                <div class="fill-blanks" id="contextCluesExercise">
+                    <!-- Context clues exercises will be populated by JavaScript -->
+                </div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-outline" id="prevActivity2">Previous Activity</button>
+                    <button class="btn btn-primary" id="nextActivity3">Next Activity</button>
+                </div>
+            </div>
+
+            <!-- Word Games Activity -->
+            <div class="activity-section" id="wordGamesActivity" style="display: none;">
+                <h2 class="activity-title">Word Games</h2>
+                <p class="welcome-subtitle">Match each word with its correct definition.</p>
+                
+                <div class="matching-game" id="matchingGame">
+                    <div class="matching-column" id="wordsColumn">
+                        <!-- Words will be populated by JavaScript -->
+                    </div>
+                    <div class="matching-column" id="definitionsColumn">
+                        <!-- Definitions will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-outline" id="prevActivity3">Previous Activity</button>
+                    <button class="btn btn-primary" id="completeActivities">Complete Activities</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Vocabulary Adventure Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="wordsLearned">0</div>
+                <div class="score-percentage">Words Explored</div>
+                <div class="score-message" id="vocabularyMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="activitiesCompleted">0</div>
+                        <div class="stat-label">Activities Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="wordsMastered">0</div>
+                        <div class="stat-label">Words Mastered</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="gamesPlayed">0</div>
+                        <div class="stat-label">Games Played</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="categoriesExplored">0</div>
+                        <div class="stat-label">Categories Explored</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vocabulary-journal">
+                <h3 class="journal-title">Your Vocabulary Journal</h3>
+                <div class="journal-words" id="vocabularyJournal">
+                    <!-- Learned words will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryActivities">Try More Words</button>
+                <button class="btn btn-secondary" id="viewTopicsFromResults">View Other Activities</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Vocabulary Data
+        const vocabularyData = {
+            words: [
+                {
+                    word: "enormous",
+                    definition: "very large in size or amount",
+                    example: "The elephant was enormous compared to the mouse.",
+                    partOfSpeech: "adjective",
+                    category: "size"
+                },
+                {
+                    word: "fragile",
+                    definition: "easily broken or damaged",
+                    example: "Be careful with that vase - it's very fragile.",
+                    partOfSpeech: "adjective",
+                    category: "describing things"
+                },
+                {
+                    word: "generous",
+                    definition: "willing to give and share",
+                    example: "She was generous and shared her cookies with everyone.",
+                    partOfSpeech: "adjective",
+                    category: "character traits"
+                },
+                {
+                    word: "habitat",
+                    definition: "the natural home of an animal or plant",
+                    example: "The ocean is the habitat for many fish and sea creatures.",
+                    partOfSpeech: "noun",
+                    category: "animals"
+                },
+                {
+                    word: "journey",
+                    definition: "a trip from one place to another",
+                    example: "Our journey to grandma's house took three hours.",
+                    partOfSpeech: "noun",
+                    category: "travel"
+                },
+                {
+                    word: "knowledge",
+                    definition: "information and understanding about a subject",
+                    example: "Reading books helps increase your knowledge.",
+                    partOfSpeech: "noun",
+                    category: "learning"
+                },
+                {
+                    word: "mysterious",
+                    definition: "difficult to understand or explain",
+                    example: "The locked box was mysterious because no one knew what was inside.",
+                    partOfSpeech: "adjective",
+                    category: "describing things"
+                },
+                {
+                    word: "navigate",
+                    definition: "to find your way to a place",
+                    example: "We used a map to navigate through the forest.",
+                    partOfSpeech: "verb",
+                    category: "travel"
+                },
+                {
+                    word: "observe",
+                    definition: "to watch carefully",
+                    example: "Scientists observe animals to learn about their behavior.",
+                    partOfSpeech: "verb",
+                    category: "learning"
+                },
+                {
+                    word: "patient",
+                    definition: "able to wait without getting upset",
+                    example: "You need to be patient when waiting for your turn.",
+                    partOfSpeech: "adjective",
+                    category: "character traits"
+                },
+                {
+                    word: "quench",
+                    definition: "to satisfy your thirst",
+                    example: "A cold glass of water will quench your thirst on a hot day.",
+                    partOfSpeech: "verb",
+                    category: "actions"
+                },
+                {
+                    word: "rare",
+                    definition: "not common or frequent",
+                    example: "The blue diamond was rare and very valuable.",
+                    partOfSpeech: "adjective",
+                    category: "describing things"
+                },
+                {
+                    word: "splendid",
+                    definition: "very impressive; excellent",
+                    example: "The fireworks display was splendid with all its colors.",
+                    partOfSpeech: "adjective",
+                    category: "describing things"
+                },
+                {
+                    word: "tremendous",
+                    definition: "very great in amount or level",
+                    example: "There was tremendous excitement before the concert.",
+                    partOfSpeech: "adjective",
+                    category: "size"
+                },
+                {
+                    word: "unique",
+                    definition: "being the only one of its kind",
+                    example: "Each snowflake has a unique pattern.",
+                    partOfSpeech: "adjective",
+                    category: "describing things"
+                },
+                {
+                    word: "vibrant",
+                    definition: "full of energy and life",
+                    example: "The vibrant colors of the painting made it stand out.",
+                    partOfSpeech: "adjective",
+                    category: "describing things"
+                },
+                {
+                    word: "wander",
+                    definition: "to walk around without a specific destination",
+                    example: "We like to wander through the park on sunny days.",
+                    partOfSpeech: "verb",
+                    category: "actions"
+                },
+                {
+                    word: "yield",
+                    definition: "to produce or provide",
+                    example: "The apple tree will yield many fruits in the autumn.",
+                    partOfSpeech: "verb",
+                    category: "actions"
+                },
+                {
+                    word: "zealous",
+                    definition: "showing great energy or enthusiasm",
+                    example: "The zealous fans cheered loudly for their team.",
+                    partOfSpeech: "adjective",
+                    category: "character traits"
+                }
+            ],
+            categories: [
+                {
+                    name: "Animals & Nature",
+                    words: ["habitat", "observe", "yield"],
+                    description: "Words related to animals, plants, and the natural world"
+                },
+                {
+                    name: "Character Traits",
+                    words: ["generous", "patient", "zealous"],
+                    description: "Words that describe people's personalities and behaviors"
+                },
+                {
+                    name: "Size & Amount",
+                    words: ["enormous", "tremendous", "rare"],
+                    description: "Words that describe how big, small, or common something is"
+                },
+                {
+                    name: "Travel & Movement",
+                    words: ["journey", "navigate", "wander"],
+                    description: "Words about going places and moving around"
+                },
+                {
+                    name: "Learning & Knowledge",
+                    words: ["knowledge", "observe", "unique"],
+                    description: "Words related to thinking, learning, and understanding"
+                },
+                {
+                    name: "Describing Things",
+                    words: ["fragile", "mysterious", "splendid", "vibrant"],
+                    description: "Words that help us describe how things look, feel, or seem"
+                }
+            ],
+            contextClues: [
+                {
+                    sentence: "The <span class='highlight'>enormous</span> whale was much bigger than our boat.",
+                    word: "enormous",
+                    options: ["very small", "very large", "very fast", "very colorful"],
+                    correct: 1
+                },
+                {
+                    sentence: "Be careful with that glass ornament because it's very <span class='highlight'>fragile</span>.",
+                    word: "fragile",
+                    options: ["strong", "beautiful", "easily broken", "expensive"],
+                    correct: 2
+                },
+                {
+                    sentence: "My friend is very <span class='highlight'>generous</span> and always shares her toys.",
+                    word: "generous",
+                    options: ["selfish", "kind and sharing", "funny", "quiet"],
+                    correct: 1
+                },
+                {
+                    sentence: "The ocean is the natural <span class='highlight'>habitat</span> for many sea creatures.",
+                    word: "habitat",
+                    options: ["food", "home", "enemy", "game"],
+                    correct: 1
+                },
+                {
+                    sentence: "Our <span class='highlight'>journey</span> to the mountains took all day.",
+                    word: "journey",
+                    options: ["party", "trip", "meal", "story"],
+                    correct: 1
+                }
+            ]
+        };
+
+        // App state
+        let appState = {
+            studentName: "",
+            currentActivity: "word-explorer",
+            activitiesCompleted: 0,
+            wordsLearned: [],
+            gamesPlayed: 0,
+            currentMatchingPairs: [],
+            matchedPairs: 0
+        };
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const topicsPage = document.getElementById('topicsPage');
+        const activitiesPage = document.getElementById('activitiesPage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startLearningBtn = document.getElementById('startLearning');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const topicCards = document.querySelectorAll('.topic-card');
+
+        // Activity sections
+        const wordExplorerActivity = document.getElementById('wordExplorerActivity');
+        const wordCategoriesActivity = document.getElementById('wordCategoriesActivity');
+        const contextCluesActivity = document.getElementById('contextCluesActivity');
+        const wordGamesActivity = document.getElementById('wordGamesActivity');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.activitiesCompleted > 0) {
+                showActivitiesPage();
+                loadActivity(appState.currentActivity);
+            } else if (appState.studentName) {
+                showTopicsPage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade3Vocabulary');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentActivity = parsed.currentActivity || "word-explorer";
+                appState.activitiesCompleted = parsed.activitiesCompleted || 0;
+                appState.wordsLearned = parsed.wordsLearned || [];
+                appState.gamesPlayed = parsed.gamesPlayed || 0;
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade3Vocabulary', JSON.stringify(appState));
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startLearningBtn.addEventListener('click', startLearning);
+            
+            // Add event listeners to topic cards
+            topicCards.forEach(card => {
+                card.addEventListener('click', () => selectTopic(card.dataset.topic));
+            });
+            
+            // Navigation buttons
+            document.getElementById('backToHome').addEventListener('click', backToHome);
+            document.getElementById('backToTopics').addEventListener('click', backToTopics);
+            document.getElementById('viewTopicsFromResults').addEventListener('click', backToTopics);
+            
+            // Activity navigation
+            document.getElementById('nextActivity').addEventListener('click', () => navigateActivity('next'));
+            document.getElementById('nextActivity2').addEventListener('click', () => navigateActivity('next'));
+            document.getElementById('nextActivity3').addEventListener('click', () => navigateActivity('next'));
+            document.getElementById('prevActivity').addEventListener('click', () => navigateActivity('prev'));
+            document.getElementById('prevActivity2').addEventListener('click', () => navigateActivity('prev'));
+            document.getElementById('prevActivity3').addEventListener('click', () => navigateActivity('prev'));
+            document.getElementById('completeActivities').addEventListener('click', showResultsPage);
+            document.getElementById('retryActivities').addEventListener('click', retryActivities);
+            
+            // Allow pressing Enter to start learning
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startLearning();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            topicsPage.style.display = 'none';
+            activitiesPage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show topics page
+        function showTopicsPage() {
+            welcomePage.style.display = 'none';
+            topicsPage.style.display = 'block';
+            activitiesPage.style.display = 'none';
+            resultsPage.style.display = 'none';
+        }
+
+        // Show activities page
+        function showActivitiesPage() {
+            welcomePage.style.display = 'none';
+            topicsPage.style.display = 'none';
+            activitiesPage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current activity
+            loadActivity(appState.currentActivity);
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            topicsPage.style.display = 'none';
+            activitiesPage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate and display results
+            document.getElementById('wordsLearned').textContent = appState.wordsLearned.length;
+            document.getElementById('activitiesCompleted').textContent = appState.activitiesCompleted;
+            document.getElementById('wordsMastered').textContent = Math.min(appState.wordsLearned.length, 15);
+            document.getElementById('gamesPlayed').textContent = appState.gamesPlayed;
+            document.getElementById('categoriesExplored').textContent = vocabularyData.categories.length;
+            
+            // Set encouraging message
+            if (appState.wordsLearned.length >= 15) {
+                document.getElementById('vocabularyMessage').textContent = "Outstanding! You're a vocabulary superstar!";
+            } else if (appState.wordsLearned.length >= 10) {
+                document.getElementById('vocabularyMessage').textContent = "Great job! You've built an impressive vocabulary!";
+            } else if (appState.wordsLearned.length >= 5) {
+                document.getElementById('vocabularyMessage').textContent = "Good work! Keep learning new words every day!";
+            } else {
+                document.getElementById('vocabularyMessage').textContent = "Nice start! Practice makes perfect!";
+            }
+            
+            // Update vocabulary journal
+            updateVocabularyJournal();
+            
+            // Save state
+            saveStateToStorage();
+        }
+
+        // Start learning - show topic selection
+        function startLearning() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            saveStateToStorage();
+            showTopicsPage();
+        }
+
+        // Select a topic and start activities
+        function selectTopic(topic) {
+            appState.currentActivity = topic;
+            saveStateToStorage();
+            showActivitiesPage();
+        }
+
+        // Load a specific activity
+        function loadActivity(activity) {
+            // Hide all activities first
+            wordExplorerActivity.style.display = 'none';
+            wordCategoriesActivity.style.display = 'none';
+            contextCluesActivity.style.display = 'none';
+            wordGamesActivity.style.display = 'none';
+            
+            // Update progress
+            updateProgress(activity);
+            
+            // Load the selected activity
+            switch(activity) {
+                case 'word-explorer':
+                    loadWordExplorer();
+                    wordExplorerActivity.style.display = 'block';
+                    break;
+                case 'word-categories':
+                    loadWordCategories();
+                    wordCategoriesActivity.style.display = 'block';
+                    break;
+                case 'context-clues':
+                    loadContextClues();
+                    contextCluesActivity.style.display = 'block';
+                    break;
+                case 'word-games':
+                    loadWordGames();
+                    wordGamesActivity.style.display = 'block';
+                    break;
+            }
+        }
+
+        // Update progress indicator
+        function updateProgress(activity) {
+            let progress = 25;
+            let activityText = "Activity 1 of 4";
+            
+            switch(activity) {
+                case 'word-categories':
+                    progress = 50;
+                    activityText = "Activity 2 of 4";
+                    break;
+                case 'context-clues':
+                    progress = 75;
+                    activityText = "Activity 3 of 4";
+                    break;
+                case 'word-games':
+                    progress = 100;
+                    activityText = "Activity 4 of 4";
+                    break;
+            }
+            
+            progressText.textContent = activityText;
+            progressFill.style.width = `${progress}%`;
+        }
+
+        // Load Word Explorer activity
+        function loadWordExplorer() {
+            const wordGrid = document.getElementById('wordExplorerGrid');
+            wordGrid.innerHTML = '';
+            
+            // Select 8 random words
+            const randomWords = [...vocabularyData.words]
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 8);
+            
+            randomWords.forEach(wordData => {
+                const wordCard = document.createElement('div');
+                wordCard.className = 'word-card';
+                wordCard.innerHTML = `
+                    <div class="word-term">${wordData.word}</div>
+                    <div class="word-part-of-speech">${wordData.partOfSpeech}</div>
+                `;
+                
+                wordCard.addEventListener('click', () => {
+                    // Remove active class from all cards
+                    document.querySelectorAll('.word-card').forEach(card => {
+                        card.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked card
+                    wordCard.classList.add('active');
+                    
+                    // Show word details
+                    showWordDetails(wordData);
+                    
+                    // Add to learned words if not already there
+                    if (!appState.wordsLearned.includes(wordData.word)) {
+                        appState.wordsLearned.push(wordData.word);
+                        saveStateToStorage();
+                    }
+                });
+                
+                wordGrid.appendChild(wordCard);
+            });
+            
+            // Clear word details
+            document.getElementById('wordDetail').style.display = 'none';
+        }
+
+        // Show word details in Word Explorer
+        function showWordDetails(wordData) {
+            const wordDetail = document.getElementById('wordDetail');
+            document.getElementById('selectedWord').textContent = wordData.word;
+            document.getElementById('wordDefinition').textContent = wordData.definition;
+            document.getElementById('wordExample').textContent = wordData.example;
+            document.getElementById('wordPartOfSpeech').textContent = wordData.partOfSpeech;
+            wordDetail.style.display = 'block';
+            wordDetail.classList.add('bounce');
+            
+            // Remove animation class after animation completes
+            setTimeout(() => {
+                wordDetail.classList.remove('bounce');
+            }, 1000);
+        }
+
+        // Load Word Categories activity
+        function loadWordCategories() {
+            const categoriesGrid = document.getElementById('categoriesGrid');
+            categoriesGrid.innerHTML = '';
+            
+            vocabularyData.categories.forEach(category => {
+                const categoryCard = document.createElement('div');
+                categoryCard.className = 'category-card';
+                categoryCard.innerHTML = `
+                    <h3 class="category-title">${category.name}</h3>
+                    <p>${category.description}</p>
+                    <div class="category-words">
+                        ${category.words.map(word => `<span class="category-word">${word}</span>`).join('')}
+                    </div>
+                `;
+                
+                categoriesGrid.appendChild(categoryCard);
+            });
+        }
+
+        // Load Context Clues activity
+        function loadContextClues() {
+            const contextCluesExercise = document.getElementById('contextCluesExercise');
+            contextCluesExercise.innerHTML = '';
+            
+            // Select 3 random context clues exercises
+            const randomExercises = [...vocabularyData.contextClues]
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 3);
+            
+            randomExercises.forEach((exercise, index) => {
+                const exerciseDiv = document.createElement('div');
+                exerciseDiv.className = 'sentence-with-blank';
+                exerciseDiv.innerHTML = `
+                    <p>${exercise.sentence}</p>
+                    <p><strong>What does "${exercise.word}" mean in this sentence?</strong></p>
+                    <div class="word-options">
+                        ${exercise.options.map((option, optIndex) => 
+                            `<div class="word-option" data-correct="${optIndex === exercise.correct}" data-exercise="${index}">${option}</div>`
+                        ).join('')}
+                    </div>
+                `;
+                
+                contextCluesExercise.appendChild(exerciseDiv);
+            });
+            
+            // Add event listeners to options
+            document.querySelectorAll('.word-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const isCorrect = this.getAttribute('data-correct') === 'true';
+                    const exerciseIndex = this.getAttribute('data-exercise');
+                    
+                    // Disable all options for this exercise
+                    document.querySelectorAll(`.word-option[data-exercise="${exerciseIndex}"]`).forEach(opt => {
+                        opt.style.pointerEvents = 'none';
+                    });
+                    
+                    // Mark correct/incorrect
+                    if (isCorrect) {
+                        this.classList.add('correct');
+                        
+                        // Add word to learned words if not already there
+                        const word = randomExercises[exerciseIndex].word;
+                        if (!appState.wordsLearned.includes(word)) {
+                            appState.wordsLearned.push(word);
+                            saveStateToStorage();
+                        }
+                    } else {
+                        this.classList.add('incorrect');
+                        
+                        // Also mark the correct answer
+                        document.querySelectorAll(`.word-option[data-exercise="${exerciseIndex}"][data-correct="true"]`).forEach(opt => {
+                            opt.classList.add('correct');
+                        });
+                    }
+                });
+            });
+        }
+
+        // Load Word Games activity
+        function loadWordGames() {
+            const wordsColumn = document.getElementById('wordsColumn');
+            const definitionsColumn = document.getElementById('definitionsColumn');
+            wordsColumn.innerHTML = '';
+            definitionsColumn.innerHTML = '';
+            
+            // Select 6 random words for matching game
+            const gameWords = [...vocabularyData.words]
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 6);
+            
+            // Reset matching state
+            appState.currentMatchingPairs = [];
+            appState.matchedPairs = 0;
+            
+            // Create word cards
+            gameWords.forEach(wordData => {
+                const wordItem = document.createElement('div');
+                wordItem.className = 'matching-item';
+                wordItem.textContent = wordData.word;
+                wordItem.setAttribute('data-word', wordData.word);
+                wordsColumn.appendChild(wordItem);
+                
+                // Add to current matching pairs
+                appState.currentMatchingPairs.push({
+                    word: wordData.word,
+                    definition: wordData.definition
+                });
+            });
+            
+            // Create definition cards (shuffled)
+            const shuffledDefinitions = [...appState.currentMatchingPairs]
+                .sort(() => 0.5 - Math.random())
+                .map(pair => pair.definition);
+            
+            shuffledDefinitions.forEach(definition => {
+                const definitionItem = document.createElement('div');
+                definitionItem.className = 'matching-item';
+                definitionItem.textContent = definition;
+                definitionItem.setAttribute('data-definition', definition);
+                definitionsColumn.appendChild(definitionItem);
+            });
+            
+            // Add event listeners for matching
+            setupMatchingGame();
+            
+            // Increment games played
+            appState.gamesPlayed++;
+            saveStateToStorage();
+        }
+
+        // Setup matching game event listeners
+        function setupMatchingGame() {
+            let selectedWord = null;
+            let selectedDefinition = null;
+            
+            document.querySelectorAll('#wordsColumn .matching-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    // Reset previous selection if any
+                    if (selectedWord) {
+                        selectedWord.style.borderColor = 'transparent';
+                    }
+                    
+                    // Select this word
+                    selectedWord = this;
+                    this.style.borderColor = var(--secondary-orange);
+                    
+                    // Check if we have a pair to match
+                    if (selectedWord && selectedDefinition) {
+                        checkMatch(selectedWord, selectedDefinition);
+                        selectedWord = null;
+                        selectedDefinition = null;
+                    }
+                });
+            });
+            
+            document.querySelectorAll('#definitionsColumn .matching-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    // Reset previous selection if any
+                    if (selectedDefinition) {
+                        selectedDefinition.style.borderColor = 'transparent';
+                    }
+                    
+                    // Select this definition
+                    selectedDefinition = this;
+                    this.style.borderColor = var(--secondary-orange);
+                    
+                    // Check if we have a pair to match
+                    if (selectedWord && selectedDefinition) {
+                        checkMatch(selectedWord, selectedDefinition);
+                        selectedWord = null;
+                        selectedDefinition = null;
+                    }
+                });
+            });
+        }
+
+        // Check if word and definition match
+        function checkMatch(wordElement, definitionElement) {
+            const word = wordElement.getAttribute('data-word');
+            const definition = definitionElement.getAttribute('data-definition');
+            
+            // Find the pair
+            const pair = appState.currentMatchingPairs.find(p => p.word === word);
+            
+            if (pair && pair.definition === definition) {
+                // Correct match
+                wordElement.classList.add('matched');
+                definitionElement.classList.add('matched');
+                wordElement.style.borderColor = 'transparent';
+                definitionElement.style.borderColor = 'transparent';
+                
+                appState.matchedPairs++;
+                
+                // Add word to learned words if not already there
+                if (!appState.wordsLearned.includes(word)) {
+                    appState.wordsLearned.push(word);
+                }
+                
+                saveStateToStorage();
+                
+                // Check if all pairs are matched
+                if (appState.matchedPairs === appState.currentMatchingPairs.length) {
+                    setTimeout(() => {
+                        alert('Congratulations! You matched all the words correctly!');
+                    }, 500);
+                }
+            } else {
+                // Incorrect match - reset borders after a delay
+                setTimeout(() => {
+                    wordElement.style.borderColor = 'transparent';
+                    definitionElement.style.borderColor = 'transparent';
+                }, 1000);
+            }
+        }
+
+        // Navigate between activities
+        function navigateActivity(direction) {
+            const activities = ['word-explorer', 'word-categories', 'context-clues', 'word-games'];
+            let currentIndex = activities.indexOf(appState.currentActivity);
+            
+            if (direction === 'next' && currentIndex < activities.length - 1) {
+                appState.currentActivity = activities[currentIndex + 1];
+            } else if (direction === 'prev' && currentIndex > 0) {
+                appState.currentActivity = activities[currentIndex - 1];
+            }
+            
+            // Update activities completed
+            if (direction === 'next' && currentIndex >= appState.activitiesCompleted) {
+                appState.activitiesCompleted = currentIndex + 1;
+            }
+            
+            saveStateToStorage();
+            loadActivity(appState.currentActivity);
+        }
+
+        // Update vocabulary journal on results page
+        function updateVocabularyJournal() {
+            const journal = document.getElementById('vocabularyJournal');
+            journal.innerHTML = '';
+            
+            // Display up to 12 learned words
+            const displayWords = appState.wordsLearned.slice(0, 12);
+            
+            displayWords.forEach(word => {
+                const wordData = vocabularyData.words.find(w => w.word === word);
+                if (wordData) {
+                    const journalWord = document.createElement('div');
+                    journalWord.className = 'journal-word';
+                    journalWord.innerHTML = `
+                        <div class="journal-word-term">${wordData.word}</div>
+                        <div class="journal-word-definition">${wordData.definition}</div>
+                    `;
+                    journal.appendChild(journalWord);
+                }
+            });
+            
+            // If no words learned yet, show a message
+            if (displayWords.length === 0) {
+                journal.innerHTML = '<p>Keep exploring words to build your vocabulary journal!</p>';
+            }
+        }
+
+        // Retry activities with new words
+        function retryActivities() {
+            appState.wordsLearned = [];
+            appState.activitiesCompleted = 0;
+            appState.currentActivity = 'word-explorer';
+            saveStateToStorage();
+            showActivitiesPage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            showTopicsPage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

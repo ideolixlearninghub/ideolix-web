@@ -1,0 +1,2268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 3 Science - Force and Movement | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables with Green and Orange Theme */
+        :root {
+            --primary-green: #00C853;
+            --secondary-orange: #FF6D00;
+            --accent-purple: #7C4DFF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 200, 83, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00B248;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #E65C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 109, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Topic Selection Page */
+        .topics-page {
+            display: none;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .topic-card {
+            background: var(--dark-surface);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-green);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        .topic-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            background: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .topic-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .topic-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Learning Content Page */
+        .learning-page {
+            display: none;
+        }
+
+        .content-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-green);
+            border-bottom: 2px solid var(--primary-green);
+            padding-bottom: 10px;
+        }
+
+        .concept-explanation {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--accent-purple);
+        }
+
+        .concept-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .concept-description {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .characteristics-list {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .characteristic-item {
+            margin-bottom: 8px;
+            padding-left: 10px;
+            border-left: 2px solid var(--secondary-orange);
+        }
+
+        /* Force Types */
+        .force-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .force-card {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .force-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-green);
+            box-shadow: 0 5px 15px rgba(0, 200, 83, 0.3);
+        }
+
+        .force-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .force-icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+        }
+
+        .force-title {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+        }
+
+        .force-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Interactive Force Demo */
+        .force-demo {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .demo-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            height: 300px;
+            background: linear-gradient(to bottom, #2c3e50, #34495e);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .demo-object {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: var(--primary-green);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: all 0.5s ease;
+        }
+
+        .force-indicator {
+            position: absolute;
+            width: 100px;
+            height: 8px;
+            background: var(--secondary-orange);
+            border-radius: 4px;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .force-direction {
+            position: absolute;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary-orange);
+        }
+
+        .demo-controls {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .force-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Classification Activity */
+        .classification-activity {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .item-card {
+            background: var(--dark-card);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: grab;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+        }
+
+        .item-card:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-3px);
+        }
+
+        .item-card.dragging {
+            opacity: 0.7;
+        }
+
+        .item-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .item-name {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .classification-areas {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .classification-area {
+            background: var(--dark-card);
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 200px;
+            border: 2px dashed var(--dark-border);
+            transition: all 0.3s ease;
+        }
+
+        .classification-area.active {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.05);
+        }
+
+        .area-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .area-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            min-height: 150px;
+            align-items: flex-start;
+        }
+
+        /* Matching Activity */
+        .matching-activity {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .matching-pairs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .matching-pairs {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .matching-item {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+
+        .matching-item:hover {
+            border-color: var(--secondary-orange);
+        }
+
+        .matching-item.matched {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-card);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-bg);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Progress Tracking */
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Science Facts */
+        .science-facts {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .facts-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-green);
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .fact-card {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid var(--accent-purple);
+        }
+
+        .fact-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .fact-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .force-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .items-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+            
+            .classification-areas {
+                grid-template-columns: 1fr;
+            }
+            
+            .facts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        .bounce {
+            animation: bounce 1s;
+        }
+
+        /* Special styling for science content */
+        .science-example {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid var(--accent-purple);
+            line-height: 1.6;
+        }
+
+        .push-example {
+            border-left-color: var(--primary-green);
+        }
+
+        .pull-example {
+            border-left-color: var(--secondary-orange);
+        }
+
+        .highlight {
+            background-color: rgba(255, 215, 0, 0.2);
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1571019614287-91a9c9b0ee17?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 3 Science - Force and Movement</h1>
+            <p class="welcome-subtitle">Discover the amazing world of forces! Learn how push and pull forces make objects move, change direction, or stop. Explore different types of forces in our everyday lives.</p>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startLearning">
+                    <span>Start Exploring</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Topics Selection Page -->
+        <div class="topics-page card fade-in" id="topicsPage">
+            <h2 class="welcome-title">Science Learning Activities</h2>
+            <p class="welcome-subtitle">Choose a topic to explore force and movement.</p>
+            
+            <div class="topics-grid">
+                <div class="topic-card" data-topic="forces">
+                    <div class="topic-icon">💪</div>
+                    <h3 class="topic-title">Push and Pull Forces</h3>
+                    <p class="topic-description">Learn about the two main types of forces - push and pull - and how they make objects move in different ways.</p>
+                </div>
+                
+                <div class="topic-card" data-topic="movement">
+                    <div class="topic-icon">🏃</div>
+                    <h3 class="topic-title">Types of Movement</h3>
+                    <p class="topic-description">Discover how forces create different types of movement like sliding, rolling, spinning, and bouncing.</p>
+                </div>
+                
+                <div class="topic-card" data-topic="quiz">
+                    <div class="topic-icon">🧠</div>
+                    <h3 class="topic-title">Knowledge Challenge</h3>
+                    <p class="topic-description">Test your knowledge about forces and movement with fun interactive quizzes.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Content Page -->
+        <div class="learning-page card fade-in" id="learningPage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Section 1 of 3</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 33%"></div>
+                </div>
+            </div>
+
+            <!-- Forces Section -->
+            <div class="content-section" id="forcesSection">
+                <h2 class="section-title">Push and Pull Forces</h2>
+                
+                <div class="concept-explanation">
+                    <h3 class="concept-title">What is a Force?</h3>
+                    <p class="concept-description">A force is a push or a pull that makes objects move, stop moving, or change direction. Forces can make things speed up, slow down, or change shape.</p>
+                    
+                    <div class="science-example">
+                        <p><strong>Forces can:</strong><br>
+                        - Make stationary objects start moving<br>
+                        - Make moving objects stop<br>
+                        - Change the direction of moving objects<br>
+                        - Change the shape of objects</p>
+                    </div>
+                </div>
+
+                <div class="force-types">
+                    <!-- Push Force -->
+                    <div class="force-card">
+                        <div class="force-header">
+                            <div class="force-icon">➡️</div>
+                            <h3 class="force-title">Push Force</h3>
+                        </div>
+                        <p class="force-description">
+                            <strong>Definition:</strong> A force that moves an object away from you
+                            <br><strong>Examples:</strong> Pushing a swing, kicking a ball, pressing a button
+                            <br><strong>Effect:</strong> Moves objects forward or away
+                        </p>
+                    </div>
+
+                    <!-- Pull Force -->
+                    <div class="force-card">
+                        <div class="force-header">
+                            <div class="force-icon">⬅️</div>
+                            <h3 class="force-title">Pull Force</h3>
+                        </div>
+                        <p class="force-description">
+                            <strong>Definition:</strong> A force that moves an object toward you
+                            <br><strong>Examples:</strong> Pulling a wagon, opening a drawer, tugging a rope
+                            <br><strong>Effect:</strong> Moves objects closer or toward you
+                        </p>
+                    </div>
+                </div>
+
+                <div class="concept-explanation">
+                    <h3 class="concept-title">Everyday Examples of Forces</h3>
+                    <p class="concept-description">Forces are all around us! We use push and pull forces many times every day without even thinking about it.</p>
+                    
+                    <div class="science-example push-example">
+                        <p><strong>Push Examples:</strong><br>
+                        - Pushing a shopping cart<br>
+                        - Kicking a soccer ball<br>
+                        - Pressing computer keys<br>
+                        - Closing a door</p>
+                    </div>
+                    
+                    <div class="science-example pull-example">
+                        <p><strong>Pull Examples:</strong><br>
+                        - Pulling a suitcase<br>
+                        - Opening a refrigerator door<br>
+                        - Tugging on a dog's leash<br>
+                        - Drawing a bowstring</p>
+                    </div>
+                </div>
+
+                <div class="force-demo">
+                    <h3>Interactive Force Demonstration</h3>
+                    <p>Apply push and pull forces to move the object!</p>
+                    
+                    <div class="demo-container" id="forceDemo">
+                        <div class="demo-object" id="demoObject">📦</div>
+                        <div class="force-indicator" id="pushIndicator" style="left: 50px; top: 50%; transform: translateY(-50%); display: none;"></div>
+                        <div class="force-indicator" id="pullIndicator" style="right: 50px; top: 50%; transform: translateY(-50%); display: none;"></div>
+                        <div class="force-direction" id="pushDirection" style="left: 30px; top: 50%; transform: translateY(-50%); display: none;">➡️</div>
+                        <div class="force-direction" id="pullDirection" style="right: 30px; top: 50%; transform: translateY(-50%); display: none;">⬅️</div>
+                    </div>
+                    
+                    <div class="demo-controls">
+                        <div class="force-buttons">
+                            <button class="btn btn-primary" id="pushButton">Push Right</button>
+                            <button class="btn btn-secondary" id="pullButton">Pull Left</button>
+                            <button class="btn btn-outline" id="resetButton">Reset Position</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="classification-activity">
+                    <h3>Force Classification Game</h3>
+                    <p>Drag each action to its correct force category (Push or Pull)!</p>
+                    
+                    <div class="items-grid" id="forceItemsGrid">
+                        <!-- Force items will be populated by JavaScript -->
+                    </div>
+                    
+                    <div class="classification-areas" id="forceClassificationAreas">
+                        <!-- Classification areas will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="nextToMovement">Next: Types of Movement</button>
+                </div>
+            </div>
+
+            <!-- Movement Section -->
+            <div class="content-section" id="movementSection" style="display: none;">
+                <h2 class="section-title">Types of Movement</h2>
+                
+                <div class="concept-explanation">
+                    <h3 class="concept-title">How Forces Create Movement</h3>
+                    <p class="concept-description">When we apply forces to objects, they can move in different ways. The type of movement depends on the force applied and the object's shape and surface.</p>
+                </div>
+
+                <div class="force-types">
+                    <!-- Sliding -->
+                    <div class="force-card">
+                        <div class="force-header">
+                            <div class="force-icon">⛸️</div>
+                            <h3 class="force-title">Sliding</h3>
+                        </div>
+                        <p class="force-description">
+                            <strong>Definition:</strong> Moving smoothly along a surface
+                            <br><strong>Examples:</strong> Sliding on ice, pushing a book on a table
+                            <br><strong>Forces:</strong> Push or pull along a surface
+                        </p>
+                    </div>
+
+                    <!-- Rolling -->
+                    <div class="force-card">
+                        <div class="force-header">
+                            <div class="force-icon">🏀</div>
+                            <h3 class="force-title">Rolling</h3>
+                        </div>
+                        <p class="force-description">
+                            <strong>Definition:</strong> Turning over and over while moving
+                            <br><strong>Examples:</strong> Rolling a ball, bicycle wheels turning
+                            <br><strong>Forces:</strong> Push (usually at an angle)
+                        </p>
+                    </div>
+
+                    <!-- Spinning -->
+                    <div class="force-card">
+                        <div class="force-header">
+                            <div class="force-icon">🌀</div>
+                            <h3 class="force-title">Spinning</h3>
+                        </div>
+                        <p class="force-description">
+                            <strong>Definition:</strong> Turning around a central point
+                            <br><strong>Examples:</strong> Spinning a top, merry-go-round
+                            <br><strong>Forces:</strong> Push or pull in a circular motion
+                        </p>
+                    </div>
+
+                    <!-- Bouncing -->
+                    <div class="force-card">
+                        <div class="force-header">
+                            <div class="force-icon">🏐</div>
+                            <h3 class="force-title">Bouncing</h3>
+                        </div>
+                        <p class="force-description">
+                            <strong>Definition:</strong> Springing up and down after hitting a surface
+                            <br><strong>Examples:</strong> Bouncing a basketball, jumping on a trampoline
+                            <br><strong>Forces:</strong> Push downward, then upward force from surface
+                        </p>
+                    </div>
+                </div>
+
+                <div class="concept-explanation">
+                    <h3 class="concept-title">Friction - The Force That Slows Things Down</h3>
+                    <p class="concept-description">Friction is a force that acts between two surfaces that are touching. It slows down moving objects and can make it harder to push or pull things.</p>
+                    
+                    <div class="science-example">
+                        <p><strong>High Friction:</strong> Rough surfaces like carpet or grass (hard to slide)<br>
+                        <strong>Low Friction:</strong> Smooth surfaces like ice or wet floors (easy to slide)<br>
+                        <strong>No Friction:</strong> In space (objects keep moving forever)</p>
+                    </div>
+                </div>
+
+                <div class="matching-activity">
+                    <h3>Match Movements to Their Examples</h3>
+                    <div class="matching-pairs" id="movementMatchingGame">
+                        <!-- Matching pairs will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-outline" id="backToForces">Previous: Forces</button>
+                    <button class="btn btn-primary" id="nextToQuiz">Next: Knowledge Challenge</button>
+                </div>
+            </div>
+
+            <!-- Quiz Section -->
+            <div class="content-section" id="quizSection" style="display: none;">
+                <h2 class="section-title">Knowledge Challenge</h2>
+                <p class="welcome-subtitle">Test your knowledge about forces and movement!</p>
+                
+                <div class="quiz-section">
+                    <div class="question-container">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                        
+                        <div class="navigation-buttons">
+                            <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                            <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-outline" id="backToMovement">Previous: Movement</button>
+                    <button class="btn btn-primary" id="completeLearning">Complete Learning</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Science Exploration Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="activitiesCompleted">0</div>
+                        <div class="stat-label">Activities Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="itemsClassified">0</div>
+                        <div class="stat-label">Items Classified</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="science-facts">
+                <h3 class="facts-title">Amazing Force & Movement Facts</h3>
+                <div class="facts-grid">
+                    <div class="fact-card">
+                        <h4 class="fact-title">Gravity - The Invisible Force</h4>
+                        <p class="fact-description">Gravity is a pull force that keeps us on the ground and makes things fall. Without gravity, we would float away into space!</p>
+                    </div>
+                    <div class="fact-card">
+                        <h4 class="fact-title">Friction Creates Heat</h4>
+                        <p class="fact-description">When you rub your hands together quickly, friction creates heat! This is why your hands feel warm when you rub them fast.</p>
+                    </div>
+                    <div class="fact-card">
+                        <h4 class="fact-title">Forces in Sports</h4>
+                        <p class="fact-description">Almost every sport uses forces! Kicking a soccer ball (push), throwing a baseball (push), and tug-of-war (pull) all involve forces.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Explore Again</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Science Content Data
+        const scienceData = {
+            forceTypes: [
+                {
+                    name: "Push",
+                    icon: "➡️",
+                    definition: "A force that moves an object away from you",
+                    examples: "Pushing a swing, kicking a ball, pressing a button",
+                    effect: "Moves objects forward or away"
+                },
+                {
+                    name: "Pull",
+                    icon: "⬅️",
+                    definition: "A force that moves an object toward you",
+                    examples: "Pulling a wagon, opening a drawer, tugging a rope",
+                    effect: "Moves objects closer or toward you"
+                }
+            ],
+            classificationActions: [
+                { name: "Kicking a Ball", type: "Push", icon: "⚽" },
+                { name: "Opening a Door", type: "Pull", icon: "🚪" },
+                { name: "Pushing a Swing", type: "Push", icon: "🧒" },
+                { name: "Pulling a Wagon", type: "Pull", icon: "🚂" },
+                { name: "Pressing a Button", type: "Push", icon: "🔘" },
+                { name: "Tugging a Rope", type: "Pull", icon: "🪢" },
+                { name: "Closing a Drawer", type: "Push", icon: "🗄️" },
+                { name: "Drawing a Bow", type: "Pull", icon: "🏹" }
+            ],
+            movementTypes: [
+                {
+                    name: "Sliding",
+                    icon: "⛸️",
+                    definition: "Moving smoothly along a surface",
+                    examples: "Sliding on ice, pushing a book on a table",
+                    forces: "Push or pull along a surface"
+                },
+                {
+                    name: "Rolling",
+                    icon: "🏀",
+                    definition: "Turning over and over while moving",
+                    examples: "Rolling a ball, bicycle wheels turning",
+                    forces: "Push (usually at an angle)"
+                },
+                {
+                    name: "Spinning",
+                    icon: "🌀",
+                    definition: "Turning around a central point",
+                    examples: "Spinning a top, merry-go-round",
+                    forces: "Push or pull in a circular motion"
+                },
+                {
+                    name: "Bouncing",
+                    icon: "🏐",
+                    definition: "Springing up and down after hitting a surface",
+                    examples: "Bouncing a basketball, jumping on a trampoline",
+                    forces: "Push downward, then upward force from surface"
+                }
+            ],
+            quizQuestions: [
+                {
+                    question: "Which type of force moves an object away from you?",
+                    options: ["Push", "Pull", "Gravity", "Friction"],
+                    answer: "A",
+                    explanation: "A push force moves objects away from you, like when you kick a ball or push a swing."
+                },
+                {
+                    question: "What force is used when opening a door?",
+                    options: ["Pull", "Push", "Gravity", "Magnetism"],
+                    answer: "A",
+                    explanation: "When you open a door, you're using a pull force to bring the door toward you."
+                },
+                {
+                    question: "Which type of movement involves turning over and over while moving?",
+                    options: ["Rolling", "Sliding", "Spinning", "Bouncing"],
+                    answer: "A",
+                    explanation: "Rolling movement involves an object turning over and over while moving forward, like a ball or wheel."
+                },
+                {
+                    question: "What force slows down moving objects?",
+                    options: ["Friction", "Gravity", "Push", "Pull"],
+                    answer: "A",
+                    explanation: "Friction is the force that acts between surfaces and slows down moving objects."
+                },
+                {
+                    question: "Which action is an example of a push force?",
+                    options: ["Kicking a soccer ball", "Opening a refrigerator", "Pulling a suitcase", "Tugging a rope"],
+                    answer: "A",
+                    explanation: "Kicking a soccer ball is a push force because you're applying force to move the ball away from you."
+                },
+                {
+                    question: "What type of movement is a merry-go-round?",
+                    options: ["Spinning", "Rolling", "Sliding", "Bouncing"],
+                    answer: "A",
+                    explanation: "A merry-go-round spins around a central point, which is spinning movement."
+                },
+                {
+                    question: "Which surface would have the most friction?",
+                    options: ["Carpet", "Ice", "Wet floor", "Polished wood"],
+                    answer: "A",
+                    explanation: "Carpet has a rough surface that creates more friction, making it harder to slide objects."
+                },
+                {
+                    question: "What force keeps us on the ground?",
+                    options: ["Gravity", "Friction", "Push", "Pull"],
+                    answer: "A",
+                    explanation: "Gravity is the pull force that keeps us on the ground and makes objects fall toward Earth."
+                },
+                {
+                    question: "Which action is an example of a pull force?",
+                    options: ["Opening a drawer", "Kicking a ball", "Pushing a cart", "Pressing a button"],
+                    answer: "A",
+                    explanation: "Opening a drawer uses a pull force to bring the drawer toward you."
+                },
+                {
+                    question: "What happens when there is no friction?",
+                    options: ["Objects keep moving forever", "Objects stop immediately", "Objects move slower", "Objects change direction"],
+                    answer: "A",
+                    explanation: "Without friction, there's no force to slow objects down, so they would keep moving forever, like in space."
+                }
+            ]
+        };
+
+        // App state
+        let appState = {
+            studentName: "",
+            currentSection: "forces",
+            quizScore: 0,
+            quizAnswered: 0,
+            itemsClassified: 0,
+            activitiesCompleted: 0,
+            currentQuestionIndex: 0
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent science skills!",
+            "Fantastic knowledge!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a science expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const topicsPage = document.getElementById('topicsPage');
+        const learningPage = document.getElementById('learningPage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startLearningBtn = document.getElementById('startLearning');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const topicCards = document.querySelectorAll('.topic-card');
+
+        // Section navigation
+        const forcesSection = document.getElementById('forcesSection');
+        const movementSection = document.getElementById('movementSection');
+        const quizSection = document.getElementById('quizSection');
+        const nextToMovement = document.getElementById('nextToMovement');
+        const nextToQuiz = document.getElementById('nextToQuiz');
+        const backToForces = document.getElementById('backToForces');
+        const backToMovement = document.getElementById('backToMovement');
+        const completeLearning = document.getElementById('completeLearning');
+
+        // Force demo elements
+        const demoObject = document.getElementById('demoObject');
+        const pushButton = document.getElementById('pushButton');
+        const pullButton = document.getElementById('pullButton');
+        const resetButton = document.getElementById('resetButton');
+        const pushIndicator = document.getElementById('pushIndicator');
+        const pullIndicator = document.getElementById('pullIndicator');
+        const pushDirection = document.getElementById('pushDirection');
+        const pullDirection = document.getElementById('pullDirection');
+
+        // Quiz elements
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+
+        // Results elements
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const activitiesCompleted = document.getElementById('activitiesCompleted');
+        const itemsClassified = document.getElementById('itemsClassified');
+        const highestScore = document.getElementById('highestScore');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            setupForceDemo();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.activitiesCompleted > 0) {
+                showLearningPage();
+                loadSection(appState.currentSection);
+            } else if (appState.studentName) {
+                showTopicsPage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade3ScienceForceMovement');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentSection = parsed.currentSection || "forces";
+                appState.quizScore = parsed.quizScore || 0;
+                appState.quizAnswered = parsed.quizAnswered || 0;
+                appState.itemsClassified = parsed.itemsClassified || 0;
+                appState.activitiesCompleted = parsed.activitiesCompleted || 0;
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade3ScienceForceMovement', JSON.stringify(appState));
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startLearningBtn.addEventListener('click', startLearning);
+            
+            // Add event listeners to topic cards
+            topicCards.forEach(card => {
+                card.addEventListener('click', () => selectTopic(card.dataset.topic));
+            });
+            
+            // Section navigation
+            nextToMovement.addEventListener('click', () => navigateSection('next'));
+            nextToQuiz.addEventListener('click', () => navigateSection('next'));
+            backToForces.addEventListener('click', () => navigateSection('prev'));
+            backToMovement.addEventListener('click', () => navigateSection('prev'));
+            completeLearning.addEventListener('click', showResultsPage);
+            
+            // Quiz navigation
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            
+            // Results navigation
+            retryTopicBtn.addEventListener('click', retryTopic);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start learning
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startLearning();
+                }
+            });
+        }
+
+        // Setup force demonstration
+        function setupForceDemo() {
+            let objectPosition = 50; // Start in the middle (percentage)
+            
+            // Push button functionality
+            pushButton.addEventListener('click', function() {
+                if (objectPosition < 90) {
+                    objectPosition += 10;
+                    demoObject.style.left = `${objectPosition}%`;
+                    
+                    // Show push indicator
+                    pushIndicator.style.display = 'block';
+                    pushDirection.style.display = 'block';
+                    
+                    // Hide after animation
+                    setTimeout(() => {
+                        pushIndicator.style.display = 'none';
+                        pushDirection.style.display = 'none';
+                    }, 500);
+                }
+            });
+            
+            // Pull button functionality
+            pullButton.addEventListener('click', function() {
+                if (objectPosition > 10) {
+                    objectPosition -= 10;
+                    demoObject.style.left = `${objectPosition}%`;
+                    
+                    // Show pull indicator
+                    pullIndicator.style.display = 'block';
+                    pullDirection.style.display = 'block';
+                    
+                    // Hide after animation
+                    setTimeout(() => {
+                        pullIndicator.style.display = 'none';
+                        pullDirection.style.display = 'none';
+                    }, 500);
+                }
+            });
+            
+            // Reset button functionality
+            resetButton.addEventListener('click', function() {
+                objectPosition = 50;
+                demoObject.style.left = '50%';
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            topicsPage.style.display = 'none';
+            learningPage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show topics page
+        function showTopicsPage() {
+            welcomePage.style.display = 'none';
+            topicsPage.style.display = 'block';
+            learningPage.style.display = 'none';
+            resultsPage.style.display = 'none';
+        }
+
+        // Show learning page
+        function showLearningPage() {
+            welcomePage.style.display = 'none';
+            topicsPage.style.display = 'none';
+            learningPage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current section
+            loadSection(appState.currentSection);
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            topicsPage.style.display = 'none';
+            learningPage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate and display results
+            const percentage = Math.round((appState.quizScore / scienceData.quizQuestions.length) * 100);
+            
+            finalScore.textContent = appState.quizScore;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.quizScore;
+            activitiesCompleted.textContent = appState.activitiesCompleted;
+            itemsClassified.textContent = appState.itemsClassified;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixGrade3ScienceForceMovement_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.quizScore);
+            
+            // Save new highest score if applicable
+            if (appState.quizScore > highest) {
+                localStorage.setItem('ideolixGrade3ScienceForceMovement_highestScore', appState.quizScore);
+            }
+            
+            // Set encouraging message
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a force and movement expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You understand forces and movement very well!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! You have a solid understanding of these science concepts!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the concepts and try again!";
+            } else {
+                scoreMessage.textContent = "Keep exploring! Science is full of amazing discoveries!";
+            }
+            
+            // Save state
+            saveStateToStorage();
+        }
+
+        // Start learning - show topic selection
+        function startLearning() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            saveStateToStorage();
+            showTopicsPage();
+        }
+
+        // Select a topic and start learning
+        function selectTopic(topic) {
+            appState.currentSection = topic === 'quiz' ? 'quiz' : 'forces';
+            saveStateToStorage();
+            showLearningPage();
+        }
+
+        // Load a specific section
+        function loadSection(section) {
+            // Hide all sections first
+            forcesSection.style.display = 'none';
+            movementSection.style.display = 'none';
+            quizSection.style.display = 'none';
+            
+            // Update progress
+            updateProgress(section);
+            
+            // Load the selected section
+            switch(section) {
+                case 'forces':
+                    forcesSection.style.display = 'block';
+                    loadForceClassificationActivity();
+                    break;
+                case 'movement':
+                    movementSection.style.display = 'block';
+                    loadMovementMatchingActivity();
+                    break;
+                case 'quiz':
+                    quizSection.style.display = 'block';
+                    loadQuizQuestion();
+                    break;
+            }
+        }
+
+        // Update progress indicator
+        function updateProgress(section) {
+            let progress = 33;
+            let sectionText = "Section 1 of 3";
+            
+            switch(section) {
+                case 'movement':
+                    progress = 66;
+                    sectionText = "Section 2 of 3";
+                    break;
+                case 'quiz':
+                    progress = 100;
+                    sectionText = "Section 3 of 3";
+                    break;
+            }
+            
+            progressText.textContent = sectionText;
+            progressFill.style.width = `${progress}%`;
+        }
+
+        // Navigate between sections
+        function navigateSection(direction) {
+            const sections = ['forces', 'movement', 'quiz'];
+            let currentIndex = sections.indexOf(appState.currentSection);
+            
+            if (direction === 'next' && currentIndex < sections.length - 1) {
+                appState.currentSection = sections[currentIndex + 1];
+            } else if (direction === 'prev' && currentIndex > 0) {
+                appState.currentSection = sections[currentIndex - 1];
+            }
+            
+            // Update activities completed
+            if (direction === 'next' && currentIndex >= appState.activitiesCompleted) {
+                appState.activitiesCompleted = currentIndex + 1;
+            }
+            
+            saveStateToStorage();
+            loadSection(appState.currentSection);
+        }
+
+        // Load force classification activity
+        function loadForceClassificationActivity() {
+            const itemsGrid = document.getElementById('forceItemsGrid');
+            const classificationAreas = document.getElementById('forceClassificationAreas');
+            
+            itemsGrid.innerHTML = '';
+            classificationAreas.innerHTML = '';
+            
+            // Shuffle actions
+            const shuffledActions = [...scienceData.classificationActions]
+                .sort(() => 0.5 - Math.random())
+                .slice(0, 6); // Use 6 actions for the activity
+            
+            // Create action cards
+            shuffledActions.forEach(action => {
+                const itemCard = document.createElement('div');
+                itemCard.className = 'item-card';
+                itemCard.setAttribute('draggable', 'true');
+                itemCard.setAttribute('data-type', action.type);
+                itemCard.innerHTML = `
+                    <div class="item-icon">${action.icon}</div>
+                    <div class="item-name">${action.name}</div>
+                `;
+                
+                // Add drag event listeners
+                itemCard.addEventListener('dragstart', handleDragStart);
+                itemCard.addEventListener('dragend', handleDragEnd);
+                
+                itemsGrid.appendChild(itemCard);
+            });
+            
+            // Create classification areas for each force type
+            scienceData.forceTypes.forEach(type => {
+                const area = document.createElement('div');
+                area.className = 'classification-area';
+                area.setAttribute('data-type', type.name);
+                area.innerHTML = `
+                    <h3 class="area-title">${type.icon} ${type.name}</h3>
+                    <div class="area-items"></div>
+                `;
+                
+                area.addEventListener('dragover', handleDragOver);
+                area.addEventListener('drop', (e) => handleForceDrop(e, type.name));
+                
+                classificationAreas.appendChild(area);
+            });
+            
+            // Reset classified items count
+            appState.itemsClassified = 0;
+            saveStateToStorage();
+        }
+
+        // Load movement matching activity
+        function loadMovementMatchingActivity() {
+            const matchingGame = document.getElementById('movementMatchingGame');
+            matchingGame.innerHTML = '';
+            
+            // Create movement type cards
+            scienceData.movementTypes.forEach(movement => {
+                const movementCard = document.createElement('div');
+                movementCard.className = 'matching-item';
+                movementCard.setAttribute('data-movement', movement.name);
+                movementCard.innerHTML = `
+                    <strong>${movement.icon} ${movement.name}</strong>
+                `;
+                matchingGame.appendChild(movementCard);
+            });
+            
+            // Create example cards (shuffled)
+            const shuffledExamples = [...scienceData.movementTypes]
+                .sort(() => 0.5 - Math.random())
+                .map(movement => movement.examples.split(', ')[0]); // Use the first example for simplicity
+            
+            shuffledExamples.forEach(example => {
+                const exampleCard = document.createElement('div');
+                exampleCard.className = 'matching-item';
+                exampleCard.setAttribute('data-example', example);
+                exampleCard.textContent = example;
+                matchingGame.appendChild(exampleCard);
+            });
+            
+            // Setup matching game
+            setupMovementMatchingGame();
+        }
+
+        // Setup movement matching game
+        function setupMovementMatchingGame() {
+            let selectedMovement = null;
+            let selectedExample = null;
+            
+            document.querySelectorAll('#movementMatchingGame .matching-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    if (this.getAttribute('data-movement')) {
+                        // This is a movement type
+                        if (selectedMovement) {
+                            selectedMovement.style.borderColor = 'transparent';
+                        }
+                        selectedMovement = this;
+                        this.style.borderColor = 'var(--secondary-orange)';
+                    } else {
+                        // This is an example
+                        if (selectedExample) {
+                            selectedExample.style.borderColor = 'transparent';
+                        }
+                        selectedExample = this;
+                        this.style.borderColor = 'var(--secondary-orange)';
+                    }
+                    
+                    // Check if we have a pair to match
+                    if (selectedMovement && selectedExample) {
+                        checkMovementMatch(selectedMovement, selectedExample);
+                        selectedMovement = null;
+                        selectedExample = null;
+                    }
+                });
+            });
+        }
+
+        // Check if movement type and example match
+        function checkMovementMatch(movementElement, exampleElement) {
+            const movementName = movementElement.getAttribute('data-movement');
+            const exampleText = exampleElement.getAttribute('data-example');
+            
+            // Find the movement type that has this example
+            const correctMovement = scienceData.movementTypes.find(movement => 
+                movement.examples.includes(exampleText)
+            );
+            
+            if (correctMovement && correctMovement.name === movementName) {
+                // Correct match
+                movementElement.classList.add('matched');
+                exampleElement.classList.add('matched');
+                movementElement.style.borderColor = 'transparent';
+                exampleElement.style.borderColor = 'transparent';
+                
+                // Show success feedback
+                showClassificationFeedback(true, `Correct! ${exampleText} is an example of ${movementElement.textContent.trim()}.`);
+            } else {
+                // Incorrect match - reset borders after a delay
+                setTimeout(() => {
+                    movementElement.style.borderColor = 'transparent';
+                    exampleElement.style.borderColor = 'transparent';
+                }, 1000);
+                
+                // Show error feedback
+                showClassificationFeedback(false, "Try again! That's not the right match.");
+            }
+        }
+
+        // Drag and drop handlers for force classification
+        function handleDragStart(e) {
+            e.dataTransfer.setData('text/plain', e.target.getAttribute('data-type'));
+            e.target.classList.add('dragging');
+            
+            // Add visual feedback to drop zones
+            document.querySelectorAll('.classification-area').forEach(area => {
+                area.classList.add('active');
+            });
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+            
+            // Remove visual feedback from drop zones
+            document.querySelectorAll('.classification-area').forEach(area => {
+                area.classList.remove('active');
+            });
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+        }
+
+        function handleForceDrop(e, expectedType) {
+            e.preventDefault();
+            const actionType = e.dataTransfer.getData('text/plain');
+            const draggedElement = document.querySelector('.item-card.dragging');
+            
+            if (draggedElement && actionType === expectedType) {
+                // Correct classification
+                const areaItems = e.currentTarget.querySelector('.area-items');
+                
+                // Create a new card for the drop area
+                const newCard = document.createElement('div');
+                newCard.className = 'item-card';
+                newCard.innerHTML = draggedElement.innerHTML;
+                newCard.style.cursor = 'default';
+                
+                areaItems.appendChild(newCard);
+                
+                // Remove the original card
+                draggedElement.remove();
+                
+                // Update classified items count
+                appState.itemsClassified++;
+                saveStateToStorage();
+                
+                // Show success feedback
+                showClassificationFeedback(true, `Correct! ${draggedElement.querySelector('.item-name').textContent} is a ${expectedType.toLowerCase()} force.`);
+            } else if (draggedElement) {
+                // Incorrect classification
+                showClassificationFeedback(false, `Try again! ${draggedElement.querySelector('.item-name').textContent} is not a ${expectedType.toLowerCase()} force.`);
+            }
+        }
+
+        // Show classification feedback
+        function showClassificationFeedback(isCorrect, message) {
+            // Create a temporary feedback element
+            const feedback = document.createElement('div');
+            feedback.style.position = 'fixed';
+            feedback.style.top = '50%';
+            feedback.style.left = '50%';
+            feedback.style.transform = 'translate(-50%, -50%)';
+            feedback.style.padding = '20px 30px';
+            feedback.style.borderRadius = '12px';
+            feedback.style.fontWeight = 'bold';
+            feedback.style.zIndex = '1000';
+            feedback.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.4)';
+            feedback.textContent = message;
+            
+            if (isCorrect) {
+                feedback.style.background = 'var(--primary-green)';
+                feedback.style.color = 'white';
+            } else {
+                feedback.style.background = 'var(--secondary-orange)';
+                feedback.style.color = 'white';
+            }
+            
+            document.body.appendChild(feedback);
+            
+            // Remove after 2 seconds
+            setTimeout(() => {
+                document.body.removeChild(feedback);
+            }, 2000);
+        }
+
+        // Load quiz question
+        function loadQuizQuestion() {
+            const question = scienceData.quizQuestions[appState.currentQuestionIndex];
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectQuizOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle quiz option selection
+        function selectQuizOption(optionElement, selectedIndex) {
+            const question = scienceData.quizQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.quizScore++;
+                appState.quizAnswered++;
+                
+                // Show positive feedback
+                showQuizFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.quizAnswered++;
+                
+                // Show negative feedback
+                showQuizFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show quiz feedback
+        function showQuizFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    feedbackMessage.textContent = `Correct answer: ${String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65))}`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next quiz question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < scienceData.quizQuestions.length) {
+                loadQuizQuestion();
+            } else {
+                // Quiz completed
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current quiz question
+        function skipQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < scienceData.quizQuestions.length) {
+                loadQuizQuestion();
+            } else {
+                // Quiz completed
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.quizScore = 0;
+            appState.quizAnswered = 0;
+            appState.itemsClassified = 0;
+            appState.currentQuestionIndex = 0;
+            appState.currentSection = "forces";
+            saveStateToStorage();
+            showLearningPage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            showTopicsPage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

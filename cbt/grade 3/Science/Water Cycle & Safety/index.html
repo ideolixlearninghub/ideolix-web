@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 3 Science - Water Cycle & Safety | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Green & Orange Theme */
+        :root {
+            --primary-green: #2E7D32;
+            --secondary-green: #4CAF50;
+            --light-green: #81C784;
+            --accent-orange: #FF6D00;
+            --light-orange: #FFAB40;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(46, 125, 50, 0.3);
+            --orange-glow: 0 0 20px rgba(255, 109, 0, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Animation */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #0a2e0f 0%, #1a4721 100%);
+            overflow: hidden;
+        }
+
+        .water-drop {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(76, 175, 80, 0.5);
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(20px);
+            }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 160px;
+            height: 160px;
+            margin-bottom: 25px;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow), 0 0 30px rgba(76, 175, 80, 0.5);
+            border: 3px solid var(--secondary-green);
+            position: relative;
+        }
+
+        .welcome-logo::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-orange);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, var(--secondary-green), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .welcome-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badges {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .topic-badge {
+            background: linear-gradient(135deg, var(--secondary-green), var(--light-green));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .topic-badge.orange {
+            background: linear-gradient(135deg, var(--accent-orange), var(--light-orange));
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--secondary-green);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-green), var(--primary-green));
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-orange), var(--light-orange));
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 109, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, var(--light-orange), var(--accent-orange));
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 109, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--secondary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary-green), var(--accent-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--secondary-green);
+            background: rgba(76, 175, 80, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(76, 175, 80, 0.1);
+            border-color: var(--secondary-green);
+            color: var(--secondary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--secondary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(76, 175, 80, 0.1);
+            border-left: 5px solid var(--secondary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--secondary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--secondary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--secondary-green), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--secondary-green), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation" id="backgroundAnimation"></div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 3 Science - Water Cycle & Safety</h1>
+            <p class="welcome-subtitle">Explore the amazing journey of water through evaporation, condensation, and precipitation! Learn how to stay safe in different environments through interactive questions.</p>
+            
+            <div class="topic-badges">
+                <div class="topic-badge">Water Cycle Basics</div>
+                <div class="topic-badge orange">Safety in the Environment</div>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Learning Journey</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Learning Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Retry Topic</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background animation
+        function initBackgroundAnimation() {
+            const background = document.getElementById('backgroundAnimation');
+            
+            // Create water drops
+            for (let i = 0; i < 30; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'water-drop';
+                drop.style.left = `${Math.random() * 100}%`;
+                drop.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                drop.style.animationDelay = `${Math.random() * 5}s`;
+                background.appendChild(drop);
+            }
+            
+            // Create clouds
+            for (let i = 0; i < 5; i++) {
+                const cloud = document.createElement('div');
+                cloud.className = 'cloud';
+                cloud.style.width = `${Math.random() * 100 + 50}px`;
+                cloud.style.height = `${Math.random() * 60 + 30}px`;
+                cloud.style.top = `${Math.random() * 30}%`;
+                cloud.style.left = `${Math.random() * 100}%`;
+                cloud.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                cloud.style.animationDelay = `${Math.random() * 10}s`;
+                background.appendChild(cloud);
+            }
+        }
+
+        // Questions array - 100 Grade 3 Science questions covering Water Cycle and Safety
+        const questions = [
+            // Section A: Water Cycle Basics (1-50)
+            {
+                question: "What is the process called when water turns into vapor and rises into the air?",
+                options: ["Condensation", "Evaporation", "Precipitation", "Collection"],
+                answer: "B",
+                explanation: "Evaporation is when water turns from liquid to gas (vapor) and rises into the air."
+            },
+            {
+                question: "What do we call the process when water vapor cools and turns back into liquid water?",
+                options: ["Evaporation", "Condensation", "Precipitation", "Collection"],
+                answer: "B",
+                explanation: "Condensation is when water vapor cools and turns back into liquid water droplets."
+            },
+            {
+                question: "What forms in the sky when water vapor condenses?",
+                options: ["Rain", "Clouds", "Snow", "Wind"],
+                answer: "B",
+                explanation: "Clouds form when water vapor in the air condenses into tiny water droplets or ice crystals."
+            },
+            {
+                question: "What do we call water that falls from clouds to the Earth's surface?",
+                options: ["Evaporation", "Condensation", "Precipitation", "Collection"],
+                answer: "C",
+                explanation: "Precipitation is any form of water that falls from clouds to the Earth's surface."
+            },
+            {
+                question: "Which of these is NOT a form of precipitation?",
+                options: ["Rain", "Snow", "Hail", "Clouds"],
+                answer: "D",
+                explanation: "Clouds are not precipitation. Precipitation includes rain, snow, sleet, and hail that fall from clouds."
+            },
+            {
+                question: "Where does most of the Earth's water evaporation occur?",
+                options: ["From lakes", "From rivers", "From oceans", "From swimming pools"],
+                answer: "C",
+                explanation: "Oceans cover about 71% of Earth's surface and provide most of the water that evaporates into the air."
+            },
+            {
+                question: "What is the continuous movement of water on, above, and below the Earth's surface called?",
+                options: ["Water cycle", "Rain cycle", "Cloud cycle", "Ocean current"],
+                answer: "A",
+                explanation: "The water cycle describes how water moves continuously between the Earth's surface and the atmosphere."
+            },
+            {
+                question: "What happens to water after it falls to the ground as precipitation?",
+                options: ["It disappears", "It evaporates immediately", "It collects in rivers, lakes, and oceans", "It turns to ice forever"],
+                answer: "C",
+                explanation: "After precipitation, water collects in rivers, lakes, oceans, and underground, where it can evaporate again."
+            },
+            {
+                question: "What is the main source of energy that drives the water cycle?",
+                options: ["The moon", "The wind", "The sun", "The Earth's core"],
+                answer: "C",
+                explanation: "The sun provides the energy that heats water, causing evaporation and powering the water cycle."
+            },
+            {
+                question: "When you see your breath on a cold day, what process are you observing?",
+                options: ["Evaporation", "Condensation", "Precipitation", "Collection"],
+                answer: "B",
+                explanation: "Your warm breath contains water vapor that condenses into tiny droplets when it hits the cold air."
+            },
+            {
+                question: "What forms on grass in the early morning when the air is cool?",
+                options: ["Frost", "Dew", "Rain", "Snow"],
+                answer: "B",
+                explanation: "Dew forms when water vapor in the air condenses on cool surfaces like grass."
+            },
+            {
+                question: "What do we call the process where plants release water vapor into the air?",
+                options: ["Evaporation", "Transpiration", "Condensation", "Perspiration"],
+                answer: "B",
+                explanation: "Transpiration is when plants release water vapor through tiny openings in their leaves."
+            },
+            {
+                question: "Where is most of the Earth's fresh water stored?",
+                options: ["In rivers", "In lakes", "In glaciers and ice caps", "In the atmosphere"],
+                answer: "C",
+                explanation: "About 68% of Earth's fresh water is stored in glaciers and ice caps."
+            },
+            {
+                question: "What happens to water molecules when they evaporate?",
+                options: ["They get colder", "They move faster and spread out", "They stick together", "They turn to ice"],
+                answer: "B",
+                explanation: "When water evaporates, the molecules gain energy, move faster, and spread out to become water vapor."
+            },
+            {
+                question: "What do we call the process of water soaking into the ground?",
+                options: ["Runoff", "Infiltration", "Evaporation", "Condensation"],
+                answer: "B",
+                explanation: "Infiltration is when water soaks into the ground and becomes groundwater."
+            },
+            {
+                question: "What is runoff?",
+                options: ["Water that evaporates", "Water that soaks into the ground", "Water that flows over the land surface", "Water in clouds"],
+                answer: "C",
+                explanation: "Runoff is water that flows over the land surface instead of soaking into the ground."
+            },
+            {
+                question: "What do we call a large body of ice that moves slowly over land?",
+                options: ["Iceberg", "Glacier", "Ice cap", "Frost"],
+                answer: "B",
+                explanation: "A glacier is a large, slow-moving mass of ice that forms over many years."
+            },
+            {
+                question: "What is groundwater?",
+                options: ["Water in clouds", "Water in rivers", "Water stored underground", "Water in the ocean"],
+                answer: "C",
+                explanation: "Groundwater is water that is stored in spaces between rocks and soil underground."
+            },
+            {
+                question: "What do we call a place where groundwater comes to the surface?",
+                options: ["Lake", "Spring", "Well", "River"],
+                answer: "B",
+                explanation: "A spring is a place where groundwater naturally flows out of the ground."
+            },
+            {
+                question: "Why is the water cycle important for life on Earth?",
+                options: ["It makes weather interesting", "It recycles and distributes fresh water", "It creates oceans", "It makes clouds look pretty"],
+                answer: "B",
+                explanation: "The water cycle recycles Earth's water supply and distributes fresh water around the planet, which is essential for all living things."
+            },
+            {
+                question: "What happens to the temperature of water during evaporation?",
+                options: ["It increases", "It decreases", "It stays the same", "It freezes"],
+                answer: "B",
+                explanation: "Evaporation cools the remaining water because the molecules with the most energy escape as vapor."
+            },
+            {
+                question: "What do we call the process of a solid (like ice) turning directly into a gas?",
+                options: ["Evaporation", "Condensation", "Sublimation", "Melting"],
+                answer: "C",
+                explanation: "Sublimation is when a solid turns directly into a gas without becoming a liquid first."
+            },
+            {
+                question: "What do we call the process of a gas turning directly into a solid?",
+                options: ["Condensation", "Deposition", "Sublimation", "Freezing"],
+                answer: "B",
+                explanation: "Deposition is when a gas turns directly into a solid, like when frost forms."
+            },
+            {
+                question: "Why do clouds float in the sky?",
+                options: ["They are lighter than air", "They are made of cotton", "Air currents keep them up", "They are magic"],
+                answer: "A",
+                explanation: "Clouds are made of tiny water droplets or ice crystals that are light enough to float in air currents."
+            },
+            {
+                question: "What determines whether precipitation falls as rain or snow?",
+                options: ["The time of day", "The air temperature", "The wind speed", "The cloud color"],
+                answer: "B",
+                explanation: "The temperature of the air between the cloud and the ground determines if precipitation falls as rain or snow."
+            },
+            {
+                question: "What is hail?",
+                options: ["Frozen rain", "Tiny ice crystals", "Balls of ice that form in thunderstorms", "Snow that melts and refreezes"],
+                answer: "C",
+                explanation: "Hail forms when updrafts in thunderstorms carry raindrops upward into extremely cold areas of the cloud where they freeze into ice balls."
+            },
+            {
+                question: "What is the difference between weather and climate?",
+                options: ["Weather is short-term, climate is long-term", "Weather is long-term, climate is short-term", "They mean the same thing", "Weather is about temperature, climate is about rain"],
+                answer: "A",
+                explanation: "Weather describes short-term atmospheric conditions, while climate describes long-term patterns of weather in a specific area."
+            },
+            {
+                question: "What instrument is used to measure rainfall?",
+                options: ["Thermometer", "Barometer", "Rain gauge", "Anemometer"],
+                answer: "C",
+                explanation: "A rain gauge is used to measure the amount of rainfall over a specific period."
+            },
+            {
+                question: "What is humidity?",
+                options: ["The temperature of the air", "The amount of water vapor in the air", "The wind speed", "The air pressure"],
+                answer: "B",
+                explanation: "Humidity is the amount of water vapor present in the air."
+            },
+            {
+                question: "Why does water evaporate faster on a hot, windy day?",
+                options: ["Heat and wind both increase evaporation", "Wind cools the water", "Heat makes water heavier", "Wind pushes water down"],
+                answer: "A",
+                explanation: "Heat provides energy for evaporation, and wind carries away water vapor, allowing more evaporation to occur."
+            },
+            {
+                question: "What is the main gas that makes up our atmosphere?",
+                options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Water vapor"],
+                answer: "C",
+                explanation: "Nitrogen makes up about 78% of Earth's atmosphere."
+            },
+            {
+                question: "What is the process called when water moves through a plant and evaporates from its leaves?",
+                options: ["Photosynthesis", "Transpiration", "Respiration", "Evaporation"],
+                answer: "B",
+                explanation: "Transpiration is the process of water movement through a plant and its evaporation from leaves, stems, and flowers."
+            },
+            {
+                question: "What do we call the boundary where a river meets the ocean?",
+                options: ["Delta", "Estuary", "Source", "Mouth"],
+                answer: "B",
+                explanation: "An estuary is where a river meets the ocean, and fresh water mixes with salt water."
+            },
+            {
+                question: "What is a watershed?",
+                options: ["A building that stores water", "An area of land that drains to a common water body", "A type of cloud", "A water treatment plant"],
+                answer: "B",
+                explanation: "A watershed is an area of land where all the water that falls in it drains to a common body of water like a river, lake, or ocean."
+            },
+            {
+                question: "What is the largest reservoir of water on Earth?",
+                options: ["Glaciers", "Groundwater", "Oceans", "Lakes"],
+                answer: "C",
+                explanation: "Oceans contain about 97% of Earth's water."
+            },
+            {
+                question: "What percentage of Earth's water is fresh water?",
+                options: ["About 3%", "About 25%", "About 50%", "About 97%"],
+                answer: "A",
+                explanation: "Only about 3% of Earth's water is fresh water, and most of that is frozen in glaciers and ice caps."
+            },
+            {
+                question: "What is an aquifer?",
+                options: ["A type of cloud", "An underground layer of water-bearing rock", "A machine that cleans water", "A large lake"],
+                answer: "B",
+                explanation: "An aquifer is an underground layer of water-bearing permeable rock, rock fractures, or unconsolidated materials from which groundwater can be extracted."
+            },
+            {
+                question: "What is desalination?",
+                options: ["The process of water evaporating", "The process of removing salt from water", "The process of water freezing", "The process of clouds forming"],
+                answer: "B",
+                explanation: "Desalination is the process of removing salt from seawater to make it drinkable."
+            },
+            {
+                question: "Why is water called the 'universal solvent'?",
+                options: ["It's found everywhere in the universe", "It can dissolve many different substances", "It's the only liquid on Earth", "It evaporates easily"],
+                answer: "B",
+                explanation: "Water is called the universal solvent because it can dissolve more substances than any other liquid."
+            },
+            {
+                question: "What is the chemical formula for water?",
+                options: ["CO2", "H2O", "O2", "NaCl"],
+                answer: "B",
+                explanation: "The chemical formula for water is H2O, which means each water molecule contains two hydrogen atoms and one oxygen atom."
+            },
+            {
+                question: "At what temperature does water freeze?",
+                options: ["0°C (32°F)", "10°C (50°F)", "100°C (212°F)", "-10°C (14°F)"],
+                answer: "A",
+                explanation: "Water freezes at 0°C (32°F) at sea level."
+            },
+            {
+                question: "At what temperature does water boil?",
+                options: ["0°C (32°F)", "50°C (122°F)", "100°C (212°F)", "150°C (302°F)"],
+                answer: "C",
+                explanation: "Water boils at 100°C (212°F) at sea level."
+            },
+            {
+                question: "What is the solid form of water called?",
+                options: ["Vapor", "Liquid", "Ice", "Steam"],
+                answer: "C",
+                explanation: "Ice is the solid form of water."
+            },
+            {
+                question: "What is the gaseous form of water called?",
+                options: ["Ice", "Liquid", "Water vapor", "Fog"],
+                answer: "C",
+                explanation: "Water vapor is the gaseous form of water."
+            },
+            {
+                question: "Why does ice float on water?",
+                options: ["Ice is lighter than water", "Ice is warmer than water", "Ice has air bubbles", "Ice is magic"],
+                answer: "A",
+                explanation: "Ice is less dense than liquid water, which is why it floats."
+            },
+            {
+                question: "What is the water cycle also known as?",
+                options: ["The hydrocycle", "The rain cycle", "The cloud cycle", "The evaporation cycle"],
+                answer: "A",
+                explanation: "The water cycle is also called the hydrologic cycle or hydrocycle."
+            },
+            {
+                question: "What do we call a period of little or no rain?",
+                options: ["Flood", "Drought", "Hurricane", "Blizzard"],
+                answer: "B",
+                explanation: "A drought is a period of unusually dry weather that lasts long enough to cause problems."
+            },
+            {
+                question: "What do we call a sudden overflow of water onto land that's normally dry?",
+                options: ["Drought", "Flood", "Tsunami", "Tornado"],
+                answer: "B",
+                explanation: "A flood is an overflow of water that submerges land that is usually dry."
+            },
+            {
+                question: "How long has the water on Earth been here?",
+                options: ["A few thousand years", "Millions of years", "Billions of years", "It's created new every day"],
+                answer: "C",
+                explanation: "Earth's water has been here for billions of years, constantly recycled through the water cycle."
+            },
+
+            // Section B: Safety in the Environment (51-100)
+            {
+                question: "Why is it important to wear a helmet when riding a bicycle?",
+                options: ["To look cool", "To protect your head in case of a fall", "To go faster", "To keep the sun out of your eyes"],
+                answer: "B",
+                explanation: "Helmets protect your head from serious injury if you fall off your bicycle."
+            },
+            {
+                question: "What should you do before crossing the street?",
+                options: ["Run across quickly", "Look both ways for cars", "Close your eyes and cross", "Text your friends"],
+                answer: "B",
+                explanation: "Always look left, right, and left again before crossing the street to make sure no cars are coming."
+            },
+            {
+                question: "Why shouldn't you play with matches or lighters?",
+                options: ["They're expensive", "They can start dangerous fires", "They're boring", "They're too small to see"],
+                answer: "B",
+                explanation: "Matches and lighters can start fires that can hurt people and damage property."
+            },
+            {
+                question: "What is the safest way to get out of a building during a fire?",
+                options: ["Use the elevator", "Use the stairs", "Jump out a window", "Hide under a bed"],
+                answer: "B",
+                explanation: "During a fire, always use the stairs, never the elevator, which could stop working."
+            },
+            {
+                question: "Why should you wear sunscreen when playing outside on a sunny day?",
+                options: ["To look tan", "To protect your skin from sunburn", "To keep cool", "To make your skin shiny"],
+                answer: "B",
+                explanation: "Sunscreen protects your skin from harmful UV rays that can cause sunburn and skin damage."
+            },
+            {
+                question: "What should you do if you find a pill or medicine that isn't yours?",
+                options: ["Taste it to see what it is", "Give it to a friend", "Tell a trusted adult", "Flush it down the toilet"],
+                answer: "C",
+                explanation: "Never take medicine that isn't prescribed for you. Always tell a trusted adult if you find pills or medicine."
+            },
+            {
+                question: "Why is it important to wash your hands before eating?",
+                options: ["To make them smell nice", "To remove germs that can make you sick", "To make food taste better", "Because your parents say so"],
+                answer: "B",
+                explanation: "Washing hands removes germs that can cause illness when they get into your body through food."
+            },
+            {
+                question: "What should you do if a stranger offers you a ride home from school?",
+                options: ["Accept if they seem nice", "Politely say no and tell a trusted adult", "Ask for candy first", "Get in the car quickly"],
+                answer: "B",
+                explanation: "Never accept rides from strangers, even if they seem nice. Always tell a trusted adult about the encounter."
+            },
+            {
+                question: "Why should you wear a life jacket when on a boat?",
+                options: ["It looks fashionable", "It keeps you warm", "It helps you float if you fall in the water", "It makes swimming easier"],
+                answer: "C",
+                explanation: "Life jackets keep you afloat if you accidentally fall into the water, which could save your life."
+            },
+            {
+                question: "What is the 'Stop, Drop, and Roll' technique used for?",
+                options: ["Crossing the street", "Putting out fires on clothing", "Playing tag", "Getting out of bed"],
+                answer: "B",
+                explanation: "Stop, Drop, and Roll is used to put out flames if your clothing catches on fire."
+            },
+            {
+                question: "Why shouldn't you run near a swimming pool?",
+                options: ["You might get tired", "You could slip and fall", "The lifeguard might yell at you", "It wastes energy"],
+                answer: "B",
+                explanation: "Running on wet surfaces can cause slips and falls that may lead to serious injuries."
+            },
+            {
+                question: "What should you do during a thunderstorm?",
+                options: ["Go outside to watch the lightning", "Stand under a tall tree", "Go inside a building or car", "Play in the rain"],
+                answer: "C",
+                explanation: "During a thunderstorm, go inside a substantial building or a hard-top vehicle to stay safe from lightning."
+            },
+            {
+                question: "Why is it important to wear bright colors when walking or biking at night?",
+                options: ["Bright colors are fashionable", "They help drivers see you better", "They keep you warm", "They scare away animals"],
+                answer: "B",
+                explanation: "Bright colors and reflective materials make you more visible to drivers in low-light conditions."
+            },
+            {
+                question: "What should you do if you get separated from your parents in a store?",
+                options: ["Keep looking for them", "Go to the parking lot to wait", "Find a store employee and ask for help", "Leave the store and go home"],
+                answer: "C",
+                explanation: "If you get lost, find a store employee or go to a checkout counter and ask for help. Never leave the store alone."
+            },
+            {
+                question: "Why should you never touch a wild animal?",
+                options: ["They might have germs or diseases", "They don't like to be touched", "They might run away", "They're too fast to catch"],
+                answer: "A",
+                explanation: "Wild animals can carry diseases and may bite or scratch if they feel threatened."
+            },
+            {
+                question: "What is the safest way to carry scissors?",
+                options: ["With the points facing forward", "With the points facing down", "With the points facing up", "Throw them to someone"],
+                answer: "B",
+                explanation: "Always carry scissors with the points facing down and towards your palm to avoid accidents."
+            },
+            {
+                question: "Why should you wear shoes outside?",
+                options: ["To look fashionable", "To protect your feet from sharp objects", "To make you taller", "Because everyone else does"],
+                answer: "B",
+                explanation: "Shoes protect your feet from sharp objects, hot surfaces, insects, and other hazards."
+            },
+            {
+                question: "What should you do if you see a downed power line?",
+                options: ["Touch it to see if it's live", "Jump over it", "Stay away and tell an adult", "Try to move it off the road"],
+                answer: "C",
+                explanation: "Always stay away from downed power lines and immediately tell a trusted adult. They could be live and dangerous."
+            },
+            {
+                question: "Why is it important to drink water when you're active and sweating?",
+                options: ["To stay hydrated", "To wash down food", "Because it's free", "To cool your mouth"],
+                answer: "A",
+                explanation: "When you're active and sweating, your body loses water. Drinking water helps prevent dehydration."
+            },
+            {
+                question: "What should you do if a friend challenges you to do something dangerous?",
+                options: ["Do it to prove you're brave", "Politely say no and suggest something safer", "Dare them to do it first", "Tell a teacher to get them in trouble"],
+                answer: "B",
+                explanation: "Real friends don't pressure you to do dangerous things. It's okay to say no and suggest a safer activity."
+            },
+            {
+                question: "Why should you look both ways before crossing a street, even if the walk signal says 'WALK'?",
+                options: ["The signal might be broken", "Cars might not stop", "It's good exercise for your neck", "To make sure no one is watching"],
+                answer: "B",
+                explanation: "Sometimes drivers don't see the signals or pedestrians. Always look for cars yourself before crossing."
+            },
+            {
+                question: "What is the safest way to use the internet?",
+                options: ["Share personal information with online friends", "Never tell your parents what you do online", "Only visit websites your parents or teachers approve", "Use any website that looks interesting"],
+                answer: "C",
+                explanation: "For internet safety, only visit approved websites and never share personal information with strangers online."
+            },
+            {
+                question: "Why shouldn't you accept friend requests from people you don't know online?",
+                options: ["They might be boring", "They could be pretending to be someone they're not", "You might run out of friend space", "Your real friends might get jealous"],
+                answer: "B",
+                explanation: "People online aren't always who they say they are. Only accept friend requests from people you know in real life."
+            },
+            {
+                question: "What should you do if you feel sick at school?",
+                options: ["Try to hide it", "Tell your teacher or school nurse", "Go home by yourself", "Wait until the end of the day"],
+                answer: "B",
+                explanation: "If you feel sick at school, tell your teacher or the school nurse so they can help you and contact your parents if needed."
+            },
+            {
+                question: "Why is it important to follow safety rules at the playground?",
+                options: ["To avoid getting in trouble", "To have more fun", "To prevent injuries", "To impress your friends"],
+                answer: "C",
+                explanation: "Playground safety rules are designed to prevent accidents and injuries while having fun."
+            },
+            {
+                question: "What should you do if you see a gun?",
+                options: ["Touch it to see if it's real", "Point it at a target", "Leave it alone and tell an adult immediately", "Hide it so no one else finds it"],
+                answer: "C",
+                explanation: "If you see a gun, never touch it. Leave the area and immediately tell a trusted adult."
+            },
+            {
+                question: "Why should you wear protective gear when skating or skateboarding?",
+                options: ["It makes you look like a professional", "It protects you from injuries if you fall", "It helps you go faster", "It's required by law"],
+                answer: "B",
+                explanation: "Helmets, knee pads, and elbow pads protect you from serious injuries if you fall while skating or skateboarding."
+            },
+            {
+                question: "What is the safest way to handle broken glass?",
+                options: ["Pick it up with your bare hands", "Sweep it up with a broom and dustpan", "Kick it under the rug", "Leave it for someone else to clean"],
+                answer: "B",
+                explanation: "Broken glass should be carefully swept up with a broom and dustpan to avoid cuts. Tell an adult if you find broken glass."
+            },
+            {
+                question: "Why shouldn't you play with electrical outlets or cords?",
+                options: ["They're expensive to replace", "You could get a dangerous electric shock", "They're boring to play with", "They might break easily"],
+                answer: "B",
+                explanation: "Electricity can cause serious shocks, burns, or even death. Never play with electrical outlets or cords."
+            },
+            {
+                question: "What should you do if you're home alone and someone knocks on the door?",
+                options: ["Open the door to see who it is", "Ignore it completely", "Look through a window to see who it is, but don't open the door", "Invite them in for a snack"],
+                answer: "C",
+                explanation: "When home alone, never open the door for strangers. Look to see who it is through a window or peephole, but don't let them know you're alone."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent science knowledge!",
+            "Fantastic observation skills!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a science expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initBackgroundAnimation();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade3ScienceWaterCycleSafety');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade3ScienceWaterCycleSafety', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Create a copy of questions and shuffle them
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixGrade3ScienceWaterCycleSafety_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade3ScienceWaterCycleSafety_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a science expert who understands the water cycle and safety perfectly!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have a strong understanding of how water moves through the environment and how to stay safe!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a science master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the questions you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better with more practice!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    feedbackMessage.textContent = `Correct answer: ${String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65))}`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade3-science-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 4 Math - Multiplication & Division | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Math Theme */
+        :root {
+            --primary-purple: #7B1FA2;
+            --secondary-purple: #BA68C8;
+            --light-purple: #E1BEE7;
+            --accent-amber: #FFA000;
+            --light-amber: #FFD54F;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(123, 31, 162, 0.3);
+            --amber-glow: 0 0 20px rgba(255, 160, 0, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Animation */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #1a0b2e 0%, #2d1b4a 100%);
+            overflow: hidden;
+        }
+
+        .math-symbol {
+            position: absolute;
+            color: rgba(186, 104, 200, 0.3);
+            font-size: 24px;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .floating-number {
+            position: absolute;
+            color: rgba(255, 160, 0, 0.4);
+            font-size: 18px;
+            font-weight: bold;
+            animation: float-slow linear infinite;
+        }
+
+        @keyframes float-slow {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page - Stylish Design */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .welcome-header {
+            position: relative;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .welcome-logo-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+        }
+
+        .welcome-logo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--secondary-purple), var(--accent-amber));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow), 0 0 40px rgba(186, 104, 200, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-logo::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-purple), var(--accent-amber));
+            z-index: -1;
+            animation: pulse 3s infinite;
+        }
+
+        .welcome-logo::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-purple), var(--accent-amber));
+            z-index: -2;
+            opacity: 0.3;
+            animation: pulse 4s infinite reverse;
+        }
+
+        .welcome-logo img {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-purple), var(--accent-amber));
+            opacity: 0.1;
+            animation: float-shapes 6s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 70%;
+            left: 80%;
+            animation-delay: 1s;
+        }
+
+        .shape:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            top: 40%;
+            left: 85%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(4) {
+            width: 70px;
+            height: 70px;
+            top: 80%;
+            left: 20%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float-shapes {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        .welcome-title {
+            font-size: 3.2rem;
+            background: linear-gradient(135deg, var(--secondary-purple), var(--accent-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 800;
+            text-shadow: 0 0 30px rgba(186, 104, 200, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 700px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        .topic-badges {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .topic-badge {
+            background: linear-gradient(135deg, var(--secondary-purple), var(--light-purple));
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(186, 104, 200, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topic-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .topic-badge:hover::before {
+            left: 100%;
+        }
+
+        .topic-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(186, 104, 200, 0.6);
+        }
+
+        .topic-badge.amber {
+            background: linear-gradient(135deg, var(--accent-amber), var(--light-amber));
+            box-shadow: 0 4px 15px rgba(255, 160, 0, 0.4);
+        }
+
+        .topic-badge.amber:hover {
+            box-shadow: 0 6px 20px rgba(255, 160, 0, 0.6);
+        }
+
+        .input-container {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 18px 25px;
+            border: 2px solid var(--dark-border);
+            border-radius: 16px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--secondary-purple);
+            box-shadow: 0 0 0 3px rgba(186, 104, 200, 0.2);
+            background: rgba(186, 104, 200, 0.05);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 16px 35px;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-purple), var(--primary-purple));
+            color: white;
+            box-shadow: 0 6px 20px rgba(186, 104, 200, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(186, 104, 200, 0.6);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-amber), var(--light-amber));
+            color: white;
+            box-shadow: 0 6px 20px rgba(255, 160, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, var(--light-amber), var(--accent-amber));
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 160, 0, 0.6);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--secondary-purple);
+            transform: translateY(-3px);
+        }
+
+        .btn-small {
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+
+        /* Stats Section */
+        .welcome-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            min-width: 150px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--secondary-purple), var(--accent-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary-purple), var(--accent-amber));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(186, 104, 200, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--secondary-purple);
+            background: rgba(186, 104, 200, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(186, 104, 200, 0.1);
+            border-color: var(--secondary-purple);
+            color: var(--secondary-purple);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--secondary-purple);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(186, 104, 200, 0.1);
+            border-left: 5px solid var(--secondary-purple);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--secondary-purple);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--secondary-purple);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--secondary-purple), var(--accent-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--secondary-purple), var(--accent-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary-purple);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2.2rem;
+            }
+            
+            .welcome-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .welcome-stats {
+                gap: 15px;
+            }
+            
+            .stat-item {
+                min-width: 120px;
+                padding: 15px;
+            }
+            
+            .stat-value {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation" id="backgroundAnimation"></div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-header">
+                <div class="welcome-logo-container">
+                    <div class="welcome-logo">
+                        <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+                    </div>
+                    <div class="floating-shapes">
+                        <div class="shape"></div>
+                        <div class="shape"></div>
+                        <div class="shape"></div>
+                        <div class="shape"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <h1 class="welcome-title">Multiplication & Division Mastery</h1>
+            <p class="welcome-subtitle">Master the essential skills of multiplying 3-4 digit numbers and performing long division with and without remainders. Build confidence with step-by-step problems and instant feedback.</p>
+            
+            <div class="topic-badges">
+                <div class="topic-badge">3-4 Digit Multiplication</div>
+                <div class="topic-badge amber">Long Division</div>
+                <div class="topic-badge">With Remainders</div>
+                <div class="topic-badge amber">Word Problems</div>
+            </div>
+            
+            <div class="input-container">
+                <div class="input-group">
+                    <label for="studentName">Enter your name to begin your math journey:</label>
+                    <input type="text" id="studentName" placeholder="Your full name">
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Math Adventure</span>
+                </button>
+                <button class="btn btn-secondary" id="viewDemo">
+                    <span>View Demo</span>
+                </button>
+            </div>
+            
+            <div class="welcome-stats">
+                <div class="stat-item">
+                    <div class="stat-value">100+</div>
+                    <div class="stat-label">Practice Questions</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Skill Levels</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">∞</div>
+                    <div class="stat-label">Unlimited Practice</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Math Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Practice Again</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background animation
+        function initBackgroundAnimation() {
+            const background = document.getElementById('backgroundAnimation');
+            const mathSymbols = ['×', '÷', '=', '>', '<'];
+            
+            // Create math symbols
+            for (let i = 0; i < 20; i++) {
+                const symbol = document.createElement('div');
+                symbol.className = 'math-symbol';
+                symbol.textContent = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
+                symbol.style.left = `${Math.random() * 100}%`;
+                symbol.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                symbol.style.animationDelay = `${Math.random() * 5}s`;
+                symbol.style.fontSize = `${Math.random() * 20 + 16}px`;
+                background.appendChild(symbol);
+            }
+            
+            // Create floating numbers
+            for (let i = 0; i < 15; i++) {
+                const number = document.createElement('div');
+                number.className = 'floating-number';
+                number.textContent = Math.floor(Math.random() * 10000).toLocaleString();
+                number.style.left = `${Math.random() * 100}%`;
+                number.style.animationDuration = `${Math.random() * 15 + 15}s`;
+                number.style.animationDelay = `${Math.random() * 10}s`;
+                background.appendChild(number);
+            }
+        }
+
+        // Generate 100+ questions for Grade 4 Multiplication & Division
+        function generateQuestions() {
+            const questions = [];
+            
+            // Question types:
+            // 1. 3-digit × 1-digit multiplication
+            // 2. 3-digit × 2-digit multiplication
+            // 3. 4-digit × 1-digit multiplication
+            // 4. 4-digit × 2-digit multiplication
+            // 5. Long division without remainder
+            // 6. Long division with remainder
+            // 7. Word problems
+            
+            // Generate 15 3-digit × 1-digit multiplication questions
+            for (let i = 0; i < 15; i++) {
+                const num1 = Math.floor(Math.random() * 900) + 100; // 3-digit number
+                const num2 = Math.floor(Math.random() * 9) + 1; // 1-digit number
+                const product = num1 * num2;
+                
+                // Generate incorrect options
+                const incorrect = [];
+                while (incorrect.length < 3) {
+                    let wrongAnswer;
+                    do {
+                        // Common errors in multiplication
+                        if (Math.random() > 0.5) {
+                            // Forgetting to carry over
+                            wrongAnswer = product - (Math.floor(Math.random() * 100) + 10);
+                        } else {
+                            // Adding instead of multiplying
+                            wrongAnswer = num1 + num2;
+                        }
+                    } while (wrongAnswer === product || incorrect.includes(wrongAnswer));
+                    incorrect.push(wrongAnswer.toLocaleString());
+                }
+                
+                // Shuffle options
+                const options = [product.toLocaleString(), ...incorrect];
+                shuffleArray(options);
+                const answerIndex = options.indexOf(product.toLocaleString());
+                
+                questions.push({
+                    question: `What is ${num1.toLocaleString()} × ${num2}?`,
+                    options: options,
+                    answer: String.fromCharCode(65 + answerIndex),
+                    explanation: `${num1.toLocaleString()} × ${num2} = ${product.toLocaleString()}. Multiply each digit of ${num1} by ${num2}, starting from the ones place.`
+                });
+            }
+            
+            // Generate 15 3-digit × 2-digit multiplication questions
+            for (let i = 0; i < 15; i++) {
+                const num1 = Math.floor(Math.random() * 900) + 100; // 3-digit number
+                const num2 = Math.floor(Math.random() * 90) + 10; // 2-digit number
+                const product = num1 * num2;
+                
+                // Generate incorrect options
+                const incorrect = [];
+                while (incorrect.length < 3) {
+                    let wrongAnswer;
+                    do {
+                        // Common errors in 2-digit multiplication
+                        if (Math.random() > 0.5) {
+                            // Forgetting the second step of multiplication
+                            wrongAnswer = num1 * (num2 % 10);
+                        } else {
+                            // Adding instead of multiplying
+                            wrongAnswer = num1 + num2;
+                        }
+                    } while (wrongAnswer === product || incorrect.includes(wrongAnswer));
+                    incorrect.push(wrongAnswer.toLocaleString());
+                }
+                
+                // Shuffle options
+                const options = [product.toLocaleString(), ...incorrect];
+                shuffleArray(options);
+                const answerIndex = options.indexOf(product.toLocaleString());
+                
+                questions.push({
+                    question: `Calculate: ${num1.toLocaleString()} × ${num2.toLocaleString()}`,
+                    options: options,
+                    answer: String.fromCharCode(65 + answerIndex),
+                    explanation: `${num1.toLocaleString()} × ${num2.toLocaleString()} = ${product.toLocaleString()}. Multiply ${num1} by each digit of ${num2}, then add the partial products.`
+                });
+            }
+            
+            // Generate 15 4-digit × 1-digit multiplication questions
+            for (let i = 0; i < 15; i++) {
+                const num1 = Math.floor(Math.random() * 9000) + 1000; // 4-digit number
+                const num2 = Math.floor(Math.random() * 9) + 1; // 1-digit number
+                const product = num1 * num2;
+                
+                // Generate incorrect options
+                const incorrect = [];
+                while (incorrect.length < 3) {
+                    let wrongAnswer;
+                    do {
+                        // Common errors with 4-digit numbers
+                        if (Math.random() > 0.5) {
+                            // Missing a carryover
+                            wrongAnswer = product - (Math.floor(Math.random() * 1000) + 100);
+                        } else {
+                            // Completely wrong calculation
+                            wrongAnswer = Math.floor(product * 0.8) + Math.floor(Math.random() * 1000);
+                        }
+                    } while (wrongAnswer === product || incorrect.includes(wrongAnswer));
+                    incorrect.push(wrongAnswer.toLocaleString());
+                }
+                
+                // Shuffle options
+                const options = [product.toLocaleString(), ...incorrect];
+                shuffleArray(options);
+                const answerIndex = options.indexOf(product.toLocaleString());
+                
+                questions.push({
+                    question: `What is ${num1.toLocaleString()} × ${num2}?`,
+                    options: options,
+                    answer: String.fromCharCode(65 + answerIndex),
+                    explanation: `${num1.toLocaleString()} × ${num2} = ${product.toLocaleString()}. Multiply each digit of ${num1} by ${num2}, carrying over when necessary.`
+                });
+            }
+            
+            // Generate 15 4-digit × 2-digit multiplication questions
+            for (let i = 0; i < 15; i++) {
+                const num1 = Math.floor(Math.random() * 9000) + 1000; // 4-digit number
+                const num2 = Math.floor(Math.random() * 90) + 10; // 2-digit number
+                const product = num1 * num2;
+                
+                // Generate incorrect options
+                const incorrect = [];
+                while (incorrect.length < 3) {
+                    let wrongAnswer;
+                    do {
+                        // Common errors with larger multiplication
+                        if (Math.random() > 0.5) {
+                            // Only multiplying by ones digit
+                            wrongAnswer = num1 * (num2 % 10);
+                        } else {
+                            // Adding a zero incorrectly
+                            wrongAnswer = (num1 * Math.floor(num2 / 10)) * 10 + (num1 * (num2 % 10));
+                        }
+                    } while (wrongAnswer === product || incorrect.includes(wrongAnswer));
+                    incorrect.push(wrongAnswer.toLocaleString());
+                }
+                
+                // Shuffle options
+                const options = [product.toLocaleString(), ...incorrect];
+                shuffleArray(options);
+                const answerIndex = options.indexOf(product.toLocaleString());
+                
+                questions.push({
+                    question: `Calculate: ${num1.toLocaleString()} × ${num2.toLocaleString()}`,
+                    options: options,
+                    answer: String.fromCharCode(65 + answerIndex),
+                    explanation: `${num1.toLocaleString()} × ${num2.toLocaleString()} = ${product.toLocaleString()}. Multiply ${num1} by each digit of ${num2}, remembering to add a zero when multiplying by the tens digit.`
+                });
+            }
+            
+            // Generate 15 long division without remainder questions
+            for (let i = 0; i < 15; i++) {
+                const divisor = Math.floor(Math.random() * 90) + 10; // 2-digit divisor
+                const quotient = Math.floor(Math.random() * 900) + 100; // 3-digit quotient
+                const dividend = divisor * quotient;
+                
+                // Generate incorrect options
+                const incorrect = [];
+                while (incorrect.length < 3) {
+                    let wrongAnswer;
+                    do {
+                        // Common division errors
+                        if (Math.random() > 0.5) {
+                            // Wrong quotient digit
+                            wrongAnswer = quotient + Math.floor(Math.random() * 10) - 5;
+                        } else {
+                            // Completely wrong calculation
+                            wrongAnswer = Math.floor(dividend / (divisor + Math.floor(Math.random() * 5) + 1));
+                        }
+                    } while (wrongAnswer === quotient || incorrect.includes(wrongAnswer));
+                    incorrect.push(wrongAnswer.toLocaleString());
+                }
+                
+                // Shuffle options
+                const options = [quotient.toLocaleString(), ...incorrect];
+                shuffleArray(options);
+                const answerIndex = options.indexOf(quotient.toLocaleString());
+                
+                questions.push({
+                    question: `What is ${dividend.toLocaleString()} ÷ ${divisor}?`,
+                    options: options,
+                    answer: String.fromCharCode(65 + answerIndex),
+                    explanation: `${dividend.toLocaleString()} ÷ ${divisor} = ${quotient.toLocaleString()}. Divide step by step, starting from the leftmost digit of the dividend.`
+                });
+            }
+            
+            // Generate 15 long division with remainder questions
+            for (let i = 0; i < 15; i++) {
+                const divisor = Math.floor(Math.random() * 90) + 10; // 2-digit divisor
+                const quotient = Math.floor(Math.random() * 900) + 100; // 3-digit quotient
+                const remainder = Math.floor(Math.random() * (divisor - 1)) + 1; // Remainder between 1 and divisor-1
+                const dividend = divisor * quotient + remainder;
+                
+                // Generate incorrect options (as quotient R remainder)
+                const correctAnswer = `${quotient.toLocaleString()} R ${remainder}`;
+                const incorrect = [];
+                while (incorrect.length < 3) {
+                    let wrongQuotient, wrongRemainder;
+                    do {
+                        // Common errors with remainders
+                        if (Math.random() > 0.5) {
+                            // Wrong quotient
+                            wrongQuotient = quotient + Math.floor(Math.random() * 10) - 5;
+                            wrongRemainder = dividend - (divisor * wrongQuotient);
+                        } else {
+                            // Wrong remainder
+                            wrongQuotient = quotient;
+                            wrongRemainder = remainder + Math.floor(Math.random() * 5) - 2;
+                        }
+                        // Ensure remainder is valid (0 <= remainder < divisor)
+                        if (wrongRemainder < 0) wrongRemainder = 0;
+                        if (wrongRemainder >= divisor) wrongRemainder = divisor - 1;
+                    } while (
+                        `${wrongQuotient.toLocaleString()} R ${wrongRemainder}` === correctAnswer || 
+                        incorrect.includes(`${wrongQuotient.toLocaleString()} R ${wrongRemainder}`)
+                    );
+                    incorrect.push(`${wrongQuotient.toLocaleString()} R ${wrongRemainder}`);
+                }
+                
+                // Shuffle options
+                const options = [correctAnswer, ...incorrect];
+                shuffleArray(options);
+                const answerIndex = options.indexOf(correctAnswer);
+                
+                questions.push({
+                    question: `What is ${dividend.toLocaleString()} ÷ ${divisor}?`,
+                    options: options,
+                    answer: String.fromCharCode(65 + answerIndex),
+                    explanation: `${dividend.toLocaleString()} ÷ ${divisor} = ${quotient.toLocaleString()} with a remainder of ${remainder}. The remainder must be less than the divisor.`
+                });
+            }
+            
+            // Generate 10 word problems
+            const wordProblems = [
+                {
+                    problem: "A factory produces 345 toys each day. How many toys will they produce in 23 days?",
+                    answer: (345 * 23).toLocaleString()
+                },
+                {
+                    problem: "A school has 1,248 students. If they are divided equally into 24 classes, how many students are in each class?",
+                    answer: "52"
+                },
+                {
+                    problem: "A book has 428 pages. How many pages are in 15 copies of this book?",
+                    answer: (428 * 15).toLocaleString()
+                },
+                {
+                    problem: "A farmer has 956 apples to pack into boxes that hold 24 apples each. How many full boxes can he pack, and how many apples will be left over?",
+                    answer: "39 R 20"
+                },
+                {
+                    problem: "A company bought 35 computers for $1,235 each. What was the total cost?",
+                    answer: (1235 * 35).toLocaleString()
+                }
+            ];
+            
+            for (let i = 0; i < 10; i++) {
+                const problem = wordProblems[i % wordProblems.length];
+                const answer = problem.answer;
+                
+                // Generate incorrect options
+                const incorrect = [];
+                while (incorrect.length < 3) {
+                    let wrongAnswer;
+                    do {
+                        // Common errors in word problems
+                        if (problem.answer.includes("R")) {
+                            // For remainder problems
+                            if (Math.random() > 0.5) {
+                                wrongAnswer = "40 R 10";
+                            } else {
+                                wrongAnswer = "38 R 15";
+                            }
+                        } else {
+                            // For multiplication problems
+                            const num = parseInt(problem.answer.replace(/,/g, ''));
+                            wrongAnswer = (num + Math.floor(Math.random() * 1000) - 500).toLocaleString();
+                        }
+                    } while (wrongAnswer === answer || incorrect.includes(wrongAnswer));
+                    incorrect.push(wrongAnswer);
+                }
+                
+                // Shuffle options
+                const options = [answer, ...incorrect];
+                shuffleArray(options);
+                const answerIndex = options.indexOf(answer);
+                
+                questions.push({
+                    question: problem.problem,
+                    options: options,
+                    answer: String.fromCharCode(65 + answerIndex),
+                    explanation: `The correct answer is ${answer}. Read word problems carefully to determine the correct operation to use.`
+                });
+            }
+            
+            return questions;
+        }
+        
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent math skills!",
+            "Fantastic calculation!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a math expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const viewDemoBtn = document.getElementById('viewDemo');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initBackgroundAnimation();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade4MathMultiplicationDivision');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade4MathMultiplicationDivision', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Generate questions
+            appState.currentQuestions = generateQuestions();
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            viewDemoBtn.addEventListener('click', showDemo);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show demo
+        function showDemo() {
+            alert("This would show a demo of how to solve multiplication and division problems with large numbers. In a full implementation, this would include step-by-step examples and interactive tutorials.");
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixGrade4MathMultiplicationDivision_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade4MathMultiplicationDivision_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a multiplication and division expert who can handle large numbers with ease!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have strong skills in multiplying and dividing large numbers!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a math master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the questions you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better with more practice!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = question.options[correctAnswer.charCodeAt(0) - 65];
+                    feedbackMessage.textContent = `Correct answer: ${correctOption}`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade4-math-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

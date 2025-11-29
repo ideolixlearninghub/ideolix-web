@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 4 Math - Geometry | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Dark Theme with Green and Dark Orange */
+        :root {
+            --primary-green: #00C853;
+            --secondary-orange: #FF5722;
+            --accent-purple: #7C4DFF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 200, 83, 0.3);
+            --orange-glow: 0 0 20px rgba(255, 87, 34, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00B248;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #E64A19;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 87, 34, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(0, 200, 83, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 4 Math – Geometry</h1>
+            <p class="welcome-subtitle">Welcome to our interactive geometry module! Here you'll explore lines, angles, triangles, quadrilaterals, perimeter, and area. Get ready to become a geometry expert!</p>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Practice Mode</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Practice Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Retry Topic</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 100 Geometry questions for Grade 4
+        const questions = [
+            // Lines and Angles
+            {
+                question: "What type of angle is less than 90 degrees?",
+                options: ["Acute angle", "Right angle", "Obtuse angle", "Straight angle"],
+                answer: "A",
+                explanation: "An acute angle is less than 90 degrees."
+            },
+            {
+                question: "How many degrees are in a right angle?",
+                options: ["45°", "90°", "180°", "360°"],
+                answer: "B",
+                explanation: "A right angle is exactly 90 degrees."
+            },
+            {
+                question: "What type of lines never meet and are always the same distance apart?",
+                options: ["Intersecting lines", "Perpendicular lines", "Parallel lines", "Curved lines"],
+                answer: "C",
+                explanation: "Parallel lines never meet and maintain the same distance between them."
+            },
+            {
+                question: "What type of angle is greater than 90 degrees but less than 180 degrees?",
+                options: ["Acute angle", "Right angle", "Obtuse angle", "Reflex angle"],
+                answer: "C",
+                explanation: "An obtuse angle is greater than 90° but less than 180°."
+            },
+            {
+                question: "What do we call lines that cross each other at a point?",
+                options: ["Parallel lines", "Perpendicular lines", "Intersecting lines", "Curved lines"],
+                answer: "C",
+                explanation: "Intersecting lines cross each other at a point."
+            },
+            {
+                question: "What type of angle is exactly 180 degrees?",
+                options: ["Acute angle", "Right angle", "Obtuse angle", "Straight angle"],
+                answer: "D",
+                explanation: "A straight angle is exactly 180 degrees."
+            },
+            {
+                question: "What do we call lines that form a right angle when they intersect?",
+                options: ["Parallel lines", "Perpendicular lines", "Intersecting lines", "Diagonal lines"],
+                answer: "B",
+                explanation: "Perpendicular lines intersect at a 90-degree angle."
+            },
+            {
+                question: "How many degrees are in a full circle?",
+                options: ["90°", "180°", "270°", "360°"],
+                answer: "D",
+                explanation: "A full circle contains 360 degrees."
+            },
+            {
+                question: "What is the name for a part of a line that has one endpoint and extends forever in one direction?",
+                options: ["Line", "Line segment", "Ray", "Point"],
+                answer: "C",
+                explanation: "A ray has one endpoint and extends forever in one direction."
+            },
+            {
+                question: "What do we call a part of a line with two endpoints?",
+                options: ["Line", "Line segment", "Ray", "Angle"],
+                answer: "B",
+                explanation: "A line segment has two endpoints."
+            },
+            
+            // Triangles
+            {
+                question: "How many sides does a triangle have?",
+                options: ["2", "3", "4", "5"],
+                answer: "B",
+                explanation: "A triangle has 3 sides."
+            },
+            {
+                question: "What type of triangle has all sides equal in length?",
+                options: ["Scalene triangle", "Isosceles triangle", "Equilateral triangle", "Right triangle"],
+                answer: "C",
+                explanation: "An equilateral triangle has all three sides equal in length."
+            },
+            {
+                question: "What type of triangle has two sides equal in length?",
+                options: ["Scalene triangle", "Isosceles triangle", "Equilateral triangle", "Right triangle"],
+                answer: "B",
+                explanation: "An isosceles triangle has two sides equal in length."
+            },
+            {
+                question: "What type of triangle has all sides different lengths?",
+                options: ["Scalene triangle", "Isosceles triangle", "Equilateral triangle", "Right triangle"],
+                answer: "A",
+                explanation: "A scalene triangle has all three sides different lengths."
+            },
+            {
+                question: "What type of triangle has one angle measuring 90 degrees?",
+                options: ["Acute triangle", "Obtuse triangle", "Right triangle", "Equilateral triangle"],
+                answer: "C",
+                explanation: "A right triangle has one 90-degree angle."
+            },
+            {
+                question: "What is the sum of all angles in a triangle?",
+                options: ["90°", "180°", "270°", "360°"],
+                answer: "B",
+                explanation: "The sum of all angles in any triangle is always 180 degrees."
+            },
+            {
+                question: "If two angles of a triangle measure 45° and 45°, what is the measure of the third angle?",
+                options: ["45°", "90°", "135°", "180°"],
+                answer: "B",
+                explanation: "45° + 45° = 90°, so 180° - 90° = 90°."
+            },
+            {
+                question: "What type of triangle has all angles less than 90 degrees?",
+                options: ["Acute triangle", "Obtuse triangle", "Right triangle", "Equilateral triangle"],
+                answer: "A",
+                explanation: "An acute triangle has all angles less than 90 degrees."
+            },
+            {
+                question: "What type of triangle has one angle greater than 90 degrees?",
+                options: ["Acute triangle", "Obtuse triangle", "Right triangle", "Equilateral triangle"],
+                answer: "B",
+                explanation: "An obtuse triangle has one angle greater than 90 degrees."
+            },
+            {
+                question: "How many vertices does a triangle have?",
+                options: ["2", "3", "4", "5"],
+                answer: "B",
+                explanation: "A triangle has 3 vertices (corners)."
+            },
+            
+            // Quadrilaterals
+            {
+                question: "How many sides does a quadrilateral have?",
+                options: ["2", "3", "4", "5"],
+                answer: "C",
+                explanation: "A quadrilateral has 4 sides."
+            },
+            {
+                question: "What quadrilateral has all sides equal and all angles 90 degrees?",
+                options: ["Rectangle", "Square", "Rhombus", "Trapezoid"],
+                answer: "B",
+                explanation: "A square has all sides equal and all angles 90 degrees."
+            },
+            {
+                question: "What quadrilateral has opposite sides equal and all angles 90 degrees?",
+                options: ["Rectangle", "Square", "Rhombus", "Trapezoid"],
+                answer: "A",
+                explanation: "A rectangle has opposite sides equal and all angles 90 degrees."
+            },
+            {
+                question: "What quadrilateral has all sides equal but not necessarily 90-degree angles?",
+                options: ["Rectangle", "Square", "Rhombus", "Trapezoid"],
+                answer: "C",
+                explanation: "A rhombus has all sides equal but angles are not necessarily 90 degrees."
+            },
+            {
+                question: "What quadrilateral has exactly one pair of parallel sides?",
+                options: ["Rectangle", "Square", "Rhombus", "Trapezoid"],
+                answer: "D",
+                explanation: "A trapezoid has exactly one pair of parallel sides."
+            },
+            {
+                question: "What is the sum of all angles in a quadrilateral?",
+                options: ["90°", "180°", "270°", "360°"],
+                answer: "D",
+                explanation: "The sum of all angles in any quadrilateral is always 360 degrees."
+            },
+            {
+                question: "How many pairs of parallel sides does a rectangle have?",
+                options: ["0", "1", "2", "4"],
+                answer: "C",
+                explanation: "A rectangle has 2 pairs of parallel sides."
+            },
+            {
+                question: "What quadrilateral has no parallel sides?",
+                options: ["Square", "Rectangle", "Rhombus", "Kite"],
+                answer: "D",
+                explanation: "A kite has no parallel sides."
+            },
+            {
+                question: "How many vertices does a quadrilateral have?",
+                options: ["2", "3", "4", "5"],
+                answer: "C",
+                explanation: "A quadrilateral has 4 vertices (corners)."
+            },
+            {
+                question: "What quadrilateral has two pairs of adjacent sides equal?",
+                options: ["Square", "Rectangle", "Rhombus", "Kite"],
+                answer: "D",
+                explanation: "A kite has two pairs of adjacent sides equal."
+            },
+            
+            // Perimeter
+            {
+                question: "What is the perimeter of a square with side length 5 cm?",
+                options: ["10 cm", "15 cm", "20 cm", "25 cm"],
+                answer: "C",
+                explanation: "Perimeter of a square = 4 × side = 4 × 5 = 20 cm."
+            },
+            {
+                question: "What is the perimeter of a rectangle with length 8 cm and width 3 cm?",
+                options: ["11 cm", "16 cm", "22 cm", "24 cm"],
+                answer: "C",
+                explanation: "Perimeter of a rectangle = 2 × (length + width) = 2 × (8 + 3) = 22 cm."
+            },
+            {
+                question: "If the perimeter of a square is 36 cm, what is the length of one side?",
+                options: ["6 cm", "9 cm", "12 cm", "18 cm"],
+                answer: "B",
+                explanation: "Side length = Perimeter ÷ 4 = 36 ÷ 4 = 9 cm."
+            },
+            {
+                question: "What is the perimeter of a triangle with sides 5 cm, 7 cm, and 9 cm?",
+                options: ["15 cm", "18 cm", "21 cm", "24 cm"],
+                answer: "C",
+                explanation: "Perimeter = sum of all sides = 5 + 7 + 9 = 21 cm."
+            },
+            {
+                question: "A rectangular garden is 12 m long and 8 m wide. What is its perimeter?",
+                options: ["20 m", "32 m", "40 m", "96 m"],
+                answer: "C",
+                explanation: "Perimeter = 2 × (length + width) = 2 × (12 + 8) = 40 m."
+            },
+            {
+                question: "If the perimeter of a rectangle is 30 cm and its length is 10 cm, what is its width?",
+                options: ["5 cm", "10 cm", "15 cm", "20 cm"],
+                answer: "A",
+                explanation: "Perimeter = 2 × (length + width), so 30 = 2 × (10 + width), 15 = 10 + width, width = 5 cm."
+            },
+            {
+                question: "What is the perimeter of a regular pentagon with side length 4 cm?",
+                options: ["16 cm", "20 cm", "24 cm", "28 cm"],
+                answer: "B",
+                explanation: "Perimeter of a regular pentagon = 5 × side = 5 × 4 = 20 cm."
+            },
+            {
+                question: "A triangle has sides of length 6 cm, 8 cm, and 10 cm. What is its perimeter?",
+                options: ["18 cm", "20 cm", "24 cm", "28 cm"],
+                answer: "C",
+                explanation: "Perimeter = 6 + 8 + 10 = 24 cm."
+            },
+            {
+                question: "What is the perimeter of a regular hexagon with side length 3 cm?",
+                options: ["9 cm", "12 cm", "15 cm", "18 cm"],
+                answer: "D",
+                explanation: "Perimeter of a regular hexagon = 6 × side = 6 × 3 = 18 cm."
+            },
+            {
+                question: "If the perimeter of a square is 48 cm, what is the length of one side?",
+                options: ["8 cm", "10 cm", "12 cm", "16 cm"],
+                answer: "C",
+                explanation: "Side length = Perimeter ÷ 4 = 48 ÷ 4 = 12 cm."
+            },
+            
+            // Area
+            {
+                question: "What is the area of a square with side length 6 cm?",
+                options: ["12 cm²", "24 cm²", "36 cm²", "48 cm²"],
+                answer: "C",
+                explanation: "Area of a square = side × side = 6 × 6 = 36 cm²."
+            },
+            {
+                question: "What is the area of a rectangle with length 7 cm and width 4 cm?",
+                options: ["11 cm²", "22 cm²", "28 cm²", "56 cm²"],
+                answer: "C",
+                explanation: "Area of a rectangle = length × width = 7 × 4 = 28 cm²."
+            },
+            {
+                question: "If the area of a square is 64 cm², what is the length of one side?",
+                options: ["6 cm", "8 cm", "10 cm", "12 cm"],
+                answer: "B",
+                explanation: "Side length = √Area = √64 = 8 cm."
+            },
+            {
+                question: "What is the area of a rectangle with length 9 m and width 5 m?",
+                options: ["14 m²", "28 m²", "45 m²", "90 m²"],
+                answer: "C",
+                explanation: "Area = length × width = 9 × 5 = 45 m²."
+            },
+            {
+                question: "A square has an area of 121 cm². What is its perimeter?",
+                options: ["11 cm", "22 cm", "44 cm", "121 cm"],
+                answer: "C",
+                explanation: "Side length = √121 = 11 cm, Perimeter = 4 × 11 = 44 cm."
+            },
+            {
+                question: "What is the area of a triangle with base 10 cm and height 6 cm?",
+                options: ["16 cm²", "30 cm²", "60 cm²", "120 cm²"],
+                answer: "B",
+                explanation: "Area of a triangle = ½ × base × height = ½ × 10 × 6 = 30 cm²."
+            },
+            {
+                question: "If the area of a rectangle is 56 cm² and its length is 8 cm, what is its width?",
+                options: ["5 cm", "6 cm", "7 cm", "8 cm"],
+                answer: "C",
+                explanation: "Area = length × width, so 56 = 8 × width, width = 56 ÷ 8 = 7 cm."
+            },
+            {
+                question: "What is the area of a square with perimeter 20 cm?",
+                options: ["16 cm²", "20 cm²", "25 cm²", "100 cm²"],
+                answer: "C",
+                explanation: "Side length = Perimeter ÷ 4 = 20 ÷ 4 = 5 cm, Area = 5 × 5 = 25 cm²."
+            },
+            {
+                question: "A triangle has a base of 12 cm and height of 8 cm. What is its area?",
+                options: ["20 cm²", "48 cm²", "96 cm²", "192 cm²"],
+                answer: "B",
+                explanation: "Area = ½ × base × height = ½ × 12 × 8 = 48 cm²."
+            },
+            {
+                question: "What is the area of a rectangle with length 15 m and width 6 m?",
+                options: ["21 m²", "42 m²", "90 m²", "180 m²"],
+                answer: "C",
+                explanation: "Area = length × width = 15 × 6 = 90 m²."
+            },
+            
+            // Mixed Geometry Questions
+            {
+                question: "How many right angles does a rectangle have?",
+                options: ["0", "2", "4", "6"],
+                answer: "C",
+                explanation: "A rectangle has 4 right angles."
+            },
+            {
+                question: "What is the name for a polygon with 5 sides?",
+                options: ["Triangle", "Quadrilateral", "Pentagon", "Hexagon"],
+                answer: "C",
+                explanation: "A polygon with 5 sides is called a pentagon."
+            },
+            {
+                question: "What is the name for a polygon with 6 sides?",
+                options: ["Triangle", "Quadrilateral", "Pentagon", "Hexagon"],
+                answer: "D",
+                explanation: "A polygon with 6 sides is called a hexagon."
+            },
+            {
+                question: "What is the name for a polygon with 8 sides?",
+                options: ["Hexagon", "Heptagon", "Octagon", "Nonagon"],
+                answer: "C",
+                explanation: "A polygon with 8 sides is called an octagon."
+            },
+            {
+                question: "How many sides does a heptagon have?",
+                options: ["5", "6", "7", "8"],
+                answer: "C",
+                explanation: "A heptagon has 7 sides."
+            },
+            {
+                question: "What do we call a polygon with all sides equal and all angles equal?",
+                options: ["Regular polygon", "Irregular polygon", "Concave polygon", "Convex polygon"],
+                answer: "A",
+                explanation: "A regular polygon has all sides equal and all angles equal."
+            },
+            {
+                question: "What is the name for a 3D shape with 6 square faces?",
+                options: ["Cube", "Cuboid", "Pyramid", "Sphere"],
+                answer: "A",
+                explanation: "A cube has 6 square faces."
+            },
+            {
+                question: "What 3D shape has a circular base and a curved surface that meets at a point?",
+                options: ["Cylinder", "Cone", "Sphere", "Pyramid"],
+                answer: "B",
+                explanation: "A cone has a circular base and a curved surface that meets at a point."
+            },
+            {
+                question: "What 3D shape has two circular bases and a curved surface?",
+                options: ["Cylinder", "Cone", "Sphere", "Pyramid"],
+                answer: "A",
+                explanation: "A cylinder has two circular bases and a curved surface."
+            },
+            {
+                question: "How many faces does a cube have?",
+                options: ["4", "6", "8", "12"],
+                answer: "B",
+                explanation: "A cube has 6 faces."
+            },
+            
+            // More Perimeter and Area
+            {
+                question: "What is the perimeter of an equilateral triangle with side length 9 cm?",
+                options: ["18 cm", "27 cm", "36 cm", "45 cm"],
+                answer: "B",
+                explanation: "Perimeter = 3 × side = 3 × 9 = 27 cm."
+            },
+            {
+                question: "A rectangular field is 25 m long and 15 m wide. What is its area?",
+                options: ["40 m²", "80 m²", "375 m²", "750 m²"],
+                answer: "C",
+                explanation: "Area = length × width = 25 × 15 = 375 m²."
+            },
+            {
+                question: "What is the area of a square with perimeter 32 cm?",
+                options: ["16 cm²", "32 cm²", "64 cm²", "128 cm²"],
+                answer: "C",
+                explanation: "Side length = 32 ÷ 4 = 8 cm, Area = 8 × 8 = 64 cm²."
+            },
+            {
+                question: "If the area of a rectangle is 72 cm² and its width is 8 cm, what is its length?",
+                options: ["6 cm", "8 cm", "9 cm", "10 cm"],
+                answer: "C",
+                explanation: "Area = length × width, so 72 = length × 8, length = 72 ÷ 8 = 9 cm."
+            },
+            {
+                question: "What is the perimeter of a regular octagon with side length 5 cm?",
+                options: ["20 cm", "30 cm", "40 cm", "50 cm"],
+                answer: "C",
+                explanation: "Perimeter = 8 × side = 8 × 5 = 40 cm."
+            },
+            {
+                question: "A triangle has a base of 14 cm and height of 10 cm. What is its area?",
+                options: ["24 cm²", "70 cm²", "140 cm²", "280 cm²"],
+                answer: "B",
+                explanation: "Area = ½ × base × height = ½ × 14 × 10 = 70 cm²."
+            },
+            {
+                question: "What is the area of a rectangle with length 12 cm and width 7 cm?",
+                options: ["19 cm²", "38 cm²", "84 cm²", "144 cm²"],
+                answer: "C",
+                explanation: "Area = length × width = 12 × 7 = 84 cm²."
+            },
+            {
+                question: "If the perimeter of a square is 60 cm, what is its area?",
+                options: ["15 cm²", "225 cm²", "240 cm²", "360 cm²"],
+                answer: "B",
+                explanation: "Side length = 60 ÷ 4 = 15 cm, Area = 15 × 15 = 225 cm²."
+            },
+            {
+                question: "What is the perimeter of a rectangle with length 18 m and width 11 m?",
+                options: ["29 m", "58 m", "198 m", "396 m"],
+                answer: "B",
+                explanation: "Perimeter = 2 × (length + width) = 2 × (18 + 11) = 58 m."
+            },
+            {
+                question: "A square has an area of 144 cm². What is the length of one side?",
+                options: ["10 cm", "12 cm", "14 cm", "16 cm"],
+                answer: "B",
+                explanation: "Side length = √144 = 12 cm."
+            },
+            
+            // Final Geometry Questions
+            {
+                question: "What type of lines intersect at a 90-degree angle?",
+                options: ["Parallel lines", "Perpendicular lines", "Intersecting lines", "Diagonal lines"],
+                answer: "B",
+                explanation: "Perpendicular lines intersect at a 90-degree angle."
+            },
+            {
+                question: "How many degrees are in three right angles?",
+                options: ["90°", "180°", "270°", "360°"],
+                answer: "C",
+                explanation: "3 × 90° = 270°."
+            },
+            {
+                question: "What is the name for an angle that is exactly 90 degrees?",
+                options: ["Acute angle", "Right angle", "Obtuse angle", "Straight angle"],
+                answer: "B",
+                explanation: "A right angle is exactly 90 degrees."
+            },
+            {
+                question: "What quadrilateral has exactly one pair of parallel sides?",
+                options: ["Square", "Rectangle", "Rhombus", "Trapezoid"],
+                answer: "D",
+                explanation: "A trapezoid has exactly one pair of parallel sides."
+            },
+            {
+                question: "What is the sum of angles in any quadrilateral?",
+                options: ["90°", "180°", "270°", "360°"],
+                answer: "D",
+                explanation: "The sum of angles in any quadrilateral is 360 degrees."
+            },
+            {
+                question: "How many sides does a nonagon have?",
+                options: ["7", "8", "9", "10"],
+                answer: "C",
+                explanation: "A nonagon has 9 sides."
+            },
+            {
+                question: "What is the area of a triangle with base 16 cm and height 9 cm?",
+                options: ["25 cm²", "72 cm²", "144 cm²", "288 cm²"],
+                answer: "B",
+                explanation: "Area = ½ × base × height = ½ × 16 × 9 = 72 cm²."
+            },
+            {
+                question: "If the perimeter of a rectangle is 34 cm and its length is 10 cm, what is its width?",
+                options: ["5 cm", "7 cm", "12 cm", "17 cm"],
+                answer: "B",
+                explanation: "Perimeter = 2 × (length + width), 34 = 2 × (10 + width), 17 = 10 + width, width = 7 cm."
+            },
+            {
+                question: "What is the perimeter of a regular pentagon with side length 7 cm?",
+                options: ["14 cm", "21 cm", "28 cm", "35 cm"],
+                answer: "D",
+                explanation: "Perimeter = 5 × side = 5 × 7 = 35 cm."
+            },
+            {
+                question: "A square has a perimeter of 48 cm. What is its area?",
+                options: ["12 cm²", "96 cm²", "144 cm²", "2304 cm²"],
+                answer: "C",
+                explanation: "Side length = 48 ÷ 4 = 12 cm, Area = 12 × 12 = 144 cm²."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent!",
+            "Fantastic!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a geometry expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixMathGeometry');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixMathGeometry', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Create a copy of questions and shuffle them
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixMathGeometry_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixMathGeometry_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a geometry expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You understand geometry very well!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a geometry master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the questions you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better at geometry with more practice!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                feedbackMessage.textContent = `Correct answer: ${correctAnswer}`;
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade4-math-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

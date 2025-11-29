@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 4 Math - Place Value | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Math Theme */
+        :root {
+            --primary-blue: #1565C0;
+            --secondary-blue: #42A5F5;
+            --light-blue: #90CAF9;
+            --accent-purple: #7B1FA2;
+            --light-purple: #BA68C8;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(21, 101, 192, 0.3);
+            --purple-glow: 0 0 20px rgba(123, 31, 162, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Animation */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #0a1a2e 0%, #1a2e4a 100%);
+            overflow: hidden;
+        }
+
+        .math-symbol {
+            position: absolute;
+            color: rgba(66, 165, 245, 0.3);
+            font-size: 24px;
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 160px;
+            height: 160px;
+            margin-bottom: 25px;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow), 0 0 30px rgba(66, 165, 245, 0.5);
+            border: 3px solid var(--secondary-blue);
+            position: relative;
+        }
+
+        .welcome-logo::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-purple);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(66, 165, 245, 0.3);
+        }
+
+        .welcome-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badges {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .topic-badge {
+            background: linear-gradient(135deg, var(--secondary-blue), var(--light-blue));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(66, 165, 245, 0.4);
+        }
+
+        .topic-badge.purple {
+            background: linear-gradient(135deg, var(--accent-purple), var(--light-purple));
+            box-shadow: 0 4px 15px rgba(123, 31, 162, 0.4);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(66, 165, 245, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            color: white;
+            box-shadow: 0 4px 15px rgba(66, 165, 245, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(66, 165, 245, 0.5);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--light-purple));
+            color: white;
+            box-shadow: 0 4px 15px rgba(123, 31, 162, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, var(--light-purple), var(--accent-purple));
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(123, 31, 162, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--secondary-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary-blue), var(--accent-purple));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(66, 165, 245, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--secondary-blue);
+            background: rgba(66, 165, 245, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(66, 165, 245, 0.1);
+            border-color: var(--secondary-blue);
+            color: var(--secondary-blue);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .option.correct .option-letter {
+            background: var(--secondary-blue);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(66, 165, 245, 0.1);
+            border-left: 5px solid var(--secondary-blue);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--secondary-blue);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--secondary-blue);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Place Value Chart */
+        .place-value-chart {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 15px;
+            overflow-x: auto;
+        }
+
+        .place-value-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 10px;
+            min-width: 80px;
+        }
+
+        .place-value-header {
+            font-weight: bold;
+            color: var(--secondary-blue);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .place-value-digit {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--dark-card);
+            border-radius: 8px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            border: 2px solid var(--dark-border);
+        }
+
+        .place-value-name {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .place-value-chart {
+                justify-content: flex-start;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation" id="backgroundAnimation"></div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 4 Math - Place Value</h1>
+            <p class="welcome-subtitle">Master reading and writing numbers up to 1,000,000! Learn about ones, tens, hundreds, thousands, and beyond through interactive practice.</p>
+            
+            <div class="topic-badges">
+                <div class="topic-badge">Numbers to 1,000,000</div>
+                <div class="topic-badge purple">Reading & Writing Large Numbers</div>
+                <div class="topic-badge">Expanded Form</div>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Math Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <!-- Place Value Chart (for relevant questions) -->
+                <div class="place-value-chart" id="placeValueChart" style="display: none;"></div>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Math Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Practice Again</button>
+                <button class="btn btn-secondary" id="viewTopics">View Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background animation
+        function initBackgroundAnimation() {
+            const background = document.getElementById('backgroundAnimation');
+            const mathSymbols = ['+', '-', '×', '÷', '=', '>', '<', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+            
+            // Create math symbols
+            for (let i = 0; i < 25; i++) {
+                const symbol = document.createElement('div');
+                symbol.className = 'math-symbol';
+                symbol.textContent = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
+                symbol.style.left = `${Math.random() * 100}%`;
+                symbol.style.animationDuration = `${Math.random() * 10 + 10}s`;
+                symbol.style.animationDelay = `${Math.random() * 5}s`;
+                symbol.style.fontSize = `${Math.random() * 20 + 16}px`;
+                background.appendChild(symbol);
+            }
+        }
+
+        // Generate 100+ questions for Grade 4 Place Value
+        function generateQuestions() {
+            const questions = [];
+            
+            // Question types:
+            // 1. Identify place value
+            // 2. Write numbers in words
+            // 3. Write numbers in standard form
+            // 4. Expanded form
+            // 5. Compare numbers
+            // 6. Order numbers
+            // 7. Round numbers
+            
+            // Generate 20 questions for identifying place values
+            for (let i = 0; i < 20; i++) {
+                const num = Math.floor(Math.random() * 1000000) + 1;
+                const numStr = num.toLocaleString();
+                const places = ['ones', 'tens', 'hundreds', 'thousands', 'ten thousands', 'hundred thousands'];
+                const placeIndex = Math.floor(Math.random() * Math.min(6, numStr.length));
+                const digit = numStr.split('').reverse()[placeIndex];
+                
+                questions.push({
+                    question: `In the number ${num.toLocaleString()}, what is the place value of the digit ${digit}?`,
+                    options: [
+                        places[placeIndex],
+                        places[(placeIndex + 1) % places.length],
+                        places[(placeIndex + 2) % places.length],
+                        places[(placeIndex + 3) % places.length]
+                    ],
+                    answer: "A",
+                    explanation: `In ${num.toLocaleString()}, the digit ${digit} is in the ${places[placeIndex]} place.`,
+                    showChart: true,
+                    number: num
+                });
+            }
+            
+            // Generate 20 questions for writing numbers in words
+            for (let i = 0; i < 20; i++) {
+                const num = Math.floor(Math.random() * 1000000) + 1;
+                const correct = numberToWords(num);
+                
+                // Generate incorrect options
+                const incorrect = [];
+                while (incorrect.length < 3) {
+                    let wrongNum;
+                    do {
+                        wrongNum = Math.floor(Math.random() * 1000000) + 1;
+                    } while (wrongNum === num);
+                    incorrect.push(numberToWords(wrongNum));
+                }
+                
+                // Shuffle options
+                const options = [correct, ...incorrect];
+                shuffleArray(options);
+                const answerIndex = options.indexOf(correct);
+                
+                questions.push({
+                    question: `How do you write ${num.toLocaleString()} in words?`,
+                    options: options,
+                    answer: String.fromCharCode(65 + answerIndex),
+                    explanation: `${num.toLocaleString()} is written as "${correct}".`
+                });
+            }
+            
+            // Generate 20 questions for writing numbers in standard form
+            for (let i = 0; i < 20; i++) {
+                const num = Math.floor(Math.random() * 1000000) + 1;
+                const words = numberToWords(num);
+                
+                // Generate incorrect options
+                const incorrect = [];
+                while (incorrect.length < 3) {
+                    let wrongNum;
+                    do {
+                        wrongNum = Math.floor(Math.random() * 1000000) + 1;
+                    } while (wrongNum === num);
+                    incorrect.push(wrongNum.toLocaleString());
+                }
+                
+                // Shuffle options
+                const options = [num.toLocaleString(), ...incorrect];
+                shuffleArray(options);
+                const answerIndex = options.indexOf(num.toLocaleString());
+                
+                questions.push({
+                    question: `What is the standard form of "${words}"?`,
+                    options: options,
+                    answer: String.fromCharCode(65 + answerIndex),
+                    explanation: `"${words}" is written as ${num.toLocaleString()} in standard form.`
+                });
+            }
+            
+            // Generate 20 questions for expanded form
+            for (let i = 0; i < 20; i++) {
+                const num = Math.floor(Math.random() * 1000000) + 1;
+                const expanded = expandedForm(num);
+                
+                // Generate incorrect options
+                const incorrect = [];
+                while (incorrect.length < 3) {
+                    let wrongNum;
+                    do {
+                        wrongNum = Math.floor(Math.random() * 1000000) + 1;
+                    } while (wrongNum === num);
+                    incorrect.push(expandedForm(wrongNum));
+                }
+                
+                // Shuffle options
+                const options = [expanded, ...incorrect];
+                shuffleArray(options);
+                const answerIndex = options.indexOf(expanded);
+                
+                questions.push({
+                    question: `What is the expanded form of ${num.toLocaleString()}?`,
+                    options: options,
+                    answer: String.fromCharCode(65 + answerIndex),
+                    explanation: `The expanded form of ${num.toLocaleString()} is ${expanded}.`
+                });
+            }
+            
+            // Generate 20 questions for comparing numbers
+            for (let i = 0; i < 20; i++) {
+                const num1 = Math.floor(Math.random() * 1000000) + 1;
+                const num2 = Math.floor(Math.random() * 1000000) + 1;
+                
+                let correctAnswer, explanation;
+                if (num1 > num2) {
+                    correctAnswer = "A";
+                    explanation = `${num1.toLocaleString()} is greater than ${num2.toLocaleString()}.`;
+                } else if (num1 < num2) {
+                    correctAnswer = "B";
+                    explanation = `${num1.toLocaleString()} is less than ${num2.toLocaleString()}.`;
+                } else {
+                    correctAnswer = "C";
+                    explanation = `${num1.toLocaleString()} is equal to ${num2.toLocaleString()}.`;
+                }
+                
+                questions.push({
+                    question: `Compare: ${num1.toLocaleString()} ___ ${num2.toLocaleString()}`,
+                    options: [">", "<", "=", "Cannot compare"],
+                    answer: correctAnswer,
+                    explanation: explanation
+                });
+            }
+            
+            return questions;
+        }
+        
+        // Helper function to convert number to words
+        function numberToWords(num) {
+            if (num === 0) return "zero";
+            
+            const ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+            const teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+            const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+            
+            function convertHundreds(n) {
+                let result = "";
+                if (n >= 100) {
+                    result += ones[Math.floor(n / 100)] + " hundred";
+                    n %= 100;
+                    if (n > 0) result += " ";
+                }
+                
+                if (n >= 20) {
+                    result += tens[Math.floor(n / 10)];
+                    n %= 10;
+                    if (n > 0) result += "-" + ones[n];
+                } else if (n >= 10) {
+                    result += teens[n - 10];
+                } else if (n > 0) {
+                    result += ones[n];
+                }
+                
+                return result;
+            }
+            
+            let result = "";
+            
+            if (num >= 1000000) {
+                result += convertHundreds(Math.floor(num / 1000000)) + " million";
+                num %= 1000000;
+                if (num > 0) result += " ";
+            }
+            
+            if (num >= 1000) {
+                result += convertHundreds(Math.floor(num / 1000)) + " thousand";
+                num %= 1000;
+                if (num > 0) result += " ";
+            }
+            
+            if (num > 0) {
+                result += convertHundreds(num);
+            }
+            
+            return result;
+        }
+        
+        // Helper function for expanded form
+        function expandedForm(num) {
+            const digits = num.toString().split('').map(Number);
+            const places = ["ones", "tens", "hundreds", "thousands", "ten thousands", "hundred thousands"];
+            let result = [];
+            
+            for (let i = 0; i < digits.length; i++) {
+                const placeValue = digits[i] * Math.pow(10, digits.length - 1 - i);
+                if (placeValue > 0) {
+                    result.push(placeValue.toLocaleString());
+                }
+            }
+            
+            return result.join(" + ");
+        }
+        
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent math skills!",
+            "Fantastic number sense!",
+            "Great job!",
+            "Amazing!",
+            "Well done!",
+            "You're a math expert!",
+            "Perfect!",
+            "Outstanding!",
+            "Brilliant!",
+            "You're on fire!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const placeValueChart = document.getElementById('placeValueChart');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initBackgroundAnimation();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade4MathPlaceValue');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade4MathPlaceValue', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Generate questions
+            appState.currentQuestions = generateQuestions();
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixGrade4MathPlaceValue_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade4MathPlaceValue_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a place value expert who understands numbers up to 1,000,000 perfectly!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have a strong understanding of place value and reading large numbers!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a math master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review the questions you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! You'll get better with more practice!";
+            }
+        }
+
+        // Start practice mode
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert('Please enter your name to continue.');
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize and shuffle questions
+            initializeQuestions();
+            
+            // Save state and show practice page
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Show/hide place value chart
+            if (question.showChart && question.number) {
+                placeValueChart.style.display = 'flex';
+                renderPlaceValueChart(question.number);
+            } else {
+                placeValueChart.style.display = 'none';
+            }
+            
+            // Clear previous options and feedback
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Render place value chart
+        function renderPlaceValueChart(number) {
+            const numStr = number.toString();
+            const places = ["Ones", "Tens", "Hundreds", "Thousands", "Ten Thousands", "Hundred Thousands"];
+            
+            placeValueChart.innerHTML = '';
+            
+            // Add columns from highest to lowest place value
+            for (let i = numStr.length - 1; i >= 0; i--) {
+                const column = document.createElement('div');
+                column.className = 'place-value-column';
+                
+                const header = document.createElement('div');
+                header.className = 'place-value-header';
+                header.textContent = places[numStr.length - 1 - i];
+                
+                const digit = document.createElement('div');
+                digit.className = 'place-value-digit';
+                digit.textContent = numStr[i];
+                
+                const name = document.createElement('div');
+                name.className = 'place-value-name';
+                name.textContent = places[numStr.length - 1 - i];
+                
+                column.appendChild(header);
+                column.appendChild(digit);
+                column.appendChild(name);
+                placeValueChart.appendChild(column);
+            }
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = question.options[correctAnswer.charCodeAt(0) - 65];
+                    feedbackMessage.textContent = `Correct answer: ${correctOption}`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade4-math-topics.html";
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

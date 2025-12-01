@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 4 Science - Sound & Vibration | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Sound Theme */
+        :root {
+            --primary-teal: #0097A7;
+            --secondary-blue: #29B6F6;
+            --accent-purple: #AB47BC;
+            --accent-orange: #FF8A65;
+            --accent-green: #66BB6A;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 151, 167, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 151, 167, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-teal);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-teal);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            box-shadow: 0 0 0 3px rgba(0, 151, 167, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-teal);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 151, 167, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00838F;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 151, 167, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-blue);
+            color: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(41, 182, 246, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #03A9F4;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(41, 182, 246, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-teal);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-teal), var(--secondary-blue));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 151, 167, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .sound-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-purple);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-teal), var(--accent-purple));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(0, 151, 167, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-teal);
+            background: rgba(0, 151, 167, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 151, 167, 0.1);
+            border-color: var(--primary-teal);
+            color: var(--primary-teal);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-blue);
+            color: #1a1a1a;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-teal);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 151, 167, 0.1);
+            border-left: 5px solid var(--primary-teal);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-teal);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-teal);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Sound Diagram */
+        .sound-diagram {
+            max-width: 400px;
+            margin: 20px auto;
+            position: relative;
+            height: 300px;
+        }
+
+        .sound-element {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .sound-element:hover {
+            transform: scale(1.1);
+        }
+
+        .sound-element-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            border: 2px solid var(--accent-orange);
+            font-size: 1.5rem;
+        }
+
+        .sound-element-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-teal);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Process Display */
+        .process-display {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            min-width: 200px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .process-step.active {
+            border-color: var(--primary-teal);
+            box-shadow: 0 0 15px rgba(0, 151, 167, 0.3);
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary-teal);
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Instrument Cards */
+        .instrument-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .instrument-card {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            width: 180px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .instrument-card:hover {
+            border-color: var(--secondary-blue);
+            transform: translateY(-5px);
+        }
+
+        .instrument-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .instrument-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--secondary-blue);
+        }
+
+        .instrument-type {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Waveform Display */
+        .waveform-display {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .waveform {
+            width: 100%;
+            height: 100px;
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .wave-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--secondary-blue);
+            top: 50%;
+        }
+
+        .wave-peak {
+            position: absolute;
+            width: 10px;
+            height: 40px;
+            background: var(--primary-teal);
+            border-radius: 5px;
+            animation: waveMove 2s linear infinite;
+        }
+
+        /* Ear Diagram */
+        .ear-diagram {
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            position: relative;
+            height: 150px;
+        }
+
+        .ear-part {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 80px;
+        }
+
+        .ear-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+            border: 2px solid var(--accent-green);
+            font-size: 1.2rem;
+        }
+
+        .ear-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        /* Safety Tips Display */
+        .safety-tips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .safety-tip {
+            background: rgba(102, 187, 106, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-green);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .sound-diagram {
+                height: 250px;
+            }
+            
+            .process-display {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .instrument-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes vibrate {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .vibrate {
+            animation: vibrate 0.3s ease infinite;
+        }
+        
+        @keyframes waveMove {
+            0% { transform: translateX(-100px); opacity: 0; }
+            50% { transform: translateX(0); opacity: 1; }
+            100% { transform: translateX(100px); opacity: 0; }
+        }
+        
+        .wave-move {
+            animation: waveMove 2s linear infinite;
+        }
+        
+        @keyframes soundWave {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        
+        .sound-wave {
+            animation: soundWave 1s ease-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .bounce {
+            animation: bounce 0.5s ease infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518609878373-06d740f60d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 4 Science</h1>
+            <p class="welcome-subtitle">Discover the amazing world of sound and vibration! Learn how sounds are created, how they travel, and how we hear them. Explore musical instruments, sound waves, and the science behind everything from whispers to thunderstorms!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">🎵</span>
+                <span class="topic-name">Sound & Vibration</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Sound Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <!-- Sound fact display -->
+                <div id="soundFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Sound diagram -->
+                <div id="soundDiagram"></div>
+                
+                <!-- Process display -->
+                <div id="processDisplay"></div>
+                
+                <!-- Instrument cards display -->
+                <div id="instrumentCardsDisplay"></div>
+                
+                <!-- Waveform display -->
+                <div id="waveformDisplay"></div>
+                
+                <!-- Ear diagram -->
+                <div id="earDiagram"></div>
+                
+                <!-- Safety tips display -->
+                <div id="safetyTipsDisplay"></div>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Sound Exploration Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 100 Grade 4 Science questions covering sound and vibration
+        const questions = [
+            // Basic Sound Concepts (1-30)
+            {
+                type: "basic",
+                question: "What is sound?",
+                options: ["Vibrations that travel through air or other materials", "A type of light", "Something we can see", "A solid object"],
+                answer: "A",
+                explanation: "Sound is produced by vibrations that travel as waves through air, water, or solids to our ears."
+            },
+            {
+                type: "basic",
+                question: "What causes sound?",
+                options: ["Vibrations", "Light", "Heat", "Electricity"],
+                answer: "A",
+                explanation: "All sounds are caused by something vibrating back and forth very quickly."
+            },
+            {
+                type: "basic",
+                question: "How does sound travel?",
+                options: ["As waves through materials", "In straight lines only", "Through empty space", "It doesn't travel"],
+                answer: "A",
+                explanation: "Sound travels as waves that need a medium (solid, liquid, or gas) to move through."
+            },
+            {
+                type: "basic",
+                question: "What is vibration?",
+                options: ["Rapid back-and-forth movement", "Slow movement", "Circular motion", "Stillness"],
+                answer: "A",
+                explanation: "Vibration is quick shaking or oscillating movement that produces sound waves."
+            },
+            {
+                type: "basic",
+                question: "Can sound travel through empty space?",
+                options: ["No, it needs a medium", "Yes, easily", "Only sometimes", "Only loud sounds"],
+                answer: "A",
+                explanation: "Sound needs particles to vibrate, so it cannot travel through vacuum (empty space)."
+            },
+            {
+                type: "basic",
+                question: "Which material does sound travel through fastest?",
+                options: ["Solids", "Liquids", "Gases", "All same speed"],
+                answer: "A",
+                explanation: "Sound travels fastest through solids because particles are closest together."
+            },
+            {
+                type: "basic",
+                question: "Which material does sound travel through slowest?",
+                options: ["Gases", "Solids", "Liquids", "All same speed"],
+                answer: "A",
+                explanation: "Sound travels slowest through gases because particles are farthest apart."
+            },
+            {
+                type: "basic",
+                question: "How fast does sound travel in air?",
+                options: ["About 343 meters per second", "100 meters per second", "1000 meters per second", "Speed of light"],
+                answer: "A",
+                explanation: "Sound travels at approximately 343 m/s in air at room temperature."
+            },
+            {
+                type: "basic",
+                question: "What is pitch?",
+                options: ["How high or low a sound is", "How loud a sound is", "Sound quality", "Sound speed"],
+                answer: "A",
+                explanation: "Pitch depends on frequency - high frequency = high pitch, low frequency = low pitch."
+            },
+            {
+                type: "basic",
+                question: "What is volume?",
+                options: ["How loud or soft a sound is", "How high or low a sound is", "Sound quality", "Sound speed"],
+                answer: "A",
+                explanation: "Volume (loudness) depends on amplitude - larger vibrations = louder sounds."
+            },
+            {
+                type: "basic",
+                question: "What is frequency?",
+                options: ["Number of vibrations per second", "How loud sound is", "Sound quality", "Sound direction"],
+                answer: "A",
+                explanation: "Frequency measures how many vibrations occur each second, measured in Hertz (Hz)."
+            },
+            {
+                type: "basic",
+                question: "What unit measures frequency?",
+                options: ["Hertz (Hz)", "Decibels (dB)", "Meters (m)", "Seconds (s)"],
+                answer: "A",
+                explanation: "Frequency is measured in Hertz (Hz) - one Hz equals one vibration per second."
+            },
+            {
+                type: "basic",
+                question: "What unit measures volume?",
+                options: ["Decibels (dB)", "Hertz (Hz)", "Meters (m)", "Seconds (s)"],
+                answer: "A",
+                explanation: "Sound volume (loudness) is measured in decibels (dB)."
+            },
+            {
+                type: "basic",
+                question: "What is amplitude?",
+                options: ["Height of sound wave", "Speed of sound", "Number of waves", "Sound quality"],
+                answer: "A",
+                explanation: "Amplitude is the height of sound waves - greater amplitude = louder sound."
+            },
+            {
+                type: "basic",
+                question: "What type of waves are sound waves?",
+                options: ["Longitudinal waves", "Transverse waves", "Circular waves", "Square waves"],
+                answer: "A",
+                explanation: "Sound waves are longitudinal - particles vibrate parallel to wave direction."
+            },
+            {
+                type: "basic",
+                question: "What happens to sound as it travels?",
+                options: ["It gets quieter", "It gets louder", "It changes pitch", "It disappears"],
+                answer: "A",
+                explanation: "Sound energy spreads out and gets absorbed, so it becomes quieter with distance."
+            },
+            {
+                type: "basic",
+                question: "Why do we hear thunder after seeing lightning?",
+                options: ["Light travels faster than sound", "Thunder takes longer to form", "Lightning is silent", "Magic"],
+                answer: "A",
+                explanation: "Light travels much faster than sound, so we see lightning before hearing thunder."
+            },
+            {
+                type: "basic",
+                question: "What is an echo?",
+                options: ["Sound bouncing back from a surface", "Original sound", "Changed sound", "Silence"],
+                answer: "A",
+                explanation: "An echo is reflected sound that reaches our ears after the original sound."
+            },
+            {
+                type: "basic",
+                question: "Where are echoes strongest?",
+                options: ["In large empty spaces", "In small rooms", "Outside in open fields", "Underwater"],
+                answer: "A",
+                explanation: "Echoes are clearest in large, empty spaces with hard surfaces that reflect sound well."
+            },
+            {
+                type: "basic",
+                question: "What is sound absorption?",
+                options: ["Materials taking in sound energy", "Sound bouncing", "Sound changing pitch", "Sound stopping"],
+                answer: "A",
+                explanation: "Soft materials absorb sound waves, reducing echoes and noise."
+            },
+            // Hearing and Ear (31-50)
+            {
+                type: "hearing",
+                question: "How do we hear sounds?",
+                options: ["Sound waves enter ear, vibrate eardrum, signals go to brain", "Ears create sound", "Brain produces sound", "Magic"],
+                answer: "A",
+                explanation: "Sound waves vibrate eardrum, which moves tiny bones that send signals to brain."
+            },
+            {
+                type: "hearing",
+                question: "What is the outer ear's function?",
+                options: ["Collect sound waves", "Process sound", "Produce sound", "Store sound"],
+                answer: "A",
+                explanation: "The outer ear (pinna) collects sound waves and directs them into ear canal."
+            },
+            {
+                type: "hearing",
+                question: "What is the eardrum?",
+                options: ["Thin membrane that vibrates with sound", "Bone in ear", "Part of outer ear", "Brain part"],
+                answer: "A",
+                explanation: "The eardrum is a thin membrane that vibrates when sound waves hit it."
+            },
+            {
+                type: "hearing",
+                question: "What are the three tiny bones in the middle ear called?",
+                options: ["Hammer, anvil, stirrup", "Big, medium, small", "Gold, silver, bronze", "One, two, three"],
+                answer: "A",
+                explanation: "The ossicles: malleus (hammer), incus (anvil), stapes (stirrup) amplify vibrations."
+            },
+            {
+                type: "hearing",
+                question: "What is the cochlea?",
+                options: ["Spiral-shaped part with fluid and hair cells", "Eardrum", "Ear canal", "Outer ear"],
+                answer: "A",
+                explanation: "The cochlea converts vibrations into electrical signals for the brain."
+            },
+            {
+                type: "hearing",
+                question: "What is the hearing range for humans?",
+                options: ["About 20 Hz to 20,000 Hz", "0 to 100 Hz", "1000 to 2000 Hz only", "Unlimited"],
+                answer: "A",
+                explanation: "Most humans hear frequencies between 20 Hz (low) and 20,000 Hz (high)."
+            },
+            {
+                type: "hearing",
+                question: "What happens if sound is too loud?",
+                options: ["Can damage hearing permanently", "Nothing happens", "Improves hearing", "Changes pitch"],
+                answer: "A",
+                explanation: "Very loud sounds can damage hair cells in cochlea, causing permanent hearing loss."
+            },
+            {
+                type: "hearing",
+                question: "Why do we have two ears?",
+                options: ["Determine sound direction", "Hear twice as loud", "For balance only", "Decoration"],
+                answer: "A",
+                explanation: "Two ears help locate sound direction by comparing arrival time and volume differences."
+            },
+            {
+                type: "hearing",
+                question: "What is deafness?",
+                options: ["Inability to hear sounds", "Hearing too well", "Temporary hearing", "Only high sounds"],
+                answer: "A",
+                explanation: "Deafness is hearing loss that can be partial or complete, temporary or permanent."
+            },
+            {
+                type: "hearing",
+                question: "How do hearing aids help?",
+                options: ["Amplify sound waves", "Create new sounds", "Change sound pitch", "Block all sound"],
+                answer: "A",
+                explanation: "Hearing aids make sounds louder and clearer for people with hearing loss."
+            },
+            // Musical Instruments (51-70)
+            {
+                type: "instruments",
+                question: "How do string instruments make sound?",
+                options: ["Vibrating strings", "Blowing air", "Hitting surfaces", "Electronic circuits"],
+                answer: "A",
+                explanation: "Plucked or bowed strings vibrate, producing sound that resonates in instrument body."
+            },
+            {
+                type: "instruments",
+                question: "Examples of string instruments?",
+                options: ["Guitar, violin, piano", "Flute, trumpet", "Drums, xylophone", "All instruments"],
+                answer: "A",
+                explanation: "String instruments produce sound through vibrating strings (guitar, violin, cello, etc.)."
+            },
+            {
+                type: "instruments",
+                question: "How do wind instruments make sound?",
+                options: ["Vibrating air columns", "Vibrating strings", "Vibrating surfaces", "Electronics"],
+                answer: "A",
+                explanation: "Wind instruments produce sound when air vibrates inside a tube or pipe."
+            },
+            {
+                type: "instruments",
+                question: "Examples of wind instruments?",
+                options: ["Flute, trumpet, clarinet", "Guitar, violin", "Drum, cymbals", "Piano, harp"],
+                answer: "A",
+                explanation: "Wind instruments: woodwinds (flute, clarinet) and brass (trumpet, trombone)."
+            },
+            {
+                type: "instruments",
+                question: "How do percussion instruments make sound?",
+                options: ["Being struck or shaken", "Vibrating strings", "Blowing air", "Electronics"],
+                answer: "A",
+                explanation: "Percussion instruments make sound when hit, shaken, or scraped."
+            },
+            {
+                type: "instruments",
+                question: "Examples of percussion instruments?",
+                options: ["Drums, xylophone, tambourine", "Guitar, violin", "Flute, trumpet", "Piano only"],
+                answer: "A",
+                explanation: "Percussion: drums, cymbals, xylophone, maracas, triangle, etc."
+            },
+            {
+                type: "instruments",
+                question: "What makes a sound higher pitched?",
+                options: ["Faster vibrations", "Slower vibrations", "Louder volume", "Softer volume"],
+                answer: "A",
+                explanation: "Higher frequency (faster vibrations) creates higher pitch sounds."
+            },
+            {
+                type: "instruments",
+                question: "What makes a sound lower pitched?",
+                options: ["Slower vibrations", "Faster vibrations", "Louder volume", "Softer volume"],
+                answer: "A",
+                explanation: "Lower frequency (slower vibrations) creates lower pitch sounds."
+            },
+            {
+                type: "instruments",
+                question: "How do you make a guitar string sound higher?",
+                options: ["Make string shorter, tighter, or thinner", "Make it longer", "Make it looser", "Make it thicker"],
+                answer: "A",
+                explanation: "Shorter, tighter, or thinner strings vibrate faster, producing higher pitch."
+            },
+            {
+                type: "instruments",
+                question: "How do you make a guitar string sound lower?",
+                options: ["Make string longer, looser, or thicker", "Make it shorter", "Make it tighter", "Make it thinner"],
+                answer: "A",
+                explanation: "Longer, looser, or thicker strings vibrate slower, producing lower pitch."
+            },
+            // Sound in Nature (71-85)
+            {
+                type: "nature",
+                question: "How do animals use sound?",
+                options: ["Communication, navigation, finding food", "Only for singing", "Only for hearing", "They don't"],
+                answer: "A",
+                explanation: "Animals use sound for communication, echolocation, warning, mating calls, and hunting."
+            },
+            {
+                type: "nature",
+                question: "What is echolocation?",
+                options: ["Using sound echoes to locate objects", "Making loud sounds", "Hearing well", "Silent moving"],
+                answer: "A",
+                explanation: "Bats and dolphins emit sounds and use echoes to navigate and find prey in dark."
+            },
+            {
+                type: "nature",
+                question: "Which animal uses echolocation?",
+                options: ["Bats", "Elephants", "Birds", "Fish"],
+                answer: "A",
+                explanation: "Bats use high-frequency sounds and echoes to fly and hunt in complete darkness."
+            },
+            {
+                type: "nature",
+                question: "What is sonar?",
+                options: ["Using sound waves to detect objects underwater", "Animal communication", "Music system", "Hearing aid"],
+                answer: "A",
+                explanation: "SONAR (Sound Navigation And Ranging) uses sound waves to map ocean floor and find objects."
+            },
+            {
+                type: "nature",
+                question: "How do whales communicate?",
+                options: ["Using low-frequency sounds that travel far in water", "Silently", "Through light", "Through touch"],
+                answer: "A",
+                explanation: "Whales use complex songs that can travel thousands of kilometers through ocean."
+            },
+            {
+                type: "nature",
+                question: "What causes thunder?",
+                options: ["Rapid expansion of heated air from lightning", "Clouds crashing", "Rain falling", "Wind blowing"],
+                answer: "A",
+                explanation: "Lightning heats air instantly, causing rapid expansion that creates thunder sound."
+            },
+            {
+                type: "nature",
+                question: "Why do we hear ocean in seashells?",
+                options: ["Amplified ambient noise", "Actual ocean", "Shell memories", "Magic"],
+                answer: "A",
+                explanation: "Shells amplify surrounding noises, which sound similar to ocean waves."
+            },
+            {
+                type: "nature",
+                question: "How do crickets make sound?",
+                options: ["Rubbing wings together", "Vocal cords", "Foot tapping", "Breathing"],
+                answer: "A",
+                explanation: "Male crickets rub their wings together (stridulation) to attract females."
+            },
+            {
+                type: "nature",
+                question: "What is infrasound?",
+                options: ["Sounds below human hearing range", "Very loud sounds", "Very high sounds", "Animal sounds"],
+                answer: "A",
+                explanation: "Infrasound has frequencies below 20 Hz - elephants and whales use it to communicate."
+            },
+            {
+                type: "nature",
+                question: "What is ultrasound?",
+                options: ["Sounds above human hearing range", "Very quiet sounds", "Very low sounds", "Music"],
+                answer: "A",
+                explanation: "Ultrasound has frequencies above 20,000 Hz - used in medical imaging and by bats."
+            },
+            // Sound Technology & Safety (86-100)
+            {
+                type: "technology",
+                question: "How do microphones work?",
+                options: ["Convert sound waves to electrical signals", "Make sounds louder", "Create sounds", "Block sounds"],
+                answer: "A",
+                explanation: "Microphones have diaphragms that vibrate with sound, generating electrical signals."
+            },
+            {
+                type: "technology",
+                question: "How do speakers work?",
+                options: ["Convert electrical signals to sound waves", "Make sounds quieter", "Create electricity", "Record sounds"],
+                answer: "A",
+                explanation: "Speakers vibrate when electrical signals pass through, creating sound waves."
+            },
+            {
+                type: "technology",
+                question: "How do telephones work?",
+                options: ["Convert sound to electricity and back", "Magic tubes", "String connections", "Thought transfer"],
+                answer: "A",
+                explanation: "Telephones convert voice sounds to electrical signals, transmit them, then convert back."
+            },
+            {
+                type: "technology",
+                question: "What is an amplifier?",
+                options: ["Device that makes sounds louder", "Makes sounds quieter", "Changes pitch", "Records sound"],
+                answer: "A",
+                explanation: "Amplifiers increase the power of electrical audio signals to make sounds louder."
+            },
+            {
+                type: "technology",
+                question: "What are headphones?",
+                options: ["Personal speakers worn over ears", "Sound recorders", "Sound creators", "Hearing testers"],
+                answer: "A",
+                explanation: "Headphones convert electrical signals to sound for private listening."
+            },
+            {
+                type: "technology",
+                question: "How do stethoscopes work?",
+                options: ["Amplify body sounds for doctors", "Create body sounds", "Block all sound", "Measure temperature"],
+                answer: "A",
+                explanation: "Stethoscopes amplify faint body sounds (heartbeat, breathing) for medical diagnosis."
+            },
+            {
+                type: "technology",
+                question: "What is noise pollution?",
+                options: ["Harmful or annoying levels of sound", "Beautiful music", "Silence", "Natural sounds"],
+                answer: "A",
+                explanation: "Noise pollution is excessive noise that can harm health and disrupt activities."
+            },
+            {
+                type: "technology",
+                question: "Why should you protect your ears from loud noises?",
+                options: ["Prevent permanent hearing damage", "Make ears stronger", "Improve hearing", "No reason"],
+                answer: "A",
+                explanation: "Loud sounds can permanently damage delicate hair cells in inner ear."
+            },
+            {
+                type: "technology",
+                question: "What are earplugs used for?",
+                options: ["Protect ears from loud sounds", "Make sounds louder", "Change sound pitch", "Decorate ears"],
+                answer: "A",
+                explanation: "Earplugs reduce sound intensity entering ears, protecting hearing."
+            },
+            {
+                type: "technology",
+                question: "How do soundproof rooms work?",
+                options: ["Absorb and block sound waves", "Create silence", "Make all sounds louder", "Change all sounds"],
+                answer: "A",
+                explanation: "Soundproofing uses dense materials and air gaps to block sound transmission."
+            },
+            {
+                type: "technology",
+                question: "What is acoustic?",
+                options: ["Study of sound", "Study of light", "Study of heat", "Study of electricity"],
+                answer: "A",
+                explanation: "Acoustics is the science of sound, including its production, transmission, and effects."
+            },
+            {
+                type: "technology",
+                question: "Why do concert halls have special designs?",
+                options: ["To improve sound quality", "To look pretty", "To save space", "To make it dark"],
+                answer: "A",
+                explanation: "Concert hall acoustics are carefully designed for optimal sound reflection and clarity."
+            },
+            {
+                type: "technology",
+                question: "How do musical instruments stay in tune?",
+                options: ["Adjusting string tension or air column length", "Magic", "Temperature changes", "Playing often"],
+                answer: "A",
+                explanation: "Instruments are tuned by adjusting parts to produce correct vibration frequencies."
+            },
+            {
+                type: "technology",
+                question: "What is a tuning fork?",
+                options: ["Metal tool that vibrates at specific pitch", "Musical instrument", "Hearing aid", "Sound recorder"],
+                answer: "A",
+                explanation: "Tuning forks produce pure tones at specific frequencies for tuning instruments."
+            },
+            {
+                type: "technology",
+                question: "Why do sound engineers use mixing boards?",
+                options: ["Balance and adjust different sounds", "Create electricity", "Block sounds", "Measure temperature"],
+                answer: "A",
+                explanation: "Mixing boards control volume, tone, and effects of multiple audio sources."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent sound knowledge!",
+            "Fantastic vibration understanding!",
+            "Great job! You're a sound expert!",
+            "Amazing! Your acoustics skills are impressive!",
+            "Well done! Perfect answer!",
+            "You're a sound science champion!",
+            "Perfect! You understand sound waves!",
+            "Outstanding acoustics knowledge!",
+            "Brilliant! You think like an acoustic engineer!",
+            "You're on fire! Great sound insight!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const soundFact = document.getElementById('soundFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const soundDiagram = document.getElementById('soundDiagram');
+        const processDisplay = document.getElementById('processDisplay');
+        const instrumentCardsDisplay = document.getElementById('instrumentCardsDisplay');
+        const waveformDisplay = document.getElementById('waveformDisplay');
+        const earDiagram = document.getElementById('earDiagram');
+        const safetyTipsDisplay = document.getElementById('safetyTipsDisplay');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade4ScienceSound');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade4ScienceSound', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade4ScienceSound_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade4ScienceSound_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a sound and vibration expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent acoustics knowledge!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep exploring to become a sound engineer!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review what you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep exploring! Sound knowledge grows with curiosity!";
+            }
+        }
+
+        // Create sound fact display
+        function createSoundFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'sound-fact';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "basic") {
+                factDiv.innerHTML = `
+                    <strong>Sound Fact:</strong> Sound travels about 4 times faster in water than in air! 
+                    That's why whales can communicate across entire oceans!
+                `;
+            } else if (question.type === "hearing") {
+                factDiv.innerHTML = `
+                    <strong>Sound Fact:</strong> Your ears can detect sounds so quiet they move your eardrum 
+                    less than the width of a single atom!
+                `;
+            } else if (question.type === "instruments") {
+                factDiv.innerHTML = `
+                    <strong>Sound Fact:</strong> The world's largest musical instrument is the organ in the 
+                    Atlantic City Convention Hall - it has over 33,000 pipes!
+                `;
+            } else if (question.type === "nature") {
+                factDiv.innerHTML = `
+                    <strong>Sound Fact:</strong> Blue whale songs are the loudest animal sounds on Earth - 
+                    at 188 decibels, they're louder than a jet engine and can travel 800 km!
+                `;
+            } else if (question.type === "technology") {
+                factDiv.innerHTML = `
+                    <strong>Sound Fact:</strong> The first recorded sound was in 1860 - a 10-second recording 
+                    of someone singing "Au Clair de la Lune" on a phonautograph!
+                `;
+            }
+            
+            return factDiv;
+        }
+
+        // Create sound diagram
+        function createSoundDiagram() {
+            const container = document.createElement('div');
+            container.className = 'sound-diagram';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "basic") {
+                container.innerHTML = `
+                    <div class="sound-element" style="top: 10%; left: 50%; transform: translateX(-50%);">
+                        <div class="sound-element-icon vibrate">🔊</div>
+                        <div class="sound-element-label">Vibration</div>
+                    </div>
+                    <div class="sound-element" style="top: 40%; left: 20%;">
+                        <div class="sound-element-icon">🌊</div>
+                        <div class="sound-element-label">Sound Waves</div>
+                    </div>
+                    <div class="sound-element" style="top: 40%; left: 80%;">
+                        <div class="sound-element-icon">👂</div>
+                        <div class="sound-element-label">Ear</div>
+                    </div>
+                    <div class="sound-element" style="top: 70%; left: 50%; transform: translateX(-50%);">
+                        <div class="sound-element-icon">🧠</div>
+                        <div class="sound-element-label">Brain</div>
+                    </div>
+                `;
+            } else if (question.type === "hearing") {
+                container.innerHTML = `
+                    <div class="sound-element" style="top: 10%; left: 50%; transform: translateX(-50%);">
+                        <div class="sound-element-icon">👂</div>
+                        <div class="sound-element-label">Outer Ear</div>
+                    </div>
+                    <div class="sound-element" style="top: 40%; left: 30%;">
+                        <div class="sound-element-icon">🥁</div>
+                        <div class="sound-element-label">Eardrum</div>
+                    </div>
+                    <div class="sound-element" style="top: 40%; left: 70%;">
+                        <div class="sound-element-icon">🔨</div>
+                        <div class="sound-element-label">Tiny Bones</div>
+                    </div>
+                    <div class="sound-element" style="top: 70%; left: 50%; transform: translateX(-50%);">
+                        <div class="sound-element-icon">🐚</div>
+                        <div class="sound-element-label">Cochlea</div>
+                    </div>
+                `;
+            } else if (question.type === "instruments") {
+                container.innerHTML = `
+                    <div class="sound-element" style="top: 10%; left: 30%;">
+                        <div class="sound-element-icon">🎸</div>
+                        <div class="sound-element-label">Strings</div>
+                    </div>
+                    <div class="sound-element" style="top: 10%; left: 70%;">
+                        <div class="sound-element-icon">🎺</div>
+                        <div class="sound-element-label">Wind</div>
+                    </div>
+                    <div class="sound-element" style="top: 50%; left: 50%; transform: translateX(-50%);">
+                        <div class="sound-element-icon">🎵</div>
+                        <div class="sound-element-label">Music</div>
+                    </div>
+                    <div class="sound-element" style="top: 70%; left: 50%; transform: translateX(-50%);">
+                        <div class="sound-element-icon">🥁</div>
+                        <div class="sound-element-label">Percussion</div>
+                    </div>
+                `;
+            }
+            
+            return container;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "sound": "🔊",
+                "vibration": "📳",
+                "wave": "🌊",
+                "pitch": "🎵",
+                "volume": "🔊",
+                "frequency": "📊",
+                "amplitude": "📈",
+                "echo": "🗣️",
+                "hearing": "👂",
+                "instrument": "🎸",
+                "music": "🎵",
+                "nature": "🐬",
+                "technology": "🎤",
+                "safety": "🛡️",
+                "ear": "👂"
+            };
+            
+            let conceptName = "Sound Concept";
+            let conceptIcon = "🔊";
+            
+            const questionText = question.question.toLowerCase();
+            const options = question.options;
+            
+            if (question.type === "basic" || questionText.includes("sound") || 
+                options.some(opt => opt.includes("sound") || opt.includes("vibration"))) {
+                conceptName = "Sound Basics";
+                conceptIcon = conceptIcons.sound;
+            } else if (question.type === "hearing" || questionText.includes("hear") || 
+                       options.some(opt => opt.includes("ear") || opt.includes("hear"))) {
+                conceptName = "Hearing";
+                conceptIcon = conceptIcons.hearing;
+            } else if (question.type === "instruments" || questionText.includes("instrument") || 
+                       options.some(opt => opt.includes("music") || opt.includes("instrument"))) {
+                conceptName = "Instruments";
+                conceptIcon = conceptIcons.instrument;
+            } else if (question.type === "nature") {
+                conceptName = "Nature Sounds";
+                conceptIcon = conceptIcons.nature;
+            } else if (question.type === "technology") {
+                conceptName = "Sound Technology";
+                conceptIcon = conceptIcons.technology;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type === "basic") {
+                label.textContent = "What is this sound principle?";
+            } else if (question.type === "hearing") {
+                label.textContent = "How do we hear sounds?";
+            } else if (question.type === "instruments") {
+                label.textContent = "How do instruments create sound?";
+            } else if (question.type === "nature") {
+                label.textContent = "How is sound used in nature?";
+            } else if (question.type === "technology") {
+                label.textContent = "How is sound technology used?";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create process display
+        function createProcessDisplay() {
+            const display = document.createElement('div');
+            display.className = 'process-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "basic") {
+                display.innerHTML = `
+                    <div class="process-step">
+                        <div class="step-icon vibrate">📳</div>
+                        <div class="step-title">Vibration</div>
+                        <div class="step-description">Something moves back and forth rapidly</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🌊</div>
+                        <div class="step-title">Sound Waves</div>
+                        <div class="step-description">Vibrations create waves in air</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">👂</div>
+                        <div class="step-title">Hearing</div>
+                        <div class="step-description">Waves enter ear and vibrate eardrum</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🧠</div>
+                        <div class="step-title">Interpretation</div>
+                        <div class="step-description">Brain processes signals as sound</div>
+                    </div>
+                `;
+            } else if (question.type === "hearing") {
+                display.innerHTML = `
+                    <div class="process-step">
+                        <div class="step-icon">👂</div>
+                        <div class="step-title">Sound Collection</div>
+                        <div class="step-description">Outer ear collects sound waves</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🥁</div>
+                        <div class="step-title">Vibration</div>
+                        <div class="step-description">Eardrum vibrates with sound</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🔨</div>
+                        <div class="step-title">Amplification</div>
+                        <div class="step-description">Tiny bones amplify vibrations</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🐚</div>
+                        <div class="step-title">Conversion</div>
+                        <div class="step-description">Cochlea converts to nerve signals</div>
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create instrument cards display
+        function createInstrumentCardsDisplay() {
+            const display = document.createElement('div');
+            display.className = 'instrument-cards';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "instruments") {
+                display.innerHTML = `
+                    <div class="instrument-card">
+                        <div class="instrument-icon">🎸</div>
+                        <div class="instrument-name">Guitar</div>
+                        <div class="instrument-type">String Instrument</div>
+                    </div>
+                    <div class="instrument-card">
+                        <div class="instrument-icon">🎺</div>
+                        <div class="instrument-name">Trumpet</div>
+                        <div class="instrument-type">Wind Instrument</div>
+                    </div>
+                    <div class="instrument-card">
+                        <div class="instrument-icon">🥁</div>
+                        <div class="instrument-name">Drum</div>
+                        <div class="instrument-type">Percussion</div>
+                    </div>
+                    <div class="instrument-card">
+                        <div class="instrument-icon">🎹</div>
+                        <div class="instrument-name">Piano</div>
+                        <div class="instrument-type">String/Percussion</div>
+                    </div>
+                `;
+            } else if (question.type === "nature") {
+                display.innerHTML = `
+                    <div class="instrument-card">
+                        <div class="instrument-icon">🦇</div>
+                        <div class="instrument-name">Bats</div>
+                        <div class="instrument-type">Echolocation</div>
+                    </div>
+                    <div class="instrument-card">
+                        <div class="instrument-icon">🐋</div>
+                        <div class="instrument-name">Whales</div>
+                        <div class="instrument-type">Low-frequency songs</div>
+                    </div>
+                    <div class="instrument-card">
+                        <div class="instrument-icon">🦗</div>
+                        <div class="instrument-name">Crickets</div>
+                        <div class="instrument-type">Wing rubbing</div>
+                    </div>
+                    <div class="instrument-card">
+                        <div class="instrument-icon">🐬</div>
+                        <div class="instrument-name">Dolphins</div>
+                        <div class="instrument-type">Clicks and whistles</div>
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create waveform display
+        function createWaveformDisplay() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "basic" || question.type === "technology") {
+                const display = document.createElement('div');
+                display.className = 'waveform-display';
+                display.innerHTML = `
+                    <h3 style="margin-bottom: 15px; color: var(--secondary-blue);">Sound Wave Visualization</h3>
+                    <div class="waveform">
+                        <div class="wave-line"></div>
+                        <div class="wave-peak" style="left: 10%; animation-delay: 0s;"></div>
+                        <div class="wave-peak" style="left: 30%; animation-delay: 0.5s;"></div>
+                        <div class="wave-peak" style="left: 50%; animation-delay: 1s;"></div>
+                        <div class="wave-peak" style="left: 70%; animation-delay: 1.5s;"></div>
+                        <div class="wave-peak" style="left: 90%; animation-delay: 2s;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+                        <div style="text-align: center;">
+                            <div style="color: var(--primary-teal); font-weight: bold;">High Pitch</div>
+                            <div style="font-size: 0.8rem; color: var(--text-secondary);">Fast vibrations</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="color: var(--secondary-blue); font-weight: bold;">Loud Sound</div>
+                            <div style="font-size: 0.8rem; color: var(--text-secondary);">Large amplitude</div>
+                        </div>
+                    </div>
+                `;
+                return display;
+            }
+            return document.createElement('div');
+        }
+
+        // Create ear diagram
+        function createEarDiagram() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "hearing") {
+                const diagram = document.createElement('div');
+                diagram.className = 'ear-diagram';
+                diagram.innerHTML = `
+                    <div class="ear-part" style="top: 20%; left: 10%;">
+                        <div class="ear-icon">👂</div>
+                        <div class="ear-label">Outer Ear</div>
+                    </div>
+                    <div class="ear-part" style="top: 50%; left: 40%;">
+                        <div class="ear-icon">🥁</div>
+                        <div class="ear-label">Eardrum</div>
+                    </div>
+                    <div class="ear-part" style="top: 30%; left: 70%;">
+                        <div class="ear-icon">🔨</div>
+                        <div class="ear-label">Bones</div>
+                    </div>
+                    <div class="ear-part" style="top: 70%; left: 70%;">
+                        <div class="ear-icon">🐚</div>
+                        <div class="ear-label">Cochlea</div>
+                    </div>
+                    <div style="position: absolute; top: 50%; left: 20%; width: 60%; height: 2px; background: var(--secondary-blue); transform: rotate(-10deg);"></div>
+                    <div style="position: absolute; top: 50%; left: 50%; width: 40%; height: 2px; background: var(--secondary-blue); transform: rotate(10deg);"></div>
+                `;
+                return diagram;
+            }
+            return document.createElement('div');
+        }
+
+        // Create safety tips display
+        function createSafetyTipsDisplay() {
+            const display = document.createElement('div');
+            display.className = 'safety-tips';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "technology" || question.type === "hearing") {
+                display.innerHTML = `
+                    <div class="safety-tip">Protect ears from loud sounds</div>
+                    <div class="safety-tip">Take breaks from headphones</div>
+                    <div class="safety-tip">Keep volume at safe levels</div>
+                    <div class="safety-tip">Use ear protection at concerts</div>
+                `;
+            } else if (question.type === "basic") {
+                display.innerHTML = `
+                    <div class="safety-tip">Sound travels through materials</div>
+                    <div class="safety-tip">Waves can be reflected or absorbed</div>
+                    <div class="safety-tip">Different pitches have different uses</div>
+                    <div class="safety-tip">Volume affects hearing health</div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            soundFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            soundDiagram.innerHTML = '';
+            processDisplay.innerHTML = '';
+            instrumentCardsDisplay.innerHTML = '';
+            waveformDisplay.innerHTML = '';
+            earDiagram.innerHTML = '';
+            safetyTipsDisplay.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            soundFact.appendChild(createSoundFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            soundDiagram.appendChild(createSoundDiagram());
+            
+            if (question.type === "basic" || question.type === "hearing") {
+                processDisplay.appendChild(createProcessDisplay());
+            }
+            
+            if (question.type === "instruments" || question.type === "nature") {
+                instrumentCardsDisplay.appendChild(createInstrumentCardsDisplay());
+            }
+            
+            const waveformElement = createWaveformDisplay();
+            if (waveformElement.innerHTML.trim() !== '') {
+                waveformDisplay.appendChild(waveformElement);
+            }
+            
+            const earDiagramElement = createEarDiagram();
+            if (earDiagramElement.innerHTML.trim() !== '') {
+                earDiagram.appendChild(earDiagramElement);
+            }
+            
+            safetyTipsDisplay.appendChild(createSafetyTipsDisplay());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

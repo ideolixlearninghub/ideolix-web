@@ -1,0 +1,2313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 4 Science - Force & Energy | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Force & Energy Theme */
+        :root {
+            --primary-orange: #FF6B35;
+            --secondary-yellow: #FFD166;
+            --accent-blue: #118AB2;
+            --accent-green: #06D6A0;
+            --accent-purple: #7B2CBF;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 107, 53, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-orange);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-orange);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #E55A2E;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-yellow);
+            color: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(255, 209, 102, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #FFC145;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 209, 102, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-orange);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-orange), var(--secondary-yellow));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .science-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-blue);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-orange), var(--accent-blue));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-orange);
+            background: rgba(255, 107, 53, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(255, 107, 53, 0.1);
+            border-color: var(--primary-orange);
+            color: var(--primary-orange);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-yellow);
+            color: #1a1a1a;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-orange);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 5px solid var(--primary-orange);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-orange);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-orange);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Force Diagram */
+        .force-diagram {
+            max-width: 400px;
+            margin: 20px auto;
+            position: relative;
+            height: 250px;
+        }
+
+        .force-element {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .force-element:hover {
+            transform: scale(1.1);
+        }
+
+        .force-element-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            border: 2px solid var(--accent-blue);
+            font-size: 1.5rem;
+        }
+
+        .force-element-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        /* Energy Diagram */
+        .energy-diagram {
+            max-width: 400px;
+            margin: 20px auto;
+            position: relative;
+            height: 250px;
+        }
+
+        .energy-element {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100px;
+        }
+
+        .energy-element-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            border: 2px solid var(--accent-green);
+            font-size: 1.5rem;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-orange);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Process Display */
+        .process-display {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            min-width: 200px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .process-step.active {
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary-orange);
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Energy Source Cards */
+        .energy-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .energy-card {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            width: 180px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .energy-card:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-5px);
+        }
+
+        .energy-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .energy-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--accent-green);
+        }
+
+        .energy-type {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Force Types Display */
+        .force-types {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .force-type {
+            background: rgba(255, 107, 53, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary-orange);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .force-diagram {
+                height: 200px;
+            }
+            
+            .process-display {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .energy-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes push {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(20px); }
+            100% { transform: translateX(0); }
+        }
+        
+        .push {
+            animation: push 1s ease infinite;
+        }
+        
+        @keyframes pull {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(-20px); }
+            100% { transform: translateX(0); }
+        }
+        
+        .pull {
+            animation: pull 1s ease infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .rotate {
+            animation: rotate 3s linear infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .bounce {
+            animation: bounce 0.5s ease infinite;
+        }
+        
+        @keyframes gravity {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        .gravity {
+            animation: gravity 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1629654291660-3c98113a0438?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 4 Science</h1>
+            <p class="welcome-subtitle">Discover the incredible world of forces and energy! Learn about pushes, pulls, friction, gravity, and different energy sources. Explore how forces make things move and how energy powers our world!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">⚡</span>
+                <span class="topic-name">Force & Energy</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Science Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <!-- Science fact display -->
+                <div id="scienceFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Force diagram -->
+                <div id="forceDiagram"></div>
+                
+                <!-- Energy diagram -->
+                <div id="energyDiagram"></div>
+                
+                <!-- Process display -->
+                <div id="processDisplay"></div>
+                
+                <!-- Energy cards display -->
+                <div id="energyCardsDisplay"></div>
+                
+                <!-- Force types display -->
+                <div id="forceTypesDisplay"></div>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Science Exploration Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 120 Grade 4 Science questions covering Forces and Energy
+        const questions = [
+            // Basic Force Concepts (1-30)
+            {
+                type: "force_basic",
+                question: "What is a force?",
+                options: ["A push or pull on an object", "Energy that makes light", "Speed of an object", "Weight of an object"],
+                answer: "A",
+                explanation: "A force is any push or pull that causes an object to move, stop, or change direction."
+            },
+            {
+                type: "force_basic",
+                question: "What are the two main types of force?",
+                options: ["Push and pull", "Fast and slow", "Heavy and light", "Big and small"],
+                answer: "A",
+                explanation: "Forces can be classified as push (moving away) or pull (moving toward)."
+            },
+            {
+                type: "force_basic",
+                question: "What does a push force do?",
+                options: ["Moves an object away from you", "Moves an object toward you", "Stops an object", "Lifts an object"],
+                answer: "A",
+                explanation: "A push force moves an object away from the force source."
+            },
+            {
+                type: "force_basic",
+                question: "What does a pull force do?",
+                options: ["Moves an object toward you", "Moves an object away", "Stops an object", "Spins an object"],
+                answer: "A",
+                explanation: "A pull force moves an object toward the force source."
+            },
+            {
+                type: "force_basic",
+                question: "Which activity uses a push force?",
+                options: ["Pushing a swing", "Pulling a wagon", "Lifting a backpack", "Tugging a rope"],
+                answer: "A",
+                explanation: "Pushing a swing applies force away from you."
+            },
+            {
+                type: "force_basic",
+                question: "Which activity uses a pull force?",
+                options: ["Pulling a door open", "Pushing a shopping cart", "Kicking a ball", "Throwing a ball"],
+                answer: "A",
+                explanation: "Pulling a door applies force toward you."
+            },
+            {
+                type: "force_basic",
+                question: "What is friction?",
+                options: ["Force that opposes motion between surfaces", "Force that pulls objects down", "Force that pushes objects up", "Speed of falling objects"],
+                answer: "A",
+                explanation: "Friction slows down or stops moving objects by rubbing against surfaces."
+            },
+            {
+                type: "force_basic",
+                question: "Where is friction helpful?",
+                options: ["Between shoes and ground", "In outer space", "Between ice and skates", "In water slides"],
+                answer: "A",
+                explanation: "Friction helps us walk without slipping."
+            },
+            {
+                type: "force_basic",
+                question: "Where do we want less friction?",
+                options: ["Between skates and ice", "Between tires and road", "Between hands and rope", "Between shoes and floor"],
+                answer: "A",
+                explanation: "Less friction helps skaters glide smoothly on ice."
+            },
+            {
+                type: "force_basic",
+                question: "What is gravity?",
+                options: ["Force that pulls objects toward Earth", "Force that pushes objects away", "Speed of objects", "Weight of air"],
+                answer: "A",
+                explanation: "Gravity is the force that pulls everything toward Earth's center."
+            },
+            {
+                type: "force_basic",
+                question: "Who discovered gravity's laws?",
+                options: ["Isaac Newton", "Albert Einstein", "Thomas Edison", "Galileo Galilei"],
+                answer: "A",
+                explanation: "Sir Isaac Newton formulated laws of gravity and motion."
+            },
+            {
+                type: "force_basic",
+                question: "What happens when you drop an object?",
+                options: ["Gravity pulls it down", "It floats upward", "It stays in place", "It moves sideways"],
+                answer: "A",
+                explanation: "Gravity pulls dropped objects toward Earth."
+            },
+            {
+                type: "force_basic",
+                question: "What is weight?",
+                options: ["Measure of gravity's pull on an object", "How big an object is", "How fast an object moves", "What an object is made of"],
+                answer: "A",
+                explanation: "Weight measures how strongly gravity pulls on an object."
+            },
+            {
+                type: "force_basic",
+                question: "What is mass?",
+                options: ["Amount of matter in an object", "Weight of an object", "Size of an object", "Color of an object"],
+                answer: "A",
+                explanation: "Mass is the amount of material in an object, measured in kilograms."
+            },
+            {
+                type: "force_basic",
+                question: "What is the difference between mass and weight?",
+                options: ["Mass is constant, weight changes with gravity", "They are the same", "Weight is constant, mass changes", "No difference"],
+                answer: "A",
+                explanation: "Mass stays same everywhere; weight changes with gravity (less on Moon)."
+            },
+            {
+                type: "force_basic",
+                question: "What force keeps planets orbiting the Sun?",
+                options: ["Gravity", "Friction", "Magnetism", "Electricity"],
+                answer: "A",
+                explanation: "The Sun's gravity keeps planets in orbit."
+            },
+            {
+                type: "force_basic",
+                question: "What is air resistance?",
+                options: ["Friction between air and moving objects", "Weight of air", "Force of wind", "Air pressure"],
+                answer: "A",
+                explanation: "Air resistance slows down objects moving through air."
+            },
+            {
+                type: "force_basic",
+                question: "Which shape has least air resistance?",
+                options: ["Streamlined (aerodynamic)", "Flat square", "Round ball", "Irregular shape"],
+                answer: "A",
+                explanation: "Streamlined shapes reduce air resistance for faster movement."
+            },
+            {
+                type: "force_basic",
+                question: "What is a simple machine?",
+                options: ["Tool that makes work easier", "Electronic device", "Complex robot", "Power tool"],
+                answer: "A",
+                explanation: "Simple machines like levers and pulleys help us use forces more effectively."
+            },
+            {
+                type: "force_basic",
+                question: "Example of a lever?",
+                options: ["Seesaw", "Wheel", "Screw", "Inclined plane"],
+                answer: "A",
+                explanation: "A seesaw is a lever that helps lift weight with less force."
+            },
+            // More Force Concepts (31-50)
+            {
+                type: "force_basic",
+                question: "What is an inclined plane?",
+                options: ["Sloping surface like a ramp", "Wheel and axle", "Lever", "Pulley"],
+                answer: "A",
+                explanation: "An inclined plane makes lifting heavy objects easier by spreading the work over distance."
+            },
+            {
+                type: "force_basic",
+                question: "What is a pulley?",
+                options: ["Wheel with rope to lift loads", "Sloping ramp", "Twisting screw", "Lever"],
+                answer: "A",
+                explanation: "Pulleys change direction of force, making lifting easier."
+            },
+            {
+                type: "force_basic",
+                question: "What is a wheel and axle?",
+                options: ["Wheel attached to rod (like doorknob)", "Ramp", "Seesaw", "Screw"],
+                answer: "A",
+                explanation: "Wheel and axle systems make turning and moving objects easier."
+            },
+            {
+                type: "force_basic",
+                question: "What is a screw?",
+                options: ["Inclined plane wrapped around cylinder", "Wheel", "Lever", "Pulley"],
+                answer: "A",
+                explanation: "A screw converts turning force into forward pushing force."
+            },
+            {
+                type: "force_basic",
+                question: "What is a wedge?",
+                options: ["Two inclined planes back-to-back (like axe)", "Wheel", "Screw", "Pulley"],
+                answer: "A",
+                explanation: "Wedges split or separate materials by applying force."
+            },
+            {
+                type: "force_basic",
+                question: "What force makes magnets attract?",
+                options: ["Magnetic force", "Gravity", "Friction", "Air resistance"],
+                answer: "A",
+                explanation: "Magnetic force pulls certain metals (iron, nickel) toward magnets."
+            },
+            {
+                type: "force_basic",
+                question: "What do opposite magnetic poles do?",
+                options: ["Attract each other", "Repel each other", "Nothing", "Change color"],
+                answer: "A",
+                explanation: "North and South poles attract; like poles (N-N or S-S) repel."
+            },
+            {
+                type: "force_basic",
+                question: "What force powers compasses?",
+                options: ["Earth's magnetic field", "Gravity", "Friction", "Electricity"],
+                answer: "A",
+                explanation: "Compass needles align with Earth's magnetic field pointing North."
+            },
+            {
+                type: "force_basic",
+                question: "What is buoyancy?",
+                options: ["Upward force in fluids (water)", "Downward force", "Sideways force", "Spinning force"],
+                answer: "A",
+                explanation: "Buoyancy pushes objects upward in water, making some float."
+            },
+            {
+                type: "force_basic",
+                question: "Why do ships float?",
+                options: ["Buoyancy equals ship's weight", "They're made of magic", "No gravity in water", "They're light"],
+                answer: "A",
+                explanation: "Ships displace enough water so buoyant force equals their weight."
+            },
+            // Energy Basics (51-70)
+            {
+                type: "energy_basic",
+                question: "What is energy?",
+                options: ["Ability to do work or cause change", "Weight of an object", "Speed of an object", "Size of an object"],
+                answer: "A",
+                explanation: "Energy is what makes things happen - it powers movement, light, heat, etc."
+            },
+            {
+                type: "energy_basic",
+                question: "What is kinetic energy?",
+                options: ["Energy of motion", "Stored energy", "Heat energy", "Light energy"],
+                answer: "A",
+                explanation: "Kinetic energy is energy in moving objects."
+            },
+            {
+                type: "energy_basic",
+                question: "Example of kinetic energy?",
+                options: ["Rolling ball", "Battery", "Food", "Raised weight"],
+                answer: "A",
+                explanation: "A rolling ball has kinetic energy because it's moving."
+            },
+            {
+                type: "energy_basic",
+                question: "What is potential energy?",
+                options: ["Stored energy", "Energy of motion", "Heat energy", "Sound energy"],
+                answer: "A",
+                explanation: "Potential energy is stored energy ready to be used."
+            },
+            {
+                type: "energy_basic",
+                question: "Example of potential energy?",
+                options: ["Book on shelf", "Falling apple", "Moving car", "Flowing water"],
+                answer: "A",
+                explanation: "A book on a shelf has potential energy that can become kinetic if it falls."
+            },
+            {
+                type: "energy_basic",
+                question: "What is mechanical energy?",
+                options: ["Energy of moving parts", "Heat energy", "Light energy", "Chemical energy"],
+                answer: "A",
+                explanation: "Mechanical energy comes from motion or position of objects."
+            },
+            {
+                type: "energy_basic",
+                question: "What is thermal energy?",
+                options: ["Heat energy", "Motion energy", "Light energy", "Sound energy"],
+                answer: "A",
+                explanation: "Thermal energy comes from temperature of substances."
+            },
+            {
+                type: "energy_basic",
+                question: "What is chemical energy?",
+                options: ["Energy stored in chemicals", "Energy of motion", "Heat energy", "Light energy"],
+                answer: "A",
+                explanation: "Chemical energy is stored in food, batteries, and fuels."
+            },
+            {
+                type: "energy_basic",
+                question: "What is electrical energy?",
+                options: ["Energy from moving electrons", "Heat from fire", "Light from Sun", "Sound from speaker"],
+                answer: "A",
+                explanation: "Electrical energy comes from electric current flowing through wires."
+            },
+            {
+                type: "energy_basic",
+                question: "What is light energy?",
+                options: ["Energy we can see", "Heat from stove", "Electricity in wires", "Motion of car"],
+                answer: "A",
+                explanation: "Light energy travels in waves we can see."
+            },
+            // Renewable Energy (71-85)
+            {
+                type: "energy_renewable",
+                question: "What is renewable energy?",
+                options: ["Energy from sources that won't run out", "Energy from fossil fuels", "Energy that disappears", "Energy from coal"],
+                answer: "A",
+                explanation: "Renewable energy comes from natural sources that replenish themselves."
+            },
+            {
+                type: "energy_renewable",
+                question: "What is solar energy?",
+                options: ["Energy from the Sun", "Energy from wind", "Energy from water", "Energy from Earth's heat"],
+                answer: "A",
+                explanation: "Solar energy comes from sunlight captured by solar panels."
+            },
+            {
+                type: "energy_renewable",
+                question: "How do solar panels work?",
+                options: ["Convert sunlight to electricity", "Store wind energy", "Burn fuels", "Use falling water"],
+                answer: "A",
+                explanation: "Solar panels have cells that convert sunlight into electrical energy."
+            },
+            {
+                type: "energy_renewable",
+                question: "What is wind energy?",
+                options: ["Energy from moving air", "Energy from Sun", "Energy from water", "Energy from coal"],
+                answer: "A",
+                explanation: "Wind turbines capture wind's kinetic energy to generate electricity."
+            },
+            {
+                type: "energy_renewable",
+                question: "How do wind turbines work?",
+                options: ["Wind turns blades connected to generator", "Store sunlight", "Burn natural gas", "Use ocean waves"],
+                answer: "A",
+                explanation: "Wind turns turbine blades, spinning a generator to produce electricity."
+            },
+            {
+                type: "energy_renewable",
+                question: "What is hydropower?",
+                options: ["Energy from moving water", "Energy from wind", "Energy from Sun", "Energy from coal"],
+                answer: "A",
+                explanation: "Hydropower uses flowing or falling water to generate electricity."
+            },
+            {
+                type: "energy_renewable",
+                question: "How do hydroelectric dams work?",
+                options: ["Falling water spins turbines", "Store wind", "Burn oil", "Use sunlight"],
+                answer: "A",
+                explanation: "Water stored behind dams falls through turbines to generate electricity."
+            },
+            {
+                type: "energy_renewable",
+                question: "What is geothermal energy?",
+                options: ["Heat from inside Earth", "Energy from Sun", "Energy from wind", "Energy from coal"],
+                answer: "A",
+                explanation: "Geothermal energy uses Earth's internal heat for power and heating."
+            },
+            {
+                type: "energy_renewable",
+                question: "Where is geothermal energy found?",
+                options: ["Near volcanoes and hot springs", "In deserts", "On mountain tops", "In oceans"],
+                answer: "A",
+                explanation: "Geothermal energy is accessible where Earth's heat reaches near surface."
+            },
+            {
+                type: "energy_renewable",
+                question: "What is biomass energy?",
+                options: ["Energy from plants and organic waste", "Energy from Sun", "Energy from wind", "Energy from uranium"],
+                answer: "A",
+                explanation: "Biomass energy comes from burning plant materials or converting them to fuels."
+            },
+            // Non-renewable Energy (86-100)
+            {
+                type: "energy_nonrenewable",
+                question: "What is non-renewable energy?",
+                options: ["Energy from sources that can run out", "Energy that never ends", "Energy from Sun", "Energy from wind"],
+                answer: "A",
+                explanation: "Non-renewable energy sources like fossil fuels take millions of years to form."
+            },
+            {
+                type: "energy_nonrenewable",
+                question: "What are fossil fuels?",
+                options: ["Coal, oil, natural gas", "Sun, wind, water", "Wood, plants, waste", "Uranium, plutonium"],
+                answer: "A",
+                explanation: "Fossil fuels formed from ancient plants and animals over millions of years."
+            },
+            {
+                type: "energy_nonrenewable",
+                question: "What is coal?",
+                options: ["Solid fossil fuel from ancient plants", "Liquid from ancient sea animals", "Gas from ancient swamps", "Energy from Sun"],
+                answer: "A",
+                explanation: "Coal formed from ancient plant matter compressed over millions of years."
+            },
+            {
+                type: "energy_nonrenewable",
+                question: "What is petroleum (oil)?",
+                options: ["Liquid fossil fuel for fuel and plastics", "Solid rock fuel", "Gas from plants", "Energy from wind"],
+                answer: "A",
+                explanation: "Petroleum formed from ancient marine organisms and is refined into fuels."
+            },
+            {
+                type: "energy_nonrenewable",
+                question: "What is natural gas?",
+                options: ["Gaseous fossil fuel for heating", "Solid coal", "Liquid oil", "Renewable energy"],
+                answer: "A",
+                explanation: "Natural gas is mainly methane, used for heating and electricity generation."
+            },
+            {
+                type: "energy_nonrenewable",
+                question: "How do fossil fuels affect environment?",
+                options: ["Release pollution and greenhouse gases", "Clean the air", "Cool the Earth", "Create oxygen"],
+                answer: "A",
+                explanation: "Burning fossil fuels releases carbon dioxide and pollutants causing climate change."
+            },
+            {
+                type: "energy_nonrenewable",
+                question: "What is nuclear energy?",
+                options: ["Energy from splitting atoms", "Energy from Sun", "Energy from wind", "Energy from water"],
+                answer: "A",
+                explanation: "Nuclear energy comes from splitting uranium atoms in controlled reactions."
+            },
+            {
+                type: "energy_nonrenewable",
+                question: "What is nuclear fission?",
+                options: ["Splitting atoms to release energy", "Joining atoms", "Burning fuels", "Using sunlight"],
+                answer: "A",
+                explanation: "Nuclear fission splits large atoms into smaller ones, releasing tremendous energy."
+            },
+            {
+                type: "energy_nonrenewable",
+                question: "What is a benefit of nuclear energy?",
+                options: ["Produces large energy with low emissions", "Never creates waste", "Totally safe", "Renewable"],
+                answer: "A",
+                explanation: "Nuclear produces huge energy with minimal greenhouse gases but creates radioactive waste."
+            },
+            {
+                type: "energy_nonrenewable",
+                question: "What is a concern with nuclear energy?",
+                options: ["Radioactive waste disposal", "It uses too much water", "It causes wind pollution", "It needs sunlight"],
+                answer: "A",
+                explanation: "Nuclear waste remains dangerous for thousands of years and must be stored safely."
+            },
+            // Energy Conservation & Applications (101-120)
+            {
+                type: "energy_conservation",
+                question: "What is energy conservation?",
+                options: ["Using less energy to do same tasks", "Creating new energy", "Storing all energy", "Wasting energy"],
+                answer: "A",
+                explanation: "Energy conservation means reducing energy use through efficiency and smarter choices."
+            },
+            {
+                type: "energy_conservation",
+                question: "How can you save energy at home?",
+                options: ["Turn off lights when not needed", "Leave all appliances on", "Open windows with AC on", "Take long hot showers"],
+                answer: "A",
+                explanation: "Turning off unused lights and electronics saves significant electricity."
+            },
+            {
+                type: "energy_conservation",
+                question: "What are energy-efficient appliances?",
+                options: ["Appliances that use less energy", "Appliances that cost more", "Larger appliances", "Older appliances"],
+                answer: "A",
+                explanation: "Energy Star appliances use advanced technology to provide same service with less energy."
+            },
+            {
+                type: "energy_conservation",
+                question: "Why is energy conservation important?",
+                options: ["Saves resources and reduces pollution", "Makes things more expensive", "Uses more fossil fuels", "Creates more waste"],
+                answer: "A",
+                explanation: "Conserving energy reduces environmental impact and saves money."
+            },
+            {
+                type: "energy_conservation",
+                question: "What is insulation?",
+                options: ["Material that reduces heat transfer", "Material that conducts heat", "Type of fuel", "Energy source"],
+                answer: "A",
+                explanation: "Insulation in walls and roofs keeps buildings warm in winter and cool in summer."
+            },
+            {
+                type: "energy_conservation",
+                question: "What is a smart grid?",
+                options: ["Modern electricity distribution system", "Old power lines", "Solar panel only", "Battery type"],
+                answer: "A",
+                explanation: "Smart grids use technology to deliver electricity more efficiently and reliably."
+            },
+            {
+                type: "energy_conservation",
+                question: "What are batteries?",
+                options: ["Devices that store chemical energy", "Energy producers", "Power plants", "Fuel sources"],
+                answer: "A",
+                explanation: "Batteries store energy chemically and release it as electricity when needed."
+            },
+            {
+                type: "energy_conservation",
+                question: "What is rechargeable battery?",
+                options: ["Battery that can be used many times", "Battery used once", "Large industrial battery", "Car engine"],
+                answer: "A",
+                explanation: "Rechargeable batteries can be refilled with energy, reducing waste."
+            },
+            {
+                type: "energy_conservation",
+                question: "What is energy transformation?",
+                options: ["Changing energy from one form to another", "Creating new energy", "Destroying energy", "Storing energy"],
+                answer: "A",
+                explanation: "Energy constantly changes forms (chemical to electrical to light, etc.)."
+            },
+            {
+                type: "energy_conservation",
+                question: "Example of energy transformation in flashlight?",
+                options: ["Chemical → Electrical → Light", "Light → Heat → Sound", "Motion → Heat → Light", "Sound → Electrical → Light"],
+                answer: "A",
+                explanation: "Batteries (chemical) power bulb (electrical) to produce light."
+            },
+            {
+                type: "energy_conservation",
+                question: "What force causes tides?",
+                options: ["Moon's gravity", "Sun's heat", "Earth's rotation", "Wind"],
+                answer: "A",
+                explanation: "The Moon's gravity pulls ocean water, creating tides."
+            },
+            {
+                type: "energy_conservation",
+                question: "What is tidal energy?",
+                options: ["Energy from ocean tides", "Energy from waves", "Energy from currents", "Energy from temperature differences"],
+                answer: "A",
+                explanation: "Tidal energy captures energy from rising and falling tides."
+            },
+            {
+                type: "energy_conservation",
+                question: "What is wave energy?",
+                options: ["Energy from ocean waves", "Energy from tides", "Energy from currents", "Energy from wind over water"],
+                answer: "A",
+                explanation: "Wave energy devices capture the up-and-down motion of ocean waves."
+            },
+            {
+                type: "energy_conservation",
+                question: "What is biofuel?",
+                options: ["Fuel from plants or algae", "Fuel from rocks", "Fuel from wind", "Fuel from sunlight"],
+                answer: "A",
+                explanation: "Biofuels like ethanol come from crops like corn or sugarcane."
+            },
+            {
+                type: "energy_conservation",
+                question: "What is energy audit?",
+                options: ["Check of energy use in building", "Money count", "Water test", "Air quality check"],
+                answer: "A",
+                explanation: "Energy audits identify where energy is wasted and how to save."
+            },
+            {
+                type: "energy_conservation",
+                question: "What is passive solar design?",
+                options: ["Building design using Sun's heat naturally", "Solar panels", "Wind turbines", "Geothermal systems"],
+                answer: "A",
+                explanation: "Passive solar uses building orientation, windows, and materials to capture solar heat."
+            },
+            {
+                type: "energy_conservation",
+                question: "What is photovoltaic cell?",
+                options: ["Solar cell converting sunlight to electricity", "Wind turbine blade", "Hydro turbine", "Battery"],
+                answer: "A",
+                explanation: "Photovoltaic (PV) cells are the basic units of solar panels."
+            },
+            {
+                type: "energy_conservation",
+                question: "What is energy density?",
+                options: ["Amount of energy in given space or mass", "Brightness of light", "Loudness of sound", "Strength of force"],
+                answer: "A",
+                explanation: "Energy density compares how much energy different fuels contain per kilogram."
+            },
+            {
+                type: "energy_conservation",
+                question: "Which has highest energy density?",
+                options: ["Uranium (nuclear)", "Coal", "Gasoline", "Wood"],
+                answer: "A",
+                explanation: "Nuclear fuel has millions of times more energy density than fossil fuels."
+            },
+            {
+                type: "energy_conservation",
+                question: "What is the law of conservation of energy?",
+                options: ["Energy cannot be created or destroyed, only transformed", "Energy can disappear", "Energy grows over time", "Energy is always new"],
+                answer: "A",
+                explanation: "Energy changes forms but the total amount in a closed system stays constant."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent physics knowledge!",
+            "Fantastic force understanding!",
+            "Great job! You're an energy expert!",
+            "Amazing! Your science skills are impressive!",
+            "Well done! Perfect answer!",
+            "You're a force and energy champion!",
+            "Perfect! You understand energy transformation!",
+            "Outstanding scientific thinking!",
+            "Brilliant! You think like a physicist!",
+            "You're on fire! Great science insight!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const scienceFact = document.getElementById('scienceFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const forceDiagram = document.getElementById('forceDiagram');
+        const energyDiagram = document.getElementById('energyDiagram');
+        const processDisplay = document.getElementById('processDisplay');
+        const energyCardsDisplay = document.getElementById('energyCardsDisplay');
+        const forceTypesDisplay = document.getElementById('forceTypesDisplay');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade4ScienceForceEnergy');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade4ScienceForceEnergy', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade4ScienceForceEnergy_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade4ScienceForceEnergy_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a force and energy expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent physics knowledge!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep exploring to become a scientist!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review what you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep exploring! Science knowledge grows with curiosity!";
+            }
+        }
+
+        // Create science fact display
+        function createScienceFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'science-fact';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "force_basic") {
+                factDiv.innerHTML = `
+                    <strong>Science Fact:</strong> The force of gravity is what keeps Earth orbiting the Sun at about 
+                    107,000 km/h! Without gravity, we'd float off into space!
+                `;
+            } else if (question.type === "energy_basic") {
+                factDiv.innerHTML = `
+                    <strong>Science Fact:</strong> The Sun produces more energy in one second than humans have used 
+                    in all of history! It's our ultimate energy source!
+                `;
+            } else if (question.type === "energy_renewable") {
+                factDiv.innerHTML = `
+                    <strong>Science Fact:</strong> Wind energy is actually a form of solar energy! The Sun heats Earth 
+                    unevenly, creating wind as air moves from hot to cold areas!
+                `;
+            } else if (question.type === "energy_nonrenewable") {
+                factDiv.innerHTML = `
+                    <strong>Science Fact:</strong> A single kilogram of uranium (nuclear fuel) contains as much energy as 
+                    3,000,000 kilograms of coal! That's why nuclear power plants are so powerful!
+                `;
+            } else if (question.type === "energy_conservation") {
+                factDiv.innerHTML = `
+                    <strong>Science Fact:</strong> If everyone in the world used energy-efficient light bulbs, we could 
+                    close 270 coal-fired power plants! Small changes make huge differences!
+                `;
+            }
+            
+            return factDiv;
+        }
+
+        // Create force diagram
+        function createForceDiagram() {
+            const container = document.createElement('div');
+            container.className = 'force-diagram';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("force")) {
+                container.innerHTML = `
+                    <div class="force-element" style="top: 20%; left: 20%;">
+                        <div class="force-element-icon push">➡️</div>
+                        <div class="force-element-label">Push</div>
+                    </div>
+                    <div class="force-element" style="top: 20%; left: 70%;">
+                        <div class="force-element-icon pull">⬅️</div>
+                        <div class="force-element-label">Pull</div>
+                    </div>
+                    <div class="force-element" style="top: 60%; left: 20%;">
+                        <div class="force-element-icon">⏬</div>
+                        <div class="force-element-label">Gravity</div>
+                    </div>
+                    <div class="force-element" style="top: 60%; left: 70%;">
+                        <div class="force-element-icon">🔄</div>
+                        <div class="force-element-label">Friction</div>
+                    </div>
+                    <div class="force-element" style="top: 40%; left: 45%;">
+                        <div class="force-element-icon">⚖️</div>
+                        <div class="force-element-label">Forces</div>
+                    </div>
+                `;
+            }
+            
+            return container;
+        }
+
+        // Create energy diagram
+        function createEnergyDiagram() {
+            const container = document.createElement('div');
+            container.className = 'energy-diagram';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("energy")) {
+                container.innerHTML = `
+                    <div class="energy-element" style="top: 10%; left: 50%; transform: translateX(-50%);">
+                        <div class="energy-element-icon">☀️</div>
+                        <div class="force-element-label">Solar</div>
+                    </div>
+                    <div class="energy-element" style="top: 40%; left: 20%;">
+                        <div class="energy-element-icon rotate">💨</div>
+                        <div class="force-element-label">Wind</div>
+                    </div>
+                    <div class="energy-element" style="top: 40%; left: 80%;">
+                        <div class="energy-element-icon">💧</div>
+                        <div class="force-element-label">Water</div>
+                    </div>
+                    <div class="energy-element" style="top: 70%; left: 50%; transform: translateX(-50%);">
+                        <div class="energy-element-icon">🔥</div>
+                        <div class="force-element-label">Fossil Fuels</div>
+                    </div>
+                `;
+            }
+            
+            return container;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "force": "⚡",
+                "push": "➡️",
+                "pull": "⬅️",
+                "friction": "🔄",
+                "gravity": "⏬",
+                "energy": "🔋",
+                "kinetic": "🏃",
+                "potential": "📦",
+                "renewable": "♻️",
+                "nonrenewable": "🛢️",
+                "solar": "☀️",
+                "wind": "💨",
+                "water": "💧",
+                "fossil": "🔥",
+                "nuclear": "⚛️"
+            };
+            
+            let conceptName = "Science Concept";
+            let conceptIcon = "⚡";
+            
+            const questionText = question.question.toLowerCase();
+            
+            if (question.type.includes("force")) {
+                conceptName = "Forces";
+                conceptIcon = conceptIcons.force;
+            } else if (question.type.includes("energy_basic")) {
+                conceptName = "Energy Basics";
+                conceptIcon = conceptIcons.energy;
+            } else if (question.type.includes("renewable")) {
+                conceptName = "Renewable Energy";
+                conceptIcon = conceptIcons.renewable;
+            } else if (question.type.includes("nonrenewable")) {
+                conceptName = "Non-renewable Energy";
+                conceptIcon = conceptIcons.nonrenewable;
+            } else if (question.type.includes("conservation")) {
+                conceptName = "Energy Conservation";
+                conceptIcon = conceptIcons.energy;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("force")) {
+                label.textContent = "What type of force is this?";
+            } else if (question.type.includes("energy_basic")) {
+                label.textContent = "What is this energy concept?";
+            } else if (question.type.includes("renewable")) {
+                label.textContent = "What renewable energy source?";
+            } else if (question.type.includes("nonrenewable")) {
+                label.textContent = "What non-renewable energy source?";
+            } else if (question.type.includes("conservation")) {
+                label.textContent = "How can we save energy?";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create process display
+        function createProcessDisplay() {
+            const display = document.createElement('div');
+            display.className = 'process-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "force_basic") {
+                display.innerHTML = `
+                    <div class="process-step">
+                        <div class="step-icon">➡️</div>
+                        <div class="step-title">Push Force</div>
+                        <div class="step-description">Moves objects away from force source</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">⬅️</div>
+                        <div class="step-title">Pull Force</div>
+                        <div class="step-description">Moves objects toward force source</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🔄</div>
+                        <div class="step-title">Friction</div>
+                        <div class="step-description">Opposes motion between surfaces</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">⏬</div>
+                        <div class="step-title">Gravity</div>
+                        <div class="step-description">Pulls objects toward Earth</div>
+                    </div>
+                `;
+            } else if (question.type.includes("energy")) {
+                display.innerHTML = `
+                    <div class="process-step">
+                        <div class="step-icon">📦</div>
+                        <div class="step-title">Potential Energy</div>
+                        <div class="step-description">Stored energy ready for use</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🏃</div>
+                        <div class="step-title">Kinetic Energy</div>
+                        <div class="step-description">Energy of moving objects</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🔄</div>
+                        <div class="step-title">Energy Transformation</div>
+                        <div class="step-description">Energy changes from one form to another</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">💡</div>
+                        <div class="step-title">Energy Conservation</div>
+                        <div class="step-description">Energy cannot be created or destroyed</div>
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create energy cards display
+        function createEnergyCardsDisplay() {
+            const display = document.createElement('div');
+            display.className = 'energy-cards';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("energy")) {
+                display.innerHTML = `
+                    <div class="energy-card">
+                        <div class="energy-icon">☀️</div>
+                        <div class="energy-name">Solar</div>
+                        <div class="energy-type">Renewable</div>
+                    </div>
+                    <div class="energy-card">
+                        <div class="energy-icon rotate">💨</div>
+                        <div class="energy-name">Wind</div>
+                        <div class="energy-type">Renewable</div>
+                    </div>
+                    <div class="energy-card">
+                        <div class="energy-icon">💧</div>
+                        <div class="energy-name">Hydropower</div>
+                        <div class="energy-type">Renewable</div>
+                    </div>
+                    <div class="energy-card">
+                        <div class="energy-icon">🔥</div>
+                        <div class="energy-name">Fossil Fuels</div>
+                        <div class="energy-type">Non-renewable</div>
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create force types display
+        function createForceTypesDisplay() {
+            const display = document.createElement('div');
+            display.className = 'force-types';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("force")) {
+                display.innerHTML = `
+                    <div class="force-type">Push - moves objects away</div>
+                    <div class="force-type">Pull - moves objects toward</div>
+                    <div class="force-type">Friction - opposes motion</div>
+                    <div class="force-type">Gravity - pulls toward Earth</div>
+                    <div class="force-type">Magnetic - attracts metals</div>
+                    <div class="force-type">Buoyancy - pushes up in fluids</div>
+                `;
+            } else if (question.type.includes("energy")) {
+                display.innerHTML = `
+                    <div class="force-type">Kinetic - energy of motion</div>
+                    <div class="force-type">Potential - stored energy</div>
+                    <div class="force-type">Renewable - won't run out</div>
+                    <div class="force-type">Non-renewable - limited supply</div>
+                    <div class="force-type">Energy conservation - using less</div>
+                    <div class="force-type">Energy transformation - changing forms</div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            scienceFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            forceDiagram.innerHTML = '';
+            energyDiagram.innerHTML = '';
+            processDisplay.innerHTML = '';
+            energyCardsDisplay.innerHTML = '';
+            forceTypesDisplay.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            scienceFact.appendChild(createScienceFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            forceDiagram.appendChild(createForceDiagram());
+            energyDiagram.appendChild(createEnergyDiagram());
+            processDisplay.appendChild(createProcessDisplay());
+            energyCardsDisplay.appendChild(createEnergyCardsDisplay());
+            forceTypesDisplay.appendChild(createForceTypesDisplay());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

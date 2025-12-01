@@ -1,0 +1,2345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 4 Science - Soil & Erosion | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Soil Theme */
+        :root {
+            --primary-brown: #795548;
+            --secondary-tan: #D7CCC8;
+            --accent-green: #66BB6A;
+            --accent-orange: #FF8A65;
+            --accent-yellow: #FFD54F;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(121, 85, 72, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-brown), var(--secondary-tan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(121, 85, 72, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-brown);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-brown);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-brown);
+            box-shadow: 0 0 0 3px rgba(121, 85, 72, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-brown);
+            color: white;
+            box-shadow: 0 4px 15px rgba(121, 85, 72, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #6D4C41;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(121, 85, 72, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-tan);
+            color: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(215, 204, 200, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #C5B9B4;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(215, 204, 200, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-brown);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-brown), var(--secondary-tan));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(121, 85, 72, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .soil-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-green);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-brown), var(--accent-green));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(121, 85, 72, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-brown);
+            background: rgba(121, 85, 72, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(121, 85, 72, 0.1);
+            border-color: var(--primary-brown);
+            color: var(--primary-brown);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-tan);
+            color: #1a1a1a;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-brown);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(121, 85, 72, 0.1);
+            border-left: 5px solid var(--primary-brown);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-brown);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-brown);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Soil Layers Diagram */
+        .soil-layers {
+            max-width: 400px;
+            margin: 20px auto;
+            position: relative;
+            height: 300px;
+        }
+
+        .soil-layer {
+            position: absolute;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .soil-layer:hover {
+            transform: scale(1.02);
+        }
+
+        .layer-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .layer-info {
+            flex: 1;
+        }
+
+        .layer-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .layer-description {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Soil Types Display */
+        .soil-types {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .soil-card {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .soil-card:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-5px);
+        }
+
+        .soil-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .soil-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--accent-green);
+        }
+
+        .soil-property {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-brown), var(--secondary-tan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-brown), var(--secondary-tan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-brown);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Process Display */
+        .process-display {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            min-width: 200px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .process-step.active {
+            border-color: var(--primary-brown);
+            box-shadow: 0 0 15px rgba(121, 85, 72, 0.3);
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary-brown);
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Erosion Types Display */
+        .erosion-types {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .erosion-type {
+            background: rgba(255, 138, 101, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-orange);
+            font-size: 0.9rem;
+            min-width: 180px;
+        }
+
+        /* Soil Properties Display */
+        .soil-properties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .soil-property {
+            background: rgba(255, 213, 79, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-yellow);
+            font-size: 0.9rem;
+        }
+
+        /* Particle Size Comparison */
+        .particle-comparison {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .particle-bar {
+            height: 20px;
+            background: linear-gradient(to right, #FFD54F, #FF8A65, #795548);
+            border-radius: 10px;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .particle-marker {
+            position: absolute;
+            top: -25px;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .soil-layers {
+                height: 250px;
+            }
+            
+            .process-display {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .soil-types {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes soilForm {
+            0% { transform: scale(0.5) rotate(0deg); opacity: 0; }
+            100% { transform: scale(1) rotate(360deg); opacity: 1; }
+        }
+        
+        .soil-form {
+            animation: soilForm 2s ease-out forwards;
+        }
+        
+        @keyframes erode {
+            0% { transform: translateX(0) scale(1); }
+            100% { transform: translateX(100px) scale(0.8); opacity: 0.5; }
+        }
+        
+        .erode {
+            animation: erode 2s ease-out infinite alternate;
+        }
+        
+        @keyframes settle {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        .settle {
+            animation: settle 1s ease-out;
+        }
+        
+        @keyframes decompose {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(0.8) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
+        }
+        
+        .decompose {
+            animation: decompose 3s linear infinite;
+        }
+        
+        @keyframes growPlant {
+            0% { transform: scaleY(0.1); }
+            100% { transform: scaleY(1); }
+        }
+        
+        .grow-plant {
+            animation: growPlant 2s ease-out;
+        }
+        
+        @keyframes waterFlow {
+            0% { transform: translateX(-100px); opacity: 0; }
+            50% { transform: translateX(0); opacity: 1; }
+            100% { transform: translateX(100px); opacity: 0; }
+        }
+        
+        .water-flow {
+            animation: waterFlow 3s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1560439514-4e9645039944?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1599058917212-d750089bc07e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 4 Science</h1>
+            <p class="welcome-subtitle">Dig into the fascinating world beneath our feet! Explore different soil types, discover how soil forms, learn about soil layers, and understand erosion and conservation methods to protect our precious soil resources!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">🌱</span>
+                <span class="topic-name">Soil Types & Erosion</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Soil Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <!-- Soil fact display -->
+                <div id="soilFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Soil layers diagram -->
+                <div id="soilLayersDisplay"></div>
+                
+                <!-- Soil types display -->
+                <div id="soilTypesDisplay"></div>
+                
+                <!-- Process display -->
+                <div id="processDisplay"></div>
+                
+                <!-- Erosion types display -->
+                <div id="erosionTypesDisplay"></div>
+                
+                <!-- Soil properties display -->
+                <div id="soilPropertiesDisplay"></div>
+                
+                <!-- Particle comparison -->
+                <div id="particleComparison"></div>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Soil Exploration Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 120 Grade 4 Science questions covering Soil Types and Erosion
+        const questions = [
+            // Soil Basics (1-30)
+            {
+                type: "soil_basic",
+                question: "What is soil?",
+                options: ["Mixture of minerals, organic matter, air, water", "Just dirt", "Only rocks", "Dead plants"],
+                answer: "A",
+                explanation: "Soil is a complex mixture of minerals, organic matter, air, water, and living organisms."
+            },
+            {
+                type: "soil_basic",
+                question: "What are the main components of soil?",
+                options: ["Minerals, organic matter, water, air", "Only sand", "Only clay", "Only humus"],
+                answer: "A",
+                explanation: "Healthy soil contains minerals (45%), organic matter (5%), water (25%), and air (25%)."
+            },
+            {
+                type: "soil_basic",
+                question: "What is organic matter in soil?",
+                options: ["Decayed plants and animals", "Rocks and minerals", "Sand particles", "Water"],
+                answer: "A",
+                explanation: "Organic matter comes from decomposed plants, animals, and microorganisms, enriching soil."
+            },
+            {
+                type: "soil_basic",
+                question: "What is humus?",
+                options: ["Dark, rich organic material in soil", "Type of rock", "Sand particle", "Water in soil"],
+                answer: "A",
+                explanation: "Humus is dark, nutrient-rich organic matter that improves soil fertility and structure."
+            },
+            {
+                type: "soil_basic",
+                question: "What are soil horizons?",
+                options: ["Layers of soil", "Types of soil", "Soil colors", "Soil textures"],
+                answer: "A",
+                explanation: "Soil horizons are distinct layers (O, A, B, C) that form as soil develops."
+            },
+            {
+                type: "soil_basic",
+                question: "What is the O horizon?",
+                options: ["Top layer with organic matter", "Clay layer", "Rock layer", "Sand layer"],
+                answer: "A",
+                explanation: "The O horizon is the surface layer with fresh and decaying organic matter."
+            },
+            {
+                type: "soil_basic",
+                question: "What is the A horizon?",
+                options: ["Topsoil - dark, rich in humus", "Clay layer", "Parent rock", "Sand layer"],
+                answer: "A",
+                explanation: "The A horizon (topsoil) contains humus, minerals, and is where most plants grow."
+            },
+            {
+                type: "soil_basic",
+                question: "What is the B horizon?",
+                options: ["Subsoil - minerals and clay accumulate", "Topsoil", "Organic layer", "Bedrock"],
+                answer: "A",
+                explanation: "The B horizon (subsoil) has minerals leached from above and more clay."
+            },
+            {
+                type: "soil_basic",
+                question: "What is the C horizon?",
+                options: ["Weathered parent rock", "Topsoil", "Humus layer", "Clay layer"],
+                answer: "A",
+                explanation: "The C horizon contains partially weathered parent rock material."
+            },
+            {
+                type: "soil_basic",
+                question: "What is bedrock?",
+                options: ["Solid rock beneath soil layers", "Topsoil", "Clay", "Sand"],
+                answer: "A",
+                explanation: "Bedrock is the solid rock layer beneath all soil horizons."
+            },
+            {
+                type: "soil_basic",
+                question: "How is soil formed?",
+                options: ["Weathering of rocks over long time", "Quickly from water", "From air", "From sunlight"],
+                answer: "A",
+                explanation: "Soil forms through weathering of rocks over hundreds to thousands of years."
+            },
+            {
+                type: "soil_basic",
+                question: "What is weathering?",
+                options: ["Breaking down rocks into smaller pieces", "Growing plants", "Water flow", "Wind blowing"],
+                answer: "A",
+                explanation: "Weathering breaks rocks into smaller particles through physical, chemical, and biological processes."
+            },
+            {
+                type: "soil_basic",
+                question: "What is physical weathering?",
+                options: ["Rocks broken by temperature changes, ice, roots", "Chemical breakdown", "Biological breakdown", "Water dissolving"],
+                answer: "A",
+                explanation: "Physical weathering breaks rocks without changing their chemical composition."
+            },
+            {
+                type: "soil_basic",
+                question: "What is chemical weathering?",
+                options: ["Rocks broken down by chemical reactions", "Freezing and thawing", "Root growth", "Wind erosion"],
+                answer: "A",
+                explanation: "Chemical weathering changes rock composition through reactions with water, air, or acids."
+            },
+            {
+                type: "soil_basic",
+                question: "What is biological weathering?",
+                options: ["Breakdown by plants, animals, microorganisms", "Temperature changes", "Water freezing", "Wind"],
+                answer: "A",
+                explanation: "Biological weathering occurs when living organisms break down rocks."
+            },
+            // Soil Types (31-60)
+            {
+                type: "soil_types",
+                question: "What are the three main soil particle sizes?",
+                options: ["Sand, silt, clay", "Big, medium, small", "Rock, gravel, dust", "Hard, soft, medium"],
+                answer: "A",
+                explanation: "Soil particles are classified by size: sand (largest), silt (medium), clay (smallest)."
+            },
+            {
+                type: "soil_types",
+                question: "Which soil particle is largest?",
+                options: ["Sand", "Silt", "Clay", "Humus"],
+                answer: "A",
+                explanation: "Sand particles are 0.05-2.0 mm, the largest of the three main soil particles."
+            },
+            {
+                type: "soil_types",
+                question: "Which soil particle is smallest?",
+                options: ["Clay", "Sand", "Silt", "Gravel"],
+                answer: "A",
+                explanation: "Clay particles are less than 0.002 mm, the smallest soil particles."
+            },
+            {
+                type: "soil_types",
+                question: "What is sandy soil like?",
+                options: ["Large particles, drains quickly", "Small particles, holds water", "Sticky when wet", "Rich in nutrients"],
+                answer: "A",
+                explanation: "Sandy soil has large particles, drains quickly, but holds few nutrients."
+            },
+            {
+                type: "soil_types",
+                question: "What is clay soil like?",
+                options: ["Small particles, holds water, sticky", "Large particles, drains fast", "Medium particles", "Sandy texture"],
+                answer: "A",
+                explanation: "Clay soil has tiny particles, holds water well, becomes sticky when wet, and drains poorly."
+            },
+            {
+                type: "soil_types",
+                question: "What is silt soil like?",
+                options: ["Medium particles, smooth texture", "Large gritty particles", "Sticky when wet", "Poor drainage"],
+                answer: "A",
+                explanation: "Silt particles are medium-sized with smooth, floury texture when dry."
+            },
+            {
+                type: "soil_types",
+                question: "What is loam soil?",
+                options: ["Mixture of sand, silt, clay - ideal for plants", "Pure sand", "Pure clay", "Pure silt"],
+                answer: "A",
+                explanation: "Loam is the ideal soil type with balanced sand, silt, and clay for plant growth."
+            },
+            {
+                type: "soil_types",
+                question: "What soil type is best for growing most plants?",
+                options: ["Loam", "Pure sand", "Pure clay", "Pure silt"],
+                answer: "A",
+                explanation: "Loam provides good drainage, water retention, and nutrient availability for plants."
+            },
+            {
+                type: "soil_types",
+                question: "What is soil texture?",
+                options: ["How soil feels (gritty, smooth, sticky)", "Soil color", "Soil smell", "Soil temperature"],
+                answer: "A",
+                explanation: "Soil texture describes particle size and determines how soil feels when rubbed."
+            },
+            {
+                type: "soil_types",
+                question: "How can you test soil texture?",
+                options: ["Ribbon test - moisten and squeeze soil", "Look at color", "Smell it", "Taste it"],
+                answer: "A",
+                explanation: "The ribbon test helps identify soil type by how long a ribbon of moist soil can be made."
+            },
+            {
+                type: "soil_types",
+                question: "What is soil structure?",
+                options: ["How particles clump together", "Particle size", "Soil color", "Nutrient content"],
+                answer: "A",
+                explanation: "Soil structure refers to how particles aggregate into clumps called peds."
+            },
+            {
+                type: "soil_types",
+                question: "Why is soil structure important?",
+                options: ["Affects air, water movement, root growth", "Determines color", "Affects smell", "Changes temperature"],
+                answer: "A",
+                explanation: "Good soil structure allows air and water movement, and provides space for roots."
+            },
+            {
+                type: "soil_types",
+                question: "What is soil pH?",
+                options: ["Measure of acidity/alkalinity", "Soil color", "Soil texture", "Soil temperature"],
+                answer: "A",
+                explanation: "Soil pH measures acidity (low pH) or alkalinity (high pH) on scale 0-14."
+            },
+            {
+                type: "soil_types",
+                question: "What pH do most plants prefer?",
+                options: ["Slightly acidic to neutral (6-7)", "Very acidic (4-5)", "Very alkaline (8-9)", "Any pH"],
+                answer: "A",
+                explanation: "Most plants grow best in slightly acidic to neutral soil (pH 6-7)."
+            },
+            {
+                type: "soil_types",
+                question: "What affects soil color?",
+                options: ["Organic matter and minerals", "Water content", "Air content", "Temperature"],
+                answer: "A",
+                explanation: "Soil color indicates organic matter (dark) and mineral content (red=iron, white=calcium)."
+            },
+            // Soil Life & Nutrients (61-80)
+            {
+                type: "soil_life",
+                question: "What lives in soil?",
+                options: ["Earthworms, insects, bacteria, fungi", "Only plants", "Only rocks", "Nothing"],
+                answer: "A",
+                explanation: "Healthy soil contains billions of microorganisms, insects, worms, and other life."
+            },
+            {
+                type: "soil_life",
+                question: "Why are earthworms important?",
+                options: ["Aerate soil, create tunnels, add nutrients", "Eat plants", "Damage soil", "Nothing important"],
+                answer: "A",
+                explanation: "Earthworms improve soil by creating tunnels for air/water and leaving nutrient-rich castings."
+            },
+            {
+                type: "soil_life",
+                question: "What are decomposers?",
+                options: ["Organisms that break down dead matter", "Organisms that eat plants", "Organisms that make soil", "Plants"],
+                answer: "A",
+                explanation: "Decomposers like bacteria and fungi break down dead plants/animals into nutrients."
+            },
+            {
+                type: "soil_life",
+                question: "What are the main plant nutrients in soil?",
+                options: ["Nitrogen, phosphorus, potassium (N-P-K)", "Oxygen, hydrogen, carbon", "Calcium, magnesium, sulfur", "All of these"],
+                answer: "D",
+                explanation: "Plants need macronutrients (N-P-K) and micronutrients (calcium, magnesium, etc.) from soil."
+            },
+            {
+                type: "soil_life",
+                question: "What does nitrogen do for plants?",
+                options: ["Promotes leaf growth", "Promotes root growth", "Promotes flowering", "Makes stems strong"],
+                answer: "A",
+                explanation: "Nitrogen helps plants grow green, leafy vegetation."
+            },
+            {
+                type: "soil_life",
+                question: "What does phosphorus do for plants?",
+                options: ["Promotes root growth and flowering", "Promotes leaf growth", "Makes plants green", "Helps water uptake"],
+                answer: "A",
+                explanation: "Phosphorus supports root development, flowering, and fruit production."
+            },
+            {
+                type: "soil_life",
+                question: "What does potassium do for plants?",
+                options: ["Helps overall health and disease resistance", "Makes leaves green", "Promotes flowering", "Helps roots grow"],
+                answer: "A",
+                explanation: "Potassium improves plant health, disease resistance, and water regulation."
+            },
+            {
+                type: "soil_life",
+                question: "What is fertilizer?",
+                options: ["Substance added to soil to provide nutrients", "Type of soil", "Soil organism", "Water for plants"],
+                answer: "A",
+                explanation: "Fertilizers supplement soil nutrients to support plant growth."
+            },
+            {
+                type: "soil_life",
+                question: "What is compost?",
+                options: ["Decayed organic matter used to improve soil", "Chemical fertilizer", "Type of clay", "Sand mixture"],
+                answer: "A",
+                explanation: "Compost is decomposed organic material that enriches soil with nutrients."
+            },
+            {
+                type: "soil_life",
+                question: "What is crop rotation?",
+                options: ["Growing different crops in same area over time", "Planting same crop always", "Watering crops", "Tilling soil"],
+                answer: "A",
+                explanation: "Crop rotation maintains soil fertility by alternating nutrient demands of different crops."
+            },
+            // Erosion Basics (81-100)
+            {
+                type: "erosion",
+                question: "What is erosion?",
+                options: ["Wearing away of soil by wind, water, ice", "Building up soil", "Planting crops", "Watering plants"],
+                answer: "A",
+                explanation: "Erosion is the natural process where soil is moved from one place to another."
+            },
+            {
+                type: "erosion",
+                question: "What causes water erosion?",
+                options: ["Rainfall and flowing water", "Wind", "Ice", "Gravity"],
+                answer: "A",
+                explanation: "Water erosion occurs when rainfall or flowing water detaches and transports soil particles."
+            },
+            {
+                type: "erosion",
+                question: "What causes wind erosion?",
+                options: ["Wind blowing loose soil particles", "Water flow", "Ice movement", "Gravity"],
+                answer: "A",
+                explanation: "Wind erosion happens when wind picks up and carries away dry, loose soil."
+            },
+            {
+                type: "erosion",
+                question: "What is gully erosion?",
+                options: ["Deep channels cut by water flow", "Surface soil removal", "Wind removal", "Ice scraping"],
+                answer: "A",
+                explanation: "Gully erosion creates deep channels that cannot be crossed by farm equipment."
+            },
+            {
+                type: "erosion",
+                question: "What is sheet erosion?",
+                options: ["Thin layer of topsoil removed evenly", "Deep channels", "Wind erosion", "Ice erosion"],
+                answer: "A",
+                explanation: "Sheet erosion removes thin, uniform layers of topsoil, often unnoticed until severe."
+            },
+            {
+                type: "erosion",
+                question: "What is rill erosion?",
+                options: ["Small channels from water flow", "Deep gullies", "Wind erosion", "Sheet erosion"],
+                answer: "A",
+                explanation: "Rill erosion creates small channels that can be smoothed by tillage."
+            },
+            {
+                type: "erosion",
+                question: "What is glacial erosion?",
+                options: ["Soil moved by glaciers", "Water erosion", "Wind erosion", "Gravity erosion"],
+                answer: "A",
+                explanation: "Glacial erosion occurs when moving ice scrapes and transports soil and rock."
+            },
+            {
+                type: "erosion",
+                question: "What is the difference between weathering and erosion?",
+                options: ["Weathering breaks down, erosion moves material", "Same thing", "Weathering builds up", "Erosion creates soil"],
+                answer: "A",
+                explanation: "Weathering breaks rocks into smaller pieces; erosion transports those pieces."
+            },
+            {
+                type: "erosion",
+                question: "What natural factors affect erosion?",
+                options: ["Rainfall, wind, slope, vegetation", "Only rainfall", "Only wind", "Only temperature"],
+                answer: "A",
+                explanation: "Erosion is influenced by climate, topography, soil type, and vegetation cover."
+            },
+            {
+                type: "erosion",
+                question: "How does vegetation reduce erosion?",
+                options: ["Roots hold soil, leaves slow rain/wind", "Makes soil heavier", "Changes soil color", "Heats soil"],
+                answer: "A",
+                explanation: "Plant roots bind soil particles; leaves intercept rain and slow wind at ground level."
+            },
+            // Erosion Control & Conservation (101-120)
+            {
+                type: "conservation",
+                question: "What is soil conservation?",
+                options: ["Protecting soil from erosion and degradation", "Removing soil", "Planting crops", "Watering soil"],
+                answer: "A",
+                explanation: "Soil conservation uses methods to prevent soil loss and maintain fertility."
+            },
+            {
+                type: "conservation",
+                question: "What are contour plowing?",
+                options: ["Plowing across slope to slow water flow", "Plowing up and down slope", "Not plowing at all", "Deep plowing"],
+                answer: "A",
+                explanation: "Contour plowing creates ridges across slopes to slow water runoff."
+            },
+            {
+                type: "conservation",
+                question: "What are terraces?",
+                options: ["Level steps on slopes to reduce erosion", "Deep holes", "Tall mounds", "Flat fields"],
+                answer: "A",
+                explanation: "Terraces create level planting areas on slopes, reducing water runoff velocity."
+            },
+            {
+                type: "conservation",
+                question: "What are windbreaks?",
+                options: ["Trees/shrubs planted to slow wind", "Walls", "Fences", "Hills"],
+                answer: "A",
+                explanation: "Windbreaks are rows of trees or shrubs that reduce wind speed and erosion."
+            },
+            {
+                type: "conservation",
+                question: "What is cover cropping?",
+                options: ["Growing plants to protect bare soil", "Only growing food crops", "Not planting anything", "Deep plowing"],
+                answer: "A",
+                explanation: "Cover crops protect soil between main crop seasons, preventing erosion."
+            },
+            {
+                type: "conservation",
+                question: "What is no-till farming?",
+                options: ["Planting without plowing to reduce erosion", "Deep plowing", "Frequent plowing", "No farming"],
+                answer: "A",
+                explanation: "No-till farming leaves crop residues on surface, protecting soil from erosion."
+            },
+            {
+                type: "conservation",
+                question: "What are retention ponds?",
+                options: ["Ponds that collect runoff water", "Water sources", "Swimming pools", "Fish ponds"],
+                answer: "A",
+                explanation: "Retention ponds capture runoff, allowing sediment to settle before water continues."
+            },
+            {
+                type: "conservation",
+                question: "Why is topsoil important?",
+                options: ["Contains most nutrients and organic matter", "Just dirt", "Hardest layer", "Rocky layer"],
+                answer: "A",
+                explanation: "Topsoil is the most fertile layer where most plant roots grow and nutrients are concentrated."
+            },
+            {
+                type: "conservation",
+                question: "How long does it take to form 1 inch of topsoil?",
+                options: ["500-1000 years", "1 year", "10 years", "100 years"],
+                answer: "A",
+                explanation: "Topsoil forms very slowly, making conservation essential for sustainable agriculture."
+            },
+            {
+                type: "conservation",
+                question: "What is desertification?",
+                options: ["Land becoming desert due to soil degradation", "Making deserts", "Planting deserts", "Watering deserts"],
+                answer: "A",
+                explanation: "Desertification occurs when fertile land becomes desert due to drought, deforestation, or poor farming."
+            },
+            // Soil & Water (121-130)
+            {
+                type: "soil_water",
+                question: "What is soil porosity?",
+                options: ["Amount of pore space between particles", "Soil color", "Soil texture", "Soil nutrients"],
+                answer: "A",
+                explanation: "Porosity measures spaces between soil particles where air and water can move."
+            },
+            {
+                type: "soil_water",
+                question: "What is soil permeability?",
+                options: ["How easily water moves through soil", "Soil color", "Soil nutrients", "Soil organisms"],
+                answer: "A",
+                explanation: "Permeability indicates how quickly water flows through soil pores."
+            },
+            {
+                type: "soil_water",
+                question: "Which soil has highest permeability?",
+                options: ["Sandy soil", "Clay soil", "Silt soil", "Loam soil"],
+                answer: "A",
+                explanation: "Sandy soil has large pores allowing rapid water movement."
+            },
+            {
+                type: "soil_water",
+                question: "Which soil has lowest permeability?",
+                options: ["Clay soil", "Sandy soil", "Silt soil", "Loam soil"],
+                answer: "A",
+                explanation: "Clay soil has tiny pores that slow water movement significantly."
+            },
+            {
+                type: "soil_water",
+                question: "What is capillary action in soil?",
+                options: ["Water moving upward through small spaces", "Water flowing down", "Water evaporating", "Water freezing"],
+                answer: "A",
+                explanation: "Capillary action moves water upward through soil pores against gravity."
+            },
+            // Human Impact (131-140)
+            {
+                type: "human_impact",
+                question: "How does deforestation affect soil?",
+                options: ["Increases erosion by removing protective cover", "Improves soil", "No effect", "Adds nutrients"],
+                answer: "A",
+                explanation: "Removing trees exposes soil to rain and wind, dramatically increasing erosion rates."
+            },
+            {
+                type: "human_impact",
+                question: "How does overgrazing affect soil?",
+                options: ["Removes vegetation, compacting and exposing soil", "Improves soil", "Adds nutrients", "No effect"],
+                answer: "A",
+                explanation: "Overgrazing strips protective vegetation and compacts soil, increasing erosion."
+            },
+            {
+                type: "human_impact",
+                question: "How does construction affect soil?",
+                options: ["Removes vegetation, compacts soil, increases runoff", "Improves soil", "Adds nutrients", "No effect"],
+                answer: "A",
+                explanation: "Construction exposes bare soil and creates impervious surfaces that increase runoff."
+            },
+            {
+                type: "human_impact",
+                question: "What is sedimentation?",
+                options: ["Soil particles settling in water bodies", "Soil formation", "Soil erosion", "Soil planting"],
+                answer: "A",
+                explanation: "Sedimentation occurs when eroded soil particles settle in rivers, lakes, or reservoirs."
+            },
+            {
+                type: "human_impact",
+                question: "Why is sedimentation harmful?",
+                options: ["Clogs waterways, harms aquatic life", "Improves water", "Adds nutrients", "No harm"],
+                answer: "A",
+                explanation: "Sediment pollution clouds water, harms fish gills, and fills reservoirs and waterways."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent soil knowledge!",
+            "Fantastic erosion understanding!",
+            "Great job! You're a soil science expert!",
+            "Amazing! Your conservation skills are impressive!",
+            "Well done! Perfect answer!",
+            "You're a soil and erosion champion!",
+            "Perfect! You understand soil formation!",
+            "Outstanding pedology knowledge!",
+            "Brilliant! You think like a soil scientist!",
+            "You're on fire! Great soil insight!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const soilFact = document.getElementById('soilFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const soilLayersDisplay = document.getElementById('soilLayersDisplay');
+        const soilTypesDisplay = document.getElementById('soilTypesDisplay');
+        const processDisplay = document.getElementById('processDisplay');
+        const erosionTypesDisplay = document.getElementById('erosionTypesDisplay');
+        const soilPropertiesDisplay = document.getElementById('soilPropertiesDisplay');
+        const particleComparison = document.getElementById('particleComparison');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade4ScienceSoil');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade4ScienceSoil', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade4ScienceSoil_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade4ScienceSoil_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a soil science expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent pedology knowledge!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep exploring to become a soil scientist!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review what you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep exploring! Soil knowledge grows with observation!";
+            }
+        }
+
+        // Create soil fact display
+        function createSoilFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'soil-fact';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "soil_basic") {
+                factDiv.innerHTML = `
+                    <strong>Soil Fact:</strong> One teaspoon of healthy soil contains more living organisms 
+                    than there are people on Earth - about 7 billion bacteria, fungi, and other microbes!
+                `;
+            } else if (question.type === "soil_types") {
+                factDiv.innerHTML = `
+                    <strong>Soil Fact:</strong> The perfect loam soil that farmers love is called "gardener's gold" 
+                    because it's so valuable for growing healthy plants!
+                `;
+            } else if (question.type === "soil_life") {
+                factDiv.innerHTML = `
+                    <strong>Soil Fact:</strong> Earthworms can process up to 36 tons of soil per acre each year! 
+                    Their tunnels help water penetrate 10 times faster than in worm-free soil!
+                `;
+            } else if (question.type === "erosion") {
+                factDiv.innerHTML = `
+                    <strong>Erosion Fact:</strong> The Dust Bowl of the 1930s removed an average of 5 inches 
+                    of topsoil from 100 million acres of farmland in the US Great Plains!
+                `;
+            } else if (question.type === "conservation") {
+                factDiv.innerHTML = `
+                    <strong>Conservation Fact:</strong> It takes nature 500-1,000 years to form just 1 inch 
+                    of topsoil! That's why soil conservation is so important!
+                `;
+            } else if (question.type === "soil_water") {
+                factDiv.innerHTML = `
+                    <strong>Water Fact:</strong> Healthy soil acts like a sponge! One acre of good soil 
+                    can absorb and store up to 20,000 gallons of rainwater during a storm!
+                `;
+            } else if (question.type === "human_impact") {
+                factDiv.innerHTML = `
+                    <strong>Impact Fact:</strong> Soil erosion causes $44 billion in damage worldwide each year 
+                    through lost agricultural productivity and water pollution!
+                `;
+            }
+            
+            return factDiv;
+        }
+
+        // Create soil layers diagram
+        function createSoilLayersDisplay() {
+            const container = document.createElement('div');
+            container.className = 'soil-layers';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("soil")) {
+                container.innerHTML = `
+                    <div class="soil-layer" style="top: 0%; background: rgba(139, 195, 74, 0.3);">
+                        <div class="layer-icon">🍂</div>
+                        <div class="layer-info">
+                            <div class="layer-name">O Horizon</div>
+                            <div class="layer-description">Organic layer (leaves, twinks)</div>
+                        </div>
+                    </div>
+                    <div class="soil-layer" style="top: 20%; background: rgba(121, 85, 72, 0.5);">
+                        <div class="layer-icon">🌱</div>
+                        <div class="layer-info">
+                            <div class="layer-name">A Horizon</div>
+                            <div class="layer-description">Topsoil (dark, rich in humus)</div>
+                        </div>
+                    </div>
+                    <div class="soil-layer" style="top: 40%; background: rgba(158, 158, 158, 0.5);">
+                        <div class="layer-icon">⛏️</div>
+                        <div class="layer-info">
+                            <div class="layer-name">B Horizon</div>
+                            <div class="layer-description">Subsoil (minerals, clay)</div>
+                        </div>
+                    </div>
+                    <div class="soil-layer" style="top: 60%; background: rgba(97, 97, 97, 0.5);">
+                        <div class="layer-icon">🪨</div>
+                        <div class="layer-info">
+                            <div class="layer-name">C Horizon</div>
+                            <div class="layer-description">Weathered parent material</div>
+                        </div>
+                    </div>
+                    <div class="soil-layer" style="top: 80%; background: rgba(66, 66, 66, 0.7);">
+                        <div class="layer-icon">🗿</div>
+                        <div class="layer-info">
+                            <div class="layer-name">Bedrock</div>
+                            <div class="layer-description">Solid rock layer</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return container;
+        }
+
+        // Create soil types display
+        function createSoilTypesDisplay() {
+            const display = document.createElement('div');
+            display.className = 'soil-types';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("soil")) {
+                display.innerHTML = `
+                    <div class="soil-card">
+                        <div class="soil-icon">🏖️</div>
+                        <div class="soil-name">Sandy Soil</div>
+                        <div class="soil-property">Large particles</div>
+                        <div class="soil-property">Drains quickly</div>
+                        <div class="soil-property">Gritty feel</div>
+                    </div>
+                    <div class="soil-card">
+                        <div class="soil-icon">🌫️</div>
+                        <div class="soil-name">Silt Soil</div>
+                        <div class="soil-property">Medium particles</div>
+                        <div class="soil-property">Smooth texture</div>
+                        <div class="soil-property">Holds moisture</div>
+                    </div>
+                    <div class="soil-card">
+                        <div class="soil-icon">🧱</div>
+                        <div class="soil-name">Clay Soil</div>
+                        <div class="soil-property">Small particles</div>
+                        <div class="soil-property">Sticky when wet</div>
+                        <div class="soil-property">Poor drainage</div>
+                    </div>
+                    <div class="soil-card">
+                        <div class="soil-icon">⭐</div>
+                        <div class="soil-name">Loam Soil</div>
+                        <div class="soil-property">Perfect balance</div>
+                        <div class="soil-property">Best for plants</div>
+                        <div class="soil-property">Ideal texture</div>
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "soil": "🌱",
+                "layers": "📊",
+                "types": "🏖️",
+                "texture": "👆",
+                "life": "🐛",
+                "nutrients": "💊",
+                "erosion": "💧",
+                "conservation": "🛡️",
+                "water": "💦",
+                "impact": "👥"
+            };
+            
+            let conceptName = "Soil Concept";
+            let conceptIcon = "🌱";
+            
+            if (question.type === "soil_basic") {
+                conceptName = "Soil Basics";
+                conceptIcon = conceptIcons.soil;
+            } else if (question.type === "soil_types") {
+                conceptName = "Soil Types";
+                conceptIcon = conceptIcons.types;
+            } else if (question.type === "soil_life") {
+                conceptName = "Soil Life";
+                conceptIcon = conceptIcons.life;
+            } else if (question.type === "erosion") {
+                conceptName = "Erosion";
+                conceptIcon = conceptIcons.erosion;
+            } else if (question.type === "conservation") {
+                conceptName = "Conservation";
+                conceptIcon = conceptIcons.conservation;
+            } else if (question.type === "soil_water") {
+                conceptName = "Soil & Water";
+                conceptIcon = conceptIcons.water;
+            } else if (question.type === "human_impact") {
+                conceptName = "Human Impact";
+                conceptIcon = conceptIcons.impact;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type === "soil_basic") {
+                label.textContent = "What is this soil concept?";
+            } else if (question.type === "soil_types") {
+                label.textContent = "What type of soil is this?";
+            } else if (question.type === "soil_life") {
+                label.textContent = "What lives in soil?";
+            } else if (question.type === "erosion") {
+                label.textContent = "What type of erosion?";
+            } else if (question.type === "conservation") {
+                label.textContent = "How can we conserve soil?";
+            } else if (question.type === "soil_water") {
+                label.textContent = "How does soil interact with water?";
+            } else if (question.type === "human_impact") {
+                label.textContent = "How do humans affect soil?";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create process display
+        function createProcessDisplay() {
+            const display = document.createElement('div');
+            display.className = 'process-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "soil_basic") {
+                display.innerHTML = `
+                    <div class="process-step">
+                        <div class="step-icon decompose">🪨</div>
+                        <div class="step-title">Weathering</div>
+                        <div class="step-description">Rocks break into smaller pieces</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🍂</div>
+                        <div class="step-title">Decomposition</div>
+                        <div class="step-description">Organic matter breaks down</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🌱</div>
+                        <div class="step-title">Mixing</div>
+                        <div class="step-description">Minerals and organic matter combine</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon settle">📊</div>
+                        <div class="step-title">Layering</div>
+                        <div class="step-description">Soil horizons form over time</div>
+                    </div>
+                `;
+            } else if (question.type === "erosion") {
+                display.innerHTML = `
+                    <div class="process-step">
+                        <div class="step-icon water-flow">💧</div>
+                        <div class="step-title">Detachment</div>
+                        <div class="step-description">Rain/wind loosen soil particles</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon erode">🏃</div>
+                        <div class="step-title">Transport</div>
+                        <div class="step-description">Water/wind carry soil away</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon settle">📍</div>
+                        <div class="step-title">Deposition</div>
+                        <div class="step-description">Soil settles in new location</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">⚠️</div>
+                        <div class="step-title">Impact</div>
+                        <div class="step-description">Loss of fertile topsoil</div>
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create erosion types display
+        function createErosionTypesDisplay() {
+            const display = document.createElement('div');
+            display.className = 'erosion-types';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("erosion") || question.type === "conservation") {
+                display.innerHTML = `
+                    <div class="erosion-type">
+                        <strong>Water Erosion</strong><br>
+                        Rain and flowing water<br>
+                        Most common type
+                    </div>
+                    <div class="erosion-type">
+                        <strong>Wind Erosion</strong><br>
+                        Dry, loose soil blown away<br>
+                        Common in dry areas
+                    </div>
+                    <div class="erosion-type">
+                        <strong>Sheet Erosion</strong><br>
+                        Thin layer removed evenly<br>
+                        Hard to notice
+                    </div>
+                    <div class="erosion-type">
+                        <strong>Gully Erosion</strong><br>
+                        Deep channels form<br>
+                        Cannot cross with equipment
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create soil properties display
+        function createSoilPropertiesDisplay() {
+            const display = document.createElement('div');
+            display.className = 'soil-properties';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("soil")) {
+                display.innerHTML = `
+                    <div class="soil-property">Texture - how soil feels</div>
+                    <div class="soil-property">Structure - how particles clump</div>
+                    <div class="soil-property">Color - indicates composition</div>
+                    <div class="soil-property">pH - acidity/alkalinity</div>
+                    <div class="soil-property">Porosity - space between particles</div>
+                    <div class="soil-property">Permeability - water movement</div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create particle comparison
+        function createParticleComparison() {
+            const comparison = document.createElement('div');
+            comparison.className = 'particle-comparison';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("soil")) {
+                comparison.innerHTML = `
+                    <h3 style="margin-bottom: 15px; color: var(--accent-yellow);">Soil Particle Sizes</h3>
+                    <div class="particle-bar">
+                        <div class="particle-marker" style="left: 10%;">Clay<br><0.002mm</div>
+                        <div class="particle-marker" style="left: 50%;">Silt<br>0.002-0.05mm</div>
+                        <div class="particle-marker" style="left: 90%;">Sand<br>0.05-2.0mm</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-secondary);">
+                        <div>Tiny particles</div>
+                        <div>Medium particles</div>
+                        <div>Large particles</div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <div style="display: inline-block; padding: 5px 15px; background: rgba(255, 213, 79, 0.2); border-radius: 20px; margin: 5px;">
+                            Sand: Gritty
+                        </div>
+                        <div style="display: inline-block; padding: 5px 15px; background: rgba(255, 138, 101, 0.2); border-radius: 20px; margin: 5px;">
+                            Silt: Smooth
+                        </div>
+                        <div style="display: inline-block; padding: 5px 15px; background: rgba(121, 85, 72, 0.2); border-radius: 20px; margin: 5px;">
+                            Clay: Sticky
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return comparison;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            soilFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            soilLayersDisplay.innerHTML = '';
+            soilTypesDisplay.innerHTML = '';
+            processDisplay.innerHTML = '';
+            erosionTypesDisplay.innerHTML = '';
+            soilPropertiesDisplay.innerHTML = '';
+            particleComparison.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            soilFact.appendChild(createSoilFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            soilLayersDisplay.appendChild(createSoilLayersDisplay());
+            soilTypesDisplay.appendChild(createSoilTypesDisplay());
+            processDisplay.appendChild(createProcessDisplay());
+            erosionTypesDisplay.appendChild(createErosionTypesDisplay());
+            soilPropertiesDisplay.appendChild(createSoilPropertiesDisplay());
+            particleComparison.appendChild(createParticleComparison());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

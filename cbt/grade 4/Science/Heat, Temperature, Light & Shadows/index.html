@@ -1,0 +1,2356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 4 Science - Heat, Temperature, Light & Shadows | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Energy Theme */
+        :root {
+            --primary-orange: #FF5722;
+            --secondary-yellow: #FFC107;
+            --accent-blue: #2196F3;
+            --accent-purple: #9C27B0;
+            --accent-green: #4CAF50;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow-orange: 0 0 20px rgba(255, 87, 34, 0.3);
+            --glow-yellow: 0 0 20px rgba(255, 193, 7, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow-orange);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 87, 34, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-orange);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-orange);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #E64A19;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 87, 34, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-yellow);
+            color: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #FFB300;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-orange);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-orange), var(--secondary-yellow));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .science-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-blue);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-orange), var(--accent-purple));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-orange);
+            background: rgba(255, 87, 34, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(255, 87, 34, 0.1);
+            border-color: var(--primary-orange);
+            color: var(--primary-orange);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-yellow);
+            color: #1a1a1a;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-orange);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(255, 87, 34, 0.1);
+            border-left: 5px solid var(--primary-orange);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-orange);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-orange);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Science Diagram */
+        .science-diagram {
+            max-width: 400px;
+            margin: 20px auto;
+            position: relative;
+            height: 300px;
+        }
+
+        .science-element {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .science-element:hover {
+            transform: scale(1.1);
+        }
+
+        .science-element-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            border: 2px solid var(--accent-green);
+            font-size: 1.5rem;
+        }
+
+        .science-element-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-orange);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Process Display */
+        .process-display {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            min-width: 200px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .process-step.active {
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 15px rgba(255, 87, 34, 0.3);
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary-orange);
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Concept Cards */
+        .concept-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .concept-card {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            width: 180px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .concept-card:hover {
+            border-color: var(--secondary-yellow);
+            transform: translateY(-5px);
+        }
+
+        .concept-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-card-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--secondary-yellow);
+        }
+
+        .concept-card-example {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Safety Tips Display */
+        .safety-tips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .safety-tip {
+            background: rgba(76, 175, 80, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-green);
+            font-size: 0.9rem;
+        }
+
+        /* Shadow Demonstration */
+        .shadow-demo {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .light-source {
+            width: 40px;
+            height: 40px;
+            background: yellow;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            box-shadow: 0 0 20px yellow;
+        }
+
+        .object-shadow {
+            width: 60px;
+            height: 60px;
+            background: #666;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .shadow {
+            width: 100px;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            margin: 10px auto;
+            border-radius: 10px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .science-diagram {
+                height: 250px;
+            }
+            
+            .process-display {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .concept-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px yellow; }
+            50% { box-shadow: 0 0 30px yellow, 0 0 40px orange; }
+        }
+        
+        .glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes heat-wave {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+        
+        .heat-wave {
+            animation: heat-wave 2s ease-in-out infinite;
+        }
+        
+        @keyframes shadow-move {
+            0% { transform: translateX(-20px) scale(0.9); }
+            50% { transform: translateX(20px) scale(1.1); }
+            100% { transform: translateX(-20px) scale(0.9); }
+        }
+        
+        .shadow-move {
+            animation: shadow-move 3s ease-in-out infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .rotate {
+            animation: rotate 4s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1518834103328-6258d0d5e230?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 4 Science</h1>
+            <p class="welcome-subtitle">Discover the fascinating worlds of heat, temperature, light, and shadows! Learn how heat travels, how we measure temperature, how light behaves, and why shadows form. Explore energy transfer, reflection, refraction, and create your own shadow experiments!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">🌡️</span>
+                <span class="topic-name">Heat, Temperature, Light & Shadows</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Energy Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <!-- Science fact display -->
+                <div id="scienceFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Science diagram -->
+                <div id="scienceDiagram"></div>
+                
+                <!-- Process display -->
+                <div id="processDisplay"></div>
+                
+                <!-- Concept cards display -->
+                <div id="conceptCardsDisplay"></div>
+                
+                <!-- Safety tips display -->
+                <div id="safetyTipsDisplay"></div>
+                
+                <!-- Shadow demonstration -->
+                <div id="shadowDemo"></div>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Energy Exploration Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 100 Grade 4 Science questions covering heat, temperature, light, and shadows
+        const questions = [
+            // Heat and Temperature Basics (1-30)
+            {
+                type: "heat",
+                question: "What is heat?",
+                options: ["A form of energy that makes things warmer", "A type of light", "Something cold", "A solid object"],
+                answer: "A",
+                explanation: "Heat is thermal energy that transfers from warmer objects to cooler ones."
+            },
+            {
+                type: "heat",
+                question: "What is temperature?",
+                options: ["A measure of how hot or cold something is", "The amount of heat", "The color of something", "How heavy something is"],
+                answer: "A",
+                explanation: "Temperature measures the average kinetic energy of particles in a substance."
+            },
+            {
+                type: "heat",
+                question: "How does heat travel?",
+                options: ["From hot objects to cold objects", "From cold to hot", "It doesn't travel", "Only sideways"],
+                answer: "A",
+                explanation: "Heat energy always flows from warmer areas to cooler areas."
+            },
+            {
+                type: "heat",
+                question: "What tool measures temperature?",
+                options: ["Thermometer", "Ruler", "Scale", "Clock"],
+                answer: "A",
+                explanation: "A thermometer measures temperature in degrees Celsius or Fahrenheit."
+            },
+            {
+                type: "heat",
+                question: "What are the three ways heat travels?",
+                options: ["Conduction, convection, radiation", "Only through air", "Only through solids", "Only through liquids"],
+                answer: "A",
+                explanation: "Conduction (solids), convection (fluids), and radiation (through space)."
+            },
+            {
+                type: "heat",
+                question: "What is conduction?",
+                options: ["Heat transfer through direct contact", "Heat transfer through fluids", "Heat transfer through space", "Heat disappearing"],
+                answer: "A",
+                explanation: "Conduction is heat transfer when objects touch, like a spoon in hot soup."
+            },
+            {
+                type: "heat",
+                question: "What is convection?",
+                options: ["Heat transfer through liquids and gases", "Heat transfer through solids", "Heat transfer through space", "Heat staying still"],
+                answer: "A",
+                explanation: "Convection occurs when warmer fluid rises and cooler fluid sinks, creating currents."
+            },
+            {
+                type: "heat",
+                question: "What is radiation?",
+                options: ["Heat transfer through empty space", "Heat transfer through contact", "Heat transfer through liquids", "Heat not transferring"],
+                answer: "A",
+                explanation: "Radiation transfers heat as invisible waves, like sunlight warming Earth."
+            },
+            {
+                type: "heat",
+                question: "Which materials are good conductors of heat?",
+                options: ["Metals", "Wood", "Plastic", "Air"],
+                answer: "A",
+                explanation: "Metals conduct heat well because their particles are close together."
+            },
+            {
+                type: "heat",
+                question: "Which materials are good insulators?",
+                options: ["Wood, plastic, air", "Metals", "Water", "Glass"],
+                answer: "A",
+                explanation: "Insulators slow heat transfer - wood, plastic, and air are good insulators."
+            },
+            {
+                type: "heat",
+                question: "What happens to most materials when heated?",
+                options: ["They expand", "They shrink", "They stay same size", "They disappear"],
+                answer: "A",
+                explanation: "Heat makes particles move faster and spread out, causing expansion."
+            },
+            {
+                type: "heat",
+                question: "What happens to most materials when cooled?",
+                options: ["They contract", "They expand", "They stay same size", "They disappear"],
+                answer: "A",
+                explanation: "Cooling makes particles move slower and come closer, causing contraction."
+            },
+            {
+                type: "heat",
+                question: "What is the freezing point of water?",
+                options: ["0°C (32°F)", "100°C (212°F)", "50°C (122°F)", "-10°C (14°F)"],
+                answer: "A",
+                explanation: "Pure water freezes at 0°C (32°F) at sea level."
+            },
+            {
+                type: "heat",
+                question: "What is the boiling point of water?",
+                options: ["100°C (212°F)", "0°C (32°F)", "50°C (122°F)", "150°C (302°F)"],
+                answer: "A",
+                explanation: "Pure water boils at 100°C (212°F) at sea level."
+            },
+            {
+                type: "heat",
+                question: "What is room temperature approximately?",
+                options: ["20-25°C (68-77°F)", "0°C (32°F)", "100°C (212°F)", "50°C (122°F)"],
+                answer: "A",
+                explanation: "Comfortable room temperature is typically 20-25°C (68-77°F)."
+            },
+            {
+                type: "heat",
+                question: "What is body temperature?",
+                options: ["37°C (98.6°F)", "0°C (32°F)", "100°C (212°F)", "50°C (122°F)"],
+                answer: "A",
+                explanation: "Normal human body temperature is about 37°C (98.6°F)."
+            },
+            {
+                type: "heat",
+                question: "Why do we feel cold when wet?",
+                options: ["Water evaporation removes body heat", "Water is naturally cold", "Water conducts heat away", "Both A and C"],
+                answer: "D",
+                explanation: "Water conducts heat away from body and evaporation cools skin."
+            },
+            {
+                type: "heat",
+                question: "What is a conductor?",
+                options: ["Material that allows heat to pass through easily", "Material that blocks heat", "A musical instrument", "A type of train"],
+                answer: "A",
+                explanation: "Conductors allow heat (or electricity) to flow through them easily."
+            },
+            {
+                type: "heat",
+                question: "What is an insulator?",
+                options: ["Material that slows heat transfer", "Material that conducts heat", "A type of music", "A type of animal"],
+                answer: "A",
+                explanation: "Insulators resist heat flow, keeping things warm or cool."
+            },
+            {
+                type: "heat",
+                question: "Why do double-pane windows keep homes warmer?",
+                options: ["Air between panes is a good insulator", "Glass is thicker", "They reflect all heat", "Magic"],
+                answer: "A",
+                explanation: "Trapped air between glass panes acts as insulation, slowing heat loss."
+            },
+            // Light Basics (31-60)
+            {
+                type: "light",
+                question: "What is light?",
+                options: ["A form of energy we can see", "A type of sound", "Something heavy", "A liquid"],
+                answer: "A",
+                explanation: "Light is visible electromagnetic radiation that travels in waves."
+            },
+            {
+                type: "light",
+                question: "What is the main source of light on Earth?",
+                options: ["The Sun", "The Moon", "Electric lights", "Fire"],
+                answer: "A",
+                explanation: "The Sun is our primary natural light source during the day."
+            },
+            {
+                type: "light",
+                question: "How fast does light travel?",
+                options: ["300,000 km per second", "100 km per hour", "Speed of sound", "It doesn't move"],
+                answer: "A",
+                explanation: "Light travels at about 300,000 kilometers per second in vacuum."
+            },
+            {
+                type: "light",
+                question: "What happens when light hits an object?",
+                options: ["It can be absorbed, reflected, or transmitted", "It always bounces back", "It always goes through", "It disappears"],
+                answer: "A",
+                explanation: "Light can be absorbed (taken in), reflected (bounced), or transmitted (passed through)."
+            },
+            {
+                type: "light",
+                question: "What is reflection?",
+                options: ["Light bouncing off a surface", "Light bending", "Light being absorbed", "Light changing color"],
+                answer: "A",
+                explanation: "Reflection is when light bounces off a surface, like a mirror."
+            },
+            {
+                type: "light",
+                question: "What is refraction?",
+                options: ["Light bending when passing through materials", "Light bouncing back", "Light being absorbed", "Light changing speed"],
+                answer: "A",
+                explanation: "Refraction is light bending as it passes from one material to another."
+            },
+            {
+                type: "light",
+                question: "What causes a rainbow?",
+                options: ["Sunlight refracting through raindrops", "Magic paint in sky", "Special clouds", "Reflection only"],
+                answer: "A",
+                explanation: "Raindrops refract (bend) and disperse sunlight into its color spectrum."
+            },
+            {
+                type: "light",
+                question: "What colors make white light?",
+                options: ["All colors of the rainbow", "Only red and blue", "Only yellow", "No colors - it's white"],
+                answer: "A",
+                explanation: "White light contains all visible colors, which separate in a prism."
+            },
+            {
+                type: "light",
+                question: "What are the colors of the rainbow in order?",
+                options: ["Red, orange, yellow, green, blue, indigo, violet", "All mixed together", "Only primary colors", "Any order"],
+                answer: "A",
+                explanation: "ROYGBIV: Red, Orange, Yellow, Green, Blue, Indigo, Violet."
+            },
+            {
+                type: "light",
+                question: "Why does a straw look bent in water?",
+                options: ["Light refraction", "The straw actually bends", "Water pressure", "Magic"],
+                answer: "A",
+                explanation: "Light bends as it moves from water to air, making the straw appear bent."
+            },
+            {
+                type: "light",
+                question: "What is transparent material?",
+                options: ["Lets all light through clearly", "Lets some light through", "Lets no light through", "Changes light color"],
+                answer: "A",
+                explanation: "Transparent materials allow clear vision through them (clear glass)."
+            },
+            {
+                type: "light",
+                question: "What is translucent material?",
+                options: ["Lets some light through but scatters it", "Lets all light through clearly", "Lets no light through", "Absorbs all light"],
+                answer: "A",
+                explanation: "Translucent materials let light through but not clearly (frosted glass)."
+            },
+            {
+                type: "light",
+                question: "What is opaque material?",
+                options: ["Lets no light through", "Lets all light through", "Lets some light through", "Only lets certain colors through"],
+                answer: "A",
+                explanation: "Opaque materials block all light (wood, metal, most solids)."
+            },
+            {
+                type: "light",
+                question: "Why is the sky blue?",
+                options: ["Air scatters blue light more than other colors", "The ocean reflects blue", "It's always been blue", "Magic"],
+                answer: "A",
+                explanation: "Air molecules scatter shorter blue wavelengths more than other colors."
+            },
+            {
+                type: "light",
+                question: "Why are sunsets red and orange?",
+                options: ["Light travels through more atmosphere at sunset", "Sun changes color", "Clouds are colored", "Magic"],
+                answer: "A",
+                explanation: "At sunset, light travels through more atmosphere, scattering blue light away, leaving red/orange."
+            },
+            {
+                type: "light",
+                question: "How do we see objects?",
+                options: ["Light reflects from objects to our eyes", "Our eyes emit light", "Objects produce their own light", "Magic"],
+                answer: "A",
+                explanation: "Light reflects off objects into our eyes, allowing us to see them."
+            },
+            {
+                type: "light",
+                question: "What are shadows?",
+                options: ["Areas where light is blocked", "Dark objects", "Reflections", "Types of light"],
+                answer: "A",
+                explanation: "Shadows form when an object blocks light from reaching a surface."
+            },
+            {
+                type: "light",
+                question: "What affects shadow size?",
+                options: ["Distance from light source and object size", "Only object color", "Only light color", "Time of day only"],
+                answer: "A",
+                explanation: "Closer to light = larger shadow; larger objects = larger shadows."
+            },
+            {
+                type: "light",
+                question: "Why are shadows longer in morning/evening?",
+                options: ["Sun is lower, light hits at sharper angle", "Sun is weaker", "Air is thicker", "Magic"],
+                answer: "A",
+                explanation: "Low sun angle creates longer shadows; midday sun creates shorter shadows."
+            },
+            {
+                type: "light",
+                question: "What is a mirror?",
+                options: ["Smooth surface that reflects light clearly", "A type of glass", "A light source", "A shadow maker"],
+                answer: "A",
+                explanation: "Mirrors have very smooth surfaces that reflect light without scattering."
+            },
+            // Shadows and Applications (61-80)
+            {
+                type: "shadows",
+                question: "How are shadows formed?",
+                options: ["When an object blocks light", "When light bends", "When light is absorbed", "When light changes color"],
+                answer: "A",
+                explanation: "Shadows occur in areas where light cannot reach because an object blocks it."
+            },
+            {
+                type: "shadows",
+                question: "What three things are needed to make a shadow?",
+                options: ["Light source, object, surface", "Only light and object", "Only object and surface", "Only light"],
+                answer: "A",
+                explanation: "You need a light source, something to block it, and a surface for the shadow to appear on."
+            },
+            {
+                type: "shadows",
+                question: "What affects how sharp a shadow's edges are?",
+                options: ["Size of light source and distance", "Only object color", "Only light color", "Time of day"],
+                answer: "A",
+                explanation: "Small light sources create sharp shadows; large or multiple sources create blurry shadows."
+            },
+            {
+                type: "shadows",
+                question: "Why does your shadow change during the day?",
+                options: ["Sun's position changes", "You grow and shrink", "Shadow moves on its own", "Light changes color"],
+                answer: "A",
+                explanation: "As Earth rotates, sun appears to move, changing shadow direction and length."
+            },
+            {
+                type: "shadows",
+                question: "What is an eclipse?",
+                options: ["When one celestial body blocks light from another", "When moon disappears", "When sun changes color", "A type of shadow play"],
+                answer: "A",
+                explanation: "Solar eclipse: moon blocks sun; lunar eclipse: Earth blocks sunlight to moon."
+            },
+            {
+                type: "shadows",
+                question: "What is a sundial?",
+                options: ["Device that tells time using shadow position", "A type of clock", "A light measurement tool", "A shadow game"],
+                answer: "A",
+                explanation: "Sundials use the sun's shadow to indicate time based on its position."
+            },
+            {
+                type: "shadows",
+                question: "How can you make a shadow larger?",
+                options: ["Move object closer to light source", "Move object away from light", "Use dimmer light", "Change object color"],
+                answer: "A",
+                explanation: "Closer to light = larger shadow; farther = smaller shadow."
+            },
+            {
+                type: "shadows",
+                question: "How can you make a shadow smaller?",
+                options: ["Move object away from light source", "Move object closer to light", "Use brighter light", "Change surface color"],
+                answer: "A",
+                explanation: "Moving object away from light source reduces shadow size."
+            },
+            {
+                type: "shadows",
+                question: "What is silhouette?",
+                options: ["Dark shape of object against light background", "A type of shadow", "A reflection", "A colored shadow"],
+                answer: "A",
+                explanation: "Silhouette shows object's outline filled with dark color against bright background."
+            },
+            {
+                type: "shadows",
+                question: "Why do shadows sometimes have two parts?",
+                options: ["When there are two light sources", "When object is transparent", "When light is very bright", "Magic effect"],
+                answer: "A",
+                explanation: "Multiple light sources create multiple shadows, like in a room with several lamps."
+            },
+            {
+                type: "shadows",
+                question: "What happens to shadows on cloudy days?",
+                options: ["They become faint or disappear", "They become darker", "They change color", "They move faster"],
+                answer: "A",
+                explanation: "Clouds scatter sunlight, creating diffuse light that produces faint or no shadows."
+            },
+            {
+                type: "shadows",
+                question: "How do puppeteers use shadows?",
+                options: ["Shadow puppetry behind a screen", "They don't use shadows", "To make puppets darker", "To hide puppets"],
+                answer: "A",
+                explanation: "Shadow puppets block light to create shapes and stories on a screen."
+            },
+            {
+                type: "shadows",
+                question: "Why are there no shadows in space?",
+                options: ["No surfaces for shadows to fall on", "No light in space", "Shadows disappear in vacuum", "There are shadows in space"],
+                answer: "A",
+                explanation: "Space is mostly empty, so there are no surfaces for shadows, but objects can block light."
+            },
+            {
+                type: "shadows",
+                question: "What is penumbra?",
+                options: ["Partial shadow where some light reaches", "Complete shadow", "Colored shadow", "Shadow edge"],
+                answer: "A",
+                explanation: "Penumbra is the partially shaded outer region of a shadow."
+            },
+            {
+                type: "shadows",
+                question: "What is umbra?",
+                options: ["Complete shadow where no light reaches", "Partial shadow", "Shadow color", "Light area"],
+                answer: "A",
+                explanation: "Umbra is the darkest part of a shadow where light is completely blocked."
+            },
+            {
+                type: "shadows",
+                question: "How do plants use sunlight?",
+                options: ["Photosynthesis to make food", "To stay warm", "To grow toward light", "All of these"],
+                answer: "D",
+                explanation: "Plants use sunlight for photosynthesis, warmth, and phototropism (growing toward light)."
+            },
+            {
+                type: "shadows",
+                question: "Why do we wear light-colored clothes in summer?",
+                options: ["Light colors reflect more heat and light", "They look nicer", "They are cheaper", "Tradition"],
+                answer: "A",
+                explanation: "Light colors reflect sunlight, keeping you cooler than dark colors that absorb heat."
+            },
+            {
+                type: "shadows",
+                question: "Why do we wear dark-colored clothes in winter?",
+                options: ["Dark colors absorb more heat from sun", "They look warmer", "Tradition", "They are thicker"],
+                answer: "A",
+                explanation: "Dark colors absorb sunlight, helping keep you warmer in cold weather."
+            },
+            {
+                type: "shadows",
+                question: "How do solar panels work?",
+                options: ["Convert sunlight into electricity", "Store sunlight", "Reflect sunlight", "Block sunlight"],
+                answer: "A",
+                explanation: "Solar panels contain materials that convert sunlight directly into electrical energy."
+            },
+            {
+                type: "shadows",
+                question: "What is solar energy?",
+                options: ["Energy from the sun", "Energy from electricity", "Energy from wind", "Energy from water"],
+                answer: "A",
+                explanation: "Solar energy is renewable energy harnessed from sunlight."
+            },
+            // Safety and Applications (81-100)
+            {
+                type: "safety",
+                question: "Why shouldn't you look directly at the sun?",
+                options: ["Can damage eyes permanently", "Sun is too bright", "It's disrespectful", "It doesn't matter"],
+                answer: "A",
+                explanation: "Sun's intense light can burn retina cells, causing permanent vision damage."
+            },
+            {
+                type: "safety",
+                question: "Why should you wear sunscreen?",
+                options: ["Protects skin from harmful UV rays", "Makes you look tanned", "Keeps you cool", "Makes skin soft"],
+                answer: "A",
+                explanation: "Sunscreen blocks ultraviolet radiation that can cause sunburn and skin damage."
+            },
+            {
+                type: "safety",
+                question: "Why do we use oven mitts?",
+                options: ["Protect hands from heat conduction", "They look nice", "Keep hands clean", "Improve grip"],
+                answer: "A",
+                explanation: "Oven mitts are insulators that protect hands from hot objects' conducted heat."
+            },
+            {
+                type: "safety",
+                question: "Why shouldn't you touch hot metal directly?",
+                options: ["Metals conduct heat quickly and can burn", "Metal is dirty", "It might break", "It's expensive"],
+                answer: "A",
+                explanation: "Metals are excellent conductors - heat transfers quickly to skin, causing burns."
+            },
+            {
+                type: "safety",
+                question: "How do fire alarms work with heat?",
+                options: ["Some detect rapid temperature increase", "They see fire", "They smell smoke", "Magic"],
+                answer: "A",
+                explanation: "Heat detectors trigger alarms when temperature rises quickly or reaches certain level."
+            },
+            {
+                type: "safety",
+                question: "Why do bridges have expansion joints?",
+                options: ["Allow expansion and contraction with temperature changes", "For decoration", "To let water through", "To make noise"],
+                answer: "A",
+                explanation: "Metal expands when hot, contracts when cold - joints prevent damage from this movement."
+            },
+            {
+                type: "safety",
+                question: "How do thermometers work?",
+                options: ["Liquid expands when heated, rises in tube", "Magic", "Electronic sensors", "Both A and C"],
+                answer: "D",
+                explanation: "Traditional thermometers use liquid expansion; digital ones use electronic sensors."
+            },
+            {
+                type: "safety",
+                question: "Why do car radiators have coolant?",
+                options: ["Absorbs engine heat and transfers it to air", "Makes car look nice", "Cleans engine", "Lubricates parts"],
+                answer: "A",
+                explanation: "Coolant absorbs engine heat, then releases it through radiator fins to air."
+            },
+            {
+                type: "safety",
+                question: "How do sunglasses protect eyes?",
+                options: ["Block harmful UV rays and reduce glare", "Make you look cool", "Keep dust out", "Change color perception"],
+                answer: "A",
+                explanation: "Good sunglasses block ultraviolet radiation and reduce bright light intensity."
+            },
+            {
+                type: "safety",
+                question: "Why do we see lightning before hearing thunder?",
+                options: ["Light travels faster than sound", "Lightning happens first", "Thunder is slower", "Magic"],
+                answer: "A",
+                explanation: "Light travels much faster than sound, so we see lightning before hearing thunder."
+            },
+            {
+                type: "safety",
+                question: "How do mirrors help drivers?",
+                options: ["See behind and beside vehicle", "Check appearance", "Decorate car", "Block sunlight"],
+                answer: "A",
+                explanation: "Rearview and side mirrors use reflection to show areas driver can't see directly."
+            },
+            {
+                type: "safety",
+                question: "Why are stop signs red?",
+                options: ["Red light travels far and gets attention", "It's a nice color", "Tradition", "Random choice"],
+                answer: "A",
+                explanation: "Red light scatters less in atmosphere and is highly visible, signaling danger/stop."
+            },
+            {
+                type: "safety",
+                question: "How do periscopes work?",
+                options: ["Use mirrors to see around obstacles", "Magic tubes", "Special lenses", "Electronic cameras"],
+                answer: "A",
+                explanation: "Periscopes use angled mirrors to reflect images around corners or over obstacles."
+            },
+            {
+                type: "safety",
+                question: "Why do roads sometimes buckle in extreme heat?",
+                options: ["Concrete expands when heated", "They get weak", "Cars are too heavy", "Poor construction"],
+                answer: "A",
+                explanation: "Materials expand with heat; without expansion joints, pressure causes buckling."
+            },
+            {
+                type: "safety",
+                question: "How do greenhouses work?",
+                options: ["Glass traps heat from sunlight", "Magic plants", "Special soil", "Watering system"],
+                answer: "A",
+                explanation: "Glass allows sunlight in but traps heat inside, creating warm environment for plants."
+            },
+            {
+                type: "safety",
+                question: "Why do metals feel colder than wood at same temperature?",
+                options: ["Metals conduct heat away from hand faster", "Metals are actually colder", "Wood produces heat", "Our perception is wrong"],
+                answer: "A",
+                explanation: "Metals are better conductors, so they draw heat from your hand quickly, feeling colder."
+            },
+            {
+                type: "safety",
+                question: "How do emergency blankets work?",
+                options: ["Reflect body heat back to person", "Generate heat", "Are very thick", "Magic material"],
+                answer: "A",
+                explanation: "Shiny emergency blankets reflect infrared radiation (body heat) back to person."
+            },
+            {
+                type: "safety",
+                question: "Why do we see our breath in cold air?",
+                options: ["Water vapor in breath condenses into tiny droplets", "We breathe out smoke", "Air freezes", "Magic"],
+                answer: "A",
+                explanation: "Warm, moist breath meets cold air, causing water vapor to condense into visible droplets."
+            },
+            {
+                type: "safety",
+                question: "How do magnifying glasses work?",
+                options: ["Convex lenses bend light to make objects appear larger", "Magic glass", "Special coating", "Electronic"],
+                answer: "A",
+                explanation: "Convex lenses refract light rays so they converge, making objects look bigger."
+            },
+            {
+                type: "safety",
+                question: "Why can magnifying glasses start fires?",
+                options: ["Focus sunlight into small, hot point", "They get very hot", "Chemical reaction", "Magic"],
+                answer: "A",
+                explanation: "Convex lenses concentrate sunlight into a small focal point that gets extremely hot."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent energy knowledge!",
+            "Fantastic heat and light understanding!",
+            "Great job! You're an energy expert!",
+            "Amazing! Your physics skills are impressive!",
+            "Well done! Perfect answer!",
+            "You're a science champion!",
+            "Perfect! You understand energy transfer!",
+            "Outstanding physics knowledge!",
+            "Brilliant! You think like a physicist!",
+            "You're on fire! Great energy insight!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const scienceFact = document.getElementById('scienceFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const scienceDiagram = document.getElementById('scienceDiagram');
+        const processDisplay = document.getElementById('processDisplay');
+        const conceptCardsDisplay = document.getElementById('conceptCardsDisplay');
+        const safetyTipsDisplay = document.getElementById('safetyTipsDisplay');
+        const shadowDemo = document.getElementById('shadowDemo');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade4ScienceEnergy');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade4ScienceEnergy', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade4ScienceEnergy_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade4ScienceEnergy_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a heat, light, and shadows expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent energy science knowledge!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep exploring to become a physics master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review what you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep exploring! Science knowledge grows with curiosity!";
+            }
+        }
+
+        // Create science fact display
+        function createScienceFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'science-fact';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "heat") {
+                factDiv.innerHTML = `
+                    <strong>Science Fact:</strong> Heat is energy in motion! 
+                    The Sun's heat travels 150 million kilometers to reach Earth in just 8 minutes!
+                `;
+            } else if (question.type === "light") {
+                factDiv.innerHTML = `
+                    <strong>Science Fact:</strong> Light is the fastest thing in the universe! 
+                    It could circle Earth 7.5 times in just one second!
+                `;
+            } else if (question.type === "shadows") {
+                factDiv.innerHTML = `
+                    <strong>Science Fact:</strong> Shadows have been used for thousands of years! 
+                    Ancient people used sundials to tell time and predicted seasons using shadows!
+                `;
+            } else if (question.type === "safety") {
+                factDiv.innerHTML = `
+                    <strong>Science Fact:</strong> Understanding heat and light keeps us safe! 
+                    From sunscreen to oven mitts, we use science to protect ourselves every day!
+                `;
+            }
+            
+            return factDiv;
+        }
+
+        // Create science diagram
+        function createScienceDiagram() {
+            const container = document.createElement('div');
+            container.className = 'science-diagram';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "heat") {
+                container.innerHTML = `
+                    <div class="science-element" style="top: 10%; left: 50%; transform: translateX(-50%);">
+                        <div class="science-element-icon heat-wave">🔥</div>
+                        <div class="science-element-label">Heat Source</div>
+                    </div>
+                    <div class="science-element" style="top: 40%; left: 20%;">
+                        <div class="science-element-icon">↔️</div>
+                        <div class="science-element-label">Conduction</div>
+                    </div>
+                    <div class="science-element" style="top: 40%; left: 80%;">
+                        <div class="science-element-icon">🔄</div>
+                        <div class="science-element-label">Convection</div>
+                    </div>
+                    <div class="science-element" style="top: 70%; left: 50%; transform: translateX(-50%);">
+                        <div class="science-element-icon">☀️</div>
+                        <div class="science-element-label">Radiation</div>
+                    </div>
+                `;
+            } else if (question.type === "light") {
+                container.innerHTML = `
+                    <div class="science-element" style="top: 10%; left: 50%; transform: translateX(-50%);">
+                        <div class="science-element-icon glow">💡</div>
+                        <div class="science-element-label">Light Source</div>
+                    </div>
+                    <div class="science-element" style="top: 40%; left: 20%;">
+                        <div class="science-element-icon">↩️</div>
+                        <div class="science-element-label">Reflection</div>
+                    </div>
+                    <div class="science-element" style="top: 40%; left: 80%;">
+                        <div class="science-element-icon">↪️</div>
+                        <div class="science-element-label">Refraction</div>
+                    </div>
+                    <div class="science-element" style="top: 70%; left: 50%; transform: translateX(-50%);">
+                        <div class="science-element-icon">🌈</div>
+                        <div class="science-element-label">Colors</div>
+                    </div>
+                `;
+            } else if (question.type === "shadows" || question.type === "safety") {
+                container.innerHTML = `
+                    <div class="science-element" style="top: 10%; left: 50%; transform: translateX(-50%);">
+                        <div class="science-element-icon glow">☀️</div>
+                        <div class="science-element-label">Light</div>
+                    </div>
+                    <div class="science-element" style="top: 40%; left: 50%; transform: translateX(-50%);">
+                        <div class="science-element-icon">🧍</div>
+                        <div class="science-element-label">Object</div>
+                    </div>
+                    <div class="science-element" style="top: 70%; left: 50%; transform: translateX(-50%);">
+                        <div class="science-element-icon">⬛</div>
+                        <div class="science-element-label">Shadow</div>
+                    </div>
+                `;
+            }
+            
+            return container;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "heat": "🔥",
+                "temperature": "🌡️",
+                "light": "💡",
+                "shadow": "⬛",
+                "conduction": "↔️",
+                "convection": "🔄",
+                "radiation": "☀️",
+                "reflection": "↩️",
+                "refraction": "↪️",
+                "energy": "⚡",
+                "sun": "☀️",
+                "thermometer": "🌡️",
+                "mirror": "🪞",
+                "rainbow": "🌈",
+                "safety": "🛡️"
+            };
+            
+            let conceptName = "Science Concept";
+            let conceptIcon = "🔬";
+            
+            const questionText = question.question.toLowerCase();
+            const options = question.options;
+            
+            if (question.type === "heat" || questionText.includes("heat") || questionText.includes("temperature") || 
+                options.some(opt => opt.includes("heat") || opt.includes("temperature"))) {
+                conceptName = "Heat & Temperature";
+                conceptIcon = conceptIcons.heat;
+            } else if (question.type === "light" || questionText.includes("light") || 
+                       options.some(opt => opt.includes("light") || opt.includes("color"))) {
+                conceptName = "Light";
+                conceptIcon = conceptIcons.light;
+            } else if (question.type === "shadows" || questionText.includes("shadow") || 
+                       options.some(opt => opt.includes("shadow"))) {
+                conceptName = "Shadows";
+                conceptIcon = conceptIcons.shadow;
+            } else if (question.type === "safety") {
+                conceptName = "Safety";
+                conceptIcon = conceptIcons.safety;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type === "heat") {
+                label.textContent = "What is this heat concept?";
+            } else if (question.type === "light") {
+                label.textContent = "What is this light principle?";
+            } else if (question.type === "shadows") {
+                label.textContent = "What is this shadow property?";
+            } else if (question.type === "safety") {
+                label.textContent = "How does this keep us safe?";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create process display
+        function createProcessDisplay() {
+            const display = document.createElement('div');
+            display.className = 'process-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "heat") {
+                display.innerHTML = `
+                    <div class="process-step">
+                        <div class="step-icon heat-wave">🔥</div>
+                        <div class="step-title">Heat Source</div>
+                        <div class="step-description">Something that produces thermal energy</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">↔️</div>
+                        <div class="step-title">Energy Transfer</div>
+                        <div class="step-description">Heat flows from hot to cold objects</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🌡️</div>
+                        <div class="step-title">Temperature Change</div>
+                        <div class="step-description">Objects get warmer or cooler</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">⚖️</div>
+                        <div class="step-title">Equilibrium</div>
+                        <div class="step-description">Objects reach same temperature</div>
+                    </div>
+                `;
+            } else if (question.type === "light") {
+                display.innerHTML = `
+                    <div class="process-step">
+                        <div class="step-icon glow">💡</div>
+                        <div class="step-title">Light Source</div>
+                        <div class="step-description">Something that emits light</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🚀</div>
+                        <div class="step-title">Light Travels</div>
+                        <div class="step-description">Light moves in straight lines at high speed</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🔄</div>
+                        <div class="step-title">Interaction</div>
+                        <div class="step-description">Light reflects, refracts, or is absorbed</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">👁️</div>
+                        <div class="step-title">Vision</div>
+                        <div class="step-description">Light enters eyes, brain processes image</div>
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create concept cards display
+        function createConceptCardsDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-cards';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "heat") {
+                display.innerHTML = `
+                    <div class="concept-card">
+                        <div class="concept-card-icon heat-wave">🔥</div>
+                        <div class="concept-card-name">Conduction</div>
+                        <div class="concept-card-example">Spoon in hot soup</div>
+                    </div>
+                    <div class="concept-card">
+                        <div class="concept-card-icon">🔄</div>
+                        <div class="concept-card-name">Convection</div>
+                        <div class="concept-card-example">Hot air rising</div>
+                    </div>
+                    <div class="concept-card">
+                        <div class="concept-card-icon">☀️</div>
+                        <div class="concept-card-name">Radiation</div>
+                        <div class="concept-card-example">Sun warming Earth</div>
+                    </div>
+                    <div class="concept-card">
+                        <div class="concept-card-icon">🌡️</div>
+                        <div class="concept-card-name">Temperature</div>
+                        <div class="concept-card-example">How hot/cold something is</div>
+                    </div>
+                `;
+            } else if (question.type === "light") {
+                display.innerHTML = `
+                    <div class="concept-card">
+                        <div class="concept-card-icon">↩️</div>
+                        <div class="concept-card-name">Reflection</div>
+                        <div class="concept-card-example">Mirrors, shiny surfaces</div>
+                    </div>
+                    <div class="concept-card">
+                        <div class="concept-card-icon">↪️</div>
+                        <div class="concept-card-name">Refraction</div>
+                        <div class="concept-card-example">Bent straw in water</div>
+                    </div>
+                    <div class="concept-card">
+                        <div class="concept-card-icon">🌈</div>
+                        <div class="concept-card-name">Dispersion</div>
+                        <div class="concept-card-example">Rainbows, prisms</div>
+                    </div>
+                    <div class="concept-card">
+                        <div class="concept-card-icon">👁️</div>
+                        <div class="concept-card-name">Absorption</div>
+                        <div class="concept-card-example">Dark colors absorb light</div>
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create safety tips display
+        function createSafetyTipsDisplay() {
+            const display = document.createElement('div');
+            display.className = 'safety-tips';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "heat" || question.type === "safety") {
+                display.innerHTML = `
+                    <div class="safety-tip">Never touch hot surfaces directly</div>
+                    <div class="safety-tip">Use oven mitts for hot objects</div>
+                    <div class="safety-tip">Stay hydrated in hot weather</div>
+                    <div class="safety-tip">Never look directly at the sun</div>
+                `;
+            } else if (question.type === "light" || question.type === "shadows") {
+                display.innerHTML = `
+                    <div class="safety-tip">Wear sunglasses in bright sunlight</div>
+                    <div class="safety-tip">Use sunscreen to protect skin</div>
+                    <div class="safety-tip">Be careful with magnifying glasses in sun</div>
+                    <div class="safety-tip">Use proper lighting to avoid eye strain</div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create shadow demonstration
+        function createShadowDemo() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "shadows" || question.type === "light") {
+                const demo = document.createElement('div');
+                demo.className = 'shadow-demo';
+                demo.innerHTML = `
+                    <div class="light-source glow"></div>
+                    <div>Light Source</div>
+                    <div class="object-shadow"></div>
+                    <div>Object</div>
+                    <div class="shadow shadow-move"></div>
+                    <div>Shadow</div>
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                        Move light → Shadow changes position<br>
+                        Move object → Shadow changes size
+                    </p>
+                `;
+                return demo;
+            }
+            return document.createElement('div');
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            scienceFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            scienceDiagram.innerHTML = '';
+            processDisplay.innerHTML = '';
+            conceptCardsDisplay.innerHTML = '';
+            safetyTipsDisplay.innerHTML = '';
+            shadowDemo.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            scienceFact.appendChild(createScienceFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            scienceDiagram.appendChild(createScienceDiagram());
+            
+            if (question.type === "heat" || question.type === "light") {
+                processDisplay.appendChild(createProcessDisplay());
+            }
+            
+            if (question.type === "heat" || question.type === "light") {
+                conceptCardsDisplay.appendChild(createConceptCardsDisplay());
+            }
+            
+            safetyTipsDisplay.appendChild(createSafetyTipsDisplay());
+            
+            const shadowDemoElement = createShadowDemo();
+            if (shadowDemoElement.innerHTML.trim() !== '') {
+                shadowDemo.appendChild(shadowDemoElement);
+            }
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

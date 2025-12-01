@@ -1,0 +1,2373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 4 Science - Plant Structure & Functions | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Plant Theme */
+        :root {
+            --primary-green: #2E7D32;
+            --secondary-lime: #9CCC65;
+            --accent-brown: #8D6E63;
+            --accent-yellow: #FFD54F;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(46, 125, 50, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-lime));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(46, 125, 50, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-green);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-green);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1B5E20;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-lime);
+            color: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(156, 204, 101, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #8BC34A;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(156, 204, 101, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-lime));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(46, 125, 50, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .plant-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-brown);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .plant-part-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .plant-part-box {
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-brown));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .plant-part-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .plant-part-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(46, 125, 50, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(46, 125, 50, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-lime);
+            color: #1a1a1a;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(46, 125, 50, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Plant Structure Diagram */
+        .plant-diagram {
+            max-width: 400px;
+            margin: 20px auto;
+            position: relative;
+            height: 300px;
+        }
+
+        .plant-element {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .plant-element:hover {
+            transform: scale(1.1);
+        }
+
+        .plant-element-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            border: 2px solid var(--accent-yellow);
+            font-size: 1.5rem;
+        }
+
+        .plant-element-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-lime));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-lime));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Process Display */
+        .process-display {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            min-width: 200px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .process-step.active {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 15px rgba(46, 125, 50, 0.3);
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary-green);
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Plant Type Cards */
+        .plant-types {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .plant-type-card {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            width: 180px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .plant-type-card:hover {
+            border-color: var(--secondary-lime);
+            transform: translateY(-5px);
+        }
+
+        .plant-type-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .plant-type-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--secondary-lime);
+        }
+
+        .plant-type-feature {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .plant-part-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .plant-diagram {
+                height: 250px;
+            }
+            
+            .process-display {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .plant-types {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1517191434949-5e90cd67d2b6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 4 Science</h1>
+            <p class="welcome-subtitle">Discover the amazing world of plants! Learn about plant structures, their functions, and how plants grow and survive. Explore roots, stems, leaves, flowers, and the incredible process of photosynthesis!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">🌿</span>
+                <span class="topic-name">Plant Structure & Functions</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Plant Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <!-- Plant fact display -->
+                <div id="plantFact"></div>
+                
+                <!-- Plant part display area -->
+                <div id="plantPartDisplay"></div>
+                
+                <!-- Plant structure diagram -->
+                <div id="plantStructureDiagram"></div>
+                
+                <!-- Process display -->
+                <div id="processDisplay"></div>
+                
+                <!-- Plant types display -->
+                <div id="plantTypesDisplay"></div>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Plant Exploration Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 100 Grade 4 Science questions covering plant structure and functions
+        const questions = [
+            // Basic Plant Parts (1-30)
+            {
+                type: "structure",
+                question: "Which plant part anchors the plant in the soil?",
+                options: ["Roots", "Stem", "Leaves", "Flowers"],
+                answer: "A",
+                explanation: "Roots anchor the plant in the soil and absorb water and minerals."
+            },
+            {
+                type: "structure",
+                question: "What is the main function of the stem?",
+                options: ["Support and transport", "Make food", "Absorb water", "Produce seeds"],
+                answer: "A",
+                explanation: "The stem supports the plant and transports water, minerals, and food between roots and leaves."
+            },
+            {
+                type: "structure",
+                question: "Which plant part is the main site of photosynthesis?",
+                options: ["Leaves", "Roots", "Flowers", "Fruits"],
+                answer: "A",
+                explanation: "Leaves contain chlorophyll and are the main site where photosynthesis occurs."
+            },
+            {
+                type: "structure",
+                question: "What do roots absorb from the soil?",
+                options: ["Water and minerals", "Sunlight", "Carbon dioxide", "Oxygen"],
+                answer: "A",
+                explanation: "Roots absorb water and minerals from the soil that the plant needs to grow."
+            },
+            {
+                type: "structure",
+                question: "Which plant part produces seeds?",
+                options: ["Flowers", "Leaves", "Stem", "Roots"],
+                answer: "A",
+                explanation: "Flowers produce seeds through the process of pollination and fertilization."
+            },
+            {
+                type: "structure",
+                question: "What protects seeds in flowering plants?",
+                options: ["Fruit", "Leaves", "Stem", "Roots"],
+                answer: "A",
+                explanation: "Fruit develops from flowers and protects the seeds while helping with seed dispersal."
+            },
+            {
+                type: "structure",
+                question: "Which plant part grows upward toward light?",
+                options: ["Stem", "Roots", "Leaves", "Flowers"],
+                answer: "A",
+                explanation: "The stem grows upward, supporting leaves and flowers toward sunlight."
+            },
+            {
+                type: "structure",
+                question: "What are the tiny openings on leaves called?",
+                options: ["Stomata", "Chlorophyll", "Veins", "Blades"],
+                answer: "A",
+                explanation: "Stomata are tiny openings on leaves that allow gas exchange (CO2 in, O2 out)."
+            },
+            {
+                type: "structure",
+                question: "Which part of the leaf contains chlorophyll?",
+                options: ["Cells in the leaf", "Leaf veins", "Leaf stem", "Leaf edge"],
+                answer: "A",
+                explanation: "Chlorophyll is in the cells of leaves, giving them green color and enabling photosynthesis."
+            },
+            {
+                type: "structure",
+                question: "What do leaf veins do?",
+                options: ["Transport materials", "Make food", "Absorb sunlight", "Store water"],
+                answer: "A",
+                explanation: "Leaf veins transport water, minerals, and food throughout the leaf."
+            },
+            {
+                type: "structure",
+                question: "Which plant part stores food in some plants?",
+                options: ["Roots (like carrots)", "Leaves", "Flowers", "Stems (all types)"],
+                answer: "A",
+                explanation: "Some roots like carrots and beets store food for the plant."
+            },
+            {
+                type: "structure",
+                question: "What is the flat part of a leaf called?",
+                options: ["Blade", "Petiole", "Vein", "Margin"],
+                answer: "A",
+                explanation: "The blade is the flat, expanded part of the leaf where most photosynthesis occurs."
+            },
+            {
+                type: "structure",
+                question: "Which plant part connects the leaf to the stem?",
+                options: ["Petiole", "Blade", "Vein", "Root"],
+                answer: "A",
+                explanation: "The petiole is the stalk that connects the leaf blade to the stem."
+            },
+            {
+                type: "structure",
+                question: "What are the two main types of roots?",
+                options: ["Taproot and fibrous", "Deep and shallow", "Thick and thin", "Long and short"],
+                answer: "A",
+                explanation: "Taproots have one main root (like carrots), while fibrous roots have many thin roots (like grass)."
+            },
+            {
+                type: "structure",
+                question: "Which plant part can store water in desert plants?",
+                options: ["Stem (like cactus)", "Leaves", "Flowers", "Roots only"],
+                answer: "A",
+                explanation: "Cactus stems are thick and store water to survive in dry conditions."
+            },
+            {
+                type: "structure",
+                question: "What are root hairs?",
+                options: ["Tiny extensions that absorb water", "Small roots", "Root decorations", "Root diseases"],
+                answer: "A",
+                explanation: "Root hairs are tiny extensions on roots that increase surface area for water absorption."
+            },
+            {
+                type: "structure",
+                question: "Which plant part can perform photosynthesis in cacti?",
+                options: ["Stem", "Roots", "Flowers", "All parts equally"],
+                answer: "A",
+                explanation: "In cacti, the stem performs photosynthesis since leaves are modified into spines."
+            },
+            {
+                type: "structure",
+                question: "What is the function of flower petals?",
+                options: ["Attract pollinators", "Produce seeds", "Make food", "Absorb water"],
+                answer: "A",
+                explanation: "Brightly colored petals attract pollinators like bees and butterflies."
+            },
+            {
+                type: "structure",
+                question: "Which part of the flower produces pollen?",
+                options: ["Stamen", "Pistil", "Petals", "Sepals"],
+                answer: "A",
+                explanation: "The stamen is the male part of the flower that produces pollen."
+            },
+            {
+                type: "structure",
+                question: "What is the function of sepals?",
+                options: ["Protect the flower bud", "Attract pollinators", "Produce seeds", "Make food"],
+                answer: "A",
+                explanation: "Sepals are usually green and protect the flower bud before it opens."
+            },
+            {
+                type: "structure",
+                question: "Which part of the flower receives pollen?",
+                options: ["Stigma", "Anther", "Petal", "Sepal"],
+                answer: "A",
+                explanation: "The stigma is the sticky top part of the pistil that receives pollen."
+            },
+            {
+                type: "structure",
+                question: "What develops from the ovary after fertilization?",
+                options: ["Fruit", "More flowers", "Leaves", "Roots"],
+                answer: "A",
+                explanation: "After fertilization, the ovary develops into a fruit containing seeds."
+            },
+            {
+                type: "structure",
+                question: "Which plant part can grow new plants from cuttings?",
+                options: ["Stem", "Roots only", "Leaves only", "Flowers only"],
+                answer: "A",
+                explanation: "Stem cuttings can grow roots and develop into new plants (vegetative propagation)."
+            },
+            {
+                type: "structure",
+                question: "What are tendrils on some plants?",
+                options: ["Modified stems for support", "Root extensions", "Flower parts", "Leaf diseases"],
+                answer: "A",
+                explanation: "Tendrils are thin, modified stems that help climbing plants like peas grip supports."
+            },
+            {
+                type: "structure",
+                question: "Which plant part can store food in potatoes?",
+                options: ["Stem (tubers)", "Roots", "Leaves", "Flowers"],
+                answer: "A",
+                explanation: "Potatoes are modified stems called tubers that store food for the plant."
+            },
+            {
+                type: "structure",
+                question: "What are spines on cacti?",
+                options: ["Modified leaves", "Modified stems", "Modified roots", "Modified flowers"],
+                answer: "A",
+                explanation: "Cactus spines are modified leaves that reduce water loss and protect the plant."
+            },
+            {
+                type: "structure",
+                question: "Which plant part contains the reproductive cells?",
+                options: ["Flowers", "Leaves", "Stems", "Roots"],
+                answer: "A",
+                explanation: "Flowers contain the plant's reproductive cells (pollen and ovules)."
+            },
+            {
+                type: "structure",
+                question: "What is the main function of bark on trees?",
+                options: ["Protection", "Photosynthesis", "Water absorption", "Seed production"],
+                answer: "A",
+                explanation: "Bark protects the tree from insects, diseases, and extreme temperatures."
+            },
+            {
+                type: "structure",
+                question: "Which plant part transports water upward?",
+                options: ["Xylem", "Phloem", "Stomata", "Chlorophyll"],
+                answer: "A",
+                explanation: "Xylem tissue transports water and minerals from roots to leaves."
+            },
+            {
+                type: "structure",
+                question: "What transports food in plants?",
+                options: ["Phloem", "Xylem", "Stomata", "Root hairs"],
+                answer: "A",
+                explanation: "Phloem tissue transports food (sugar) made in leaves to other plant parts."
+            },
+            // Plant Processes (31-60)
+            {
+                type: "process",
+                question: "What is photosynthesis?",
+                options: ["Process plants use to make food", "Plant breathing", "Water absorption", "Seed production"],
+                answer: "A",
+                explanation: "Photosynthesis is the process where plants use sunlight, water, and CO2 to make food (glucose)."
+            },
+            {
+                type: "process",
+                question: "What do plants need for photosynthesis?",
+                options: ["Sunlight, water, carbon dioxide", "Oxygen, soil, darkness", "Nitrogen, wind, rain", "Only sunlight"],
+                answer: "A",
+                explanation: "Photosynthesis requires sunlight, water, and carbon dioxide to produce glucose and oxygen."
+            },
+            {
+                type: "process",
+                question: "What gas do plants take in during photosynthesis?",
+                options: ["Carbon dioxide", "Oxygen", "Nitrogen", "Hydrogen"],
+                answer: "A",
+                explanation: "Plants take in carbon dioxide from the air during photosynthesis."
+            },
+            {
+                type: "process",
+                question: "What gas do plants release during photosynthesis?",
+                options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Water vapor"],
+                answer: "A",
+                explanation: "Plants release oxygen as a byproduct of photosynthesis."
+            },
+            {
+                type: "process",
+                question: "What is the green pigment in plants called?",
+                options: ["Chlorophyll", "Xylem", "Phloem", "Stomata"],
+                answer: "A",
+                explanation: "Chlorophyll is the green pigment that captures sunlight for photosynthesis."
+            },
+            {
+                type: "process",
+                question: "What is transpiration?",
+                options: ["Water loss from leaves", "Food production", "Seed dispersal", "Flower growth"],
+                answer: "A",
+                explanation: "Transpiration is the process where water evaporates from plant leaves through stomata."
+            },
+            {
+                type: "process",
+                question: "What is pollination?",
+                options: ["Transfer of pollen to stigma", "Seed formation", "Fruit development", "Flower coloring"],
+                answer: "A",
+                explanation: "Pollination is the transfer of pollen from anther to stigma, enabling fertilization."
+            },
+            {
+                type: "process",
+                question: "What happens after pollination?",
+                options: ["Fertilization occurs", "Flower dies", "Leaves fall", "Roots grow"],
+                answer: "A",
+                explanation: "After pollination, fertilization occurs when pollen reaches the ovule."
+            },
+            {
+                type: "process",
+                question: "What is germination?",
+                options: ["Seed sprouting and growth", "Flower opening", "Leaf formation", "Fruit ripening"],
+                answer: "A",
+                explanation: "Germination is when a seed sprouts and begins to grow into a new plant."
+            },
+            {
+                type: "process",
+                question: "What do seeds need to germinate?",
+                options: ["Water, oxygen, proper temperature", "Only sunlight", "Only soil", "Only wind"],
+                answer: "A",
+                explanation: "Seeds need water, oxygen, and the right temperature to germinate."
+            },
+            {
+                type: "process",
+                question: "What is respiration in plants?",
+                options: ["Using oxygen to release energy", "Making food", "Absorbing water", "Growing taller"],
+                answer: "A",
+                explanation: "Plant respiration uses oxygen to break down food and release energy for growth."
+            },
+            {
+                type: "process",
+                question: "When do plants respire?",
+                options: ["All the time", "Only during day", "Only at night", "Only when growing"],
+                answer: "A",
+                explanation: "Plants respire continuously, day and night, to get energy from food."
+            },
+            {
+                type: "process",
+                question: "What is tropism?",
+                options: ["Plant growth response", "Water movement", "Seed dispersal", "Flower color change"],
+                answer: "A",
+                explanation: "Tropism is plant growth in response to stimuli like light, gravity, or touch."
+            },
+            {
+                type: "process",
+                question: "What is phototropism?",
+                options: ["Growth toward light", "Growth toward gravity", "Growth toward water", "Growth toward touch"],
+                answer: "A",
+                explanation: "Phototropism is plant growth toward a light source."
+            },
+            {
+                type: "process",
+                question: "What is geotropism?",
+                options: ["Growth response to gravity", "Growth toward light", "Growth toward water", "Growth toward touch"],
+                answer: "A",
+                explanation: "Geotropism (gravitropism) is plant growth in response to gravity (roots down, stems up)."
+            },
+            {
+                type: "process",
+                question: "What is dormancy?",
+                options: ["Resting period for plants", "Rapid growth", "Flowering time", "Seed dispersal"],
+                answer: "A",
+                explanation: "Dormancy is a resting period when growth slows or stops, often during winter."
+            },
+            {
+                type: "process",
+                question: "What is deciduous?",
+                options: ["Trees that lose leaves seasonally", "Trees that keep leaves", "Plants that flower", "Plants that produce fruit"],
+                answer: "A",
+                explanation: "Deciduous trees lose their leaves seasonally, usually in autumn."
+            },
+            {
+                type: "process",
+                question: "What is evergreen?",
+                options: ["Plants that keep leaves year-round", "Plants that lose leaves", "Plants that flower once", "Plants with short life"],
+                answer: "A",
+                explanation: "Evergreen plants keep their leaves throughout the year."
+            },
+            {
+                type: "process",
+                question: "What is the life cycle of a plant?",
+                options: ["Seed → seedling → adult → flower → fruit → seed", "Only seed to plant", "Only flowering", "Only fruit production"],
+                answer: "A",
+                explanation: "The complete plant life cycle includes seed, germination, growth, reproduction, and seed production."
+            },
+            {
+                type: "process",
+                question: "What is annual plant?",
+                options: ["Completes life cycle in one year", "Lives many years", "Never flowers", "Only grows in water"],
+                answer: "A",
+                explanation: "Annual plants complete their life cycle from seed to seed in one growing season."
+            },
+            {
+                type: "process",
+                question: "What is perennial plant?",
+                options: ["Lives more than two years", "Lives one year", "Lives only weeks", "Never produces seeds"],
+                answer: "A",
+                explanation: "Perennial plants live for more than two years, often flowering repeatedly."
+            },
+            {
+                type: "process",
+                question: "What is biennial plant?",
+                options: ["Takes two years to complete life cycle", "Takes one year", "Takes many years", "Never completes cycle"],
+                answer: "A",
+                explanation: "Biennial plants take two years to complete their life cycle (growth year 1, flower/fruit year 2)."
+            },
+            {
+                type: "process",
+                question: "How do plants reproduce without seeds?",
+                options: ["Vegetative propagation", "Only through flowers", "Only through fruits", "They can't"],
+                answer: "A",
+                explanation: "Vegetative propagation uses plant parts like stems, roots, or leaves to grow new plants."
+            },
+            {
+                type: "process",
+                question: "What is a tuber?",
+                options: ["Underground stem that stores food", "Type of root", "Type of leaf", "Type of flower"],
+                answer: "A",
+                explanation: "Tubers like potatoes are underground stems that store food and can grow new plants."
+            },
+            {
+                type: "process",
+                question: "What is a bulb?",
+                options: ["Underground stem with fleshy leaves", "Type of root", "Type of seed", "Type of fruit"],
+                answer: "A",
+                explanation: "Bulbs like onions are underground stems with fleshy leaves that store food."
+            },
+            {
+                type: "process",
+                question: "How do plants get nitrogen?",
+                options: ["From soil with help of bacteria", "From air directly", "From sunlight", "From water only"],
+                answer: "A",
+                explanation: "Plants get nitrogen from soil, often with help from nitrogen-fixing bacteria."
+            },
+            {
+                type: "process",
+                question: "What is chlorophyll's role?",
+                options: ["Capture sunlight energy", "Transport water", "Store food", "Protect plant"],
+                answer: "A",
+                explanation: "Chlorophyll captures sunlight energy and converts it to chemical energy during photosynthesis."
+            },
+            {
+                type: "process",
+                question: "Why do leaves change color in fall?",
+                options: ["Chlorophyll breaks down", "New pigments made", "Leaves get sick", "Too much water"],
+                answer: "A",
+                explanation: "In autumn, chlorophyll breaks down, revealing other pigments (yellow, orange, red) always present."
+            },
+            {
+                type: "process",
+                question: "What is the main product of photosynthesis?",
+                options: ["Glucose (sugar)", "Oxygen only", "Water only", "Carbon dioxide"],
+                answer: "A",
+                explanation: "The main product of photosynthesis is glucose (sugar), which plants use for energy and growth."
+            },
+            {
+                type: "process",
+                question: "How do plants use the sugar they make?",
+                options: ["For energy and building materials", "Only for color", "Only for smell", "They don't use it"],
+                answer: "A",
+                explanation: "Plants use glucose for energy through respiration and as building material for growth."
+            },
+            // Plant Types and Adaptations (61-80)
+            {
+                type: "adaptation",
+                question: "How are desert plants adapted?",
+                options: ["Store water, reduced leaves", "Need lots of water", "Large thin leaves", "Grow in shade"],
+                answer: "A",
+                explanation: "Desert plants store water (succulents) and have reduced leaves (spines) to minimize water loss."
+            },
+            {
+                type: "adaptation",
+                question: "How are aquatic plants adapted?",
+                options: ["Air spaces in stems, flexible", "Need dry soil", "Thick bark", "Deep roots"],
+                answer: "A",
+                explanation: "Aquatic plants have air spaces for buoyancy and flexible stems to withstand water movement."
+            },
+            {
+                type: "adaptation",
+                question: "What adaptation helps plants in windy areas?",
+                options: ["Flexible stems", "Stiff rigid stems", "No stems", "Very tall stems"],
+                answer: "A",
+                explanation: "Flexible stems allow plants to bend without breaking in windy conditions."
+            },
+            {
+                type: "adaptation",
+                question: "How are epiphytes adapted?",
+                options: ["Grow on other plants for support", "Have deep roots", "Need soil", "Are parasites"],
+                answer: "A",
+                explanation: "Epiphytes like some orchids grow on other plants for support but get nutrients from air/rain."
+            },
+            {
+                type: "adaptation",
+                question: "What are carnivorous plants adapted to do?",
+                options: ["Trap insects for nutrients", "Make extra food", "Store more water", "Grow faster"],
+                answer: "A",
+                explanation: "Carnivorous plants like Venus flytraps trap insects to get nutrients from poor soil."
+            },
+            {
+                type: "adaptation",
+                question: "How are conifers adapted to cold?",
+                options: ["Needle-like leaves, waxy coating", "Large broad leaves", "No leaves", "Bright flowers"],
+                answer: "A",
+                explanation: "Conifers have needle-like leaves with waxy coating to reduce water loss in cold/dry conditions."
+            },
+            {
+                type: "adaptation",
+                question: "What are climbing plants adapted with?",
+                options: ["Tendrils or twining stems", "Very deep roots", "No support needed", "Very thick stems"],
+                answer: "A",
+                explanation: "Climbing plants use tendrils or twining stems to reach sunlight by growing on supports."
+            },
+            {
+                type: "adaptation",
+                question: "How are mangrove trees adapted?",
+                options: ["Aerial roots for oxygen", "No roots", "Very deep roots", "Floating leaves"],
+                answer: "A",
+                explanation: "Mangroves have aerial roots (pneumatophores) that get oxygen in waterlogged soil."
+            },
+            {
+                type: "adaptation",
+                question: "What adaptation helps seeds disperse by wind?",
+                options: ["Wings or parachutes", "Sweet taste", "Bright color", "Heavy weight"],
+                answer: "A",
+                explanation: "Wind-dispersed seeds have wings (maple) or parachutes (dandelion) to travel far."
+            },
+            {
+                type: "adaptation",
+                question: "How are water-dispersed seeds adapted?",
+                options: ["Float in water", "Sink quickly", "Dissolve in water", "Avoid water"],
+                answer: "A",
+                explanation: "Water-dispersed seeds can float (coconut) to travel to new locations by water."
+            },
+            {
+                type: "adaptation",
+                question: "What are xerophytes?",
+                options: ["Plants adapted to dry conditions", "Water plants", "Shade plants", "Cold plants"],
+                answer: "A",
+                explanation: "Xerophytes are plants adapted to survive with little water (cacti, succulents)."
+            },
+            {
+                type: "adaptation",
+                question: "What are hydrophytes?",
+                options: ["Plants adapted to water", "Dry condition plants", "Cold climate plants", "Desert plants"],
+                answer: "A",
+                explanation: "Hydrophytes are plants adapted to live in or on water (water lilies, lotus)."
+            },
+            {
+                type: "adaptation",
+                question: "How are shade plants adapted?",
+                options: ["Large thin leaves", "Small thick leaves", "No leaves", "Bright colored leaves"],
+                answer: "A",
+                explanation: "Shade plants have large, thin leaves to capture maximum available light."
+            },
+            {
+                type: "adaptation",
+                question: "What are halophytes?",
+                options: ["Salt-tolerant plants", "Freshwater plants", "Acid-loving plants", "Shade plants"],
+                answer: "A",
+                explanation: "Halophytes are plants adapted to grow in salty conditions (mangroves, salt marsh plants)."
+            },
+            {
+                type: "adaptation",
+                question: "How do some plants protect themselves from herbivores?",
+                options: ["Thorns, spines, or chemicals", "By running away", "By hiding", "By changing color"],
+                answer: "A",
+                explanation: "Plants use thorns (roses), spines (cacti), or chemicals (poison ivy) for protection."
+            },
+            {
+                type: "adaptation",
+                question: "What are deciduous trees adapted for?",
+                options: ["Seasonal climate changes", "Constant climate", "Only warm weather", "Only cold weather"],
+                answer: "A",
+                explanation: "Deciduous trees lose leaves to conserve water and energy during unfavorable seasons."
+            },
+            {
+                type: "adaptation",
+                question: "How are alpine plants adapted?",
+                options: ["Low growth, hairy leaves", "Tall growth", "Large leaves", "No flowers"],
+                answer: "A",
+                explanation: "Alpine plants grow low to avoid wind and have hairy leaves for insulation."
+            },
+            {
+                type: "adaptation",
+                question: "What are air plants (Tillandsia) adapted for?",
+                options: ["Get nutrients from air", "Need rich soil", "Live in water", "Need deep roots"],
+                answer: "A",
+                explanation: "Air plants absorb water and nutrients through leaves from air and rain."
+            },
+            {
+                type: "adaptation",
+                question: "How are prairie grasses adapted to fire?",
+                options: ["Deep roots survive fire", "Avoid fire", "Need fire", "Grow after rain only"],
+                answer: "A",
+                explanation: "Prairie grasses have deep roots that survive fires, which clear competition."
+            },
+            {
+                type: "adaptation",
+                question: "What are buttress roots adaptation for?",
+                options: ["Support in shallow soil", "Water storage", "Food storage", "Climbing"],
+                answer: "A",
+                explanation: "Buttress roots (in rainforest trees) provide support in shallow, nutrient-poor soil."
+            },
+            // Human Uses and Importance (81-100)
+            {
+                type: "importance",
+                question: "Why are plants important to humans?",
+                options: ["Food, oxygen, medicine, materials", "Only for decoration", "Only for shade", "Not important"],
+                answer: "A",
+                explanation: "Plants provide food, oxygen, medicine, clothing, shelter, and many other essentials."
+            },
+            {
+                type: "importance",
+                question: "How do plants help prevent soil erosion?",
+                options: ["Roots hold soil together", "Leaves block rain", "Flowers attract bees", "Stems store water"],
+                answer: "A",
+                explanation: "Plant roots bind soil particles together, preventing erosion by wind and water."
+            },
+            {
+                type: "importance",
+                question: "What is the main way plants help the atmosphere?",
+                options: ["Produce oxygen, absorb CO2", "Make clouds", "Create wind", "Change temperature"],
+                answer: "A",
+                explanation: "Plants produce oxygen through photosynthesis and absorb carbon dioxide."
+            },
+            {
+                type: "importance",
+                question: "How do plants help in the water cycle?",
+                options: ["Release water vapor (transpiration)", "Create rain", "Store all water", "Stop evaporation"],
+                answer: "A",
+                explanation: "Through transpiration, plants release water vapor that contributes to cloud formation."
+            },
+            {
+                type: "importance",
+                question: "Why are forests called 'lungs of the Earth'?",
+                options: ["Produce oxygen, absorb CO2", "Make sounds", "Have lung shapes", "Breathe like animals"],
+                answer: "A",
+                explanation: "Forests produce large amounts of oxygen and absorb carbon dioxide, similar to lungs."
+            },
+            {
+                type: "importance",
+                question: "How do plants provide habitats?",
+                options: ["Shelter and food for animals", "Only for insects", "Only for birds", "Not important for habitats"],
+                answer: "A",
+                explanation: "Plants provide food, shelter, and nesting sites for countless animal species."
+            },
+            {
+                type: "importance",
+                question: "What medicines come from plants?",
+                options: ["Aspirin, quinine, morphine", "Only vitamins", "Only antibiotics", "No medicines"],
+                answer: "A",
+                explanation: "Many medicines originate from plants, including aspirin (willow), quinine (cinchona), morphine (poppy)."
+            },
+            {
+                type: "importance",
+                question: "How do plants provide clothing materials?",
+                options: ["Cotton, linen, rayon", "Only synthetic fibers", "Only leather", "Only wool"],
+                answer: "A",
+                explanation: "Plants provide natural fibers like cotton, linen (flax), and rayon (wood pulp) for clothing."
+            },
+            {
+                type: "importance",
+                question: "What building materials come from plants?",
+                options: ["Wood, bamboo, thatch", "Only concrete", "Only steel", "Only plastic"],
+                answer: "A",
+                explanation: "Wood from trees, bamboo, and thatch from grasses are important building materials worldwide."
+            },
+            {
+                type: "importance",
+                question: "How do plants help in agriculture?",
+                options: ["Prevent erosion, enrich soil", "Only as crops", "Only for decoration", "Not helpful"],
+                answer: "A",
+                explanation: "Plants prevent soil erosion, add organic matter, and some (legumes) enrich soil with nitrogen."
+            },
+            {
+                type: "importance",
+                question: "What is crop rotation with legumes important for?",
+                options: ["Add nitrogen to soil", "Add water", "Add minerals", "Add sunlight"],
+                answer: "A",
+                explanation: "Legumes have nitrogen-fixing bacteria in roots that add nitrogen to soil, improving fertility."
+            },
+            {
+                type: "importance",
+                question: "How do plants help reduce pollution?",
+                options: ["Absorb pollutants, produce oxygen", "Create pollution", "Ignore pollution", "Increase pollution"],
+                answer: "A",
+                explanation: "Plants absorb air pollutants and produce oxygen, helping clean the air."
+            },
+            {
+                type: "importance",
+                question: "Why are wetlands with plants important?",
+                options: ["Filter water, prevent floods", "Only for birds", "Only look pretty", "Drain land"],
+                answer: "A",
+                explanation: "Wetland plants filter pollutants from water and help prevent flooding by absorbing excess water."
+            },
+            {
+                type: "importance",
+                question: "How do plants contribute to the economy?",
+                options: ["Agriculture, forestry, medicine", "Only decoration", "Only science", "Not at all"],
+                answer: "A",
+                explanation: "Plants support agriculture, forestry, medicine, textiles, and many other industries."
+            },
+            {
+                type: "importance",
+                question: "What is the importance of pollinators?",
+                options: ["Help plants reproduce", "Harm plants", "Eat plants", "Ignore plants"],
+                answer: "A",
+                explanation: "Pollinators like bees help plants reproduce, which is essential for food production."
+            },
+            {
+                type: "importance",
+                question: "Why should we conserve plant diversity?",
+                options: ["Medicine, food security, ecosystems", "Only for beauty", "Only for wood", "Not important"],
+                answer: "A",
+                explanation: "Plant diversity provides potential medicines, food security, and healthy ecosystems."
+            },
+            {
+                type: "importance",
+                question: "How do urban plants help cities?",
+                options: ["Reduce heat, improve air", "Increase problems", "Use too much water", "Attract pests"],
+                answer: "A",
+                explanation: "Urban plants reduce heat island effect, improve air quality, and provide recreation."
+            },
+            {
+                type: "importance",
+                question: "What is the importance of seed banks?",
+                options: ["Preserve plant diversity", "Store food", "Sell seeds", "Grow plants faster"],
+                answer: "A",
+                explanation: "Seed banks preserve plant genetic diversity for future food security and conservation."
+            },
+            {
+                type: "importance",
+                question: "How do plants indicate environmental health?",
+                options: ["Sensitive to pollution changes", "Never change", "Always healthy", "Ignore environment"],
+                answer: "A",
+                explanation: "Plants are bioindicators - their health reflects environmental conditions like air/water quality."
+            },
+            {
+                type: "importance",
+                question: "Why is photosynthesis vital for life on Earth?",
+                options: ["Base of food chains, oxygen supply", "Only for plants", "Only produces CO2", "Minor process"],
+                answer: "A",
+                explanation: "Photosynthesis is the foundation of most food chains and provides Earth's oxygen supply."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent plant knowledge!",
+            "Fantastic botanical understanding!",
+            "Great job! You're a plant expert!",
+            "Amazing! Your plant science skills are impressive!",
+            "Well done! Perfect answer!",
+            "You're a botany champion!",
+            "Perfect! You understand plant systems!",
+            "Outstanding plant science knowledge!",
+            "Brilliant! You think like a botanist!",
+            "You're on fire! Great plant insight!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const plantFact = document.getElementById('plantFact');
+        const plantPartDisplay = document.getElementById('plantPartDisplay');
+        const plantStructureDiagram = document.getElementById('plantStructureDiagram');
+        const processDisplay = document.getElementById('processDisplay');
+        const plantTypesDisplay = document.getElementById('plantTypesDisplay');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            // Show appropriate page based on state
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade4SciencePlants');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                // If we have a saved state but no questions, initialize them
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade4SciencePlants', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            // Create a copy of questions and shuffle them
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            // Allow pressing Enter to start practice
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            
+            // Clear any previous input
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            
+            // Display student name
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Load the current question
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            // Calculate results
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            // Update results display
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            // Get highest score from localStorage
+            const highest = localStorage.getItem('ideolixGrade4SciencePlants_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            // Save new highest score if applicable
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade4SciencePlants_highestScore', appState.score);
+            }
+            
+            // Set encouraging message based on score
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a plant structure and functions expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent plant science knowledge!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep exploring to become a botany master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review what you missed and try again!";
+            } else {
+                scoreMessage.textContent = "Keep exploring! Plant knowledge grows with curiosity!";
+            }
+        }
+
+        // Create plant fact display
+        function createPlantFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'plant-fact';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "structure") {
+                factDiv.innerHTML = `
+                    <strong>Plant Fact:</strong> Plants have specialized structures for different functions. 
+                    Roots anchor and absorb, stems support and transport, leaves make food, and flowers reproduce.
+                `;
+            } else if (question.type === "process") {
+                factDiv.innerHTML = `
+                    <strong>Plant Fact:</strong> Through photosynthesis, plants convert sunlight into chemical energy, 
+                    producing oxygen as a byproduct - essential for most life on Earth!
+                `;
+            } else if (question.type === "adaptation") {
+                factDiv.innerHTML = `
+                    <strong>Plant Fact:</strong> Plants have amazing adaptations to survive in different environments - 
+                    from cactus spines that reduce water loss to mangrove roots that breathe in waterlogged soil.
+                `;
+            } else if (question.type === "importance") {
+                factDiv.innerHTML = `
+                    <strong>Plant Fact:</strong> Plants are vital to life on Earth - they provide oxygen, food, medicine, 
+                    materials, and maintain healthy ecosystems. We depend on plants for our survival!
+                `;
+            }
+            
+            return factDiv;
+        }
+
+        // Create plant structure diagram
+        function createPlantStructureDiagram() {
+            const container = document.createElement('div');
+            container.className = 'plant-diagram';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "structure") {
+                // Plant parts diagram
+                container.innerHTML = `
+                    <div class="plant-element" style="top: 10%; left: 50%; transform: translateX(-50%);">
+                        <div class="plant-element-icon">🌸</div>
+                        <div class="plant-element-label">Flower</div>
+                    </div>
+                    <div class="plant-element" style="top: 30%; left: 30%;">
+                        <div class="plant-element-icon">🍃</div>
+                        <div class="plant-element-label">Leaf</div>
+                    </div>
+                    <div class="plant-element" style="top: 30%; left: 70%;">
+                        <div class="plant-element-icon">🍃</div>
+                        <div class="plant-element-label">Leaf</div>
+                    </div>
+                    <div class="plant-element" style="top: 50%; left: 50%; transform: translateX(-50%);">
+                        <div class="plant-element-icon">🌿</div>
+                        <div class="plant-element-label">Stem</div>
+                    </div>
+                    <div class="plant-element" style="top: 80%; left: 50%; transform: translateX(-50%);">
+                        <div class="plant-element-icon">🪴</div>
+                        <div class="plant-element-label">Roots</div>
+                    </div>
+                `;
+            } else if (question.type === "process") {
+                // Photosynthesis diagram
+                container.innerHTML = `
+                    <div class="plant-element" style="top: 10%; left: 50%; transform: translateX(-50%);">
+                        <div class="plant-element-icon">☀️</div>
+                        <div class="plant-element-label">Sunlight</div>
+                    </div>
+                    <div class="plant-element" style="top: 40%; left: 30%;">
+                        <div class="plant-element-icon">💧</div>
+                        <div class="plant-element-label">Water</div>
+                    </div>
+                    <div class="plant-element" style="top: 40%; left: 70%;">
+                        <div class="plant-element-icon">🌬️</div>
+                        <div class="plant-element-label">CO₂</div>
+                    </div>
+                    <div class="plant-element" style="top: 70%; left: 50%; transform: translateX(-50%);">
+                        <div class="plant-element-icon">🌱</div>
+                        <div class="plant-element-label">Plant</div>
+                    </div>
+                `;
+            } else if (question.type === "adaptation") {
+                // Adaptations diagram
+                container.innerHTML = `
+                    <div class="plant-element" style="top: 10%; left: 30%;">
+                        <div class="plant-element-icon">🌵</div>
+                        <div class="plant-element-label">Desert</div>
+                    </div>
+                    <div class="plant-element" style="top: 10%; left: 70%;">
+                        <div class="plant-element-icon">🌺</div>
+                        <div class="plant-element-label">Rainforest</div>
+                    </div>
+                    <div class="plant-element" style="top: 60%; left: 30%;">
+                        <div class="plant-element-icon">🌊</div>
+                        <div class="plant-element-label">Aquatic</div>
+                    </div>
+                    <div class="plant-element" style="top: 60%; left: 70%;">
+                        <div class="plant-element-icon">🏔️</div>
+                        <div class="plant-element-label">Alpine</div>
+                    </div>
+                `;
+            } else if (question.type === "importance") {
+                // Importance diagram
+                container.innerHTML = `
+                    <div class="plant-element" style="top: 10%; left: 50%; transform: translateX(-50%);">
+                        <div class="plant-element-icon">🌍</div>
+                        <div class="plant-element-label">Earth</div>
+                    </div>
+                    <div class="plant-element" style="top: 40%; left: 30%;">
+                        <div class="plant-element-icon">💨</div>
+                        <div class="plant-element-label">Oxygen</div>
+                    </div>
+                    <div class="plant-element" style="top: 40%; left: 70%;">
+                        <div class="plant-element-icon">🍎</div>
+                        <div class="plant-element-label">Food</div>
+                    </div>
+                    <div class="plant-element" style="top: 70%; left: 50%; transform: translateX(-50%);">
+                        <div class="plant-element-icon">🏠</div>
+                        <div class="plant-element-label">Shelter</div>
+                    </div>
+                `;
+            }
+            
+            return container;
+        }
+
+        // Create plant part display
+        function createPlantPartDisplay() {
+            const display = document.createElement('div');
+            display.className = 'plant-part-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Define icons for different plant parts
+            const plantPartIcons = {
+                "Roots": "🪴",
+                "Stem": "🌿",
+                "Leaves": "🍃",
+                "Flowers": "🌸",
+                "Fruit": "🍎",
+                "Seeds": "🌱",
+                "Bark": "🌳",
+                "Chlorophyll": "💚",
+                "Stomata": "🕳️",
+                "Xylem": "💧",
+                "Phloem": "🍯",
+                "Petals": "🌸",
+                "Stamen": "🧬",
+                "Pistil": "🌸",
+                "Sepals": "🌿",
+                "Tendrils": "🌀",
+                "Spines": "🌵",
+                "Tubers": "🥔",
+                "Bulbs": "🧅",
+                "Photosynthesis": "☀️",
+                "Transpiration": "💨",
+                "Pollination": "🐝",
+                "Germination": "🌱",
+                "Respiration": "🌬️"
+            };
+            
+            // Try to find a plant part from the question
+            let plantPartName = "Plant Part";
+            let plantPartIcon = "🌿";
+            
+            // Check question text for plant parts
+            const questionText = question.question.toLowerCase();
+            for (const [part, icon] of Object.entries(plantPartIcons)) {
+                if (questionText.includes(part.toLowerCase()) || 
+                    question.options.some(opt => opt.includes(part))) {
+                    plantPartName = part;
+                    plantPartIcon = icon;
+                    break;
+                }
+            }
+            
+            // Check options for plant parts
+            if (plantPartName === "Plant Part") {
+                for (const option of question.options) {
+                    for (const [part, icon] of Object.entries(plantPartIcons)) {
+                        if (option.includes(part)) {
+                            plantPartName = part;
+                            plantPartIcon = icon;
+                            break;
+                        }
+                    }
+                    if (plantPartName !== "Plant Part") break;
+                }
+            }
+            
+            const plantPartBox = document.createElement('div');
+            plantPartBox.className = 'plant-part-box grow';
+            plantPartBox.innerHTML = `
+                <div class="plant-part-icon">${plantPartIcon}</div>
+                <div class="plant-part-text">${plantPartName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'plant-part-label';
+            
+            if (question.type === "structure") {
+                label.textContent = "What is the function of this plant part?";
+            } else if (question.type === "process") {
+                label.textContent = "What is this plant process?";
+            } else if (question.type === "adaptation") {
+                label.textContent = "What is this plant adaptation for?";
+            } else if (question.type === "importance") {
+                label.textContent = "Why is this important for plants/humans?";
+            }
+            
+            display.appendChild(plantPartBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create process display
+        function createProcessDisplay() {
+            const display = document.createElement('div');
+            display.className = 'process-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "process") {
+                display.innerHTML = `
+                    <div class="process-step">
+                        <div class="step-icon">☀️</div>
+                        <div class="step-title">Photosynthesis</div>
+                        <div class="step-description">Plants make food using sunlight, water, and CO₂</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">💨</div>
+                        <div class="step-title">Respiration</div>
+                        <div class="step-description">Plants use oxygen to release energy from food</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🌱</div>
+                        <div class="step-title">Germination</div>
+                        <div class="step-description">Seeds sprout and begin to grow</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🐝</div>
+                        <div class="step-title">Pollination</div>
+                        <div class="step-description">Transfer of pollen for fertilization</div>
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create plant types display
+        function createPlantTypesDisplay() {
+            const display = document.createElement('div');
+            display.className = 'plant-types';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "adaptation") {
+                display.innerHTML = `
+                    <div class="plant-type-card">
+                        <div class="plant-type-icon">🌵</div>
+                        <div class="plant-type-name">Desert Plants</div>
+                        <div class="plant-type-feature">Store water, reduce leaves</div>
+                    </div>
+                    <div class="plant-type-card">
+                        <div class="plant-type-icon">🌺</div>
+                        <div class="plant-type-name">Rainforest Plants</div>
+                        <div class="plant-type-feature">Large leaves, climbing</div>
+                    </div>
+                    <div class="plant-type-card">
+                        <div class="plant-type-icon">🌊</div>
+                        <div class="plant-type-name">Aquatic Plants</div>
+                        <div class="plant-type-feature">Air spaces, flexible</div>
+                    </div>
+                    <div class="plant-type-card">
+                        <div class="plant-type-icon">🏔️</div>
+                        <div class="plant-type-name">Alpine Plants</div>
+                        <div class="plant-type-feature">Low growth, hairy</div>
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Update progress
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            // Set question text
+            questionText.textContent = question.question;
+            
+            // Clear previous content
+            plantFact.innerHTML = '';
+            plantPartDisplay.innerHTML = '';
+            plantStructureDiagram.innerHTML = '';
+            processDisplay.innerHTML = '';
+            plantTypesDisplay.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create displays based on question type
+            plantFact.appendChild(createPlantFact());
+            plantPartDisplay.appendChild(createPlantPartDisplay());
+            plantStructureDiagram.appendChild(createPlantStructureDiagram());
+            
+            if (question.type === "process") {
+                processDisplay.appendChild(createProcessDisplay());
+            }
+            
+            if (question.type === "adaptation") {
+                plantTypesDisplay.appendChild(createPlantTypesDisplay());
+            }
+            
+            // Create option elements
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            // Disable all options
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            // Mark correct/incorrect
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                // Correct answer
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Add animation
+                optionElement.classList.add('pulse');
+                
+                // Show positive feedback
+                showFeedback(true, question.explanation);
+            } else {
+                // Incorrect answer
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                
+                // Show negative feedback
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            // Enable next question button
+            nextQuestionBtn.disabled = false;
+            
+            // Save progress
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic with new shuffled questions
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Re-shuffle questions
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page (simulated)
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+            // In a real implementation, this would be: window.location.href = "grade4-science-topics.html";
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            // Initialize questions if needed
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

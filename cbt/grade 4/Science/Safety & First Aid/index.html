@@ -1,0 +1,2269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 4 Science - Safety & First Aid | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Safety Theme */
+        :root {
+            --primary-red: #F44336;
+            --secondary-orange: #FF9800;
+            --accent-green: #4CAF50;
+            --accent-blue: #2196F3;
+            --accent-yellow: #FFEB3B;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(244, 67, 54, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-red), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(244, 67, 54, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-red);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-red);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-red);
+            color: white;
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #D32F2F;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(244, 67, 54, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #F57C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-red);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-red), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .safety-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-blue);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-red), var(--accent-blue));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-red);
+            background: rgba(244, 67, 54, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #FF9800;
+            color: #FF9800;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-orange);
+            color: #1a1a1a;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-red);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #FF9800;
+            color: #1a1a1a;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid var(--primary-red);
+        }
+
+        .feedback-incorrect {
+            background: rgba(255, 152, 0, 0.1);
+            border-left: 5px solid var(--secondary-orange);
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-red);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: var(--secondary-orange);
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-red);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: var(--secondary-orange);
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* First Aid Kit Diagram */
+        .first-aid-kit {
+            max-width: 500px;
+            margin: 20px auto;
+            position: relative;
+            height: 250px;
+        }
+
+        .first-aid-item {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .first-aid-item:hover {
+            transform: scale(1.1);
+        }
+
+        .first-aid-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            border: 2px solid var(--accent-green);
+            font-size: 1.5rem;
+        }
+
+        .first-aid-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        /* Emergency Contacts Display */
+        .emergency-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .contact-card {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--accent-blue);
+        }
+
+        .contact-number {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: bold;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-red), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-red), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-red);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Process Display */
+        .process-display {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            min-width: 200px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .process-step.active {
+            border-color: var(--primary-red);
+            box-shadow: 0 0 15px rgba(244, 67, 54, 0.3);
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary-red);
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Safety Rules Display */
+        .safety-rules {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .safety-rule {
+            background: rgba(76, 175, 80, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-green);
+            font-size: 0.9rem;
+        }
+
+        /* Emergency Procedures */
+        .emergency-procedures {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .emergency-step {
+            background: rgba(33, 150, 243, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-blue);
+            font-size: 0.9rem;
+            min-width: 180px;
+        }
+
+        /* Hazard Symbols */
+        .hazard-symbols {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .hazard-symbol {
+            background: rgba(255, 235, 59, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-yellow);
+            font-size: 0.9rem;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .symbol-icon {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .first-aid-kit {
+                height: 200px;
+            }
+            
+            .process-display {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .emergency-contacts {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .heartbeat {
+            animation: heartbeat 1s ease-in-out infinite;
+        }
+        
+        @keyframes bandageWrap {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .bandage-wrap {
+            animation: bandageWrap 2s linear infinite;
+        }
+        
+        @keyframes emergencyFlash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .emergency-flash {
+            animation: emergencyFlash 1s ease-in-out infinite;
+        }
+        
+        @keyframes checkPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .check-pulse {
+            animation: checkPulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes stopSignal {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+            100% { transform: translateX(0); }
+        }
+        
+        .stop-signal {
+            animation: stopSignal 2s ease-in-out infinite;
+        }
+        
+        @keyframes waterFlow {
+            0% { transform: translateX(-100px); opacity: 0; }
+            50% { transform: translateX(0); opacity: 1; }
+            100% { transform: translateX(100px); opacity: 0; }
+        }
+        
+        .water-flow {
+            animation: waterFlow 3s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1584467735871-8db9ac8dcc83?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 4 Science</h1>
+            <p class="welcome-subtitle">Learn essential safety skills and first aid knowledge! Discover how to prevent accidents, handle emergencies, provide basic first aid, and keep yourself and others safe in various situations. Become a safety superhero!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">🩹</span>
+                <span class="topic-name">Safety & First Aid</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Safety Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <!-- Safety fact display -->
+                <div id="safetyFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- First aid kit diagram -->
+                <div id="firstAidKitDisplay"></div>
+                
+                <!-- Emergency contacts display -->
+                <div id="emergencyContactsDisplay"></div>
+                
+                <!-- Process display -->
+                <div id="processDisplay"></div>
+                
+                <!-- Safety rules display -->
+                <div id="safetyRulesDisplay"></div>
+                
+                <!-- Emergency procedures display -->
+                <div id="emergencyProceduresDisplay"></div>
+                
+                <!-- Hazard symbols display -->
+                <div id="hazardSymbolsDisplay"></div>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Safety Training Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 120 Grade 4 Science questions covering Safety and First Aid
+        const questions = [
+            // Basic Safety Rules (1-30)
+            {
+                type: "safety_basic",
+                question: "What is safety?",
+                options: ["Protecting yourself and others from harm", "Being careful", "Following rules", "All of these"],
+                answer: "D",
+                explanation: "Safety means taking precautions to prevent accidents, injuries, and harm to yourself and others."
+            },
+            {
+                type: "safety_basic",
+                question: "What should you do before crossing the street?",
+                options: ["Look left, right, left again", "Run across quickly", "Listen to music", "Look straight ahead"],
+                answer: "A",
+                explanation: "Always look left, right, and left again before crossing to check for cars."
+            },
+            {
+                type: "safety_basic",
+                question: "Where should you cross the street?",
+                options: ["At crosswalks or intersections", "Anywhere", "Between parked cars", "Wherever is fastest"],
+                answer: "A",
+                explanation: "Use designated crosswalks and intersections where drivers expect pedestrians."
+            },
+            {
+                type: "safety_basic",
+                question: "What should you wear when riding a bicycle?",
+                options: ["Helmet, bright clothing", "Just regular clothes", "Dark clothing at night", "No special gear"],
+                answer: "A",
+                explanation: "Always wear a properly fitted helmet and bright/reflective clothing when cycling."
+            },
+            {
+                type: "safety_basic",
+                question: "How should you carry sharp objects?",
+                options: ["Point away from you, handle first", "Point toward you", "By the sharp end", "Throw them"],
+                answer: "A",
+                explanation: "Carry sharp objects with points/blades away from you, offering handle first to others."
+            },
+            {
+                type: "safety_basic",
+                question: "What should you do with electrical cords?",
+                options: ["Keep away from water, don't overload", "Put in water", "Hide under carpets", "Plug many devices"],
+                answer: "A",
+                explanation: "Keep cords dry, don't overload outlets, and don't run them under rugs where they can overheat."
+            },
+            {
+                type: "safety_basic",
+                question: "How can you prevent slipping?",
+                options: ["Wipe up spills immediately", "Ignore wet floors", "Run on wet surfaces", "Wear slippery shoes"],
+                answer: "A",
+                explanation: "Clean spills immediately and use caution on wet or slippery surfaces."
+            },
+            {
+                type: "safety_basic",
+                question: "What is the 'Stop, Drop, and Roll' for?",
+                options: ["If clothes catch fire", "If you fall", "If lost", "If scared"],
+                answer: "A",
+                explanation: "Stop, drop to ground, cover face, roll back and forth if clothing catches fire."
+            },
+            {
+                type: "safety_basic",
+                question: "What should you never play with?",
+                options: ["Matches, lighters, candles", "Toys", "Books", "Balls"],
+                answer: "A",
+                explanation: "Matches, lighters, and candles can cause fires - only adults should use them."
+            },
+            {
+                type: "safety_basic",
+                question: "What is stranger danger?",
+                options: ["Being careful around unknown people", "Talking to everyone", "Going with strangers", "Ignoring adults"],
+                answer: "A",
+                explanation: "Don't talk to, accept gifts from, or go anywhere with strangers without parent permission."
+            },
+            {
+                type: "safety_basic",
+                question: "What information should you never share online?",
+                options: ["Full name, address, phone, school", "Favorite color", "Game scores", "Book titles"],
+                answer: "A",
+                explanation: "Never share personal information online without parent permission."
+            },
+            {
+                type: "safety_basic",
+                question: "How should you answer the phone?",
+                options: ["Say hello, don't give personal info", "Give address", "Say parents aren't home", "Hang up immediately"],
+                answer: "A",
+                explanation: "Answer politely but don't give personal information to unknown callers."
+            },
+            {
+                type: "safety_basic",
+                question: "What should you do if lost in public?",
+                options: ["Find security/police or stay in place", "Wander around", "Cry loudly", "Go with anyone offering help"],
+                answer: "A",
+                explanation: "Stay where you are or find a store employee/security officer/police officer for help."
+            },
+            {
+                type: "safety_basic",
+                question: "Why wear seatbelts in cars?",
+                options: ["Prevent injury in crashes", "It's comfortable", "For decoration", "Only on highways"],
+                answer: "A",
+                explanation: "Seatbelts keep you from being thrown in accidents, reducing serious injuries."
+            },
+            {
+                type: "safety_basic",
+                question: "What is a safe following distance when walking?",
+                options: ["Stay with trusted adults", "Walk far ahead", "Walk alone", "Follow strangers"],
+                answer: "A",
+                explanation: "Always stay with trusted adults or groups when in public places."
+            },
+            // First Aid Basics (31-60)
+            {
+                type: "first_aid",
+                question: "What is first aid?",
+                options: ["Immediate care for injury/illness", "Medical surgery", "Hospital treatment", "Medicine only"],
+                answer: "A",
+                explanation: "First aid is the immediate care given to someone injured or suddenly ill before professionals arrive."
+            },
+            {
+                type: "first_aid",
+                question: "What should you do first in any emergency?",
+                options: ["Check if scene is safe", "Start CPR", "Call for help", "Treat injury"],
+                answer: "A",
+                explanation: "Always check if the scene is safe for you before helping others."
+            },
+            {
+                type: "first_aid",
+                question: "What is the emergency number in the US?",
+                options: ["911", "119", "999", "112"],
+                answer: "A",
+                explanation: "911 connects you to police, fire, and medical emergency services in the US."
+            },
+            {
+                type: "first_aid",
+                question: "What information should you give when calling 911?",
+                options: ["Location, problem, help needed", "Your name only", "Nothing", "Joke"],
+                answer: "A",
+                explanation: "Tell dispatcher: location, what happened, how many people need help, and your phone number."
+            },
+            {
+                type: "first_aid",
+                question: "What should you do for a small cut?",
+                options: ["Wash with soap/water, apply bandage", "Leave dirty", "Use dirt to stop bleeding", "Ignore it"],
+                answer: "A",
+                explanation: "Clean small cuts with soap and water, apply antibiotic ointment, cover with bandage."
+            },
+            {
+                type: "first_aid",
+                question: "What is the proper way to wash hands?",
+                options: ["Soap, 20 seconds, between fingers", "Quick rinse", "Just water", "Wipe on clothes"],
+                answer: "A",
+                explanation: "Wash with soap for 20 seconds, between fingers, under nails, to prevent infection."
+            },
+            {
+                type: "first_aid",
+                question: "How should you treat a nosebleed?",
+                options: ["Lean forward, pinch nostrils", "Lean back", "Blow nose hard", "Put head between knees"],
+                answer: "A",
+                explanation: "Lean slightly forward, pinch nostrils together for 10 minutes, breathe through mouth."
+            },
+            {
+                type: "first_aid",
+                question: "What is RICE for sprains?",
+                options: ["Rest, Ice, Compression, Elevation", "Run, Ignore, Cry, Exercise", "Rub, Itch, Cool, Eat", "Rest, Inject, Cut, Elevate"],
+                answer: "A",
+                explanation: "RICE: Rest injured area, Ice 20 min on/off, Compression with bandage, Elevate above heart."
+            },
+            {
+                type: "first_aid",
+                question: "What should you do for a bee sting?",
+                options: ["Remove stinger, wash, ice", "Leave stinger in", "Suck venom out", "Rub dirt on it"],
+                answer: "A",
+                explanation: "Scrape stinger out sideways, wash area, apply ice, watch for allergic reaction."
+            },
+            {
+                type: "first_aid",
+                question: "How should you treat a minor burn?",
+                options: ["Cool with running water 10-20 min", "Put butter on it", "Pop blisters", "Use hot water"],
+                answer: "A",
+                explanation: "Cool minor burns with cool (not ice cold) running water for 10-20 minutes."
+            },
+            // Fire Safety (61-70)
+            {
+                type: "fire_safety",
+                question: "What should you do if you smell smoke?",
+                options: ["Alert adults, get out, call 911", "Investigate alone", "Hide", "Open all windows"],
+                answer: "A",
+                explanation: "Alert everyone, leave immediately, call 911 from outside, never re-enter burning building."
+            },
+            {
+                type: "fire_safety",
+                question: "How should you test a door for heat?",
+                options: ["Back of hand on door/knob", "Kick it open", "Look through keyhole", "Open quickly"],
+                answer: "A",
+                explanation: "Use back of hand to feel door/knob for heat before opening during fire."
+            },
+            {
+                type: "fire_safety",
+                question: "What is a family meeting place outside?",
+                options: ["Designated safe spot away from home", "Inside house", "Neighbor's garage", "Car in driveway"],
+                answer: "A",
+                explanation: "Have a designated meeting place outside your home where everyone gathers after escaping fire."
+            },
+            {
+                type: "fire_safety",
+                question: "How often should smoke alarms be tested?",
+                options: ["Monthly", "Yearly", "Never", "Weekly"],
+                answer: "A",
+                explanation: "Test smoke alarms monthly and change batteries yearly or when they chirp."
+            },
+            {
+                type: "fire_safety",
+                question: "What is a fire escape plan?",
+                options: ["Practice routes out of home", "Buying fire extinguisher", "Having insurance", "Watching fire safety video"],
+                answer: "A",
+                explanation: "Plan and practice two ways out of every room, especially bedrooms."
+            },
+            // Water Safety (71-80)
+            {
+                type: "water_safety",
+                question: "What is the most important pool safety rule?",
+                options: ["Never swim alone", "Always dive in", "Swim after eating", "Play rough games"],
+                answer: "A",
+                explanation: "Always swim with a buddy and adult supervision present."
+            },
+            {
+                type: "water_safety",
+                question: "What should you do if someone is struggling in water?",
+                options: ["Call for help, throw flotation device", "Jump in to save them", "Swim away", "Watch them"],
+                answer: "A",
+                explanation: "Call for adult help, throw something that floats, reach with pole - don't jump in unless trained."
+            },
+            {
+                type: "water_safety",
+                question: "Why wear life jackets on boats?",
+                options: ["Float if fall in water", "Look cool", "Keep warm", "Required by law only"],
+                answer: "A",
+                explanation: "Life jackets keep you floating if you fall into water, even if unconscious."
+            },
+            {
+                type: "water_safety",
+                question: "What does a red flag at beach mean?",
+                options: ["Dangerous conditions, no swimming", "Swimming allowed", "Lifeguard on duty", "Beach closed"],
+                answer: "A",
+                explanation: "Red flag means dangerous conditions - high surf, strong currents, no swimming."
+            },
+            {
+                type: "water_safety",
+                question: "How can you prevent drowning?",
+                options: ["Learn to swim, use life jackets", "Avoid all water", "Swim alone", "Ignore rules"],
+                answer: "A",
+                explanation: "Take swimming lessons, always supervise children near water, use proper flotation devices."
+            },
+            // Poison Safety (81-90)
+            {
+                type: "poison_safety",
+                question: "What should you do if you suspect poisoning?",
+                options: ["Call Poison Control (1-800-222-1222)", "Give water", "Make vomit", "Wait and see"],
+                answer: "A",
+                explanation: "Call Poison Control immediately - don't wait for symptoms or try home remedies."
+            },
+            {
+                type: "poison_safety",
+                question: "Where should medicines be stored?",
+                options: ["Locked up, out of reach", "In candy jar", "On counter", "In purse"],
+                answer: "A",
+                explanation: "Medicines should be in child-proof containers, locked cabinets, out of children's reach."
+            },
+            {
+                type: "poison_safety",
+                question: "What household items can be poisonous?",
+                options: ["Cleaners, medicines, plants", "Only marked poisons", "Food only", "Water"],
+                answer: "A",
+                explanation: "Many common items like cleaners, medicines, certain plants, and cosmetics can be poisonous."
+            },
+            {
+                type: "poison_safety",
+                question: "What does 'Mr. Yuk' sticker mean?",
+                options: ["Poison - don't touch/taste", "Good to eat", "Toy inside", "Medicine"],
+                answer: "A",
+                explanation: "Mr. Yuk stickers warn children that something is poisonous and shouldn't be touched or tasted."
+            },
+            {
+                type: "poison_safety",
+                question: "Why shouldn't you take medicine that isn't yours?",
+                options: ["Could be wrong dose or type", "It's expensive", "It tastes bad", "Parents will know"],
+                answer: "A",
+                explanation: "Medicine is prescribed for specific people - wrong medicine or dose can be dangerous."
+            },
+            // Weather Safety (91-100)
+            {
+                type: "weather_safety",
+                question: "What should you do during thunderstorm?",
+                options: ["Go indoors, away from windows", "Stand under tree", "Use telephone", "Watch lightning"],
+                answer: "A",
+                explanation: "Go inside sturdy building, avoid windows, plumbing, electrical equipment, corded phones."
+            },
+            {
+                type: "weather_safety",
+                question: "What is safe shelter during tornado?",
+                options: ["Basement/interior room without windows", "Car", "Mobile home", "Under bridge"],
+                answer: "A",
+                explanation: "Go to basement or small interior room on lowest floor, away from windows."
+            },
+            {
+                type: "weather_safety",
+                question: "What does tornado watch mean?",
+                options: ["Conditions favorable for tornadoes", "Tornado sighted", "All clear", "Take shelter now"],
+                answer: "A",
+                explanation: "Watch means conditions are right for tornadoes - be prepared to take shelter."
+            },
+            {
+                type: "weather_safety",
+                question: "What does tornado warning mean?",
+                options: ["Tornado sighted - take shelter now", "Possible tornadoes", "Storm over", "Just thunderstorm"],
+                answer: "A",
+                explanation: "Warning means tornado has been sighted or indicated by radar - take shelter immediately."
+            },
+            {
+                type: "weather_safety",
+                question: "What is heat exhaustion?",
+                options: ["Overheating from high temperatures", "Being cold", "Windburn", "Rain sickness"],
+                answer: "A",
+                explanation: "Heat exhaustion occurs in hot weather - symptoms include dizziness, nausea, sweating."
+            },
+            // Internet Safety (101-110)
+            {
+                type: "internet_safety",
+                question: "What should you never share online?",
+                options: ["Personal information, passwords", "Favorite games", "School subjects", "Hobbies"],
+                answer: "A",
+                explanation: "Never share personal information, passwords, location, or photos without parent permission."
+            },
+            {
+                type: "internet_safety",
+                question: "What should you do if you see something scary online?",
+                options: ["Tell trusted adult, close page", "Keep watching", "Share with friends", "Ignore it"],
+                answer: "A",
+                explanation: "Tell a parent or teacher immediately if you see something scary or inappropriate online."
+            },
+            {
+                type: "internet_safety",
+                question: "Who should you talk to online?",
+                options: ["Only people you know in real life", "Anyone friendly", "Everyone", "No one"],
+                answer: "A",
+                explanation: "Only communicate online with people you know in real life and have parent approval."
+            },
+            {
+                type: "internet_safety",
+                question: "What is cyberbullying?",
+                options: ["Mean behavior online", "Playing games", "Making friends", "Learning online"],
+                answer: "A",
+                explanation: "Cyberbullying is using technology to hurt, embarrass, or threaten others."
+            },
+            {
+                type: "internet_safety",
+                question: "What should you do if cyberbullied?",
+                options: ["Tell adult, save evidence, don't respond", "Fight back online", "Delete everything", "Ignore it"],
+                answer: "A",
+                explanation: "Tell trusted adult, save evidence, block the person, don't respond to bullies."
+            },
+            // Personal Safety (111-120)
+            {
+                type: "personal_safety",
+                question: "What is your 'safe word' for?",
+                options: ["Secret word for emergencies", "Password for games", "Favorite word", "School password"],
+                answer: "A",
+                explanation: "A family safe word is used in emergencies to verify someone is truly sent by parents."
+            },
+            {
+                type: "personal_safety",
+                question: "What should you do if approached by stranger?",
+                options: ["Say no, walk away, tell adult", "Go with them", "Take gifts", "Talk politely"],
+                answer: "A",
+                explanation: "Say no loudly, walk/run away, find trusted adult immediately if stranger approaches."
+            },
+            {
+                type: "personal_safety",
+                question: "Where are your body's private parts?",
+                options: ["Areas covered by swimsuit", "Only arms/legs", "Whole body", "Just face"],
+                answer: "A",
+                explanation: "Private parts are areas covered by swimsuit - no one should touch these without good reason."
+            },
+            {
+                type: "personal_safety",
+                question: "What is 'good touch' vs 'bad touch'?",
+                options: ["Good feels safe/caring, bad feels wrong/scary", "All touch is same", "Only doctors can touch", "Parents decide"],
+                answer: "A",
+                explanation: "Good touch makes you feel safe/loved (hugs from family). Bad touch feels wrong/scary/unwanted."
+            },
+            {
+                type: "personal_safety",
+                question: "Who should you tell if touched inappropriately?",
+                options: ["Trusted adult immediately", "No one", "Only friends", "Wait until older"],
+                answer: "A",
+                explanation: "Tell trusted adult immediately if anyone touches you in ways that make you uncomfortable."
+            },
+            // Additional Safety Topics (121-130)
+            {
+                type: "additional_safety",
+                question: "What should you do before using playground equipment?",
+                options: ["Check for hazards, use properly", "Just play", "Use broken equipment", "Push others"],
+                answer: "A",
+                explanation: "Check for hazards like broken equipment, hot surfaces, proper use prevents injuries."
+            },
+            {
+                type: "additional_safety",
+                question: "How should you carry scissors?",
+                options: ["Point down, hand over blade", "Point up", "Throw them", "Run with them"],
+                answer: "A",
+                explanation: "Carry scissors with points down, hand over blade, pass handle-first to others."
+            },
+            {
+                type: "additional_safety",
+                question: "What is the danger of plastic bags?",
+                options: ["Suffocation risk", "They're ugly", "Expensive", "Break easily"],
+                answer: "A",
+                explanation: "Plastic bags can cause suffocation - never put them over head or play with them."
+            },
+            {
+                type: "additional_safety",
+                question: "Why shouldn't you run with objects in mouth?",
+                options: ["Could choke if fall", "Looks silly", "Saves time", "Exercises jaw"],
+                answer: "A",
+                explanation: "Running with objects in mouth can cause choking if you fall or breathe in the object."
+            },
+            {
+                type: "additional_safety",
+                question: "What should you do if you find pills/medicine?",
+                options: ["Give to adult, don't taste", "Taste them", "Flush down toilet", "Hide them"],
+                answer: "A",
+                explanation: "Give any found pills/medicine to adult immediately - never taste unknown substances."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent safety knowledge!",
+            "Fantastic first aid skills!",
+            "Great job! You're a safety expert!",
+            "Amazing! Your emergency response skills are impressive!",
+            "Well done! Perfect answer!",
+            "You're a safety superhero!",
+            "Perfect! You understand emergency procedures!",
+            "Outstanding safety awareness!",
+            "Brilliant! You think like a first responder!",
+            "You're on fire! Great safety insight!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const safetyFact = document.getElementById('safetyFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const firstAidKitDisplay = document.getElementById('firstAidKitDisplay');
+        const emergencyContactsDisplay = document.getElementById('emergencyContactsDisplay');
+        const processDisplay = document.getElementById('processDisplay');
+        const safetyRulesDisplay = document.getElementById('safetyRulesDisplay');
+        const emergencyProceduresDisplay = document.getElementById('emergencyProceduresDisplay');
+        const hazardSymbolsDisplay = document.getElementById('hazardSymbolsDisplay');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade4ScienceSafety');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade4ScienceSafety', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade4ScienceSafety_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade4ScienceSafety_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a safety and first aid expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent emergency response skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep learning to become a safety leader!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review safety rules and try again!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Safety knowledge saves lives!";
+            }
+        }
+
+        // Create safety fact display
+        function createSafetyFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'safety-fact';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "safety_basic") {
+                factDiv.innerHTML = `
+                    <strong>Safety Fact:</strong> Wearing a bicycle helmet reduces the risk of head injury 
+                    by 85% and brain injury by 88%! Always buckle up that helmet!
+                `;
+            } else if (question.type === "first_aid") {
+                factDiv.innerHTML = `
+                    <strong>First Aid Fact:</strong> The "Good Samaritan" laws protect people who provide 
+                    reasonable assistance to those who are injured or in danger! Don't be afraid to help!
+                `;
+            } else if (question.type === "fire_safety") {
+                factDiv.innerHTML = `
+                    <strong>Fire Safety Fact:</strong> You may have less than 2 minutes to escape a home fire! 
+                    That's why having working smoke alarms and practicing fire drills is so important!
+                `;
+            } else if (question.type === "water_safety") {
+                factDiv.innerHTML = `
+                    <strong>Water Safety Fact:</strong> Drowning is the leading cause of unintentional death 
+                    for children ages 1-4! Constant adult supervision is essential around water!
+                `;
+            } else if (question.type === "poison_safety") {
+                factDiv.innerHTML = `
+                    <strong>Poison Safety Fact:</strong> The Poison Control Center (1-800-222-1222) receives 
+                    over 2 million calls each year! Most calls involve children under age 6!
+                `;
+            } else if (question.type === "weather_safety") {
+                factDiv.innerHTML = `
+                    <strong>Weather Safety Fact:</strong> Lightning strikes the Earth about 100 times every 
+                    second! When thunder roars, go indoors immediately!
+                `;
+            } else if (question.type === "internet_safety") {
+                factDiv.innerHTML = `
+                    <strong>Internet Safety Fact:</strong> 1 in 3 internet users is a child! That's why it's 
+                    so important to learn digital safety from a young age!
+                `;
+            } else if (question.type === "personal_safety") {
+                factDiv.innerHTML = `
+                    <strong>Personal Safety Fact:</strong> Children who know their full name, address, and 
+                    phone number, and how to dial 911 are better prepared for emergencies!
+                `;
+            }
+            
+            return factDiv;
+        }
+
+        // Create first aid kit diagram
+        function createFirstAidKitDisplay() {
+            const container = document.createElement('div');
+            container.className = 'first-aid-kit';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("first_aid") || question.type.includes("safety")) {
+                container.innerHTML = `
+                    <div class="first-aid-item" style="top: 10%; left: 20%;">
+                        <div class="first-aid-icon bandage-wrap">🩹</div>
+                        <div class="first-aid-label">Bandages</div>
+                    </div>
+                    <div class="first-aid-item" style="top: 10%; left: 80%;">
+                        <div class="first-aid-icon">🧴</div>
+                        <div class="first-aid-label">Antiseptic</div>
+                    </div>
+                    <div class="first-aid-item" style="top: 40%; left: 20%;">
+                        <div class="first-aid-icon">✂️</div>
+                        <div class="first-aid-label">Scissors</div>
+                    </div>
+                    <div class="first-aid-item" style="top: 40%; left: 80%;">
+                        <div class="first-aid-icon">🧤</div>
+                        <div class="first-aid-label">Gloves</div>
+                    </div>
+                    <div class="first-aid-item" style="top: 70%; left: 50%; transform: translateX(-50%);">
+                        <div class="first-aid-icon emergency-flash">📞</div>
+                        <div class="first-aid-label">Emergency Numbers</div>
+                    </div>
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(121, 85, 72, 0.1); border-radius: 12px; border: 2px dashed var(--primary-red);"></div>
+                `;
+            }
+            
+            return container;
+        }
+
+        // Create emergency contacts display
+        function createEmergencyContactsDisplay() {
+            const display = document.createElement('div');
+            display.className = 'emergency-contacts';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("safety") || question.type.includes("first_aid")) {
+                display.innerHTML = `
+                    <div class="contact-card">
+                        <div class="contact-icon emergency-flash">🚨</div>
+                        <div class="contact-name">Emergency</div>
+                        <div class="contact-number">911</div>
+                        <div class="contact-info">Police, Fire, Medical</div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">☠️</div>
+                        <div class="contact-name">Poison Control</div>
+                        <div class="contact-number">1-800-222-1222</div>
+                        <div class="contact-info">24/7 Free Help</div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon heartbeat">❤️</div>
+                        <div class="contact-name">Parents/Guardians</div>
+                        <div class="contact-number">[Your Numbers]</div>
+                        <div class="contact-info">Memorize these!</div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">🏠</div>
+                        <div class="contact-name">Trusted Neighbor</div>
+                        <div class="contact-number">[Neighbor's Number]</div>
+                        <div class="contact-info">Local Help</div>
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "safety": "🛡️",
+                "first_aid": "🩹",
+                "fire": "🔥",
+                "water": "💧",
+                "poison": "☠️",
+                "weather": "⛈️",
+                "internet": "🌐",
+                "personal": "👤",
+                "emergency": "🚨",
+                "prevention": "✅"
+            };
+            
+            let conceptName = "Safety Concept";
+            let conceptIcon = "🛡️";
+            
+            if (question.type === "safety_basic") {
+                conceptName = "Basic Safety";
+                conceptIcon = conceptIcons.safety;
+            } else if (question.type === "first_aid") {
+                conceptName = "First Aid";
+                conceptIcon = conceptIcons.first_aid;
+            } else if (question.type === "fire_safety") {
+                conceptName = "Fire Safety";
+                conceptIcon = conceptIcons.fire;
+            } else if (question.type === "water_safety") {
+                conceptName = "Water Safety";
+                conceptIcon = conceptIcons.water;
+            } else if (question.type === "poison_safety") {
+                conceptName = "Poison Safety";
+                conceptIcon = conceptIcons.poison;
+            } else if (question.type === "weather_safety") {
+                conceptName = "Weather Safety";
+                conceptIcon = conceptIcons.weather;
+            } else if (question.type === "internet_safety") {
+                conceptName = "Internet Safety";
+                conceptIcon = conceptIcons.internet;
+            } else if (question.type === "personal_safety") {
+                conceptName = "Personal Safety";
+                conceptIcon = conceptIcons.personal;
+            } else if (question.type === "additional_safety") {
+                conceptName = "Additional Safety";
+                conceptIcon = conceptIcons.safety;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type === "safety_basic") {
+                label.textContent = "What is this safety rule?";
+            } else if (question.type === "first_aid") {
+                label.textContent = "What first aid procedure?";
+            } else if (question.type === "fire_safety") {
+                label.textContent = "What fire safety practice?";
+            } else if (question.type === "water_safety") {
+                label.textContent = "What water safety rule?";
+            } else if (question.type === "poison_safety") {
+                label.textContent = "What poison safety measure?";
+            } else if (question.type === "weather_safety") {
+                label.textContent = "What weather safety procedure?";
+            } else if (question.type === "internet_safety") {
+                label.textContent = "What internet safety rule?";
+            } else if (question.type === "personal_safety") {
+                label.textContent = "What personal safety rule?";
+            } else if (question.type === "additional_safety") {
+                label.textContent = "What additional safety measure?";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create process display
+        function createProcessDisplay() {
+            const display = document.createElement('div');
+            display.className = 'process-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type === "first_aid") {
+                display.innerHTML = `
+                    <div class="process-step">
+                        <div class="step-icon">👀</div>
+                        <div class="step-title">Check Safety</div>
+                        <div class="step-description">Is scene safe for you?</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">📞</div>
+                        <div class="step-title">Call for Help</div>
+                        <div class="step-description">911 for serious emergencies</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🩹</div>
+                        <div class="step-title">Provide Care</div>
+                        <div class="step-description">First aid within your training</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">👨‍⚕️</div>
+                        <div class="step-title">Get Professional Help</div>
+                        <div class="step-description">Stay until help arrives</div>
+                    </div>
+                `;
+            } else if (question.type === "fire_safety") {
+                display.innerHTML = `
+                    <div class="process-step">
+                        <div class="step-icon">🔥</div>
+                        <div class="step-title">Smoke Alarm Sounds</div>
+                        <div class="step-description">Get out immediately</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">👋</div>
+                        <div class="step-title">Check Door for Heat</div>
+                        <div class="step-description">Use back of hand</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🚶</div>
+                        <div class="step-title">Stay Low and Go</div>
+                        <div class="step-description">Crawl under smoke</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">📍</div>
+                        <div class="step-title">Meet at Safe Place</div>
+                        <div class="step-description">Designated meeting spot</div>
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create safety rules display
+        function createSafetyRulesDisplay() {
+            const display = document.createElement('div');
+            display.className = 'safety-rules';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("safety")) {
+                display.innerHTML = `
+                    <div class="safety-rule">Always look both ways before crossing</div>
+                    <div class="safety-rule">Wear helmet when biking/skating</div>
+                    <div class="safety-rule">Never play with matches/lighters</div>
+                    <div class="safety-rule">Tell adult about strangers</div>
+                    <div class="safety-rule">Keep personal info private</div>
+                    <div class="safety-rule">Use seatbelts in vehicles</div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create emergency procedures display
+        function createEmergencyProceduresDisplay() {
+            const display = document.createElement('div');
+            display.className = 'emergency-procedures';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("safety") || question.type.includes("first_aid")) {
+                display.innerHTML = `
+                    <div class="emergency-step">
+                        <strong>Emergency Call</strong><br>
+                        Dial 911<br>
+                        Give location clearly
+                    </div>
+                    <div class="emergency-step">
+                        <strong>Minor Cut</strong><br>
+                        Wash with soap/water<br>
+                        Apply bandage
+                    </div>
+                    <div class="emergency-step">
+                        <strong>Nosebleed</strong><br>
+                        Lean forward<br>
+                        Pinch nostrils 10 min
+                    </div>
+                    <div class="emergency-step">
+                        <strong>Minor Burn</strong><br>
+                        Cool with water<br>
+                        10-20 minutes
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create hazard symbols display
+        function createHazardSymbolsDisplay() {
+            const display = document.createElement('div');
+            display.className = 'hazard-symbols';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("safety")) {
+                display.innerHTML = `
+                    <div class="hazard-symbol">
+                        <div class="symbol-icon">🔥</div>
+                        <strong>Flammable</strong><br>
+                        Can catch fire
+                    </div>
+                    <div class="hazard-symbol">
+                        <div class="symbol-icon">☠️</div>
+                        <strong>Poison</strong><br>
+                        Toxic/Dangerous
+                    </div>
+                    <div class="hazard-symbol">
+                        <div class="symbol-icon">⚡</div>
+                        <strong>Electrical Hazard</strong><br>
+                        Shock risk
+                    </div>
+                    <div class="hazard-symbol">
+                        <div class="symbol-icon">⚠️</div>
+                        <strong>Warning</strong><br>
+                        General danger
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            safetyFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            firstAidKitDisplay.innerHTML = '';
+            emergencyContactsDisplay.innerHTML = '';
+            processDisplay.innerHTML = '';
+            safetyRulesDisplay.innerHTML = '';
+            emergencyProceduresDisplay.innerHTML = '';
+            hazardSymbolsDisplay.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            safetyFact.appendChild(createSafetyFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            firstAidKitDisplay.appendChild(createFirstAidKitDisplay());
+            emergencyContactsDisplay.appendChild(createEmergencyContactsDisplay());
+            processDisplay.appendChild(createProcessDisplay());
+            safetyRulesDisplay.appendChild(createSafetyRulesDisplay());
+            emergencyProceduresDisplay.appendChild(createEmergencyProceduresDisplay());
+            hazardSymbolsDisplay.appendChild(createHazardSymbolsDisplay());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

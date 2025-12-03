@@ -1,0 +1,2279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Math - Number Patterns | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Math Theme */
+        :root {
+            --primary-purple: #9C27B0;
+            --secondary-pink: #E91E63;
+            --accent-teal: #00BCD4;
+            --accent-amber: #FFC107;
+            --accent-lime: #CDDC39;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(156, 39, 176, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(156, 39, 176, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-purple);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-purple);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-purple);
+            color: white;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #7B1FA2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(156, 39, 176, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-pink);
+            color: white;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #C2185B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-purple);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-purple), var(--secondary-pink));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .math-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-teal);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* New Compact Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-teal));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-purple);
+            background: rgba(156, 39, 176, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(156, 39, 176, 0.1);
+            border-color: var(--primary-purple);
+            color: var(--primary-purple);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-pink);
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-purple);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(156, 39, 176, 0.1);
+            border-left: 5px solid var(--primary-purple);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-purple);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-purple);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+        }
+
+        /* Pattern Display */
+        .pattern-display {
+            margin: 20px 0;
+        }
+
+        .pattern-sequence {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .pattern-number {
+            background: rgba(156, 39, 176, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            min-width: 60px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .pattern-number.missing {
+            background: rgba(255, 193, 7, 0.2);
+            border: 2px dashed var(--accent-amber);
+            animation: pulseMissing 2s ease-in-out infinite;
+        }
+
+        .pattern-number.highlight {
+            background: rgba(0, 188, 212, 0.2);
+            border: 2px solid var(--accent-teal);
+            transform: scale(1.1);
+        }
+
+        /* Number Line Pattern */
+        .pattern-number-line {
+            width: 100%;
+            height: 80px;
+            position: relative;
+            margin: 25px 0;
+        }
+
+        .pattern-line-track {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            right: 20px;
+            height: 4px;
+            background: var(--dark-border);
+            transform: translateY(-50%);
+        }
+
+        .pattern-point {
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 30px;
+            background: var(--secondary-pink);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(233, 30, 99, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .pattern-line {
+            position: absolute;
+            height: 2px;
+            background: var(--accent-teal);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Table Pattern Display */
+        .pattern-table {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .table-cell {
+            background: var(--dark-card);
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            border: 1px solid var(--dark-border);
+        }
+
+        .table-cell.header {
+            background: rgba(156, 39, 176, 0.2);
+            font-weight: bold;
+            color: var(--primary-purple);
+        }
+
+        .table-cell.highlight {
+            background: rgba(255, 193, 7, 0.2);
+            border-color: var(--accent-amber);
+            animation: tableHighlight 1s ease-in-out infinite;
+        }
+
+        /* Growing Pattern Visualization */
+        .growing-pattern {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 15px;
+            margin: 25px 0;
+            height: 150px;
+        }
+
+        .pattern-block {
+            background: linear-gradient(to top, var(--primary-purple), var(--secondary-pink));
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            min-width: 40px;
+        }
+
+        /* Function Machine */
+        .function-machine {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 25px 0;
+            padding: 20px;
+            background: var(--dark-card);
+            border-radius: 12px;
+        }
+
+        .machine-input {
+            padding: 15px;
+            background: rgba(0, 188, 212, 0.2);
+            border-radius: 8px;
+            border: 2px solid var(--accent-teal);
+            font-size: 1.5rem;
+            font-weight: bold;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .machine-operator {
+            font-size: 2rem;
+            color: var(--accent-amber);
+            font-weight: bold;
+        }
+
+        .machine-box {
+            padding: 20px 30px;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-pink));
+            border-radius: 10px;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .machine-output {
+            padding: 15px;
+            background: rgba(233, 30, 99, 0.2);
+            border-radius: 8px;
+            border: 2px solid var(--secondary-pink);
+            font-size: 1.5rem;
+            font-weight: bold;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        /* Pattern Rules Display */
+        .pattern-rules {
+            margin: 20px 0;
+        }
+
+        .rule-item {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--accent-lime);
+        }
+
+        .rule-title {
+            font-weight: bold;
+            color: var(--accent-lime);
+            margin-bottom: 5px;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-purple);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Process Display */
+        .process-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .process-step {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 200px;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .process-step.active {
+            border-color: var(--primary-purple);
+        }
+
+        .step-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: var(--primary-purple);
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .pattern-table {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .function-machine {
+                flex-wrap: wrap;
+            }
+            
+            .pattern-number {
+                min-width: 50px;
+                padding: 12px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes patternFlow {
+            0% { transform: translateY(-10px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        .pattern-flow {
+            animation: patternFlow 0.5s ease forwards;
+        }
+        
+        @keyframes patternHighlight {
+            0%, 100% { background-color: rgba(156, 39, 176, 0.1); border-color: var(--primary-purple); }
+            50% { background-color: rgba(156, 39, 176, 0.3); border-color: var(--secondary-pink); }
+        }
+        
+        .pattern-highlight {
+            animation: patternHighlight 1s ease-in-out infinite;
+        }
+        
+        @keyframes pulseMissing {
+            0%, 100% { transform: scale(1); background-color: rgba(255, 193, 7, 0.2); }
+            50% { transform: scale(1.05); background-color: rgba(255, 193, 7, 0.4); }
+        }
+        
+        @keyframes tableHighlight {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes patternSlide {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .pattern-slide {
+            animation: patternSlide 0.5s ease forwards;
+        }
+        
+        @keyframes machineProcess {
+            0% { transform: translateX(0); opacity: 1; }
+            50% { transform: translateX(100px); opacity: 0.5; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        
+        .machine-process {
+            animation: machineProcess 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1509228468518-180dd4864904?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 5 Mathematics</h1>
+            <p class="welcome-subtitle">Uncover the secrets of number patterns! Learn to identify, extend, and create patterns using addition, subtraction, multiplication, and division rules. Discover how patterns help us predict what comes next!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">🔢</span>
+                <span class="topic-name">Number Patterns & Sequences</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Pattern Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Math fact display -->
+                <div id="mathFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Pattern Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 100 Grade 5 Number Pattern questions
+        const questions = [
+            // Increasing Patterns - Addition (1-20)
+            {
+                type: "increasing_add",
+                question: "What comes next: 2, 4, 6, 8, ___?",
+                options: ["10", "9", "12", "14"],
+                answer: "A",
+                explanation: "Pattern: Add 2 each time. 8 + 2 = 10"
+            },
+            {
+                type: "increasing_add",
+                question: "Complete the pattern: 5, 10, 15, 20, ___",
+                options: ["25", "30", "22", "18"],
+                answer: "A",
+                explanation: "Pattern: Add 5 each time. 20 + 5 = 25"
+            },
+            {
+                type: "increasing_add",
+                question: "What is the missing number: 12, 17, 22, 27, ___?",
+                options: ["32", "37", "30", "29"],
+                answer: "A",
+                explanation: "Pattern: Add 5 each time. 27 + 5 = 32"
+            },
+            {
+                type: "increasing_add",
+                question: "Continue the sequence: 3, 7, 11, 15, ___",
+                options: ["19", "17", "20", "23"],
+                answer: "A",
+                explanation: "Pattern: Add 4 each time. 15 + 4 = 19"
+            },
+            {
+                type: "increasing_add",
+                question: "What comes next: 100, 110, 120, 130, ___?",
+                options: ["140", "135", "150", "125"],
+                answer: "A",
+                explanation: "Pattern: Add 10 each time. 130 + 10 = 140"
+            },
+            {
+                type: "increasing_add",
+                question: "Complete: 45, 50, 55, 60, ___",
+                options: ["65", "70", "62", "58"],
+                answer: "A",
+                explanation: "Pattern: Add 5 each time. 60 + 5 = 65"
+            },
+            {
+                type: "increasing_add",
+                question: "What is next: 8, 16, 24, 32, ___?",
+                options: ["40", "36", "48", "38"],
+                answer: "A",
+                explanation: "Pattern: Add 8 each time. 32 + 8 = 40"
+            },
+            {
+                type: "increasing_add",
+                question: "Continue: 17, 24, 31, 38, ___",
+                options: ["45", "42", "40", "48"],
+                answer: "A",
+                explanation: "Pattern: Add 7 each time. 38 + 7 = 45"
+            },
+            {
+                type: "increasing_add",
+                question: "What comes after: 33, 38, 43, 48, ___?",
+                options: ["53", "50", "58", "55"],
+                answer: "A",
+                explanation: "Pattern: Add 5 each time. 48 + 5 = 53"
+            },
+            {
+                type: "increasing_add",
+                question: "Complete pattern: 125, 130, 135, 140, ___",
+                options: ["145", "150", "142", "138"],
+                answer: "A",
+                explanation: "Pattern: Add 5 each time. 140 + 5 = 145"
+            },
+
+            // Decreasing Patterns - Subtraction (21-40)
+            {
+                type: "decreasing_sub",
+                question: "What comes next: 20, 18, 16, 14, ___?",
+                options: ["12", "10", "13", "15"],
+                answer: "A",
+                explanation: "Pattern: Subtract 2 each time. 14 - 2 = 12"
+            },
+            {
+                type: "decreasing_sub",
+                question: "Complete: 50, 45, 40, 35, ___",
+                options: ["30", "25", "33", "40"],
+                answer: "A",
+                explanation: "Pattern: Subtract 5 each time. 35 - 5 = 30"
+            },
+            {
+                type: "decreasing_sub",
+                question: "What is missing: 100, 95, 90, 85, ___?",
+                options: ["80", "75", "82", "88"],
+                answer: "A",
+                explanation: "Pattern: Subtract 5 each time. 85 - 5 = 80"
+            },
+            {
+                type: "decreasing_sub",
+                question: "Continue: 63, 60, 57, 54, ___",
+                options: ["51", "50", "48", "52"],
+                answer: "A",
+                explanation: "Pattern: Subtract 3 each time. 54 - 3 = 51"
+            },
+            {
+                type: "decreasing_sub",
+                question: "What comes next: 200, 190, 180, 170, ___?",
+                options: ["160", "165", "155", "175"],
+                answer: "A",
+                explanation: "Pattern: Subtract 10 each time. 170 - 10 = 160"
+            },
+            {
+                type: "decreasing_sub",
+                question: "Complete pattern: 88, 80, 72, 64, ___",
+                options: ["56", "60", "48", "52"],
+                answer: "A",
+                explanation: "Pattern: Subtract 8 each time. 64 - 8 = 56"
+            },
+            {
+                type: "decreasing_sub",
+                question: "What is next: 150, 140, 130, 120, ___?",
+                options: ["110", "115", "105", "125"],
+                answer: "A",
+                explanation: "Pattern: Subtract 10 each time. 120 - 10 = 110"
+            },
+            {
+                type: "decreasing_sub",
+                question: "Continue: 99, 96, 93, 90, ___",
+                options: ["87", "85", "88", "92"],
+                answer: "A",
+                explanation: "Pattern: Subtract 3 each time. 90 - 3 = 87"
+            },
+            {
+                type: "decreasing_sub",
+                question: "What comes after: 75, 70, 65, 60, ___?",
+                options: ["55", "50", "58", "62"],
+                answer: "A",
+                explanation: "Pattern: Subtract 5 each time. 60 - 5 = 55"
+            },
+            {
+                type: "decreasing_sub",
+                question: "Complete: 120, 115, 110, 105, ___",
+                options: ["100", "95", "102", "98"],
+                answer: "A",
+                explanation: "Pattern: Subtract 5 each time. 105 - 5 = 100"
+            },
+
+            // Multiplication Patterns (41-60)
+            {
+                type: "multiplication",
+                question: "What comes next: 2, 4, 8, 16, ___?",
+                options: ["32", "24", "20", "18"],
+                answer: "A",
+                explanation: "Pattern: Multiply by 2 each time. 16 × 2 = 32"
+            },
+            {
+                type: "multiplication",
+                question: "Complete: 3, 6, 12, 24, ___",
+                options: ["48", "36", "30", "42"],
+                answer: "A",
+                explanation: "Pattern: Multiply by 2 each time. 24 × 2 = 48"
+            },
+            {
+                type: "multiplication",
+                question: "What is missing: 5, 10, 20, 40, ___?",
+                options: ["80", "60", "50", "100"],
+                answer: "A",
+                explanation: "Pattern: Multiply by 2 each time. 40 × 2 = 80"
+            },
+            {
+                type: "multiplication",
+                question: "Continue: 1, 3, 9, 27, ___",
+                options: ["81", "54", "36", "45"],
+                answer: "A",
+                explanation: "Pattern: Multiply by 3 each time. 27 × 3 = 81"
+            },
+            {
+                type: "multiplication",
+                question: "What comes next: 4, 12, 36, 108, ___?",
+                options: ["324", "216", "144", "432"],
+                answer: "A",
+                explanation: "Pattern: Multiply by 3 each time. 108 × 3 = 324"
+            },
+            {
+                type: "multiplication",
+                question: "Complete pattern: 10, 20, 40, 80, ___",
+                options: ["160", "100", "120", "140"],
+                answer: "A",
+                explanation: "Pattern: Multiply by 2 each time. 80 × 2 = 160"
+            },
+            {
+                type: "multiplication",
+                question: "What is next: 7, 14, 28, 56, ___?",
+                options: ["112", "84", "70", "98"],
+                answer: "A",
+                explanation: "Pattern: Multiply by 2 each time. 56 × 2 = 112"
+            },
+            {
+                type: "multiplication",
+                question: "Continue: 2, 6, 18, 54, ___",
+                options: ["162", "108", "72", "90"],
+                answer: "A",
+                explanation: "Pattern: Multiply by 3 each time. 54 × 3 = 162"
+            },
+            {
+                type: "multiplication",
+                question: "What comes after: 8, 24, 72, 216, ___?",
+                options: ["648", "432", "288", "360"],
+                answer: "A",
+                explanation: "Pattern: Multiply by 3 each time. 216 × 3 = 648"
+            },
+            {
+                type: "multiplication",
+                question: "Complete: 6, 12, 24, 48, ___",
+                options: ["96", "72", "60", "84"],
+                answer: "A",
+                explanation: "Pattern: Multiply by 2 each time. 48 × 2 = 96"
+            },
+
+            // Division Patterns (61-70)
+            {
+                type: "division",
+                question: "What comes next: 81, 27, 9, 3, ___?",
+                options: ["1", "0", "6", "2"],
+                answer: "A",
+                explanation: "Pattern: Divide by 3 each time. 3 ÷ 3 = 1"
+            },
+            {
+                type: "division",
+                question: "Complete: 128, 64, 32, 16, ___",
+                options: ["8", "4", "12", "24"],
+                answer: "A",
+                explanation: "Pattern: Divide by 2 each time. 16 ÷ 2 = 8"
+            },
+            {
+                type: "division",
+                question: "What is missing: 1000, 100, 10, ___?",
+                options: ["1", "0.1", "100", "10"],
+                answer: "A",
+                explanation: "Pattern: Divide by 10 each time. 10 ÷ 10 = 1"
+            },
+            {
+                type: "division",
+                question: "Continue: 625, 125, 25, 5, ___",
+                options: ["1", "0.2", "10", "2.5"],
+                answer: "A",
+                explanation: "Pattern: Divide by 5 each time. 5 ÷ 5 = 1"
+            },
+            {
+                type: "division",
+                question: "What comes next: 256, 64, 16, 4, ___?",
+                options: ["1", "2", "0.5", "8"],
+                answer: "A",
+                explanation: "Pattern: Divide by 4 each time. 4 ÷ 4 = 1"
+            },
+
+            // Mixed Patterns - Two-step (71-85)
+            {
+                type: "mixed_two_step",
+                question: "What comes next: 2, 4, 8, 10, 14, 16, ___?",
+                options: ["20", "18", "22", "24"],
+                answer: "A",
+                explanation: "Pattern: Add 2, then multiply by 2, repeat. Last was +2 (16), next is ×2 = 32? Wait, check: 2(+2)→4(×2)→8(+2)→10(×2)→20? Let's trace: 2→4 (×2), 4→8 (×2), 8→10 (+2), 10→14 (+4?), 14→16 (+2), 16→20 (+4?). Actually pattern might be: +2, ×2, +2, +4? Let's recalc: 2(+2=4), 4(×2=8), 8(+2=10), 10(+4=14), 14(+2=16), 16(+4=20). So answer is 20"
+            },
+            {
+                type: "mixed_two_step",
+                question: "Complete: 3, 6, 12, 15, 30, 33, ___",
+                options: ["66", "36", "60", "39"],
+                answer: "A",
+                explanation: "Pattern: Multiply by 2, then add 3. 33 × 2 = 66"
+            },
+            {
+                type: "mixed_two_step",
+                question: "What is next: 5, 10, 13, 26, 29, ___?",
+                options: ["58", "32", "52", "34"],
+                answer: "A",
+                explanation: "Pattern: Multiply by 2, then add 3. 29 × 2 = 58"
+            },
+            {
+                type: "mixed_two_step",
+                question: "Continue: 7, 14, 17, 34, 37, ___",
+                options: ["74", "40", "70", "44"],
+                answer: "A",
+                explanation: "Pattern: Multiply by 2, then add 3. 37 × 2 = 74"
+            },
+            {
+                type: "mixed_two_step",
+                question: "What comes after: 4, 8, 11, 22, 25, ___?",
+                options: ["50", "28", "44", "30"],
+                answer: "A",
+                explanation: "Pattern: Multiply by 2, then add 3. 25 × 2 = 50"
+            },
+
+            // Growing Patterns - Different increments (86-95)
+            {
+                type: "growing",
+                question: "What is the pattern: 2, 5, 10, 17, 26, ___?",
+                options: ["37", "35", "30", "40"],
+                answer: "A",
+                explanation: "Pattern: Add 3, then 5, then 7, then 9 (odd numbers). 26 + 11 = 37"
+            },
+            {
+                type: "growing",
+                question: "Complete: 1, 4, 9, 16, 25, ___",
+                options: ["36", "30", "49", "35"],
+                answer: "A",
+                explanation: "Pattern: Square numbers (1², 2², 3², 4², 5²). Next is 6² = 36"
+            },
+            {
+                type: "growing",
+                question: "What comes next: 3, 6, 11, 18, 27, ___?",
+                options: ["38", "36", "30", "42"],
+                answer: "A",
+                explanation: "Pattern: Add 3, then 5, then 7, then 9. 27 + 11 = 38"
+            },
+            {
+                type: "growing",
+                question: "Continue: 5, 8, 13, 20, 29, ___",
+                options: ["40", "38", "35", "42"],
+                answer: "A",
+                explanation: "Pattern: Add 3, then 5, then 7, then 9. 29 + 11 = 40"
+            },
+            {
+                type: "growing",
+                question: "What is missing: 10, 13, 18, 25, 34, ___?",
+                options: ["45", "40", "38", "50"],
+                answer: "A",
+                explanation: "Pattern: Add 3, then 5, then 7, then 9. 34 + 11 = 45"
+            },
+
+            // Pattern Rules & Function Tables (96-100)
+            {
+                type: "rules",
+                question: "If pattern rule is 'add 7', what comes after 42?",
+                options: ["49", "35", "50", "45"],
+                answer: "A",
+                explanation: "Pattern: Start at any number, add 7. 42 + 7 = 49"
+            },
+            {
+                type: "rules",
+                question: "Rule: 'multiply by 3'. If first number is 4, what is third?",
+                options: ["36", "12", "27", "48"],
+                answer: "A",
+                explanation: "Sequence: 4, 12 (4×3), 36 (12×3). Third number is 36"
+            },
+            {
+                type: "rules",
+                question: "Rule: 'subtract 9'. If first is 100, what is fourth?",
+                options: ["73", "82", "91", "64"],
+                answer: "A",
+                explanation: "Sequence: 100, 91, 82, 73. Fourth is 73"
+            },
+            {
+                type: "rules",
+                question: "What is the rule: 2, 6, 18, 54?",
+                options: ["Multiply by 3", "Add 4", "Multiply by 2", "Add 12"],
+                answer: "A",
+                explanation: "Each number is multiplied by 3 to get the next"
+            },
+            {
+                type: "rules",
+                question: "Find the rule: 80, 40, 20, 10",
+                options: ["Divide by 2", "Subtract 40", "Divide by 4", "Subtract 20"],
+                answer: "A",
+                explanation: "Each number is divided by 2 to get the next"
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent pattern recognition!",
+            "Fantastic sequence skills!",
+            "Great job! You're a pattern detective!",
+            "Amazing! Your pattern finding skills are impressive!",
+            "Well done! Perfect pattern prediction!",
+            "You're a pattern prediction champion!",
+            "Perfect! You understand sequence rules!",
+            "Outstanding mathematical thinking!",
+            "Brilliant! You think like a mathematician!",
+            "You're on fire! Great pattern insight!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const mathFact = document.getElementById('mathFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Generate pattern sequence
+        function generatePattern(type) {
+            let pattern = [];
+            let start = Math.floor(Math.random() * 20) + 1;
+            
+            switch(type) {
+                case "increasing_add":
+                    const add = Math.floor(Math.random() * 5) + 2;
+                    for (let i = 0; i < 6; i++) {
+                        pattern.push(start + (i * add));
+                    }
+                    break;
+                    
+                case "decreasing_sub":
+                    const sub = Math.floor(Math.random() * 5) + 2;
+                    start = Math.floor(Math.random() * 50) + 50;
+                    for (let i = 0; i < 6; i++) {
+                        pattern.push(start - (i * sub));
+                    }
+                    break;
+                    
+                case "multiplication":
+                    start = Math.floor(Math.random() * 5) + 2;
+                    const mult = Math.random() > 0.5 ? 2 : 3;
+                    for (let i = 0; i < 6; i++) {
+                        pattern.push(start * Math.pow(mult, i));
+                    }
+                    break;
+                    
+                case "division":
+                    start = Math.floor(Math.random() * 3) + 1;
+                    const divisor = Math.random() > 0.5 ? 2 : 3;
+                    const power = Math.floor(Math.random() * 3) + 3;
+                    for (let i = 0; i < 6; i++) {
+                        pattern.push(start * Math.pow(divisor, power - i));
+                    }
+                    break;
+                    
+                case "mixed_two_step":
+                    start = Math.floor(Math.random() * 10) + 1;
+                    for (let i = 0; i < 7; i++) {
+                        if (i % 2 === 0) {
+                            pattern.push(start);
+                            start *= 2;
+                        } else {
+                            pattern.push(start);
+                            start += 3;
+                        }
+                    }
+                    break;
+                    
+                case "growing":
+                    start = Math.floor(Math.random() * 10) + 1;
+                    let increment = 3;
+                    pattern.push(start);
+                    for (let i = 1; i < 7; i++) {
+                        pattern.push(pattern[i-1] + increment);
+                        increment += 2;
+                    }
+                    break;
+                    
+                default:
+                    pattern = [2, 4, 6, 8, 10, 12];
+            }
+            
+            return pattern;
+        }
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade5Patterns');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade5Patterns', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade5Patterns_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade5Patterns_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a pattern recognition expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent sequence skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a pattern master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review pattern concepts and try again!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Pattern skills grow with practice!";
+            }
+        }
+
+        // Create math fact display
+        function createMathFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'math-fact';
+            
+            const facts = [
+                "The Fibonacci sequence (0,1,1,2,3,5,8,13...) appears in nature! Count the spirals on a pineapple or sunflower!",
+                "Patterns in numbers were studied by ancient mathematicians in Egypt, Greece, and India over 2,000 years ago!",
+                "The number 142857 has a magical pattern: multiply it by 1,2,3,4,5,6 and the digits just rotate!",
+                "Prime numbers have patterns too! Except for 2 and 3, all primes are either 1 more or 1 less than a multiple of 6!",
+                "The golden ratio (about 1.618) creates a special pattern found in art, architecture, and even in our bodies!",
+                "Pascal's Triangle shows amazing number patterns! Each number is the sum of the two numbers above it!",
+                "Magic squares have patterns where all rows, columns, and diagonals add to the same number!",
+                "Patterns help computers understand music, images, and even human speech!"
+            ];
+            
+            factDiv.innerHTML = `<strong>Math Fact:</strong> ${facts[Math.floor(Math.random() * facts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "increasing_add": "📈",
+                "decreasing_sub": "📉",
+                "multiplication": "✖️",
+                "division": "➗",
+                "mixed_two_step": "🔄",
+                "growing": "🌱",
+                "rules": "📋"
+            };
+            
+            let conceptName = "Number Patterns";
+            let conceptIcon = "🔢";
+            
+            if (question.type.includes("increasing")) {
+                conceptName = "Increasing Patterns";
+                conceptIcon = conceptIcons.increasing_add;
+            } else if (question.type.includes("decreasing")) {
+                conceptName = "Decreasing Patterns";
+                conceptIcon = conceptIcons.decreasing_sub;
+            } else if (question.type.includes("multiplication")) {
+                conceptName = "Multiplication Patterns";
+                conceptIcon = conceptIcons.multiplication;
+            } else if (question.type.includes("division")) {
+                conceptName = "Division Patterns";
+                conceptIcon = conceptIcons.division;
+            } else if (question.type.includes("mixed")) {
+                conceptName = "Two-Step Patterns";
+                conceptIcon = conceptIcons.mixed_two_step;
+            } else if (question.type.includes("growing")) {
+                conceptName = "Growing Patterns";
+                conceptIcon = conceptIcons.growing;
+            } else if (question.type.includes("rules")) {
+                conceptName = "Pattern Rules";
+                conceptIcon = conceptIcons.rules;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("increasing")) {
+                label.textContent = "Numbers get larger by adding the same amount";
+            } else if (question.type.includes("decreasing")) {
+                label.textContent = "Numbers get smaller by subtracting the same amount";
+            } else if (question.type.includes("multiplication")) {
+                label.textContent = "Multiply by the same number each time";
+            } else if (question.type.includes("division")) {
+                label.textContent = "Divide by the same number each time";
+            } else if (question.type.includes("mixed")) {
+                label.textContent = "Two different operations alternating";
+            } else if (question.type.includes("growing")) {
+                label.textContent = "Pattern with increasing differences";
+            } else {
+                label.textContent = "Identify the rule that creates the pattern";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create pattern visualization
+        function createPatternVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const pattern = generatePattern(question.type);
+            
+            // Create a sequence with one missing number
+            const displayPattern = [...pattern];
+            const missingIndex = Math.floor(Math.random() * (displayPattern.length - 3)) + 2;
+            const missingValue = displayPattern[missingIndex];
+            displayPattern[missingIndex] = "?";
+            
+            if (question.type.includes("increasing_add")) {
+                // Show addition pattern
+                const difference = pattern[1] - pattern[0];
+                
+                vizDiv.innerHTML = `
+                    <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-purple);">Increasing Pattern: Add ${difference}</h3>
+                    
+                    <div class="pattern-sequence">
+                        ${displayPattern.map((num, index) => `
+                            <div class="pattern-number ${num === '?' ? 'missing' : 'pattern-flow'}" 
+                                 style="animation-delay: ${index * 0.1}s">
+                                ${num}
+                                ${index > 0 && num !== '?' && displayPattern[index-1] !== '?' ? 
+                                  `<div style="font-size: 0.7rem; color: var(--text-secondary);">+${difference}</div>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="pattern-number-line">
+                        <div class="pattern-line-track"></div>
+                        ${pattern.slice(0, 6).map((num, index) => {
+                            const position = 20 + (index * (80 / 5));
+                            return `
+                                <div class="pattern-point" style="left: ${position}%;">
+                                    ${num}
+                                </div>
+                                ${index < 5 ? `
+                                    <div class="pattern-line" style="left: ${position}%; width: ${80/5}%;"></div>
+                                ` : ''}
+                            `;
+                        }).join('')}
+                    </div>
+                    
+                    <div class="pattern-rules">
+                        <div class="rule-item">
+                            <div class="rule-title">Pattern Rule:</div>
+                            <div>Start at ${pattern[0]}, add ${difference} each time</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-title">To find missing number:</div>
+                            <div>Take previous number (${pattern[missingIndex-1]}) and add ${difference}</div>
+                            <div>${pattern[missingIndex-1]} + ${difference} = ${missingValue}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="pattern-table">
+                        <div class="table-cell header">Position</div>
+                        <div class="table-cell header">1st</div>
+                        <div class="table-cell header">2nd</div>
+                        <div class="table-cell header">3rd</div>
+                        <div class="table-cell header">4th</div>
+                        <div class="table-cell header">5th</div>
+                        <div class="table-cell header">6th</div>
+                        
+                        <div class="table-cell">Number</div>
+                        ${pattern.slice(0, 6).map((num, index) => `
+                            <div class="table-cell ${index === missingIndex ? 'highlight' : ''}">
+                                ${num}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+            } else if (question.type.includes("decreasing_sub")) {
+                // Show subtraction pattern
+                const difference = pattern[0] - pattern[1];
+                
+                vizDiv.innerHTML = `
+                    <h3 style="text-align: center; margin-bottom: 20px; color: var(--secondary-pink);">Decreasing Pattern: Subtract ${difference}</h3>
+                    
+                    <div class="pattern-sequence">
+                        ${displayPattern.map((num, index) => `
+                            <div class="pattern-number ${num === '?' ? 'missing' : 'pattern-flow'}" 
+                                 style="animation-delay: ${index * 0.1}s">
+                                ${num}
+                                ${index > 0 && num !== '?' && displayPattern[index-1] !== '?' ? 
+                                  `<div style="font-size: 0.7rem; color: var(--text-secondary);">-${difference}</div>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="growing-pattern">
+                        ${pattern.slice(0, 6).map((num, index) => {
+                            const height = 20 + (num / Math.max(...pattern) * 100);
+                            return `
+                                <div class="pattern-block" style="height: ${height}px; animation-delay: ${index * 0.1}s;">
+                                    ${num}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    
+                    <div class="pattern-rules">
+                        <div class="rule-item">
+                            <div class="rule-title">Pattern Rule:</div>
+                            <div>Start at ${pattern[0]}, subtract ${difference} each time</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-title">To find missing number:</div>
+                            <div>Take previous number (${pattern[missingIndex-1]}) and subtract ${difference}</div>
+                            <div>${pattern[missingIndex-1]} - ${difference} = ${missingValue}</div>
+                        </div>
+                    </div>
+                `;
+                
+            } else if (question.type.includes("multiplication")) {
+                // Show multiplication pattern
+                const multiplier = pattern[1] / pattern[0];
+                
+                vizDiv.innerHTML = `
+                    <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-teal);">Multiplication Pattern: Multiply by ${multiplier}</h3>
+                    
+                    <div class="pattern-sequence">
+                        ${displayPattern.map((num, index) => `
+                            <div class="pattern-number ${num === '?' ? 'missing' : 'pattern-flow'}" 
+                                 style="animation-delay: ${index * 0.1}s">
+                                ${num}
+                                ${index > 0 && num !== '?' && displayPattern[index-1] !== '?' ? 
+                                  `<div style="font-size: 0.7rem; color: var(--text-secondary);">×${multiplier}</div>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="function-machine">
+                        <div class="machine-input">${pattern[0]}</div>
+                        <div class="machine-operator">→</div>
+                        <div class="machine-box">× ${multiplier}</div>
+                        <div class="machine-operator">→</div>
+                        <div class="machine-output">${pattern[1]}</div>
+                    </div>
+                    
+                    <div class="pattern-rules">
+                        <div class="rule-item">
+                            <div class="rule-title">Pattern Rule:</div>
+                            <div>Start at ${pattern[0]}, multiply by ${multiplier} each time</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-title">To find missing number:</div>
+                            <div>Take previous number (${pattern[missingIndex-1]}) and multiply by ${multiplier}</div>
+                            <div>${pattern[missingIndex-1]} × ${multiplier} = ${missingValue}</div>
+                        </div>
+                    </div>
+                `;
+                
+            } else if (question.type.includes("mixed_two_step")) {
+                // Show two-step pattern
+                vizDiv.innerHTML = `
+                    <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-amber);">Two-Step Pattern</h3>
+                    
+                    <div class="pattern-sequence">
+                        ${displayPattern.map((num, index) => `
+                            <div class="pattern-number ${num === '?' ? 'missing' : 'pattern-flow'}" 
+                                 style="animation-delay: ${index * 0.1}s">
+                                ${num}
+                                ${index > 0 && num !== '?' && displayPattern[index-1] !== '?' ? 
+                                  `<div style="font-size: 0.7rem; color: var(--text-secondary);">
+                                    ${index % 2 === 1 ? '×2' : '+3'}
+                                  </div>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="pattern-rules">
+                        <div class="rule-item">
+                            <div class="rule-title">Pattern Rule:</div>
+                            <div>Multiply by 2, then add 3, repeat</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-title">Pattern Steps:</div>
+                            <div>${pattern[0]} → ×2 → ${pattern[1]} → +3 → ${pattern[2]} → ×2 → ${pattern[3]} → +3 → ${pattern[4]} ...</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-title">To find missing number:</div>
+                            <div>Look at position in pattern and apply correct operation</div>
+                        </div>
+                    </div>
+                `;
+                
+            } else {
+                // General pattern display
+                vizDiv.innerHTML = `
+                    <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-lime);">Number Pattern</h3>
+                    
+                    <div class="pattern-sequence">
+                        ${displayPattern.map((num, index) => `
+                            <div class="pattern-number ${num === '?' ? 'missing pattern-highlight' : 'pattern-slide'}" 
+                                 style="animation-delay: ${index * 0.1}s">
+                                ${num}
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="pattern-table">
+                        <div class="table-cell header">Step</div>
+                        <div class="table-cell header">1</div>
+                        <div class="table-cell header">2</div>
+                        <div class="table-cell header">3</div>
+                        <div class="table-cell header">4</div>
+                        <div class="table-cell header">5</div>
+                        <div class="table-cell header">6</div>
+                        
+                        <div class="table-cell">Value</div>
+                        ${pattern.slice(0, 6).map((num, index) => `
+                            <div class="table-cell ${index === missingIndex ? 'highlight' : ''}">
+                                ${num}
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="pattern-rules">
+                        <div class="rule-item">
+                            <div class="rule-title">How to Find Patterns:</div>
+                            <div>1. Look at differences between numbers</div>
+                            <div>2. Check if multiplying or dividing</div>
+                            <div>3. Look for repeating operations</div>
+                            <div>4. Test your rule on all numbers</div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return vizDiv;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            mathFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            mathFact.appendChild(createMathFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createPatternVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

@@ -1,0 +1,2398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 English - Making Inferences & Comparing Texts | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for English/Literature Theme */
+        :root {
+            --primary-indigo: #3F51B5;
+            --secondary-teal: #009688;
+            --accent-amber: #FFC107;
+            --accent-deep-orange: #FF5722;
+            --accent-purple: #9C27B0;
+            --accent-green: #4CAF50;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(63, 81, 181, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-indigo), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(63, 81, 181, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-indigo);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-indigo);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-indigo);
+            box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-indigo);
+            color: white;
+            box-shadow: 0 4px 15px rgba(63, 81, 181, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #303F9F;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(63, 81, 181, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-teal);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 150, 136, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #00796B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 150, 136, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-indigo);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-indigo), var(--secondary-teal));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(63, 81, 181, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .english-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-amber);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* New Compact Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-indigo), var(--accent-purple));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(63, 81, 181, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-indigo);
+            background: rgba(63, 81, 181, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(63, 81, 181, 0.1);
+            border-color: var(--primary-indigo);
+            color: var(--primary-indigo);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-teal);
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-indigo);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(63, 81, 181, 0.1);
+            border-left: 5px solid var(--primary-indigo);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-indigo);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-indigo);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+        }
+
+        /* Text Passage Display */
+        .passage-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid var(--secondary-teal);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .passage-title {
+            color: var(--secondary-teal);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .passage-text {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .passage-clue {
+            background: rgba(0, 150, 136, 0.1);
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+            border-left: 3px solid var(--secondary-teal);
+            font-style: italic;
+        }
+
+        /* Inference Process Display */
+        .inference-process {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .inference-process {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .process-step {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .process-step.active {
+            border-color: var(--primary-indigo);
+            background: rgba(63, 81, 181, 0.1);
+        }
+
+        .step-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: var(--primary-indigo);
+            margin-bottom: 8px;
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Clue Highlight Display */
+        .clue-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .clue-item {
+            background: var(--dark-card);
+            padding: 10px 15px;
+            border-radius: 6px;
+            border: 2px solid var(--accent-amber);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .clue-icon {
+            color: var(--accent-amber);
+            font-weight: bold;
+        }
+
+        .clue-text {
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        /* Text Comparison Display */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .text-column {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid var(--accent-deep-orange);
+        }
+
+        .text-column.left {
+            border-color: var(--primary-indigo);
+        }
+
+        .text-column.right {
+            border-color: var(--secondary-teal);
+        }
+
+        .column-title {
+            color: var(--accent-deep-orange);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .text-column.left .column-title {
+            color: var(--primary-indigo);
+        }
+
+        .text-column.right .column-title {
+            color: var(--secondary-teal);
+        }
+
+        /* Evidence Tracker */
+        .evidence-tracker {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-green);
+        }
+
+        .tracker-title {
+            color: var(--accent-green);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .evidence-list {
+            list-style-type: none;
+        }
+
+        .evidence-item {
+            padding: 10px;
+            margin-bottom: 8px;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 6px;
+            border-left: 3px solid var(--accent-green);
+        }
+
+        /* Venn Diagram Display */
+        .venn-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            position: relative;
+            height: 200px;
+        }
+
+        .venn-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            position: absolute;
+            opacity: 0.3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .venn-left {
+            background: var(--primary-indigo);
+            left: 25%;
+            transform: translateX(-50%);
+        }
+
+        .venn-right {
+            background: var(--secondary-teal);
+            right: 25%;
+            transform: translateX(50%);
+        }
+
+        .venn-intersection {
+            background: var(--accent-purple);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            opacity: 0.7;
+        }
+
+        .venn-label {
+            position: absolute;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .venn-left-label {
+            left: 15%;
+            top: 50%;
+            color: var(--primary-indigo);
+        }
+
+        .venn-right-label {
+            right: 15%;
+            top: 50%;
+            color: var(--secondary-teal);
+        }
+
+        .venn-both-label {
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--accent-purple);
+        }
+
+        /* Reading Strategy Display */
+        .strategy-display {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .strategy-display {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .strategy-card {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .strategy-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent-amber);
+        }
+
+        .strategy-name {
+            font-weight: bold;
+            color: var(--primary-indigo);
+            margin-bottom: 8px;
+        }
+
+        .strategy-tip {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Text Analysis Steps */
+        .analysis-steps {
+            margin: 20px 0;
+        }
+
+        .analysis-step {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--accent-amber);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background: var(--accent-amber);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-indigo), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-indigo), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-indigo);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .inference-process {
+                grid-template-columns: 1fr;
+            }
+            
+            .strategy-display {
+                grid-template-columns: 1fr;
+            }
+            
+            .venn-diagram {
+                height: 150px;
+            }
+            
+            .venn-circle {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes clueReveal {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .clue-reveal {
+            animation: clueReveal 0.5s ease forwards;
+        }
+        
+        @keyframes textHighlight {
+            0%, 100% { background-color: rgba(63, 81, 181, 0.1); }
+            50% { background-color: rgba(63, 81, 181, 0.3); }
+        }
+        
+        .text-highlight {
+            animation: textHighlight 1s ease-in-out infinite;
+        }
+        
+        @keyframes vennPulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.05); opacity: 0.5; }
+        }
+        
+        .venn-pulse {
+            animation: vennPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes strategyGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 193, 7, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(255, 193, 7, 0.6); }
+        }
+        
+        .strategy-glow {
+            animation: strategyGlow 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1456513080510-34499c43696c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1524578271613-d550eacf6090?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 5 English</h1>
+            <p class="welcome-subtitle">Master reading comprehension! Learn to make inferences using text clues, compare different texts, analyze characters and settings, and develop critical thinking skills for deeper understanding!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">📚🔍</span>
+                <span class="topic-name">Making Inferences & Comparing Texts</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Reading Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 120</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0.83%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- English fact display -->
+                <div id="englishFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Reading Comprehension Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 120+ Grade 5 English questions
+        const questions = [
+            // Making Inferences - Character Feelings (1-20)
+            {
+                type: "inference_character",
+                question: "Sarah slammed her bedroom door, threw her backpack on the floor, and didn't come out for dinner. What can you infer about how Sarah feels?",
+                options: ["She is angry or upset", "She is very hungry", "She is studying hard", "She is excited about something"],
+                answer: "A",
+                explanation: "Slamming doors and not eating suggests anger or upset feelings"
+            },
+            {
+                type: "inference_character",
+                question: "Tom's eyes widened, he jumped up and down, and shouted, 'I can't believe it!' What emotion is Tom likely feeling?",
+                options: ["Excitement or surprise", "Sadness", "Anger", "Boredom"],
+                answer: "A",
+                explanation: "Widened eyes, jumping, and excited shouting indicate excitement"
+            },
+            {
+                type: "inference_character",
+                question: "Maria bit her lip, looked at the ground, and whispered her answer. What can you infer about Maria?",
+                options: ["She is nervous or shy", "She is confident", "She is angry", "She is tired"],
+                answer: "A",
+                explanation: "Biting lip, avoiding eye contact, and whispering suggest nervousness"
+            },
+            {
+                type: "inference_character",
+                question: "David hugged his knees to his chest and wiped his eyes with his sleeve. How is David probably feeling?",
+                options: ["Sad or crying", "Excited", "Angry", "Hungry"],
+                answer: "A",
+                explanation: "Curling up and wiping eyes suggests sadness or crying"
+            },
+            {
+                type: "inference_character",
+                question: "Emma tapped her foot, checked her watch every minute, and sighed loudly. What can you infer?",
+                options: ["She is impatient or bored", "She is excited", "She is scared", "She is confused"],
+                answer: "A",
+                explanation: "Foot tapping, watch checking, and sighing show impatience"
+            },
+            {
+                type: "inference_character",
+                question: "When the teacher announced the test, Jake's face turned pale and his hands shook. What emotion is Jake feeling?",
+                options: ["Fear or anxiety", "Excitement", "Anger", "Happiness"],
+                answer: "A",
+                explanation: "Pale face and shaking hands indicate fear or anxiety"
+            },
+            {
+                type: "inference_character",
+                question: "After winning the game, the team members high-fived each other with huge smiles. What can you infer?",
+                options: ["They are happy and proud", "They are disappointed", "They are angry", "They are tired"],
+                answer: "A",
+                explanation: "High-fives and big smiles show happiness and pride"
+            },
+            {
+                type: "inference_character",
+                question: "When her friend moved away, Lily stopped playing her favorite games and spent more time alone. What can you infer about Lily?",
+                options: ["She is lonely or sad", "She is angry at her friend", "She is very busy", "She found new friends"],
+                answer: "A",
+                explanation: "Withdrawing from activities suggests loneliness or sadness"
+            },
+            {
+                type: "inference_character",
+                question: "During the scary movie, Sam covered his eyes and asked to leave early. What does this suggest?",
+                options: ["Sam is frightened", "Sam is bored", "Sam is hungry", "Sam is angry"],
+                answer: "A",
+                explanation: "Covering eyes and wanting to leave shows fear"
+            },
+            {
+                type: "inference_character",
+                question: "When the puppy chewed his shoe, Mark sighed but then picked up the puppy and petted it. What does this show about Mark?",
+                options: ["He is patient and forgiving", "He is very angry", "He doesn't like the puppy", "He is scared of dogs"],
+                answer: "A",
+                explanation: "Sighing but then being gentle shows patience and forgiveness"
+            },
+
+            // Making Inferences - Setting (21-35)
+            {
+                type: "inference_setting",
+                question: "The air was salty, seagulls cried overhead, and waves crashed against rocks. Where is this likely taking place?",
+                options: ["At the beach or ocean", "In a forest", "In a city", "On a farm"],
+                answer: "A",
+                explanation: "Salty air, seagulls, and waves are beach/ocean clues"
+            },
+            {
+                type: "inference_setting",
+                question: "Leaves rustled, birds chirped, and the path was covered with pine needles. Where is this?",
+                options: ["In a forest", "In a desert", "In a school", "In a house"],
+                answer: "A",
+                explanation: "Leaves, birds, and pine needles indicate a forest"
+            },
+            {
+                type: "inference_setting",
+                question: "The bell rang, lockers slammed, and students hurried to their next class. Where is this?",
+                options: ["In a school", "In an office", "In a mall", "In a hospital"],
+                answer: "A",
+                explanation: "School bells, lockers, and students indicate a school"
+            },
+            {
+                type: "inference_setting",
+                question: "Sizzling sounds came from the kitchen, delicious smells filled the air, and pots clattered. Where is this?",
+                options: ["In a restaurant or kitchen", "In a library", "In a garden", "In a garage"],
+                answer: "A",
+                explanation: "Sizzling, food smells, and pots indicate a kitchen"
+            },
+            {
+                type: "inference_setting",
+                question: "Books lined the walls, people spoke in whispers, and it was very quiet. Where is this?",
+                options: ["In a library", "In a playground", "In a market", "In a factory"],
+                answer: "A",
+                explanation: "Books, whispering, and quiet indicate a library"
+            },
+
+            // Making Inferences - Plot/Events (36-50)
+            {
+                type: "inference_plot",
+                question: "The sky darkened, wind howled, and people rushed to bring things inside. What is probably going to happen?",
+                options: ["A storm is coming", "It's getting dark for bedtime", "A party is starting", "School is ending"],
+                answer: "A",
+                explanation: "Dark sky, wind, and rushing indicate an approaching storm"
+            },
+            {
+                type: "inference_plot",
+                question: "The cake was decorated, balloons filled the room, and presents were piled on a table. What event is this?",
+                options: ["A birthday party", "A graduation", "A wedding", "A regular dinner"],
+                answer: "A",
+                explanation: "Cake, balloons, and presents indicate a birthday"
+            },
+            {
+                type: "inference_plot",
+                question: "Maya packed her suitcase, checked her passport, and said goodbye to her pet. What is she probably doing?",
+                options: ["Going on a trip", "Moving to a new house", "Going to school", "Cleaning her room"],
+                answer: "A",
+                explanation: "Suitcase, passport, and goodbyes suggest travel"
+            },
+            {
+                type: "inference_plot",
+                question: "Lights flashed, sirens wailed, and cars pulled over to the side. What is happening?",
+                options: ["An emergency vehicle is passing", "A parade is happening", "A traffic light is broken", "People are racing"],
+                answer: "A",
+                explanation: "Flashing lights and sirens indicate emergency vehicles"
+            },
+            {
+                type: "inference_plot",
+                question: "The ground shook, pictures fell off walls, and people ran outside. What is occurring?",
+                options: ["An earthquake", "A thunderstorm", "A concert", "Construction work"],
+                answer: "A",
+                explanation: "Shaking ground and falling objects suggest an earthquake"
+            },
+
+            // Making Inferences - Author's Purpose (51-65)
+            {
+                type: "inference_purpose",
+                question: "A story describes a polluted river and dying fish. What might the author want readers to do?",
+                options: ["Care about the environment", "Go fishing", "Learn about fish", "Build a bridge"],
+                answer: "A",
+                explanation: "Describing pollution suggests environmental concern"
+            },
+            {
+                type: "inference_purpose",
+                question: "An article explains how to make a simple bird feeder. What is the author's main purpose?",
+                options: ["To teach or instruct", "To entertain", "To persuade", "To describe"],
+                answer: "A",
+                explanation: "Explaining how to make something is instructional"
+            },
+            {
+                type: "inference_purpose",
+                question: "A funny story about a silly dog makes readers laugh. What is the author's purpose?",
+                options: ["To entertain", "To inform", "To persuade", "To describe"],
+                answer: "A",
+                explanation: "Making readers laugh is entertainment"
+            },
+            {
+                type: "inference_purpose",
+                question: "A passage gives facts about how plants grow. What is the author's purpose?",
+                options: ["To inform or teach", "To entertain", "To persuade", "To tell a story"],
+                answer: "A",
+                explanation: "Providing facts is informational"
+            },
+            {
+                type: "inference_purpose",
+                question: "An advertisement says 'Buy now while supplies last!' What is the purpose?",
+                options: ["To persuade", "To inform", "To entertain", "To describe"],
+                answer: "A",
+                explanation: "Encouraging buying is persuasive"
+            },
+
+            // Comparing Texts - Similarities (66-85)
+            {
+                type: "compare_similarities",
+                question: "Both stories have a main character who learns an important lesson. What are they comparing?",
+                options: ["Themes or messages", "Settings", "Authors", "Book lengths"],
+                answer: "A",
+                explanation: "Learning lessons relates to themes or messages"
+            },
+            {
+                type: "compare_similarities",
+                question: "Story A and Story B both take place on a farm. What do they have in common?",
+                options: ["Setting", "Characters", "Plot", "Moral"],
+                answer: "A",
+                explanation: "Where stories happen is the setting"
+            },
+            {
+                type: "compare_similarities",
+                question: "Both articles explain how to care for a pet. What is similar about them?",
+                options: ["Purpose or topic", "Length", "Author", "Title"],
+                answer: "A",
+                explanation: "Explaining pet care shows similar purpose/topic"
+            },
+            {
+                type: "compare_similarities",
+                question: "Poem 1 and Poem 2 both use rhyming words at the end of lines. What feature is similar?",
+                options: ["Poetic structure", "Theme", "Length", "Mood"],
+                answer: "A",
+                explanation: "Rhyming patterns are part of poetic structure"
+            },
+            {
+                type: "compare_similarities",
+                question: "Both stories show characters being honest even when it's difficult. What is similar?",
+                options: ["Character traits/values", "Settings", "Endings", "Authors"],
+                answer: "A",
+                explanation: "Character behavior shows traits/values"
+            },
+            {
+                type: "compare_similarities",
+                question: "Article A and Article B both provide historical facts about ancient Egypt. What do they share?",
+                options: ["Topic and purpose", "Author's opinion", "Fictional elements", "Poetic language"],
+                answer: "A",
+                explanation: "Same topic and informational purpose"
+            },
+            {
+                type: "compare_similarities",
+                question: "Both passages describe a beautiful sunset over the ocean. What element is similar?",
+                options: ["Descriptive imagery", "Character development", "Problem solving", "Dialogue"],
+                answer: "A",
+                explanation: "Vivid descriptions are imagery"
+            },
+            {
+                type: "compare_similarities",
+                question: "Story X and Story Y both have surprise endings. What do they have in common?",
+                options: ["Plot structure", "Character names", "Settings", "Moral lessons"],
+                answer: "A",
+                explanation: "Ending type relates to plot structure"
+            },
+            {
+                type: "compare_similarities",
+                question: "Both texts use statistics and expert quotes. What feature do they share?",
+                options: ["Types of evidence", "Fictional elements", "Poetic devices", "Character dialogue"],
+                answer: "A",
+                explanation: "Statistics and quotes are types of evidence"
+            },
+            {
+                type: "compare_similarities",
+                question: "The two biographies both focus on the person's childhood. What aspect is similar?",
+                options: ["Focus or perspective", "Writing style", "Publication date", "Book cover"],
+                answer: "A",
+                explanation: "Focusing on childhood is perspective"
+            },
+
+            // Comparing Texts - Differences (86-105)
+            {
+                type: "compare_differences",
+                question: "Story A is fiction with imaginary characters, while Story B is about real historical events. How are they different?",
+                options: ["Genre (fiction vs nonfiction)", "Length", "Popularity", "Title"],
+                answer: "A",
+                explanation: "Fiction vs nonfiction is genre difference"
+            },
+            {
+                type: "compare_differences",
+                question: "Poem 1 has a happy, cheerful mood, while Poem 2 is sad and serious. What differs?",
+                options: ["Tone or mood", "Rhyme scheme", "Number of stanzas", "Author's age"],
+                answer: "A",
+                explanation: "Happy vs sad is tone/mood difference"
+            },
+            {
+                type: "compare_differences",
+                question: "Article A tries to persuade readers, while Article B just provides facts. What's different?",
+                options: ["Author's purpose", "Topic", "Length", "Publication date"],
+                answer: "A",
+                explanation: "Persuade vs inform is purpose difference"
+            },
+            {
+                type: "compare_differences",
+                question: "Book 1 uses simple words for young readers, while Book 2 has complex vocabulary. What differs?",
+                options: ["Reading level/audience", "Genre", "Setting", "Plot"],
+                answer: "A",
+                explanation: "Simple vs complex vocabulary targets different audiences"
+            },
+            {
+                type: "compare_differences",
+                question: "Passage A is written in first person ('I'), while Passage B uses third person ('he/she'). What differs?",
+                options: ["Point of view", "Tense", "Mood", "Theme"],
+                answer: "A",
+                explanation: "First vs third person is point of view difference"
+            },
+            {
+                type: "compare_differences",
+                question: "Story 1 has lots of action and adventure, while Story 2 focuses on character feelings. What differs?",
+                options: ["Focus or emphasis", "Setting", "Length", "Author"],
+                answer: "A",
+                explanation: "Action vs feelings shows different focus"
+            },
+            {
+                type: "compare_differences",
+                question: "Text A uses formal, academic language, while Text B uses casual, conversational language. What's different?",
+                options: ["Writing style/tone", "Topic", "Purpose", "Publication"],
+                answer: "A",
+                explanation: "Formal vs casual is style/tone difference"
+            },
+            {
+                type: "compare_differences",
+                question: "Article X includes the author's opinions, while Article Y only presents facts. How do they differ?",
+                options: ["Objectivity (opinion vs fact)", "Length", "Topic", "Readership"],
+                answer: "A",
+                explanation: "Opinions vs facts is objectivity difference"
+            },
+            {
+                type: "compare_differences",
+                question: "Passage 1 describes events in chronological order, while Passage 2 uses flashbacks. What differs?",
+                options: ["Organization/structure", "Characters", "Setting", "Theme"],
+                answer: "A",
+                explanation: "Chronological vs flashback is structural difference"
+            },
+            {
+                type: "compare_differences",
+                question: "Story A has a happy ending, while Story B ends sadly. What element differs?",
+                options: ["Resolution/ending", "Beginning", "Characters", "Setting"],
+                answer: "A",
+                explanation: "Happy vs sad ending is resolution difference"
+            },
+
+            // Comparing Texts - Evidence/Support (106-120)
+            {
+                type: "compare_evidence",
+                question: "Both authors mention that recycling helps the environment. What type of evidence is this?",
+                options: ["Supporting detail", "Main idea", "Conclusion", "Introduction"],
+                answer: "A",
+                explanation: "Specific mentions that support main points are supporting details"
+            },
+            {
+                type: "compare_evidence",
+                question: "Article A uses statistics about tree planting, while Article B uses personal stories. How do they support their points differently?",
+                options: ["Types of evidence", "Main ideas", "Conclusions", "Titles"],
+                answer: "A",
+                explanation: "Statistics vs stories are different evidence types"
+            },
+            {
+                type: "compare_evidence",
+                question: "Both passages include quotes from experts. What purpose do these serve?",
+                options: ["Add credibility/support", "Make it longer", "Make it fictional", "Change the topic"],
+                answer: "A",
+                explanation: "Expert quotes add credibility and support arguments"
+            },
+            {
+                type: "compare_evidence",
+                question: "Text 1 uses examples from history, while Text 2 uses current events. How do they differ in evidence?",
+                options: ["Time period of examples", "Amount of evidence", "Type of sources", "Author's credibility"],
+                answer: "A",
+                explanation: "Historical vs current examples differ in time period"
+            },
+            {
+                type: "compare_evidence",
+                question: "Passage A includes photographs as evidence, while Passage B uses diagrams. What differs?",
+                options: ["Visual evidence type", "Written evidence", "Main argument", "Conclusion"],
+                answer: "A",
+                explanation: "Photographs vs diagrams are different visual evidence types"
+            },
+            {
+                type: "compare_evidence",
+                question: "Both articles cite scientific studies. What does this add to their arguments?",
+                options: ["Scientific support", "Entertainment value", "Fictional elements", "Personal opinions"],
+                answer: "A",
+                explanation: "Scientific studies provide research-based support"
+            },
+            {
+                type: "compare_evidence",
+                question: "Author 1 uses personal experience as evidence, while Author 2 uses research data. How do they differ?",
+                options: ["Personal vs objective evidence", "Topic relevance", "Writing quality", "Publication venue"],
+                answer: "A",
+                explanation: "Personal experience vs research data is subjective vs objective"
+            },
+            {
+                type: "compare_evidence",
+                question: "Both texts include definitions of key terms. What purpose does this serve?",
+                options: ["Clarify meaning for readers", "Make text longer", "Show author's vocabulary", "Entertain readers"],
+                answer: "A",
+                explanation: "Definitions clarify meaning and aid understanding"
+            },
+            {
+                type: "compare_evidence",
+                question: "Document A uses charts to show data, while Document B describes the same data in paragraphs. What's different?",
+                options: ["Presentation format", "Data accuracy", "Topic importance", "Author expertise"],
+                answer: "A",
+                explanation: "Charts vs paragraphs are different presentation formats"
+            },
+            {
+                type: "compare_evidence",
+                question: "Both authors include counterarguments (opposing views). Why do they do this?",
+                options: ["Show balanced perspective", "Confuse readers", "Make text longer", "Avoid taking a position"],
+                answer: "A",
+                explanation: "Counterarguments show consideration of different perspectives"
+            },
+
+            // Advanced Inference Questions (121-135)
+            {
+                type: "advanced_inference",
+                question: "The instructions say 'Press firmly for 3 seconds, then release.' The device beeps twice. What probably happened?",
+                options: ["The command was successfully completed", "The device broke", "Nothing happened", "It needs batteries"],
+                answer: "A",
+                explanation: "Beeping often indicates successful completion of a command"
+            },
+            {
+                type: "advanced_inference",
+                question: "A character checks her watch, sighs, and says 'He's always late.' What can you infer about 'he'?",
+                options: ["He is often not punctual", "He is very busy", "He doesn't own a watch", "He is traveling"],
+                answer: "A",
+                explanation: "Checking watch, sighing, and 'always late' suggest habitual lateness"
+            },
+            {
+                type: "advanced_inference",
+                question: "The recipe says 'Bake until golden brown.' The cook removes it when still pale. What will likely result?",
+                options: ["The food will be undercooked", "The food will be burnt", "The food will be perfect", "The oven is broken"],
+                answer: "A",
+                explanation: "Removing before golden brown suggests undercooking"
+            },
+            {
+                type: "advanced_inference",
+                question: "A sign says 'Fresh paint - do not touch.' A child reaches toward it. What will probably happen next?",
+                options: ["Someone will stop the child", "The paint will dry instantly", "Nothing will happen", "The sign will fall"],
+                answer: "A",
+                explanation: "Children reaching toward forbidden things often get stopped"
+            },
+            {
+                type: "advanced_inference",
+                question: "The forecast says 100% chance of rain. A man leaves without an umbrella. What can you infer?",
+                options: ["He might get wet", "He doesn't believe forecasts", "It won't rain", "He has a raincoat"],
+                answer: "A",
+                explanation: "No umbrella in certain rain suggests getting wet"
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent inference skills!",
+            "Fantastic text analysis!",
+            "Great job! You're a reading comprehension expert!",
+            "Amazing! Your critical thinking is impressive!",
+            "Well done! Perfect text interpretation!",
+            "You're an inference and comparison champion!",
+            "Perfect! You understand implied meanings!",
+            "Outstanding analytical thinking!",
+            "Brilliant! You think like a literary critic!",
+            "You're on fire! Great reading insight!"
+        ];
+
+        // Sample passages for visualization
+        const samplePassages = {
+            characterFeelings: {
+                title: "The Lost Homework",
+                text: "Maria searched through her backpack for the third time. Her forehead was wrinkled with worry, and she kept glancing at the clock. The teacher was collecting homework in just five minutes. 'I know I put it in here last night,' she whispered to herself, her voice trembling slightly.",
+                clues: [
+                    "Searched three times",
+                    "Wrinkled forehead",
+                    "Glancing at clock",
+                    "Voice trembling",
+                    "'I know I put it in here'"
+                ],
+                inference: "Maria is anxious and worried about her lost homework",
+                type: "character"
+            },
+            setting: {
+                title: "The Forest Path",
+                text: "Sunlight filtered through the dense canopy of leaves, creating patterns on the mossy ground. Birds called to each other from high branches, and a gentle breeze carried the scent of pine. The path was soft underfoot, covered with years of fallen needles.",
+                clues: [
+                    "Sunlight through leaves",
+                    "Birds in branches",
+                    "Scent of pine",
+                    "Mossy ground",
+                    "Pine needles on path"
+                ],
+                inference: "The setting is a peaceful, sunny forest",
+                type: "setting"
+            },
+            plot: {
+                title: "The Storm Approaches",
+                text: "Dark clouds gathered on the horizon, moving quickly toward the town. Leaves began to rustle nervously, then the wind picked up, making signs swing and shutters bang. People on the street hurried to finish their errands, glancing anxiously at the sky.",
+                clues: [
+                    "Dark clouds gathering",
+                    "Wind increasing",
+                    "Signs swinging",
+                    "Shutters banging",
+                    "People hurrying"
+                ],
+                inference: "A storm is coming soon",
+                type: "plot"
+            }
+        };
+
+        // Sample text comparisons
+        const textComparisons = {
+            fictionVsNonfiction: {
+                title1: "The Magical Garden (Fiction)",
+                text1: "In the secret garden, flowers sang softly in the moonlight and the roses glowed with their own inner light. The garden gate opened only for those with pure hearts.",
+                title2: "How Plants Grow (Nonfiction)",
+                text2: "Plants need sunlight, water, and nutrients from soil to grow. Through photosynthesis, they convert light energy into chemical energy. Most plants flower in response to seasonal changes.",
+                similarities: ["Both about plants/gardens", "Both descriptive"],
+                differences: ["Fiction vs Nonfiction", "Magical vs Scientific", "Entertaining vs Informative"],
+                type: "genre"
+            },
+            differentPurposes: {
+                title1: "Save Our Parks (Persuasive)",
+                text1: "Our community parks are treasures we must protect! Without proper funding, these green spaces will disappear. Join us in asking the city council to increase park funding.",
+                title2: "Park Statistics Report (Informative)",
+                text2: "City parks receive 15% of municipal budget. Annual visitor numbers have increased by 8% over five years. Maintenance costs average $50,000 per park annually.",
+                similarities: ["Both about parks", "Both use facts/numbers"],
+                differences: ["Persuasive vs Informative", "Emotional vs Neutral", "Call to action vs Just facts"],
+                type: "purpose"
+            }
+        };
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const englishFact = document.getElementById('englishFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade5English');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade5English', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade5English_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade5English_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a reading comprehension expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent inference skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a text analysis master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review inference strategies and try again!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Reading skills grow with practice!";
+            }
+        }
+
+        // Create English fact display
+        function createEnglishFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'english-fact';
+            
+            const facts = [
+                "The word 'inference' comes from Latin 'inferre' meaning 'to bring in' or 'to conclude'!",
+                "Good readers make inferences automatically - about 70% of reading comprehension comes from inferences!",
+                "The earliest known written story is the Epic of Gilgamesh from ancient Mesopotamia, over 4,000 years old!",
+                "Comparing texts helps develop critical thinking skills that are essential for academic success!",
+                "Children who read for pleasure have better vocabulary, general knowledge, and understanding of other cultures!",
+                "The average novel has about 80,000 words, but some children's books use just 500 words to tell powerful stories!",
+                "Making inferences is like being a detective - you use clues to figure out what isn't directly stated!",
+                "Studies show that comparing different versions of the same story improves analytical skills by 40%!"
+            ];
+            
+            factDiv.innerHTML = `<strong>Reading Fact:</strong> ${facts[Math.floor(Math.random() * facts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "inference_character": "👤",
+                "inference_setting": "🏞️",
+                "inference_plot": "📖",
+                "inference_purpose": "🎯",
+                "compare_similarities": "🔄",
+                "compare_differences": "⚖️",
+                "compare_evidence": "🔍",
+                "advanced_inference": "🧠"
+            };
+            
+            let conceptName = "Reading Comprehension";
+            let conceptIcon = "📚";
+            
+            if (question.type.includes("inference_character")) {
+                conceptName = "Character Inference";
+                conceptIcon = conceptIcons.inference_character;
+            } else if (question.type.includes("inference_setting")) {
+                conceptName = "Setting Inference";
+                conceptIcon = conceptIcons.inference_setting;
+            } else if (question.type.includes("inference_plot")) {
+                conceptName = "Plot Inference";
+                conceptIcon = conceptIcons.inference_plot;
+            } else if (question.type.includes("inference_purpose")) {
+                conceptName = "Author's Purpose";
+                conceptIcon = conceptIcons.inference_purpose;
+            } else if (question.type.includes("compare_similarities")) {
+                conceptName = "Text Similarities";
+                conceptIcon = conceptIcons.compare_similarities;
+            } else if (question.type.includes("compare_differences")) {
+                conceptName = "Text Differences";
+                conceptIcon = conceptIcons.compare_differences;
+            } else if (question.type.includes("compare_evidence")) {
+                conceptName = "Comparing Evidence";
+                conceptIcon = conceptIcons.compare_evidence;
+            } else if (question.type.includes("advanced_inference")) {
+                conceptName = "Advanced Inference";
+                conceptIcon = conceptIcons.advanced_inference;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("inference_character")) {
+                label.textContent = "Understanding character feelings and traits from clues";
+            } else if (question.type.includes("inference_setting")) {
+                label.textContent = "Figuring out where and when from descriptive details";
+            } else if (question.type.includes("inference_plot")) {
+                label.textContent = "Predicting events and understanding causes/effects";
+            } else if (question.type.includes("inference_purpose")) {
+                label.textContent = "Identifying why the author wrote the text";
+            } else if (question.type.includes("compare_similarities")) {
+                label.textContent = "Finding what texts have in common";
+            } else if (question.type.includes("compare_differences")) {
+                label.textContent = "Identifying how texts are different";
+            } else if (question.type.includes("compare_evidence")) {
+                label.textContent = "Analyzing how authors support their points";
+            } else if (question.type.includes("advanced_inference")) {
+                label.textContent = "Complex reasoning from multiple clues";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create English visualization
+        function createEnglishVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("inference")) {
+                // Inference visualization
+                const passages = Object.values(samplePassages);
+                const passage = passages[Math.floor(Math.random() * passages.length)];
+                
+                vizDiv.innerHTML = `
+                    <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-indigo);">Making Inferences Process</h3>
+                    
+                    <div class="passage-container text-highlight">
+                        <div class="passage-title">${passage.title}</div>
+                        <div class="passage-text">"${passage.text}"</div>
+                        <div class="passage-clue">Clues from the text are highlighted below...</div>
+                    </div>
+                    
+                    <div class="inference-process">
+                        <div class="process-step ${question.type.includes('character') ? 'active' : ''}">
+                            <div class="step-icon">🔍</div>
+                            <div class="step-title">Find Clues</div>
+                            <div class="step-description">Look for details in the text</div>
+                        </div>
+                        <div class="process-step active">
+                            <div class="step-icon">🤔</div>
+                            <div class="step-title">Think About</div>
+                            <div class="step-description">What do the clues suggest?</div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-icon">💡</div>
+                            <div class="step-title">Make Inference</div>
+                            <div class="step-description">Draw a logical conclusion</div>
+                        </div>
+                    </div>
+                    
+                    <div class="clue-display">
+                        ${passage.clues.map((clue, index) => `
+                            <div class="clue-item clue-reveal" style="animation-delay: ${index * 0.2}s">
+                                <div class="clue-icon">✓</div>
+                                <div class="clue-text">${clue}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="evidence-tracker">
+                        <div class="tracker-title">Inference Reasoning</div>
+                        <ul class="evidence-list">
+                            <li class="evidence-item">Text says: "${passage.clues[0].toLowerCase()}"</li>
+                            <li class="evidence-item">Text says: "${passage.clues[1].toLowerCase()}"</li>
+                            <li class="evidence-item">From these clues, we can infer: <strong>${passage.inference}</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="strategy-display">
+                        <div class="strategy-card strategy-glow">
+                            <div class="strategy-icon">👀</div>
+                            <div class="strategy-name">Look for Clues</div>
+                            <div class="strategy-tip">Actions, dialogue, descriptions</div>
+                        </div>
+                        <div class="strategy-card">
+                            <div class="strategy-icon">🧩</div>
+                            <div class="strategy-name">Connect Clues</div>
+                            <div class="strategy-tip">How do details fit together?</div>
+                        </div>
+                        <div class="strategy-card">
+                            <div class="strategy-icon">💭</div>
+                            <div class="strategy-name">Use Background Knowledge</div>
+                            <div class="strategy-tip">What do you already know?</div>
+                        </div>
+                        <div class="strategy-card">
+                            <div class="strategy-icon">✅</div>
+                            <div class="strategy-name">Check Your Inference</div>
+                            <div class="strategy-tip">Does it make sense with all clues?</div>
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-steps">
+                        <div class="analysis-step">
+                            <span class="step-number">1</span> Read carefully and identify important details
+                        </div>
+                        <div class="analysis-step">
+                            <span class="step-number">2</span> Ask yourself: "What do these details suggest?"
+                        </div>
+                        <div class="analysis-step">
+                            <span class="step-number">3</span> Combine clues with what you already know
+                        </div>
+                        <div class="analysis-step">
+                            <span class="step-number">4</span> Make a logical conclusion that isn't directly stated
+                        </div>
+                        <div class="analysis-step">
+                            <span class="step-number">5</span> Check if your inference is supported by the text
+                        </div>
+                    </div>
+                `;
+                
+            } else if (question.type.includes("compare")) {
+                // Text comparison visualization
+                const comparisons = Object.values(textComparisons);
+                const comparison = comparisons[Math.floor(Math.random() * comparisons.length)];
+                
+                vizDiv.innerHTML = `
+                    <h3 style="text-align: center; margin-bottom: 20px; color: var(--secondary-teal);">Comparing Texts</h3>
+                    
+                    <div class="comparison-container">
+                        <div class="text-column left">
+                            <div class="column-title">${comparison.title1}</div>
+                            <div class="passage-text">"${comparison.text1}"</div>
+                        </div>
+                        <div class="text-column right">
+                            <div class="column-title">${comparison.title2}</div>
+                            <div class="passage-text">"${comparison.text2}"</div>
+                        </div>
+                    </div>
+                    
+                    <div class="venn-diagram">
+                        <div class="venn-circle venn-left venn-pulse" style="animation-delay: 0s">Text 1</div>
+                        <div class="venn-circle venn-right venn-pulse" style="animation-delay: 0.5s">Text 2</div>
+                        <div class="venn-intersection">Both</div>
+                        <div class="venn-label venn-left-label">Only Text 1</div>
+                        <div class="venn-label venn-right-label">Only Text 2</div>
+                        <div class="venn-label venn-both-label">Both Texts</div>
+                    </div>
+                    
+                    <div class="comparison-container">
+                        <div class="text-column left">
+                            <div class="column-title">Similarities</div>
+                            <div class="analysis-steps">
+                                ${comparison.similarities.map((similarity, index) => `
+                                    <div class="analysis-step">
+                                        <span class="step-number">${index + 1}</span> ${similarity}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div class="text-column right">
+                            <div class="column-title">Differences</div>
+                            <div class="analysis-steps">
+                                ${comparison.differences.map((difference, index) => `
+                                    <div class="analysis-step">
+                                        <span class="step-number">${index + 1}</span> ${difference}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="evidence-tracker">
+                        <div class="tracker-title">Comparison Questions to Ask</div>
+                        <ul class="evidence-list">
+                            <li class="evidence-item">What is the main purpose of each text?</li>
+                            <li class="evidence-item">Who is the intended audience for each?</li>
+                            <li class="evidence-item">What information or ideas do they share?</li>
+                            <li class="evidence-item">How are their tones or styles different?</li>
+                            <li class="evidence-item">What evidence does each author use?</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="strategy-display">
+                        <div class="strategy-card">
+                            <div class="strategy-icon">📝</div>
+                            <div class="strategy-name">Identify Purpose</div>
+                            <div class="strategy-tip">Why was each text written?</div>
+                        </div>
+                        <div class="strategy-card">
+                            <div class="strategy-icon">👥</div>
+                            <div class="strategy-name">Consider Audience</div>
+                            <div class="strategy-tip">Who is each text for?</div>
+                        </div>
+                        <div class="strategy-card">
+                            <div class="strategy-icon">🔍</div>
+                            <div class="strategy-name">Look for Evidence</div>
+                            <div class="strategy-tip">How do authors support ideas?</div>
+                        </div>
+                        <div class="strategy-card">
+                            <div class="strategy-icon">📊</div>
+                            <div class="strategy-name">Compare Structure</div>
+                            <div class="strategy-tip">How is each text organized?</div>
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-steps">
+                        <div class="analysis-step">
+                            <span class="step-number">1</span> Read both texts carefully
+                        </div>
+                        <div class="analysis-step">
+                            <span class="step-number">2</span> Identify main ideas of each text
+                        </div>
+                        <div class="analysis-step">
+                            <span class="step-number">3</span> Look for similarities in content, purpose, or style
+                        </div>
+                        <div class="analysis-step">
+                            <span class="step-number">4</span> Identify differences in perspective, tone, or evidence
+                        </div>
+                        <div class="analysis-step">
+                            <span class="step-number">5</span> Consider why the texts might be similar or different
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return vizDiv;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            englishFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            englishFact.appendChild(createEnglishFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createEnglishVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

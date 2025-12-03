@@ -1,0 +1,2194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Math - Angles, Perimeter & Area | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Math Theme */
+        :root {
+            --primary-purple: #9C27B0;
+            --secondary-pink: #E91E63;
+            --accent-teal: #00BCD4;
+            --accent-amber: #FFC107;
+            --accent-lime: #CDDC39;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(156, 39, 176, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(156, 39, 176, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-purple);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-purple);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-purple);
+            color: white;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #7B1FA2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(156, 39, 176, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-pink);
+            color: white;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #C2185B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-purple);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-purple), var(--secondary-pink));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .math-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-teal);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* New Compact Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-teal));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-purple);
+            background: rgba(156, 39, 176, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(156, 39, 176, 0.1);
+            border-color: var(--primary-purple);
+            color: var(--primary-purple);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-pink);
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-purple);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(156, 39, 176, 0.1);
+            border-left: 5px solid var(--primary-purple);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-purple);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-purple);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+        }
+
+        /* Angle Display */
+        .angle-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .angle-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid var(--dark-border);
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .angle-arm {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40%;
+            height: 3px;
+            background: var(--accent-teal);
+            transform-origin: left center;
+        }
+
+        .angle-measure {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-purple);
+        }
+
+        .angle-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Angle Types Display */
+        .angle-types {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .angle-type {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .angle-type.active {
+            border-color: var(--primary-purple);
+            background: rgba(156, 39, 176, 0.1);
+        }
+
+        .angle-type-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .angle-type-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--primary-purple);
+        }
+
+        .angle-type-range {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Shape Display */
+        .shape-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .shape-canvas {
+            width: 250px;
+            height: 200px;
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .rectangle {
+            position: absolute;
+            border: 2px solid var(--accent-teal);
+            background: rgba(0, 188, 212, 0.1);
+        }
+
+        .dimension-label {
+            position: absolute;
+            background: var(--dark-card);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--accent-teal);
+            border: 1px solid var(--accent-teal);
+        }
+
+        .compound-shape {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .shape-part {
+            padding: 15px;
+            border: 2px solid var(--accent-amber);
+            border-radius: 8px;
+            background: rgba(255, 193, 7, 0.1);
+            text-align: center;
+        }
+
+        /* Formula Display */
+        .formula-display {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-lime);
+        }
+
+        .formula-title {
+            font-weight: bold;
+            color: var(--accent-lime);
+            margin-bottom: 10px;
+        }
+
+        .formula-equation {
+            font-size: 1.5rem;
+            font-family: monospace;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .formula-explanation {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Measurement Display */
+        .measurement-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .measurement-box {
+            padding: 15px 25px;
+            background: rgba(156, 39, 176, 0.1);
+            border-radius: 8px;
+            border: 2px solid var(--primary-purple);
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .measurement-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+
+        .measurement-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-purple);
+        }
+
+        /* Unit Display */
+        .unit-display {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .unit-item {
+            padding: 10px 15px;
+            background: var(--dark-card);
+            border-radius: 6px;
+            border: 1px solid var(--dark-border);
+            font-size: 0.9rem;
+        }
+
+        .unit-item.active {
+            background: rgba(0, 188, 212, 0.2);
+            border-color: var(--accent-teal);
+            color: var(--accent-teal);
+        }
+
+        /* Calculation Steps */
+        .calculation-steps {
+            margin: 20px 0;
+        }
+
+        .step {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--accent-amber);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background: var(--accent-amber);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-purple);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Process Display */
+        .process-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .process-step {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 200px;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .process-step.active {
+            border-color: var(--primary-purple);
+        }
+
+        .step-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: var(--primary-purple);
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .angle-types {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .angle-circle {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .shape-canvas {
+                width: 200px;
+                height: 150px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes angleRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(var(--rotation)); }
+        }
+        
+        .angle-rotate {
+            animation: angleRotate 1s ease forwards;
+        }
+        
+        @keyframes angleHighlight {
+            0%, 100% { background-color: rgba(156, 39, 176, 0.1); border-color: var(--primary-purple); }
+            50% { background-color: rgba(156, 39, 176, 0.3); border-color: var(--secondary-pink); }
+        }
+        
+        .angle-highlight {
+            animation: angleHighlight 1s ease-in-out infinite;
+        }
+        
+        @keyframes shapePulse {
+            0%, 100% { border-color: var(--accent-teal); }
+            50% { border-color: var(--accent-amber); }
+        }
+        
+        .shape-pulse {
+            animation: shapePulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes measurementFlow {
+            0% { transform: translateY(-10px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        .measurement-flow {
+            animation: measurementFlow 0.5s ease forwards;
+        }
+        
+        @keyframes formulaGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(205, 220, 57, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(205, 220, 57, 0.6); }
+        }
+        
+        .formula-glow {
+            animation: formulaGlow 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1509228468518-180dd4864904?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 5 Mathematics</h1>
+            <p class="welcome-subtitle">Explore angles, perimeter, and area! Learn to identify different types of angles, calculate perimeter by adding all sides, find area by multiplying length and width, and work with compound shapes!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">📐</span>
+                <span class="topic-name">Angles, Perimeter & Area</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Geometry Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Math fact display -->
+                <div id="mathFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Geometry Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 100 Grade 5 Geometry questions
+        const questions = [
+            // Types of Angles (1-25)
+            {
+                type: "angles_type",
+                question: "What type of angle measures exactly 90 degrees?",
+                options: ["Right angle", "Acute angle", "Obtuse angle", "Straight angle"],
+                answer: "A",
+                explanation: "A right angle is exactly 90°, like the corner of a square"
+            },
+            {
+                type: "angles_type",
+                question: "An angle less than 90° is called:",
+                options: ["Acute angle", "Right angle", "Obtuse angle", "Reflex angle"],
+                answer: "A",
+                explanation: "Acute angles are between 0° and 90°"
+            },
+            {
+                type: "angles_type",
+                question: "What is an angle greater than 90° but less than 180°?",
+                options: ["Obtuse angle", "Acute angle", "Right angle", "Straight angle"],
+                answer: "A",
+                explanation: "Obtuse angles are between 90° and 180°"
+            },
+            {
+                type: "angles_type",
+                question: "A straight angle measures:",
+                options: ["180°", "90°", "360°", "45°"],
+                answer: "A",
+                explanation: "A straight angle is exactly 180°, forming a straight line"
+            },
+            {
+                type: "angles_type",
+                question: "Which angle is acute: 45°, 90°, 120°, or 180°?",
+                options: ["45°", "90°", "120°", "180°"],
+                answer: "A",
+                explanation: "45° < 90°, so it's acute"
+            },
+            {
+                type: "angles_type",
+                question: "What type of angle is 135°?",
+                options: ["Obtuse", "Acute", "Right", "Straight"],
+                answer: "A",
+                explanation: "135° > 90° and < 180°, so it's obtuse"
+            },
+            {
+                type: "angles_type",
+                question: "How many degrees in a right angle?",
+                options: ["90°", "180°", "360°", "45°"],
+                answer: "A",
+                explanation: "Right angle = 90° exactly"
+            },
+            {
+                type: "angles_type",
+                question: "Which is obtuse: 85°, 95°, 175°, or 5°?",
+                options: ["95°", "85°", "175°", "5°"],
+                answer: "A",
+                explanation: "95° > 90° and < 180°, so it's obtuse"
+            },
+            {
+                type: "angles_type",
+                question: "What type of angle measures exactly 180°?",
+                options: ["Straight angle", "Right angle", "Obtuse angle", "Acute angle"],
+                answer: "A",
+                explanation: "Straight angle = 180°, forms a straight line"
+            },
+            {
+                type: "angles_type",
+                question: "An angle of 30° is:",
+                options: ["Acute", "Right", "Obtuse", "Straight"],
+                answer: "A",
+                explanation: "30° < 90°, so it's acute"
+            },
+
+            // Angle Measurement (26-40)
+            {
+                type: "angles_measure",
+                question: "If two angles add to 90°, they are:",
+                options: ["Complementary", "Supplementary", "Equal", "Opposite"],
+                answer: "A",
+                explanation: "Complementary angles sum to 90°"
+            },
+            {
+                type: "angles_measure",
+                question: "Two angles that add to 180° are:",
+                options: ["Supplementary", "Complementary", "Acute", "Obtuse"],
+                answer: "A",
+                explanation: "Supplementary angles sum to 180°"
+            },
+            {
+                type: "angles_measure",
+                question: "What is the complement of 30°?",
+                options: ["60°", "150°", "30°", "90°"],
+                answer: "A",
+                explanation: "90° - 30° = 60°"
+            },
+            {
+                type: "angles_measure",
+                question: "What is the supplement of 120°?",
+                options: ["60°", "240°", "120°", "90°"],
+                answer: "A",
+                explanation: "180° - 120° = 60°"
+            },
+            {
+                type: "angles_measure",
+                question: "If angle A = 45°, its complement is:",
+                options: ["45°", "90°", "135°", "180°"],
+                answer: "A",
+                explanation: "90° - 45° = 45°"
+            },
+
+            // Perimeter of Rectangles (41-60)
+            {
+                type: "perimeter_rect",
+                question: "What is perimeter?",
+                options: ["Distance around a shape", "Space inside a shape", "Length times width", "Half of area"],
+                answer: "A",
+                explanation: "Perimeter is the total distance around the outside of a shape"
+            },
+            {
+                type: "perimeter_rect",
+                question: "Find perimeter: rectangle length=5cm, width=3cm",
+                options: ["16 cm", "15 cm", "8 cm", "30 cm"],
+                answer: "A",
+                explanation: "Perimeter = 2×(length+width) = 2×(5+3)=2×8=16cm"
+            },
+            {
+                type: "perimeter_rect",
+                question: "Rectangle has length 8m, width 4m. What is perimeter?",
+                options: ["24 m", "32 m", "12 m", "16 m"],
+                answer: "A",
+                explanation: "Perimeter = 2×(8+4)=2×12=24m"
+            },
+            {
+                type: "perimeter_rect",
+                question: "Perimeter of square with side 6cm is:",
+                options: ["24 cm", "36 cm", "12 cm", "18 cm"],
+                answer: "A",
+                explanation: "Square perimeter = 4×side = 4×6=24cm"
+            },
+            {
+                type: "perimeter_rect",
+                question: "If perimeter of square is 20cm, what is side length?",
+                options: ["5 cm", "10 cm", "4 cm", "8 cm"],
+                answer: "A",
+                explanation: "Square: Perimeter = 4×side, so side = 20÷4=5cm"
+            },
+            {
+                type: "perimeter_rect",
+                question: "Rectangle: length=7cm, perimeter=22cm. Find width.",
+                options: ["4 cm", "3 cm", "5 cm", "6 cm"],
+                answer: "A",
+                explanation: "Perimeter=2×(length+width), so 22=2×(7+width), 11=7+width, width=4cm"
+            },
+            {
+                type: "perimeter_rect",
+                question: "Find perimeter: length=12m, width=9m",
+                options: ["42 m", "21 m", "108 m", "54 m"],
+                answer: "A",
+                explanation: "2×(12+9)=2×21=42m"
+            },
+            {
+                type: "perimeter_rect",
+                question: "Square has perimeter 36cm. Area is:",
+                options: ["81 cm²", "36 cm²", "144 cm²", "18 cm²"],
+                answer: "A",
+                explanation: "Side=36÷4=9cm, Area=9×9=81cm²"
+            },
+
+            // Area of Rectangles (61-80)
+            {
+                type: "area_rect",
+                question: "What is area?",
+                options: ["Space inside a shape", "Distance around shape", "Sum of all sides", "Half of perimeter"],
+                answer: "A",
+                explanation: "Area measures the space inside a 2D shape"
+            },
+            {
+                type: "area_rect",
+                question: "Find area: rectangle length=6cm, width=4cm",
+                options: ["24 cm²", "20 cm²", "10 cm²", "48 cm²"],
+                answer: "A",
+                explanation: "Area = length×width = 6×4=24cm²"
+            },
+            {
+                type: "area_rect",
+                question: "Rectangle: length=8m, width=5m. Area?",
+                options: ["40 m²", "13 m²", "26 m²", "45 m²"],
+                answer: "A",
+                explanation: "8×5=40m²"
+            },
+            {
+                type: "area_rect",
+                question: "Area of square with side 7cm is:",
+                options: ["49 cm²", "14 cm²", "28 cm²", "21 cm²"],
+                answer: "A",
+                explanation: "Square area = side×side = 7×7=49cm²"
+            },
+            {
+                type: "area_rect",
+                question: "If area=36cm² and length=9cm, find width.",
+                options: ["4 cm", "27 cm", "45 cm", "6 cm"],
+                answer: "A",
+                explanation: "Area=length×width, so 36=9×width, width=36÷9=4cm"
+            },
+            {
+                type: "area_rect",
+                question: "Square has area 64m². Side length is:",
+                options: ["8 m", "16 m", "32 m", "4 m"],
+                answer: "A",
+                explanation: "√64=8m (since 8×8=64)"
+            },
+            {
+                type: "area_rect",
+                question: "Find area: length=15cm, width=12cm",
+                options: ["180 cm²", "27 cm²", "54 cm²", "90 cm²"],
+                answer: "A",
+                explanation: "15×12=180cm²"
+            },
+            {
+                type: "area_rect",
+                question: "Rectangle area=48cm², width=6cm. Length is:",
+                options: ["8 cm", "42 cm", "54 cm", "12 cm"],
+                answer: "A",
+                explanation: "48÷6=8cm"
+            },
+
+            // Compound Shapes - Perimeter (81-90)
+            {
+                type: "compound_perimeter",
+                question: "Find perimeter of L-shape: 3cm×3cm missing from 8cm×5cm rectangle corner",
+                options: ["26 cm", "30 cm", "22 cm", "34 cm"],
+                answer: "A",
+                explanation: "Perimeter same as original rectangle: 2×(8+5)=26cm"
+            },
+            {
+                type: "compound_perimeter",
+                question: "Shape made of two 4cm squares side by side. Perimeter?",
+                options: ["24 cm", "32 cm", "16 cm", "20 cm"],
+                answer: "A",
+                explanation: "Rectangle 8cm×4cm: 2×(8+4)=24cm"
+            },
+            {
+                type: "compound_perimeter",
+                question: "U-shape: outer dimensions 10cm×6cm, inner cutout 4cm×2cm. Perimeter?",
+                options: ["44 cm", "40 cm", "48 cm", "52 cm"],
+                answer: "A",
+                explanation: "Add all outer sides plus inner cutout sides"
+            },
+
+            // Compound Shapes - Area (91-100)
+            {
+                type: "compound_area",
+                question: "Find area of L-shape: 3cm×3cm missing from 8cm×5cm rectangle corner",
+                options: ["31 cm²", "40 cm²", "9 cm²", "49 cm²"],
+                answer: "A",
+                explanation: "Area of rectangle (8×5=40) minus missing square (3×3=9) = 31cm²"
+            },
+            {
+                type: "compound_area",
+                question: "Two rectangles: 4cm×3cm and 5cm×2cm. Total area?",
+                options: ["22 cm²", "14 cm²", "8 cm²", "30 cm²"],
+                answer: "A",
+                explanation: "(4×3=12) + (5×2=10) = 22cm²"
+            },
+            {
+                type: "compound_area",
+                question: "Shape: rectangle 6cm×4cm with 2cm×2cm square attached. Total area?",
+                options: ["28 cm²", "24 cm²", "4 cm²", "32 cm²"],
+                answer: "A",
+                explanation: "(6×4=24) + (2×2=4) = 28cm²"
+            },
+            {
+                type: "compound_area",
+                question: "Room dimensions: main 12m×8m, alcove 3m×2m. Floor area?",
+                options: ["102 m²", "96 m²", "6 m²", "108 m²"],
+                answer: "A",
+                explanation: "(12×8=96) + (3×2=6) = 102m²"
+            },
+            {
+                type: "compound_area",
+                question: "Garden: rectangle 10m×6m with circular pond removed (diameter 2m). Approximate area?",
+                options: ["57 m²", "60 m²", "3 m²", "63 m²"],
+                answer: "A",
+                explanation: "Rectangle area=60m², pond area≈3m² (π×1²≈3.14), so ≈57m²"
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent geometry skills!",
+            "Fantastic measurement understanding!",
+            "Great job! You're a geometry expert!",
+            "Amazing! Your angle knowledge is impressive!",
+            "Well done! Perfect calculation!",
+            "You're a perimeter and area champion!",
+            "Perfect! You understand shapes and measurements!",
+            "Outstanding mathematical thinking!",
+            "Brilliant! You think like a mathematician!",
+            "You're on fire! Great geometry insight!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const mathFact = document.getElementById('mathFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Generate random angle
+        function generateRandomAngle(type = null) {
+            let angle;
+            
+            if (type === "acute") {
+                angle = Math.floor(Math.random() * 89) + 1; // 1-89°
+            } else if (type === "right") {
+                angle = 90;
+            } else if (type === "obtuse") {
+                angle = Math.floor(Math.random() * 89) + 91; // 91-179°
+            } else if (type === "straight") {
+                angle = 180;
+            } else {
+                // Random type
+                const types = ["acute", "right", "obtuse"];
+                const randomType = types[Math.floor(Math.random() * types.length)];
+                return generateRandomAngle(randomType);
+            }
+            
+            return angle;
+        }
+
+        // Generate random rectangle dimensions
+        function generateRectangle() {
+            const length = Math.floor(Math.random() * 15) + 5; // 5-20
+            const width = Math.floor(Math.random() * 10) + 3; // 3-13
+            return { length, width };
+        }
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade5Geometry');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade5Geometry', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade5Geometry_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade5Geometry_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a geometry measurement expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent spatial reasoning skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a geometry master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review angle and measurement concepts and try again!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Geometry skills grow with practice!";
+            }
+        }
+
+        // Create math fact display
+        function createMathFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'math-fact';
+            
+            const facts = [
+                "The word 'geometry' comes from Greek words meaning 'earth measurement'! Ancient Egyptians used geometry to measure fields after Nile floods!",
+                "Right angles (90°) were considered sacred by ancient Egyptians! They used ropes with 12 knots to create perfect right triangles!",
+                "The largest measured angle in geometry is 360° (full rotation), while the smallest is 0°!",
+                "Ancient Babylonians divided circles into 360 degrees because they used a base-60 number system and 360 has many divisors!",
+                "The concept of area measurement dates back over 4,000 years! Ancient clay tablets show calculations for field areas!",
+                "Perimeter comes from Greek words 'peri' (around) and 'metron' (measure) - literally 'measure around'!",
+                "The Parthenon in Athens was built with precise geometric proportions using the golden ratio!",
+                "Angles are measured in degrees, but also in radians - there are 2π radians in a full circle!"
+            ];
+            
+            factDiv.innerHTML = `<strong>Math Fact:</strong> ${facts[Math.floor(Math.random() * facts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "angles_type": "📐",
+                "angles_measure": "📏",
+                "perimeter_rect": "🔲",
+                "area_rect": "🟩",
+                "compound_perimeter": "📐",
+                "compound_area": "➕"
+            };
+            
+            let conceptName = "Geometry";
+            let conceptIcon = "📐";
+            
+            if (question.type.includes("angles_type")) {
+                conceptName = "Types of Angles";
+                conceptIcon = conceptIcons.angles_type;
+            } else if (question.type.includes("angles_measure")) {
+                conceptName = "Angle Measurement";
+                conceptIcon = conceptIcons.angles_measure;
+            } else if (question.type.includes("perimeter")) {
+                conceptName = question.type.includes("compound") ? "Compound Shape Perimeter" : "Rectangle Perimeter";
+                conceptIcon = conceptIcons.perimeter_rect;
+            } else if (question.type.includes("area")) {
+                conceptName = question.type.includes("compound") ? "Compound Shape Area" : "Rectangle Area";
+                conceptIcon = conceptIcons.area_rect;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("angles_type")) {
+                label.textContent = "Acute, Right, Obtuse, and Straight angles";
+            } else if (question.type.includes("angles_measure")) {
+                label.textContent = "Complementary and Supplementary angles";
+            } else if (question.type.includes("perimeter_rect")) {
+                label.textContent = "Distance around a rectangle";
+            } else if (question.type.includes("area_rect")) {
+                label.textContent = "Space inside a rectangle";
+            } else if (question.type.includes("compound")) {
+                label.textContent = "Working with combined shapes";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create geometry visualization
+        function createGeometryVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("angles")) {
+                // Angle visualization
+                let angle, angleType;
+                
+                if (question.type.includes("type")) {
+                    // Show specific angle types
+                    const angleTypes = [
+                        { name: "Acute", range: "0° - 90°", example: 45, icon: "🔺" },
+                        { name: "Right", range: "Exactly 90°", example: 90, icon: "⬜" },
+                        { name: "Obtuse", range: "90° - 180°", example: 135, icon: "📐" },
+                        { name: "Straight", range: "Exactly 180°", example: 180, icon: "➖" }
+                    ];
+                    
+                    angle = angleTypes[Math.floor(Math.random() * angleTypes.length)].example;
+                    angleType = angle < 90 ? "acute" : angle === 90 ? "right" : angle < 180 ? "obtuse" : "straight";
+                    
+                    vizDiv.innerHTML = `
+                        <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-purple);">Types of Angles</h3>
+                        
+                        <div class="angle-display">
+                            <div class="angle-circle">
+                                <div class="angle-arm" style="transform: rotate(0deg);"></div>
+                                <div class="angle-arm angle-rotate" style="--rotation: ${angle}deg; transform: rotate(${angle}deg);"></div>
+                                <div class="angle-measure">${angle}°</div>
+                                <div class="angle-label">${angleType.toUpperCase()} ANGLE</div>
+                            </div>
+                        </div>
+                        
+                        <div class="angle-types">
+                            ${angleTypes.map((type, index) => `
+                                <div class="angle-type ${type.name.toLowerCase() === angleType ? 'active angle-highlight' : 'measurement-flow'}" 
+                                     style="animation-delay: ${index * 0.1}s">
+                                    <div class="angle-type-icon">${type.icon}</div>
+                                    <div class="angle-type-name">${type.name}</div>
+                                    <div class="angle-type-range">${type.range}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="formula-display formula-glow">
+                            <div class="formula-title">Angle Classification:</div>
+                            <div class="formula-equation">
+                                Acute < 90° < Right = 90° < Obtuse < 180° = Straight
+                            </div>
+                            <div class="formula-explanation">
+                                Acute angles are sharp, Right angles are square corners, Obtuse angles are wider
+                            </div>
+                        </div>
+                    `;
+                    
+                } else {
+                    // Angle measurement (complementary/supplementary)
+                    const angle1 = Math.floor(Math.random() * 80) + 10; // 10-90
+                    const isComplementary = Math.random() > 0.5;
+                    const angle2 = isComplementary ? 90 - angle1 : 180 - angle1;
+                    
+                    vizDiv.innerHTML = `
+                        <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-teal);">${isComplementary ? 'Complementary' : 'Supplementary'} Angles</h3>
+                        
+                        <div class="angle-display">
+                            <div class="angle-circle">
+                                <div class="angle-arm" style="transform: rotate(0deg);"></div>
+                                <div class="angle-arm angle-rotate" style="--rotation: ${angle1}deg; transform: rotate(${angle1}deg);"></div>
+                                <div class="angle-measure">${angle1}°</div>
+                                <div class="angle-label">Angle 1</div>
+                            </div>
+                        </div>
+                        
+                        <div class="measurement-display">
+                            <div class="measurement-box measurement-flow" style="animation-delay: 0s;">
+                                <div class="measurement-label">Angle 1</div>
+                                <div class="measurement-value">${angle1}°</div>
+                            </div>
+                            
+                            <div style="font-size: 2rem; color: var(--accent-amber); align-self: center;">+</div>
+                            
+                            <div class="measurement-box measurement-flow" style="animation-delay: 0.2s;">
+                                <div class="measurement-label">Angle 2</div>
+                                <div class="measurement-value">${angle2}°</div>
+                            </div>
+                            
+                            <div style="font-size: 2rem; color: var(--accent-amber); align-self: center;">=</div>
+                            
+                            <div class="measurement-box measurement-flow" style="animation-delay: 0.4s;">
+                                <div class="measurement-label">Total</div>
+                                <div class="measurement-value">${isComplementary ? 90 : 180}°</div>
+                            </div>
+                        </div>
+                        
+                        <div class="formula-display">
+                            <div class="formula-title">${isComplementary ? 'Complementary' : 'Supplementary'} Angles:</div>
+                            <div class="formula-equation">
+                                ${isComplementary ? 'A + B = 90°' : 'A + B = 180°'}
+                            </div>
+                            <div class="formula-explanation">
+                                ${isComplementary ? 'Complementary angles add to 90°' : 'Supplementary angles add to 180°'}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+            } else if (question.type.includes("perimeter") || question.type.includes("area")) {
+                // Rectangle visualization
+                const rect = generateRectangle();
+                const length = rect.length;
+                const width = rect.width;
+                const perimeter = 2 * (length + width);
+                const area = length * width;
+                
+                const isPerimeter = question.type.includes("perimeter");
+                const isCompound = question.type.includes("compound");
+                
+                if (isCompound) {
+                    // Compound shape visualization
+                    const cutoutSize = Math.min(Math.floor(length/2), Math.floor(width/2), 4);
+                    
+                    vizDiv.innerHTML = `
+                        <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-amber);">Compound Shape</h3>
+                        
+                        <div class="shape-display">
+                            <div class="shape-canvas">
+                                <!-- Main rectangle -->
+                                <div class="rectangle shape-pulse" style="width: ${length * 10}px; height: ${width * 10}px; top: 10px; left: 10px;">
+                                </div>
+                                
+                                <!-- Cutout rectangle -->
+                                <div class="rectangle" style="width: ${cutoutSize * 10}px; height: ${cutoutSize * 10}px; top: 10px; left: 10px; background: var(--dark-surface);">
+                                </div>
+                                
+                                <!-- Dimensions -->
+                                <div class="dimension-label" style="top: ${(width * 10)/2 + 10}px; left: ${(length * 10) + 20}px;">
+                                    ${length} cm
+                                </div>
+                                <div class="dimension-label" style="top: ${(width * 10) + 20}px; left: ${(length * 10)/2 + 10}px;">
+                                    ${width} cm
+                                </div>
+                                <div class="dimension-label" style="top: 15px; left: ${(cutoutSize * 10)/2 + 10}px; font-size: 0.8rem;">
+                                    ${cutoutSize} cm
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="compound-shape">
+                            <div class="shape-part">
+                                <div style="font-weight: bold; color: var(--accent-teal); margin-bottom: 5px;">Main Rectangle</div>
+                                <div>Length: ${length} cm</div>
+                                <div>Width: ${width} cm</div>
+                                <div style="margin-top: 10px; font-weight: bold;">
+                                    Area: ${area} cm²
+                                </div>
+                            </div>
+                            
+                            <div class="shape-part">
+                                <div style="font-weight: bold; color: var(--secondary-pink); margin-bottom: 5px;">Missing Square</div>
+                                <div>Side: ${cutoutSize} cm</div>
+                                <div style="margin-top: 10px; font-weight: bold;">
+                                    Area: ${cutoutSize * cutoutSize} cm²
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="calculation-steps">
+                            <div class="step">
+                                <span class="step-number">1</span> Calculate main rectangle area: ${length} × ${width} = ${area} cm²
+                            </div>
+                            <div class="step">
+                                <span class="step-number">2</span> Calculate missing square area: ${cutoutSize} × ${cutoutSize} = ${cutoutSize * cutoutSize} cm²
+                            </div>
+                            <div class="step">
+                                <span class="step-number">3</span> Subtract: ${area} - ${cutoutSize * cutoutSize} = ${area - (cutoutSize * cutoutSize)} cm²
+                            </div>
+                        </div>
+                    `;
+                    
+                } else {
+                    // Simple rectangle visualization
+                    vizDiv.innerHTML = `
+                        <h3 style="text-align: center; margin-bottom: 20px; color: ${isPerimeter ? 'var(--accent-teal)' : 'var(--accent-lime)'};">Rectangle ${isPerimeter ? 'Perimeter' : 'Area'}</h3>
+                        
+                        <div class="shape-display">
+                            <div class="shape-canvas">
+                                <div class="rectangle shape-pulse" style="width: ${length * 10}px; height: ${width * 10}px; top: 10px; left: 10px;">
+                                </div>
+                                
+                                <!-- Dimensions -->
+                                <div class="dimension-label" style="top: ${(width * 10)/2 + 10}px; left: ${(length * 10) + 20}px;">
+                                    ${length} ${isPerimeter ? 'cm' : 'cm'}
+                                </div>
+                                <div class="dimension-label" style="top: ${(width * 10) + 20}px; left: ${(length * 10)/2 + 10}px;">
+                                    ${width} ${isPerimeter ? 'cm' : 'cm'}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="measurement-display">
+                            <div class="measurement-box measurement-flow" style="animation-delay: 0s;">
+                                <div class="measurement-label">Length</div>
+                                <div class="measurement-value">${length} cm</div>
+                            </div>
+                            
+                            <div class="measurement-box measurement-flow" style="animation-delay: 0.2s;">
+                                <div class="measurement-label">Width</div>
+                                <div class="measurement-value">${width} cm</div>
+                            </div>
+                            
+                            <div class="measurement-box measurement-flow" style="animation-delay: 0.4s;">
+                                <div class="measurement-label">${isPerimeter ? 'Perimeter' : 'Area'}</div>
+                                <div class="measurement-value">${isPerimeter ? perimeter + ' cm' : area + ' cm²'}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="formula-display formula-glow">
+                            <div class="formula-title">${isPerimeter ? 'Perimeter Formula' : 'Area Formula'}:</div>
+                            <div class="formula-equation">
+                                ${isPerimeter ? 'P = 2 × (Length + Width)' : 'A = Length × Width'}
+                            </div>
+                            <div class="formula-explanation">
+                                ${isPerimeter ? 
+                                    'Add length and width, then multiply by 2' : 
+                                    'Multiply length by width'}
+                            </div>
+                        </div>
+                        
+                        <div class="calculation-steps">
+                            <div class="step">
+                                <span class="step-number">1</span> ${isPerimeter ? 'Add length and width: ' + length + ' + ' + width + ' = ' + (length + width) + ' cm' : 'Multiply length by width: ' + length + ' × ' + width}
+                            </div>
+                            <div class="step">
+                                <span class="step-number">2</span> ${isPerimeter ? 'Multiply by 2: 2 × ' + (length + width) + ' = ' + perimeter + ' cm' : 'Calculate: ' + length + ' × ' + width + ' = ' + area + ' cm²'}
+                            </div>
+                        </div>
+                        
+                        <div class="unit-display">
+                            <div class="unit-item ${isPerimeter ? 'active' : ''}">cm (perimeter)</div>
+                            <div class="unit-item ${!isPerimeter ? 'active' : ''}">cm² (area)</div>
+                        </div>
+                    `;
+                }
+            }
+            
+            return vizDiv;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            mathFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            mathFact.appendChild(createMathFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createGeometryVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

@@ -1,0 +1,2321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Math - Fraction Operations | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Math Theme */
+        :root {
+            --primary-purple: #9C27B0;
+            --secondary-pink: #E91E63;
+            --accent-teal: #00BCD4;
+            --accent-amber: #FFC107;
+            --accent-lime: #CDDC39;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(156, 39, 176, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(156, 39, 176, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-purple);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-purple);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-purple);
+            color: white;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #7B1FA2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(156, 39, 176, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-pink);
+            color: white;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #C2185B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-purple);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-purple), var(--secondary-pink));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .math-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-teal);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* New Compact Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-teal));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-purple);
+            background: rgba(156, 39, 176, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(156, 39, 176, 0.1);
+            border-color: var(--primary-purple);
+            color: var(--primary-purple);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-pink);
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-purple);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(156, 39, 176, 0.1);
+            border-left: 5px solid var(--primary-purple);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-purple);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-purple);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+        }
+
+        /* Fraction Display */
+        .fraction-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .fraction-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-purple);
+            text-align: center;
+        }
+
+        .fraction-bar {
+            width: 100%;
+            height: 3px;
+            background: var(--primary-purple);
+            margin: 5px 0;
+        }
+
+        /* Fraction Circles */
+        .fraction-circle-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .fraction-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-teal);
+            position: relative;
+            overflow: hidden;
+            background: var(--dark-card);
+        }
+
+        .fraction-slice {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 100%);
+            background: rgba(0, 188, 212, 0.3);
+            transform-origin: 50% 50%;
+        }
+
+        .fraction-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        /* Operation Steps */
+        .operation-steps {
+            margin: 20px 0;
+        }
+
+        .step {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--accent-amber);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background: var(--accent-amber);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* Common Denominator Display */
+        .common-denominator {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .fraction-box {
+            padding: 15px 25px;
+            background: rgba(156, 39, 176, 0.1);
+            border-radius: 10px;
+            border: 2px solid var(--primary-purple);
+            text-align: center;
+        }
+
+        .operator {
+            font-size: 2rem;
+            color: var(--accent-teal);
+            font-weight: bold;
+        }
+
+        /* Number Line */
+        .fraction-number-line {
+            width: 100%;
+            height: 60px;
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .number-line-track {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--dark-border);
+            transform: translateY(-50%);
+        }
+
+        .number-line-tick {
+            position: absolute;
+            top: 50%;
+            height: 10px;
+            width: 2px;
+            background: var(--text-secondary);
+            transform: translateY(-50%);
+        }
+
+        .number-line-label {
+            position: absolute;
+            top: 60%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .number-line-point {
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary-pink);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(233, 30, 99, 0.5);
+        }
+
+        /* Multiplication Grid */
+        .multiplication-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .grid-cell {
+            background: rgba(255, 193, 7, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--accent-amber);
+        }
+
+        /* Division Display */
+        .division-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .division-box {
+            padding: 15px;
+            background: rgba(205, 220, 57, 0.1);
+            border-radius: 8px;
+            border: 2px solid var(--accent-lime);
+            text-align: center;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-purple);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Process Display */
+        .process-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .process-step {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 200px;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .process-step.active {
+            border-color: var(--primary-purple);
+        }
+
+        .step-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: var(--primary-purple);
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .fraction-circle {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .common-denominator {
+                flex-direction: column;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes fractionSlice {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(var(--rotation)); }
+        }
+        
+        .fraction-slice-animate {
+            animation: fractionSlice 1s ease forwards;
+        }
+        
+        @keyframes fractionHighlight {
+            0%, 100% { background-color: rgba(156, 39, 176, 0.1); }
+            50% { background-color: rgba(156, 39, 176, 0.3); }
+        }
+        
+        .fraction-highlight {
+            animation: fractionHighlight 1s ease-in-out infinite;
+        }
+        
+        @keyframes operationFlow {
+            0% { transform: translateY(-10px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        .operation-flow {
+            animation: operationFlow 0.5s ease forwards;
+        }
+        
+        @keyframes numberLineMove {
+            0% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+            100% { transform: translateX(-50%) translateY(0); }
+        }
+        
+        .number-line-bounce {
+            animation: numberLineMove 1s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1509228468518-180dd4864904?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 5 Mathematics</h1>
+            <p class="welcome-subtitle">Master fraction operations! Learn to add, subtract, multiply, and divide fractions with like and unlike denominators. Understand equivalent fractions, simplify answers, and solve real-world fraction problems!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">½</span>
+                <span class="topic-name">Fraction Operations</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Math Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Math fact display -->
+                <div id="mathFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Math Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Generate random fraction
+        function generateFraction(allowImproper = false, maxDenominator = 12) {
+            const denominator = Math.floor(Math.random() * (maxDenominator - 2)) + 2;
+            const maxNumerator = allowImproper ? denominator * 2 : denominator - 1;
+            const numerator = Math.floor(Math.random() * maxNumerator) + 1;
+            
+            // Reduce fraction
+            const gcd = getGCD(numerator, denominator);
+            return {
+                numerator: numerator / gcd,
+                denominator: denominator / gcd,
+                toString: function() {
+                    return `${this.numerator}/${this.denominator}`;
+                },
+                toDecimal: function() {
+                    return this.numerator / this.denominator;
+                }
+            };
+        }
+
+        // Get Greatest Common Divisor
+        function getGCD(a, b) {
+            return b === 0 ? a : getGCD(b, a % b);
+        }
+
+        // Get Least Common Multiple
+        function getLCM(a, b) {
+            return (a * b) / getGCD(a, b);
+        }
+
+        // Questions array - 100 Grade 5 Fraction Operation questions
+        const questions = [
+            // Addition with Like Denominators (1-15)
+            {
+                type: "addition_like",
+                question: "What is 1/4 + 2/4?",
+                options: ["3/4", "3/8", "1/2", "2/4"],
+                answer: "A",
+                explanation: "When denominators are the same, add numerators: 1 + 2 = 3, keep denominator 4"
+            },
+            {
+                type: "addition_like",
+                question: "Solve: 3/8 + 2/8",
+                options: ["5/8", "5/16", "1/2", "6/8"],
+                answer: "A",
+                explanation: "3/8 + 2/8 = (3+2)/8 = 5/8"
+            },
+            {
+                type: "addition_like",
+                question: "Calculate: 5/12 + 4/12",
+                options: ["9/12 or 3/4", "9/24", "1/12", "20/12"],
+                answer: "A",
+                explanation: "5/12 + 4/12 = 9/12 = 3/4 (simplified)"
+            },
+            {
+                type: "addition_like",
+                question: "Add: 2/5 + 1/5",
+                options: ["3/5", "3/10", "2/5", "1/5"],
+                answer: "A",
+                explanation: "2/5 + 1/5 = 3/5"
+            },
+            {
+                type: "addition_like",
+                question: "What is 7/10 + 1/10?",
+                options: ["8/10 or 4/5", "8/20", "7/10", "1/10"],
+                answer: "A",
+                explanation: "7/10 + 1/10 = 8/10 = 4/5"
+            },
+
+            // Addition with Unlike Denominators (16-30)
+            {
+                type: "addition_unlike",
+                question: "What is 1/2 + 1/4?",
+                options: ["3/4", "2/6", "1/6", "2/4"],
+                answer: "A",
+                explanation: "1/2 = 2/4, so 2/4 + 1/4 = 3/4"
+            },
+            {
+                type: "addition_unlike",
+                question: "Solve: 1/3 + 1/6",
+                options: ["1/2", "2/9", "2/6", "1/9"],
+                answer: "A",
+                explanation: "1/3 = 2/6, so 2/6 + 1/6 = 3/6 = 1/2"
+            },
+            {
+                type: "addition_unlike",
+                question: "Calculate: 3/4 + 1/8",
+                options: ["7/8", "4/12", "4/8", "3/8"],
+                answer: "A",
+                explanation: "3/4 = 6/8, so 6/8 + 1/8 = 7/8"
+            },
+            {
+                type: "addition_unlike",
+                question: "Add: 2/3 + 1/9",
+                options: ["7/9", "3/12", "3/9", "2/9"],
+                answer: "A",
+                explanation: "2/3 = 6/9, so 6/9 + 1/9 = 7/9"
+            },
+            {
+                type: "addition_unlike",
+                question: "What is 5/6 + 2/3?",
+                options: ["3/2 or 1½", "7/9", "7/6", "10/6"],
+                answer: "A",
+                explanation: "2/3 = 4/6, so 5/6 + 4/6 = 9/6 = 3/2 = 1½"
+            },
+
+            // Subtraction with Like Denominators (31-45)
+            {
+                type: "subtraction_like",
+                question: "What is 5/8 - 3/8?",
+                options: ["2/8 or 1/4", "2/0", "8/8", "2/16"],
+                answer: "A",
+                explanation: "5/8 - 3/8 = (5-3)/8 = 2/8 = 1/4"
+            },
+            {
+                type: "subtraction_like",
+                question: "Solve: 7/9 - 2/9",
+                options: ["5/9", "5/18", "9/9", "5/0"],
+                answer: "A",
+                explanation: "7/9 - 2/9 = 5/9"
+            },
+            {
+                type: "subtraction_like",
+                question: "Calculate: 11/12 - 5/12",
+                options: ["6/12 or 1/2", "6/24", "16/12", "6/0"],
+                answer: "A",
+                explanation: "11/12 - 5/12 = 6/12 = 1/2"
+            },
+            {
+                type: "subtraction_like",
+                question: "Subtract: 4/5 - 1/5",
+                options: ["3/5", "3/10", "5/5", "3/0"],
+                answer: "A",
+                explanation: "4/5 - 1/5 = 3/5"
+            },
+            {
+                type: "subtraction_like",
+                question: "What is 9/10 - 3/10?",
+                options: ["6/10 or 3/5", "6/20", "12/10", "6/0"],
+                answer: "A",
+                explanation: "9/10 - 3/10 = 6/10 = 3/5"
+            },
+
+            // Subtraction with Unlike Denominators (46-60)
+            {
+                type: "subtraction_unlike",
+                question: "What is 3/4 - 1/2?",
+                options: ["1/4", "2/2", "2/4", "1/2"],
+                answer: "A",
+                explanation: "1/2 = 2/4, so 3/4 - 2/4 = 1/4"
+            },
+            {
+                type: "subtraction_unlike",
+                question: "Solve: 5/6 - 1/3",
+                options: ["3/6 or 1/2", "4/3", "4/6", "5/3"],
+                answer: "A",
+                explanation: "1/3 = 2/6, so 5/6 - 2/6 = 3/6 = 1/2"
+            },
+            {
+                type: "subtraction_unlike",
+                question: "Calculate: 7/8 - 1/4",
+                options: ["5/8", "6/4", "6/8", "8/8"],
+                answer: "A",
+                explanation: "1/4 = 2/8, so 7/8 - 2/8 = 5/8"
+            },
+            {
+                type: "subtraction_unlike",
+                question: "Subtract: 2/3 - 1/6",
+                options: ["3/6 or 1/2", "1/3", "1/6", "3/3"],
+                answer: "A",
+                explanation: "2/3 = 4/6, so 4/6 - 1/6 = 3/6 = 1/2"
+            },
+            {
+                type: "subtraction_unlike",
+                question: "What is 1 - 3/4?",
+                options: ["1/4", "3/4", "4/4", "0"],
+                answer: "A",
+                explanation: "1 = 4/4, so 4/4 - 3/4 = 1/4"
+            },
+
+            // Multiplication of Fractions (61-75)
+            {
+                type: "multiplication",
+                question: "What is 1/2 × 1/3?",
+                options: ["1/6", "1/5", "2/5", "2/6"],
+                answer: "A",
+                explanation: "Multiply numerators: 1×1=1, multiply denominators: 2×3=6 = 1/6"
+            },
+            {
+                type: "multiplication",
+                question: "Solve: 2/3 × 3/4",
+                options: ["6/12 or 1/2", "5/7", "6/7", "2/4"],
+                answer: "A",
+                explanation: "2/3 × 3/4 = 6/12 = 1/2"
+            },
+            {
+                type: "multiplication",
+                question: "Calculate: 3/5 × 2/7",
+                options: ["6/35", "5/12", "6/12", "5/35"],
+                answer: "A",
+                explanation: "3/5 × 2/7 = (3×2)/(5×7) = 6/35"
+            },
+            {
+                type: "multiplication",
+                question: "Multiply: 4/9 × 3/8",
+                options: ["12/72 or 1/6", "7/17", "12/17", "7/72"],
+                answer: "A",
+                explanation: "4/9 × 3/8 = 12/72 = 1/6"
+            },
+            {
+                type: "multiplication",
+                question: "What is 5/6 × 2/5?",
+                options: ["10/30 or 1/3", "7/11", "10/11", "7/30"],
+                answer: "A",
+                explanation: "5/6 × 2/5 = 10/30 = 1/3"
+            },
+            {
+                type: "multiplication",
+                question: "Solve: 3/4 × 8",
+                options: ["6", "24/4", "11/4", "8/4"],
+                answer: "A",
+                explanation: "3/4 × 8 = 24/4 = 6"
+            },
+
+            // Division of Fractions (76-90)
+            {
+                type: "division",
+                question: "What is 1/2 ÷ 1/4?",
+                options: ["2", "1/8", "2/4", "4/2"],
+                answer: "A",
+                explanation: "1/2 ÷ 1/4 = 1/2 × 4/1 = 4/2 = 2"
+            },
+            {
+                type: "division",
+                question: "Solve: 3/4 ÷ 1/2",
+                options: ["3/2 or 1½", "3/8", "4/3", "2/4"],
+                answer: "A",
+                explanation: "3/4 ÷ 1/2 = 3/4 × 2/1 = 6/4 = 3/2 = 1½"
+            },
+            {
+                type: "division",
+                question: "Calculate: 2/3 ÷ 5/6",
+                options: ["12/15 or 4/5", "10/18", "12/18", "10/15"],
+                answer: "A",
+                explanation: "2/3 ÷ 5/6 = 2/3 × 6/5 = 12/15 = 4/5"
+            },
+            {
+                type: "division",
+                question: "Divide: 3/5 ÷ 2/7",
+                options: ["21/10 or 2⅒", "6/35", "21/35", "6/10"],
+                answer: "A",
+                explanation: "3/5 ÷ 2/7 = 3/5 × 7/2 = 21/10 = 2⅒"
+            },
+            {
+                type: "division",
+                question: "What is 4 ÷ 1/3?",
+                options: ["12", "4/3", "1/12", "3/4"],
+                answer: "A",
+                explanation: "4 ÷ 1/3 = 4 × 3/1 = 12"
+            },
+
+            // Mixed Operations & Word Problems (91-100)
+            {
+                type: "mixed",
+                question: "Sam ate 1/3 of pizza and Tom ate 1/4. What fraction did they eat together?",
+                options: ["7/12", "2/7", "1/7", "5/12"],
+                answer: "A",
+                explanation: "1/3 + 1/4 = 4/12 + 3/12 = 7/12"
+            },
+            {
+                type: "mixed",
+                question: "A recipe needs 3/4 cup flour. You want to make 1/2 of recipe. How much flour?",
+                options: ["3/8 cup", "1/4 cup", "1/2 cup", "3/4 cup"],
+                answer: "A",
+                explanation: "3/4 × 1/2 = 3/8 cup"
+            },
+            {
+                type: "mixed",
+                question: "You have 2½ yards of ribbon. Cut into 1/4 yard pieces. How many pieces?",
+                options: ["10", "5", "6", "8"],
+                answer: "A",
+                explanation: "2½ = 5/2, 5/2 ÷ 1/4 = 5/2 × 4/1 = 20/2 = 10 pieces"
+            },
+            {
+                type: "mixed",
+                question: "What is 1/2 + 1/3 - 1/6?",
+                options: ["2/3", "1/2", "5/6", "1/3"],
+                answer: "A",
+                explanation: "1/2=3/6, 1/3=2/6, so 3/6+2/6-1/6=4/6=2/3"
+            },
+            {
+                type: "mixed",
+                question: "Simplify: (2/3 × 3/4) ÷ 1/2",
+                options: ["1", "1/2", "2/3", "3/4"],
+                answer: "A",
+                explanation: "2/3×3/4=6/12=1/2, 1/2÷1/2=1/2×2/1=2/2=1"
+            },
+            {
+                type: "mixed",
+                question: "A rope is 5/8 meter long. Cut off 1/4 meter. How much is left?",
+                options: ["3/8 meter", "1/2 meter", "1/8 meter", "4/8 meter"],
+                answer: "A",
+                explanation: "5/8 - 1/4 = 5/8 - 2/8 = 3/8 meter"
+            },
+            {
+                type: "mixed",
+                question: "What is 3/5 of 20?",
+                options: ["12", "15", "10", "8"],
+                answer: "A",
+                explanation: "3/5 × 20 = 60/5 = 12"
+            },
+            {
+                type: "mixed",
+                question: "If 1/3 of class is girls and there are 24 students, how many girls?",
+                options: ["8", "12", "6", "16"],
+                answer: "A",
+                explanation: "1/3 × 24 = 24/3 = 8 girls"
+            },
+            {
+                type: "mixed",
+                question: "Solve: 2⅓ + 1½",
+                options: ["3⅚", "3½", "4⅙", "3¾"],
+                answer: "A",
+                explanation: "2⅓=7/3=14/6, 1½=3/2=9/6, sum=23/6=3⅚"
+            },
+            {
+                type: "mixed",
+                question: "Which is greater: 2/3 or 3/4?",
+                options: ["3/4", "2/3", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "2/3=8/12, 3/4=9/12, so 3/4 > 2/3"
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent fraction mastery!",
+            "Fantastic operation skills!",
+            "Great job! You're a fraction expert!",
+            "Amazing! Your understanding of fractions is impressive!",
+            "Well done! Perfect calculation!",
+            "You're a fraction operation champion!",
+            "Perfect! You understand equivalent fractions!",
+            "Outstanding mathematical thinking!",
+            "Brilliant! You think like a mathematician!",
+            "You're on fire! Great fraction insight!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const mathFact = document.getElementById('mathFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Simplify fraction
+        function simplifyFraction(numerator, denominator) {
+            const gcd = getGCD(numerator, denominator);
+            return {
+                numerator: numerator / gcd,
+                denominator: denominator / gcd,
+                toString: function() {
+                    return `${this.numerator}/${this.denominator}`;
+                }
+            };
+        }
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade5Fractions');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade5Fractions', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade5Fractions_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade5Fractions_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a fraction operations expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent fraction skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a math master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review fraction concepts and try again!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Math skills grow with practice!";
+            }
+        }
+
+        // Create math fact display
+        function createMathFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'math-fact';
+            
+            const facts = [
+                "Fractions were used by ancient Egyptians over 4,000 years ago! They mainly used unit fractions (like 1/2, 1/3, 1/4).",
+                "The word 'fraction' comes from Latin 'fractio' meaning 'to break' - fractions break whole numbers into parts!",
+                "Ancient Romans used fractions based on 12 (duodecimal system) - that's why we have 12 inches in a foot!",
+                "The horizontal line in fractions was first used by Arabic mathematicians in the 12th century!",
+                "In some countries, fractions are written with numerator above denominator without a line: ¾ instead of 3/4!",
+                "The concept of equivalent fractions was understood by Indian mathematicians in the 7th century!",
+                "Decimal fractions (like 0.5) were invented in the 16th century, making calculations much easier!",
+                "The fraction bar (—) is also called a vinculum, which means 'bond' in Latin!"
+            ];
+            
+            factDiv.innerHTML = `<strong>Math Fact:</strong> ${facts[Math.floor(Math.random() * facts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "addition_like": "➕",
+                "addition_unlike": "➕",
+                "subtraction_like": "➖",
+                "subtraction_unlike": "➖",
+                "multiplication": "✖️",
+                "division": "➗",
+                "mixed": "⚡"
+            };
+            
+            let conceptName = "Fraction Addition";
+            let conceptIcon = "➕";
+            
+            if (question.type.includes("addition")) {
+                conceptName = question.type.includes("like") ? "Adding Like Fractions" : "Adding Unlike Fractions";
+                conceptIcon = conceptIcons.addition_like;
+            } else if (question.type.includes("subtraction")) {
+                conceptName = question.type.includes("like") ? "Subtracting Like Fractions" : "Subtracting Unlike Fractions";
+                conceptIcon = conceptIcons.subtraction_like;
+            } else if (question.type.includes("multiplication")) {
+                conceptName = "Multiplying Fractions";
+                conceptIcon = conceptIcons.multiplication;
+            } else if (question.type.includes("division")) {
+                conceptName = "Dividing Fractions";
+                conceptIcon = conceptIcons.division;
+            } else {
+                conceptName = "Mixed Operations";
+                conceptIcon = conceptIcons.mixed;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("addition_like")) {
+                label.textContent = "Add numerators, keep same denominator";
+            } else if (question.type.includes("addition_unlike")) {
+                label.textContent = "Find common denominator first";
+            } else if (question.type.includes("subtraction_like")) {
+                label.textContent = "Subtract numerators, keep same denominator";
+            } else if (question.type.includes("subtraction_unlike")) {
+                label.textContent = "Common denominator, then subtract";
+            } else if (question.type.includes("multiplication")) {
+                label.textContent = "Multiply numerators, multiply denominators";
+            } else if (question.type.includes("division")) {
+                label.textContent = "Keep first, change ÷ to ×, flip second fraction";
+            } else {
+                label.textContent = "Applying fraction operation rules";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create fraction visualization
+        function createFractionVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("addition")) {
+                // Addition visualization
+                const frac1 = generateFraction(false, 8);
+                const frac2 = generateFraction(false, 8);
+                
+                // Ensure like denominators for like questions
+                if (question.type.includes("like")) {
+                    frac2.denominator = frac1.denominator;
+                    frac2.numerator = Math.min(frac2.numerator, frac1.denominator - 1);
+                }
+                
+                const lcm = getLCM(frac1.denominator, frac2.denominator);
+                const newNum1 = frac1.numerator * (lcm / frac1.denominator);
+                const newNum2 = frac2.numerator * (lcm / frac2.denominator);
+                const resultNum = newNum1 + newNum2;
+                const result = simplifyFraction(resultNum, lcm);
+                
+                vizDiv.innerHTML = `
+                    <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-purple);">Adding Fractions</h3>
+                    
+                    <div class="common-denominator">
+                        <div class="fraction-box operation-flow" style="animation-delay: 0s;">
+                            <div class="fraction-number">${frac1.numerator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${frac1.denominator}</div>
+                        </div>
+                        
+                        <div class="operator" style="animation-delay: 0.2s;">+</div>
+                        
+                        <div class="fraction-box operation-flow" style="animation-delay: 0.4s;">
+                            <div class="fraction-number">${frac2.numerator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${frac2.denominator}</div>
+                        </div>
+                        
+                        <div class="operator" style="animation-delay: 0.6s;">=</div>
+                        
+                        <div class="fraction-box fraction-highlight" style="animation-delay: 0.8s;">
+                            <div class="fraction-number">${result.numerator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${result.denominator}</div>
+                        </div>
+                    </div>
+                    
+                    ${!question.type.includes("like") ? `
+                    <div class="operation-steps">
+                        <div class="step">
+                            <span class="step-number">1</span> Find common denominator: LCM of ${frac1.denominator} and ${frac2.denominator} = ${lcm}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span> Convert: ${frac1.toString()} = ${newNum1}/${lcm}, ${frac2.toString()} = ${newNum2}/${lcm}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span> Add numerators: ${newNum1} + ${newNum2} = ${resultNum}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span> Simplify: ${resultNum}/${lcm} = ${result.toString()}
+                        </div>
+                    </div>
+                    ` : `
+                    <div class="operation-steps">
+                        <div class="step">
+                            <span class="step-number">1</span> Denominators are the same (${frac1.denominator})
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span> Add numerators: ${frac1.numerator} + ${frac2.numerator} = ${frac1.numerator + frac2.numerator}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span> Keep denominator: ${frac1.denominator}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span> Result: ${frac1.numerator + frac2.numerator}/${frac1.denominator}
+                        </div>
+                    </div>
+                    `}
+                    
+                    <div class="fraction-circle-container">
+                        <div class="fraction-circle">
+                            <div class="fraction-label">${frac1.toString()}</div>
+                            ${Array.from({length: frac1.denominator}).map((_, i) => `
+                                <div class="fraction-slice" style="--rotation: ${(360/frac1.denominator * i)}deg; transform: rotate(${360/frac1.denominator * i}deg); background: ${i < frac1.numerator ? 'rgba(156, 39, 176, 0.5)' : 'transparent'};"></div>
+                            `).join('')}
+                        </div>
+                        
+                        <div style="align-self: center; font-size: 2rem;">+</div>
+                        
+                        <div class="fraction-circle">
+                            <div class="fraction-label">${frac2.toString()}</div>
+                            ${Array.from({length: frac2.denominator}).map((_, i) => `
+                                <div class="fraction-slice" style="--rotation: ${(360/frac2.denominator * i)}deg; transform: rotate(${360/frac2.denominator * i}deg); background: ${i < frac2.numerator ? 'rgba(0, 188, 212, 0.5)' : 'transparent'};"></div>
+                            `).join('')}
+                        </div>
+                        
+                        <div style="align-self: center; font-size: 2rem;">=</div>
+                        
+                        <div class="fraction-circle">
+                            <div class="fraction-label">${result.toString()}</div>
+                            ${Array.from({length: result.denominator}).map((_, i) => `
+                                <div class="fraction-slice" style="--rotation: ${(360/result.denominator * i)}deg; transform: rotate(${360/result.denominator * i}deg); background: ${i < result.numerator ? 'rgba(233, 30, 99, 0.5)' : 'transparent'};"></div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                
+            } else if (question.type.includes("subtraction")) {
+                // Subtraction visualization
+                const frac1 = generateFraction(false, 8);
+                let frac2 = generateFraction(false, 8);
+                
+                // Ensure like denominators for like questions and frac1 > frac2
+                if (question.type.includes("like")) {
+                    frac2.denominator = frac1.denominator;
+                    frac2.numerator = Math.min(frac2.numerator, frac1.numerator - 1);
+                }
+                
+                // Make sure frac1 > frac2
+                if (frac1.numerator/frac1.denominator <= frac2.numerator/frac2.denominator) {
+                    const temp = frac1.numerator;
+                    frac1.numerator = frac2.numerator + 1;
+                    frac2.numerator = temp;
+                }
+                
+                const lcm = getLCM(frac1.denominator, frac2.denominator);
+                const newNum1 = frac1.numerator * (lcm / frac1.denominator);
+                const newNum2 = frac2.numerator * (lcm / frac2.denominator);
+                const resultNum = newNum1 - newNum2;
+                const result = simplifyFraction(resultNum, lcm);
+                
+                vizDiv.innerHTML = `
+                    <h3 style="text-align: center; margin-bottom: 20px; color: var(--secondary-pink);">Subtracting Fractions</h3>
+                    
+                    <div class="common-denominator">
+                        <div class="fraction-box operation-flow" style="animation-delay: 0s;">
+                            <div class="fraction-number">${frac1.numerator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${frac1.denominator}</div>
+                        </div>
+                        
+                        <div class="operator" style="animation-delay: 0.2s;">-</div>
+                        
+                        <div class="fraction-box operation-flow" style="animation-delay: 0.4s;">
+                            <div class="fraction-number">${frac2.numerator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${frac2.denominator}</div>
+                        </div>
+                        
+                        <div class="operator" style="animation-delay: 0.6s;">=</div>
+                        
+                        <div class="fraction-box fraction-highlight" style="animation-delay: 0.8s;">
+                            <div class="fraction-number">${result.numerator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${result.denominator}</div>
+                        </div>
+                    </div>
+                    
+                    ${!question.type.includes("like") ? `
+                    <div class="operation-steps">
+                        <div class="step">
+                            <span class="step-number">1</span> Find common denominator: LCM of ${frac1.denominator} and ${frac2.denominator} = ${lcm}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span> Convert: ${frac1.toString()} = ${newNum1}/${lcm}, ${frac2.toString()} = ${newNum2}/${lcm}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span> Subtract numerators: ${newNum1} - ${newNum2} = ${resultNum}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span> Simplify: ${resultNum}/${lcm} = ${result.toString()}
+                        </div>
+                    </div>
+                    ` : `
+                    <div class="operation-steps">
+                        <div class="step">
+                            <span class="step-number">1</span> Denominators are the same (${frac1.denominator})
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span> Subtract numerators: ${frac1.numerator} - ${frac2.numerator} = ${frac1.numerator - frac2.numerator}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span> Keep denominator: ${frac1.denominator}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span> Result: ${frac1.numerator - frac2.numerator}/${frac1.denominator}
+                        </div>
+                    </div>
+                    `}
+                `;
+                
+            } else if (question.type.includes("multiplication")) {
+                // Multiplication visualization
+                const frac1 = generateFraction(false, 6);
+                const frac2 = generateFraction(false, 6);
+                const resultNum = frac1.numerator * frac2.numerator;
+                const resultDen = frac1.denominator * frac2.denominator;
+                const result = simplifyFraction(resultNum, resultDen);
+                
+                vizDiv.innerHTML = `
+                    <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-teal);">Multiplying Fractions</h3>
+                    
+                    <div class="common-denominator">
+                        <div class="fraction-box operation-flow" style="animation-delay: 0s;">
+                            <div class="fraction-number">${frac1.numerator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${frac1.denominator}</div>
+                        </div>
+                        
+                        <div class="operator" style="animation-delay: 0.2s;">×</div>
+                        
+                        <div class="fraction-box operation-flow" style="animation-delay: 0.4s;">
+                            <div class="fraction-number">${frac2.numerator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${frac2.denominator}</div>
+                        </div>
+                        
+                        <div class="operator" style="animation-delay: 0.6s;">=</div>
+                        
+                        <div class="fraction-box fraction-highlight" style="animation-delay: 0.8s;">
+                            <div class="fraction-number">${result.numerator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${result.denominator}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="operation-steps">
+                        <div class="step">
+                            <span class="step-number">1</span> Multiply numerators: ${frac1.numerator} × ${frac2.numerator} = ${resultNum}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span> Multiply denominators: ${frac1.denominator} × ${frac2.denominator} = ${resultDen}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span> Result: ${resultNum}/${resultDen}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span> Simplify: ${resultNum}/${resultDen} = ${result.toString()}
+                        </div>
+                    </div>
+                    
+                    <div class="multiplication-grid">
+                        <div class="grid-cell">Multiply</div>
+                        <div class="grid-cell">Numerators</div>
+                        <div class="grid-cell">Denominators</div>
+                        <div class="grid-cell">${frac1.toString()} × ${frac2.toString()}</div>
+                        <div class="grid-cell">${frac1.numerator} × ${frac2.numerator} = ${resultNum}</div>
+                        <div class="grid-cell">${frac1.denominator} × ${frac2.denominator} = ${resultDen}</div>
+                    </div>
+                `;
+                
+            } else if (question.type.includes("division")) {
+                // Division visualization
+                const frac1 = generateFraction(false, 6);
+                const frac2 = generateFraction(false, 6);
+                const resultNum = frac1.numerator * frac2.denominator;
+                const resultDen = frac1.denominator * frac2.numerator;
+                const result = simplifyFraction(resultNum, resultDen);
+                
+                vizDiv.innerHTML = `
+                    <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-lime);">Dividing Fractions</h3>
+                    
+                    <div class="division-display">
+                        <div class="fraction-box operation-flow" style="animation-delay: 0s;">
+                            <div class="fraction-number">${frac1.numerator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${frac1.denominator}</div>
+                        </div>
+                        
+                        <div style="font-size: 2rem; color: var(--accent-lime); margin: 0 15px;">÷</div>
+                        
+                        <div class="fraction-box operation-flow" style="animation-delay: 0.2s;">
+                            <div class="fraction-number">${frac2.numerator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${frac2.denominator}</div>
+                        </div>
+                        
+                        <div style="font-size: 2rem; color: var(--accent-lime); margin: 0 15px;">=</div>
+                        
+                        <div class="fraction-box operation-flow" style="animation-delay: 0.4s;">
+                            <div class="fraction-number">${frac1.numerator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${frac1.denominator}</div>
+                        </div>
+                        
+                        <div style="font-size: 2rem; color: var(--accent-lime); margin: 0 10px;">×</div>
+                        
+                        <div class="fraction-box operation-flow" style="animation-delay: 0.6s;">
+                            <div class="fraction-number">${frac2.denominator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${frac2.numerator}</div>
+                        </div>
+                        
+                        <div style="font-size: 2rem; color: var(--accent-lime); margin: 0 15px;">=</div>
+                        
+                        <div class="fraction-box fraction-highlight" style="animation-delay: 0.8s;">
+                            <div class="fraction-number">${result.numerator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${result.denominator}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="operation-steps">
+                        <div class="step">
+                            <span class="step-number">1</span> KEEP the first fraction: ${frac1.toString()}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span> CHANGE ÷ to ×
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span> FLIP the second fraction: ${frac2.toString()} becomes ${frac2.denominator}/${frac2.numerator}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span> Multiply: ${frac1.numerator}×${frac2.denominator}=${resultNum}, ${frac1.denominator}×${frac2.numerator}=${resultDen}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">5</span> Simplify: ${resultNum}/${resultDen} = ${result.toString()}
+                        </div>
+                    </div>
+                `;
+                
+            } else {
+                // Mixed operations visualization
+                const operation = Math.random() > 0.5 ? '+' : '×';
+                const frac1 = generateFraction(false, 8);
+                const frac2 = generateFraction(false, 8);
+                
+                let result, explanation;
+                if (operation === '+') {
+                    const lcm = getLCM(frac1.denominator, frac2.denominator);
+                    const newNum1 = frac1.numerator * (lcm / frac1.denominator);
+                    const newNum2 = frac2.numerator * (lcm / frac2.denominator);
+                    const resultNum = newNum1 + newNum2;
+                    result = simplifyFraction(resultNum, lcm);
+                    explanation = `Common denominator: ${lcm}, then add: ${newNum1}/${lcm} + ${newNum2}/${lcm} = ${resultNum}/${lcm}`;
+                } else {
+                    const resultNum = frac1.numerator * frac2.numerator;
+                    const resultDen = frac1.denominator * frac2.denominator;
+                    result = simplifyFraction(resultNum, resultDen);
+                    explanation = `Multiply numerators: ${frac1.numerator}×${frac2.numerator}=${resultNum}, denominators: ${frac1.denominator}×${frac2.denominator}=${resultDen}`;
+                }
+                
+                vizDiv.innerHTML = `
+                    <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-amber);">Fraction Operation</h3>
+                    
+                    <div class="common-denominator">
+                        <div class="fraction-box">
+                            <div class="fraction-number">${frac1.numerator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${frac1.denominator}</div>
+                        </div>
+                        
+                        <div class="operator">${operation}</div>
+                        
+                        <div class="fraction-box">
+                            <div class="fraction-number">${frac2.numerator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${frac2.denominator}</div>
+                        </div>
+                        
+                        <div class="operator">=</div>
+                        
+                        <div class="fraction-box fraction-highlight">
+                            <div class="fraction-number">${result.numerator}</div>
+                            <div class="fraction-bar"></div>
+                            <div class="fraction-number">${result.denominator}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="operation-steps">
+                        <div class="step">
+                            <span class="step-number">1</span> ${operation === '+' ? 'Find common denominator' : 'Multiply numerators and denominators separately'}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span> ${explanation}
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span> Simplify the result
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(255, 193, 7, 0.1); border-radius: 10px;">
+                        <div style="font-size: 1rem; color: var(--text-secondary);">Remember:</div>
+                        <div style="font-size: 1.1rem; color: var(--accent-amber); margin-top: 10px;">
+                            ${operation === '+' ? 'Add/Subtract: Need common denominator' : 'Multiply: Multiply straight across'}
+                        </div>
+                        <div style="font-size: 1.1rem; color: var(--accent-teal); margin-top: 5px;">
+                            Divide: Keep, Change, Flip
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return vizDiv;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            mathFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            mathFact.appendChild(createMathFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createFractionVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

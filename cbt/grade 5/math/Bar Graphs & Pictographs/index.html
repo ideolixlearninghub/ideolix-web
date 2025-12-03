@@ -1,0 +1,2390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Math - Bar Graphs & Pictographs | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Data Visualization Theme */
+        :root {
+            --primary-blue: #2196F3;
+            --secondary-green: #4CAF50;
+            --accent-orange: #FF9800;
+            --accent-purple: #9C27B0;
+            --accent-pink: #E91E63;
+            --accent-cyan: #00BCD4;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(33, 150, 243, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(33, 150, 243, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-blue);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--accent-pink);
+            color: white;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #C2185B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-blue), var(--accent-pink));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .math-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-orange);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* New Compact Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-cyan));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--accent-pink);
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+        }
+
+        /* Bar Graph Display */
+        .graph-container {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 8px;
+            background: var(--dark-card);
+        }
+
+        .graph-title {
+            text-align: center;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .graph-axis {
+            position: absolute;
+            background: var(--dark-border);
+        }
+
+        .x-axis {
+            bottom: 30px;
+            left: 50px;
+            right: 30px;
+            height: 2px;
+        }
+
+        .y-axis {
+            left: 50px;
+            top: 20px;
+            bottom: 30px;
+            width: 2px;
+        }
+
+        .bar {
+            position: absolute;
+            bottom: 30px;
+            background: var(--primary-blue);
+            border-radius: 4px 4px 0 0;
+            transition: height 1s ease;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-primary);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .y-axis-labels {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        /* Pictograph Display */
+        .pictograph-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .pictograph-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            background: var(--dark-card);
+            border-radius: 8px;
+        }
+
+        .pictograph-label {
+            min-width: 100px;
+            color: var(--text-primary);
+            font-weight: bold;
+        }
+
+        .pictograph-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            flex: 1;
+        }
+
+        .pictograph-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            background: var(--primary-blue);
+            border-radius: 4px;
+            transition: transform 0.3s ease;
+        }
+
+        .pictograph-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .pictograph-count {
+            min-width: 50px;
+            text-align: right;
+            color: var(--accent-orange);
+            font-weight: bold;
+        }
+
+        .pictograph-key {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: var(--dark-card);
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .key-icon {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            background: var(--secondary-green);
+            border-radius: 4px;
+        }
+
+        .key-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .data-table th {
+            background: var(--dark-surface);
+            padding: 12px;
+            text-align: left;
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--primary-blue);
+        }
+
+        .data-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+        }
+
+        .data-table tr:hover {
+            background: rgba(33, 150, 243, 0.05);
+        }
+
+        /* Graph Types Display */
+        .graph-types {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .graph-types {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .graph-type-card {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .graph-type-card.active {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .graph-type-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .graph-type-name {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .graph-type-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Graph Elements */
+        .graph-elements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .graph-element {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: var(--dark-card);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .element-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+        }
+
+        .element-label {
+            color: var(--text-primary);
+        }
+
+        /* Scale Display */
+        .scale-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            background: var(--dark-card);
+            border-radius: 8px;
+        }
+
+        .scale-icon {
+            font-size: 1.5rem;
+        }
+
+        .scale-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .scale-value {
+            color: var(--accent-orange);
+            font-weight: bold;
+        }
+
+        /* Calculation Steps */
+        .calculation-steps {
+            margin: 20px 0;
+        }
+
+        .step {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--accent-orange);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .graph-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .pictograph-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .pictograph-label {
+                min-width: auto;
+            }
+            
+            .graph-container {
+                height: 250px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes barGrow {
+            from { height: 0; }
+            to { height: var(--bar-height); }
+        }
+        
+        .bar-grow {
+            animation: barGrow 1s ease forwards;
+        }
+        
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .icon-bounce {
+            animation: iconBounce 0.5s ease infinite;
+        }
+        
+        @keyframes graphHighlight {
+            0%, 100% { box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3); }
+            50% { box-shadow: 0 2px 16px rgba(33, 150, 243, 0.6); }
+        }
+        
+        .graph-highlight {
+            animation: graphHighlight 2s ease-in-out infinite;
+        }
+        
+        @keyframes dataFlow {
+            0% { transform: translateX(-20px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        
+        .data-flow {
+            animation: dataFlow 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 5 Mathematics</h1>
+            <p class="welcome-subtitle">Master data visualization! Learn to read, interpret, and create bar graphs and pictographs. Understand scales, keys, and how to represent data visually to solve real-world problems!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">📊📈</span>
+                <span class="topic-name">Bar Graphs & Pictographs</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Data Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Math fact display -->
+                <div id="mathFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Data Visualization Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 100 Grade 5 Bar Graphs & Pictographs questions
+        const questions = [
+            // Reading Bar Graphs (1-25)
+            {
+                type: "bar_graph_reading",
+                question: "What is the title of a bar graph?",
+                options: ["The main topic of the graph", "The x-axis label", "The y-axis label", "The source of data"],
+                answer: "A",
+                explanation: "The title tells you what the graph is about"
+            },
+            {
+                type: "bar_graph_reading",
+                question: "What does the x-axis of a bar graph usually show?",
+                options: ["Categories being compared", "Numerical values", "The scale", "The key"],
+                answer: "A",
+                explanation: "The x-axis shows the different categories or groups"
+            },
+            {
+                type: "bar_graph_reading",
+                question: "What does the y-axis of a bar graph show?",
+                options: ["Numerical values or counts", "Categories", "The title", "Colors"],
+                answer: "A",
+                explanation: "The y-axis shows the scale with numbers or counts"
+            },
+            {
+                type: "bar_graph_reading",
+                question: "In a bar graph about favorite fruits, if the 'Apple' bar reaches 20 on the y-axis and the scale is 1 unit = 2 votes, how many people voted for apples?",
+                options: ["40 people", "20 people", "10 people", "60 people"],
+                answer: "A",
+                explanation: "20 units × 2 votes per unit = 40 votes"
+            },
+            {
+                type: "bar_graph_reading",
+                question: "If a bar graph shows 'Number of Books Read' and the 'March' bar reaches 15, what does this mean?",
+                options: ["15 books were read in March", "15 people read books in March", "Books cost $15 in March", "March is 15th month"],
+                answer: "A",
+                explanation: "The bar height shows the quantity for that category"
+            },
+            {
+                type: "bar_graph_reading",
+                question: "What is the scale of a bar graph?",
+                options: ["The numerical values on the y-axis", "The categories on x-axis", "The colors of bars", "The title"],
+                answer: "A",
+                explanation: "The scale shows what each unit on the y-axis represents"
+            },
+            {
+                type: "bar_graph_reading",
+                question: "If a bar graph scale is 1 unit = 5 students, and a bar reaches 4 units, how many students does it represent?",
+                options: ["20 students", "4 students", "9 students", "5 students"],
+                answer: "A",
+                explanation: "4 units × 5 students per unit = 20 students"
+            },
+            {
+                type: "bar_graph_reading",
+                question: "Which part of a bar graph helps you understand what is being measured?",
+                options: ["Axis labels", "Bar colors", "Grid lines", "Graph border"],
+                answer: "A",
+                explanation: "Axis labels tell you what the categories and numbers represent"
+            },
+            {
+                type: "bar_graph_reading",
+                question: "What do the bars in a bar graph represent?",
+                options: ["Values for each category", "Colors", "The scale", "The title"],
+                answer: "A",
+                explanation: "Each bar shows the value for its corresponding category"
+            },
+            {
+                type: "bar_graph_reading",
+                question: "If 'Math' bar = 30, 'Science' bar = 25, 'English' bar = 35, which subject has the highest score?",
+                options: ["English", "Math", "Science", "They're equal"],
+                answer: "A",
+                explanation: "English has the tallest bar at 35"
+            },
+
+            // Creating Bar Graphs (26-40)
+            {
+                type: "bar_graph_creating",
+                question: "What should you do first when creating a bar graph?",
+                options: ["Choose a title and labels", "Color the bars", "Draw the border", "Add numbers"],
+                answer: "A",
+                explanation: "Always start with a clear title and axis labels"
+            },
+            {
+                type: "bar_graph_creating",
+                question: "How do you determine the scale for a bar graph?",
+                options: ["Find the range of data and divide evenly", "Always use 1,2,3,4,5", "Use random numbers", "Copy from another graph"],
+                answer: "A",
+                explanation: "The scale should cover your data range with even intervals"
+            },
+            {
+                type: "bar_graph_creating",
+                question: "What is an appropriate scale for data values: 15, 20, 25, 30?",
+                options: ["0, 5, 10, 15, 20, 25, 30, 35", "0, 10, 20, 30, 40", "15, 20, 25, 30", "0, 100, 200, 300"],
+                answer: "A",
+                explanation: "The scale should start at 0 and have equal intervals covering all values"
+            },
+            {
+                type: "bar_graph_creating",
+                question: "Why should bar graphs start at 0 on the y-axis?",
+                options: ["To show accurate comparisons", "To save space", "It's a rule", "To make bars taller"],
+                answer: "A",
+                explanation: "Starting at 0 ensures fair visual comparisons between bars"
+            },
+            {
+                type: "bar_graph_creating",
+                question: "How wide should bars be in a bar graph?",
+                options: ["Equal width with equal spacing", "Different widths", "Very thin", "Very wide"],
+                answer: "A",
+                explanation: "Bars should be equal width with consistent spacing for fair comparison"
+            },
+
+            // Reading Pictographs (41-65)
+            {
+                type: "pictograph_reading",
+                question: "What is a pictograph?",
+                options: ["A graph using pictures to show data", "A bar graph with colors", "A numbered chart", "A pie chart"],
+                answer: "A",
+                explanation: "Pictographs use pictures or symbols to represent data"
+            },
+            {
+                type: "pictograph_reading",
+                question: "What is the 'key' in a pictograph?",
+                options: ["Shows what each picture represents", "The title", "The border", "The colors used"],
+                answer: "A",
+                explanation: "The key explains the value of each picture/symbol"
+            },
+            {
+                type: "pictograph_reading",
+                question: "If a pictograph key shows 🍎 = 5 apples, and there are 3 apples shown for 'John', how many apples does John have?",
+                options: ["15 apples", "3 apples", "5 apples", "8 apples"],
+                answer: "A",
+                explanation: "3 symbols × 5 apples per symbol = 15 apples"
+            },
+            {
+                type: "pictograph_reading",
+                question: "What does a half-picture in a pictograph mean?",
+                options: ["Half the value of one picture", "A mistake", "A different category", "Double value"],
+                answer: "A",
+                explanation: "Half a picture represents half the value of a full picture"
+            },
+            {
+                type: "pictograph_reading",
+                question: "If 🚗 = 10 cars, and 'Parking Lot A' shows 2½ cars, how many cars are there?",
+                options: ["25 cars", "20 cars", "12 cars", "15 cars"],
+                answer: "A",
+                explanation: "2½ symbols × 10 cars per symbol = 25 cars"
+            },
+            {
+                type: "pictograph_reading",
+                question: "Why are pictographs useful?",
+                options: ["Easy to understand visually", "Hard to read", "Use lots of numbers", "Require calculations"],
+                answer: "A",
+                explanation: "Pictographs make data easy to understand at a glance"
+            },
+            {
+                type: "pictograph_reading",
+                question: "What should you check first when reading a pictograph?",
+                options: ["The key", "The title", "The pictures", "The colors"],
+                answer: "A",
+                explanation: "Always check the key to understand what each picture represents"
+            },
+            {
+                type: "pictograph_reading",
+                question: "If ⭐ = 2 points, and a student has 4½ stars, how many points?",
+                options: ["9 points", "8 points", "10 points", "4 points"],
+                answer: "A",
+                explanation: "4½ stars × 2 points per star = 9 points"
+            },
+            {
+                type: "pictograph_reading",
+                question: "What does each row in a pictograph represent?",
+                options: ["A different category", "The scale", "The key", "Colors"],
+                answer: "A",
+                explanation: "Each row represents a different category being compared"
+            },
+            {
+                type: "pictograph_reading",
+                question: "If 📚 = 3 books, how many books for 2 full books and 1 half-book?",
+                options: ["7.5 books", "6 books", "9 books", "3 books"],
+                answer: "A",
+                explanation: "(2 × 3) + (0.5 × 3) = 6 + 1.5 = 7.5 books"
+            },
+
+            // Creating Pictographs (66-80)
+            {
+                type: "pictograph_creating",
+                question: "What is the first step in creating a pictograph?",
+                options: ["Choose an appropriate symbol", "Draw the grid", "Color the pictures", "Write numbers"],
+                answer: "A",
+                explanation: "Choose a symbol that represents your data well"
+            },
+            {
+                type: "pictograph_creating",
+                question: "How do you choose the value for each picture in a pictograph?",
+                options: ["Based on your data range", "Always use 1", "Use 10 always", "Choose randomly"],
+                answer: "A",
+                explanation: "Choose a value that makes the pictograph clear and not too crowded"
+            },
+            {
+                type: "pictograph_creating",
+                question: "What should you include in a pictograph key?",
+                options: ["Symbol and its value", "Only the symbol", "Only the value", "The title"],
+                answer: "A",
+                explanation: "The key must show both the symbol and what it represents"
+            },
+            {
+                type: "pictograph_creating",
+                question: "Why might you use half-symbols in a pictograph?",
+                options: ["To show half the key value", "To save space", "To make it colorful", "It's required"],
+                answer: "A",
+                explanation: "Half-symbols allow you to represent values that aren't whole multiples"
+            },
+            {
+                type: "pictograph_creating",
+                question: "What makes a good pictograph symbol?",
+                options: ["Simple, clear, and relevant", "Complex and detailed", "Colorful only", "Large size"],
+                answer: "A",
+                explanation: "Symbols should be simple, easy to draw, and relevant to the data"
+            },
+
+            // Comparing Graphs (81-90)
+            {
+                type: "graph_comparison",
+                question: "Which graph uses pictures to show data?",
+                options: ["Pictograph", "Bar graph", "Line graph", "Pie chart"],
+                answer: "A",
+                explanation: "Pictographs use pictures, bar graphs use bars"
+            },
+            {
+                type: "graph_comparison",
+                question: "Which graph uses bars of different heights?",
+                options: ["Bar graph", "Pictograph", "Both", "Neither"],
+                answer: "A",
+                explanation: "Bar graphs use rectangular bars of different heights"
+            },
+            {
+                type: "graph_comparison",
+                question: "What do both bar graphs and pictographs show?",
+                options: ["Comparisons between categories", "Changes over time", "Percentages", "Exact numbers only"],
+                answer: "A",
+                explanation: "Both compare different categories using visual representations"
+            },
+            {
+                type: "graph_comparison",
+                question: "Which graph might be better for showing favorite fruits of young children?",
+                options: ["Pictograph", "Bar graph", "Line graph", "Scatter plot"],
+                answer: "A",
+                explanation: "Pictographs with fruit pictures are very intuitive for children"
+            },
+            {
+                type: "graph_comparison",
+                question: "Which graph requires a key to explain symbols?",
+                options: ["Pictograph", "Bar graph", "Both", "Neither"],
+                answer: "A",
+                explanation: "Only pictographs need a key to explain picture values"
+            },
+
+            // Real-world Problems (91-100)
+            {
+                type: "real_world_problems",
+                question: "A store tracks ice cream sales: Chocolate-45, Vanilla-60, Strawberry-30. Which flavor sold the most?",
+                options: ["Vanilla", "Chocolate", "Strawberry", "All equal"],
+                answer: "A",
+                explanation: "Vanilla has the highest number at 60 sales"
+            },
+            {
+                type: "real_world_problems",
+                question: "A pictograph shows 🏀 = 5 students. If 3½ basketballs are shown for Class 5A, how many students play basketball?",
+                options: ["17.5 students", "15 students", "20 students", "18 students"],
+                answer: "A",
+                explanation: "3½ × 5 = 17.5 students (round to 17 or 18 in real context)"
+            },
+            {
+                type: "real_world_problems",
+                question: "A bar graph shows test scores: Math-85, Science-92, English-78. What's the difference between highest and lowest?",
+                options: ["14 points", "7 points", "10 points", "5 points"],
+                answer: "A",
+                explanation: "92 (highest) - 78 (lowest) = 14 points difference"
+            },
+            {
+                type: "real_world_problems",
+                question: "If 📚 = 4 books, and you see 2 books for 'May' and 3 books for 'June', how many more books in June?",
+                options: ["4 more books", "1 more book", "3 more books", "2 more books"],
+                answer: "A",
+                explanation: "June: 3×4=12 books, May: 2×4=8 books, Difference: 12-8=4 books"
+            },
+            {
+                type: "real_world_problems",
+                question: "A survey shows: Pizza-25 votes, Burger-18, Pasta-22. If displayed in a bar graph with scale 1 unit=2 votes, how tall is Pizza bar?",
+                options: ["12.5 units", "25 units", "50 units", "10 units"],
+                answer: "A",
+                explanation: "25 votes ÷ 2 votes per unit = 12.5 units"
+            },
+            {
+                type: "real_world_problems",
+                question: "A pictograph shows favorite colors with 🎨 = 3 votes. If Red has 4🎨, Blue has 2🎨, Green has 3🎨, which color is most popular?",
+                options: ["Red", "Blue", "Green", "Tie"],
+                answer: "A",
+                explanation: "Red: 4×3=12 votes, Blue: 2×3=6, Green: 3×3=9. Red has most votes"
+            },
+            {
+                type: "real_world_problems",
+                question: "In a bar graph of monthly rainfall, July bar = 8cm, August bar = 5cm. How much more rain in July?",
+                options: ["3 cm", "13 cm", "5 cm", "8 cm"],
+                answer: "A",
+                explanation: "8 cm - 5 cm = 3 cm more in July"
+            },
+            {
+                type: "real_world_problems",
+                question: "If 🚗 = 10 cars sold, and a dealership shows 2½ cars for March, 4 cars for April, how many more in April?",
+                options: ["15 more cars", "20 more cars", "25 more cars", "10 more cars"],
+                answer: "A",
+                explanation: "April: 4×10=40, March: 2.5×10=25, Difference: 40-25=15 cars"
+            },
+            {
+                type: "real_world_problems",
+                question: "A class poll: Soccer-15, Basketball-12, Swimming-18. What's the total votes?",
+                options: ["45 votes", "35 votes", "50 votes", "40 votes"],
+                answer: "A",
+                explanation: "15 + 12 + 18 = 45 total votes"
+            },
+            {
+                type: "real_world_problems",
+                question: "If ⭐ = 2 achievements, and Sarah has 5 stars, John has 3½ stars, how many more achievements does Sarah have?",
+                options: ["3 more achievements", "2 more", "4 more", "5 more"],
+                answer: "A",
+                explanation: "Sarah: 5×2=10, John: 3.5×2=7, Difference: 10-7=3 achievements"
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent data interpretation skills!",
+            "Fantastic graph reading ability!",
+            "Great job! You're a data visualization expert!",
+            "Amazing! Your graph analysis is impressive!",
+            "Well done! Perfect data understanding!",
+            "You're a bar graph and pictograph champion!",
+            "Perfect! You understand visual data representation!",
+            "Outstanding analytical thinking!",
+            "Brilliant! You think like a data scientist!",
+            "You're on fire! Great graph insight!"
+        ];
+
+        // Sample data for visualizations
+        const sampleData = {
+            favoriteFruits: {
+                title: "Favorite Fruits Survey",
+                categories: ["Apples", "Bananas", "Oranges", "Grapes", "Strawberries"],
+                values: [25, 18, 22, 15, 30],
+                icon: "🍎",
+                scale: "1 unit = 2 votes"
+            },
+            bookReading: {
+                title: "Books Read This Month",
+                categories: ["Week 1", "Week 2", "Week 3", "Week 4"],
+                values: [4, 6, 3, 8],
+                icon: "📚",
+                scale: "1 unit = 1 book"
+            },
+            sportsParticipation: {
+                title: "Sports Team Participation",
+                categories: ["Soccer", "Basketball", "Swimming", "Tennis"],
+                values: [45, 32, 28, 20],
+                icon: "⚽",
+                scale: "1 unit = 4 students"
+            },
+            testScores: {
+                title: "Class Test Scores",
+                categories: ["Math", "Science", "English", "History"],
+                values: [85, 92, 78, 88],
+                icon: "📝",
+                scale: "1 unit = 2 points"
+            },
+            weatherData: {
+                title: "Monthly Rainfall",
+                categories: ["Jan", "Feb", "Mar", "Apr", "May"],
+                values: [8, 6, 10, 7, 12],
+                icon: "🌧️",
+                scale: "1 unit = 1 cm"
+            }
+        };
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const mathFact = document.getElementById('mathFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Generate sample data for visualization
+        function generateSampleData(type) {
+            const datasets = Object.values(sampleData);
+            return datasets[Math.floor(Math.random() * datasets.length)];
+        }
+
+        // Create bar graph visualization
+        function createBarGraph(data) {
+            const maxValue = Math.max(...data.values);
+            const graphHeight = 200;
+            const barWidth = 40;
+            const spacing = 20;
+            const yAxisMax = Math.ceil(maxValue / 10) * 10;
+            
+            let graphHTML = `
+                <div class="graph-container">
+                    <div class="graph-title">${data.title}</div>
+                    <div class="y-axis-labels">
+                        <div>${yAxisMax}</div>
+                        <div>${Math.round(yAxisMax * 0.75)}</div>
+                        <div>${Math.round(yAxisMax * 0.5)}</div>
+                        <div>${Math.round(yAxisMax * 0.25)}</div>
+                        <div>0</div>
+                    </div>
+                    <div class="y-axis"></div>
+                    <div class="x-axis"></div>
+            `;
+            
+            data.categories.forEach((category, index) => {
+                const barHeight = (data.values[index] / yAxisMax) * graphHeight;
+                const leftPosition = 60 + (index * (barWidth + spacing));
+                
+                graphHTML += `
+                    <div class="bar bar-grow" 
+                         style="--bar-height: ${barHeight}px; 
+                                height: ${barHeight}px; 
+                                left: ${leftPosition}px; 
+                                width: ${barWidth}px;
+                                background: ${getBarColor(index)};">
+                        <div class="bar-value">${data.values[index]}</div>
+                        <div class="bar-label">${category}</div>
+                    </div>
+                `;
+            });
+            
+            graphHTML += `
+                    <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); color: var(--text-secondary); font-size: 0.8rem;">
+                        Scale: ${data.scale}
+                    </div>
+                </div>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Value</th>
+                            <th>Bar Color</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            data.categories.forEach((category, index) => {
+                graphHTML += `
+                    <tr>
+                        <td>${category}</td>
+                        <td>${data.values[index]}</td>
+                        <td>
+                            <div style="display: inline-block; width: 15px; height: 15px; background: ${getBarColor(index)}; border-radius: 3px;"></div>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            graphHTML += `
+                    </tbody>
+                </table>
+                
+                <div class="calculation-steps">
+                    <div class="step">
+                        <span class="step-number">1</span> Identify the highest value: ${Math.max(...data.values)} (${data.categories[data.values.indexOf(Math.max(...data.values))]})
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span> Identify the lowest value: ${Math.min(...data.values)} (${data.categories[data.values.indexOf(Math.min(...data.values))]})
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span> Calculate difference: ${Math.max(...data.values)} - ${Math.min(...data.values)} = ${Math.max(...data.values) - Math.min(...data.values)}
+                    </div>
+                    <div class="step">
+                        <span class="step-number">4</span> Total sum: ${data.values.reduce((a, b) => a + b, 0)}
+                    </div>
+                </div>
+            `;
+            
+            return graphHTML;
+        }
+
+        // Create pictograph visualization
+        function createPictograph(data) {
+            const iconValue = Math.ceil(Math.max(...data.values) / 5);
+            const icons = ['🍎', '📚', '⚽', '📝', '🌧️', '⭐', '🏀', '🚗', '🏠', '🐱'];
+            const icon = icons[Math.floor(Math.random() * icons.length)];
+            
+            let pictographHTML = `
+                <div class="pictograph-container">
+                    <div class="graph-title">${data.title}</div>
+                    <div class="pictograph-key">
+                        <div class="key-icon">${icon}</div>
+                        <div class="key-text">= ${iconValue} ${getUnit(data.title)}</div>
+                    </div>
+            `;
+            
+            data.categories.forEach((category, index) => {
+                const fullIcons = Math.floor(data.values[index] / iconValue);
+                const hasHalfIcon = (data.values[index] % iconValue) >= (iconValue / 2);
+                const iconCount = hasHalfIcon ? fullIcons + 0.5 : fullIcons;
+                
+                pictographHTML += `
+                    <div class="pictograph-row data-flow" style="animation-delay: ${index * 0.1}s">
+                        <div class="pictograph-label">${category}</div>
+                        <div class="pictograph-icons">
+                `;
+                
+                // Add full icons
+                for (let i = 0; i < fullIcons; i++) {
+                    pictographHTML += `<div class="pictograph-icon icon-bounce" style="animation-delay: ${i * 0.1}s">${icon}</div>`;
+                }
+                
+                // Add half icon if needed
+                if (hasHalfIcon) {
+                    pictographHTML += `<div class="pictograph-icon" style="opacity: 0.6">${icon}</div>`;
+                }
+                
+                pictographHTML += `
+                        </div>
+                        <div class="pictograph-count">${data.values[index]} ${getUnit(data.title)}</div>
+                    </div>
+                `;
+            });
+            
+            pictographHTML += `
+                </div>
+                
+                <div class="scale-display">
+                    <div class="scale-icon">📊</div>
+                    <div class="scale-text">Each ${icon} represents </div>
+                    <div class="scale-value">${iconValue} ${getUnit(data.title)}</div>
+                </div>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Raw Value</th>
+                            <th>Pictograph Value</th>
+                            <th>Icons Needed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            data.categories.forEach((category, index) => {
+                const fullIcons = Math.floor(data.values[index] / iconValue);
+                const hasHalfIcon = (data.values[index] % iconValue) >= (iconValue / 2);
+                const iconCount = hasHalfIcon ? fullIcons + 0.5 : fullIcons;
+                
+                pictographHTML += `
+                    <tr>
+                        <td>${category}</td>
+                        <td>${data.values[index]}</td>
+                        <td>${iconCount} × ${iconValue}</td>
+                        <td>${fullIcons}${hasHalfIcon ? '½' : ''} ${icon}</td>
+                    </tr>
+                `;
+            });
+            
+            pictographHTML += `
+                    </tbody>
+                </table>
+                
+                <div class="calculation-steps">
+                    <div class="step">
+                        <span class="step-number">1</span> Key: ${icon} = ${iconValue} ${getUnit(data.title)}
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span> To calculate: Divide value by ${iconValue}
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span> Example: ${data.values[0]} ÷ ${iconValue} = ${(data.values[0] / iconValue).toFixed(1)} icons
+                    </div>
+                </div>
+            `;
+            
+            return pictographHTML;
+        }
+
+        // Helper function to get bar color
+        function getBarColor(index) {
+            const colors = [
+                'var(--primary-blue)',
+                'var(--secondary-green)',
+                'var(--accent-orange)',
+                'var(--accent-purple)',
+                'var(--accent-pink)',
+                'var(--accent-cyan)'
+            ];
+            return colors[index % colors.length];
+        }
+
+        // Helper function to get unit from title
+        function getUnit(title) {
+            if (title.includes('Vote') || title.includes('Survey')) return 'votes';
+            if (title.includes('Book')) return 'books';
+            if (title.includes('Student')) return 'students';
+            if (title.includes('Score')) return 'points';
+            if (title.includes('Rain')) return 'cm';
+            if (title.includes('Car')) return 'cars';
+            return 'units';
+        }
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade5Graphs');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade5Graphs', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade5Graphs_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade5Graphs_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a data visualization expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent graph interpretation skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a graph master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review graph reading concepts and try again!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Data skills grow with practice!";
+            }
+        }
+
+        // Create math fact display
+        function createMathFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'math-fact';
+            
+            const facts = [
+                "The first known bar graph was created by William Playfair in 1786 to show Scotland's imports and exports!",
+                "Pictographs are one of the oldest forms of data visualization, dating back to ancient cave paintings!",
+                "The word 'graph' comes from the Greek word 'graphein' meaning 'to write' or 'to draw'!",
+                "Florence Nightingale used data visualizations (including graphs) to improve hospital conditions during the Crimean War!",
+                "Bar graphs are also called bar charts or column charts in different parts of the world!",
+                "The longest bar graph ever made was over 100 meters long, showing world population growth!",
+                "Pictographs are especially useful for people who have difficulty reading numbers or for international audiences!",
+                "In Japan, pictographs called 'emoji' have become a global phenomenon for visual communication!"
+            ];
+            
+            factDiv.innerHTML = `<strong>Graph Fact:</strong> ${facts[Math.floor(Math.random() * facts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "bar_graph_reading": "📊",
+                "bar_graph_creating": "📈",
+                "pictograph_reading": "🖼️",
+                "pictograph_creating": "🎨",
+                "graph_comparison": "⚖️",
+                "real_world_problems": "🏫"
+            };
+            
+            let conceptName = "Data Visualization";
+            let conceptIcon = "📊";
+            
+            if (question.type.includes("bar_graph")) {
+                conceptName = question.type.includes("reading") ? "Reading Bar Graphs" : "Creating Bar Graphs";
+                conceptIcon = conceptIcons.bar_graph_reading;
+            } else if (question.type.includes("pictograph")) {
+                conceptName = question.type.includes("reading") ? "Reading Pictographs" : "Creating Pictographs";
+                conceptIcon = conceptIcons.pictograph_reading;
+            } else if (question.type.includes("comparison")) {
+                conceptName = "Comparing Graphs";
+                conceptIcon = conceptIcons.graph_comparison;
+            } else if (question.type.includes("real_world")) {
+                conceptName = "Real-World Problems";
+                conceptIcon = conceptIcons.real_world_problems;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("bar_graph_reading")) {
+                label.textContent = "Reading titles, axes, scales, and interpreting bar heights";
+            } else if (question.type.includes("bar_graph_creating")) {
+                label.textContent = "Choosing scales, drawing bars, labeling axes";
+            } else if (question.type.includes("pictograph_reading")) {
+                label.textContent = "Understanding keys, counting pictures, interpreting half-symbols";
+            } else if (question.type.includes("pictograph_creating")) {
+                label.textContent = "Choosing symbols, creating keys, drawing pictures";
+            } else if (question.type.includes("comparison")) {
+                label.textContent = "Comparing bar graphs and pictographs";
+            } else if (question.type.includes("real_world")) {
+                label.textContent = "Applying graph skills to real situations";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create graph visualization
+        function createGraphVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const data = generateSampleData();
+            
+            if (question.type.includes("bar_graph") || question.type.includes("real_world") || question.type.includes("comparison")) {
+                // Show bar graph for bar graph questions and some others
+                vizDiv.innerHTML = `
+                    <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-blue);">Bar Graph Elements</h3>
+                    
+                    ${createBarGraph(data)}
+                    
+                    <div class="graph-types">
+                        <div class="graph-type-card ${question.type.includes('bar_graph') ? 'active' : ''}">
+                            <div class="graph-type-icon">📊</div>
+                            <div class="graph-type-name">Bar Graph</div>
+                            <div class="graph-type-desc">Uses bars to show comparisons</div>
+                        </div>
+                        <div class="graph-type-card ${question.type.includes('pictograph') ? 'active' : ''}">
+                            <div class="graph-type-icon">🖼️</div>
+                            <div class="graph-type-name">Pictograph</div>
+                            <div class="graph-type-desc">Uses pictures to show data</div>
+                        </div>
+                        <div class="graph-type-card">
+                            <div class="graph-type-icon">📈</div>
+                            <div class="graph-type-name">Line Graph</div>
+                            <div class="graph-type-desc">Shows changes over time</div>
+                        </div>
+                    </div>
+                    
+                    <div class="graph-elements">
+                        <div class="graph-element">
+                            <div class="element-color" style="background: var(--primary-blue);"></div>
+                            <div class="element-label">Title: ${data.title}</div>
+                        </div>
+                        <div class="graph-element">
+                            <div class="element-color" style="background: var(--secondary-green);"></div>
+                            <div class="element-label">X-axis: Categories</div>
+                        </div>
+                        <div class="graph-element">
+                            <div class="element-color" style="background: var(--accent-orange);"></div>
+                            <div class="element-label">Y-axis: Values (${data.scale})</div>
+                        </div>
+                        <div class="graph-element">
+                            <div class="element-color" style="background: var(--accent-purple);"></div>
+                            <div class="element-label">Bars: Show quantities</div>
+                        </div>
+                    </div>
+                    
+                    <div class="calculation-steps">
+                        <div class="step">
+                            <span class="step-number">1</span> Always read the title first to understand what the graph shows
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span> Check the x-axis labels to know what categories are being compared
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span> Look at the y-axis scale to understand what the numbers mean
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span> Compare bar heights to see which categories have more or less
+                        </div>
+                        <div class="step">
+                            <span class="step-number">5</span> Use the scale to convert bar height to actual numbers
+                        </div>
+                    </div>
+                `;
+            } else if (question.type.includes("pictograph")) {
+                // Show pictograph for pictograph questions
+                vizDiv.innerHTML = `
+                    <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-pink);">Pictograph Elements</h3>
+                    
+                    ${createPictograph(data)}
+                    
+                    <div class="graph-types">
+                        <div class="graph-type-card">
+                            <div class="graph-type-icon">📊</div>
+                            <div class="graph-type-name">Bar Graph</div>
+                            <div class="graph-type-desc">Uses bars to show comparisons</div>
+                        </div>
+                        <div class="graph-type-card active">
+                            <div class="graph-type-icon">🖼️</div>
+                            <div class="graph-type-name">Pictograph</div>
+                            <div class="graph-type-desc">Uses pictures to show data</div>
+                        </div>
+                        <div class="graph-type-card">
+                            <div class="graph-type-icon">🥧</div>
+                            <div class="graph-type-name">Pie Chart</div>
+                            <div class="graph-type-desc">Shows parts of a whole</div>
+                        </div>
+                    </div>
+                    
+                    <div class="graph-elements">
+                        <div class="graph-element">
+                            <div class="element-color" style="background: var(--primary-blue);"></div>
+                            <div class="element-label">Title: Tells what the graph shows</div>
+                        </div>
+                        <div class="graph-element">
+                            <div class="element-color" style="background: var(--secondary-green);"></div>
+                            <div class="element-label">Key: Explains picture value</div>
+                        </div>
+                        <div class="graph-element">
+                            <div class="element-color" style="background: var(--accent-orange);"></div>
+                            <div class="element-label">Rows: Different categories</div>
+                        </div>
+                        <div class="graph-element">
+                            <div class="element-color" style="background: var(--accent-purple);"></div>
+                            <div class="element-label">Pictures: Represent quantities</div>
+                        </div>
+                    </div>
+                    
+                    <div class="calculation-steps">
+                        <div class="step">
+                            <span class="step-number">1</span> Always check the KEY first to know what each picture represents
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span> Count full pictures and multiply by the key value
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span> For half-pictures, use half the key value
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span> Add up all the picture values for each category
+                        </div>
+                        <div class="step">
+                            <span class="step-number">5</span> Compare rows to see which category has most/least
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return vizDiv;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            mathFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            mathFact.appendChild(createMathFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createGraphVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

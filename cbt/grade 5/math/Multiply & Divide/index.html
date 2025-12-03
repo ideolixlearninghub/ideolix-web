@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Math - Multiply & Divide | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Math Theme */
+        :root {
+            --primary-orange: #FF9800;
+            --secondary-red: #F44336;
+            --accent-blue: #2196F3;
+            --accent-green: #4CAF50;
+            --accent-purple: #9C27B0;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(255, 152, 0, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 152, 0, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-orange);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-orange);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #F57C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-red);
+            color: white;
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #D32F2F;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(244, 67, 54, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-orange);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Page - New Compact Layout */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-orange), var(--secondary-red));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(255, 152, 0, 0.5);
+        }
+
+        .question-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 25px;
+            min-height: 400px;
+        }
+
+        @media (max-width: 768px) {
+            .question-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        .question-section {
+            background: var(--dark-surface);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid var(--dark-border);
+        }
+
+        .example-section {
+            background: var(--dark-surface);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid var(--dark-border);
+        }
+
+        .question-text {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            color: var(--text-primary);
+            min-height: 80px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-orange);
+            background: rgba(255, 152, 0, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(255, 152, 0, 0.1);
+            border-color: var(--primary-orange);
+            color: var(--primary-orange);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--primary-orange);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-orange);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        /* Example Section */
+        .example-title {
+            font-size: 1.3rem;
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .math-fact {
+            background: rgba(33, 150, 243, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-blue);
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .example-display {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .process-display {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-green);
+        }
+
+        .step-icon {
+            font-size: 1.5rem;
+            color: var(--accent-green);
+        }
+
+        .step-content h4 {
+            color: var(--accent-green);
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Calculation Display */
+        .calculation-display {
+            background: rgba(255, 152, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .vertical-calculation {
+            display: inline-block;
+            text-align: right;
+            margin: 10px auto;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        .vertical-row {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin: 3px 0;
+        }
+
+        .operator {
+            margin-right: 10px;
+            color: var(--primary-orange);
+            font-weight: bold;
+        }
+
+        .number-part {
+            min-width: 60px;
+            text-align: right;
+            padding: 3px 8px;
+        }
+
+        .line {
+            height: 2px;
+            background: var(--primary-orange);
+            margin: 8px 0;
+        }
+
+        /* Feedback Container */
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+            grid-column: 1 / -1;
+        }
+
+        .feedback-correct {
+            background: rgba(255, 152, 0, 0.1);
+            border-left: 5px solid var(--primary-orange);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-orange);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-orange);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            grid-column: 1 / -1;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-orange), var(--secondary-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-orange);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes calculationHighlight {
+            0%, 100% { background-color: transparent; }
+            50% { background-color: rgba(255, 152, 0, 0.2); }
+        }
+        
+        .calculation-highlight {
+            animation: calculationHighlight 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 5 Mathematics</h1>
+            <p class="welcome-subtitle">Master multiplication and division! Learn to multiply 3-digit by 2-digit numbers, divide 4-digit by 2-digit numbers, and apply these skills to real-world problems. Build computational fluency and problem-solving skills!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">✖️➗</span>
+                <span class="topic-name">Multiplying & Dividing Whole Numbers</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Math Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-content">
+                <!-- Left Column: Question and Options -->
+                <div class="question-section">
+                    <h2 class="question-text" id="questionText"></h2>
+                    <div class="options-container" id="optionsContainer"></div>
+                </div>
+                
+                <!-- Right Column: Examples and Process -->
+                <div class="example-section">
+                    <h3 class="example-title">Examples & Process</h3>
+                    <div id="mathFact" class="math-fact"></div>
+                    <div id="calculationDisplay" class="example-display"></div>
+                    <div id="processDisplay" class="process-display"></div>
+                </div>
+                
+                <!-- Feedback spans both columns -->
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <!-- Navigation spans both columns -->
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Math Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 100 Grade 5 Math questions covering Multiplication & Division
+        const questions = [
+            // Basic Multiplication (1-25)
+            {
+                type: "multiplication_basic",
+                question: "What is 25 × 12?",
+                options: ["300", "250", "275", "325"],
+                answer: "A",
+                explanation: "25 × 12 = 300. 25 × 10 = 250, plus 25 × 2 = 50, total 300."
+            },
+            {
+                type: "multiplication_basic",
+                question: "Calculate: 34 × 15",
+                options: ["510", "500", "5100", "410"],
+                answer: "A",
+                explanation: "34 × 15 = 510. 34 × 10 = 340, plus 34 × 5 = 170, total 510."
+            },
+            {
+                type: "multiplication_basic",
+                question: "What is 123 × 45?",
+                options: ["5,535", "5,435", "5,635", "5,335"],
+                answer: "A",
+                explanation: "123 × 45 = 5,535. 123 × 40 = 4,920, plus 123 × 5 = 615, total 5,535."
+            },
+            {
+                type: "multiplication_basic",
+                question: "Multiply: 256 × 34",
+                options: ["8,704", "8,804", "8,604", "7,704"],
+                answer: "A",
+                explanation: "256 × 34 = 8,704. 256 × 30 = 7,680, plus 256 × 4 = 1,024, total 8,704."
+            },
+            {
+                type: "multiplication_basic",
+                question: "What is 78 × 92?",
+                options: ["7,176", "7,076", "7,276", "6,176"],
+                answer: "A",
+                explanation: "78 × 92 = 7,176. 78 × 90 = 7,020, plus 78 × 2 = 156, total 7,176."
+            },
+            {
+                type: "multiplication_basic",
+                question: "Calculate: 145 × 27",
+                options: ["3,915", "3,815", "4,015", "3,915.5"],
+                answer: "A",
+                explanation: "145 × 27 = 3,915. 145 × 20 = 2,900, plus 145 × 7 = 1,015, total 3,915."
+            },
+            {
+                type: "multiplication_basic",
+                question: "What is 309 × 56?",
+                options: ["17,304", "17,404", "17,204", "16,304"],
+                answer: "A",
+                explanation: "309 × 56 = 17,304. 309 × 50 = 15,450, plus 309 × 6 = 1,854, total 17,304."
+            },
+            {
+                type: "multiplication_basic",
+                question: "Multiply: 432 × 89",
+                options: ["38,448", "38,348", "38,548", "37,448"],
+                answer: "A",
+                explanation: "432 × 89 = 38,448. 432 × 80 = 34,560, plus 432 × 9 = 3,888, total 38,448."
+            },
+            {
+                type: "multiplication_basic",
+                question: "What is 567 × 23?",
+                options: ["13,041", "13,141", "12,941", "13,041.5"],
+                answer: "A",
+                explanation: "567 × 23 = 13,041. 567 × 20 = 11,340, plus 567 × 3 = 1,701, total 13,041."
+            },
+            {
+                type: "multiplication_basic",
+                question: "Calculate: 789 × 34",
+                options: ["26,826", "26,726", "26,926", "25,826"],
+                answer: "A",
+                explanation: "789 × 34 = 26,826. 789 × 30 = 23,670, plus 789 × 4 = 3,156, total 26,826."
+            },
+            // Multiplication with Zero Patterns (11-20)
+            {
+                type: "multiplication_patterns",
+                question: "What is 450 × 60?",
+                options: ["27,000", "27,100", "26,900", "27,000.0"],
+                answer: "A",
+                explanation: "450 × 60 = 27,000. Multiply 45 × 6 = 270, then add two zeros from 450 and one zero from 60 = total three zeros."
+            },
+            {
+                type: "multiplication_patterns",
+                question: "Calculate: 305 × 40",
+                options: ["12,200", "12,100", "12,300", "12,000"],
+                answer: "A",
+                explanation: "305 × 40 = 12,200. 305 × 4 = 1,220, then add one zero from 40."
+            },
+            {
+                type: "multiplication_patterns",
+                question: "What is 1,200 × 50?",
+                options: ["60,000", "60,500", "59,500", "6,000"],
+                answer: "A",
+                explanation: "1,200 × 50 = 60,000. 12 × 5 = 60, then add three zeros from 1,200 and one zero from 50 = total four zeros."
+            },
+            {
+                type: "multiplication_patterns",
+                question: "Multiply: 800 × 75",
+                options: ["60,000", "60,500", "59,500", "6,000"],
+                answer: "A",
+                explanation: "800 × 75 = 60,000. 8 × 75 = 600, then add two zeros from 800."
+            },
+            {
+                type: "multiplication_patterns",
+                question: "What is 205 × 300?",
+                options: ["61,500", "61,000", "62,000", "6,150"],
+                answer: "A",
+                explanation: "205 × 300 = 61,500. 205 × 3 = 615, then add two zeros from 300."
+            },
+            // Basic Division (21-45)
+            {
+                type: "division_basic",
+                question: "What is 144 ÷ 12?",
+                options: ["12", "11", "13", "14"],
+                answer: "A",
+                explanation: "144 ÷ 12 = 12. 12 × 12 = 144."
+            },
+            {
+                type: "division_basic",
+                question: "Calculate: 168 ÷ 14",
+                options: ["12", "11", "13", "14"],
+                answer: "A",
+                explanation: "168 ÷ 14 = 12. 14 × 12 = 168."
+            },
+            {
+                type: "division_basic",
+                question: "What is 225 ÷ 15?",
+                options: ["15", "14", "16", "15.5"],
+                answer: "A",
+                explanation: "225 ÷ 15 = 15. 15 × 15 = 225."
+            },
+            {
+                type: "division_basic",
+                question: "Divide: 288 ÷ 16",
+                options: ["18", "17", "19", "18.5"],
+                answer: "A",
+                explanation: "288 ÷ 16 = 18. 16 × 18 = 288."
+            },
+            {
+                type: "division_basic",
+                question: "What is 1,225 ÷ 35?",
+                options: ["35", "34", "36", "35.5"],
+                answer: "A",
+                explanation: "1,225 ÷ 35 = 35. 35 × 35 = 1,225."
+            },
+            {
+                type: "division_basic",
+                question: "Calculate: 2,500 ÷ 50",
+                options: ["50", "49", "51", "500"],
+                answer: "A",
+                explanation: "2,500 ÷ 50 = 50. 50 × 50 = 2,500."
+            },
+            {
+                type: "division_basic",
+                question: "What is 3,600 ÷ 45?",
+                options: ["80", "79", "81", "800"],
+                answer: "A",
+                explanation: "3,600 ÷ 45 = 80. 45 × 80 = 3,600."
+            },
+            {
+                type: "division_basic",
+                question: "Divide: 4,900 ÷ 70",
+                options: ["70", "69", "71", "700"],
+                answer: "A",
+                explanation: "4,900 ÷ 70 = 70. 70 × 70 = 4,900."
+            },
+            {
+                type: "division_basic",
+                question: "What is 1,764 ÷ 42?",
+                options: ["42", "41", "43", "42.5"],
+                answer: "A",
+                explanation: "1,764 ÷ 42 = 42. 42 × 42 = 1,764."
+            },
+            {
+                type: "division_basic",
+                question: "Calculate: 2,304 ÷ 48",
+                options: ["48", "47", "49", "48.5"],
+                answer: "A",
+                explanation: "2,304 ÷ 48 = 48. 48 × 48 = 2,304."
+            },
+            // Division with Remainders (46-65)
+            {
+                type: "division_remainder",
+                question: "What is 157 ÷ 12?",
+                options: ["13 R1", "12 R13", "13", "12 R1"],
+                answer: "A",
+                explanation: "157 ÷ 12 = 13 remainder 1. 12 × 13 = 156, 157 - 156 = 1."
+            },
+            {
+                type: "division_remainder",
+                question: "Calculate: 289 ÷ 15",
+                options: ["19 R4", "18 R19", "19", "18 R4"],
+                answer: "A",
+                explanation: "289 ÷ 15 = 19 remainder 4. 15 × 19 = 285, 289 - 285 = 4."
+            },
+            {
+                type: "division_remainder",
+                question: "What is 432 ÷ 25?",
+                options: ["17 R7", "16 R32", "17", "16 R7"],
+                answer: "A",
+                explanation: "432 ÷ 25 = 17 remainder 7. 25 × 17 = 425, 432 - 425 = 7."
+            },
+            {
+                type: "division_remainder",
+                question: "Divide: 567 ÷ 34",
+                options: ["16 R23", "15 R57", "16", "15 R23"],
+                answer: "A",
+                explanation: "567 ÷ 34 = 16 remainder 23. 34 × 16 = 544, 567 - 544 = 23."
+            },
+            {
+                type: "division_remainder",
+                question: "What is 789 ÷ 45?",
+                options: ["17 R24", "16 R69", "17", "16 R24"],
+                answer: "A",
+                explanation: "789 ÷ 45 = 17 remainder 24. 45 × 17 = 765, 789 - 765 = 24."
+            },
+            {
+                type: "division_remainder",
+                question: "Calculate: 1,234 ÷ 56",
+                options: ["22 R2", "21 R58", "22", "21 R2"],
+                answer: "A",
+                explanation: "1,234 ÷ 56 = 22 remainder 2. 56 × 22 = 1,232, 1,234 - 1,232 = 2."
+            },
+            {
+                type: "division_remainder",
+                question: "What is 1,567 ÷ 78?",
+                options: ["20 R7", "19 R85", "20", "19 R7"],
+                answer: "A",
+                explanation: "1,567 ÷ 78 = 20 remainder 7. 78 × 20 = 1,560, 1,567 - 1,560 = 7."
+            },
+            {
+                type: "division_remainder",
+                question: "Divide: 2,345 ÷ 67",
+                options: ["35 R0", "34 R47", "35", "34"],
+                answer: "A",
+                explanation: "2,345 ÷ 67 = 35 exactly. 67 × 35 = 2,345."
+            },
+            {
+                type: "division_remainder",
+                question: "What is 3,456 ÷ 89?",
+                options: ["38 R74", "37 R163", "38", "37 R74"],
+                answer: "A",
+                explanation: "3,456 ÷ 89 = 38 remainder 74. 89 × 38 = 3,382, 3,456 - 3,382 = 74."
+            },
+            {
+                type: "division_remainder",
+                question: "Calculate: 4,567 ÷ 92",
+                options: ["49 R59", "48 R151", "49", "48 R59"],
+                answer: "A",
+                explanation: "4,567 ÷ 92 = 49 remainder 59. 92 × 49 = 4,508, 4,567 - 4,508 = 59."
+            },
+            // Larger Division Problems (66-85)
+            {
+                type: "division_large",
+                question: "What is 5,600 ÷ 80?",
+                options: ["70", "700", "7", "70.0"],
+                answer: "A",
+                explanation: "5,600 ÷ 80 = 70. 80 × 70 = 5,600."
+            },
+            {
+                type: "division_large",
+                question: "Calculate: 7,200 ÷ 90",
+                options: ["80", "800", "8", "80.0"],
+                answer: "A",
+                explanation: "7,200 ÷ 90 = 80. 90 × 80 = 7,200."
+            },
+            {
+                type: "division_large",
+                question: "What is 8,100 ÷ 45?",
+                options: ["180", "18", "1,800", "180.0"],
+                answer: "A",
+                explanation: "8,100 ÷ 45 = 180. 45 × 180 = 8,100."
+            },
+            {
+                type: "division_large",
+                question: "Divide: 9,600 ÷ 60",
+                options: ["160", "16", "1,600", "160.0"],
+                answer: "A",
+                explanation: "9,600 ÷ 60 = 160. 60 × 160 = 9,600."
+            },
+            {
+                type: "division_large",
+                question: "What is 10,500 ÷ 75?",
+                options: ["140", "14", "1,400", "140.0"],
+                answer: "A",
+                explanation: "10,500 ÷ 75 = 140. 75 × 140 = 10,500."
+            },
+            // Word Problems (86-100)
+            {
+                type: "word_problem",
+                question: "A school has 24 classrooms with 35 students each. How many students total?",
+                options: ["840", "850", "830", "860"],
+                answer: "A",
+                explanation: "24 × 35 = 840 students. 20 × 35 = 700, plus 4 × 35 = 140, total 840."
+            },
+            {
+                type: "word_problem",
+                question: "A factory produces 156 toys each hour. How many in 8 hours?",
+                options: ["1,248", "1,148", "1,348", "1,248.0"],
+                answer: "A",
+                explanation: "156 × 8 = 1,248 toys. 150 × 8 = 1,200, plus 6 × 8 = 48, total 1,248."
+            },
+            {
+                type: "word_problem",
+                question: "A book has 45 pages. How many pages in 23 copies?",
+                options: ["1,035", "1,025", "1,045", "1,135"],
+                answer: "A",
+                explanation: "45 × 23 = 1,035 pages. 45 × 20 = 900, plus 45 × 3 = 135, total 1,035."
+            },
+            {
+                type: "word_problem",
+                question: "There are 1,728 students in 36 equal classes. How many per class?",
+                options: ["48", "47", "49", "48.5"],
+                answer: "A",
+                explanation: "1,728 ÷ 36 = 48 students per class. 36 × 48 = 1,728."
+            },
+            {
+                type: "word_problem",
+                question: "A truck carries 2,500 kg divided equally into 25 boxes. How heavy each box?",
+                options: ["100 kg", "110 kg", "90 kg", "100.0 kg"],
+                answer: "A",
+                explanation: "2,500 ÷ 25 = 100 kg per box. 25 × 100 = 2,500."
+            },
+            {
+                type: "word_problem",
+                question: "A stadium has 45 rows with 78 seats each. Total seats?",
+                options: ["3,510", "3,410", "3,610", "3,510.0"],
+                answer: "A",
+                explanation: "45 × 78 = 3,510 seats. 45 × 70 = 3,150, plus 45 × 8 = 360, total 3,510."
+            },
+            {
+                type: "word_problem",
+                question: "1,575 pencils shared among 35 students. How many each?",
+                options: ["45", "44", "46", "45.5"],
+                answer: "A",
+                explanation: "1,575 ÷ 35 = 45 pencils each. 35 × 45 = 1,575."
+            },
+            {
+                type: "word_problem",
+                question: "A car travels 65 km per hour. How far in 12 hours?",
+                options: ["780 km", "770 km", "790 km", "780.0 km"],
+                answer: "A",
+                explanation: "65 × 12 = 780 km. 65 × 10 = 650, plus 65 × 2 = 130, total 780."
+            },
+            {
+                type: "word_problem",
+                question: "3,240 apples packed in boxes of 45. How many boxes?",
+                options: ["72", "71", "73", "72.5"],
+                answer: "A",
+                explanation: "3,240 ÷ 45 = 72 boxes. 45 × 72 = 3,240."
+            },
+            {
+                type: "word_problem",
+                question: "A building has 15 floors with 24 windows each. Total windows?",
+                options: ["360", "350", "370", "360.0"],
+                answer: "A",
+                explanation: "15 × 24 = 360 windows. 10 × 24 = 240, plus 5 × 24 = 120, total 360."
+            },
+            // Mixed Problems (91-100)
+            {
+                type: "mixed",
+                question: "If 28 × 34 = 952, what is 952 ÷ 28?",
+                options: ["34", "28", "952", "26"],
+                answer: "A",
+                explanation: "952 ÷ 28 = 34. Division is the inverse of multiplication."
+            },
+            {
+                type: "mixed",
+                question: "What number multiplied by 56 gives 1,568?",
+                options: ["28", "27", "29", "28.5"],
+                answer: "A",
+                explanation: "1,568 ÷ 56 = 28. 56 × 28 = 1,568."
+            },
+            {
+                type: "mixed",
+                question: "If 45 × 67 = 3,015, what is 3,015 ÷ 45?",
+                options: ["67", "65", "68", "67.5"],
+                answer: "A",
+                explanation: "3,015 ÷ 45 = 67. Check: 45 × 67 = 3,015."
+            },
+            {
+                type: "mixed",
+                question: "What is the missing number: 39 × __ = 1,521?",
+                options: ["39", "38", "40", "39.5"],
+                answer: "A",
+                explanation: "1,521 ÷ 39 = 39. 39 × 39 = 1,521."
+            },
+            {
+                type: "mixed",
+                question: "If 72 × 84 = 6,048, what is 6,048 ÷ 84?",
+                options: ["72", "70", "74", "72.5"],
+                answer: "A",
+                explanation: "6,048 ÷ 84 = 72. This checks the multiplication fact."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent multiplication skills!",
+            "Fantastic division computation!",
+            "Great work! You're a math operations expert!",
+            "Amazing! Your multiplication and division skills are impressive!",
+            "Well done! Perfect calculation!",
+            "You're a computation champion!",
+            "Perfect! You understand inverse operations!",
+            "Outstanding mathematical reasoning!",
+            "Brilliant! You handle large numbers like a pro!",
+            "You're on fire! Great attention to place value!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const mathFact = document.getElementById('mathFact');
+        const calculationDisplay = document.getElementById('calculationDisplay');
+        const processDisplay = document.getElementById('processDisplay');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Format number with commas
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade5MathMultiplyDivide');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade5MathMultiplyDivide', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade5MathMultiplyDivide_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade5MathMultiplyDivide_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a multiplication and division expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent computation skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing multiplication tables!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review multiplication and division concepts!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Math operations improve with practice!";
+            }
+        }
+
+        // Create math fact display
+        function createMathFact() {
+            const facts = [
+                "The '×' symbol was introduced by William Oughtred in 1631! Before that, mathematicians wrote 'M' for multiplication.",
+                "The division symbol '÷' is called an obelus and was first used by Swiss mathematician Johann Rahn in 1659!",
+                "Ancient Egyptians used a doubling method for multiplication that only required addition!",
+                "The word 'multiply' comes from Latin 'multiplicare' meaning 'to increase many times'!",
+                "Division by zero is undefined because you cannot split something into zero parts!",
+                "The largest multiplication table ever created was 1000×1000 on a computer in 2012!",
+                "The equal sign '=' was invented because the author was tired of writing 'is equal to' repeatedly!",
+                "In some countries, a dot '·' is used for multiplication instead of '×'!"
+            ];
+            
+            return `<strong>Math Fact:</strong> ${facts[Math.floor(Math.random() * facts.length)]}`;
+        }
+
+        // Create calculation display
+        function createCalculationDisplay() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const text = question.question;
+            
+            // Extract numbers for demonstration
+            const numbers = text.match(/\d+/g);
+            let displayHTML = '';
+            
+            if (question.type.includes("multiplication")) {
+                if (numbers && numbers.length >= 2) {
+                    const num1 = parseInt(numbers[0]);
+                    const num2 = parseInt(numbers[1]);
+                    
+                    displayHTML = `
+                        <div style="margin-bottom: 10px; color: var(--accent-blue); font-weight: bold;">Multiplication Example:</div>
+                        <div class="vertical-calculation calculation-highlight">
+                            <div class="vertical-row">
+                                <div class="number-part">${num1}</div>
+                            </div>
+                            <div class="vertical-row">
+                                <div class="operator">×</div>
+                                <div class="number-part">${num2}</div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="vertical-row" style="color: var(--primary-orange); font-weight: bold;">
+                                <div class="number-part">${num1 * num2}</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px; color: var(--text-secondary); font-size: 0.9rem;">
+                            Multiply ones first, then tens, then add partial products!
+                        </div>
+                    `;
+                }
+            } else if (question.type.includes("division")) {
+                if (numbers && numbers.length >= 2) {
+                    const dividend = parseInt(numbers[0]);
+                    const divisor = parseInt(numbers[1]);
+                    const quotient = Math.floor(dividend / divisor);
+                    const remainder = dividend % divisor;
+                    
+                    displayHTML = `
+                        <div style="margin-bottom: 10px; color: var(--accent-green); font-weight: bold;">Division Example:</div>
+                        <div class="vertical-calculation calculation-highlight">
+                            <div class="vertical-row">
+                                <div class="operator" style="color: var(--accent-green);">${divisor}</div>
+                                <div class="number-part" style="border: 2px solid var(--accent-green);">${dividend}</div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="vertical-row" style="color: var(--accent-green); font-weight: bold;">
+                                <div class="number-part">${quotient}${remainder > 0 ? ` R${remainder}` : ''}</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px; color: var(--text-secondary); font-size: 0.9rem;">
+                            ${remainder > 0 ? 
+                                `Check: ${divisor} × ${quotient} = ${divisor * quotient}, + ${remainder} = ${dividend}` : 
+                                `Check: ${divisor} × ${quotient} = ${dividend}`}
+                        </div>
+                    `;
+                }
+            }
+            
+            return displayHTML;
+        }
+
+        // Create process display
+        function createProcessDisplay() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            let processHTML = '';
+            
+            if (question.type.includes("multiplication")) {
+                processHTML = `
+                    <div class="process-step">
+                        <div class="step-icon">1️⃣</div>
+                        <div class="step-content">
+                            <h4>Step 1: Multiply Ones</h4>
+                            <p>Multiply the bottom ones digit by each top digit, right to left</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">2️⃣</div>
+                        <div class="step-content">
+                            <h4>Step 2: Multiply Tens</h4>
+                            <p>Multiply the bottom tens digit by each top digit, add a zero first</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">3️⃣</div>
+                        <div class="step-content">
+                            <h4>Step 3: Add Partial Products</h4>
+                            <p>Add the two partial products together</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">✅</div>
+                        <div class="step-content">
+                            <h4>Step 4: Check Work</h4>
+                            <p>Verify by estimating or using inverse operation (division)</p>
+                        </div>
+                    </div>
+                `;
+            } else if (question.type.includes("division")) {
+                processHTML = `
+                    <div class="process-step">
+                        <div class="step-icon">1️⃣</div>
+                        <div class="step-content">
+                            <h4>Step 1: Estimate</h4>
+                            <p>Round numbers to estimate how many times divisor fits</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">2️⃣</div>
+                        <div class="step-content">
+                            <h4>Step 2: Divide</h4>
+                            <p>Divide starting from the leftmost digit of dividend</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">3️⃣</div>
+                        <div class="step-content">
+                            <h4>Step 3: Multiply & Subtract</h4>
+                            <p>Multiply quotient by divisor, subtract from dividend</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">4️⃣</div>
+                        <div class="step-content">
+                            <h4>Step 4: Bring Down</h4>
+                            <p>Bring down next digit, repeat until no digits remain</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                processHTML = `
+                    <div class="process-step">
+                        <div class="step-icon">🔍</div>
+                        <div class="step-content">
+                            <h4>Identify Operation</h4>
+                            <p>Determine if problem requires multiplication or division</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">📝</div>
+                        <div class="step-content">
+                            <h4>Write Problem</h4>
+                            <p>Write numbers in proper vertical format</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🧮</div>
+                        <div class="step-content">
+                            <h4>Calculate</h4>
+                            <p>Perform the operation step by step</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">✓</div>
+                        <div class="step-content">
+                            <h4>Verify Answer</h4>
+                            <p>Check using inverse operation or estimation</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return processHTML;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            // Update examples and process displays
+            mathFact.innerHTML = createMathFact();
+            calculationDisplay.innerHTML = createCalculationDisplay();
+            processDisplay.innerHTML = createProcessDisplay();
+            
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create answer options
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

@@ -1,0 +1,2243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Math - Adding & Subtracting | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Math Theme */
+        :root {
+            --primary-green: #4CAF50;
+            --secondary-blue: #2196F3;
+            --accent-orange: #FF9800;
+            --accent-teal: #009688;
+            --accent-purple: #9C27B0;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(76, 175, 80, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(76, 175, 80, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-green);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-green);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #388E3C;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-blue));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .math-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-orange);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-teal));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(76, 175, 80, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(76, 175, 80, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-blue);
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(76, 175, 80, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Calculation Display */
+        .calculation-display {
+            max-width: 800px;
+            margin: 20px auto;
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            overflow-x: auto;
+            text-align: center;
+        }
+
+        .equation {
+            font-size: 2rem;
+            margin: 20px 0;
+            color: var(--text-primary);
+        }
+
+        .vertical-calculation {
+            display: inline-block;
+            text-align: right;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            min-width: 200px;
+        }
+
+        .vertical-row {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin: 5px 0;
+        }
+
+        .operator {
+            margin-right: 10px;
+            color: var(--accent-orange);
+            font-weight: bold;
+        }
+
+        .number-part {
+            min-width: 80px;
+            text-align: right;
+            padding: 5px 10px;
+            border-bottom: 2px solid var(--dark-border);
+        }
+
+        .line {
+            height: 2px;
+            background: var(--primary-green);
+            margin: 10px 0;
+        }
+
+        .answer-row {
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-top: 10px;
+        }
+
+        /* Decimal Alignment Display */
+        .decimal-alignment {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .decimal-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            min-width: 200px;
+            padding: 10px;
+            background: rgba(33, 150, 243, 0.1);
+            border-radius: 8px;
+            border: 1px solid var(--secondary-blue);
+        }
+
+        .decimal-point {
+            color: var(--accent-orange);
+            font-weight: bold;
+            margin: 0 5px;
+        }
+
+        /* Number Display */
+        .number-display {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            color: var(--primary-green);
+            padding: 20px;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 12px;
+            border: 2px solid var(--primary-green);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Process Display */
+        .process-display {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            min-width: 200px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .process-step.active {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary-green);
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Money Display */
+        .money-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .money-item {
+            background: rgba(255, 152, 0, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-orange);
+            font-size: 1.1rem;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        /* Estimation Display */
+        .estimation-display {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .estimation-item {
+            background: rgba(156, 39, 176, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-purple);
+            font-size: 1rem;
+            text-align: center;
+            min-width: 180px;
+        }
+
+        /* Word Problem Display */
+        .word-problem {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .problem-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .problem-hint {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: 15px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .process-display {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .number-display {
+                font-size: 2rem;
+            }
+            
+            .equation {
+                font-size: 1.5rem;
+            }
+            
+            .vertical-calculation {
+                min-width: 150px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes countUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .count-up {
+            animation: countUp 0.5s ease forwards;
+        }
+        
+        @keyframes calculationHighlight {
+            0%, 100% { background-color: transparent; }
+            50% { background-color: rgba(76, 175, 80, 0.2); }
+        }
+        
+        .calculation-highlight {
+            animation: calculationHighlight 1s ease-in-out;
+        }
+        
+        @keyframes decimalBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .decimal-bounce {
+            animation: decimalBounce 1s ease infinite;
+        }
+        
+        @keyframes numberGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(76, 175, 80, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(76, 175, 80, 0.6); }
+        }
+        
+        .number-glow {
+            animation: numberGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes moneyShake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-2deg); }
+            75% { transform: rotate(2deg); }
+        }
+        
+        .money-shake {
+            animation: moneyShake 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1509228468518-180dd4864904?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 5 Mathematics</h1>
+            <p class="welcome-subtitle">Master the art of adding and subtracting whole numbers and decimals! Learn to line up place values, handle decimal points, solve real-world money problems, and develop estimation skills. Build confidence in calculations that you'll use every day!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">➕➖</span>
+                <span class="topic-name">Adding & Subtracting Whole Numbers & Decimals</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Math Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <!-- Math fact display -->
+                <div id="mathFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Calculation display -->
+                <div id="calculationDisplay"></div>
+                
+                <!-- Decimal alignment display -->
+                <div id="decimalAlignmentDisplay"></div>
+                
+                <!-- Number display -->
+                <div id="numberDisplay"></div>
+                
+                <!-- Process display -->
+                <div id="processDisplay"></div>
+                
+                <!-- Money display -->
+                <div id="moneyDisplay"></div>
+                
+                <!-- Estimation display -->
+                <div id="estimationDisplay"></div>
+                
+                <!-- Word problem display -->
+                <div id="wordProblemDisplay"></div>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Math Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 100 Grade 5 Math questions covering Adding & Subtracting Whole Numbers & Decimals
+        const questions = [
+            // Basic Addition with Whole Numbers (1-20)
+            {
+                type: "addition_basic",
+                question: "What is 345 + 678?",
+                options: ["1,023", "1,013", "1,033", "923"],
+                answer: "A",
+                explanation: "345 + 678 = 1,023. Add ones: 5+8=13 (write 3, carry 1), tens: 4+7+1=12 (write 2, carry 1), hundreds: 3+6+1=10."
+            },
+            {
+                type: "addition_basic",
+                question: "Calculate: 1,234 + 5,678",
+                options: ["6,912", "6,812", "7,012", "6,912.0"],
+                answer: "A",
+                explanation: "1,234 + 5,678 = 6,912. Add ones: 4+8=12 (2, carry 1), tens: 3+7+1=11 (1, carry 1), hundreds: 2+6+1=9, thousands: 1+5=6."
+            },
+            {
+                type: "addition_basic",
+                question: "Add 456 + 789 + 123",
+                options: ["1,368", "1,358", "1,378", "1,248"],
+                answer: "A",
+                explanation: "456 + 789 = 1,245, then + 123 = 1,368. Or add all at once: ones: 6+9+3=18 (8, carry 1), tens: 5+8+2+1=16 (6, carry 1), hundreds: 4+7+1+1=13."
+            },
+            {
+                type: "addition_basic",
+                question: "What is 2,500 + 3,750?",
+                options: ["6,250", "6,150", "6,350", "5,250"],
+                answer: "A",
+                explanation: "2,500 + 3,750 = 6,250. Notice: 2,500 + 3,500 = 6,000, + 250 = 6,250."
+            },
+            {
+                type: "addition_basic",
+                question: "Find the sum: 12,345 + 67,890",
+                options: ["80,235", "80,135", "79,235", "80,335"],
+                answer: "A",
+                explanation: "12,345 + 67,890 = 80,235. Add ones: 5+0=5, tens: 4+9=13 (3, carry 1), hundreds: 3+8+1=12 (2, carry 1), thousands: 2+7+1=10 (0, carry 1), ten thousands: 1+6+1=8."
+            },
+            {
+                type: "addition_basic",
+                question: "Calculate: 999 + 1,001",
+                options: ["2,000", "1,100", "1,900", "2,100"],
+                answer: "A",
+                explanation: "999 + 1,001 = 2,000. 999 + 1 = 1,000, + 1,000 = 2,000."
+            },
+            {
+                type: "addition_basic",
+                question: "What is 45,678 + 54,321?",
+                options: ["99,999", "100,000", "99,899", "99,999.0"],
+                answer: "A",
+                explanation: "45,678 + 54,321 = 99,999. Notice the pattern: 4+5=9, 5+4=9, 6+3=9, 7+2=9, 8+1=9."
+            },
+            {
+                type: "addition_basic",
+                question: "Add these numbers: 1,111 + 2,222 + 3,333",
+                options: ["6,666", "6,556", "6,776", "5,666"],
+                answer: "A",
+                explanation: "1,111 + 2,222 = 3,333, + 3,333 = 6,666. All digits add to 6."
+            },
+            {
+                type: "addition_basic",
+                question: "What is 25,000 + 75,000?",
+                options: ["100,000", "90,000", "110,000", "95,000"],
+                answer: "A",
+                explanation: "25,000 + 75,000 = 100,000. 25 + 75 = 100, then add three zeros."
+            },
+            {
+                type: "addition_basic",
+                question: "Calculate: 8,765 + 4,321",
+                options: ["13,086", "12,986", "13,186", "12,086"],
+                answer: "A",
+                explanation: "8,765 + 4,321 = 13,086. Add ones: 5+1=6, tens: 6+2=8, hundreds: 7+3=10 (0, carry 1), thousands: 8+4+1=13."
+            },
+            // Basic Subtraction with Whole Numbers (21-40)
+            {
+                type: "subtraction_basic",
+                question: "What is 987 - 654?",
+                options: ["333", "343", "323", "433"],
+                answer: "A",
+                explanation: "987 - 654 = 333. Subtract ones: 7-4=3, tens: 8-5=3, hundreds: 9-6=3."
+            },
+            {
+                type: "subtraction_basic",
+                question: "Calculate: 5,432 - 1,234",
+                options: ["4,198", "4,298", "4,098", "3,198"],
+                answer: "A",
+                explanation: "5,432 - 1,234 = 4,198. Subtract ones: 2-4 (borrow) → 12-4=8, tens: 2-3 (borrow) → 12-3=9, hundreds: 4-2=2, thousands: 5-1=4."
+            },
+            {
+                type: "subtraction_basic",
+                question: "Subtract: 10,000 - 3,456",
+                options: ["6,544", "6,444", "7,544", "6,654"],
+                answer: "A",
+                explanation: "10,000 - 3,456 = 6,544. Borrow multiple times: from 10,000, borrow to make it 9,999+1 - 3,456 = 6,544."
+            },
+            {
+                type: "subtraction_basic",
+                question: "What is 7,654 - 2,345?",
+                options: ["5,309", "5,409", "5,209", "5,319"],
+                answer: "A",
+                explanation: "7,654 - 2,345 = 5,309. Subtract ones: 4-5 (borrow) → 14-5=9, tens: 4-4=0, hundreds: 6-3=3, thousands: 7-2=5."
+            },
+            {
+                type: "subtraction_basic",
+                question: "Find the difference: 50,000 - 12,345",
+                options: ["37,655", "37,555", "38,655", "37,665"],
+                answer: "A",
+                explanation: "50,000 - 12,345 = 37,655. Borrow: 50,000 = 49,999+1 - 12,345 = 37,655."
+            },
+            {
+                type: "subtraction_basic",
+                question: "Calculate: 100,000 - 99,999",
+                options: ["1", "0", "2", "1,001"],
+                answer: "A",
+                explanation: "100,000 - 99,999 = 1. This shows that numbers differ by only 1."
+            },
+            {
+                type: "subtraction_basic",
+                question: "What is 8,001 - 4,567?",
+                options: ["3,434", "3,534", "3,334", "4,434"],
+                answer: "A",
+                explanation: "8,001 - 4,567 = 3,434. Borrow: 8,001 = 7,999+2 - 4,567 = 3,434."
+            },
+            {
+                type: "subtraction_basic",
+                question: "Subtract: 12,345 - 6,789",
+                options: ["5,556", "5,656", "5,456", "6,556"],
+                answer: "A",
+                explanation: "12,345 - 6,789 = 5,556. Subtract with borrowing at each place."
+            },
+            {
+                type: "subtraction_basic",
+                question: "What is 90,000 - 45,678?",
+                options: ["44,322", "44,222", "45,322", "44,432"],
+                answer: "A",
+                explanation: "90,000 - 45,678 = 44,322. 90,000 = 89,999+1 - 45,678 = 44,322."
+            },
+            {
+                type: "subtraction_basic",
+                question: "Calculate: 60,060 - 30,030",
+                options: ["30,030", "30,130", "29,930", "30,000"],
+                answer: "A",
+                explanation: "60,060 - 30,030 = 30,030. Notice the pattern: tens of thousands: 6-3=3, thousands: 0-0=0, hundreds: 0-0=0, tens: 6-3=3, ones: 0-0=0."
+            },
+            // Decimal Addition (41-60)
+            {
+                type: "decimal_addition",
+                question: "What is 3.45 + 2.67?",
+                options: ["6.12", "6.02", "5.12", "6.22"],
+                answer: "A",
+                explanation: "3.45 + 2.67 = 6.12. Line up decimals: 3.45 + 2.67 = 6.12. Hundredths: 5+7=12 (2, carry 1), tenths: 4+6+1=11 (1, carry 1), ones: 3+2+1=6."
+            },
+            {
+                type: "decimal_addition",
+                question: "Calculate: 12.34 + 56.78",
+                options: ["69.12", "68.12", "69.02", "68.02"],
+                answer: "A",
+                explanation: "12.34 + 56.78 = 69.12. Hundredths: 4+8=12 (2, carry 1), tenths: 3+7+1=11 (1, carry 1), ones: 2+6+1=9, tens: 1+5=6."
+            },
+            {
+                type: "decimal_addition",
+                question: "Add: 0.75 + 0.25",
+                options: ["1.00", "1.0", "0.100", "1"],
+                answer: "A",
+                explanation: "0.75 + 0.25 = 1.00. Hundredths: 5+5=10 (0, carry 1), tenths: 7+2+1=10 (0, carry 1), ones: 0+0+1=1."
+            },
+            {
+                type: "decimal_addition",
+                question: "What is 4.5 + 3.75?",
+                options: ["8.25", "8.35", "7.25", "8.15"],
+                answer: "A",
+                explanation: "4.5 + 3.75 = 8.25. Write 4.5 as 4.50: 4.50 + 3.75 = 8.25. Hundredths: 0+5=5, tenths: 5+7=12 (2, carry 1), ones: 4+3+1=8."
+            },
+            {
+                type: "decimal_addition",
+                question: "Calculate: 9.99 + 0.01",
+                options: ["10.00", "10.0", "9.100", "10"],
+                answer: "A",
+                explanation: "9.99 + 0.01 = 10.00. Hundredths: 9+1=10 (0, carry 1), tenths: 9+0+1=10 (0, carry 1), ones: 9+0+1=10."
+            },
+            {
+                type: "decimal_addition",
+                question: "Add these decimals: 1.2 + 3.45 + 6.78",
+                options: ["11.43", "11.33", "10.43", "11.53"],
+                answer: "A",
+                explanation: "1.2 (as 1.20) + 3.45 + 6.78 = 11.43. Add: 1.20 + 3.45 = 4.65, + 6.78 = 11.43."
+            },
+            {
+                type: "decimal_addition",
+                question: "What is 25.6 + 14.35?",
+                options: ["39.95", "39.85", "40.05", "39.75"],
+                answer: "A",
+                explanation: "25.6 (as 25.60) + 14.35 = 39.95. Hundredths: 0+5=5, tenths: 6+3=9, ones: 5+4=9, tens: 2+1=3."
+            },
+            {
+                type: "decimal_addition",
+                question: "Calculate: 100.05 + 200.95",
+                options: ["301.00", "300.100", "301.0", "301"],
+                answer: "A",
+                explanation: "100.05 + 200.95 = 301.00. Hundredths: 5+5=10 (0, carry 1), tenths: 0+9+1=10 (0, carry 1), ones: 0+0+1=1, tens: 0+0=0, hundreds: 1+2=3."
+            },
+            {
+                type: "decimal_addition",
+                question: "Add: 7.08 + 3.92",
+                options: ["11.00", "10.100", "11.0", "11"],
+                answer: "A",
+                explanation: "7.08 + 3.92 = 11.00. Hundredths: 8+2=10 (0, carry 1), tenths: 0+9+1=10 (0, carry 1), ones: 7+3+1=11."
+            },
+            {
+                type: "decimal_addition",
+                question: "What is 0.6 + 0.7 + 0.8?",
+                options: ["2.1", "2.0", "2.2", "1.9"],
+                answer: "A",
+                explanation: "0.6 + 0.7 = 1.3, + 0.8 = 2.1. Or: 6+7+8=21 tenths = 2.1."
+            },
+            // Decimal Subtraction (61-80)
+            {
+                type: "decimal_subtraction",
+                question: "What is 5.75 - 2.50?",
+                options: ["3.25", "3.35", "3.15", "3.75"],
+                answer: "A",
+                explanation: "5.75 - 2.50 = 3.25. Subtract hundredths: 5-0=5, tenths: 7-5=2, ones: 5-2=3."
+            },
+            {
+                type: "decimal_subtraction",
+                question: "Calculate: 8.46 - 3.27",
+                options: ["5.19", "5.29", "5.09", "5.21"],
+                answer: "A",
+                explanation: "8.46 - 3.27 = 5.19. Hundredths: 6-7 (borrow) → 16-7=9, tenths: 3-2=1, ones: 8-3=5."
+            },
+            {
+                type: "decimal_subtraction",
+                question: "Subtract: 10.00 - 4.56",
+                options: ["5.44", "5.54", "6.44", "5.34"],
+                answer: "A",
+                explanation: "10.00 - 4.56 = 5.44. Write as 9.99+0.01 - 4.56 = 5.44."
+            },
+            {
+                type: "decimal_subtraction",
+                question: "What is 7.3 - 2.75?",
+                options: ["4.55", "4.65", "4.45", "5.55"],
+                answer: "A",
+                explanation: "7.3 (as 7.30) - 2.75 = 4.55. Hundredths: 0-5 (borrow) → 10-5=5, tenths: 2-7 (borrow) → 12-7=5, ones: 6-2=4."
+            },
+            {
+                type: "decimal_subtraction",
+                question: "Calculate: 15.25 - 9.99",
+                options: ["5.26", "5.36", "6.26", "5.16"],
+                answer: "A",
+                explanation: "15.25 - 9.99 = 5.26. Hundredths: 5-9 (borrow) → 15-9=6, tenths: 1-9 (borrow) → 11-9=2, ones: 4-9 (borrow) → 14-9=5."
+            },
+            {
+                type: "decimal_subtraction",
+                question: "Subtract: 100.0 - 25.75",
+                options: ["74.25", "75.25", "74.35", "75.15"],
+                answer: "A",
+                explanation: "100.0 (as 100.00) - 25.75 = 74.25. Borrow: 100.00 = 99.99+0.01 - 25.75 = 74.25."
+            },
+            {
+                type: "decimal_subtraction",
+                question: "What is 3.01 - 1.99?",
+                options: ["1.02", "1.12", "2.02", "0.98"],
+                answer: "A",
+                explanation: "3.01 - 1.99 = 1.02. Hundredths: 1-9 (borrow) → 11-9=2, tenths: 9-9=0, ones: 2-1=1."
+            },
+            {
+                type: "decimal_subtraction",
+                question: "Calculate: 8.5 - 3.625",
+                options: ["4.875", "4.775", "5.875", "4.985"],
+                answer: "A",
+                explanation: "8.5 (as 8.500) - 3.625 = 4.875. Thousandths: 0-5 (borrow) → 10-5=5, hundredths: 9-2=7, tenths: 4-6 (borrow) → 14-6=8, ones: 7-3=4."
+            },
+            {
+                type: "decimal_subtraction",
+                question: "Subtract: 20.00 - 12.34",
+                options: ["7.66", "7.76", "8.66", "7.56"],
+                answer: "A",
+                explanation: "20.00 - 12.34 = 7.66. 20.00 = 19.99+0.01 - 12.34 = 7.66."
+            },
+            {
+                type: "decimal_subtraction",
+                question: "What is 0.9 - 0.45?",
+                options: ["0.45", "0.55", "0.35", "0.5"],
+                answer: "A",
+                explanation: "0.9 (as 0.90) - 0.45 = 0.45. Hundredths: 0-5 (borrow) → 10-5=5, tenths: 8-4=4, ones: 0-0=0."
+            },
+            // Mixed Operations with Whole Numbers & Decimals (81-100)
+            {
+                type: "mixed_operations",
+                question: "What is 25 + 12.5?",
+                options: ["37.5", "37.0", "37", "37.05"],
+                answer: "A",
+                explanation: "25 + 12.5 = 37.5. Write 25 as 25.0: 25.0 + 12.5 = 37.5."
+            },
+            {
+                type: "mixed_operations",
+                question: "Calculate: 50 - 12.75",
+                options: ["37.25", "37.75", "38.25", "37.5"],
+                answer: "A",
+                explanation: "50 - 12.75 = 37.25. Write 50 as 50.00: 50.00 - 12.75 = 37.25."
+            },
+            {
+                type: "mixed_operations",
+                question: "Add: 100 + 45.5 + 3.25",
+                options: ["148.75", "148.5", "149.75", "147.75"],
+                answer: "A",
+                explanation: "100 + 45.5 = 145.5, + 3.25 = 148.75. Or: 100.00 + 45.50 + 3.25 = 148.75."
+            },
+            {
+                type: "mixed_operations",
+                question: "What is 75.5 - 50?",
+                options: ["25.5", "25.0", "25", "26.5"],
+                answer: "A",
+                explanation: "75.5 - 50 = 25.5. Write 50 as 50.0: 75.5 - 50.0 = 25.5."
+            },
+            {
+                type: "mixed_operations",
+                question: "Calculate: 200 + 99.99",
+                options: ["299.99", "300.00", "299.9", "299.99"],
+                answer: "A",
+                explanation: "200 + 99.99 = 299.99. Write 200 as 200.00: 200.00 + 99.99 = 299.99."
+            },
+            {
+                type: "mixed_operations",
+                question: "Subtract: 1,000 - 125.5",
+                options: ["874.5", "875.5", "874.0", "875.0"],
+                answer: "A",
+                explanation: "1,000 - 125.5 = 874.5. Write as 1,000.0 - 125.5 = 874.5."
+            },
+            {
+                type: "mixed_operations",
+                question: "What is 45 + 67.89?",
+                options: ["112.89", "112.99", "113.89", "111.89"],
+                answer: "A",
+                explanation: "45 (as 45.00) + 67.89 = 112.89. Hundredths: 0+9=9, tenths: 0+8=8, ones: 5+7=12 (2, carry 1), tens: 4+6+1=11."
+            },
+            {
+                type: "mixed_operations",
+                question: "Calculate: 500.25 - 250",
+                options: ["250.25", "250.75", "250.0", "250"],
+                answer: "A",
+                explanation: "500.25 - 250 = 250.25. Write 250 as 250.00: 500.25 - 250.00 = 250.25."
+            },
+            {
+                type: "mixed_operations",
+                question: "Add: 1,000 + 500 + 75.5",
+                options: ["1,575.5", "1,575.0", "1,576.5", "1,574.5"],
+                answer: "A",
+                explanation: "1,000 + 500 = 1,500, + 75.5 = 1,575.5."
+            },
+            {
+                type: "mixed_operations",
+                question: "What is 99.9 - 50?",
+                options: ["49.9", "50.9", "49.0", "50.0"],
+                answer: "A",
+                explanation: "99.9 - 50 = 49.9. Write 50 as 50.0: 99.9 - 50.0 = 49.9."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent calculation skills!",
+            "Fantastic job with decimal alignment!",
+            "Great work! You're a math computation expert!",
+            "Amazing! Your addition and subtraction skills are impressive!",
+            "Well done! Perfect answer with proper decimal placement!",
+            "You're a computation champion!",
+            "Perfect! You understand place value alignment!",
+            "Outstanding mathematical accuracy!",
+            "Brilliant! You handle decimals like a pro!",
+            "You're on fire! Great attention to detail!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const mathFact = document.getElementById('mathFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const calculationDisplay = document.getElementById('calculationDisplay');
+        const decimalAlignmentDisplay = document.getElementById('decimalAlignmentDisplay');
+        const numberDisplay = document.getElementById('numberDisplay');
+        const processDisplay = document.getElementById('processDisplay');
+        const moneyDisplay = document.getElementById('moneyDisplay');
+        const estimationDisplay = document.getElementById('estimationDisplay');
+        const wordProblemDisplay = document.getElementById('wordProblemDisplay');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Format number with commas
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Format decimal number
+        function formatDecimal(num, decimals = 2) {
+            return parseFloat(num).toFixed(decimals);
+        }
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade5MathAddSubtract');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade5MathAddSubtract', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade5MathAddSubtract_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade5MathAddSubtract_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're an addition and subtraction expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent computation skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing decimal alignment!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review carrying and borrowing concepts!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Math computation improves with practice!";
+            }
+        }
+
+        // Create math fact display
+        function createMathFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'math-fact';
+            
+            const facts = [
+                "The '+' symbol comes from Latin 'et' meaning 'and'. It was first used in print in 1489!",
+                "The '-' symbol first appeared in a German math book in 1481 as a horizontal dash!",
+                "Ancient Egyptians used hieroglyphs for addition and subtraction over 4,000 years ago!",
+                "The decimal point was invented by Scottish mathematician John Napier in 1617!",
+                "The abacus, invented over 2,000 years ago, is still used today for fast calculations!",
+                "In the 1600s, some mathematicians used 'p' for plus and 'm' for minus!",
+                "The equals sign '=' was invented in 1557 by Welsh mathematician Robert Recorde!",
+                "The word 'decimal' comes from Latin 'decimus' meaning 'tenth'!"
+            ];
+            
+            factDiv.innerHTML = `<strong>Math Fact:</strong> ${facts[Math.floor(Math.random() * facts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create vertical calculation display
+        function createCalculationDisplay() {
+            const display = document.createElement('div');
+            display.className = 'calculation-display calculation-highlight';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Extract numbers from question text for demonstration
+            let num1, num2;
+            const text = question.question;
+            
+            if (question.type.includes("addition")) {
+                const numbers = text.match(/\d+(\.\d+)?/g);
+                if (numbers && numbers.length >= 2) {
+                    num1 = parseFloat(numbers[0]);
+                    num2 = parseFloat(numbers[1]);
+                    
+                    const isDecimal = numbers[0].includes('.') || numbers[1].includes('.');
+                    const maxDecimals = Math.max(
+                        (numbers[0].split('.')[1] || '').length,
+                        (numbers[1].split('.')[1] || '').length
+                    );
+                    
+                    display.innerHTML = `
+                        <div style="margin-bottom: 15px; color: var(--accent-orange); font-weight: bold;">Vertical Calculation:</div>
+                        <div class="vertical-calculation">
+                            <div class="vertical-row">
+                                <div class="number-part">${num1.toFixed(isDecimal ? maxDecimals : 0)}</div>
+                            </div>
+                            <div class="vertical-row">
+                                <div class="operator">+</div>
+                                <div class="number-part">${num2.toFixed(isDecimal ? maxDecimals : 0)}</div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="vertical-row answer-row">
+                                <div class="number-part">${(num1 + num2).toFixed(isDecimal ? maxDecimals : 0)}</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px; color: var(--text-secondary); font-size: 0.9rem;">
+                            Remember to align decimal points!
+                        </div>
+                    `;
+                }
+            } else if (question.type.includes("subtraction")) {
+                const numbers = text.match(/\d+(\.\d+)?/g);
+                if (numbers && numbers.length >= 2) {
+                    num1 = parseFloat(numbers[0]);
+                    num2 = parseFloat(numbers[1]);
+                    
+                    const isDecimal = numbers[0].includes('.') || numbers[1].includes('.');
+                    const maxDecimals = Math.max(
+                        (numbers[0].split('.')[1] || '').length,
+                        (numbers[1].split('.')[1] || '').length
+                    );
+                    
+                    display.innerHTML = `
+                        <div style="margin-bottom: 15px; color: var(--accent-orange); font-weight: bold;">Vertical Calculation:</div>
+                        <div class="vertical-calculation">
+                            <div class="vertical-row">
+                                <div class="number-part">${num1.toFixed(isDecimal ? maxDecimals : 0)}</div>
+                            </div>
+                            <div class="vertical-row">
+                                <div class="operator">-</div>
+                                <div class="number-part">${num2.toFixed(isDecimal ? maxDecimals : 0)}</div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="vertical-row answer-row">
+                                <div class="number-part">${(num1 - num2).toFixed(isDecimal ? maxDecimals : 0)}</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px; color: var(--text-secondary); font-size: 0.9rem;">
+                            Remember to borrow when needed!
+                        </div>
+                    `;
+                }
+            }
+            
+            return display;
+        }
+
+        // Create decimal alignment display
+        function createDecimalAlignmentDisplay() {
+            const display = document.createElement('div');
+            display.className = 'decimal-alignment';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("decimal")) {
+                // Create example decimal alignment
+                const num1 = Math.random() * 100;
+                const num2 = Math.random() * 100;
+                
+                const num1Str = num1.toFixed(2);
+                const num2Str = num2.toFixed(2);
+                
+                display.innerHTML = `
+                    <div style="margin-bottom: 10px; color: var(--secondary-blue); font-weight: bold;">Decimal Alignment Example:</div>
+                    <div class="decimal-row decimal-bounce" style="animation-delay: 0s;">
+                        <span>${num1Str.replace('.', '<span class="decimal-point">.</span>')}</span>
+                    </div>
+                    <div style="font-size: 1.5rem; color: var(--accent-orange);">+</div>
+                    <div class="decimal-row decimal-bounce" style="animation-delay: 0.2s;">
+                        <span>${num2Str.replace('.', '<span class="decimal-point">.</span>')}</span>
+                    </div>
+                    <div style="height: 2px; background: var(--primary-green); width: 100px; margin: 10px 0;"></div>
+                    <div class="decimal-row" style="background: rgba(76, 175, 80, 0.2);">
+                        <span>${(num1 + num2).toFixed(2).replace('.', '<span class="decimal-point">.</span>')}</span>
+                    </div>
+                    <div style="margin-top: 15px; color: var(--text-secondary); font-size: 0.9rem;">
+                        Always line up the decimal points when adding or subtracting!
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create number display
+        function createNumberDisplay() {
+            const display = document.createElement('div');
+            display.className = 'number-display number-glow';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Show an example number based on question type
+            if (question.type.includes("decimal")) {
+                const num = (Math.random() * 100).toFixed(2);
+                display.textContent = `$${formatNumber(parseFloat(num))}`;
+            } else {
+                const num = Math.floor(Math.random() * 10000);
+                display.textContent = formatNumber(num);
+            }
+            
+            return display;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "addition": "➕",
+                "subtraction": "➖",
+                "decimal": "🔢",
+                "mixed": "🔄"
+            };
+            
+            let conceptName = "Addition";
+            let conceptIcon = conceptIcons.addition;
+            
+            if (question.type.includes("addition")) {
+                conceptName = "Addition";
+                conceptIcon = conceptIcons.addition;
+            } else if (question.type.includes("subtraction")) {
+                conceptName = "Subtraction";
+                conceptIcon = conceptIcons.subtraction;
+            } else if (question.type.includes("decimal")) {
+                conceptName = "Decimals";
+                conceptIcon = conceptIcons.decimal;
+            } else if (question.type.includes("mixed")) {
+                conceptName = "Mixed Operations";
+                conceptIcon = conceptIcons.mixed;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("addition")) {
+                label.textContent = "Combine numbers to find the total";
+            } else if (question.type.includes("subtraction")) {
+                label.textContent = "Find the difference between numbers";
+            } else if (question.type.includes("decimal")) {
+                label.textContent = "Work with tenths and hundredths";
+            } else if (question.type.includes("mixed")) {
+                label.textContent = "Combine whole numbers and decimals";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create process display
+        function createProcessDisplay() {
+            const display = document.createElement('div');
+            display.className = 'process-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("decimal")) {
+                display.innerHTML = `
+                    <div class="process-step">
+                        <div class="step-icon">🔢</div>
+                        <div class="step-title">Step 1: Align Decimals</div>
+                        <div class="step-description">Line up numbers by decimal point</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">0️⃣</div>
+                        <div class="step-title">Step 2: Add Zeros</div>
+                        <div class="step-description">Add zeros so all numbers have same decimal places</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">➕➖</div>
+                        <div class="step-title">Step 3: Calculate</div>
+                        <div class="step-description">Add or subtract as with whole numbers</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🎯</div>
+                        <div class="step-title">Step 4: Place Decimal</div>
+                        <div class="step-description">Bring decimal straight down in answer</div>
+                    </div>
+                `;
+            } else {
+                display.innerHTML = `
+                    <div class="process-step">
+                        <div class="step-icon">👈</div>
+                        <div class="step-title">Step 1: Right Alignment</div>
+                        <div class="step-description">Align numbers to the right (ones place)</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🔢</div>
+                        <div class="step-title">Step 2: Start at Ones</div>
+                        <div class="step-description">Begin with the rightmost column</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">📝</div>
+                        <div class="step-title">Step 3: Carry/Borrow</div>
+                        <div class="step-description">Carry over 10s or borrow when needed</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">✅</div>
+                        <div class="step-title">Step 4: Move Left</div>
+                        <div class="step-description">Work left through all place values</div>
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create money display
+        function createMoneyDisplay() {
+            const display = document.createElement('div');
+            display.className = 'money-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            if (question.type.includes("decimal")) {
+                const price1 = (Math.random() * 50).toFixed(2);
+                const price2 = (Math.random() * 50).toFixed(2);
+                
+                display.innerHTML = `
+                    <div class="money-item money-shake" style="animation-delay: 0s;">
+                        <strong>Item 1:</strong><br>
+                        $${price1}
+                    </div>
+                    <div class="money-item" style="font-size: 1.5rem; align-self: center;">
+                        ${question.type.includes("addition") ? "+" : "-"}
+                    </div>
+                    <div class="money-item money-shake" style="animation-delay: 0.3s;">
+                        <strong>Item 2:</strong><br>
+                        $${price2}
+                    </div>
+                    <div class="money-item" style="font-size: 1.5rem; align-self: center;">
+                        =
+                    </div>
+                    <div class="money-item" style="background: rgba(76, 175, 80, 0.2); border-color: var(--primary-green);">
+                        <strong>Total:</strong><br>
+                        $${question.type.includes("addition") ? (parseFloat(price1) + parseFloat(price2)).toFixed(2) : (parseFloat(price1) - parseFloat(price2)).toFixed(2)}
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create estimation display
+        function createEstimationDisplay() {
+            const display = document.createElement('div');
+            display.className = 'estimation-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Extract numbers for estimation example
+            const text = question.question;
+            const numbers = text.match(/\d+(\.\d+)?/g);
+            
+            if (numbers && numbers.length >= 2) {
+                const num1 = parseFloat(numbers[0]);
+                const num2 = parseFloat(numbers[1]);
+                
+                let estimate;
+                if (question.type.includes("addition")) {
+                    estimate = Math.round(num1) + Math.round(num2);
+                } else {
+                    estimate = Math.round(num1) - Math.round(num2);
+                }
+                
+                display.innerHTML = `
+                    <div class="estimation-item">
+                        <strong>Exact Calculation:</strong><br>
+                        ${question.type.includes("addition") ? `${num1} + ${num2}` : `${num1} - ${num2}`}<br>
+                        = ?
+                    </div>
+                    <div class="estimation-item" style="font-size: 1.5rem; align-self: center;">
+                        ≈
+                    </div>
+                    <div class="estimation-item">
+                        <strong>Estimation:</strong><br>
+                        ${Math.round(num1)} ${question.type.includes("addition") ? "+" : "-"} ${Math.round(num2)}<br>
+                        ≈ ${estimate}
+                    </div>
+                    <div style="grid-column: 1 / -1; margin-top: 10px; color: var(--text-secondary); font-size: 0.9rem;">
+                        Estimation helps check if your answer is reasonable!
+                    </div>
+                `;
+            }
+            
+            return display;
+        }
+
+        // Create word problem display
+        function createWordProblemDisplay() {
+            const display = document.createElement('div');
+            display.className = 'word-problem';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            // Create a sample word problem
+            const problems = [
+                "Maria bought a book for $12.95 and a pen for $3.75. How much did she spend in total?",
+                "A football field is 100 yards long. If a player runs 45 yards, how many more yards to reach the end zone?",
+                "The temperature was 78.5°F in the morning and rose by 12.3°F by afternoon. What was the afternoon temperature?",
+                "A recipe calls for 2.5 cups of flour. If you already added 1.75 cups, how much more flour do you need?",
+                "Sam saved $125.50. He wants to buy a bike that costs $199.99. How much more money does he need?"
+            ];
+            
+            const randomProblem = problems[Math.floor(Math.random() * problems.length)];
+            
+            display.innerHTML = `
+                <h3 style="margin-bottom: 15px; color: var(--accent-teal);">Real-World Application:</h3>
+                <div class="problem-text">"${randomProblem}"</div>
+                <div class="problem-hint">Hint: Identify whether to add or subtract, then align decimals carefully!</div>
+            `;
+            
+            return display;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            mathFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            calculationDisplay.innerHTML = '';
+            decimalAlignmentDisplay.innerHTML = '';
+            numberDisplay.innerHTML = '';
+            processDisplay.innerHTML = '';
+            moneyDisplay.innerHTML = '';
+            estimationDisplay.innerHTML = '';
+            wordProblemDisplay.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            mathFact.appendChild(createMathFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            
+            // Show appropriate visualizations based on question type
+            calculationDisplay.appendChild(createCalculationDisplay());
+            
+            if (question.type.includes("decimal")) {
+                decimalAlignmentDisplay.appendChild(createDecimalAlignmentDisplay());
+            }
+            
+            numberDisplay.appendChild(createNumberDisplay());
+            processDisplay.appendChild(createProcessDisplay());
+            
+            if (question.type.includes("decimal")) {
+                moneyDisplay.appendChild(createMoneyDisplay());
+            }
+            
+            estimationDisplay.appendChild(createEstimationDisplay());
+            wordProblemDisplay.appendChild(createWordProblemDisplay());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

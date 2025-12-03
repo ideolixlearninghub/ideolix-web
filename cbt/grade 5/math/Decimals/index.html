@@ -1,0 +1,2074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Math - Decimals | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Decimals Theme */
+        :root {
+            --primary-teal: #009688;
+            --secondary-cyan: #00BCD4;
+            --accent-orange: #FF9800;
+            --accent-lime: #CDDC39;
+            --accent-purple: #9C27B0;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(0, 150, 136, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 150, 136, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-teal);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-teal);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            box-shadow: 0 0 0 3px rgba(0, 150, 136, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-teal);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 150, 136, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00796B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 150, 136, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-cyan);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #0097A7;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 188, 212, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-teal);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Page */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-teal), var(--secondary-cyan));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 150, 136, 0.5);
+        }
+
+        /* Question Content Layout */
+        .question-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 25px;
+            min-height: 400px;
+        }
+
+        @media (max-width: 768px) {
+            .question-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        .question-section {
+            background: var(--dark-surface);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid var(--dark-border);
+        }
+
+        .example-section {
+            background: var(--dark-surface);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid var(--dark-border);
+        }
+
+        .question-text {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            color: var(--text-primary);
+            min-height: 80px;
+        }
+
+        /* Decimal Display */
+        .decimal-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-lime);
+        }
+
+        .decimal-place {
+            display: inline-block;
+            text-align: center;
+            min-width: 40px;
+            margin: 0 2px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .decimal-place.highlight {
+            background: rgba(0, 150, 136, 0.2);
+            transform: scale(1.1);
+        }
+
+        .decimal-point {
+            color: var(--accent-orange);
+            font-weight: bold;
+            margin: 0 5px;
+            font-size: 2.5rem;
+        }
+
+        .place-value-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 3px;
+        }
+
+        /* Place Value Chart */
+        .place-value-chart {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 5px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .place-cell {
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            border: 1px solid var(--dark-border);
+        }
+
+        .place-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        .place-digit {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-lime);
+        }
+
+        /* Money Display */
+        .money-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255, 152, 0, 0.1);
+            border-radius: 10px;
+            border-left: 3px solid var(--accent-orange);
+        }
+
+        .dollar-sign {
+            font-size: 1.5rem;
+            color: var(--accent-orange);
+            font-weight: bold;
+        }
+
+        /* Fraction/Decimal Conversion Display */
+        .conversion-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .conversion-box {
+            padding: 15px;
+            background: rgba(205, 220, 57, 0.1);
+            border-radius: 10px;
+            border: 2px solid var(--accent-lime);
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .conversion-arrow {
+            font-size: 2rem;
+            color: var(--secondary-cyan);
+        }
+
+        /* Options Container */
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-teal);
+            background: rgba(0, 150, 136, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 150, 136, 0.1);
+            border-color: var(--primary-teal);
+            color: var(--primary-teal);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--primary-teal);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-teal);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        /* Example Section */
+        .example-title {
+            font-size: 1.3rem;
+            color: var(--primary-teal);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .math-fact {
+            background: rgba(156, 39, 176, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-purple);
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .example-display {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .process-display {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-orange);
+        }
+
+        .step-icon {
+            font-size: 1.5rem;
+            color: var(--accent-orange);
+        }
+
+        .step-content h4 {
+            color: var(--accent-orange);
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Calculation Display */
+        .calculation-display {
+            background: rgba(0, 188, 212, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .vertical-calculation {
+            display: inline-block;
+            text-align: right;
+            margin: 10px auto;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        .vertical-row {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin: 3px 0;
+        }
+
+        .operator {
+            margin-right: 10px;
+            color: var(--primary-teal);
+            font-weight: bold;
+        }
+
+        .number-part {
+            min-width: 60px;
+            text-align: right;
+            padding: 3px 8px;
+        }
+
+        .line {
+            height: 2px;
+            background: var(--primary-teal);
+            margin: 8px 0;
+        }
+
+        /* Feedback Container */
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+            grid-column: 1 / -1;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 150, 136, 0.1);
+            border-left: 5px solid var(--primary-teal);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-teal);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-teal);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            grid-column: 1 / -1;
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-teal);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes decimalHighlight {
+            0%, 100% { background-color: transparent; }
+            50% { background-color: rgba(0, 150, 136, 0.3); }
+        }
+        
+        .decimal-highlight {
+            animation: decimalHighlight 1s ease-in-out;
+        }
+        
+        @keyframes moneyShake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-2deg); }
+            75% { transform: rotate(2deg); }
+        }
+        
+        .money-shake {
+            animation: moneyShake 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 5 Mathematics</h1>
+            <p class="welcome-subtitle">Master decimals! Learn decimal place value, perform operations with decimals, convert between fractions and decimals, and solve real-world money problems. Build essential skills for measurement, money, and data analysis!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">🔢</span>
+                <span class="topic-name">Decimals Mastery (Place Value, Operations, Conversions)</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Decimals Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-content">
+                <!-- Left Column: Question and Options -->
+                <div class="question-section">
+                    <h2 class="question-text" id="questionText"></h2>
+                    <div id="decimalDisplay"></div>
+                    <div class="options-container" id="optionsContainer"></div>
+                </div>
+                
+                <!-- Right Column: Examples and Process -->
+                <div class="example-section">
+                    <h3 class="example-title">Examples & Process</h3>
+                    <div id="mathFact" class="math-fact"></div>
+                    <div id="visualDisplay" class="example-display"></div>
+                    <div id="processDisplay" class="process-display"></div>
+                </div>
+                
+                <!-- Feedback spans both columns -->
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-message"></div>
+                    <div class="feedback-explanation"></div>
+                </div>
+                
+                <!-- Navigation spans both columns -->
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Decimals Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // 100+ Decimals Questions
+        const questions = [
+            // Decimal Place Value Basics (1-20)
+            {
+                type: "place_value_basics",
+                question: "What is the place value of the digit 5 in 3.45?",
+                options: ["Hundredths", "Tenths", "Ones", "Tens"],
+                answer: "A",
+                explanation: "In 3.45, the digits after decimal are: 4 (tenths), 5 (hundredths). So 5 is in hundredths place."
+            },
+            {
+                type: "place_value_basics",
+                question: "What is the value of the digit 7 in 12.73?",
+                options: ["7 tenths or 0.7", "7 hundredths or 0.07", "7 ones", "7 tens"],
+                answer: "A",
+                explanation: "In 12.73, digits after decimal: 7 (tenths), 3 (hundredths). So 7 represents 7 tenths or 0.7."
+            },
+            {
+                type: "place_value_basics",
+                question: "In the number 4.569, which digit is in the thousandths place?",
+                options: ["9", "5", "6", "4"],
+                answer: "A",
+                explanation: "4.569: after decimal - 5 (tenths), 6 (hundredths), 9 (thousandths)."
+            },
+            {
+                type: "place_value_basics",
+                question: "What is the place value of 3 in 0.123?",
+                options: ["Thousandths", "Hundredths", "Tenths", "Ten-thousandths"],
+                answer: "A",
+                explanation: "0.123: 1 (tenths), 2 (hundredths), 3 (thousandths)."
+            },
+            {
+                type: "place_value_basics",
+                question: "Which digit is in the hundredths place in 25.678?",
+                options: ["7", "6", "8", "5"],
+                answer: "A",
+                explanation: "25.678: 6 (tenths), 7 (hundredths), 8 (thousandths)."
+            },
+            {
+                type: "place_value_basics",
+                question: "What is 0.4 written as a fraction?",
+                options: ["4/10", "4/100", "1/4", "2/5"],
+                answer: "A",
+                explanation: "0.4 = 4 tenths = 4/10, which simplifies to 2/5."
+            },
+            {
+                type: "place_value_basics",
+                question: "Write 0.25 as a fraction in simplest form.",
+                options: ["1/4", "25/100", "1/25", "2/5"],
+                answer: "A",
+                explanation: "0.25 = 25/100 = 1/4 (divide numerator and denominator by 25)."
+            },
+            {
+                type: "place_value_basics",
+                question: "Convert 0.75 to a fraction in simplest form.",
+                options: ["3/4", "75/100", "7/10", "1/75"],
+                answer: "A",
+                explanation: "0.75 = 75/100 = 3/4 (divide numerator and denominator by 25)."
+            },
+            {
+                type: "place_value_basics",
+                question: "What is 3/10 as a decimal?",
+                options: ["0.3", "0.03", "0.33", "3.0"],
+                answer: "A",
+                explanation: "3/10 = three tenths = 0.3."
+            },
+            {
+                type: "place_value_basics",
+                question: "Convert 7/100 to a decimal.",
+                options: ["0.07", "0.7", "0.007", "7.0"],
+                answer: "A",
+                explanation: "7/100 = seven hundredths = 0.07."
+            },
+            // Reading and Writing Decimals (21-40)
+            {
+                type: "reading_decimals",
+                question: "How do you read 4.56?",
+                options: ["Four and fifty-six hundredths", "Four point fifty-six", "Four hundred fifty-six", "Four and five six"],
+                answer: "A",
+                explanation: "4.56 = 4 and 56 hundredths, read as 'four and fifty-six hundredths'."
+            },
+            {
+                type: "reading_decimals",
+                question: "Write 'three and two tenths' as a decimal.",
+                options: ["3.2", "3.02", "0.32", "32.0"],
+                answer: "A",
+                explanation: "Three and two tenths = 3 + 0.2 = 3.2."
+            },
+            {
+                type: "reading_decimals",
+                question: "How do you read 0.008?",
+                options: ["Eight thousandths", "Eight hundredths", "Point zero zero eight", "Zero point eight"],
+                answer: "A",
+                explanation: "0.008 = 8 thousandths, read as 'eight thousandths'."
+            },
+            {
+                type: "reading_decimals",
+                question: "Write 'seven and twenty-five hundredths' as a decimal.",
+                options: ["7.25", "7.025", "7.205", "72.5"],
+                answer: "A",
+                explanation: "Seven and twenty-five hundredths = 7 + 0.25 = 7.25."
+            },
+            {
+                type: "reading_decimals",
+                question: "How do you read 12.345?",
+                options: ["Twelve and three hundred forty-five thousandths", "Twelve point three four five", "One two point three four five", "Twelve and three tenths four hundredths five thousandths"],
+                answer: "A",
+                explanation: "12.345 = 12 and 345 thousandths, read as 'twelve and three hundred forty-five thousandths'."
+            },
+            // Decimal Operations - Addition (41-60)
+            {
+                type: "decimal_addition",
+                question: "What is 3.5 + 2.4?",
+                options: ["5.9", "5.1", "6.0", "5.5"],
+                answer: "A",
+                explanation: "3.5 + 2.4 = 5.9. Align decimals: 3.5 + 2.4 = 5.9."
+            },
+            {
+                type: "decimal_addition",
+                question: "Calculate: 12.34 + 5.67",
+                options: ["18.01", "17.01", "18.11", "17.91"],
+                answer: "A",
+                explanation: "12.34 + 5.67 = 18.01. Hundredths: 4+7=11 (write 1, carry 1), tenths: 3+6+1=10 (write 0, carry 1), ones: 2+5+1=8, tens: 1+0=1."
+            },
+            {
+                type: "decimal_addition",
+                question: "Add: 7.8 + 3.25",
+                options: ["11.05", "10.05", "11.15", "10.15"],
+                answer: "A",
+                explanation: "7.8 (as 7.80) + 3.25 = 11.05. Hundredths: 0+5=5, tenths: 8+2=10 (write 0, carry 1), ones: 7+3+1=11."
+            },
+            {
+                type: "decimal_addition",
+                question: "What is 0.75 + 0.25?",
+                options: ["1.00", "0.100", "1.0", "0.10"],
+                answer: "A",
+                explanation: "0.75 + 0.25 = 1.00. Hundredths: 5+5=10 (write 0, carry 1), tenths: 7+2+1=10 (write 0, carry 1), ones: 0+0+1=1."
+            },
+            {
+                type: "decimal_addition",
+                question: "Calculate: 45.6 + 23.78",
+                options: ["69.38", "68.38", "69.28", "68.28"],
+                answer: "A",
+                explanation: "45.6 (as 45.60) + 23.78 = 69.38. Hundredths: 0+8=8, tenths: 6+7=13 (write 3, carry 1), ones: 5+3+1=9, tens: 4+2=6."
+            },
+            // Decimal Operations - Subtraction (61-80)
+            {
+                type: "decimal_subtraction",
+                question: "What is 8.9 - 4.3?",
+                options: ["4.6", "4.4", "5.6", "4.2"],
+                answer: "A",
+                explanation: "8.9 - 4.3 = 4.6. Tenths: 9-3=6, ones: 8-4=4."
+            },
+            {
+                type: "decimal_subtraction",
+                question: "Subtract: 12.5 - 7.8",
+                options: ["4.7", "5.3", "4.3", "5.7"],
+                answer: "A",
+                explanation: "12.5 - 7.8 = 4.7. Tenths: 5-8 (borrow) → 15-8=7, ones: 1-7 (borrow) → 11-7=4."
+            },
+            {
+                type: "decimal_subtraction",
+                question: "Calculate: 15.00 - 8.75",
+                options: ["6.25", "7.25", "6.75", "7.75"],
+                answer: "A",
+                explanation: "15.00 - 8.75 = 6.25. Hundredths: 0-5 (borrow) → 10-5=5, tenths: 9-7=2, ones: 4-8 (borrow) → 14-8=6."
+            },
+            {
+                type: "decimal_subtraction",
+                question: "What is 10.0 - 4.56?",
+                options: ["5.44", "5.56", "6.44", "6.56"],
+                answer: "A",
+                explanation: "10.0 (as 10.00) - 4.56 = 5.44. Borrow: 10.00 = 9.99+0.01 - 4.56 = 5.44."
+            },
+            {
+                type: "decimal_subtraction",
+                question: "Subtract: 7.3 - 2.85",
+                options: ["4.45", "4.55", "5.45", "5.55"],
+                answer: "A",
+                explanation: "7.3 (as 7.30) - 2.85 = 4.45. Hundredths: 0-5 (borrow) → 10-5=5, tenths: 2-8 (borrow) → 12-8=4, ones: 6-2=4."
+            },
+            // Decimal Operations - Multiplication (81-95)
+            {
+                type: "decimal_multiplication",
+                question: "What is 3.2 × 4?",
+                options: ["12.8", "12.2", "1.28", "128"],
+                answer: "A",
+                explanation: "3.2 × 4 = 12.8. Multiply as whole numbers: 32 × 4 = 128, then place decimal: one decimal place = 12.8."
+            },
+            {
+                type: "decimal_multiplication",
+                question: "Calculate: 2.5 × 1.6",
+                options: ["4.0", "3.0", "4.1", "3.5"],
+                answer: "A",
+                explanation: "2.5 × 1.6 = 4.0. Multiply: 25 × 16 = 400. Total decimal places: 1+1=2, so 4.00 = 4.0."
+            },
+            {
+                type: "decimal_multiplication",
+                question: "What is 0.4 × 0.3?",
+                options: ["0.12", "1.2", "0.012", "12"],
+                answer: "A",
+                explanation: "0.4 × 0.3 = 0.12. Multiply: 4 × 3 = 12. Total decimal places: 1+1=2, so 0.12."
+            },
+            {
+                type: "decimal_multiplication",
+                question: "Multiply: 1.25 × 8",
+                options: ["10.0", "10.00", "100", "1.0"],
+                answer: "A",
+                explanation: "1.25 × 8 = 10.0. Multiply: 125 × 8 = 1000. Total decimal places: 2, so 10.00 = 10.0."
+            },
+            {
+                type: "decimal_multiplication",
+                question: "Calculate: 0.7 × 0.9",
+                options: ["0.63", "6.3", "0.063", "63"],
+                answer: "A",
+                explanation: "0.7 × 0.9 = 0.63. Multiply: 7 × 9 = 63. Total decimal places: 1+1=2, so 0.63."
+            },
+            // Decimal Operations - Division (96-110)
+            {
+                type: "decimal_division",
+                question: "What is 4.8 ÷ 2?",
+                options: ["2.4", "2.2", "2.6", "2.0"],
+                answer: "A",
+                explanation: "4.8 ÷ 2 = 2.4. Divide: 4 ÷ 2 = 2, 0.8 ÷ 2 = 0.4, total 2.4."
+            },
+            {
+                type: "decimal_division",
+                question: "Divide: 6.4 ÷ 0.8",
+                options: ["8", "0.8", "80", "0.08"],
+                answer: "A",
+                explanation: "6.4 ÷ 0.8 = 8. Multiply both by 10: 64 ÷ 8 = 8."
+            },
+            {
+                type: "decimal_division",
+                question: "Calculate: 3.6 ÷ 0.6",
+                options: ["6", "0.6", "60", "0.06"],
+                answer: "A",
+                explanation: "3.6 ÷ 0.6 = 6. Multiply both by 10: 36 ÷ 6 = 6."
+            },
+            {
+                type: "decimal_division",
+                question: "What is 0.45 ÷ 0.05?",
+                options: ["9", "0.9", "90", "0.09"],
+                answer: "A",
+                explanation: "0.45 ÷ 0.05 = 9. Multiply both by 100: 45 ÷ 5 = 9."
+            },
+            {
+                type: "decimal_division",
+                question: "Divide: 7.2 ÷ 0.9",
+                options: ["8", "0.8", "80", "0.08"],
+                answer: "A",
+                explanation: "7.2 ÷ 0.9 = 8. Multiply both by 10: 72 ÷ 9 = 8."
+            },
+            // Comparing and Ordering Decimals (111-125)
+            {
+                type: "comparing_decimals",
+                question: "Which is greater: 0.7 or 0.69?",
+                options: ["0.7", "0.69", "They are equal", "Cannot compare"],
+                answer: "A",
+                explanation: "0.7 = 0.70, and 0.70 > 0.69. So 0.7 is greater."
+            },
+            {
+                type: "comparing_decimals",
+                question: "Compare: 3.45 _ 3.54",
+                options: ["<", ">", "=", "≠"],
+                answer: "A",
+                explanation: "3.45 < 3.54 because in the hundredths place: 5 < 4? Wait, compare: 3.45 vs 3.54. Tenths: 4 < 5, so 3.45 < 3.54."
+            },
+            {
+                type: "comparing_decimals",
+                question: "Order from least to greatest: 2.3, 2.03, 2.33",
+                options: ["2.03, 2.3, 2.33", "2.3, 2.03, 2.33", "2.33, 2.3, 2.03", "2.03, 2.33, 2.3"],
+                answer: "A",
+                explanation: "Write all with same decimal places: 2.30, 2.03, 2.33. So: 2.03 < 2.30 < 2.33."
+            },
+            {
+                type: "comparing_decimals",
+                question: "Which symbol makes this true: 0.89 _ 0.9?",
+                options: ["<", ">", "=", "≈"],
+                answer: "A",
+                explanation: "0.9 = 0.90, and 0.89 < 0.90, so 0.89 < 0.9."
+            },
+            {
+                type: "comparing_decimals",
+                question: "Order from greatest to least: 4.56, 4.65, 4.06",
+                options: ["4.65, 4.56, 4.06", "4.56, 4.65, 4.06", "4.06, 4.56, 4.65", "4.65, 4.06, 4.56"],
+                answer: "A",
+                explanation: "Compare: 4.65 > 4.56 > 4.06 (65 hundredths > 56 hundredths > 6 hundredths)."
+            },
+            // Money Problems (126-135)
+            {
+                type: "money_problems",
+                question: "If an item costs $3.45 and you pay with $5.00, how much change do you get?",
+                options: ["$1.55", "$1.65", "$2.55", "$2.45"],
+                answer: "A",
+                explanation: "$5.00 - $3.45 = $1.55. Subtract: 5.00 - 3.45 = 1.55."
+            },
+            {
+                type: "money_problems",
+                question: "You buy a pencil for $0.75 and an eraser for $0.50. What is the total cost?",
+                options: ["$1.25", "$1.35", "$1.15", "$0.125"],
+                answer: "A",
+                explanation: "$0.75 + $0.50 = $1.25. Add: 0.75 + 0.50 = 1.25."
+            },
+            {
+                type: "money_problems",
+                question: "If 3 candy bars cost $2.37 total, what is the cost of one candy bar?",
+                options: ["$0.79", "$0.78", "$0.80", "$0.77"],
+                answer: "A",
+                explanation: "$2.37 ÷ 3 = $0.79. Divide: 2.37 ÷ 3 = 0.79."
+            },
+            {
+                type: "money_problems",
+                question: "You have $10.00 and spend $4.75. How much money is left?",
+                options: ["$5.25", "$5.75", "$6.25", "$4.25"],
+                answer: "A",
+                explanation: "$10.00 - $4.75 = $5.25. Subtract: 10.00 - 4.75 = 5.25."
+            },
+            {
+                type: "money_problems",
+                question: "A book costs $12.95 and a notebook costs $3.50. What is the total?",
+                options: ["$16.45", "$15.45", "$16.55", "$15.55"],
+                answer: "A",
+                explanation: "$12.95 + $3.50 = $16.45. Add: 12.95 + 3.50 = 16.45."
+            },
+            // Fraction/Decimal Conversion (136-150)
+            {
+                type: "conversion",
+                question: "What is 1/2 as a decimal?",
+                options: ["0.5", "0.2", "0.1", "0.05"],
+                answer: "A",
+                explanation: "1/2 = 0.5. Divide 1 by 2 = 0.5."
+            },
+            {
+                type: "conversion",
+                question: "Convert 3/4 to a decimal.",
+                options: ["0.75", "0.25", "0.34", "0.43"],
+                answer: "A",
+                explanation: "3/4 = 0.75. Divide 3 by 4 = 0.75."
+            },
+            {
+                type: "conversion",
+                question: "What is 1/5 as a decimal?",
+                options: ["0.2", "0.5", "0.1", "0.02"],
+                answer: "A",
+                explanation: "1/5 = 0.2. Divide 1 by 5 = 0.2."
+            },
+            {
+                type: "conversion",
+                question: "Convert 2/5 to a decimal.",
+                options: ["0.4", "0.2", "0.5", "0.25"],
+                answer: "A",
+                explanation: "2/5 = 0.4. Divide 2 by 5 = 0.4."
+            },
+            {
+                type: "conversion",
+                question: "What is 3/5 as a decimal?",
+                options: ["0.6", "0.3", "0.5", "0.8"],
+                answer: "A",
+                explanation: "3/5 = 0.6. Divide 3 by 5 = 0.6."
+            },
+            {
+                type: "conversion",
+                question: "Convert 7/10 to a decimal.",
+                options: ["0.7", "0.07", "0.71", "0.1"],
+                answer: "A",
+                explanation: "7/10 = 0.7. Denominator 10 means decimal with one place: 0.7."
+            },
+            {
+                type: "conversion",
+                question: "What is 9/100 as a decimal?",
+                options: ["0.09", "0.9", "0.009", "0.19"],
+                answer: "A",
+                explanation: "9/100 = 0.09. Denominator 100 means decimal with two places: 0.09."
+            },
+            {
+                type: "conversion",
+                question: "Convert 25/100 to a decimal.",
+                options: ["0.25", "2.5", "0.025", "0.0025"],
+                answer: "A",
+                explanation: "25/100 = 0.25. Denominator 100 means decimal with two places: 0.25."
+            },
+            // Mixed Operations and Word Problems (151-160)
+            {
+                type: "mixed_operations",
+                question: "If 0.3 × ? = 1.2, what is the missing number?",
+                options: ["4", "0.4", "0.04", "40"],
+                answer: "A",
+                explanation: "1.2 ÷ 0.3 = 4. Divide: 12 ÷ 3 = 4."
+            },
+            {
+                type: "mixed_operations",
+                question: "What is 0.5 of 8.4?",
+                options: ["4.2", "4.0", "4.4", "2.4"],
+                answer: "A",
+                explanation: "0.5 of 8.4 means 0.5 × 8.4 = 4.2. Multiply: 0.5 × 8.4 = 4.2."
+            },
+            {
+                type: "mixed_operations",
+                question: "A rope is 2.5 meters long. If you cut off 0.75 meters, how much is left?",
+                options: ["1.75 meters", "1.25 meters", "2.25 meters", "3.25 meters"],
+                answer: "A",
+                explanation: "2.5 - 0.75 = 1.75 meters. Subtract: 2.50 - 0.75 = 1.75."
+            },
+            {
+                type: "mixed_operations",
+                question: "If each box weighs 1.25 kg, how much do 4 boxes weigh?",
+                options: ["5.0 kg", "4.25 kg", "5.25 kg", "4.5 kg"],
+                answer: "A",
+                explanation: "1.25 × 4 = 5.0 kg. Multiply: 1.25 × 4 = 5.00 = 5.0 kg."
+            },
+            {
+                type: "mixed_operations",
+                question: "You have 6.3 liters of juice and pour it equally into 3 bottles. How much in each?",
+                options: ["2.1 liters", "2.3 liters", "2.0 liters", "1.9 liters"],
+                answer: "A",
+                explanation: "6.3 ÷ 3 = 2.1 liters. Divide: 6.3 ÷ 3 = 2.1."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent decimal skills!",
+            "Fantastic understanding of decimal place value!",
+            "Great work! You're a decimals operations expert!",
+            "Amazing! Your conversion skills are impressive!",
+            "Well done! Perfect decimal calculation!",
+            "You're a decimals champion!",
+            "Perfect! You understand place value alignment!",
+            "Outstanding mathematical reasoning with decimals!",
+            "Brilliant! You handle decimal operations like a pro!",
+            "You're on fire! Great attention to decimal points!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const decimalDisplay = document.getElementById('decimalDisplay');
+        const mathFact = document.getElementById('mathFact');
+        const visualDisplay = document.getElementById('visualDisplay');
+        const processDisplay = document.getElementById('processDisplay');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Helper function to create decimal display
+        function createDecimalDisplay() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            let displayHTML = '';
+            
+            // Extract numbers from question
+            const text = question.question;
+            const numbers = text.match(/\d+(\.\d+)?/g);
+            
+            if (question.type.includes("place_value") || question.type.includes("reading")) {
+                if (numbers && numbers.length > 0) {
+                    const num = numbers[0];
+                    if (num.includes('.')) {
+                        const [whole, decimal] = num.split('.');
+                        const places = ['Ones', 'Tenths', 'Hundredths', 'Thousandths'];
+                        
+                        displayHTML = `
+                            <div class="decimal-display decimal-highlight">
+                                ${whole.split('').map((digit, i, arr) => `
+                                    <div class="decimal-place">
+                                        ${digit}
+                                        <div class="place-value-label">${places[arr.length - i - 1]}</div>
+                                    </div>
+                                `).join('')}
+                                <span class="decimal-point">.</span>
+                                ${decimal.split('').map((digit, i) => `
+                                    <div class="decimal-place ${i === 0 ? 'highlight' : ''}">
+                                        ${digit}
+                                        <div class="place-value-label">${places[i + 1]}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+                }
+            } else if (question.type.includes("money")) {
+                displayHTML = `
+                    <div class="money-display money-shake">
+                        <span class="dollar-sign">$</span>
+                        <div class="decimal-display">
+                            ${numbers ? numbers[0].replace('.', '<span class="decimal-point">.</span>') : '0.00'}
+                        </div>
+                    </div>
+                `;
+            } else if (question.type.includes("conversion")) {
+                // Extract fraction if present
+                const fractionMatch = text.match(/(\d+)\/(\d+)/);
+                if (fractionMatch) {
+                    const [_, numerator, denominator] = fractionMatch;
+                    const decimalValue = (parseInt(numerator) / parseInt(denominator)).toFixed(2);
+                    
+                    displayHTML = `
+                        <div class="conversion-display">
+                            <div class="conversion-box">
+                                <strong>Fraction</strong><br>
+                                ${numerator}/${denominator}
+                            </div>
+                            <div class="conversion-arrow">→</div>
+                            <div class="conversion-box">
+                                <strong>Decimal</strong><br>
+                                ${decimalValue}
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+            
+            return displayHTML;
+        }
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade5MathDecimals');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade5MathDecimals', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade5MathDecimals_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade5MathDecimals_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a decimals expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent decimal skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing decimal concepts!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review decimal place value and operations!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Decimals get easier with practice!";
+            }
+        }
+
+        // Create math fact display
+        function createMathFact() {
+            const facts = [
+                "The decimal point was invented by Scottish mathematician John Napier in 1617!",
+                "The word 'decimal' comes from Latin 'decimus' meaning 'tenth'!",
+                "Some ancient civilizations used base-60 instead of base-10, which is why we have 60 seconds in a minute!",
+                "The metric system is based on decimals, making conversions easy (just move the decimal point)!",
+                "Stock prices are quoted in decimals to the nearest cent ($0.01) since 2001!",
+                "The decimal separator varies by country: US uses period (.), Europe often uses comma (,)!",
+                "Binary numbers (base-2) are used by computers, but they can represent decimals too!",
+                "The repeating decimal 0.999... is mathematically equal to 1!"
+            ];
+            
+            return `<strong>Math Fact:</strong> ${facts[Math.floor(Math.random() * facts.length)]}`;
+        }
+
+        // Create visual display
+        function createVisualDisplay() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            let visualHTML = '';
+            
+            if (question.type.includes("place_value")) {
+                visualHTML = `
+                    <div style="margin-bottom: 10px; color: var(--accent-lime); font-weight: bold;">Place Value Chart:</div>
+                    <div class="place-value-chart">
+                        ${['Thousands', 'Hundreds', 'Tens', 'Ones', '.', 'Tenths', 'Hundredths', 'Thousandths', 'Ten-thousandths'].map(place => `
+                            <div class="place-cell">
+                                <div class="place-label">${place}</div>
+                                <div class="place-digit">${place === '.' ? '•' : '0'}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div style="margin-top: 10px; color: var(--text-secondary); font-size: 0.9rem;">
+                        Each place is 10 times the place to its right!
+                    </div>
+                `;
+            } else if (question.type.includes("operations")) {
+                const text = question.question;
+                const numbers = text.match(/\d+(\.\d+)?/g);
+                
+                if (numbers && numbers.length >= 2) {
+                    const num1 = parseFloat(numbers[0]);
+                    const num2 = parseFloat(numbers[1]);
+                    let operation = '+';
+                    let result = num1 + num2;
+                    
+                    if (question.type.includes("subtraction")) {
+                        operation = '−';
+                        result = num1 - num2;
+                    } else if (question.type.includes("multiplication")) {
+                        operation = '×';
+                        result = num1 * num2;
+                    } else if (question.type.includes("division")) {
+                        operation = '÷';
+                        result = num1 / num2;
+                    }
+                    
+                    visualHTML = `
+                        <div style="margin-bottom: 10px; color: var(--accent-orange); font-weight: bold;">Calculation:</div>
+                        <div class="vertical-calculation">
+                            <div class="vertical-row">
+                                <div class="number-part">${num1.toFixed(num1.toString().includes('.') ? 2 : 0)}</div>
+                            </div>
+                            <div class="vertical-row">
+                                <div class="operator">${operation}</div>
+                                <div class="number-part">${num2.toFixed(num2.toString().includes('.') ? 2 : 0)}</div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="vertical-row" style="color: var(--primary-teal); font-weight: bold;">
+                                <div class="number-part">${result.toFixed(result.toString().includes('.') ? 2 : 0)}</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px; color: var(--text-secondary); font-size: 0.9rem;">
+                            Remember to align decimal points vertically!
+                        </div>
+                    `;
+                }
+            }
+            
+            return visualHTML;
+        }
+
+        // Create process display
+        function createProcessDisplay() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            let processHTML = '';
+            
+            if (question.type.includes("place_value")) {
+                processHTML = `
+                    <div class="process-step">
+                        <div class="step-icon">1️⃣</div>
+                        <div class="step-content">
+                            <h4>Identify Decimal Point</h4>
+                            <p>Find the decimal point separating whole numbers from fractional parts</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">2️⃣</div>
+                        <div class="step-content">
+                            <h4>Left of Decimal</h4>
+                            <p>Places to left: Ones, Tens, Hundreds, Thousands (each 10× bigger to left)</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">3️⃣</div>
+                        <div class="step-content">
+                            <h4>Right of Decimal</h4>
+                            <p>Places to right: Tenths, Hundredths, Thousandths (each 10× smaller to right)</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">✅</div>
+                        <div class="step-content">
+                            <h4>Read Value</h4>
+                            <p>Each digit's value = digit × place value (e.g., 3 in tenths place = 3 × 0.1 = 0.3)</p>
+                        </div>
+                    </div>
+                `;
+            } else if (question.type.includes("addition") || question.type.includes("subtraction")) {
+                processHTML = `
+                    <div class="process-step">
+                        <div class="step-icon">1️⃣</div>
+                        <div class="step-content">
+                            <h4>Align Decimals</h4>
+                            <p>Write numbers with decimal points directly under each other</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">2️⃣</div>
+                        <div class="step-content">
+                            <h4>Add Zeros</h4>
+                            <p>Add zeros so all numbers have same number of decimal places</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">3️⃣</div>
+                        <div class="step-content">
+                            <h4>Add/Subtract</h4>
+                            <p>Perform operation as with whole numbers, ignoring decimal points</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">✅</div>
+                        <div class="step-content">
+                            <h4>Place Decimal</h4>
+                            <p>Place decimal point in answer directly below other decimal points</p>
+                        </div>
+                    </div>
+                `;
+            } else if (question.type.includes("multiplication")) {
+                processHTML = `
+                    <div class="process-step">
+                        <div class="step-icon">1️⃣</div>
+                        <div class="step-content">
+                            <h4>Ignore Decimals</h4>
+                            <p>Multiply the numbers as if they were whole numbers</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">2️⃣</div>
+                        <div class="step-content">
+                            <h4>Count Decimal Places</h4>
+                            <p>Count total decimal places in the numbers being multiplied</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">3️⃣</div>
+                        <div class="step-content">
+                            <h4>Place Decimal</h4>
+                            <p>Place decimal point in answer so it has that many decimal places</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">✅</div>
+                        <div class="step-content">
+                            <h4>Check</h4>
+                            <p>Estimate to verify your answer is reasonable</p>
+                        </div>
+                    </div>
+                `;
+            } else if (question.type.includes("conversion")) {
+                processHTML = `
+                    <div class="process-step">
+                        <div class="step-icon">1️⃣</div>
+                        <div class="step-content">
+                            <h4>Fraction to Decimal</h4>
+                            <p>Divide numerator by denominator</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">2️⃣</div>
+                        <div class="step-content">
+                            <h4>Denominator Hints</h4>
+                            <p>Denominator 10 = 1 decimal place, 100 = 2 places, 1000 = 3 places</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">3️⃣</div>
+                        <div class="step-content">
+                            <h4>Decimal to Fraction</h4>
+                            <p>Write decimal as fraction with denominator 10, 100, 1000, etc.</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">✅</div>
+                        <div class="step-content">
+                            <h4>Simplify</h4>
+                            <p>Reduce fraction to simplest form if possible</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                processHTML = `
+                    <div class="process-step">
+                        <div class="step-icon">🔍</div>
+                        <div class="step-content">
+                            <h4>Understand Problem</h4>
+                            <p>Identify what operation or conversion is needed</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">📝</div>
+                        <div class="step-content">
+                            <h4>Write Clearly</h4>
+                            <p>Write numbers neatly with aligned decimal points</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🧮</div>
+                        <div class="step-content">
+                            <h4>Calculate</h4>
+                            <p>Perform the operation carefully step by step</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">✓</div>
+                        <div class="step-content">
+                            <h4>Check Work</h4>
+                            <p>Verify answer makes sense and decimal is correctly placed</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return processHTML;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            // Update displays
+            decimalDisplay.innerHTML = createDecimalDisplay();
+            mathFact.innerHTML = createMathFact();
+            visualDisplay.innerHTML = createVisualDisplay();
+            processDisplay.innerHTML = createProcessDisplay();
+            
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Create answer options
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

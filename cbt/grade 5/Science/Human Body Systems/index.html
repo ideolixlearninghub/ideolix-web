@@ -1,0 +1,2478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Science - Human Body Systems | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Science Theme */
+        :root {
+            --primary-blue: #2196F3;
+            --secondary-teal: #009688;
+            --accent-red: #F44336;
+            --accent-orange: #FF9800;
+            --accent-green: #4CAF50;
+            --accent-purple: #9C27B0;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(33, 150, 243, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(33, 150, 243, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-blue);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-teal);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 150, 136, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #00796B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 150, 136, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-teal));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .science-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-orange);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-teal);
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+        }
+
+        /* Body System Display */
+        .system-display {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid var(--secondary-teal);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .system-title {
+            color: var(--secondary-teal);
+            margin-bottom: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .system-type {
+            display: inline-block;
+            padding: 5px 10px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .digestive .system-type { background: var(--accent-orange); }
+        .circulatory .system-type { background: var(--accent-red); }
+        .respiratory .system-type { background: var(--accent-green); }
+
+        /* System Comparison Display */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .system-column {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+        }
+
+        .system-column.digestive {
+            border-color: var(--accent-orange);
+        }
+
+        .system-column.circulatory {
+            border-color: var(--accent-red);
+        }
+
+        .system-column.respiratory {
+            border-color: var(--accent-green);
+        }
+
+        .column-title {
+            color: var(--accent-orange);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .system-column.circulatory .column-title {
+            color: var(--accent-red);
+        }
+
+        .system-column.respiratory .column-title {
+            color: var(--accent-green);
+        }
+
+        /* Organ Display */
+        .organ-display {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .organ-display {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .organ-item {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .organ-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--accent-purple);
+        }
+
+        .organ-name {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+        }
+
+        .organ-function {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Process Cards */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 992px) {
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .process-card {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .process-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .process-card.active {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .process-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .process-title {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .process-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        /* System Flow Display */
+        .system-flow {
+            margin: 20px 0;
+        }
+
+        .flow-step {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--accent-orange);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .step-detail {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        /* Health Tips Display */
+        .health-tips {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-green);
+        }
+
+        .tips-title {
+            color: var(--accent-green);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .tips-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .tip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 6px;
+        }
+
+        .tip-icon {
+            color: var(--accent-green);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .tip-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Anatomy Table */
+        .anatomy-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .anatomy-table th {
+            background: var(--dark-surface);
+            padding: 12px;
+            text-align: left;
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--primary-blue);
+        }
+
+        .anatomy-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+        }
+
+        .anatomy-table tr:hover {
+            background: rgba(33, 150, 243, 0.05);
+        }
+
+        .digestive-cell {
+            border-left: 4px solid var(--accent-orange);
+        }
+
+        .circulatory-cell {
+            border-left: 4px solid var(--accent-red);
+        }
+
+        .respiratory-cell {
+            border-left: 4px solid var(--accent-green);
+        }
+
+        /* Interactive Practice */
+        .interactive-practice {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .practice-title {
+            color: var(--accent-orange);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .practice-area {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .diagram-box {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid var(--dark-border);
+            min-height: 150px;
+            position: relative;
+        }
+
+        .label-box {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid var(--accent-green);
+            min-height: 150px;
+            color: var(--accent-green);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .organ-display {
+                grid-template-columns: 1fr;
+            }
+            
+            .tips-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .heartbeat {
+            animation: heartbeat 1s ease-in-out infinite;
+        }
+        
+        @keyframes breath {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        
+        .breath {
+            animation: breath 3s ease-in-out infinite;
+        }
+        
+        @keyframes digest {
+            0% { transform: translateX(-10px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        
+        .digest {
+            animation: digest 0.8s ease forwards;
+        }
+        
+        @keyframes flow {
+            0%, 100% { color: var(--accent-orange); }
+            50% { color: var(--accent-red); }
+        }
+        
+        .flow {
+            animation: flow 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 5 Science</h1>
+            <p class="welcome-subtitle">Explore the amazing human body systems! Learn how the digestive system processes food, the circulatory system transports blood, and the respiratory system enables breathing. Discover how these systems work together to keep you alive and healthy!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">🫀🫁🩸</span>
+                <span class="topic-name">Human Body Systems</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Body Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 130</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0.8%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Science fact display -->
+                <div id="scienceFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Body Systems Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 130+ Grade 5 Human Body Systems questions
+        const questions = [
+            // Digestive System Basics (1-25)
+            {
+                type: "digestive_basics",
+                question: "What is the main function of the digestive system?",
+                options: ["Break down food for energy", "Pump blood through body", "Help with breathing", "Control body movements"],
+                answer: "A",
+                explanation: "The digestive system breaks down food into nutrients that the body can use for energy, growth, and repair."
+            },
+            {
+                type: "digestive_basics",
+                question: "Where does digestion begin?",
+                options: ["Mouth", "Stomach", "Small intestine", "Esophagus"],
+                answer: "A",
+                explanation: "Digestion begins in the mouth where teeth chew food and saliva starts breaking it down."
+            },
+            {
+                type: "digestive_basics",
+                question: "What organ produces digestive juices to break down food in the stomach?",
+                options: ["Stomach", "Liver", "Pancreas", "Gallbladder"],
+                answer: "A",
+                explanation: "The stomach produces gastric juices containing enzymes and acid to break down food."
+            },
+            {
+                type: "digestive_basics",
+                question: "Which organ absorbs most nutrients from digested food?",
+                options: ["Small intestine", "Stomach", "Large intestine", "Liver"],
+                answer: "A",
+                explanation: "The small intestine is where most nutrient absorption occurs through its villi-lined walls."
+            },
+            {
+                type: "digestive_basics",
+                question: "What is the function of the large intestine?",
+                options: ["Absorb water and form waste", "Digest proteins", "Produce enzymes", "Store bile"],
+                answer: "A",
+                explanation: "The large intestine absorbs water from undigested food and forms solid waste (feces)."
+            },
+            {
+                type: "digestive_basics",
+                question: "What tube carries food from mouth to stomach?",
+                options: ["Esophagus", "Trachea", "Small intestine", "Colon"],
+                answer: "A",
+                explanation: "The esophagus is the muscular tube that moves food from the mouth to the stomach."
+            },
+            {
+                type: "digestive_basics",
+                question: "Which organ produces bile to help digest fats?",
+                options: ["Liver", "Stomach", "Pancreas", "Gallbladder"],
+                answer: "A",
+                explanation: "The liver produces bile, which helps break down fats in the small intestine."
+            },
+            {
+                type: "digestive_basics",
+                question: "Where is bile stored before it's released into the small intestine?",
+                options: ["Gallbladder", "Liver", "Stomach", "Pancreas"],
+                answer: "A",
+                explanation: "The gallbladder stores and concentrates bile produced by the liver."
+            },
+            {
+                type: "digestive_basics",
+                question: "What organ produces insulin and digestive enzymes?",
+                options: ["Pancreas", "Liver", "Stomach", "Kidneys"],
+                answer: "A",
+                explanation: "The pancreas produces insulin to regulate blood sugar and enzymes to digest food."
+            },
+            {
+                type: "digestive_basics",
+                question: "What are the finger-like projections in the small intestine called?",
+                options: ["Villi", "Alveoli", "Capillaries", "Bronchi"],
+                answer: "A",
+                explanation: "Villi are tiny finger-like projections that increase surface area for nutrient absorption."
+
+            },
+            // Circulatory System Basics (26-50)
+            {
+                type: "circulatory_basics",
+                question: "What is the main function of the circulatory system?",
+                options: ["Transport blood throughout body", "Digest food", "Exchange gases", "Filter waste"],
+                answer: "A",
+                explanation: "The circulatory system transports blood, which carries oxygen, nutrients, and waste products."
+            },
+            {
+                type: "circulatory_basics",
+                question: "Which organ pumps blood through the body?",
+                options: ["Heart", "Lungs", "Liver", "Brain"],
+                answer: "A",
+                explanation: "The heart is the muscular pump that circulates blood throughout the body."
+            },
+            {
+                type: "circulatory_basics",
+                question: "What are the three types of blood vessels?",
+                options: ["Arteries, veins, capillaries", "Aorta, vena cava, pulmonary", "Red, white, platelets", "Oxygenated, deoxygenated, mixed"],
+                answer: "A",
+                explanation: "Arteries carry blood away from heart, veins carry blood to heart, capillaries exchange materials."
+            },
+            {
+                type: "circulatory_basics",
+                question: "Which blood vessels carry oxygen-rich blood away from the heart?",
+                options: ["Arteries", "Veins", "Capillaries", "Venules"],
+                answer: "A",
+                explanation: "Arteries carry oxygenated blood away from the heart to the body (except pulmonary artery)."
+            },
+            {
+                type: "circulatory_basics",
+                question: "What do veins carry back to the heart?",
+                options: ["Oxygen-poor blood", "Oxygen-rich blood", "Digested food", "Waste products"],
+                answer: "A",
+                explanation: "Veins carry deoxygenated blood back to the heart (except pulmonary veins)."
+            },
+            {
+                type: "circulatory_basics",
+                question: "Where does gas exchange occur between blood and body cells?",
+                options: ["Capillaries", "Arteries", "Veins", "Heart"],
+                answer: "A",
+                explanation: "Capillaries are tiny vessels where oxygen and nutrients leave blood, and waste enters."
+            },
+            {
+                type: "circulatory_basics",
+                question: "What are the four chambers of the heart?",
+                options: ["Right atrium, right ventricle, left atrium, left ventricle", "Upper, lower, left, right", "Aorta, pulmonary, vena cava, coronary", "Red, white, blue, green"],
+                answer: "A",
+                explanation: "The heart has two atria (upper chambers) and two ventricles (lower chambers)."
+            },
+            {
+                type: "circulatory_basics",
+                question: "Which component of blood carries oxygen?",
+                options: ["Red blood cells", "White blood cells", "Platelets", "Plasma"],
+                answer: "A",
+                explanation: "Red blood cells contain hemoglobin that carries oxygen from lungs to body cells."
+            },
+            {
+                type: "circulatory_basics",
+                question: "What do white blood cells do?",
+                options: ["Fight infection", "Carry oxygen", "Help clotting", "Transport nutrients"],
+                answer: "A",
+                explanation: "White blood cells are part of the immune system and help fight infections."
+            },
+            {
+                type: "circulatory_basics",
+                question: "What is the function of platelets?",
+                options: ["Help blood clot", "Carry oxygen", "Fight germs", "Transport hormones"],
+                answer: "A",
+                explanation: "Platelets help form blood clots to stop bleeding when you're injured."
+
+            },
+            // Respiratory System Basics (51-75)
+            {
+                type: "respiratory_basics",
+                question: "What is the main function of the respiratory system?",
+                options: ["Exchange gases (oxygen and carbon dioxide)", "Pump blood", "Digest food", "Filter waste"],
+                answer: "A",
+                explanation: "The respiratory system brings oxygen into the body and removes carbon dioxide."
+            },
+            {
+                type: "respiratory_basics",
+                question: "What is the main organ of the respiratory system?",
+                options: ["Lungs", "Heart", "Brain", "Liver"],
+                answer: "A",
+                explanation: "The lungs are the primary organs where gas exchange occurs."
+            },
+            {
+                type: "respiratory_basics",
+                question: "What tube carries air to the lungs?",
+                options: ["Trachea (windpipe)", "Esophagus", "Bronchus", "Urethra"],
+                answer: "A",
+                explanation: "The trachea is the windpipe that carries air from nose/mouth to the bronchi and lungs."
+            },
+            {
+                type: "respiratory_basics",
+                question: "What are the tiny air sacs in the lungs called?",
+                options: ["Alveoli", "Bronchi", "Capillaries", "Villi"],
+                answer: "A",
+                explanation: "Alveoli are tiny air sacs where oxygen enters blood and carbon dioxide leaves."
+            },
+            {
+                type: "respiratory_basics",
+                question: "What muscle helps you breathe?",
+                options: ["Diaphragm", "Heart", "Stomach", "Lungs"],
+                answer: "A",
+                explanation: "The diaphragm is a dome-shaped muscle that contracts and relaxes to help you breathe."
+            },
+            {
+                type: "respiratory_basics",
+                question: "What gas do we breathe in?",
+                options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Helium"],
+                answer: "A",
+                explanation: "We breathe in oxygen, which our cells need to produce energy."
+            },
+            {
+                type: "respiratory_basics",
+                question: "What gas do we breathe out?",
+                options: ["Carbon dioxide", "Oxygen", "Nitrogen", "Hydrogen"],
+                answer: "A",
+                explanation: "We breathe out carbon dioxide, a waste product from cellular respiration."
+            },
+            {
+                type: "respiratory_basics",
+                question: "What are the two main branches of the trachea called?",
+                options: ["Bronchi", "Alveoli", "Capillaries", "Arteries"],
+                answer: "A",
+                explanation: "The trachea splits into two bronchi, one leading to each lung."
+            },
+            {
+                type: "respiratory_basics",
+                question: "What protects the lungs?",
+                options: ["Rib cage", "Skull", "Pelvis", "Spine"],
+                answer: "A",
+                explanation: "The rib cage (ribs and sternum) protects the lungs and heart."
+            },
+            {
+                type: "respiratory_basics",
+                question: "What happens when you inhale?",
+                options: ["Diaphragm contracts and moves down", "Diaphragm relaxes and moves up", "Heart beats faster", "Stomach expands"],
+                answer: "A",
+                explanation: "When you inhale, the diaphragm contracts and moves downward, creating space for lungs to expand."
+
+            },
+            // System Interactions (76-100)
+            {
+                type: "system_interactions",
+                question: "How do respiratory and circulatory systems work together?",
+                options: ["Lungs oxygenate blood, heart pumps it", "Both digest food", "Both remove waste", "Both produce hormones"],
+                answer: "A",
+                explanation: "Respiratory system provides oxygen to blood, circulatory system transports it to cells."
+            },
+            {
+                type: "system_interactions",
+                question: "Where does oxygen from lungs enter the bloodstream?",
+                options: ["Capillaries around alveoli", "Heart chambers", "Large arteries", "Veins in legs"],
+                answer: "A",
+                explanation: "Oxygen diffuses from alveoli into capillaries surrounding them, then enters blood."
+            },
+            {
+                type: "system_interactions",
+                question: "How does digestive system help circulatory system?",
+                options: ["Provides nutrients from food", "Pumps blood faster", "Cleans the blood", "Produces oxygen"],
+                answer: "A",
+                explanation: "Digestive system breaks down food into nutrients that enter bloodstream to nourish cells."
+            },
+            {
+                type: "system_interactions",
+                question: "What waste product from cells do lungs remove?",
+                options: ["Carbon dioxide", "Urea", "Solid waste", "Excess water"],
+                answer: "A",
+                explanation: "Lungs remove carbon dioxide, a waste product from cellular respiration."
+            },
+            {
+                type: "system_interactions",
+                question: "How do cells get energy from food?",
+                options: ["Oxygen breaks down nutrients", "Stomach digests it directly", "Liver stores it", "Kidneys filter it"],
+                answer: "A",
+                explanation: "Cells use oxygen to break down nutrients (cellular respiration) to release energy."
+            },
+            {
+                type: "system_interactions",
+                question: "What carries nutrients from digestive system to body cells?",
+                options: ["Bloodstream", "Nerves", "Lymph vessels", "Air passages"],
+                answer: "A",
+                explanation: "Nutrients absorbed in small intestine enter bloodstream and are carried to cells."
+            },
+            {
+                type: "system_interactions",
+                question: "Why do cells need oxygen?",
+                options: ["To release energy from food", "To build proteins", "To digest food", "To fight germs"],
+                answer: "A",
+                explanation: "Cells need oxygen for cellular respiration to convert food nutrients into usable energy (ATP)."
+            },
+            {
+                type: "system_interactions",
+                question: "What happens to carbon dioxide produced by cells?",
+                options: ["Carried by blood to lungs to be exhaled", "Digested in stomach", "Stored in bones", "Excreted by skin"],
+                answer: "A",
+                explanation: "Blood carries CO2 from cells to lungs, where it's exchanged for oxygen and exhaled."
+            },
+            {
+                type: "system_interactions",
+                question: "How does exercise affect these systems?",
+                options: ["All work harder - faster breathing, heart rate, digestion", "All slow down", "Only respiratory works", "Only circulatory works"],
+                answer: "A",
+                explanation: "During exercise, body needs more oxygen and energy, so breathing, heart rate, and metabolism increase."
+            },
+            {
+                type: "system_interactions",
+                question: "What system removes solid waste from digestive system?",
+                options: ["Excretory system", "Circulatory system", "Respiratory system", "Nervous system"],
+                answer: "A",
+                explanation: "The excretory system (including large intestine) removes solid waste from digestive process."
+
+            },
+            // Organ Functions (101-125)
+            {
+                type: "organ_functions",
+                question: "What is the function of the heart?",
+                options: ["Pump blood throughout body", "Digest food", "Breathe air", "Think thoughts"],
+                answer: "A",
+                explanation: "The heart is a muscular pump that circulates blood through blood vessels."
+            },
+            {
+                type: "organ_functions",
+                question: "What does the liver do in digestion?",
+                options: ["Produces bile to digest fats", "Pumps blood", "Filters air", "Stores urine"],
+                answer: "A",
+                explanation: "Liver produces bile that helps break down fats in the small intestine."
+            },
+            {
+                type: "organ_functions",
+                question: "What is the main job of the small intestine?",
+                options: ["Absorb nutrients from food", "Pump blood", "Exchange gases", "Produce bile"],
+                answer: "A",
+                explanation: "Small intestine absorbs nutrients from digested food into bloodstream."
+            },
+            {
+                type: "organ_functions",
+                question: "What does the large intestine do?",
+                options: ["Absorbs water and forms feces", "Digests proteins", "Oxygenates blood", "Produces insulin"],
+                answer: "A",
+                explanation: "Large intestine absorbs water from undigested material and forms solid waste."
+            },
+            {
+                type: "organ_functions",
+                question: "What is the trachea's function?",
+                options: ["Carry air to lungs", "Carry food to stomach", "Pump blood", "Filter blood"],
+                answer: "A",
+                explanation: "Trachea (windpipe) carries air between throat and bronchi/lungs."
+            },
+            {
+                type: "organ_functions",
+                question: "What do alveoli do?",
+                options: ["Exchange oxygen and carbon dioxide", "Pump blood", "Digest food", "Filter waste"],
+                answer: "A",
+                explanation: "Alveoli are tiny air sacs where oxygen enters blood and carbon dioxide leaves."
+            },
+            {
+                type: "organ_functions",
+                question: "What does the diaphragm do?",
+                options: ["Helps with breathing", "Pumps blood", "Digests food", "Filters urine"],
+                answer: "A",
+                explanation: "Diaphragm is the main breathing muscle that expands and contracts lungs."
+            },
+            {
+                type: "organ_functions",
+                question: "What is the esophagus?",
+                options: ["Tube from mouth to stomach", "Windpipe to lungs", "Blood vessel from heart", "Nerve to brain"],
+                answer: "A",
+                explanation: "Esophagus is the muscular tube that carries food from mouth to stomach."
+            },
+            {
+                type: "organ_functions",
+                question: "What does the stomach do?",
+                options: ["Breaks down food with acid and enzymes", "Pumps blood", "Exchanges gases", "Filters blood"],
+                answer: "A",
+                explanation: "Stomach mixes food with gastric juices to break it down into a liquid called chyme."
+            },
+            {
+                type: "organ_functions",
+                question: "What are blood vessels?",
+                options: ["Tubes that carry blood", "Organs that digest food", "Parts that breathe air", "Cells that fight germs"],
+                answer: "A",
+                explanation: "Blood vessels (arteries, veins, capillaries) are tubes that transport blood throughout body."
+
+            },
+            // Health and Care (126-150)
+            {
+                type: "health_care",
+                question: "How can you keep your heart healthy?",
+                options: ["Exercise and eat healthy foods", "Breathe quickly", "Eat lots of sugar", "Sit all day"],
+                answer: "A",
+                explanation: "Regular exercise and healthy diet help maintain strong heart and blood vessels."
+            },
+            {
+                type: "health_care",
+                question: "Why is exercise good for lungs?",
+                options: ["Makes them stronger and more efficient", "Makes them smaller", "Dries them out", "Makes them weaker"],
+                answer: "A",
+                explanation: "Exercise strengthens breathing muscles and increases lung capacity and efficiency."
+            },
+            {
+                type: "health_care",
+                question: "What foods are good for digestive health?",
+                options: ["Fruits, vegetables, and fiber", "Only candy", "Only meat", "Only bread"],
+                answer: "A",
+                explanation: "Fiber from fruits, vegetables, and whole grains helps digestion and prevents constipation."
+            },
+            {
+                type: "health_care",
+                question: "Why is smoking bad for respiratory system?",
+                options: ["Damages lungs and makes breathing hard", "Makes lungs stronger", "Helps digestion", "Cleans blood"],
+                answer: "A",
+                explanation: "Smoking damages lung tissue, reduces oxygen exchange, and causes diseases like cancer."
+            },
+            {
+                type: "health_care",
+                question: "How much water should you drink for good health?",
+                options: ["6-8 glasses daily", "Only when thirsty", "1 glass weekly", "Only with meals"],
+                answer: "A",
+                explanation: "Adequate water helps all body systems: digestion, circulation, temperature regulation."
+            },
+            {
+                type: "health_care",
+                question: "What exercise is good for heart health?",
+                options: ["Running, swimming, biking", "Only stretching", "Only weight lifting", "Only sitting"],
+                answer: "A",
+                explanation: "Cardiovascular exercises strengthen heart muscle and improve circulation."
+            },
+            {
+                type: "health_care",
+                question: "Why is fiber important for digestion?",
+                options: ["Helps move food through intestines", "Makes food taste sweet", "Builds muscles", "Cools body"],
+                answer: "A",
+                explanation: "Fiber adds bulk to stool and helps food move smoothly through digestive tract."
+            },
+            {
+                type: "health_care",
+                question: "What happens if you don't get enough oxygen?",
+                options: ["Cells can't make energy properly", "Digestion speeds up", "Heart beats slower", "Muscles get stronger"],
+                answer: "A",
+                explanation: "Without enough oxygen, cells can't perform cellular respiration to produce energy."
+            },
+            {
+                type: "health_care",
+                question: "Why is washing hands important before eating?",
+                options: ["Prevents germs from entering digestive system", "Makes food taste better", "Warms up hands", "Exercises fingers"],
+                answer: "A",
+                explanation: "Washing removes germs that could cause illness if they enter through mouth."
+            },
+            {
+                type: "health_care",
+                question: "How does deep breathing help the body?",
+                options: ["Brings more oxygen to cells", "Digests food faster", "Pumps blood harder", "Makes you taller"],
+                answer: "A",
+                explanation: "Deep breathing fully expands lungs, maximizing oxygen intake and carbon dioxide removal."
+
+            },
+            // Advanced Concepts (151-155)
+            {
+                type: "advanced_concepts",
+                question: "What is cellular respiration?",
+                options: ["Cells using oxygen to release energy from food", "Breathing air in and out", "Blood flowing through vessels", "Food moving through intestines"],
+                answer: "A",
+                explanation: "Cellular respiration is the process where cells use oxygen to break down glucose and release energy."
+            },
+            {
+                type: "advanced_concepts",
+                question: "What is the difference between arteries and veins?",
+                options: ["Arteries carry blood away from heart, veins carry to heart", "Arteries are thinner than veins", "Veins have valves, arteries don't", "Both carry same type of blood"],
+                answer: "A",
+                explanation: "Main difference: direction of blood flow relative to heart (arteries away, veins toward)."
+            },
+            {
+                type: "advanced_concepts",
+                question: "What is peristalsis?",
+                options: ["Muscle contractions that move food through digestive tract", "Heart beating", "Lungs expanding", "Blood flowing"],
+                answer: "A",
+                explanation: "Peristalsis is wave-like muscle contractions that push food through esophagus and intestines."
+            },
+            {
+                type: "advanced_concepts",
+                question: "What are the two types of circulation?",
+                options: ["Pulmonary and systemic", "Arterial and venous", "Oxygenated and deoxygenated", "Upper and lower"],
+                answer: "A",
+                explanation: "Pulmonary circulation: heart to lungs and back. Systemic circulation: heart to body and back."
+            },
+            {
+                type: "advanced_concepts",
+                question: "What is the role of hemoglobin?",
+                options: ["Carry oxygen in red blood cells", "Digest proteins", "Fight infections", "Help blood clot"],
+                answer: "A",
+                explanation: "Hemoglobin is a protein in red blood cells that binds to oxygen for transport."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent body systems knowledge!",
+            "Fantastic anatomy understanding!",
+            "Great job! You're a biology expert!",
+            "Amazing! Your system knowledge is perfect!",
+            "Well done! Perfect organ function identification!",
+            "You're a human body systems champion!",
+            "Perfect! You understand how body systems work together!",
+            "Outstanding physiology knowledge!",
+            "Brilliant! You think like a medical expert!",
+            "You're on fire! Great scientific insight!"
+        ];
+
+        // Digestive system information
+        const digestiveSystem = {
+            name: "Digestive System",
+            function: "Breaks down food into nutrients",
+            organs: [
+                {name: "Mouth", function: "Chews food, saliva starts digestion"},
+                {name: "Esophagus", function: "Transports food to stomach"},
+                {name: "Stomach", function: "Mixes food with acids and enzymes"},
+                {name: "Small Intestine", function: "Absorbs nutrients into bloodstream"},
+                {name: "Large Intestine", function: "Absorbs water, forms waste"},
+                {name: "Liver", function: "Produces bile, filters toxins"},
+                {name: "Pancreas", function: "Produces digestive enzymes, insulin"},
+                {name: "Gallbladder", function: "Stores and concentrates bile"}
+            ],
+            process: [
+                "Food enters mouth, teeth chew it",
+                "Saliva begins breaking down carbohydrates",
+                "Swallowed food travels down esophagus",
+                "Stomach acids and enzymes break down proteins",
+                "Liver produces bile to digest fats",
+                "Pancreas adds enzymes to small intestine",
+                "Small intestine absorbs nutrients",
+                "Large intestine absorbs water, forms waste"
+            ]
+        };
+
+        // Circulatory system information
+        const circulatorySystem = {
+            name: "Circulatory System",
+            function: "Transports blood, oxygen, nutrients",
+            organs: [
+                {name: "Heart", function: "Pumps blood throughout body"},
+                {name: "Arteries", function: "Carry oxygen-rich blood away from heart"},
+                {name: "Veins", function: "Carry oxygen-poor blood back to heart"},
+                {name: "Capillaries", function: "Exchange materials with cells"},
+                {name: "Blood", function: "Transports oxygen, nutrients, waste"}
+            ],
+            components: [
+                {name: "Red Blood Cells", function: "Carry oxygen using hemoglobin"},
+                {name: "White Blood Cells", function: "Fight infections and diseases"},
+                {name: "Platelets", function: "Help blood clotting"},
+                {name: "Plasma", function: "Liquid part carrying cells and nutrients"}
+            ],
+            circulation: [
+                "Deoxygenated blood enters right atrium",
+                "Blood flows to right ventricle",
+                "Pumped to lungs via pulmonary artery",
+                "Blood picks up oxygen in lungs",
+                "Oxygenated blood returns to left atrium",
+                "Blood flows to left ventricle",
+                "Pumped to body via aorta",
+                "Oxygen delivered to cells via capillaries"
+            ]
+        };
+
+        // Respiratory system information
+        const respiratorySystem = {
+            name: "Respiratory System",
+            function: "Exchanges gases (oxygen in, carbon dioxide out)",
+            organs: [
+                {name: "Nose/Mouth", function: "Air enters body"},
+                {name: "Trachea", function: "Windpipe carrying air to lungs"},
+                {name: "Bronchi", function: "Tubes branching to each lung"},
+                {name: "Lungs", function: "Main organs for gas exchange"},
+                {name: "Alveoli", function: "Tiny air sacs where gas exchange occurs"},
+                {name: "Diaphragm", function: "Main breathing muscle"}
+            ],
+            breathing: [
+                "Diaphragm contracts and moves down",
+                "Rib muscles expand chest cavity",
+                "Air rushes into lungs (inhalation)",
+                "Oxygen diffuses into blood in alveoli",
+                "Carbon dioxide diffuses out of blood",
+                "Diaphragm relaxes and moves up",
+                "Air pushed out of lungs (exhalation)"
+            ],
+            gasExchange: [
+                "Oxygen from air enters alveoli",
+                "Oxygen diffuses into capillaries",
+                "Oxygen binds to hemoglobin in red blood cells",
+                "Oxygenated blood travels to heart",
+                "Heart pumps oxygenated blood to body",
+                "Cells use oxygen, produce carbon dioxide",
+                "Carbon dioxide diffuses into blood",
+                "Blood carries CO2 back to lungs",
+                "CO2 diffuses into alveoli, is exhaled"
+            ]
+        };
+
+        // System interactions
+        const systemInteractions = [
+            {
+                systems: "Respiratory + Circulatory",
+                interaction: "Lungs oxygenate blood, heart pumps it to body",
+                example: "Oxygen from air → alveoli → capillaries → blood → heart → body cells"
+            },
+            {
+                systems: "Digestive + Circulatory", 
+                interaction: "Nutrients from food enter bloodstream, carried to cells",
+                example: "Food → small intestine → nutrients absorbed → bloodstream → body cells"
+            },
+            {
+                systems: "All Three Systems",
+                interaction: "Work together for energy production",
+                example: "Food (digestive) + Oxygen (respiratory) → Energy in cells (delivered by circulatory)"
+            }
+        ];
+
+        // Health tips for each system
+        const healthTips = [
+            {system: "Digestive", tip: "Eat high-fiber foods, drink plenty of water"},
+            {system: "Digestive", tip: "Chew food thoroughly, eat slowly"},
+            {system: "Circulatory", tip: "Exercise regularly for heart health"},
+            {system: "Circulatory", tip: "Eat heart-healthy foods (fruits, vegetables)"},
+            {system: "Respiratory", tip: "Avoid smoking and polluted air"},
+            {system: "Respiratory", tip: "Exercise to strengthen breathing muscles"},
+            {system: "All Systems", tip: "Drink 6-8 glasses of water daily"},
+            {system: "All Systems", tip: "Get enough sleep for body repair"},
+            {system: "All Systems", tip: "Wash hands to prevent infections"},
+            {system: "All Systems", tip: "Eat balanced diet with all nutrients"}
+        ];
+
+        // Interesting body facts
+        const bodyFacts = [
+            "Your small intestine is about 22 feet long - as tall as a two-story building!",
+            "The heart beats about 100,000 times per day, pumping 2,000 gallons of blood!",
+            "Lungs contain over 300 million alveoli with surface area of a tennis court!",
+            "Your stomach acid is strong enough to dissolve metal (but don't try it!)",
+            "Blood travels 60,000 miles through blood vessels - enough to circle Earth 2.5 times!",
+            "You breathe about 20,000 times per day, moving over 2,000 gallons of air!",
+            "The liver performs over 500 different functions in your body!",
+            "Food takes 24-72 hours to pass completely through your digestive system!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const scienceFact = document.getElementById('scienceFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade5BodySystems');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade5BodySystems', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade5BodySystems_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade5BodySystems_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a body systems expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent anatomy knowledge!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep learning to become a biology master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review body systems and try again!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Science knowledge grows with practice!";
+            }
+        }
+
+        // Create science fact display
+        function createScienceFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'science-fact';
+            
+            factDiv.innerHTML = `<strong>Amazing Body Fact:</strong> ${bodyFacts[Math.floor(Math.random() * bodyFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "digestive_basics": "🩸",
+                "circulatory_basics": "🫀",
+                "respiratory_basics": "🫁",
+                "system_interactions": "🔗",
+                "organ_functions": "🧬",
+                "health_care": "💊",
+                "advanced_concepts": "🧠"
+            };
+            
+            let conceptName = "Digestive System";
+            let conceptIcon = "🩸";
+            
+            if (question.type.includes("digestive_basics")) {
+                conceptName = "Digestive System";
+                conceptIcon = conceptIcons.digestive_basics;
+            } else if (question.type.includes("circulatory_basics")) {
+                conceptName = "Circulatory System";
+                conceptIcon = conceptIcons.circulatory_basics;
+            } else if (question.type.includes("respiratory_basics")) {
+                conceptName = "Respiratory System";
+                conceptIcon = conceptIcons.respiratory_basics;
+            } else if (question.type.includes("system_interactions")) {
+                conceptName = "System Interactions";
+                conceptIcon = conceptIcons.system_interactions;
+            } else if (question.type.includes("organ_functions")) {
+                conceptName = "Organ Functions";
+                conceptIcon = conceptIcons.organ_functions;
+            } else if (question.type.includes("health_care")) {
+                conceptName = "Health & Care";
+                conceptIcon = conceptIcons.health_care;
+            } else if (question.type.includes("advanced_concepts")) {
+                conceptName = "Advanced Concepts";
+                conceptIcon = conceptIcons.advanced_concepts;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("digestive_basics")) {
+                label.textContent = "How food is broken down and absorbed";
+            } else if (question.type.includes("circulatory_basics")) {
+                label.textContent = "How blood transports materials through body";
+            } else if (question.type.includes("respiratory_basics")) {
+                label.textContent = "How breathing exchanges gases";
+            } else if (question.type.includes("system_interactions")) {
+                label.textContent = "How body systems work together";
+            } else if (question.type.includes("organ_functions")) {
+                label.textContent = "Specific roles of different organs";
+            } else if (question.type.includes("health_care")) {
+                label.textContent = "Keeping body systems healthy";
+            } else if (question.type.includes("advanced_concepts")) {
+                label.textContent = "Deeper understanding of body processes";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create body systems visualization
+        function createBodyVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-blue);">Human Body Systems</h3>
+                
+                <div class="comparison-container">
+                    <div class="system-column digestive">
+                        <div class="column-title">Digestive System</div>
+                        <div class="system-display digestive">
+                            <div style="text-align: center; margin-bottom: 15px;">
+                                <div style="font-size: 1.3rem; color: var(--accent-orange); font-weight: bold;">🩸 Food Processing</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary);">Breaks down food into nutrients</div>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <strong>Key Organs:</strong><br>
+                                • Mouth & Esophagus<br>
+                                • Stomach<br>
+                                • Small Intestine<br>
+                                • Large Intestine<br>
+                                • Liver & Pancreas
+                            </div>
+                            <div>
+                                <strong>Main Process:</strong><br>
+                                1. Ingestion (eating)<br>
+                                2. Digestion (breaking down)<br>
+                                3. Absorption (nutrients to blood)<br>
+                                4. Elimination (waste removal)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="system-column circulatory">
+                        <div class="column-title">Circulatory System</div>
+                        <div class="system-display circulatory">
+                            <div style="text-align: center; margin-bottom: 15px;">
+                                <div style="font-size: 1.3rem; color: var(--accent-red); font-weight: bold;">🫀 Blood Transport</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary);">Moves blood, oxygen, nutrients</div>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <strong>Key Components:</strong><br>
+                                • Heart (pump)<br>
+                                • Arteries (away from heart)<br>
+                                • Veins (to heart)<br>
+                                • Capillaries (exchange)<br>
+                                • Blood (transport medium)
+                            </div>
+                            <div>
+                                <strong>Blood Components:</strong><br>
+                                • Red cells (oxygen)<br>
+                                • White cells (immunity)<br>
+                                • Platelets (clotting)<br>
+                                • Plasma (liquid)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="system-column respiratory" style="margin-top: 20px;">
+                    <div class="column-title">Respiratory System</div>
+                    <div class="system-display respiratory">
+                        <div style="text-align: center; margin-bottom: 15px;">
+                            <div style="font-size: 1.3rem; color: var(--accent-green); font-weight: bold;">🫁 Gas Exchange</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Brings in oxygen, removes CO₂</div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div>
+                                <strong>Key Organs:</strong><br>
+                                • Nose & Mouth<br>
+                                • Trachea (windpipe)<br>
+                                • Bronchi & Lungs<br>
+                                • Alveoli (air sacs)<br>
+                                • Diaphragm (muscle)
+                            </div>
+                            <div>
+                                <strong>Breathing Process:</strong><br>
+                                1. Inhalation (air in)<br>
+                                2. Gas exchange in alveoli<br>
+                                3. Oxygen to blood<br>
+                                4. CO₂ from blood<br>
+                                5. Exhalation (air out)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="organ-display">
+                    <div class="organ-item digest" style="animation-delay: 0s">
+                        <div class="organ-icon">🦷</div>
+                        <div class="organ-name">Mouth</div>
+                        <div class="organ-function">Chews food, saliva starts digestion</div>
+                    </div>
+                    <div class="organ-item digest" style="animation-delay: 0.1s">
+                        <div class="organ-icon">🍽️</div>
+                        <div class="organ-name">Stomach</div>
+                        <div class="organ-function">Mixes food with acids, enzymes</div>
+                    </div>
+                    <div class="organ-item heartbeat" style="animation-delay: 0.2s">
+                        <div class="organ-icon">❤️</div>
+                        <div class="organ-name">Heart</div>
+                        <div class="organ-function">Pumps blood throughout body</div>
+                    </div>
+                    <div class="organ-item breath" style="animation-delay: 0.3s">
+                        <div class="organ-icon">🫁</div>
+                        <div class="organ-name">Lungs</div>
+                        <div class="organ-function">Exchange oxygen and CO₂</div>
+                    </div>
+                </div>
+                
+                <div class="system-flow">
+                    <h4 style="color: var(--accent-purple); margin-bottom: 15px; text-align: center;">How Systems Work Together</h4>
+                    
+                    ${systemInteractions.map((interaction, index) => `
+                        <div class="flow-step digest" style="animation-delay: ${index * 0.2}s">
+                            <div class="step-number">${index + 1}</div>
+                            <div class="step-content">
+                                <div class="step-title">${interaction.systems}</div>
+                                <div class="step-detail">${interaction.interaction}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
+                                    <em>Example: ${interaction.example}</em>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="health-tips">
+                    <div class="tips-title">Health Tips for Body Systems</div>
+                    <div class="tips-list">
+                        ${healthTips.slice(0, 8).map((tip, index) => `
+                            <div class="tip-item flow" style="animation-delay: ${index * 0.1}s">
+                                <div class="tip-icon">💡</div>
+                                <div class="tip-text"><strong>${tip.system}:</strong> ${tip.tip}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="interactive-practice">
+                    <div class="practice-title">Body Systems Challenge</div>
+                    <div class="practice-area">
+                        <div class="diagram-box">
+                            <strong>Match the system to its function:</strong><br><br>
+                            1. Digestive System<br>
+                            2. Circulatory System<br>
+                            3. Respiratory System<br><br>
+                            A. Gas exchange<br>
+                            B. Nutrient transport<br>
+                            C. Food breakdown
+                        </div>
+                        <div class="label-box">
+                            <strong>Answer:</strong><br><br>
+                            1-C (Digestive = Food breakdown)<br>
+                            2-B (Circulatory = Nutrient transport)<br>
+                            3-A (Respiratory = Gas exchange)
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--accent-orange);">
+                    <div style="color: var(--accent-orange); font-weight: bold; margin-bottom: 10px;">Quick Review Questions:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. Which system breaks down food?<br>
+                        2. What pumps blood through the body?<br>
+                        3. Where does gas exchange occur in lungs?<br>
+                        4. How do these systems work together?
+                    </div>
+                </div>
+            `;
+            
+            return vizDiv;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            scienceFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            scienceFact.appendChild(createScienceFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createBodyVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

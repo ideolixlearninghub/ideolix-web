@@ -1,0 +1,3011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Science - Light & Shadows, Sound | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Light & Sound Theme */
+        :root {
+            --primary-yellow: #FFEB3B;
+            --secondary-blue: #2196F3;
+            --accent-purple: #9C27B0;
+            --accent-orange: #FF9800;
+            --accent-green: #4CAF50;
+            --accent-red: #F44336;
+            --accent-teal: #009688;
+            --accent-indigo: #3F51B5;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(255, 235, 59, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-yellow), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        /* Topic Selection */
+        .topic-selection {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        @media (max-width: 768px) {
+            .topic-selection {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .topic-card {
+            background: var(--dark-surface);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 280px;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+
+        .topic-card.active {
+            border-color: var(--primary-yellow);
+            background: rgba(255, 235, 59, 0.1);
+        }
+
+        .topic-card.light {
+            border-color: var(--primary-yellow);
+        }
+
+        .topic-card.shadows {
+            border-color: var(--secondary-blue);
+        }
+
+        .topic-card.sound {
+            border-color: var(--accent-purple);
+        }
+
+        .topic-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .topic-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .topic-card.light .topic-title {
+            color: var(--primary-yellow);
+        }
+
+        .topic-card.shadows .topic-title {
+            color: var(--secondary-blue);
+        }
+
+        .topic-card.sound .topic-title {
+            color: var(--accent-purple);
+        }
+
+        .topic-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .topic-examples {
+            text-align: left;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .topic-examples div {
+            margin: 5px 0;
+            padding-left: 10px;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 235, 59, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-yellow);
+        }
+
+        .topic-icon-small {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-yellow);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-yellow);
+            box-shadow: 0 0 0 3px rgba(255, 235, 59, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-yellow);
+            color: #121212;
+            box-shadow: 0 4px 15px rgba(255, 235, 59, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #FBC02D;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 235, 59, 0.5);
+        }
+
+        .btn-light {
+            background: var(--primary-yellow);
+            color: #121212;
+            box-shadow: 0 4px 15px rgba(255, 235, 59, 0.4);
+        }
+
+        .btn-light:hover {
+            background: #FBC02D;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 235, 59, 0.5);
+        }
+
+        .btn-shadows {
+            background: var(--secondary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-shadows:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-sound {
+            background: var(--accent-purple);
+            color: white;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
+        }
+
+        .btn-sound:hover {
+            background: #7B1FA2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(156, 39, 176, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--accent-teal);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 150, 136, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #00796B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 150, 136, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-yellow);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .science-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-orange);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(255, 235, 59, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-yellow);
+            background: rgba(255, 235, 59, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(255, 235, 59, 0.1);
+            border-color: var(--primary-yellow);
+            color: var(--primary-yellow);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--accent-teal);
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-yellow);
+            color: #121212;
+        }
+
+        .option.incorrect .option-letter {
+            background: var(--accent-red);
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(255, 235, 59, 0.1);
+            border-left: 5px solid var(--primary-yellow);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid var(--accent-red);
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-yellow);
+            color: #121212;
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: var(--accent-red);
+            color: white;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-yellow);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: var(--accent-red);
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+        }
+
+        /* Light Properties Display */
+        .light-diagram {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid var(--primary-yellow);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .diagram-title {
+            color: var(--primary-yellow);
+            margin-bottom: 15px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .light-property {
+            position: relative;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .light-property:hover {
+            background: rgba(255, 235, 59, 0.1);
+            transform: translateX(5px);
+        }
+
+        .property-label {
+            font-weight: bold;
+            color: var(--primary-yellow);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .property-explanation {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            padding-left: 30px;
+        }
+
+        /* Properties Comparison */
+        .properties-comparison {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 992px) {
+            .properties-comparison {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .properties-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .property-card {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .property-card.reflection {
+            border-color: var(--primary-yellow);
+        }
+
+        .property-card.refraction {
+            border-color: var(--secondary-blue);
+        }
+
+        .property-card.absorption {
+            border-color: var(--accent-orange);
+        }
+
+        .property-card.transmission {
+            border-color: var(--accent-green);
+        }
+
+        .property-card.shadow {
+            border-color: var(--accent-purple);
+        }
+
+        .property-card.color {
+            border-color: var(--accent-red);
+        }
+
+        .property-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .property-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .property-card.reflection .property-name {
+            color: var(--primary-yellow);
+        }
+
+        .property-card.refraction .property-name {
+            color: var(--secondary-blue);
+        }
+
+        .property-card.absorption .property-name {
+            color: var(--accent-orange);
+        }
+
+        .property-card.transmission .property-name {
+            color: var(--accent-green);
+        }
+
+        .property-card.shadow .property-name {
+            color: var(--accent-purple);
+        }
+
+        .property-card.color .property-name {
+            color: var(--accent-red);
+        }
+
+        .property-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        /* Process Display */
+        .process-display {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-teal);
+        }
+
+        .process-title {
+            color: var(--accent-teal);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .process-step {
+            background: rgba(0, 150, 136, 0.1);
+            padding: 15px;
+            border-radius: 6px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: var(--accent-teal);
+            margin-bottom: 5px;
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Sound Display */
+        .sound-display {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .sound-display {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .sound-item {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .sound-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--accent-purple);
+        }
+
+        .sound-title {
+            font-weight: bold;
+            color: var(--accent-purple);
+            margin-bottom: 8px;
+        }
+
+        .sound-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Wave Display */
+        .wave-display {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--secondary-blue);
+        }
+
+        .wave-title {
+            color: var(--secondary-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .wave-diagram {
+            background: rgba(33, 150, 243, 0.1);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            text-align: center;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+        .wave-part {
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin: 0 5px;
+        }
+
+        .amplitude {
+            background: rgba(255, 235, 59, 0.2);
+            color: var(--primary-yellow);
+        }
+
+        .frequency {
+            background: rgba(156, 39, 176, 0.2);
+            color: var(--accent-purple);
+        }
+
+        /* Examples Table */
+        .examples-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .examples-table th {
+            background: var(--dark-surface);
+            padding: 12px;
+            text-align: left;
+            color: var(--primary-yellow);
+            border-bottom: 2px solid var(--primary-yellow);
+        }
+
+        .examples-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+        }
+
+        .examples-table tr:hover {
+            background: rgba(255, 235, 59, 0.05);
+        }
+
+        /* Science Challenge */
+        .science-challenge {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .challenge-title {
+            color: var(--accent-orange);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .challenge-area {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .challenge-scenario {
+            font-style: italic;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .challenge-question {
+            font-weight: bold;
+            color: var(--accent-orange);
+            margin-bottom: 15px;
+        }
+
+        .challenge-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .challenge-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .challenge-option {
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .challenge-option:hover {
+            background: rgba(255, 152, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-yellow), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-yellow), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .properties-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .sound-display {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes lightBeam {
+            0% { transform: translateX(-20px); opacity: 0; }
+            50% { transform: translateX(0); opacity: 1; }
+            100% { transform: translateX(20px); opacity: 0; }
+        }
+        
+        .light-beam {
+            animation: lightBeam 2s ease-in-out infinite;
+        }
+        
+        @keyframes shadowMove {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+        
+        .shadow-move {
+            animation: shadowMove 3s ease-in-out infinite;
+        }
+        
+        @keyframes soundWave {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        .sound-wave {
+            animation: soundWave 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        .rainbow {
+            animation: rainbow 3s linear infinite;
+        }
+        
+        @keyframes vibrate {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+            100% { transform: translateX(0); }
+        }
+        
+        .vibrate {
+            animation: vibrate 0.1s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1531326044268-d1c58d8a1fdc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1546587348-d12660c30c50?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 5 Science: Light & Shadows, Sound</h1>
+            <p class="welcome-subtitle">Explore the fascinating world of light and sound! Learn how light travels, creates shadows, reflects, and refracts. Discover how sound waves travel, how we hear, and the properties of different sounds in this illuminating acoustic adventure!</p>
+            
+            <div class="topic-selection" id="topicSelection">
+                <!-- Light Properties Card -->
+                <div class="topic-card light" id="lightCard">
+                    <div class="topic-icon">💡🔍</div>
+                    <div class="topic-title">Light Properties</div>
+                    <div class="topic-description">Discover how light travels in straight lines, reflects off surfaces, refracts through materials, and creates the colors we see. Learn about transparent, translucent, and opaque objects.</div>
+                    <div class="topic-examples">
+                        <div><strong>Reflection:</strong> Mirrors, shiny surfaces</div>
+                        <div><strong>Refraction:</strong> Lenses, water bending light</div>
+                        <div><strong>Color:</strong> Rainbows, prisms, color mixing</div>
+                    </div>
+                </div>
+                
+                <!-- Shadows Card -->
+                <div class="topic-card shadows" id="shadowsCard">
+                    <div class="topic-icon">🌑📏</div>
+                    <div class="topic-title">Shadows</div>
+                    <div class="topic-description">Understand how shadows are formed, change size and shape, and how they're affected by light source position. Learn about umbra and penumbra, solar and lunar eclipses.</div>
+                    <div class="topic-examples">
+                        <div><strong>Shadow Size:</strong> Changes with distance</div>
+                        <div><strong>Eclipses:</strong> Solar and lunar shadows</div>
+                        <div><strong>Sundials:</strong> Telling time with shadows</div>
+                    </div>
+                </div>
+                
+                <!-- Sound Card -->
+                <div class="topic-card sound" id="soundCard">
+                    <div class="topic-icon">🔊📈</div>
+                    <div class="topic-title">Sound</div>
+                    <div class="topic-description">Explore how sound travels as waves, how we hear, and the properties of sound including pitch, volume, and quality. Learn about vibration, sound waves, and how different materials affect sound.</div>
+                    <div class="topic-examples">
+                        <div><strong>Vibration:</strong> How sound is created</div>
+                        <div><strong>Pitch:</strong> High and low sounds</div>
+                        <div><strong>Volume:</strong> Loud and soft sounds</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-light" id="startLight">
+                    <span>Start Light Properties Challenge</span>
+                </button>
+                <button class="btn btn-shadows" id="startShadows">
+                    <span>Start Shadows Challenge</span>
+                </button>
+                <button class="btn btn-sound" id="startSound">
+                    <span>Start Sound Challenge</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 45</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 2%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Science fact display -->
+                <div id="scienceFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Light & Sound Science Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Light Properties Questions (45 questions)
+        const lightPropertiesQuestions = [
+            // Basic Light Properties (1-15)
+            {
+                type: "basic_light",
+                question: "What is light?",
+                options: ["A form of energy that we can see", "A type of sound wave", "A kind of heat", "A solid material"],
+                answer: "A",
+                explanation: "Light is a form of electromagnetic energy that our eyes can detect, allowing us to see."
+            },
+            {
+                type: "basic_light",
+                question: "How does light travel?",
+                options: ["In straight lines (rays)", "In circles", "In zigzag patterns", "Only downward"],
+                answer: "A",
+                explanation: "Light travels in straight lines called rays, which is why shadows have sharp edges."
+            },
+            {
+                type: "basic_light",
+                question: "What is the main source of natural light on Earth?",
+                options: ["The Sun", "The Moon", "Stars", "Fire"],
+                answer: "A",
+                explanation: "The Sun is Earth's primary natural light source, providing light and energy for life."
+            },
+            {
+                type: "basic_light",
+                question: "What is reflection?",
+                options: ["Light bouncing off a surface", "Light bending through a material", "Light being absorbed", "Light changing color"],
+                answer: "A",
+                explanation: "Reflection occurs when light rays bounce off a surface, like a mirror or shiny object."
+            },
+            {
+                type: "basic_light",
+                question: "What is refraction?",
+                options: ["Light bending when passing through different materials", "Light bouncing back", "Light being blocked", "Light changing speed only"],
+                answer: "A",
+                explanation: "Refraction is the bending of light as it passes from one transparent material to another."
+            },
+            {
+                type: "basic_light",
+                question: "Which object is transparent?",
+                options: ["Clear glass window", "Wax paper", "Wooden door", "Metal sheet"],
+                answer: "A",
+                explanation: "Transparent materials allow almost all light to pass through clearly."
+            },
+            {
+                type: "basic_light",
+                question: "Which object is translucent?",
+                options: ["Frosted glass", "Clear plastic", "Brick wall", "Mirror"],
+                answer: "A",
+                explanation: "Translucent materials allow some light to pass through but scatter it, making objects appear blurry."
+            },
+            {
+                type: "basic_light",
+                question: "Which object is opaque?",
+                options: ["Wooden table", "Clean water", "Clear air", "Glass cup"],
+                answer: "A",
+                explanation: "Opaque materials do not allow any light to pass through, creating shadows."
+            },
+            {
+                type: "basic_light",
+                question: "What happens to light when it hits a mirror?",
+                options: ["It reflects at the same angle it arrived", "It absorbs into the mirror", "It passes through", "It changes color"],
+                answer: "A",
+                explanation: "The angle of reflection equals the angle of incidence - this is the law of reflection."
+            },
+            {
+                type: "basic_light",
+                question: "Why does a straw look bent in water?",
+                options: ["Refraction of light", "The straw actually bends", "Water magnifies", "Air bubbles"],
+                answer: "A",
+                explanation: "Light bends when moving from water to air, making the straw appear bent."
+
+            // Color and Light (16-25)
+            },
+            {
+                type: "color_light",
+                question: "What is white light made of?",
+                options: ["All colors of the rainbow combined", "Only white color", "Red and blue only", "No colors"],
+                answer: "A",
+                explanation: "White light contains all visible colors, which can be separated by a prism."
+            },
+            {
+                type: "color_light",
+                question: "How do we see colors?",
+                options: ["Objects reflect some colors and absorb others", "Objects create their own colors", "Our eyes invent colors", "Light has no color"],
+                answer: "A",
+                explanation: "A red apple reflects red light and absorbs other colors, so we see it as red."
+            },
+            {
+                type: "color_light",
+                question: "What colors make up a rainbow?",
+                options: ["Red, orange, yellow, green, blue, indigo, violet", "Only red, yellow, blue", "Black and white", "All possible colors"],
+                answer: "A",
+                explanation: "ROYGBIV - the colors of the visible spectrum in order of wavelength."
+            },
+            {
+                type: "color_light",
+                question: "What color is absorbed by a green leaf?",
+                options: ["Red and blue light", "Green light", "All colors", "No colors"],
+                answer: "A",
+                explanation: "Chlorophyll in leaves absorbs red and blue light for photosynthesis, reflecting green."
+            },
+            {
+                type: "color_light",
+                question: "What happens when you mix all colors of light?",
+                options: ["You get white light", "You get black", "You get gray", "You get rainbow colors"],
+                answer: "A",
+                explanation: "Additive color mixing with light creates white when all colors combine."
+
+            // Light Sources (26-35)
+            },
+            {
+                type: "light_sources",
+                question: "Which is a natural light source?",
+                options: ["Sun", "Light bulb", "LED", "Candle"],
+                answer: "A",
+                explanation: "The Sun is a natural light source, while the others are human-made."
+            },
+            {
+                type: "light_sources",
+                question: "Which is an artificial light source?",
+                options: ["Flashlight", "Sun", "Lightning", "Firefly"],
+                answer: "A",
+                explanation: "Artificial light sources are created by humans for various purposes."
+            },
+            {
+                type: "light_sources",
+                question: "What produces light in a light bulb?",
+                options: ["Electricity heating a filament", "Magic", "Chemical reactions", "Sound vibrations"],
+                answer: "A",
+                explanation: "Incandescent bulbs have a tungsten filament that glows when heated by electricity."
+            },
+            {
+                type: "light_sources",
+                question: "How do fireflies produce light?",
+                options: ["Bioluminescence (chemical reaction)", "Electricity", "Reflecting sunlight", "Friction"],
+                answer: "A",
+                explanation: "Fireflies use a chemical reaction called bioluminescence to produce cold light."
+            },
+            {
+                type: "light_sources",
+                question: "Why can we see the Moon at night?",
+                options: ["It reflects sunlight", "It produces its own light", "It glows from heat", "Stars light it up"],
+                answer: "A",
+                explanation: "The Moon doesn't produce light; it reflects sunlight to Earth."
+
+            // Vision and Light (36-45)
+            },
+            {
+                type: "vision_light",
+                question: "How do our eyes see objects?",
+                options: ["Light reflects off objects into our eyes", "Our eyes send out light beams", "Objects send images to our eyes", "We feel objects with our eyes"],
+                answer: "A",
+                explanation: "Light reflects from objects, enters our eyes, and forms images on the retina."
+            },
+            {
+                type: "vision_light",
+                question: "What part of the eye controls light entering?",
+                options: ["Pupil", "Lens", "Retina", "Iris"],
+                answer: "A",
+                explanation: "The pupil is the opening that lets light into the eye; it gets smaller in bright light."
+            },
+            {
+                type: "vision_light",
+                question: "Why do we need light to see?",
+                options: ["Light carries information from objects to our eyes", "Our eyes work like flashlights", "Darkness blocks vision", "Light cleans our eyes"],
+                answer: "A",
+                explanation: "Without light, there's nothing to carry visual information from objects to our eyes."
+            },
+            {
+                type: "vision_light",
+                question: "What happens in total darkness?",
+                options: ["We cannot see anything", "We see better", "Colors become brighter", "We see in infrared"],
+                answer: "A",
+                explanation: "With no light source, no light reaches our eyes, so we cannot see."
+            },
+            {
+                type: "vision_light",
+                question: "How do glasses help people see better?",
+                options: ["Lenses refract light to correct focus", "They make eyes bigger", "They produce more light", "They absorb bad light"],
+                answer: "A",
+                explanation: "Glasses use curved lenses to refract light properly onto the retina."
+            }
+        ];
+
+        // Shadows Questions (45 questions)
+        const shadowsQuestions = [
+            // Basic Shadows (1-15)
+            {
+                type: "basic_shadows",
+                question: "What is a shadow?",
+                options: ["An area where light is blocked", "A reflection of light", "A type of light", "A colored area"],
+                answer: "A",
+                explanation: "Shadows form when an opaque object blocks light from reaching a surface."
+            },
+            {
+                type: "basic_shadows",
+                question: "What is needed to form a shadow?",
+                options: ["Light source, opaque object, surface", "Just an object", "Just light", "Just a surface"],
+                answer: "A",
+                explanation: "Three things are needed: a light source, something to block the light, and a surface for the shadow."
+            },
+            {
+                type: "basic_shadows",
+                question: "What type of object makes the clearest shadow?",
+                options: ["Opaque object", "Transparent object", "Translucent object", "Any object"],
+                answer: "A",
+                explanation: "Opaque objects block all light, creating sharp, clear shadows."
+            },
+            {
+                type: "basic_shadows",
+                question: "What happens to a shadow when you move the object closer to the light source?",
+                options: ["Shadow gets larger", "Shadow gets smaller", "Shadow disappears", "Shadow changes color"],
+                answer: "A",
+                explanation: "Closer to light source = larger shadow because object blocks more light rays."
+            },
+            {
+                type: "basic_shadows",
+                question: "What happens to a shadow when you move the object farther from the light source?",
+                options: ["Shadow gets smaller", "Shadow gets larger", "Shadow disappears", "Shadow blurs"],
+                answer: "A",
+                explanation: "Farther from light source = smaller shadow because object blocks fewer light rays."
+            },
+            {
+                type: "basic_shadows",
+                question: "Why are shadows longest in early morning and late afternoon?",
+                options: ["Sun is low, light rays come at an angle", "Sun is brighter", "Air is clearer", "Temperature is cooler"],
+                answer: "A",
+                explanation: "Low sun angle creates longer shadows because objects block light over a greater distance."
+            },
+            {
+                type: "basic_shadows",
+                question: "Why are shadows shortest at noon?",
+                options: ["Sun is overhead, light comes straight down", "Sun is weaker", "Shadows disappear", "Light is scattered"],
+                answer: "A",
+                explanation: "When the sun is directly overhead, shadows are directly under objects, making them shortest."
+            },
+            {
+                type: "basic_shadows",
+                question: "What happens to shadows on a cloudy day?",
+                options: ["They become faint or disappear", "They become darker", "They change color", "They become longer"],
+                answer: "A",
+                explanation: "Clouds scatter light, reducing direct light that creates sharp shadows."
+            },
+            {
+                type: "basic_shadows",
+                question: "Can a transparent object cast a shadow?",
+                options: ["No, or very faint shadow", "Yes, dark shadow", "Yes, colored shadow", "Only at night"],
+                answer: "A",
+                explanation: "Transparent objects allow most light through, so they don't create clear shadows."
+            },
+            {
+                type: "basic_shadows",
+                question: "Can a translucent object cast a shadow?",
+                options: ["Yes, but blurry shadow", "No shadow", "Very dark shadow", "Colored shadow"],
+                answer: "A",
+                explanation: "Translucent objects create faint, blurry shadows because they scatter some light."
+
+            // Shadow Properties (16-25)
+            },
+            {
+                type: "shadow_properties",
+                question: "What is the darkest part of a shadow called?",
+                options: ["Umbra", "Penumbra", "Core", "Center"],
+                answer: "A",
+                explanation: "The umbra is the central, darkest part where light is completely blocked."
+            },
+            {
+                type: "shadow_properties",
+                question: "What is the lighter outer part of a shadow called?",
+                options: ["Penumbra", "Umbra", "Edge", "Border"],
+                answer: "A",
+                explanation: "The penumbra is the partial shadow where only some light is blocked."
+            },
+            {
+                type: "shadow_properties",
+                question: "Why do shadows sometimes have fuzzy edges?",
+                options: ["Large light source or multiple light sources", "Object is moving", "Surface is uneven", "Air is dirty"],
+                answer: "A",
+                explanation: "Large light sources create soft shadows with penumbra areas; small sources make sharp shadows."
+            },
+            {
+                type: "shadow_properties",
+                question: "How can you make a shadow sharper?",
+                options: ["Use a small, bright light source", "Use a large light source", "Move object farther", "Use colored light"],
+                answer: "A",
+                explanation: "Small light sources (like a flashlight) create sharp shadows with clear edges."
+            },
+            {
+                type: "shadow_properties",
+                question: "What happens to shadow edges when the light source is very large?",
+                options: ["They become blurry", "They become sharper", "They disappear", "They change color"],
+                answer: "A",
+                explanation: "Large light sources (like fluorescent lights) create soft shadows with gradual edges."
+
+            // Shadow Direction (26-35)
+            },
+            {
+                type: "shadow_direction",
+                question: "Where is your shadow when the sun is in front of you?",
+                options: ["Behind you", "In front of you", "To your side", "You have no shadow"],
+                answer: "A",
+                explanation: "Shadows are always opposite the light source. Sun in front = shadow behind."
+            },
+            {
+                type: "shadow_direction",
+                question: "Where is your shadow when the sun is behind you?",
+                options: ["In front of you", "Behind you", "To your side", "Under you"],
+                answer: "A",
+                explanation: "Sun behind you = shadow in front of you, pointing away from the sun."
+            },
+            {
+                type: "shadow_direction",
+                question: "If the sun rises in the east, where will morning shadows point?",
+                options: ["West", "East", "North", "South"],
+                answer: "A",
+                explanation: "Morning sun in east creates shadows pointing west."
+            },
+            {
+                type: "shadow_direction",
+                question: "If the sun sets in the west, where will evening shadows point?",
+                options: ["East", "West", "North", "South"],
+                answer: "A",
+                explanation: "Evening sun in west creates shadows pointing east."
+            },
+            {
+                type: "shadow_direction",
+                question: "At solar noon (sun highest), where do shadows point?",
+                options: ["Directly north (in northern hemisphere)", "East", "West", "They disappear"],
+                answer: "A",
+                explanation: "At true solar noon, shadows point directly north in the northern hemisphere."
+
+            // Eclipses and Sundials (36-45)
+            },
+            {
+                type: "eclipses_shadows",
+                question: "What is a solar eclipse?",
+                options: ["Moon's shadow falls on Earth", "Earth's shadow falls on Moon", "Sun disappears", "Moon disappears"],
+                answer: "A",
+                explanation: "Solar eclipse occurs when the Moon passes between Sun and Earth, casting its shadow on Earth."
+            },
+            {
+                type: "eclipses_shadows",
+                question: "What is a lunar eclipse?",
+                options: ["Earth's shadow falls on Moon", "Moon's shadow falls on Earth", "Sun blocks Moon", "Moon blocks Sun"],
+                answer: "A",
+                explanation: "Lunar eclipse occurs when Earth passes between Sun and Moon, casting its shadow on the Moon."
+            },
+            {
+                type: "eclipses_shadows",
+                question: "Why don't we have eclipses every month?",
+                options: ["Moon's orbit is tilted relative to Earth's orbit", "Moon is too small", "Sun is too big", "Earth rotates too fast"],
+                answer: "A",
+                explanation: "The Moon's orbit is tilted 5 degrees, so it usually passes above or below the Sun-Earth line."
+            },
+            {
+                type: "eclipses_shadows",
+                question: "How does a sundial tell time?",
+                options: ["Shadow position indicates time", "It measures sunlight intensity", "It tracks sun color", "It counts light rays"],
+                answer: "A",
+                explanation: "Sundials use the position of a shadow cast by a gnomon (stick) to indicate time."
+            },
+            {
+                type: "eclipses_shadows",
+                question: "Why are shadows useful for navigation?",
+                options: ["They indicate direction relative to sun", "They show distance", "They measure speed", "They predict weather"],
+                answer: "A",
+                explanation: "Shadow direction shows the sun's position, which helps determine cardinal directions."
+            }
+        ];
+
+        // Sound Questions (45 questions)
+        const soundQuestions = [
+            // Basic Sound (1-15)
+            {
+                type: "basic_sound",
+                question: "What is sound?",
+                options: ["Vibrations that travel through a medium", "A type of light", "A form of heat", "Electrical energy"],
+                answer: "A",
+                explanation: "Sound is produced by vibrating objects and travels as waves through solids, liquids, or gases."
+            },
+            {
+                type: "basic_sound",
+                question: "How is sound created?",
+                options: ["By vibrations", "By light", "By heat", "By electricity"],
+                answer: "A",
+                explanation: "All sounds begin with something vibrating - vocal cords, guitar strings, drum skins, etc."
+            },
+            {
+                type: "basic_sound",
+                question: "How does sound travel?",
+                options: ["As waves through a medium", "In straight lines like light", "Through empty space only", "Only through air"],
+                answer: "A",
+                explanation: "Sound travels as longitudinal waves (compression waves) that need a medium like air, water, or solids."
+            },
+            {
+                type: "basic_sound",
+                question: "Can sound travel through empty space?",
+                options: ["No, it needs a medium", "Yes, very fast", "Yes, but slowly", "Only certain sounds"],
+                answer: "A",
+                explanation: "Space is a vacuum with no particles to vibrate, so sound cannot travel through it."
+            },
+            {
+                type: "basic_sound",
+                question: "Through which medium does sound travel fastest?",
+                options: ["Solids", "Liquids", "Gases", "All equally"],
+                answer: "A",
+                explanation: "Sound travels fastest in solids because particles are closer together, transferring vibrations quicker."
+            },
+            {
+                type: "basic_sound",
+                question: "Through which medium does sound travel slowest?",
+                options: ["Gases (like air)", "Liquids", "Solids", "Vacuum"],
+                answer: "A",
+                explanation: "Sound travels slowest in gases because particles are far apart, making energy transfer slower."
+            },
+            {
+                type: "basic_sound",
+                question: "What do we use to hear sounds?",
+                options: ["Ears", "Eyes", "Nose", "Skin"],
+                answer: "A",
+                explanation: "Our ears detect sound vibrations and send signals to our brain for interpretation."
+            },
+            {
+                type: "basic_sound",
+                question: "What part of the ear collects sound waves?",
+                options: ["Outer ear (pinna)", "Eardrum", "Cochlea", "Brain"],
+                answer: "A",
+                explanation: "The outer ear funnels sound waves into the ear canal toward the eardrum."
+            },
+            {
+                type: "basic_sound",
+                question: "What vibrates first when sound enters the ear?",
+                options: ["Eardrum", "Cochlea", "Brain cells", "Ear bones"],
+                answer: "A",
+                explanation: "Sound waves make the eardrum vibrate, which then vibrates the tiny bones in the middle ear."
+            },
+            {
+                type: "basic_sound",
+                question: "Where are sound vibrations converted to electrical signals?",
+                options: ["Cochlea in inner ear", "Eardrum", "Ear canal", "Outer ear"],
+                answer: "A",
+                explanation: "The cochlea contains hair cells that convert vibrations into electrical signals for the brain."
+
+            // Sound Properties (16-25)
+            },
+            {
+                type: "sound_properties",
+                question: "What is pitch?",
+                options: ["How high or low a sound is", "How loud a sound is", "Sound quality", "Sound direction"],
+                answer: "A",
+                explanation: "Pitch depends on frequency - high frequency = high pitch, low frequency = low pitch."
+            },
+            {
+                type: "sound_properties",
+                question: "What is volume?",
+                options: ["How loud or soft a sound is", "How high or low a sound is", "Sound quality", "Sound speed"],
+                answer: "A",
+                explanation: "Volume (loudness) depends on amplitude - bigger vibrations = louder sound."
+            },
+            {
+                type: "sound_properties",
+                question: "What makes a high-pitched sound?",
+                options: ["Fast vibrations (high frequency)", "Slow vibrations", "Loud vibrations", "Soft vibrations"],
+                answer: "A",
+                explanation: "High frequency (many vibrations per second) creates high-pitched sounds like whistles."
+            },
+            {
+                type: "sound_properties",
+                question: "What makes a low-pitched sound?",
+                options: ["Slow vibrations (low frequency)", "Fast vibrations", "Loud vibrations", "Soft vibrations"],
+                answer: "A",
+                explanation: "Low frequency (few vibrations per second) creates low-pitched sounds like drums."
+            },
+            {
+                type: "sound_properties",
+                question: "What makes a loud sound?",
+                options: ["Large vibrations (high amplitude)", "Fast vibrations", "Slow vibrations", "High frequency"],
+                answer: "A",
+                explanation: "Greater vibration amplitude creates more energy, resulting in louder sounds."
+
+            // Sound Waves (26-35)
+            },
+            {
+                type: "sound_waves",
+                question: "What are sound waves?",
+                options: ["Compression waves that move through matter", "Light waves", "Heat waves", "Water waves on surface"],
+                answer: "A",
+                explanation: "Sound waves are longitudinal waves where particles vibrate parallel to the wave direction."
+            },
+            {
+                type: "sound_waves",
+                question: "What is frequency?",
+                options: ["Number of vibrations per second", "Size of vibrations", "Speed of sound", "Direction of sound"],
+                answer: "A",
+                explanation: "Frequency is measured in Hertz (Hz) - 1 Hz = 1 vibration per second."
+            },
+            {
+                type: "sound_waves",
+                question: "What is amplitude?",
+                options: ["Size of the vibration wave", "Speed of vibration", "Pitch of sound", "Quality of sound"],
+                answer: "A",
+                explanation: "Greater amplitude means larger vibrations and louder sound."
+            },
+            {
+                type: "sound_waves",
+                question: "What is the speed of sound in air?",
+                options: ["About 343 meters per second", "About 3,000 m/s", "About 1500 m/s", "About 5000 m/s"],
+                answer: "A",
+                explanation: "Sound travels at approximately 343 m/s in air at room temperature (about 767 mph)."
+            },
+            {
+                type: "sound_waves",
+                question: "Why do you see lightning before hearing thunder?",
+                options: ["Light travels faster than sound", "Sound travels faster than light", "They travel together", "Thunder happens later"],
+                answer: "A",
+                explanation: "Light travels about 874,000 times faster than sound in air."
+
+            // Sound Applications (36-45)
+            },
+            {
+                type: "sound_applications",
+                question: "What is an echo?",
+                options: ["Sound reflecting off a surface", "Sound getting louder", "Sound changing pitch", "Sound disappearing"],
+                answer: "A",
+                explanation: "An echo is a reflected sound that reaches your ears after the original sound."
+            },
+            {
+                type: "sound_applications",
+                question: "Why do bats use sound?",
+                options: ["Echolocation to navigate and hunt", "To communicate only", "To scare predators", "To see in dark"],
+                answer: "A",
+                explanation: "Bats emit high-frequency sounds that bounce off objects, helping them 'see' in darkness."
+            },
+            {
+                type: "sound_applications",
+                question: "What is ultrasound?",
+                options: ["Sound above human hearing range", "Sound below human hearing", "Very loud sound", "Very soft sound"],
+                answer: "A",
+                explanation: "Ultrasound has frequencies above 20,000 Hz, which humans cannot hear."
+            },
+            {
+                type: "sound_applications",
+                question: "How do submarines use sound?",
+                options: ["Sonar to detect objects underwater", "To communicate with fish", "To create light", "To move faster"],
+                answer: "A",
+                explanation: "Sonar (Sound Navigation And Ranging) uses sound waves to detect underwater objects."
+            },
+            {
+                type: "sound_applications",
+                question: "Why do concert halls use curtains and carpets?",
+                options: ["To absorb sound and reduce echoes", "To reflect sound", "To make it pretty", "To keep warm"],
+                answer: "A",
+                explanation: "Soft materials absorb sound waves, reducing echoes and reverberation for better sound quality."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: "",
+            topicType: "" // "light", "shadows", or "sound"
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent light and sound knowledge!",
+            "Fantastic understanding of waves and vibrations!",
+            "Great job! You're a light and sound expert!",
+            "Amazing! Perfect physics answers!",
+            "Well done! You understand waves perfectly!",
+            "You're a wave science champion!",
+            "Perfect! You think like a physicist!",
+            "Outstanding wave understanding!",
+            "Brilliant! You know how light and sound work!",
+            "You're on fire! Great physics knowledge!"
+        ];
+
+        // Science facts for display
+        const scienceFacts = [
+            "Light travels at 299,792 kilometers per second - fast enough to circle Earth 7.5 times in one second!",
+            "A shadow on the Moon during a lunar eclipse appears red because Earth's atmosphere bends sunlight!",
+            "Sound travels 4.3 times faster in water than in air - that's why whales can communicate across oceans!",
+            "The human eye can distinguish about 10 million different colors!",
+            "Some shrimp can create sound so loud it stuns or kills small fish - the snap creates a bubble that reaches 4700°C!",
+            "A lightning bolt is 5 times hotter than the surface of the Sun - about 30,000°C!",
+            "Bats use echolocation so precise they can detect objects as thin as a human hair!",
+            "The color blue is the rarest color in nature - less than 10% of plants have blue flowers!"
+        ];
+
+        // Sample light and sound data for visualizations
+        const waveData = {
+            lightProperties: [
+                {name: "Reflection", icon: "🪞", color: "var(--primary-yellow)", description: "Light bouncing off surfaces"},
+                {name: "Refraction", icon: "🔍", color: "var(--secondary-blue)", description: "Light bending through materials"},
+                {name: "Absorption", icon: "⚫", color: "var(--accent-orange)", description: "Light being taken in"},
+                {name: "Transmission", icon: "💎", color: "var(--accent-green)", description: "Light passing through"},
+                {name: "Shadow", icon: "🌑", color: "var(--accent-purple)", description: "Light being blocked"},
+                {name: "Color", icon: "🌈", color: "var(--accent-red)", description: "Different wavelengths of light"}
+            ],
+            materialTypes: [
+                {type: "Transparent", example: "Clear glass, clean water", icon: "👁️"},
+                {type: "Translucent", example: "Frosted glass, wax paper", icon: "🌫️"},
+                {type: "Opaque", example: "Wood, metal, brick", icon: "🚪"}
+            ],
+            soundProperties: [
+                {property: "Pitch", dependsOn: "Frequency", icon: "🎵"},
+                {property: "Volume", dependsOn: "Amplitude", icon: "🔊"},
+                {property: "Quality", dependsOn: "Waveform", icon: "🎻"},
+                {property: "Speed", dependsOn: "Medium", icon: "⚡"}
+            ]
+        };
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startLightBtn = document.getElementById('startLight');
+        const startShadowsBtn = document.getElementById('startShadows');
+        const startSoundBtn = document.getElementById('startSound');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const scienceFact = document.getElementById('scienceFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+        
+        // Topic cards
+        const lightCard = document.getElementById('lightCard');
+        const shadowsCard = document.getElementById('shadowsCard');
+        const soundCard = document.getElementById('soundCard');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade5LightSound');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                appState.topicType = parsed.topicType || "";
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade5LightSound', JSON.stringify(appState));
+        }
+
+        // Initialize questions based on topic type
+        function initializeQuestions(topicType) {
+            appState.topicType = topicType;
+            
+            switch(topicType) {
+                case "light":
+                    appState.currentQuestions = [...lightPropertiesQuestions];
+                    break;
+                case "shadows":
+                    appState.currentQuestions = [...shadowsQuestions];
+                    break;
+                case "sound":
+                    appState.currentQuestions = [...soundQuestions];
+                    break;
+            }
+            
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startLightBtn.addEventListener('click', () => startPractice("light"));
+            startShadowsBtn.addEventListener('click', () => startPractice("shadows"));
+            startSoundBtn.addEventListener('click', () => startPractice("sound"));
+            
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice("light");
+                }
+            });
+            
+            // Add click events to topic cards
+            lightCard.addEventListener('click', () => {
+                clearActiveCards();
+                lightCard.classList.add('active');
+                startLightBtn.classList.add('btn-light');
+            });
+            
+            shadowsCard.addEventListener('click', () => {
+                clearActiveCards();
+                shadowsCard.classList.add('active');
+                startShadowsBtn.classList.add('btn-shadows');
+            });
+            
+            soundCard.addEventListener('click', () => {
+                clearActiveCards();
+                soundCard.classList.add('active');
+                startSoundBtn.classList.add('btn-sound');
+            });
+        }
+        
+        function clearActiveCards() {
+            lightCard.classList.remove('active');
+            shadowsCard.classList.remove('active');
+            soundCard.classList.remove('active');
+            startLightBtn.classList.remove('btn-light');
+            startShadowsBtn.classList.remove('btn-shadows');
+            startSoundBtn.classList.remove('btn-sound');
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Set progress bar color based on topic type
+            switch(appState.topicType) {
+                case "light":
+                    progressFill.style.background = "linear-gradient(to right, var(--primary-yellow), #FBC02D)";
+                    break;
+                case "shadows":
+                    progressFill.style.background = "linear-gradient(to right, var(--secondary-blue), #1976D2)";
+                    break;
+                case "sound":
+                    progressFill.style.background = "linear-gradient(to right, var(--accent-purple), #7B1FA2)";
+                    break;
+                default:
+                    progressFill.style.background = "linear-gradient(to right, var(--primary-yellow), var(--accent-orange))";
+            }
+            
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem(`ideolixGrade5LightSound_${appState.topicType}_highestScore`) || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem(`ideolixGrade5LightSound_${appState.topicType}_highestScore`, appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a light and sound expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent wave knowledge!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep learning to become a physics master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review light and sound concepts and try again!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Physics knowledge grows with practice!";
+            }
+        }
+
+        // Create science fact display
+        function createScienceFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'science-fact';
+            
+            factDiv.innerHTML = `<strong>Wave Fact:</strong> ${scienceFacts[Math.floor(Math.random() * scienceFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display based on topic type
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            let conceptName = "";
+            let conceptIcon = "";
+            let conceptColor = "";
+            
+            switch(appState.topicType) {
+                case "light":
+                    conceptName = "Light Properties";
+                    conceptIcon = "💡🔍";
+                    conceptColor = "var(--primary-yellow)";
+                    break;
+                case "shadows":
+                    conceptName = "Shadows";
+                    conceptIcon = "🌑📏";
+                    conceptColor = "var(--secondary-blue)";
+                    break;
+                case "sound":
+                    conceptName = "Sound";
+                    conceptIcon = "🔊📈";
+                    conceptColor = "var(--accent-purple)";
+                    break;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.style.background = `linear-gradient(135deg, ${conceptColor}, ${conceptColor}80)`;
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            // Add specific label based on question type
+            if (question.type.includes("basic_light")) {
+                label.textContent = "Basic Light Properties";
+            } else if (question.type.includes("color_light")) {
+                label.textContent = "Color and Light";
+            } else if (question.type.includes("light_sources")) {
+                label.textContent = "Light Sources";
+            } else if (question.type.includes("vision_light")) {
+                label.textContent = "Vision and Light";
+            } else if (question.type.includes("basic_shadows")) {
+                label.textContent = "Basic Shadow Properties";
+            } else if (question.type.includes("shadow_properties")) {
+                label.textContent = "Shadow Properties";
+            } else if (question.type.includes("shadow_direction")) {
+                label.textContent = "Shadow Direction";
+            } else if (question.type.includes("eclipses_shadows")) {
+                label.textContent = "Eclipses and Sundials";
+            } else if (question.type.includes("basic_sound")) {
+                label.textContent = "Basic Sound Properties";
+            } else if (question.type.includes("sound_properties")) {
+                label.textContent = "Sound Properties";
+            } else if (question.type.includes("sound_waves")) {
+                label.textContent = "Sound Waves";
+            } else if (question.type.includes("sound_applications")) {
+                label.textContent = "Sound Applications";
+            } else {
+                label.textContent = "Light & Sound Science Concepts";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create visualization based on topic type
+        function createScienceVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            switch(appState.topicType) {
+                case "light":
+                    vizDiv.innerHTML = createLightVisualization(question);
+                    break;
+                case "shadows":
+                    vizDiv.innerHTML = createShadowsVisualization(question);
+                    break;
+                case "sound":
+                    vizDiv.innerHTML = createSoundVisualization(question);
+                    break;
+            }
+            
+            return vizDiv;
+        }
+
+        // Light visualization
+        function createLightVisualization(question) {
+            return `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-yellow);">Light Properties and Behavior</h3>
+                
+                <div class="light-diagram">
+                    <div class="diagram-title">How Light Interacts with Materials</div>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="display: inline-block; padding: 20px; background: rgba(255, 235, 59, 0.1); border-radius: 12px; font-size: 1.2rem;">
+                            ☀️ Light Source Emits Rays<br>
+                            ⬇<br>
+                            🪞 Reflection (Bouncing)<br>
+                            🔍 Refraction (Bending)<br>
+                            ⚫ Absorption (Taking In)<br>
+                            💎 Transmission (Passing Through)
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="properties-comparison">
+                    ${waveData.lightProperties.map(property => `
+                        <div class="property-card ${property.name.toLowerCase()}">
+                            <div class="property-icon">${property.icon}</div>
+                            <div class="property-name">${property.name}</div>
+                            <div class="property-description">${property.description}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="process-display">
+                    <div class="process-title">How We See Colors</div>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-title">White Light Contains All Colors</div>
+                                <div class="step-description">Sunlight appears white but contains all rainbow colors</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-title">Objects Reflect Some Colors</div>
+                                <div class="step-description">A red apple reflects red light, absorbs other colors</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-title">Reflected Light Enters Eyes</div>
+                                <div class="step-description">Reflected colored light travels to our eyes</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="step-title">Brain Interprets Color</div>
+                                <div class="step-description">Our brain processes the signals as specific colors</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sound-display">
+                    ${waveData.materialTypes.map(material => `
+                        <div class="sound-item">
+                            <div class="sound-icon">${material.icon}</div>
+                            <div class="sound-title">${material.type}</div>
+                            <div class="sound-description">${material.example}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <table class="examples-table">
+                    <thead>
+                        <tr>
+                            <th>Light Phenomenon</th>
+                            <th>Everyday Example</th>
+                            <th>Scientific Principle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: var(--primary-yellow); font-weight: bold;">Reflection</td>
+                            <td>Mirror, shiny spoon, still water</td>
+                            <td>Light bounces off smooth surfaces at equal angles</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--secondary-blue); font-weight: bold;">Refraction</td>
+                            <td>Straw in water, lenses, rainbows</td>
+                            <td>Light bends when changing speed between materials</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-red); font-weight: bold;">Color Separation</td>
+                            <td>Prism, rainbow, CD surface</td>
+                            <td>Different colors bend at different angles (dispersion)</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-green); font-weight: bold;">Transmission</td>
+                            <td>Window, eyeglasses, clean water</td>
+                            <td>Light passes through transparent materials</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="science-challenge">
+                    <div class="challenge-title">Quick Challenge</div>
+                    <div class="challenge-area">
+                        <div class="challenge-scenario">
+                            You're at a pool on a sunny day. You notice that the bottom of the pool looks shallower than it actually is, and when you jump in, it's deeper than expected.
+                        </div>
+                        <div class="challenge-question">What light phenomenon makes the pool look shallower?</div>
+                        <div class="challenge-options">
+                            <div class="challenge-option">Refraction - light bends when leaving water, making bottom appear closer</div>
+                            <div class="challenge-option">Reflection - water surface acts like a mirror</div>
+                            <div class="challenge-option">Absorption - water absorbs light, making it dark</div>
+                            <div class="challenge-option">Color change - water filters certain colors</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Shadows visualization
+        function createShadowsVisualization(question) {
+            return `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--secondary-blue);">Shadows: Light Blocked in Action</h3>
+                
+                <div class="wave-display">
+                    <div class="wave-title">How Shadows Are Formed</div>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="display: inline-block; padding: 20px; background: rgba(33, 150, 243, 0.1); border-radius: 12px; font-size: 1.2rem;">
+                            ☀️ Light Source → Light Rays Travel Straight → 🚫 Opaque Object Blocks Light → 🌑 Shadow Forms on Surface
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="properties-comparison">
+                    <div class="property-card">
+                        <div class="property-icon">📏</div>
+                        <div class="property-name">Shadow Size</div>
+                        <div class="property-description">Changes with distance from light source and object</div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-icon">🧭</div>
+                        <div class="property-name">Shadow Direction</div>
+                        <div class="property-description">Always opposite the light source direction</div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-icon">🌅</div>
+                        <div class="property-name">Shadow Length</div>
+                        <div class="property-description">Longest at sunrise/sunset, shortest at noon</div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-icon">🌑</div>
+                        <div class="property-name">Umbra</div>
+                        <div class="property-description">Darkest central part of shadow</div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-icon">🌓</div>
+                        <div class="property-name">Penumbra</div>
+                        <div class="property-description">Lighter outer part of shadow</div>
+                    </div>
+                    <div class="property-card">
+                        <div class="property-icon">⏱️</div>
+                        <div class="property-name">Sundials</div>
+                        <div class="property-description">Use shadows to tell time</div>
+                    </div>
+                </div>
+                
+                <div class="process-display">
+                    <div class="process-title">Solar Eclipse - Earth in Moon's Shadow</div>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-title">Alignment</div>
+                                <div class="step-description">Sun, Moon, and Earth align perfectly in a straight line</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-title">Moon Blocks Sun</div>
+                                <div class="step-description">Moon passes between Sun and Earth, casting its shadow</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-title">Shadow Falls on Earth</div>
+                                <div class="step-description">Moon's shadow travels across Earth's surface</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="step-title">Day Turns to Night</div>
+                                <div class="step-description">In the shadow path, daytime becomes as dark as night</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sound-display">
+                    <div class="sound-item">
+                        <div class="sound-icon">🌅</div>
+                        <div class="sound-title">Morning Shadows</div>
+                        <div class="sound-description">Long shadows pointing west, sun in east</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-icon">🌞</div>
+                        <div class="sound-title">Noon Shadows</div>
+                        <div class="sound-description">Short shadows under objects, sun overhead</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-icon">🌇</div>
+                        <div class="sound-title">Evening Shadows</div>
+                        <div class="sound-description">Long shadows pointing east, sun in west</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-icon">🌙</div>
+                        <div class="sound-title">Night Shadows</div>
+                        <div class="sound-description">Artificial light creates varied shadows</div>
+                    </div>
+                </div>
+                
+                <table class="examples-table">
+                    <thead>
+                        <tr>
+                            <th>Shadow Feature</th>
+                            <th>What Affects It</th>
+                            <th>Example/Observation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: var(--secondary-blue); font-weight: bold;">Size</td>
+                            <td>Distance between light, object, and surface</td>
+                            <td>Hand close to flashlight = giant hand shadow on wall</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-purple); font-weight: bold;">Sharpness</td>
+                            <td>Size of light source and object edges</td>
+                            <td>Small bulb = sharp shadows; large fluorescent = soft shadows</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-orange); font-weight: bold;">Direction</td>
+                            <td>Position of light source</td>
+                            <td>Sun in west = shadows point east; always opposite light</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--primary-yellow); font-weight: bold;">Length</td>
+                            <td>Height of light source above horizon</td>
+                            <td>Low sun (morning/evening) = long shadows; high sun = short shadows</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="science-challenge">
+                    <div class="challenge-title">Quick Challenge</div>
+                    <div class="challenge-area">
+                        <div class="challenge-question">Why does your shadow disappear when you stand directly under a streetlight at night?</div>
+                        <div class="challenge-options">
+                            <div class="challenge-option">The light source is directly above you, so your shadow falls directly under you where it's hard to see</div>
+                            <div class="challenge-option">The streetlight is too bright and eliminates all shadows</div>
+                            <div class="challenge-option">Shadows only form during daytime</div>
+                            <div class="challenge-option">Your eyes adjust to make the shadow invisible</div>
+                        </div>
+                        <div style="margin-top: 15px; color: var(--text-secondary); font-size: 0.9rem;">
+                            <strong>Think about:</strong> Where does your shadow go when the light source is directly overhead?
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Sound visualization
+        function createSoundVisualization(question) {
+            return `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-purple);">Sound: Vibrations We Can Hear</h3>
+                
+                <div class="process-display">
+                    <div class="process-title">How Sound Travels and We Hear</div>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-title">Vibration Creation</div>
+                                <div class="step-description">Object vibrates (guitar string, vocal cords, drum skin)</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-title">Wave Propagation</div>
+                                <div class="step-description">Vibrations create sound waves that travel through medium (air, water, solid)</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-title">Ear Collection</div>
+                                <div class="step-description">Outer ear collects sound waves and directs them to eardrum</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="step-title">Brain Interpretation</div>
+                                <div class="step-description">Brain processes electrical signals as specific sounds</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="properties-comparison">
+                    ${waveData.soundProperties.map(prop => `
+                        <div class="property-card">
+                            <div class="property-icon">${prop.icon}</div>
+                            <div class="property-name">${prop.property}</div>
+                            <div class="property-description">Depends on: ${prop.dependsOn}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="wave-display">
+                    <div class="wave-title">Sound Wave Properties</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0;">
+                        <div style="background: rgba(156, 39, 176, 0.1); padding: 15px; border-radius: 8px;">
+                            <div style="font-weight: bold; color: var(--accent-purple); margin-bottom: 5px;">Frequency</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                                <strong>Definition:</strong> Number of vibrations per second<br>
+                                <strong>Unit:</strong> Hertz (Hz)<br>
+                                <strong>Effect:</strong> Determines pitch (high/low)
+                            </div>
+                        </div>
+                        <div style="background: rgba(156, 39, 176, 0.1); padding: 15px; border-radius: 8px;">
+                            <div style="font-weight: bold; color: var(--accent-purple); margin-bottom: 5px;">Amplitude</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                                <strong>Definition:</strong> Size of vibration wave<br>
+                                <strong>Unit:</strong> Decibels (dB)<br>
+                                <strong>Effect:</strong> Determines volume (loud/soft)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sound-display">
+                    <div class="sound-item">
+                        <div class="sound-icon">💨</div>
+                        <div class="sound-title">Speed in Air</div>
+                        <div class="sound-description">~343 m/s (767 mph) at room temperature</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-icon">💧</div>
+                        <div class="sound-title">Speed in Water</div>
+                        <div class="sound-description">~1,480 m/s (4.3× faster than air)</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-icon">⚙️</div>
+                        <div class="sound-title">Speed in Steel</div>
+                        <div class="sound-description">~5,960 m/s (17× faster than air)</div>
+                    </div>
+                    <div class="sound-item">
+                        <div class="sound-icon">🚫</div>
+                        <div class="sound-title">Speed in Vacuum</div>
+                        <div class="sound-description">0 m/s (cannot travel without medium)</div>
+                    </div>
+                </div>
+                
+                <table class="examples-table">
+                    <thead>
+                        <tr>
+                            <th>Sound Property</th>
+                            <th>What It Means</th>
+                            <th>Real World Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: var(--accent-purple); font-weight: bold;">Pitch</td>
+                            <td>How high or low a sound is</td>
+                            <td>Whistle (high pitch), Drum (low pitch)</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--primary-yellow); font-weight: bold;">Volume</td>
+                            <td>How loud or soft a sound is</td>
+                            <td>Whisper (soft), Rock concert (loud)</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--secondary-blue); font-weight: bold;">Echo</td>
+                            <td>Reflected sound arriving later</td>
+                            <td>Shouting in canyon, empty gymnasium</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-orange); font-weight: bold;">Sonar/Echolocation</td>
+                            <td>Using sound reflections to locate objects</td>
+                            <td>Bats navigating, submarines mapping ocean floor</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="science-challenge">
+                    <div class="challenge-title">Quick Challenge</div>
+                    <div class="challenge-area">
+                        <div class="challenge-scenario">
+                            You're at a baseball game. You see the batter hit the ball, but you hear the crack of the bat a moment after seeing the hit.
+                        </div>
+                        <div class="challenge-question">Why is there a delay between seeing the hit and hearing the sound?</div>
+                        <div class="challenge-options">
+                            <div class="challenge-option">Light travels much faster than sound, so you see it instantly but sound takes time to reach you</div>
+                            <div class="challenge-option">Your eyes work faster than your ears</div>
+                            <div class="challenge-option">The sound is created after the hit happens</div>
+                            <div class="challenge-option">Your brain processes sights before sounds</div>
+                        </div>
+                        <div style="margin-top: 15px; color: var(--text-secondary); font-size: 0.9rem;">
+                            <strong>Think about:</strong> Light travels at 299,792 km/s while sound travels at only 0.343 km/s in air!
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            scienceFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            scienceFact.appendChild(createScienceFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createScienceVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    feedbackMessage.textContent = `Correct answer: ${correctOption}`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions(appState.topicType);
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            showWelcomePage();
+        }
+
+        // Start practice session
+        function startPractice(topicType) {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions(topicType);
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

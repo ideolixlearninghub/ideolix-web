@@ -1,0 +1,2960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Science - Weather, Climate & Water Cycle | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Weather/Climate Theme */
+        :root {
+            --primary-blue: #2196F3;
+            --secondary-teal: #009688;
+            --accent-yellow: #FFEB3B;
+            --accent-green: #4CAF50;
+            --accent-orange: #FF9800;
+            --accent-purple: #9C27B0;
+            --accent-red: #F44336;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(33, 150, 243, 0.3);
+            --sun-glow: 0 0 20px rgba(255, 235, 59, 0.5);
+            --water-glow: 0 0 20px rgba(33, 150, 243, 0.5);
+            --cloud-glow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Cloud Background */
+        .cloud-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(to bottom, #0a2540, #1a3650);
+            overflow: hidden;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: floatCloud 60s linear infinite;
+        }
+
+        .cloud-1 { top: 20%; left: -100px; width: 200px; height: 60px; animation-delay: 0s; }
+        .cloud-2 { top: 40%; left: -150px; width: 250px; height: 80px; animation-delay: 10s; }
+        .cloud-3 { top: 60%; left: -200px; width: 180px; height: 50px; animation-delay: 20s; }
+        .cloud-4 { top: 30%; left: -250px; width: 300px; height: 100px; animation-delay: 30s; }
+        .cloud-5 { top: 70%; left: -180px; width: 220px; height: 70px; animation-delay: 40s; }
+
+        .rain-drop {
+            position: absolute;
+            width: 2px;
+            height: 15px;
+            background: rgba(33, 150, 243, 0.6);
+            animation: rainFall 1s linear infinite;
+        }
+
+        @keyframes floatCloud {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(calc(100vw + 400px)) translateY(20px); }
+        }
+
+        @keyframes rainFall {
+            0% { transform: translateY(-100px); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(33, 150, 243, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-blue);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-teal);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 150, 136, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #00796B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 150, 136, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-teal));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .weather-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-yellow);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-teal);
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Water Cycle Display */
+        .water-cycle {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+            min-height: 300px;
+        }
+
+        .cycle-title {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .cycle-stage {
+            position: absolute;
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid;
+            text-align: center;
+            width: 120px;
+            transition: transform 0.3s ease;
+        }
+
+        .cycle-stage:hover {
+            transform: scale(1.05);
+        }
+
+        .cycle-stage.evaporation {
+            top: 20px;
+            left: calc(50% - 60px);
+            border-color: var(--accent-yellow);
+        }
+
+        .cycle-stage.condensation {
+            top: 100px;
+            left: 30px;
+            border-color: var(--accent-blue);
+        }
+
+        .cycle-stage.precipitation {
+            top: 100px;
+            right: 30px;
+            border-color: var(--secondary-teal);
+        }
+
+        .cycle-stage.collection {
+            bottom: 20px;
+            left: calc(50% - 60px);
+            border-color: var(--accent-green);
+        }
+
+        .stage-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .stage-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .evaporation .stage-title {
+            color: var(--accent-yellow);
+        }
+
+        .condensation .stage-title {
+            color: var(--primary-blue);
+        }
+
+        .precipitation .stage-title {
+            color: var(--secondary-teal);
+        }
+
+        .collection .stage-title {
+            color: var(--accent-green);
+        }
+
+        .stage-description {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .cycle-arrow {
+            position: absolute;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Weather Elements Display */
+        .weather-elements {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .weather-elements {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .weather-card {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .weather-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .weather-card.temperature {
+            border-color: var(--accent-red);
+        }
+
+        .weather-card.humidity {
+            border-color: var(--primary-blue);
+        }
+
+        .weather-card.pressure {
+            border-color: var(--accent-purple);
+        }
+
+        .weather-card.wind {
+            border-color: var(--accent-green);
+        }
+
+        .weather-card.precipitation {
+            border-color: var(--secondary-teal);
+        }
+
+        .weather-card.clouds {
+            border-color: var(--accent-yellow);
+        }
+
+        .weather-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .weather-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .temperature .weather-title {
+            color: var(--accent-red);
+        }
+
+        .humidity .weather-title {
+            color: var(--primary-blue);
+        }
+
+        .pressure .weather-title {
+            color: var(--accent-purple);
+        }
+
+        .wind .weather-title {
+            color: var(--accent-green);
+        }
+
+        .precipitation .weather-title {
+            color: var(--secondary-teal);
+        }
+
+        .clouds .weather-title {
+            color: var(--accent-yellow);
+        }
+
+        .weather-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .weather-measurement {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Climate Zones Display */
+        .climate-zones {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-orange);
+        }
+
+        .zones-title {
+            color: var(--accent-orange);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .zones-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .zones-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .zone-card {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+
+        .zone-card.tropical {
+            border-left-color: var(--accent-red);
+        }
+
+        .zone-card.temperate {
+            border-left-color: var(--accent-green);
+        }
+
+        .zone-card.polar {
+            border-left-color: var(--primary-blue);
+        }
+
+        .zone-card.arid {
+            border-left-color: var(--accent-yellow);
+        }
+
+        .zone-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .zone-name {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .tropical .zone-name {
+            color: var(--accent-red);
+        }
+
+        .temperate .zone-name {
+            color: var(--accent-green);
+        }
+
+        .polar .zone-name {
+            color: var(--primary-blue);
+        }
+
+        .arid .zone-name {
+            color: var(--accent-yellow);
+        }
+
+        .zone-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Weather Instruments */
+        .instruments-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 992px) {
+            .instruments-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .instruments-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .instrument-card {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid var(--accent-purple);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .instrument-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .instrument-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .instrument-name {
+            font-weight: bold;
+            color: var(--accent-purple);
+            margin-bottom: 8px;
+        }
+
+        .instrument-measures {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .instrument-use {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Precipitation Types */
+        .precipitation-types {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .precipitation-title {
+            color: var(--secondary-teal);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .precipitation-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .precipitation-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .precipitation-item {
+            background: var(--dark-surface);
+            padding: 10px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 3px solid var(--secondary-teal);
+        }
+
+        .precip-icon {
+            font-size: 1.5rem;
+        }
+
+        .precip-name {
+            font-weight: bold;
+            color: var(--secondary-teal);
+        }
+
+        .precip-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Weather vs Climate */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .comparison-column {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+        }
+
+        .comparison-column.weather {
+            border-color: var(--primary-blue);
+        }
+
+        .comparison-column.climate {
+            border-color: var(--accent-orange);
+        }
+
+        .column-title {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .comparison-column.climate .column-title {
+            color: var(--accent-orange);
+        }
+
+        .comparison-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .comparison-item {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--dark-border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .comparison-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-icon {
+            font-size: 1.2rem;
+            width: 24px;
+        }
+
+        .weather .item-icon {
+            color: var(--primary-blue);
+        }
+
+        .climate .item-icon {
+            color: var(--accent-orange);
+        }
+
+        /* Interactive Weather Station */
+        .weather-station {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-green);
+        }
+
+        .station-title {
+            color: var(--accent-green);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .station-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .station-button {
+            padding: 10px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-green);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .station-button:hover {
+            background: rgba(76, 175, 80, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .station-display {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes waterFlow {
+            0% { transform: translateY(0); opacity: 0; }
+            100% { transform: translateY(20px); opacity: 1; }
+        }
+        
+        .water-flow {
+            animation: waterFlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes sunGlow {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        
+        .sun-glow {
+            animation: sunGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes cloudFloat {
+            0% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            100% { transform: translateX(-10px); }
+        }
+        
+        .cloud-float {
+            animation: cloudFloat 6s ease-in-out infinite;
+        }
+        
+        @keyframes rainAnimation {
+            0% { transform: translateY(-20px); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100px); opacity: 0; }
+        }
+        
+        .rain-animation {
+            animation: rainAnimation 2s linear infinite;
+        }
+        
+        @keyframes windBlow {
+            0% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(10px) rotate(5deg); }
+            75% { transform: translateX(-10px) rotate(-5deg); }
+            100% { transform: translateX(0) rotate(0deg); }
+        }
+        
+        .wind-blow {
+            animation: windBlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes cycleFlow {
+            0% { color: var(--accent-yellow); }
+            25% { color: var(--primary-blue); }
+            50% { color: var(--secondary-teal); }
+            75% { color: var(--accent-green); }
+            100% { color: var(--accent-yellow); }
+        }
+        
+        .cycle-flow {
+            animation: cycleFlow 8s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Cloud Background -->
+    <div class="cloud-bg" id="cloudBg">
+        <!-- Clouds will be generated by JavaScript -->
+        <!-- Rain drops will be generated by JavaScript -->
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 5 Science</h1>
+            <p class="welcome-subtitle">Explore the fascinating world of weather, climate, and the water cycle! Learn how weather is formed, understand climate patterns, and discover the continuous journey of water on Earth. From evaporation to precipitation, from sunny days to storms - become a weather expert!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">🌤️🌧️🌪️🌊</span>
+                <span class="topic-name">Weather, Climate & Water Cycle</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Weather Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 130</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0.8%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Weather fact display -->
+                <div id="weatherFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Weather Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background animation
+        function initBackground() {
+            const cloudBg = document.getElementById('cloudBg');
+            
+            // Create clouds
+            for (let i = 1; i <= 5; i++) {
+                const cloud = document.createElement('div');
+                cloud.className = `cloud cloud-${i}`;
+                cloudBg.appendChild(cloud);
+            }
+            
+            // Create rain drops
+            for (let i = 0; i < 50; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'rain-drop';
+                drop.style.left = `${Math.random() * 100}%`;
+                drop.style.animationDelay = `${Math.random() * 5}s`;
+                drop.style.animationDuration = `${0.5 + Math.random() * 1.5}s`;
+                cloudBg.appendChild(drop);
+            }
+        }
+
+        // Questions array - 130+ Grade 5 Weather, Climate & Water Cycle questions
+        const questions = [
+            // Weather Basics (1-25)
+            {
+                type: "weather_basics",
+                question: "What is weather?",
+                options: ["Daily atmospheric conditions", "Long-term patterns", "Only temperature", "Only rain"],
+                answer: "A",
+                explanation: "Weather refers to short-term atmospheric conditions (temperature, precipitation, wind, etc.) in a specific place and time."
+            },
+            {
+                type: "weather_basics",
+                question: "What are the main elements of weather?",
+                options: ["Temperature, precipitation, wind, humidity, clouds", "Only sun and rain", "Only hot and cold", "Only storms"],
+                answer: "A",
+                explanation: "Weather elements include temperature, precipitation (rain, snow), wind speed/direction, humidity, cloud cover, and atmospheric pressure."
+            },
+            {
+                type: "weather_basics",
+                question: "What is atmosphere?",
+                options: ["Layer of gases surrounding Earth", "Water on Earth", "Land surface", "Only clouds"],
+                answer: "A",
+                explanation: "Atmosphere is the layer of gases (air) surrounding Earth, held by gravity, where weather occurs."
+            },
+            {
+                type: "weather_basics",
+                question: "What causes weather changes?",
+                options: ["Sun's energy heating Earth unevenly", "Moon's gravity", "Earth's rotation only", "Ocean currents only"],
+                answer: "A",
+                explanation: "Uneven heating by the sun creates temperature differences, leading to air movement (wind), evaporation, and weather patterns."
+            },
+            {
+                type: "weather_basics",
+                question: "What is meteorology?",
+                options: ["Study of weather and atmosphere", "Study of oceans", "Study of rocks", "Study of space"],
+                answer: "A",
+                explanation: "Meteorology is the scientific study of the atmosphere, focusing on weather processes and forecasting."
+            },
+            {
+                type: "weather_basics",
+                question: "What is a weather forecast?",
+                options: ["Prediction of future weather conditions", "Record of past weather", "Current weather only", "Climate prediction"],
+                answer: "A",
+                explanation: "Weather forecast predicts future atmospheric conditions based on scientific data and models."
+            },
+            {
+                type: "weather_basics",
+                question: "Who studies and predicts weather?",
+                options: ["Meteorologists", "Geologists", "Astronomers", "Biologists"],
+                answer: "A",
+                explanation: "Meteorologists are scientists who study atmospheric phenomena and predict weather."
+            },
+            {
+                type: "weather_basics",
+                question: "What is weather station?",
+                options: ["Place with instruments measuring weather elements", "TV studio", "Radio station", "Satellite only"],
+                answer: "A",
+                explanation: "Weather stations have instruments to measure temperature, humidity, wind, pressure, and precipitation."
+            },
+            {
+                type: "weather_basics",
+                question: "What is satellite used for in weather?",
+                options: ["Take pictures of clouds/weather systems from space", "Measure ground temperature", "Create rain", "Stop storms"],
+                answer: "A",
+                explanation: "Weather satellites orbit Earth, taking images of clouds, storms, and tracking weather systems globally."
+            },
+            {
+                type: "weather_basics",
+                question: "What is radar used for in weather?",
+                options: ["Detect precipitation and storms", "Measure temperature", "Measure humidity", "Measure wind only"],
+                answer: "A",
+                explanation: "Weather radar uses radio waves to detect precipitation intensity, location, and movement of storms."
+            },
+            // Temperature (26-40)
+            {
+                type: "temperature",
+                question: "What instrument measures temperature?",
+                options: ["Thermometer", "Barometer", "Anemometer", "Hygrometer"],
+                answer: "A",
+                explanation: "Thermometer measures air temperature in degrees Celsius (°C) or Fahrenheit (°F)."
+            },
+            {
+                type: "temperature",
+                question: "What is normal room temperature?",
+                options: ["About 20-25°C (68-77°F)", "0°C", "100°C", "50°C"],
+                answer: "A",
+                explanation: "Comfortable room temperature is typically 20-25°C (68-77°F)."
+            },
+            {
+                type: "temperature",
+                question: "What unit is typically used for weather temperature?",
+                options: ["Degrees Celsius (°C)", "Kilograms", "Meters", "Joules"],
+                answer: "A",
+                explanation: "Most countries use Celsius for weather reports; some use Fahrenheit (mainly USA)."
+            },
+            {
+                type: "temperature",
+                question: "What temperature does water freeze?",
+                options: ["0°C (32°F)", "100°C", "-10°C", "10°C"],
+                answer: "A",
+                explanation: "Pure water freezes at 0°C (32°F) at sea level."
+            },
+            {
+                type: "temperature",
+                question: "What temperature does water boil?",
+                options: ["100°C (212°F)", "0°C", "50°C", "150°C"],
+                answer: "A",
+                explanation: "Pure water boils at 100°C (212°F) at sea level."
+            },
+            // Precipitation (41-60)
+            {
+                type: "precipitation",
+                question: "What is precipitation?",
+                options: ["Water falling from clouds to Earth's surface", "Water evaporating", "Water in clouds", "Water in rivers"],
+                answer: "A",
+                explanation: "Precipitation includes rain, snow, sleet, hail - any form of water falling from clouds."
+            },
+            {
+                type: "precipitation",
+                question: "What is rain?",
+                options: ["Liquid water drops falling from clouds", "Frozen water", "Water vapor", "Dew on grass"],
+                answer: "A",
+                explanation: "Rain consists of liquid water droplets that are heavy enough to fall from clouds."
+            },
+            {
+                type: "precipitation",
+                question: "What is snow?",
+                options: ["Ice crystals falling from clouds", "Liquid rain", "Frozen rain in air", "Hail"],
+                answer: "A",
+                explanation: "Snow forms when water vapor turns directly into ice crystals in clouds below freezing."
+            },
+            {
+                type: "precipitation",
+                question: "What is hail?",
+                options: ["Balls of ice falling during thunderstorms", "Rain drops", "Snow flakes", "Dew"],
+                answer: "A",
+                explanation: "Hail forms in thunderstorms when updrafts carry raindrops upward into freezing air, creating ice layers."
+            },
+            {
+                type: "precipitation",
+                question: "What is sleet?",
+                options: ["Ice pellets from rain freezing while falling", "Snow melting then refreezing", "Hail stones", "Dew"],
+                answer: "A",
+                explanation: "Sleet forms when raindrops freeze into ice pellets while falling through cold air layer."
+            },
+            {
+                type: "precipitation",
+                question: "What instrument measures rainfall?",
+                options: ["Rain gauge", "Thermometer", "Barometer", "Anemometer"],
+                answer: "A",
+                explanation: "Rain gauge collects and measures amount of rainfall in millimeters or inches."
+            },
+            // Wind (61-75)
+            {
+                type: "wind",
+                question: "What is wind?",
+                options: ["Moving air", "Still air", "Hot air only", "Cold air only"],
+                answer: "A",
+                explanation: "Wind is horizontal movement of air caused by differences in air pressure."
+            },
+            {
+                type: "wind",
+                question: "What causes wind?",
+                options: ["Uneven heating creating pressure differences", "Earth's rotation only", "Moon's gravity", "Ocean currents only"],
+                answer: "A",
+                explanation: "Sun heats Earth unevenly, creating temperature and pressure differences that make air move (wind)."
+            },
+            {
+                type: "wind",
+                question: "What instrument measures wind speed?",
+                options: ["Anemometer", "Barometer", "Thermometer", "Hygrometer"],
+                answer: "A",
+                explanation: "Anemometer has cups that spin in wind, measuring speed in km/h or mph."
+            },
+            {
+                type: "wind",
+                question: "What instrument shows wind direction?",
+                options: ["Wind vane", "Anemometer", "Barometer", "Thermometer"],
+                answer: "A",
+                explanation: "Wind vane points in direction wind is coming from (north wind comes from north)."
+            },
+            {
+                type: "wind",
+                question: "What is breeze?",
+                options: ["Gentle wind", "Strong wind", "No wind", "Storm wind"],
+                answer: "A",
+                explanation: "Breeze is a light to moderate wind; sea/land breezes are caused by temperature differences."
+            },
+            // Humidity & Clouds (76-95)
+            {
+                type: "humidity_clouds",
+                question: "What is humidity?",
+                options: ["Amount of water vapor in air", "Amount of rain", "Amount of clouds", "Temperature"],
+                answer: "A",
+                explanation: "Humidity measures how much water vapor is in the air; affects how hot/cold we feel."
+            },
+            {
+                type: "humidity_clouds",
+                question: "What instrument measures humidity?",
+                options: ["Hygrometer", "Thermometer", "Barometer", "Anemometer"],
+                answer: "A",
+                explanation: "Hygrometer measures relative humidity (percentage of moisture in air compared to maximum possible)."
+            },
+            {
+                type: "humidity_clouds",
+                question: "What are clouds?",
+                options: ["Visible collections of tiny water droplets or ice crystals", "Smoke in sky", "Pollution", "Stars"],
+                answer: "A",
+                explanation: "Clouds form when water vapor condenses into tiny droplets or ice crystals around dust particles."
+            },
+            {
+                type: "humidity_clouds",
+                question: "How do clouds form?",
+                options: ["Water vapor cools and condenses", "Water evaporates", "Rain falls up", "Wind blows water up"],
+                answer: "A",
+                explanation: "When warm, moist air rises and cools, water vapor condenses into cloud droplets around condensation nuclei."
+            },
+            {
+                type: "humidity_clouds",
+                question: "What are cumulus clouds?",
+                options: ["Fluffy, white clouds with flat bottoms", "Thin, wispy clouds", "Gray layer clouds", "Storm clouds"],
+                answer: "A",
+                explanation: "Cumulus clouds look like cotton balls; fair weather clouds, but can grow into thunderstorms."
+            },
+            {
+                type: "humidity_clouds",
+                question: "What are stratus clouds?",
+                options: ["Gray, layered clouds covering sky", "Fluffy clouds", "Wispy clouds", "Puffy clouds"],
+                answer: "A",
+                explanation: "Stratus clouds form flat, gray layers that can cover entire sky, often bringing drizzle."
+            },
+            {
+                type: "humidity_clouds",
+                question: "What are cirrus clouds?",
+                options: ["Thin, wispy high-altitude clouds", "Low gray clouds", "Puffy clouds", "Storm clouds"],
+                answer: "A",
+                explanation: "Cirrus clouds are high, thin, wispy clouds made of ice crystals; often indicate weather change."
+            },
+            // Atmospheric Pressure (96-105)
+            {
+                type: "pressure",
+                question: "What is atmospheric pressure?",
+                options: ["Weight of air pressing down on Earth", "Weight of clouds", "Temperature pressure", "Wind pressure"],
+                answer: "A",
+                explanation: "Air has weight; atmospheric pressure is force exerted by air molecules on surfaces."
+            },
+            {
+                type: "pressure",
+                question: "What instrument measures air pressure?",
+                options: ["Barometer", "Thermometer", "Anemometer", "Hygrometer"],
+                answer: "A",
+                explanation: "Barometer measures atmospheric pressure in millibars or inches of mercury."
+            },
+            {
+                type: "pressure",
+                question: "What does high pressure usually bring?",
+                options: ["Clear, calm weather", "Stormy weather", "Rainy weather", "Cloudy weather"],
+                answer: "A",
+                explanation: "High pressure areas generally bring fair, sunny weather with light winds."
+            },
+            {
+                type: "pressure",
+                question: "What does low pressure usually bring?",
+                options: ["Cloudy, rainy, stormy weather", "Clear weather", "Sunny weather", "Calm weather"],
+                answer: "A",
+                explanation: "Low pressure areas often bring clouds, precipitation, and storms as air rises and cools."
+            },
+            // Water Cycle (106-130)
+            {
+                type: "water_cycle",
+                question: "What is the water cycle?",
+                options: ["Continuous movement of water on, above, below Earth", "Only rain falling", "Only rivers flowing", "Only clouds"],
+                answer: "A",
+                explanation: "Water cycle describes how water evaporates, forms clouds, precipitates, and flows back to oceans."
+            },
+            {
+                type: "water_cycle",
+                question: "What is evaporation?",
+                options: ["Water turning to vapor from surfaces", "Vapor turning to water", "Water freezing", "Snow melting"],
+                answer: "A",
+                explanation: "Evaporation: liquid water (oceans, lakes) turns to water vapor (gas) due to sun's heat."
+            },
+            {
+                type: "water_cycle",
+                question: "What is condensation?",
+                options: ["Water vapor turning to liquid water", "Liquid turning to vapor", "Water freezing", "Ice melting"],
+                answer: "A",
+                explanation: "Condensation: water vapor cools and changes back to liquid water droplets, forming clouds."
+            },
+            {
+                type: "water_cycle",
+                question: "What is precipitation?",
+                options: ["Water falling from clouds as rain, snow, etc.", "Water evaporating", "Water in rivers", "Water in oceans"],
+                answer: "A",
+                explanation: "Precipitation occurs when cloud droplets combine and become heavy enough to fall to Earth."
+            },
+            {
+                type: "water_cycle",
+                question: "What is collection?",
+                options: ["Water gathering in oceans, lakes, rivers, ground", "Water evaporating", "Clouds forming", "Rain falling"],
+                answer: "A",
+                explanation: "Collection: precipitation collects in oceans, lakes, rivers, soil, and groundwater."
+            },
+            {
+                type: "water_cycle",
+                question: "What is transpiration?",
+                options: ["Plants releasing water vapor", "Animals drinking", "Rain falling", "Water evaporating from soil"],
+                answer: "A",
+                explanation: "Transpiration: plants absorb water through roots and release water vapor through leaves."
+            },
+            {
+                type: "water_cycle",
+                question: "What powers the water cycle?",
+                options: ["Sun's energy", "Moon's gravity", "Earth's rotation", "Wind"],
+                answer: "A",
+                explanation: "Solar energy drives evaporation and provides heat that powers the entire water cycle."
+            },
+            {
+                type: "water_cycle",
+                question: "Where is most Earth's water?",
+                options: ["Oceans (salt water)", "Rivers", "Lakes", "Clouds"],
+                answer: "A",
+                explanation: "About 97% of Earth's water is in oceans as salt water; only 3% is fresh water."
+            },
+            {
+                type: "water_cycle",
+                question: "What is groundwater?",
+                options: ["Water stored underground in soil/rock", "Water in clouds", "Water in rivers", "Water in plants"],
+                answer: "A",
+                explanation: "Groundwater is fresh water stored in spaces between soil particles and rock layers underground."
+            },
+            // Climate Basics (131-150)
+            {
+                type: "climate_basics",
+                question: "What is climate?",
+                options: ["Long-term weather patterns of an area", "Daily weather", "Only temperature", "Only precipitation"],
+                answer: "A",
+                explanation: "Climate describes average weather conditions (temperature, precipitation) over many years in a region."
+            },
+            {
+                type: "climate_basics",
+                question: "What's difference between weather and climate?",
+                options: ["Weather is short-term, climate is long-term", "Same thing", "Climate is short-term", "Weather is long-term"],
+                answer: "A",
+                explanation: "Weather: daily conditions; Climate: average conditions over 30+ years."
+            },
+            {
+                type: "climate_basics",
+                question: "What are main climate zones?",
+                options: ["Tropical, temperate, polar", "Hot, cold, wet", "Sunny, rainy, snowy", "Land, sea, air"],
+                answer: "A",
+                explanation: "Three main zones based on latitude: tropical (equator), temperate (middle), polar (poles)."
+            },
+            {
+                type: "climate_basics",
+                question: "What is tropical climate?",
+                options: ["Hot and humid near equator", "Cold near poles", "Mild with seasons", "Dry desert"],
+                answer: "A",
+                explanation: "Tropical zones near equator have warm temperatures year-round with high rainfall."
+            },
+            {
+                type: "climate_basics",
+                question: "What is temperate climate?",
+                options: ["Moderate with four seasons", "Always hot", "Always cold", "No seasons"],
+                answer: "A",
+                explanation: "Temperate zones have distinct warm summers and cool winters with moderate precipitation."
+            },
+            {
+                type: "climate_basics",
+                question: "What is polar climate?",
+                options: ["Cold year-round near poles", "Hot near equator", "Mild with rain", "Dry desert"],
+                answer: "A",
+                explanation: "Polar regions have freezing temperatures year-round with ice and snow cover."
+            },
+            {
+                type: "climate_basics",
+                question: "What affects climate?",
+                options: ["Latitude, altitude, oceans, mountains", "Only sun", "Only wind", "Only rain"],
+                answer: "A",
+                explanation: "Climate factors: latitude (distance from equator), altitude (height), ocean currents, mountain ranges."
+            },
+            {
+                type: "climate_basics",
+                question: "What is microclimate?",
+                options: ["Small area with different climate", "Global climate", "Ocean climate", "Space climate"],
+                answer: "A",
+                explanation: "Microclimate: local climate differing from surrounding area (valley, city, forest edge)."
+            },
+            // Weather Phenomena (151-170)
+            {
+                type: "phenomena",
+                question: "What is thunderstorm?",
+                options: ["Storm with lightning, thunder, heavy rain", "Gentle rain", "Snow storm", "Fog"],
+                answer: "A",
+                explanation: "Thunderstorms have cumulonimbus clouds, lightning, thunder, heavy rain, sometimes hail."
+            },
+            {
+                type: "phenomena",
+                question: "What causes lightning?",
+                options: ["Electrical discharge between clouds or cloud-ground", "Rain falling", "Wind blowing", "Sun heating"],
+                answer: "A",
+                explanation: "Lightning: electrical spark caused by charge separation in storm clouds."
+            },
+            {
+                type: "phenomena",
+                question: "What causes thunder?",
+                options: ["Sound from lightning heating air rapidly", "Rain hitting ground", "Wind blowing", "Clouds colliding"],
+                answer: "A",
+                explanation: "Thunder: sound produced when lightning rapidly heats air, causing explosive expansion."
+            },
+            {
+                type: "phenomena",
+                question: "What is tornado?",
+                options: ["Violently rotating column of air touching ground", "Gentle breeze", "Rain shower", "Snow storm"],
+                answer: "A",
+                explanation: "Tornado: funnel-shaped, violently rotating air extending from thunderstorm to ground."
+            },
+            {
+                type: "phenomena",
+                question: "What is hurricane/typhoon?",
+                options: ["Large rotating storm over warm ocean", "Small tornado", "Gentle rain", "Snow storm"],
+                answer: "A",
+                explanation: "Hurricane/typhoon: giant rotating storm with strong winds, heavy rain forming over warm oceans."
+            },
+            {
+                type: "phenomena",
+                question: "What is fog?",
+                options: ["Cloud at ground level", "High cloud", "Rain", "Snow"],
+                answer: "A",
+                explanation: "Fog forms when air near ground cools enough for water vapor to condense into tiny droplets."
+            },
+            {
+                type: "phenomena",
+                question: "What is drought?",
+                options: ["Long period with little/no rainfall", "Heavy rain", "Flood", "Snow storm"],
+                answer: "A",
+                explanation: "Drought: extended period of abnormally low rainfall, causing water shortages."
+            },
+            {
+                type: "phenomena",
+                question: "What is flood?",
+                options: ["Overflow of water onto normally dry land", "No water", "Drought", "Gentle rain"],
+                answer: "A",
+                explanation: "Flood occurs when water overflows river banks or accumulates faster than it can drain."
+            },
+            // Seasons (171-180)
+            {
+                type: "seasons",
+                question: "What causes seasons?",
+                options: ["Earth's tilt and revolution around sun", "Earth's rotation only", "Moon's phases", "Cloud cover"],
+                answer: "A",
+                explanation: "Seasons occur because Earth's axis is tilted 23.5° as it orbits the sun, changing sunlight angle."
+            },
+            {
+                type: "seasons",
+                question: "What are the four seasons?",
+                options: ["Spring, summer, autumn, winter", "Hot, cold, wet, dry", "Sunny, rainy, snowy, windy", "Day, night, dusk, dawn"],
+                answer: "A",
+                explanation: "In temperate zones: spring (warming), summer (hot), autumn (cooling), winter (cold)."
+            },
+            // Weather Forecasting (181-190)
+            {
+                type: "forecasting",
+                question: "What is weather map?",
+                options: ["Map showing weather conditions and systems", "Road map", "Political map", "Star map"],
+                answer: "A",
+                explanation: "Weather maps show fronts, pressure systems, temperature, precipitation using symbols and colors."
+            },
+            {
+                type: "forecasting",
+                question: "What is cold front?",
+                options: ["Boundary where cold air replaces warm air", "Warm air replacing cold", "No change", "Stationary air"],
+                answer: "A",
+                explanation: "Cold front: leading edge of cooler air mass replacing warmer air, often bringing storms then clearing."
+            },
+            {
+                type: "forecasting",
+                question: "What is warm front?",
+                options: ["Boundary where warm air replaces cold air", "Cold air replacing warm", "No change", "Stationary air"],
+                answer: "A",
+                explanation: "Warm front: leading edge of warmer air replacing cooler air, often bringing steady rain."
+            },
+            // Conservation & Impact (191-200)
+            {
+                type: "conservation",
+                question: "Why is weather forecasting important?",
+                options: ["Helps plan activities, warn of dangerous weather", "Only for farmers", "Only for TV", "Not important"],
+                answer: "A",
+                explanation: "Forecasting helps agriculture, transportation, emergency planning, and warns of storms/floods."
+            },
+            {
+                type: "conservation",
+                question: "How does weather affect daily life?",
+                options: ["Influences clothing, activities, transportation", "No effect", "Only affects farmers", "Only affects pilots"],
+                answer: "A",
+                explanation: "Weather determines what we wear, outdoor activities, travel plans, and energy use."
+            },
+            // Advanced Concepts (201-210)
+            {
+                type: "advanced",
+                question: "What is climate change?",
+                options: ["Long-term change in Earth's climate patterns", "Daily weather change", "Season change", "Cloud formation"],
+                answer: "A",
+                explanation: "Climate change refers to significant, long-term changes in temperature, precipitation, or wind patterns."
+            },
+            {
+                type: "advanced",
+                question: "What is greenhouse effect?",
+                options: ["Trapping of heat by atmospheric gases", "Plant growth", "Rain formation", "Wind creation"],
+                answer: "A",
+                explanation: "Greenhouse effect: gases like CO2 trap infrared radiation, warming Earth's surface (natural process)."
+            },
+            {
+                type: "advanced",
+                question: "What is water conservation?",
+                options: ["Careful use and protection of water resources", "Using more water", "Wasting water", "Creating water"],
+                answer: "A",
+                explanation: "Water conservation means using water efficiently to ensure availability for future."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent weather knowledge!",
+            "Fantastic understanding of the water cycle!",
+            "Great job! You're a meteorology expert!",
+            "Amazing! Your climate knowledge is perfect!",
+            "Well done! Perfect weather identification!",
+            "You're a weather and climate champion!",
+            "Perfect! You understand atmospheric science!",
+            "Outstanding meteorological knowledge!",
+            "Brilliant! You think like a weather scientist!",
+            "You're forecasting greatness! Excellent insight!"
+        ];
+
+        // Water cycle stages
+        const waterCycleStages = {
+            evaporation: {
+                name: "Evaporation",
+                icon: "☀️",
+                color: "var(--accent-yellow)",
+                description: "Sun heats water, turning it into vapor",
+                examples: ["Oceans", "Lakes", "Rivers", "Soil"],
+                process: "Liquid → Water vapor",
+                percentage: "90% from oceans"
+            },
+            condensation: {
+                name: "Condensation",
+                icon: "☁️",
+                color: "var(--primary-blue)",
+                description: "Water vapor cools and forms clouds",
+                examples: ["Cloud formation", "Dew", "Fog"],
+                process: "Water vapor → Liquid droplets",
+                cloudTypes: ["Cumulus", "Stratus", "Cirrus"]
+            },
+            precipitation: {
+                name: "Precipitation",
+                icon: "🌧️",
+                color: "var(--secondary-teal)",
+                description: "Water falls from clouds to Earth",
+                examples: ["Rain", "Snow", "Sleet", "Hail"],
+                process: "Cloud droplets combine and fall",
+                measurement: "Rain gauge (mm/inches)"
+            },
+            collection: {
+                name: "Collection",
+                icon: "🌊",
+                color: "var(--accent-green)",
+                description: "Water gathers in bodies of water",
+                examples: ["Oceans", "Lakes", "Rivers", "Groundwater"],
+                process: "Runoff and infiltration",
+                storage: "97% oceans, 3% freshwater"
+            }
+        };
+
+        // Weather elements
+        const weatherElements = [
+            {
+                name: "Temperature",
+                icon: "🌡️",
+                color: "var(--accent-red)",
+                description: "How hot or cold the air is",
+                instrument: "Thermometer",
+                units: "°C or °F",
+                facts: ["Affects what we wear", "Changes with seasons", "Higher during day"]
+            },
+            {
+                name: "Humidity",
+                icon: "💧",
+                color: "var(--primary-blue)",
+                description: "Amount of water vapor in air",
+                instrument: "Hygrometer",
+                units: "Percentage (%)",
+                facts: ["Affects comfort level", "High = sticky feeling", "Low = dry skin"]
+            },
+            {
+                name: "Air Pressure",
+                icon: "⬇️",
+                color: "var(--accent-purple)",
+                description: "Weight of air pushing down",
+                instrument: "Barometer",
+                units: "Millibars (mb)",
+                facts: ["High = clear weather", "Low = stormy weather", "Changes with altitude"]
+            },
+            {
+                name: "Wind",
+                icon: "💨",
+                color: "var(--accent-green)",
+                description: "Moving air from high to low pressure",
+                instrument: "Anemometer & Wind vane",
+                units: "km/h or mph",
+                facts: ["Speed and direction", "Creates weather patterns", "Affects temperature"]
+            },
+            {
+                name: "Precipitation",
+                icon: "☔",
+                color: "var(--secondary-teal)",
+                description: "Water falling from clouds",
+                instrument: "Rain gauge",
+                units: "mm or inches",
+                facts: ["Rain, snow, sleet, hail", "Essential for life", "Varies by region"]
+            },
+            {
+                name: "Cloud Cover",
+                icon: "☁️",
+                color: "var(--accent-yellow)",
+                description: "Amount of sky covered by clouds",
+                instrument: "Observation/satellite",
+                units: "Percentage or oktas",
+                facts: ["Affects temperature", "Blocks sunlight", "Indicates weather"]
+            }
+        ];
+
+        // Climate zones
+        const climateZones = [
+            {
+                name: "Tropical",
+                icon: "🌴",
+                color: "var(--accent-red)",
+                location: "Near equator (0-23.5° latitude)",
+                temperature: "Hot year-round (20-30°C)",
+                precipitation: "High rainfall, often daily",
+                characteristics: ["Rainforests", "Monsoons", "High humidity", "Little seasonal change"],
+                examples: ["Amazon", "Congo", "Indonesia"]
+            },
+            {
+                name: "Temperate",
+                icon: "🍂",
+                color: "var(--accent-green)",
+                location: "Middle latitudes (23.5-66.5°)",
+                temperature: "Moderate with four seasons",
+                precipitation: "Moderate, varies by season",
+                characteristics: ["Deciduous forests", "Grasslands", "Distinct seasons", "Agriculture suitable"],
+                examples: ["Europe", "USA", "China", "Australia SE"]
+            },
+            {
+                name: "Polar",
+                icon: "🧊",
+                color: "var(--primary-blue)",
+                location: "High latitudes (66.5-90°)",
+                temperature: "Cold year-round (below 0°C)",
+                precipitation: "Low, mostly snow",
+                characteristics: ["Tundra/ice caps", "Permafrost", "Midnight sun/polar night", "Sparse vegetation"],
+                examples: ["Arctic", "Antarctica", "Greenland", "Northern Canada"]
+            },
+            {
+                name: "Arid/Desert",
+                icon: "🏜️",
+                color: "var(--accent-yellow)",
+                location: "Various latitudes",
+                temperature: "Hot days, cold nights",
+                precipitation: "Very low (<250mm/year)",
+                characteristics: ["Little vegetation", "Large temperature swings", "Sand dunes", "Adapted wildlife"],
+                examples: ["Sahara", "Arabian", "Gobi", "Australian Outback"]
+            }
+        ];
+
+        // Weather instruments
+        const weatherInstruments = [
+            {
+                name: "Thermometer",
+                icon: "🌡️",
+                measures: "Temperature",
+                how: "Liquid expands/contracts with heat",
+                units: "°C or °F"
+            },
+            {
+                name: "Barometer",
+                icon: "📉",
+                measures: "Air pressure",
+                how: "Measures weight of air column",
+                units: "Millibars or inches Hg"
+            },
+            {
+                name: "Anemometer",
+                icon: "🌀",
+                measures: "Wind speed",
+                how: "Cups rotate faster with stronger wind",
+                units: "km/h or mph"
+            },
+            {
+                name: "Wind Vane",
+                icon: "↗️",
+                measures: "Wind direction",
+                how: "Points toward wind source",
+                units: "Cardinal directions"
+            },
+            {
+                name: "Hygrometer",
+                icon: "💧",
+                measures: "Humidity",
+                how: "Measures water vapor in air",
+                units: "Percentage (%)"
+            },
+            {
+                name: "Rain Gauge",
+                icon: "📏",
+                measures: "Rainfall amount",
+                how: "Collects and measures rain",
+                units: "mm or inches"
+            },
+            {
+                name: "Weather Satellite",
+                icon: "🛰️",
+                measures: "Cloud cover, storms",
+                how: "Takes pictures from space",
+                units: "Images/data"
+            },
+            {
+                name: "Weather Radar",
+                icon: "📡",
+                measures: "Precipitation location/intensity",
+                how: "Radio waves detect rain/snow",
+                units: "Reflectivity (dBZ)"
+            }
+        ];
+
+        // Precipitation types
+        const precipitationTypes = [
+            {name: "Rain", icon: "🌧️", description: "Liquid water drops >0.5mm"},
+            {name: "Drizzle", icon: "🌦️", description: "Fine, misty rain drops <0.5mm"},
+            {name: "Snow", icon: "❄️", description: "Ice crystals forming snowflakes"},
+            {name: "Sleet", icon: "🌨️", description: "Raindrops freezing while falling"},
+            {name: "Hail", icon: "🧊", description: "Layered ice balls from thunderstorms"},
+            {name: "Freezing Rain", icon: "🌧️❄️", description: "Rain freezing on contact with cold surfaces"}
+        ];
+
+        // Weather vs Climate comparison
+        const weatherClimateComparison = {
+            weather: {
+                name: "Weather",
+                timeFrame: "Short-term (hours to days)",
+                predictability: "Changes rapidly, hard to predict exactly",
+                scope: "Local/regional",
+                examples: ["Today's temperature", "This week's forecast", "Current storm"],
+                characteristics: ["Daily conditions", "Immediate impact", "Variable"]
+            },
+            climate: {
+                name: "Climate",
+                timeFrame: "Long-term (30+ years average)",
+                predictability: "Patterns stable over time",
+                scope: "Regional/global",
+                examples: ["Desert climate", "Tropical rainforest", "Polar regions"],
+                characteristics: ["Average patterns", "Determines ecosystems", "Changes slowly"]
+            }
+        };
+
+        // Interesting weather facts
+        const weatherFacts = [
+            "The water you drink today could have been dinosaur sweat millions of years ago!",
+            "Lightning strikes Earth about 100 times every second - that's 8.6 million times a day!",
+            "The highest temperature ever recorded was 56.7°C (134°F) in Death Valley, California!",
+            "The lowest temperature ever recorded was -89.2°C (-128.6°F) in Antarctica!",
+            "A single cumulonimbus cloud can weigh as much as 1 million pounds - that's like 100 elephants!",
+            "Raindrops are not tear-shaped - they're actually shaped like hamburger buns!",
+            "The water cycle has been working for over 4 billion years - since Earth had liquid water!",
+            "Wind doesn't make a sound until it blows against something - that's why we hear it!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const weatherFact = document.getElementById('weatherFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initBackground();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade5Weather');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade5Weather', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade5Weather_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade5Weather_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a weather expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent meteorological knowledge!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep learning to become a climate master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review weather concepts and try again!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Weather science helps us understand our planet!";
+            }
+        }
+
+        // Create weather fact display
+        function createWeatherFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'weather-fact';
+            
+            factDiv.innerHTML = `<strong>Amazing Weather Fact:</strong> ${weatherFacts[Math.floor(Math.random() * weatherFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "weather_basics": "🌤️",
+                "temperature": "🌡️",
+                "precipitation": "🌧️",
+                "wind": "💨",
+                "humidity_clouds": "☁️",
+                "pressure": "⬇️",
+                "water_cycle": "🌊",
+                "climate_basics": "🗺️",
+                "phenomena": "⚡",
+                "seasons": "🍂",
+                "forecasting": "📡",
+                "conservation": "💧",
+                "advanced": "🧠"
+            };
+            
+            let conceptName = "Weather Basics";
+            let conceptIcon = "🌤️";
+            
+            if (question.type.includes("weather_basics")) {
+                conceptName = "Weather Basics";
+                conceptIcon = conceptIcons.weather_basics;
+            } else if (question.type.includes("temperature")) {
+                conceptName = "Temperature";
+                conceptIcon = conceptIcons.temperature;
+            } else if (question.type.includes("precipitation")) {
+                conceptName = "Precipitation";
+                conceptIcon = conceptIcons.precipitation;
+            } else if (question.type.includes("wind")) {
+                conceptName = "Wind";
+                conceptIcon = conceptIcons.wind;
+            } else if (question.type.includes("humidity_clouds")) {
+                conceptName = "Humidity & Clouds";
+                conceptIcon = conceptIcons.humidity_clouds;
+            } else if (question.type.includes("pressure")) {
+                conceptName = "Atmospheric Pressure";
+                conceptIcon = conceptIcons.pressure;
+            } else if (question.type.includes("water_cycle")) {
+                conceptName = "Water Cycle";
+                conceptIcon = conceptIcons.water_cycle;
+            } else if (question.type.includes("climate_basics")) {
+                conceptName = "Climate Basics";
+                conceptIcon = conceptIcons.climate_basics;
+            } else if (question.type.includes("phenomena")) {
+                conceptName = "Weather Phenomena";
+                conceptIcon = conceptIcons.phenomena;
+            } else if (question.type.includes("seasons")) {
+                conceptName = "Seasons";
+                conceptIcon = conceptIcons.seasons;
+            } else if (question.type.includes("forecasting")) {
+                conceptName = "Weather Forecasting";
+                conceptIcon = conceptIcons.forecasting;
+            } else if (question.type.includes("conservation")) {
+                conceptName = "Conservation & Impact";
+                conceptIcon = conceptIcons.conservation;
+            } else if (question.type.includes("advanced")) {
+                conceptName = "Advanced Concepts";
+                conceptIcon = conceptIcons.advanced;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("weather_basics")) {
+                label.textContent = "Understanding weather, atmosphere, and meteorology";
+            } else if (question.type.includes("temperature")) {
+                label.textContent = "Measuring and understanding air temperature";
+            } else if (question.type.includes("precipitation")) {
+                label.textContent = "Types and measurement of precipitation";
+            } else if (question.type.includes("wind")) {
+                label.textContent = "Wind formation, measurement, and effects";
+            } else if (question.type.includes("humidity_clouds")) {
+                label.textContent = "Humidity measurement and cloud formation/types";
+            } else if (question.type.includes("pressure")) {
+                label.textContent = "Atmospheric pressure and weather relationships";
+            } else if (question.type.includes("water_cycle")) {
+                label.textContent = "The continuous movement of Earth's water";
+            } else if (question.type.includes("climate_basics")) {
+                label.textContent = "Climate zones, patterns, and factors";
+            } else if (question.type.includes("phenomena")) {
+                label.textContent = "Thunderstorms, tornadoes, hurricanes, and other phenomena";
+            } else if (question.type.includes("seasons")) {
+                label.textContent = "Causes and characteristics of seasons";
+            } else if (question.type.includes("forecasting")) {
+                label.textContent = "Weather prediction methods and tools";
+            } else if (question.type.includes("conservation")) {
+                label.textContent = "Weather impacts and water conservation";
+            } else if (question.type.includes("advanced")) {
+                label.textContent = "Deeper understanding of weather and climate concepts";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create weather visualization
+        function createWeatherVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            // Randomly select a water cycle stage for emphasis
+            const cycleStages = Object.keys(waterCycleStages);
+            const selectedStage = cycleStages[Math.floor(Math.random() * cycleStages.length)];
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-blue);">Weather, Climate & Water Cycle</h3>
+                
+                <div class="water-cycle">
+                    <div class="cycle-title cycle-flow">The Water Cycle - Earth's Recycling System</div>
+                    ${Object.entries(waterCycleStages).map(([key, stage], index) => `
+                        <div class="cycle-stage ${key} water-flow" style="animation-delay: ${index * 0.5}s">
+                            <div class="stage-icon">${stage.icon}</div>
+                            <div class="stage-title">${stage.name}</div>
+                            <div class="stage-description">${stage.description}</div>
+                        </div>
+                    `).join('')}
+                    <div class="cycle-arrow" style="top: 50px; left: 40%; transform: rotate(45deg);">↘️</div>
+                    <div class="cycle-arrow" style="top: 50px; right: 40%; transform: rotate(-45deg);">↙️</div>
+                    <div class="cycle-arrow" style="bottom: 50px; left: calc(50% - 20px);">↑</div>
+                </div>
+                
+                <div class="weather-elements">
+                    ${weatherElements.map(element => `
+                        <div class="weather-card ${element.name.toLowerCase()} wind-blow" style="animation-delay: ${Math.random() * 2}s">
+                            <div class="weather-icon">${element.icon}</div>
+                            <div class="weather-title">${element.name}</div>
+                            <div class="weather-description">${element.description}</div>
+                            <div class="weather-measurement">
+                                <strong>Instrument:</strong> ${element.instrument}<br>
+                                <strong>Units:</strong> ${element.units}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="climate-zones">
+                    <div class="zones-title">Major Climate Zones of Earth</div>
+                    <div class="zones-grid">
+                        ${climateZones.map(zone => `
+                            <div class="zone-card ${zone.name.toLowerCase()} cloud-float" style="animation-delay: ${Math.random() * 2}s">
+                                <div class="zone-icon">${zone.icon}</div>
+                                <div class="zone-name">${zone.name} Zone</div>
+                                <div class="zone-description">
+                                    <strong>Location:</strong> ${zone.location}<br>
+                                    <strong>Temperature:</strong> ${zone.temperature}<br>
+                                    <strong>Precipitation:</strong> ${zone.precipitation}<br>
+                                    <strong>Examples:</strong> ${zone.examples.slice(0, 2).join(', ')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="comparison-container">
+                    <div class="comparison-column weather">
+                        <div class="column-title">Weather</div>
+                        <ul class="comparison-list">
+                            <li class="comparison-item">
+                                <span class="item-icon">⏱️</span>
+                                <span><strong>Time Frame:</strong> ${weatherClimateComparison.weather.timeFrame}</span>
+                            </li>
+                            <li class="comparison-item">
+                                <span class="item-icon">🎯</span>
+                                <span><strong>Predictability:</strong> ${weatherClimateComparison.weather.predictability}</span>
+                            </li>
+                            <li class="comparison-item">
+                                <span class="item-icon">📍</span>
+                                <span><strong>Scope:</strong> ${weatherClimateComparison.weather.scope}</span>
+                            </li>
+                            <li class="comparison-item">
+                                <span class="item-icon">📝</span>
+                                <span><strong>Examples:</strong> ${weatherClimateComparison.weather.examples.join(', ')}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-column climate">
+                        <div class="column-title">Climate</div>
+                        <ul class="comparison-list">
+                            <li class="comparison-item">
+                                <span class="item-icon">📅</span>
+                                <span><strong>Time Frame:</strong> ${weatherClimateComparison.climate.timeFrame}</span>
+                            </li>
+                            <li class="comparison-item">
+                                <span class="item-icon">📊</span>
+                                <span><strong>Predictability:</strong> ${weatherClimateComparison.climate.predictability}</span>
+                            </li>
+                            <li class="comparison-item">
+                                <span class="item-icon">🌍</span>
+                                <span><strong>Scope:</strong> ${weatherClimateComparison.climate.scope}</span>
+                            </li>
+                            <li class="comparison-item">
+                                <span class="item-icon">📝</span>
+                                <span><strong>Examples:</strong> ${weatherClimateComparison.climate.examples.join(', ')}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="instruments-grid">
+                    <div style="grid-column: 1 / -1; text-align: center; margin-bottom: 10px; color: var(--accent-purple); font-weight: bold; font-size: 1.2rem;">
+                        Weather Instruments
+                    </div>
+                    ${weatherInstruments.map(instrument => `
+                        <div class="instrument-card sun-glow" style="animation-delay: ${Math.random() * 2}s">
+                            <div class="instrument-icon">${instrument.icon}</div>
+                            <div class="instrument-name">${instrument.name}</div>
+                            <div class="instrument-measures">
+                                <strong>Measures:</strong> ${instrument.measures}<br>
+                                <strong>How:</strong> ${instrument.how}
+                            </div>
+                            <div class="instrument-use">
+                                Units: ${instrument.units}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="precipitation-types">
+                    <div class="precipitation-title">Types of Precipitation</div>
+                    <div class="precipitation-list">
+                        ${precipitationTypes.map(precip => `
+                            <div class="precipitation-item rain-animation" style="animation-delay: ${Math.random() * 2}s">
+                                <div class="precip-icon">${precip.icon}</div>
+                                <div>
+                                    <div class="precip-name">${precip.name}</div>
+                                    <div class="precip-desc">${precip.description}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="weather-station">
+                    <div class="station-title">Interactive Weather Station</div>
+                    <div class="station-controls">
+                        <div class="station-button" onclick="showWeatherElement('temperature')">Temperature</div>
+                        <div class="station-button" onclick="showWeatherElement('wind')">Wind</div>
+                        <div class="station-button" onclick="showWeatherElement('precipitation')">Precipitation</div>
+                        <div class="station-button" onclick="showWeatherElement('clouds')">Cloud Types</div>
+                    </div>
+                    <div class="station-display" id="stationDisplay">
+                        Click buttons above to explore weather elements
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--accent-orange);">
+                    <div style="color: var(--accent-orange); font-weight: bold; margin-bottom: 10px;">Quick Review Questions:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. What are the four stages of the water cycle?<br>
+                        2. What's the difference between weather and climate?<br>
+                        3. Name three weather instruments and what they measure.<br>
+                        4. What causes seasons on Earth?
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--accent-green);">
+                    <div style="color: var(--accent-green); font-weight: bold; margin-bottom: 10px; text-align: center;">Water Conservation Tips</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div>💧 Turn off tap while brushing teeth</div>
+                        <div>🛁 Take shorter showers</div>
+                        <div>🚿 Fix leaky faucets promptly</div>
+                        <div>🌱 Water plants in early morning</div>
+                        <div>🚗 Wash car with bucket, not hose</div>
+                        <div>🔄 Reuse water when possible</div>
+                    </div>
+                </div>
+            `;
+            
+            return vizDiv;
+        }
+
+        // Global function for interactive weather station
+        window.showWeatherElement = function(element) {
+            const stationDisplay = document.getElementById('stationDisplay');
+            if (!stationDisplay) return;
+            
+            let content = "";
+            
+            switch(element) {
+                case 'temperature':
+                    content = `
+                        <div style="text-align: center; width: 100%;">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">🌡️</div>
+                            <div style="font-weight: bold; color: var(--accent-red); margin-bottom: 10px; font-size: 1.5rem;">Temperature</div>
+                            <div style="margin-bottom: 15px;">Measure of how hot or cold the air is</div>
+                            <div style="text-align: left; background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                                <strong>Instrument:</strong> Thermometer<br>
+                                <strong>Units:</strong> °C (Celsius) or °F (Fahrenheit)<br>
+                                <strong>Normal Range:</strong> -50°C to 50°C (-58°F to 122°F)<br>
+                                <strong>Records:</strong> Highest: 56.7°C | Lowest: -89.2°C
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'wind':
+                    content = `
+                        <div style="text-align: center; width: 100%;">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">💨</div>
+                            <div style="font-weight: bold; color: var(--accent-green); margin-bottom: 10px; font-size: 1.5rem;">Wind</div>
+                            <div style="margin-bottom: 15px;">Moving air from high to low pressure areas</div>
+                            <div style="text-align: left; background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                                <strong>Speed Instrument:</strong> Anemometer<br>
+                                <strong>Direction Instrument:</strong> Wind vane<br>
+                                <strong>Units:</strong> km/h or mph (speed)<br>
+                                <strong>Beaufort Scale:</strong> 0 (calm) to 12 (hurricane)<br>
+                                <strong>Causes:</strong> Uneven heating of Earth's surface
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'precipitation':
+                    content = `
+                        <div style="text-align: center; width: 100%;">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">🌧️</div>
+                            <div style="font-weight: bold; color: var(--secondary-teal); margin-bottom: 10px; font-size: 1.5rem;">Precipitation</div>
+                            <div style="margin-bottom: 15px;">Water falling from clouds to Earth's surface</div>
+                            <div style="text-align: left; background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                                <strong>Types:</strong> Rain, snow, sleet, hail, freezing rain<br>
+                                <strong>Measurement:</strong> Rain gauge (mm or inches)<br>
+                                <strong>Formation:</strong> Cloud droplets combine and fall<br>
+                                <strong>World Record:</strong> 1,825 cm/year in Cherrapunji, India<br>
+                                <strong>Importance:</strong> Essential for all life on Earth
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'clouds':
+                    content = `
+                        <div style="text-align: center; width: 100%;">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">☁️</div>
+                            <div style="font-weight: bold; color: var(--accent-yellow); margin-bottom: 10px; font-size: 1.5rem;">Cloud Types</div>
+                            <div style="margin-bottom: 15px;">Visible collections of water droplets or ice crystals</div>
+                            <div style="text-align: left; background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                                <strong>Cumulus:</strong> Fluffy, fair weather clouds<br>
+                                <strong>Stratus:</strong> Gray layers, often bring drizzle<br>
+                                <strong>Cirrus:</strong> Wispy high clouds, ice crystals<br>
+                                <strong>Cumulonimbus:</strong> Towering storm clouds<br>
+                                <strong>Altitude:</strong> High (cirrus), Middle (alto-), Low (stratus)<br>
+                                <strong>Formation:</strong> Water vapor condenses on dust particles
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            stationDisplay.innerHTML = content;
+        };
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            weatherFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            weatherFact.appendChild(createWeatherFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createWeatherVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

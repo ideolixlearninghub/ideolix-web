@@ -1,0 +1,2865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Science - Heat & Temperature | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Heat/Temperature Theme */
+        :root {
+            --primary-red: #F44336;
+            --secondary-orange: #FF9800;
+            --accent-yellow: #FFEB3B;
+            --accent-blue: #2196F3;
+            --accent-green: #4CAF50;
+            --accent-purple: #9C27B0;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(244, 67, 54, 0.3);
+            --hot-glow: 0 0 20px rgba(244, 67, 54, 0.5);
+            --cold-glow: 0 0 20px rgba(33, 150, 243, 0.5);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-red), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(244, 67, 54, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-red);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-red);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-red);
+            color: white;
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #D32F2F;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(244, 67, 54, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #F57C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-red);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-red), var(--secondary-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .science-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-yellow);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-red), var(--secondary-orange));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-red);
+            background: rgba(244, 67, 54, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: var(--primary-red);
+            color: var(--primary-red);
+        }
+
+        .option.incorrect {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-orange);
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-red);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid var(--primary-red);
+        }
+
+        .feedback-incorrect {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 5px solid var(--accent-blue);
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-red);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: var(--accent-blue);
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-red);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: var(--accent-blue);
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+        }
+
+        /* Temperature Scale Display */
+        .temperature-scale {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .scale-title {
+            color: var(--primary-red);
+            margin-bottom: 15px;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .scale-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 200px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .scale-bar {
+            width: 30px;
+            background: linear-gradient(to top, var(--accent-blue), var(--accent-yellow), var(--primary-red));
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .scale-mark {
+            position: absolute;
+            left: 35px;
+            width: calc(100% - 40px);
+            border-bottom: 1px solid var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+
+        .scale-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            transform: translateY(10px);
+        }
+
+        /* Heat Transfer Display */
+        .transfer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .transfer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .transfer-card {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .transfer-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .transfer-card.conduction {
+            border-color: var(--accent-yellow);
+        }
+
+        .transfer-card.convection {
+            border-color: var(--primary-red);
+        }
+
+        .transfer-card.radiation {
+            border-color: var(--accent-orange);
+        }
+
+        .transfer-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .transfer-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .conduction .transfer-title {
+            color: var(--accent-yellow);
+        }
+
+        .convection .transfer-title {
+            color: var(--primary-red);
+        }
+
+        .radiation .transfer-title {
+            color: var(--accent-orange);
+        }
+
+        .transfer-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .transfer-examples {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Thermal Expansion Display */
+        .expansion-display {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-green);
+        }
+
+        .expansion-title {
+            color: var(--accent-green);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .expansion-demo {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px 0;
+            height: 100px;
+        }
+
+        .expansion-item {
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .expansion-item.cold {
+            transform: scale(0.9);
+        }
+
+        .expansion-item.hot {
+            transform: scale(1.1);
+        }
+
+        .expansion-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .expansion-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .cold .expansion-label {
+            color: var(--accent-blue);
+        }
+
+        .hot .expansion-label {
+            color: var(--primary-red);
+        }
+
+        /* Insulators & Conductors */
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .material-column {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+        }
+
+        .material-column.conductors {
+            border-color: var(--accent-yellow);
+        }
+
+        .material-column.insulators {
+            border-color: var(--accent-blue);
+        }
+
+        .column-title {
+            color: var(--accent-yellow);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .material-column.insulators .column-title {
+            color: var(--accent-blue);
+        }
+
+        .material-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .material-item {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--dark-border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .material-item:last-child {
+            border-bottom: none;
+        }
+
+        .material-icon {
+            font-size: 1.2rem;
+        }
+
+        .conductors .material-icon {
+            color: var(--accent-yellow);
+        }
+
+        .insulators .material-icon {
+            color: var(--accent-blue);
+        }
+
+        /* Thermometer Display */
+        .thermometer-demo {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .thermometer-title {
+            color: var(--accent-purple);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .thermometer {
+            width: 30px;
+            height: 150px;
+            background: var(--dark-surface);
+            border-radius: 15px;
+            margin: 0 auto 20px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--dark-border);
+        }
+
+        .mercury {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, var(--accent-blue), var(--accent-yellow), var(--primary-red));
+            border-radius: 13px 13px 0 0;
+            transition: height 1s ease;
+        }
+
+        .temperature-readings {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .reading {
+            text-align: center;
+        }
+
+        .reading-value {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .cold .reading-value {
+            color: var(--accent-blue);
+        }
+
+        .normal .reading-value {
+            color: var(--accent-green);
+        }
+
+        .hot .reading-value {
+            color: var(--primary-red);
+        }
+
+        .reading-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Everyday Examples */
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 992px) {
+            .examples-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .example-card {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .example-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .example-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .example-title {
+            font-weight: bold;
+            color: var(--primary-red);
+            margin-bottom: 8px;
+        }
+
+        .example-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .example-heat-type {
+            padding: 3px 8px;
+            background: var(--dark-surface);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            display: inline-block;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: var(--dark-surface);
+            padding: 12px;
+            text-align: left;
+            color: var(--primary-red);
+            border-bottom: 2px solid var(--primary-red);
+        }
+
+        .comparison-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(244, 67, 54, 0.05);
+        }
+
+        /* Interactive Lab */
+        .interactive-lab {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .lab-title {
+            color: var(--accent-purple);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .lab-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .lab-button {
+            padding: 10px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-purple);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lab-button:hover {
+            background: rgba(156, 39, 176, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .lab-display {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-red), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-red), var(--secondary-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-red);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes heatWave {
+            0% { transform: translateX(-10px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        
+        .heat-wave {
+            animation: heatWave 0.8s ease forwards;
+        }
+        
+        @keyframes temperatureRise {
+            0% { color: var(--accent-blue); }
+            50% { color: var(--accent-yellow); }
+            100% { color: var(--primary-red); }
+        }
+        
+        .temperature-rise {
+            animation: temperatureRise 3s ease-in-out infinite;
+        }
+        
+        @keyframes hotGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.4); }
+            50% { box-shadow: 0 0 20px 10px rgba(244, 67, 54, 0.1); }
+        }
+        
+        .hot-glow {
+            animation: hotGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes coldGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.4); }
+            50% { box-shadow: 0 0 20px 10px rgba(33, 150, 243, 0.1); }
+        }
+        
+        .cold-glow {
+            animation: coldGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes mercuryRise {
+            from { height: 30%; }
+            to { height: 80%; }
+        }
+        
+        @keyframes mercuryFall {
+            from { height: 80%; }
+            to { height: 30%; }
+        }
+        
+        .mercury-rise {
+            animation: mercuryRise 2s ease forwards;
+        }
+        
+        .mercury-fall {
+            animation: mercuryFall 2s ease forwards;
+        }
+        
+        @keyframes particleMovement {
+            0% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(5px) translateY(-5px); }
+            50% { transform: translateX(10px) translateY(0); }
+            75% { transform: translateX(5px) translateY(5px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+        
+        .particle-movement {
+            animation: particleMovement 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1562813733-b31f71025d54?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 5 Science</h1>
+            <p class="welcome-subtitle">Explore the fascinating world of heat and temperature! Learn how heat transfers, how temperature is measured, and discover the difference between heat and temperature. Understand conductors, insulators, thermal expansion, and how heat affects our daily lives in this exciting thermal adventure!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">🔥🌡️🧊☀️</span>
+                <span class="topic-name">Heat and Temperature</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Thermal Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 130</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0.8%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Science fact display -->
+                <div id="scienceFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Thermal Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 130+ Grade 5 Heat and Temperature questions
+        const questions = [
+            // Heat Basics (1-25)
+            {
+                type: "heat_basics",
+                question: "What is heat?",
+                options: ["Form of energy that causes temperature change", "Same as temperature", "Only from the sun", "Only in hot objects"],
+                answer: "A",
+                explanation: "Heat is thermal energy transferred from hotter to colder objects."
+            },
+            {
+                type: "heat_basics",
+                question: "What is temperature?",
+                options: ["Measure of how hot or cold something is", "Amount of heat in an object", "Weight of an object", "Size of an object"],
+                answer: "A",
+                explanation: "Temperature measures average kinetic energy of particles in an object."
+            },
+            {
+                type: "heat_basics",
+                question: "What's the difference between heat and temperature?",
+                options: ["Heat is energy, temperature is measurement", "They are the same thing", "Temperature is energy, heat is measurement", "No difference"],
+                answer: "A",
+                explanation: "Heat is thermal energy transferred, temperature measures hotness/coldness."
+            },
+            {
+                type: "heat_basics",
+                question: "What unit measures temperature?",
+                options: ["Degrees Celsius (°C)", "Joules", "Kilograms", "Meters"],
+                answer: "A",
+                explanation: "Temperature is measured in degrees Celsius (°C), Fahrenheit (°F), or Kelvin (K)."
+            },
+            {
+                type: "heat_basics",
+                question: "What unit measures heat energy?",
+                options: ["Joules (J)", "Degrees Celsius", "Kilograms", "Meters"],
+                answer: "A",
+                explanation: "Heat energy is measured in joules (J) or calories (cal)."
+            },
+            {
+                type: "heat_basics",
+                question: "What happens when objects gain heat?",
+                options: ["Temperature usually increases", "Always get bigger", "Always change color", "Always melt"],
+                answer: "A",
+                explanation: "Adding heat increases particle motion, usually increasing temperature."
+            },
+            {
+                type: "heat_basics",
+                question: "What is thermal energy?",
+                options: ["Total kinetic energy of all particles", "Only energy from fire", "Only in hot objects", "Energy that never changes"],
+                answer: "A",
+                explanation: "Thermal energy is total kinetic energy from particle motion in a substance."
+            },
+            {
+                type: "heat_basics",
+                question: "What is absolute zero?",
+                options: ["Coldest possible temperature (-273°C)", "Hottest temperature", "Room temperature", "Water boiling point"],
+                answer: "A",
+                explanation: "Absolute zero (-273°C) is when particles have minimal motion."
+            },
+            {
+                type: "heat_basics",
+                question: "Which has more heat energy: ocean or cup of boiling water?",
+                options: ["Ocean has more total heat energy", "Cup has more heat energy", "Both have same", "Cannot compare"],
+                answer: "A",
+                explanation: "Ocean has more total heat energy due to massive amount of water, even though temperature is lower."
+            },
+            {
+                type: "heat_basics",
+                question: "What is room temperature?",
+                options: ["About 20-25°C (68-77°F)", "0°C", "100°C", "50°C"],
+                answer: "A",
+                explanation: "Comfortable room temperature is typically 20-25°C (68-77°F)."
+            },
+            // Temperature Measurement (26-45)
+            {
+                type: "temperature_measurement",
+                question: "What instrument measures temperature?",
+                options: ["Thermometer", "Barometer", "Hygrometer", "Speedometer"],
+                answer: "A",
+                explanation: "Thermometer measures temperature using expansion/contraction of liquids."
+            },
+            {
+                type: "temperature_measurement",
+                question: "What liquid is commonly used in thermometers?",
+                options: ["Mercury or alcohol", "Water", "Oil", "Juice"],
+                answer: "A",
+                explanation: "Mercury or colored alcohol expand/contract predictably with temperature."
+            },
+            {
+                type: "temperature_measurement",
+                question: "At what temperature does water freeze?",
+                options: ["0°C (32°F)", "100°C", "-10°C", "10°C"],
+                answer: "A",
+                explanation: "Pure water freezes at 0°C (32°F) at sea level."
+            },
+            {
+                type: "temperature_measurement",
+                question: "At what temperature does water boil?",
+                options: ["100°C (212°F)", "0°C", "50°C", "150°C"],
+                answer: "A",
+                explanation: "Pure water boils at 100°C (212°F) at sea level."
+            },
+            {
+                type: "temperature_measurement",
+                question: "What is body temperature?",
+                options: ["About 37°C (98.6°F)", "25°C", "40°C", "30°C"],
+                answer: "A",
+                explanation: "Normal human body temperature is about 37°C (98.6°F)."
+            },
+            {
+                type: "temperature_measurement",
+                question: "What temperature scale is used in science?",
+                options: ["Celsius and Kelvin", "Only Fahrenheit", "Only Celsius", "Only Kelvin"],
+                answer: "A",
+                explanation: "Science uses Celsius and Kelvin scales internationally."
+            },
+            {
+                type: "temperature_measurement",
+                question: "How does a thermometer work?",
+                options: ["Liquid expands when heated", "Liquid shrinks when heated", "Glass changes color", "Numbers appear"],
+                answer: "A",
+                explanation: "Liquid in thermometer expands when heated, rising up the tube."
+            },
+            {
+                type: "temperature_measurement",
+                question: "What is Kelvin scale?",
+                options: ["Starts at absolute zero", "Starts at water freezing", "Same as Fahrenheit", "For cooking only"],
+                answer: "A",
+                explanation: "Kelvin scale starts at absolute zero (0K = -273°C)."
+            },
+            {
+                type: "temperature_measurement",
+                question: "Why use alcohol instead of mercury in some thermometers?",
+                options: ["Safer if broken", "Cheaper", "More colorful", "Works better"],
+                answer: "A",
+                explanation: "Alcohol is safer (non-toxic) and works at very low temperatures."
+            },
+            {
+                type: "temperature_measurement",
+                question: "What is digital thermometer?",
+                options: ["Uses electronic sensors", "Uses mercury", "Uses air pressure", "Uses color changes"],
+                answer: "A",
+                explanation: "Digital thermometers use electronic sensors to measure temperature."
+            },
+            // Heat Transfer - Conduction (46-65)
+            {
+                type: "conduction",
+                question: "What is conduction?",
+                options: ["Heat transfer through direct contact", "Through fluids", "Through empty space", "Through waves"],
+                answer: "A",
+                explanation: "Conduction is heat transfer through direct contact between particles."
+            },
+            {
+                type: "conduction",
+                question: "Which is example of conduction?",
+                options: ["Spoon heating in hot soup", "Sun warming Earth", "Boiling water", "Hot air rising"],
+                answer: "A",
+                explanation: "Spoon heats through direct contact with hot soup (conduction)."
+            },
+            {
+                type: "conduction",
+                question: "What materials conduct heat well?",
+                options: ["Metals", "Wood", "Plastic", "Air"],
+                answer: "A",
+                explanation: "Metals are good conductors - heat moves easily through them."
+            },
+            {
+                type: "conduction",
+                question: "Why do metals feel cold?",
+                options: ["Conduct heat away from hand quickly", "They are actually cold", "They absorb cold", "They repel heat"],
+                answer: "A",
+                explanation: "Metals conduct body heat away quickly, making them feel cold."
+            },
+            {
+                type: "conduction",
+                question: "What are poor conductors called?",
+                options: ["Insulators", "Conductors", "Radiators", "Convectors"],
+                answer: "A",
+                explanation: "Poor conductors are called insulators (wood, plastic, air)."
+            },
+            {
+                type: "conduction",
+                question: "Why use wooden handles on pans?",
+                options: ["Wood is good insulator", "Wood conducts heat", "Wood looks nice", "Wood is cheap"],
+                answer: "A",
+                explanation: "Wood insulates, preventing heat transfer to hands (safety)."
+            },
+            {
+                type: "conduction",
+                question: "What happens in conduction at particle level?",
+                options: ["Particles vibrate and transfer energy to neighbors", "Particles move to new location", "Particles emit light", "Particles disappear"],
+                answer: "A",
+                explanation: "In conduction, vibrating particles transfer kinetic energy to adjacent particles."
+            },
+            {
+                type: "conduction",
+                question: "Which conducts heat fastest?",
+                options: ["Copper", "Wood", "Glass", "Water"],
+                answer: "A",
+                explanation: "Copper is excellent conductor, transferring heat very quickly."
+            },
+            {
+                type: "conduction",
+                question: "Why wear woolen clothes in winter?",
+                options: ["Wool traps air (good insulator)", "Wool generates heat", "Wool conducts body heat", "Wool repels cold"],
+                answer: "A",
+                explanation: "Wool traps air pockets, providing insulation against heat loss."
+            },
+            {
+                type: "conduction",
+                question: "What is thermal conductivity?",
+                options: ["Ability to conduct heat", "Ability to reflect heat", "Ability to absorb heat", "Ability to create heat"],
+                answer: "A",
+                explanation: "Thermal conductivity measures how well material transfers heat."
+            },
+            // Heat Transfer - Convection (66-85)
+            {
+                type: "convection",
+                question: "What is convection?",
+                options: ["Heat transfer through fluid movement", "Through direct contact", "Through empty space", "Through solids"],
+                answer: "A",
+                explanation: "Convection is heat transfer through movement of fluids (liquids/gases)."
+            },
+            {
+                type: "convection",
+                question: "Which is example of convection?",
+                options: ["Boiling water", "Sunlight", "Ironing clothes", "Touching hot stove"],
+                answer: "A",
+                explanation: "Boiling water shows convection currents as heated water rises."
+            },
+            {
+                type: "convection",
+                question: "What creates convection currents?",
+                options: ["Hot fluids rise, cool fluids sink", "Cold fluids rise, hot fluids sink", "Fluids don't move", "Only in solids"],
+                answer: "A",
+                explanation: "Hot fluids become less dense and rise; cool fluids sink, creating currents."
+            },
+            {
+                type: "convection",
+                question: "Where do convection currents occur?",
+                options: ["Oceans, atmosphere, magma", "Only in solids", "Only in space", "Only in metals"],
+                answer: "A",
+                explanation: "Convection occurs in fluids: ocean currents, weather systems, Earth's mantle."
+            },
+            {
+                type: "convection",
+                question: "How does heater warm a room?",
+                options: ["Creates convection currents", "Only conduction", "Only radiation", "Magic"],
+                answer: "A",
+                explanation: "Heater warms air, which rises, creating convection currents that circulate warm air."
+            },
+            {
+                type: "convection",
+                question: "What are convection currents in atmosphere called?",
+                options: ["Winds", "Tides", "Earthquakes", "Volcanoes"],
+                answer: "A",
+                explanation: "Atmospheric convection currents create winds and weather patterns."
+            },
+            {
+                type: "convection",
+                question: "Why does hot air balloon rise?",
+                options: ["Hot air is less dense", "Hot air is heavier", "Magic", "Balloon material"],
+                answer: "A",
+                explanation: "Heated air in balloon becomes less dense than surrounding air, causing it to rise."
+            },
+            {
+                type: "convection",
+                question: "What is sea breeze?",
+                options: ["Convection from land/sea temperature difference", "Conduction from sun", "Radiation from moon", "Just wind"],
+                answer: "A",
+                explanation: "Sea breeze: daytime - land heats faster, warm air rises, cool sea air moves in."
+            },
+            {
+                type: "convection",
+                question: "What is land breeze?",
+                options: ["Nighttime reverse of sea breeze", "Strong wind", "Ocean current", "Mountain wind"],
+                answer: "A",
+                explanation: "Land breeze: nighttime - land cools faster, cool land air moves toward warmer sea."
+            },
+            {
+                type: "convection",
+                question: "How does convection oven work?",
+                options: ["Circulates hot air with fan", "Uses radiation only", "Uses conduction only", "Uses microwave"],
+                answer: "A",
+                explanation: "Convection oven uses fan to circulate hot air, cooking food faster and evenly."
+            },
+            // Heat Transfer - Radiation (86-105)
+            {
+                type: "radiation",
+                question: "What is radiation?",
+                options: ["Heat transfer through electromagnetic waves", "Through direct contact", "Through fluids", "Through solids"],
+                answer: "A",
+                explanation: "Radiation transfers heat through electromagnetic waves, needing no medium."
+            },
+            {
+                type: "radiation",
+                question: "Which is example of radiation?",
+                options: ["Sun warming Earth", "Spoon in hot tea", "Boiling water", "Room heater blowing air"],
+                answer: "A",
+                explanation: "Sun's heat reaches Earth through space as infrared radiation."
+            },
+            {
+                type: "radiation",
+                question: "How does radiation travel?",
+                options: ["Through vacuum (empty space)", "Only through air", "Only through water", "Only through solids"],
+                answer: "A",
+                explanation: "Radiation can travel through vacuum (empty space), unlike conduction/convection."
+            },
+            {
+                type: "radiation",
+                question: "What emits thermal radiation?",
+                options: ["All objects with temperature", "Only very hot objects", "Only the sun", "Only living things"],
+                answer: "A",
+                explanation: "All objects emit infrared radiation based on their temperature."
+            },
+            {
+                type: "radiation",
+                question: "What color absorbs most radiation?",
+                options: ["Black", "White", "Silver", "Transparent"],
+                answer: "A",
+                explanation: "Black surfaces absorb most radiation; white reflects most."
+            },
+            {
+                type: "radiation",
+                question: "What color reflects most radiation?",
+                options: ["White", "Black", "Red", "Blue"],
+                answer: "A",
+                explanation: "White surfaces reflect most radiation, staying cooler."
+            },
+            {
+                type: "radiation",
+                question: "Why wear light-colored clothes in summer?",
+                options: ["Reflect sunlight, stay cooler", "Absorb sunlight", "Fashion", "Tradition"],
+                answer: "A",
+                explanation: "Light colors reflect solar radiation, keeping body cooler."
+            },
+            {
+                type: "radiation",
+                question: "What is infrared radiation?",
+                options: ["Heat radiation we feel", "Visible light", "Ultraviolet light", "X-rays"],
+                answer: "A",
+                explanation: "Infrared radiation is heat radiation we feel but cannot see."
+            },
+            {
+                type: "radiation",
+                question: "How does thermos flask reduce heat transfer?",
+                options: ["Vacuum prevents conduction/convection, shiny surfaces reduce radiation", "Magic", "Thick glass only", "Special liquid"],
+                answer: "A",
+                explanation: "Thermos uses vacuum for insulation, shiny surfaces to reflect radiation."
+            },
+            {
+                type: "radiation",
+                question: "What are good absorbers of radiation?",
+                options: ["Dark, rough surfaces", "Light, shiny surfaces", "Transparent surfaces", "All surfaces equally"],
+                answer: "A",
+                explanation: "Dark, rough surfaces absorb radiation best; light, shiny surfaces reflect it."
+            },
+            // Thermal Expansion (106-125)
+            {
+                type: "thermal_expansion",
+                question: "What is thermal expansion?",
+                options: ["Matter expands when heated", "Matter shrinks when heated", "No change with heat", "Only gases expand"],
+                answer: "A",
+                explanation: "Most matter expands when heated as particles vibrate more and spread out."
+            },
+            {
+                type: "thermal_expansion",
+                question: "What happens to solids when heated?",
+                options: ["Expand slightly", "Shrink", "No change", "Melt immediately"],
+                answer: "A",
+                explanation: "Solids expand when heated, but expansion is small compared to liquids/gases."
+            },
+            {
+                type: "thermal_expansion",
+                question: "Why are gaps left between railway tracks?",
+                options: ["Allow expansion on hot days", "For drainage", "To save material", "For decoration"],
+                answer: "A",
+                explanation: "Gaps allow tracks to expand in heat without buckling."
+            },
+            {
+                type: "thermal_expansion",
+                question: "What happens to liquids when heated?",
+                options: ["Expand more than solids", "Shrink", "No change", "Always boil"],
+                answer: "A",
+                explanation: "Liquids expand more than solids when heated (except water between 0-4°C)."
+            },
+            {
+                type: "thermal_expansion",
+                question: "What is unusual about water's expansion?",
+                options: ["Expands when freezing", "Shrinks when freezing", "No change when freezing", "Disappears when freezing"],
+                answer: "A",
+                explanation: "Water expands about 9% when freezing (ice less dense than water)."
+            },
+            {
+                type: "thermal_expansion",
+                question: "Why does ice float?",
+                options: ["Less dense than water", "More dense than water", "Same density", "Magic"],
+                answer: "A",
+                explanation: "Ice is less dense than water due to expansion when freezing, so it floats."
+            },
+            {
+                type: "thermal_expansion",
+                question: "What is bimetallic strip?",
+                options: ["Two metals with different expansion rates", "Single metal strip", "Plastic strip", "Wooden strip"],
+                answer: "A",
+                explanation: "Bimetallic strip bends when heated as metals expand at different rates."
+            },
+            {
+                type: "thermal_expansion",
+                question: "Where are bimetallic strips used?",
+                options: ["Thermostats, thermometers", "Only in clocks", "Only in toys", "Nowhere"],
+                answer: "A",
+                explanation: "Used in thermostats to control temperature and some thermometers."
+            },
+            {
+                type: "thermal_expansion",
+                question: "Why do power lines sag in summer?",
+                options: ["Expand in heat", "Wind stretches them", "Birds sit on them", "Manufacturing defect"],
+                answer: "A",
+                explanation: "Metal cables expand in summer heat, causing them to sag."
+            },
+            {
+                type: "thermal_expansion",
+                question: "What is contraction?",
+                options: ["Matter shrinks when cooled", "Matter expands when cooled", "No change when cooled", "Only gases shrink"],
+                answer: "A",
+                explanation: "Contraction is opposite of expansion - matter shrinks when cooled."
+            },
+            // Conductors & Insulators (126-145)
+            {
+                type: "conductors_insulators",
+                question: "What are good thermal conductors?",
+                options: ["Metals like copper, aluminum", "Wood, plastic", "Air, wool", "Water, oil"],
+                answer: "A",
+                explanation: "Metals conduct heat well due to free electrons that transfer energy quickly."
+            },
+            {
+                type: "conductors_insulators",
+                question: "What are good thermal insulators?",
+                options: ["Wood, plastic, air", "Copper, aluminum", "Iron, steel", "Water, mercury"],
+                answer: "A",
+                explanation: "Insulators slow heat transfer: wood, plastic, air, wool, styrofoam."
+            },
+            {
+                type: "conductors_insulators",
+                question: "Why use double-glazed windows?",
+                options: ["Air layer provides insulation", "Looks nice", "Stronger", "Cheaper"],
+                answer: "A",
+                explanation: "Air trapped between glass layers acts as insulator, reducing heat transfer."
+            },
+            {
+                type: "conductors_insulators",
+                question: "Why is air good insulator?",
+                options: ["Particles far apart, slow conduction", "Particles close together", "Air conducts well", "Air generates heat"],
+                answer: "A",
+                explanation: "Air particles are far apart, making conduction inefficient (good insulation)."
+            },
+            {
+                type: "conductors_insulators",
+                question: "Why do birds fluff feathers in winter?",
+                options: ["Trap air for insulation", "To look bigger", "To dry feathers", "To attract mates"],
+                answer: "A",
+                explanation: "Fluffed feathers trap more air, creating better insulation against cold."
+            },
+            {
+                type: "conductors_insulators",
+                question: "What material is used in oven mitts?",
+                options: ["Cloth (insulator)", "Metal (conductor)", "Glass", "Paper"],
+                answer: "A",
+                explanation: "Cloth insulates hands from hot pans by slowing heat transfer."
+            },
+            {
+                type: "conductors_insulators",
+                question: "Why are cooking pots made of metal?",
+                options: ["Conduct heat quickly to food", "Look shiny", "Cheap", "Lightweight"],
+                answer: "A",
+                explanation: "Metal conducts heat quickly and evenly for efficient cooking."
+            },
+            {
+                type: "conductors_insulators",
+                question: "Why have plastic/rubber handles on metal tools?",
+                options: ["Insulate from heat/cold", "Better grip only", "Decoration", "Make tools lighter"],
+                answer: "A",
+                explanation: "Plastic/rubber insulates hands from temperature extremes of metal."
+            },
+            {
+                type: "conductors_insulators",
+                question: "What is vacuum flask (thermos) principle?",
+                options: ["Vacuum prevents conduction/convection", "Magic", "Thick walls only", "Special liquid"],
+                answer: "A",
+                explanation: "Vacuum between walls prevents heat transfer by conduction/convection."
+            },
+            {
+                type: "conductors_insulators",
+                question: "Why do igloos work?",
+                options: ["Snow/air provide insulation", "Snow generates heat", "Small space heats easily", "Magic"],
+                answer: "A",
+                explanation: "Snow contains trapped air pockets, providing excellent insulation."
+            },
+            // Effects of Heat (146-155)
+            {
+                type: "heat_effects",
+                question: "What happens when solids are heated enough?",
+                options: ["Melt to become liquids", "Always burn", "Always evaporate", "Always shrink"],
+                answer: "A",
+                explanation: "Heating solids provides energy to overcome forces holding particles together, causing melting."
+            },
+            {
+                type: "heat_effects",
+                question: "What happens when liquids are heated enough?",
+                options: ["Boil to become gases", "Always freeze", "Always disappear", "Always change color"],
+                answer: "A",
+                explanation: "Heating liquids provides energy for particles to escape as gas (boiling)."
+            },
+            {
+                type: "heat_effects",
+                question: "What is evaporation?",
+                options: ["Liquid to gas at surface, below boiling", "Only at boiling point", "Gas to liquid", "Solid to gas"],
+                answer: "A",
+                explanation: "Evaporation is liquid turning to gas at surface, at any temperature."
+            },
+            {
+                type: "heat_effects",
+                question: "Why does evaporation cool things?",
+                options: ["Fastest particles escape, lowering average energy", "Magic", "Absorbs cold", "Creates wind"],
+                answer: "A",
+                explanation: "Fastest (hottest) particles escape during evaporation, lowering average kinetic energy (temperature)."
+            },
+            {
+                type: "heat_effects",
+                question: "Why do we sweat?",
+                options: ["Evaporation cools body", "To get wet", "To smell", "Exercise effect"],
+                answer: "A",
+                explanation: "Sweat evaporation removes heat from skin, cooling the body."
+            },
+            // Sources of Heat (156-165)
+            {
+                type: "heat_sources",
+                question: "What is natural source of heat for Earth?",
+                options: ["Sun", "Moon", "Stars", "Earth's core"],
+                answer: "A",
+                explanation: "Sun is primary natural heat source for Earth's surface."
+            },
+            {
+                type: "heat_sources",
+                question: "What are artificial heat sources?",
+                options: ["Electric heaters, fires", "Only sun", "Only volcanoes", "Only animals"],
+                answer: "A",
+                explanation: "Artificial sources: heaters, stoves, lights, electrical appliances."
+            },
+            {
+                type: "heat_sources",
+                question: "What is geothermal energy?",
+                options: ["Heat from Earth's interior", "Heat from sun", "Heat from air", "Heat from water"],
+                answer: "A",
+                explanation: "Geothermal energy comes from Earth's hot interior (magma, hot rocks)."
+            },
+            {
+                type: "heat_sources",
+                question: "How do animals generate body heat?",
+                options: ["Chemical reactions in cells", "From sun only", "From eating hot food", "From movement only"],
+                answer: "A",
+                explanation: "Animals generate heat through metabolic reactions (breaking down food)."
+            },
+            {
+                type: "heat_sources",
+                question: "What is chemical heat source?",
+                options: ["Burning fuel (combustion)", "Electric heater", "Sunlight", "Friction"],
+                answer: "A",
+                explanation: "Combustion (burning) releases heat through chemical reactions."
+            },
+            // Heat in Daily Life (166-175)
+            {
+                type: "daily_life",
+                question: "Why use lid when cooking?",
+                options: ["Traps heat, cooks faster", "For decoration", "To see food", "To let steam escape"],
+                answer: "A",
+                explanation: "Lid traps heat and steam, increasing temperature and cooking efficiency."
+            },
+            {
+                type: "daily_life",
+                question: "Why feel cooler under tree shade?",
+                options: ["Blocks direct radiation from sun", "Tree generates cold", "Magic", "Wind only"],
+                answer: "A",
+                explanation: "Tree blocks direct solar radiation, reducing heat gain."
+            },
+            {
+                type: "daily_life",
+                question: "Why are radiators placed near floor?",
+                options: ["Hot air rises, creating convection", "For decoration", "Easier to install", "Saves space"],
+                answer: "A",
+                explanation: "Hot air from radiator rises, creating convection currents that warm room."
+            },
+            {
+                type: "daily_life",
+                question: "Why use aluminum foil in cooking?",
+                options: ["Reflects heat, cooks evenly", "Adds flavor", "Makes food shiny", "Traps moisture only"],
+                answer: "A",
+                explanation: "Aluminum reflects heat radiation, helping food cook evenly."
+            },
+            {
+                type: "daily_life",
+                question: "Why do bridges have expansion joints?",
+                options: ["Allow expansion/contraction with temperature", "For drainage", "For decoration", "To save material"],
+                answer: "A",
+                explanation: "Expansion joints allow bridge materials to expand in heat without damage."
+            },
+            // Advanced Concepts (176-185)
+            {
+                type: "advanced",
+                question: "What is specific heat capacity?",
+                options: ["Heat needed to raise 1g by 1°C", "Temperature of object", "Heat conductivity", "Expansion rate"],
+                answer: "A",
+                explanation: "Specific heat capacity: energy needed to raise temperature of 1g by 1°C."
+            },
+            {
+                type: "advanced",
+                question: "Why does sand get hotter than water at beach?",
+                options: ["Lower specific heat capacity", "Higher specific heat", "Darker color", "Closer to sun"],
+                answer: "A",
+                explanation: "Sand has lower specific heat than water, so it heats up faster with same sunlight."
+            },
+            {
+                type: "advanced",
+                question: "What is heat capacity?",
+                options: ["Heat needed to raise object's temperature", "Maximum temperature", "Heat conductivity", "Expansion amount"],
+                answer: "A",
+                explanation: "Heat capacity: total heat needed to raise object's temperature by 1°C."
+            },
+            {
+                type: "advanced",
+                question: "What is thermal equilibrium?",
+                options: ["Objects reach same temperature", "Objects melt", "Objects freeze", "Objects disappear"],
+                answer: "A",
+                explanation: "Thermal equilibrium: objects in contact reach same temperature (no net heat flow)."
+            },
+            {
+                type: "advanced",
+                question: "What is greenhouse effect?",
+                options: ["Trapping of heat by atmosphere", "Plants growing", "House heating", "Glass production"],
+                answer: "A",
+                explanation: "Greenhouse effect: gases trap infrared radiation, warming Earth's surface."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent thermal knowledge!",
+            "Fantastic understanding of heat transfer!",
+            "Great job! You're a heat expert!",
+            "Amazing! Your temperature knowledge is perfect!",
+            "Well done! Perfect heat identification!",
+            "You're a thermal science champion!",
+            "Perfect! You understand conduction, convection, and radiation!",
+            "Outstanding scientific knowledge!",
+            "Brilliant! You think like a thermal engineer!",
+            "You're on fire! Great scientific insight!"
+        ];
+
+        // Heat transfer types
+        const heatTransferTypes = {
+            conduction: {
+                name: "Conduction",
+                icon: "👐",
+                color: "var(--accent-yellow)",
+                description: "Heat transfer through direct contact between particles",
+                examples: [
+                    "Spoon heating in hot soup",
+                    "Touching hot stove",
+                    "Ironing clothes",
+                    "Walking barefoot on hot sand"
+                ],
+                mechanism: "Particle vibration transfers kinetic energy to neighbors",
+                goodMaterials: ["Metals (copper, aluminum)", "Stone", "Glass"],
+                poorMaterials: ["Wood", "Plastic", "Rubber", "Air"]
+            },
+            convection: {
+                name: "Convection",
+                icon: "🌪️",
+                color: "var(--primary-red)",
+                description: "Heat transfer through movement of fluids (liquids/gases)",
+                examples: [
+                    "Boiling water",
+                    "Room heater warming air",
+                    "Ocean currents",
+                    "Weather systems"
+                ],
+                mechanism: "Hot fluids rise (less dense), cool fluids sink, creating currents",
+                naturalExamples: ["Sea breezes", "Land breezes", "Mantle convection"],
+                artificialExamples: ["Convection ovens", "Radiators", "Hot air balloons"]
+            },
+            radiation: {
+                name: "Radiation",
+                icon: "☀️",
+                color: "var(--secondary-orange)",
+                description: "Heat transfer through electromagnetic waves (needs no medium)",
+                examples: [
+                    "Sun warming Earth",
+                    "Feeling heat from fire",
+                    "Microwave cooking",
+                    "Infrared heaters"
+                ],
+                mechanism: "Infrared electromagnetic waves carry energy",
+                properties: [
+                    "Travels through vacuum",
+                    "Speed of light",
+                    "Can be reflected/absorbed"
+                ],
+                absorption: "Dark surfaces absorb best, light surfaces reflect"
+            }
+        };
+
+        // Temperature scales
+        const temperatureScales = [
+            {name: "Celsius", symbol: "°C", freezing: 0, boiling: 100, body: 37, room: 22},
+            {name: "Fahrenheit", symbol: "°F", freezing: 32, boiling: 212, body: 98.6, room: 72},
+            {name: "Kelvin", symbol: "K", freezing: 273.15, boiling: 373.15, body: 310.15, room: 295}
+        ];
+
+        // Thermal expansion examples
+        const expansionExamples = [
+            {item: "Railway tracks", expansion: "Gaps left for summer expansion", effect: "Prevents buckling"},
+            {item: "Bridges", expansion: "Expansion joints allow movement", effect: "Prevents structural damage"},
+            {item: "Power lines", expansion: "Sag more in summer heat", effect: "Prevents breaking"},
+            {item: "Thermometers", expansion: "Liquid expands in thin tube", effect: "Measures temperature"},
+            {item: "Bimetallic strips", expansion: "Different metals expand at different rates", effect: "Used in thermostats"}
+        ];
+
+        // Conductors and insulators
+        const thermalMaterials = {
+            conductors: [
+                {name: "Copper", icon: "🔴", use: "Cooking pots, electrical wires"},
+                {name: "Aluminum", icon: "⚪", use: "Foil, pans, radiators"},
+                {name: "Iron/Steel", icon: "⚫", use: "Pans, tools, structures"},
+                {name: "Silver", icon: "✨", use: "Specialized equipment (best conductor)"},
+                {name: "Gold", icon: "🌟", use: "Electronics, specialized uses"}
+            ],
+            insulators: [
+                {name: "Wood", icon: "🪵", use: "Handles, furniture, buildings"},
+                {name: "Plastic", icon: "🧱", use: "Handles, containers, coatings"},
+                {name: "Rubber", icon: "🛞", use: "Handles, tires, seals"},
+                {name: "Air", icon: "💨", use: "Double-pane windows, clothing"},
+                {name: "Wool", icon: "🐑", use: "Clothing, blankets"},
+                {name: "Styrofoam", icon: "📦", use: "Coolers, packaging"},
+                {name: "Fiberglass", icon: "🧵", use: "Insulation in houses"}
+            ]
+        };
+
+        // Everyday heat examples
+        const everydayExamples = [
+            {icon: "🍳", title: "Cooking", description: "Conduction from pan, convection in oven, radiation from grill", type: "All three"},
+            {icon: "🏠", title: "House Insulation", description: "Trapped air in walls reduces heat transfer", type: "Conduction/Convection"},
+            {icon: "👕", title: "Winter Clothing", description: "Traps air layers to reduce body heat loss", type: "Conduction"},
+            {icon: "🚗", title: "Car Radiator", description: "Coolant carries engine heat away via convection", type: "Convection"},
+            {icon: "🌡️", title: "Thermometer", description: "Liquid expansion measures temperature", type: "Thermal expansion"},
+            {icon: "❄️", title: "Refrigerator", description: "Removes heat from inside to outside", type: "Convection"},
+            {icon: "🔥", title: "Fireplace", description: "Radiation warms people, convection warms air", type: "Radiation/Convection"},
+            {icon: "🏖️", title: "Beach Day", description: "Sand heats quickly, water stays cool longer", type: "Radiation/Specific heat"},
+            {icon: "🧊", title: "Ice Cooling Drink", description: "Heat transfers from drink to ice until equilibrium", type: "Conduction"},
+            {icon: "☕", title: "Hot Drink Cooling", description: "Heat lost through conduction, convection, radiation", type: "All three"}
+        ];
+
+        // Interesting science facts
+        const scienceFacts = [
+            "The sun is 93 million miles away, but its radiation reaches Earth in just 8 minutes!",
+            "Absolute zero (-273°C) is theoretically impossible to reach - it's the temperature where particles stop moving!",
+            "Water has a very high specific heat capacity - it takes more energy to heat water than most substances!",
+            "The metal mercury is liquid at room temperature and expands predictably, making it perfect for thermometers!",
+            "Dark clothes absorb more heat radiation, which is why they feel warmer in sunlight than light-colored clothes!",
+            "A vacuum is the perfect insulator - with no particles, heat can't transfer by conduction or convection!",
+            "The human body loses most heat through radiation (about 60%), not convection or conduction!",
+            "Some desert animals have large ears not just for hearing, but to radiate excess body heat!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const scienceFact = document.getElementById('scienceFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade5Heat');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade5Heat', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade5Heat_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade5Heat_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a thermal expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent heat knowledge!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep learning to become a thermal master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review heat concepts and try again!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Thermal science helps us understand our world!";
+            }
+        }
+
+        // Create science fact display
+        function createScienceFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'science-fact';
+            
+            factDiv.innerHTML = `<strong>Amazing Science Fact:</strong> ${scienceFacts[Math.floor(Math.random() * scienceFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "heat_basics": "🔥",
+                "temperature_measurement": "🌡️",
+                "conduction": "👐",
+                "convection": "🌪️",
+                "radiation": "☀️",
+                "thermal_expansion": "↔️",
+                "conductors_insulators": "⚡",
+                "heat_effects": "💧",
+                "heat_sources": "⚛️",
+                "daily_life": "🏠",
+                "advanced": "🧠"
+            };
+            
+            let conceptName = "Heat Basics";
+            let conceptIcon = "🔥";
+            
+            if (question.type.includes("heat_basics")) {
+                conceptName = "Heat Basics";
+                conceptIcon = conceptIcons.heat_basics;
+            } else if (question.type.includes("temperature_measurement")) {
+                conceptName = "Temperature Measurement";
+                conceptIcon = conceptIcons.temperature_measurement;
+            } else if (question.type.includes("conduction")) {
+                conceptName = "Conduction";
+                conceptIcon = conceptIcons.conduction;
+            } else if (question.type.includes("convection")) {
+                conceptName = "Convection";
+                conceptIcon = conceptIcons.convection;
+            } else if (question.type.includes("radiation")) {
+                conceptName = "Radiation";
+                conceptIcon = conceptIcons.radiation;
+            } else if (question.type.includes("thermal_expansion")) {
+                conceptName = "Thermal Expansion";
+                conceptIcon = conceptIcons.thermal_expansion;
+            } else if (question.type.includes("conductors_insulators")) {
+                conceptName = "Conductors & Insulators";
+                conceptIcon = conceptIcons.conductors_insulators;
+            } else if (question.type.includes("heat_effects")) {
+                conceptName = "Effects of Heat";
+                conceptIcon = conceptIcons.heat_effects;
+            } else if (question.type.includes("heat_sources")) {
+                conceptName = "Heat Sources";
+                conceptIcon = conceptIcons.heat_sources;
+            } else if (question.type.includes("daily_life")) {
+                conceptName = "Heat in Daily Life";
+                conceptIcon = conceptIcons.daily_life;
+            } else if (question.type.includes("advanced")) {
+                conceptName = "Advanced Concepts";
+                conceptIcon = conceptIcons.advanced;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("heat_basics")) {
+                label.textContent = "Understanding heat, temperature, and their differences";
+            } else if (question.type.includes("temperature_measurement")) {
+                label.textContent = "How temperature is measured and different scales";
+            } else if (question.type.includes("conduction")) {
+                label.textContent = "Heat transfer through direct contact";
+            } else if (question.type.includes("convection")) {
+                label.textContent = "Heat transfer through fluid movement";
+            } else if (question.type.includes("radiation")) {
+                label.textContent = "Heat transfer through electromagnetic waves";
+            } else if (question.type.includes("thermal_expansion")) {
+                label.textContent = "How matter expands when heated and contracts when cooled";
+            } else if (question.type.includes("conductors_insulators")) {
+                label.textContent = "Materials that conduct heat well vs. those that don't";
+            } else if (question.type.includes("heat_effects")) {
+                label.textContent = "How heat causes melting, boiling, and evaporation";
+            } else if (question.type.includes("heat_sources")) {
+                label.textContent = "Natural and artificial sources of heat";
+            } else if (question.type.includes("daily_life")) {
+                label.textContent = "Heat applications in everyday life";
+            } else if (question.type.includes("advanced")) {
+                label.textContent = "Deeper understanding of thermal concepts";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create heat visualization
+        function createHeatVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            // Randomly select a transfer type for demo
+            const transferTypes = ['conduction', 'convection', 'radiation'];
+            const selectedType = transferTypes[Math.floor(Math.random() * transferTypes.length)];
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-red);">Heat and Temperature Concepts</h3>
+                
+                <div class="temperature-scale hot-glow">
+                    <div class="scale-title">Temperature Scales Comparison</div>
+                    <div class="scale-container">
+                        <div class="scale-bar" style="height: 100%;"></div>
+                        ${[100, 80, 60, 40, 20, 0].map(temp => `
+                            <div class="scale-mark" style="top: ${100 - temp}%;">
+                                <div class="scale-label">${temp}°C</div>
+                                <div class="scale-label">${Math.round(temp * 9/5 + 32)}°F</div>
+                                <div class="scale-label">${Math.round(temp + 273)}K</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+                        <div style="text-align: center;">
+                            <div style="font-weight: bold; color: var(--accent-blue);">Water Freezes</div>
+                            <div>0°C = 32°F = 273K</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-weight: bold; color: var(--accent-green);">Room Temperature</div>
+                            <div>22°C = 72°F = 295K</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-weight: bold; color: var(--primary-red);">Water Boils</div>
+                            <div>100°C = 212°F = 373K</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="transfer-grid">
+                    ${Object.values(heatTransferTypes).map(type => `
+                        <div class="transfer-card ${type.name.toLowerCase()} heat-wave">
+                            <div class="transfer-icon">${type.icon}</div>
+                            <div class="transfer-title">${type.name}</div>
+                            <div class="transfer-description">${type.description}</div>
+                            <div class="transfer-examples">
+                                <strong>Examples:</strong><br>
+                                ${type.examples.slice(0, 2).map(ex => `• ${ex}`).join('<br>')}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="thermometer-demo">
+                    <div class="thermometer-title">How a Thermometer Works</div>
+                    <div class="thermometer">
+                        <div class="mercury mercury-rise" id="mercury" style="height: 60%;"></div>
+                    </div>
+                    <div class="temperature-readings">
+                        <div class="reading cold">
+                            <div class="reading-value">0°C</div>
+                            <div class="reading-label">Freezing</div>
+                        </div>
+                        <div class="reading normal">
+                            <div class="reading-value">22°C</div>
+                            <div class="reading-label">Room Temp</div>
+                        </div>
+                        <div class="reading hot">
+                            <div class="reading-value">37°C</div>
+                            <div class="reading-label">Body Temp</div>
+                        </div>
+                        <div class="reading hot">
+                            <div class="reading-value">100°C</div>
+                            <div class="reading-label">Boiling</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="expansion-display">
+                    <div class="expansion-title">Thermal Expansion Demonstration</div>
+                    <div class="expansion-demo">
+                        <div class="expansion-item cold cold-glow">
+                            <div class="expansion-icon">❄️</div>
+                            <div class="expansion-label">Cold (0°C)</div>
+                            <div>Particles close together</div>
+                        </div>
+                        <div style="font-size: 2rem; color: var(--text-secondary);">→</div>
+                        <div class="expansion-item hot hot-glow">
+                            <div class="expansion-icon">🔥</div>
+                            <div class="expansion-label">Hot (100°C)</div>
+                            <div>Particles spread apart</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <strong>Real-World Examples:</strong><br>
+                        ${expansionExamples.slice(0, 3).map(ex => `
+                            <div style="background: var(--dark-surface); padding: 10px; margin: 5px 0; border-radius: 6px; border-left: 3px solid var(--accent-orange);">
+                                <strong>${ex.item}:</strong> ${ex.expansion}<br>
+                                <em>Effect: ${ex.effect}</em>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="materials-grid">
+                    <div class="material-column conductors">
+                        <div class="column-title">Good Thermal Conductors</div>
+                        <ul class="material-list">
+                            ${thermalMaterials.conductors.map(mat => `
+                                <li class="material-item temperature-rise">
+                                    <span class="material-icon">${mat.icon}</span>
+                                    <span><strong>${mat.name}</strong> - ${mat.use}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                        <div style="margin-top: 15px; padding: 10px; background: rgba(255, 235, 59, 0.1); border-radius: 6px;">
+                            <strong>Properties:</strong><br>
+                            • Heat transfers quickly<br>
+                            • Metals are best conductors<br>
+                            • Used where heat needs to move
+                        </div>
+                    </div>
+                    
+                    <div class="material-column insulators">
+                        <div class="column-title">Good Thermal Insulators</div>
+                        <ul class="material-list">
+                            ${thermalMaterials.insulators.slice(0, 5).map(mat => `
+                                <li class="material-item cold-glow">
+                                    <span class="material-icon">${mat.icon}</span>
+                                    <span><strong>${mat.name}</strong> - ${mat.use}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                        <div style="margin-top: 15px; padding: 10px; background: rgba(33, 150, 243, 0.1); border-radius: 6px;">
+                            <strong>Properties:</strong><br>
+                            • Heat transfers slowly<br>
+                            • Often contain trapped air<br>
+                            • Used to keep heat in or out
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="examples-grid">
+                    <div class="lab-title" style="grid-column: 1 / -1; margin-bottom: 0;">Everyday Examples of Heat Transfer</div>
+                    ${everydayExamples.map((example, index) => `
+                        <div class="example-card particle-movement" style="animation-delay: ${index * 0.1}s">
+                            <div class="example-icon">${example.icon}</div>
+                            <div class="example-title">${example.title}</div>
+                            <div class="example-description">${example.description}</div>
+                            <div class="example-heat-type" style="color: ${example.type === 'All three' ? 'var(--accent-purple)' : example.type === 'Conduction' ? 'var(--accent-yellow)' : example.type === 'Convection' ? 'var(--primary-red)' : 'var(--secondary-orange)'}">
+                                ${example.type}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="interactive-lab">
+                    <div class="lab-title">Interactive Heat Lab</div>
+                    <div class="lab-controls">
+                        <div class="lab-button" onclick="showHeatTransfer('conduction')">Show Conduction</div>
+                        <div class="lab-button" onclick="showHeatTransfer('convection')">Show Convection</div>
+                        <div class="lab-button" onclick="showHeatTransfer('radiation')">Show Radiation</div>
+                    </div>
+                    <div class="lab-display" id="labDisplay">
+                        Click buttons above to explore heat transfer types
+                    </div>
+                </div>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>Heat</th>
+                            <th>Temperature</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Definition</td>
+                            <td>Energy transferred due to temperature difference</td>
+                            <td>Measure of average kinetic energy</td>
+                        </tr>
+                        <tr>
+                            <td>Unit</td>
+                            <td>Joules (J), calories (cal)</td>
+                            <td>Degrees Celsius (°C), Fahrenheit (°F), Kelvin (K)</td>
+                        </tr>
+                        <tr>
+                            <td>Measured with</td>
+                            <td>Calorimeter</td>
+                            <td>Thermometer</td>
+                        </tr>
+                        <tr>
+                            <td>Depends on</td>
+                            <td>Mass, temperature change, material</td>
+                            <td>Particle motion only</td>
+                        </tr>
+                        <tr>
+                            <td>Example</td>
+                            <td>Ocean has more heat energy than cup of boiling water</td>
+                            <td>Cup of boiling water has higher temperature than ocean</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--accent-orange);">
+                    <div style="color: var(--accent-orange); font-weight: bold; margin-bottom: 10px;">Quick Review Questions:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. What's the difference between heat and temperature?<br>
+                        2. Name the three methods of heat transfer.<br>
+                        3. Why do railway tracks have gaps?<br>
+                        4. Give an example of conduction in daily life.
+                    </div>
+                </div>
+            `;
+            
+            // Add mercury animation
+            setTimeout(() => {
+                const mercury = document.getElementById('mercury');
+                if (mercury) {
+                    setInterval(() => {
+                        mercury.style.height = `${30 + Math.random() * 50}%`;
+                    }, 3000);
+                }
+            }, 100);
+            
+            return vizDiv;
+        }
+
+        // Global function for interactive lab
+        window.showHeatTransfer = function(type) {
+            const labDisplay = document.getElementById('labDisplay');
+            if (!labDisplay) return;
+            
+            const transfer = heatTransferTypes[type];
+            
+            labDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">${transfer.icon}</div>
+                    <div style="font-weight: bold; color: ${transfer.color}; margin-bottom: 10px; font-size: 1.5rem;">${transfer.name}</div>
+                    <div style="margin-bottom: 15px;">${transfer.description}</div>
+                    <div style="text-align: left; background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                        <strong>How it works:</strong> ${transfer.mechanism}<br><br>
+                        <strong>Examples:</strong><br>
+                        ${transfer.examples.map(ex => `• ${ex}`).join('<br>')}
+                    </div>
+                </div>
+            `;
+        };
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            scienceFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            scienceFact.appendChild(createScienceFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createHeatVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

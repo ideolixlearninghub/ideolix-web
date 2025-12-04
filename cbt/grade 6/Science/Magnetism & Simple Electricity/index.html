@@ -1,0 +1,3332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 6 Science - Magnetism & Simple Electricity | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Physics Theme */
+        :root {
+            --primary-purple: #9C27B0;
+            --secondary-blue: #2196F3;
+            --accent-yellow: #FFC107;
+            --accent-red: #F44336;
+            --accent-green: #4CAF50;
+            --accent-orange: #FF9800;
+            --accent-teal: #009688;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(156, 39, 176, 0.3);
+            --magnetic-glow: 0 0 15px rgba(156, 39, 176, 0.2);
+            --electric-glow: 0 0 15px rgba(33, 150, 243, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Physics Pattern Background */
+        .physics-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(156, 39, 176, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255, 193, 7, 0.05) 2px, rgba(255, 193, 7, 0.05) 4px);
+            opacity: 0.3;
+        }
+
+        .floating-magnet {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.05);
+            font-size: 3rem;
+            animation: floatMagnet 20s linear infinite;
+        }
+
+        .floating-bolt {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.05);
+            font-size: 3rem;
+            animation: floatBolt 15s linear infinite;
+        }
+
+        @keyframes floatMagnet {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.1; }
+            25% { transform: translate(-100px, -50px) rotate(90deg); opacity: 0.05; }
+            50% { transform: translate(50px, -100px) rotate(180deg); opacity: 0.1; }
+            75% { transform: translate(100px, 50px) rotate(270deg); opacity: 0.05; }
+            100% { transform: translate(0, 0) rotate(360deg); opacity: 0.1; }
+        }
+
+        @keyframes floatBolt {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.1; }
+            25% { transform: translate(80px, -60px) rotate(-90deg); opacity: 0.05; }
+            50% { transform: translate(-40px, -80px) rotate(-180deg); opacity: 0.1; }
+            75% { transform: translate(-80px, 60px) rotate(-270deg); opacity: 0.05; }
+            100% { transform: translate(0, 0) rotate(-360deg); opacity: 0.1; }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(156, 39, 176, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-purple);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-purple);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-purple);
+            color: white;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #7B1FA2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(156, 39, 176, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-purple);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-purple), var(--secondary-blue));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .science-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-yellow);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-blue));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-purple);
+            background: rgba(156, 39, 176, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(156, 39, 176, 0.1);
+            border-color: var(--primary-purple);
+            color: var(--primary-purple);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-blue);
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-purple);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(156, 39, 176, 0.1);
+            border-left: 5px solid var(--primary-purple);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-purple);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-purple);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Magnetism Concepts */
+        .magnetism-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid var(--primary-purple);
+            box-shadow: var(--glow);
+        }
+
+        .display-title {
+            color: var(--primary-purple);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .magnetism-types {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .type-card {
+            background: var(--dark-surface);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .type-card.natural {
+            border-color: var(--primary-purple);
+            background: rgba(156, 39, 176, 0.1);
+        }
+
+        .type-card.electromagnet {
+            border-color: var(--secondary-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .type-card.temporary {
+            border-color: var(--accent-yellow);
+            background: rgba(255, 193, 7, 0.1);
+        }
+
+        .type-card.permanent {
+            border-color: var(--accent-green);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .type-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .type-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .type-name {
+            font-weight: bold;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .type-natural .type-name { color: var(--primary-purple); }
+        .type-electromagnet .type-name { color: var(--secondary-blue); }
+        .type-temporary .type-name { color: var(--accent-yellow); }
+        .type-permanent .type-name { color: var(--accent-green); }
+
+        .type-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        /* Magnetic Field Visualization */
+        .field-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-teal);
+        }
+
+        .field-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            min-height: 200px;
+            position: relative;
+        }
+
+        .magnet {
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(90deg, var(--primary-purple), #7B1FA2);
+            border-radius: 4px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .magnet-north {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--accent-red);
+            font-weight: bold;
+        }
+
+        .magnet-south {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--secondary-blue);
+            font-weight: bold;
+        }
+
+        .field-line {
+            position: absolute;
+            border: 1px dashed var(--accent-yellow);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        /* Electricity Concepts */
+        .electricity-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--secondary-blue);
+        }
+
+        .electricity-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .electricity-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .electricity-card {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--secondary-blue);
+        }
+
+        .electricity-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .electricity-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--secondary-blue);
+        }
+
+        .electricity-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        /* Circuits */
+        .circuit-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-orange);
+        }
+
+        .circuit-diagram {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circuit-component {
+            padding: 10px 15px;
+            background: var(--dark-card);
+            border-radius: 4px;
+            margin: 0 10px;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .component-battery {
+            border-color: var(--accent-yellow);
+        }
+
+        .component-bulb {
+            border-color: var(--accent-orange);
+        }
+
+        .component-wire {
+            width: 50px;
+            height: 2px;
+            background: var(--text-muted);
+            margin: 0 10px;
+        }
+
+        .component-switch {
+            border-color: var(--accent-green);
+        }
+
+        /* Properties Comparison */
+        .comparison-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-yellow);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: var(--dark-surface);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: var(--dark-card);
+            padding: 12px;
+            text-align: left;
+            color: var(--accent-yellow);
+            border-bottom: 2px solid var(--accent-yellow);
+        }
+
+        .comparison-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(255, 193, 7, 0.05);
+        }
+
+        /* Interactive Lab */
+        .lab-container {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-orange);
+        }
+
+        .lab-controls {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .lab-button {
+            padding: 10px 15px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-orange);
+            border-radius: 6px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lab-button:hover {
+            background: rgba(255, 152, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .lab-area {
+            background: var(--dark-surface);
+            min-height: 200px;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lab-item {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 6px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .lab-item.magnet {
+            border-color: var(--primary-purple);
+            background: rgba(156, 39, 176, 0.1);
+        }
+
+        .lab-item.battery {
+            border-color: var(--accent-yellow);
+            background: rgba(255, 193, 7, 0.1);
+        }
+
+        .lab-item.bulb {
+            border-color: var(--accent-orange);
+            background: rgba(255, 152, 0, 0.1);
+        }
+
+        .lab-item.wire {
+            width: 120px;
+            height: 4px;
+            background: var(--text-muted);
+            border: none;
+        }
+
+        .lab-item:hover {
+            transform: scale(1.05);
+        }
+
+        .lab-result {
+            text-align: center;
+            margin-top: 15px;
+            min-height: 30px;
+            color: var(--text-secondary);
+            font-weight: bold;
+        }
+
+        /* Safety Rules */
+        .safety-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-red);
+        }
+
+        .safety-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .safety-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .safety-card {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid var(--accent-red);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .safety-icon {
+            font-size: 2rem;
+            color: var(--accent-red);
+        }
+
+        .safety-text {
+            flex: 1;
+        }
+
+        .safety-rule {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--accent-red);
+        }
+
+        .safety-explanation {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Interactive Practice */
+        .interactive-practice {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-teal);
+        }
+
+        .practice-title {
+            color: var(--accent-teal);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .practice-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .practice-button {
+            padding: 10px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-teal);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .practice-button:hover {
+            background: rgba(0, 150, 136, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .practice-display {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-purple);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .magnetism-types {
+                flex-direction: column;
+            }
+            
+            .electricity-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes magneticPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(156, 39, 176, 0.4); }
+            50% { box-shadow: 0 0 20px 5px rgba(156, 39, 176, 0.2); }
+        }
+        
+        .magnetic-pulse {
+            animation: magneticPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes electricFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        .electric-flow {
+            background: linear-gradient(90deg, var(--secondary-blue), #64B5F6, var(--secondary-blue));
+            background-size: 200% 100%;
+            animation: electricFlow 2s linear infinite;
+        }
+        
+        @keyframes bulbGlow {
+            0%, 100% { color: var(--text-muted); }
+            50% { color: var(--accent-orange); text-shadow: 0 0 10px var(--accent-orange); }
+        }
+        
+        .bulb-glow {
+            animation: bulbGlow 1s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Physics Pattern Background -->
+    <div class="physics-bg" id="physicsBg">
+        <!-- Magnets and bolts will be generated by JavaScript -->
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 6 Science</h1>
+            <p class="welcome-subtitle">Discover the invisible forces that power our world! Learn about magnetism, electric circuits, and how electricity is generated. Explore the relationship between magnetism and electricity, and understand how these forces shape our daily lives.</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">🧲⚡🔋</span>
+                <span class="topic-name">Magnetism & Simple Electricity</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Physics Exploration</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 120</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0.8%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Science fact display -->
+                <div id="scienceFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Physics Explorer Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background
+        function initBackground() {
+            const physicsBg = document.getElementById('physicsBg');
+            
+            // Create floating magnets
+            const magnets = ['🧲', '🔗', '🌀', '🧭', '🧲'];
+            for (let i = 0; i < 15; i++) {
+                const magnet = document.createElement('div');
+                magnet.className = 'floating-magnet';
+                magnet.textContent = magnets[Math.floor(Math.random() * magnets.length)];
+                magnet.style.left = `${Math.random() * 100}%`;
+                magnet.style.top = `${Math.random() * 100}%`;
+                magnet.style.animationDelay = `${Math.random() * 20}s`;
+                magnet.style.fontSize = `${2 + Math.random() * 2}rem`;
+                magnet.style.color = 'rgba(156, 39, 176, 0.1)';
+                physicsBg.appendChild(magnet);
+            }
+            
+            // Create floating bolts
+            const bolts = ['⚡', '🔋', '💡', '🔌', '⚡'];
+            for (let i = 0; i < 10; i++) {
+                const bolt = document.createElement('div');
+                bolt.className = 'floating-bolt';
+                bolt.textContent = bolts[Math.floor(Math.random() * bolts.length)];
+                bolt.style.left = `${Math.random() * 100}%`;
+                bolt.style.top = `${Math.random() * 100}%`;
+                bolt.style.animationDelay = `${Math.random() * 15}s`;
+                bolt.style.fontSize = `${2 + Math.random() * 2}rem`;
+                bolt.style.color = 'rgba(33, 150, 243, 0.1)';
+                physicsBg.appendChild(bolt);
+            }
+        }
+
+        // Questions array - 120+ Grade 6 Magnetism & Electricity questions
+        const questions = [
+            // Magnetism Basics (1-20)
+            {
+                type: "magnetism_basics",
+                question: "What is a magnet?",
+                options: ["An object that attracts iron and steel", "An object that attracts all metals", "An object that attracts only gold", "An object that repels all metals"],
+                answer: "A",
+                explanation: "A magnet is an object that produces a magnetic field and attracts ferromagnetic materials like iron, nickel, and cobalt."
+            },
+            {
+                type: "magnetism_basics",
+                question: "What are the ends of a magnet called?",
+                options: ["Poles", "Ends", "Tips", "Points"],
+                answer: "A",
+                explanation: "The ends of a magnet are called poles - north pole and south pole. These are where the magnetic force is strongest."
+            },
+            {
+                type: "magnetism_basics",
+                question: "Like magnetic poles:",
+                options: ["Repel each other", "Attract each other", "Have no effect", "Cancel each other"],
+                answer: "A",
+                explanation: "Like poles (N-N or S-S) repel each other, while unlike poles (N-S) attract each other."
+            },
+            {
+                type: "magnetism_basics",
+                question: "Unlike magnetic poles:",
+                options: ["Attract each other", "Repel each other", "Have no effect", "Cancel each other"],
+                answer: "A",
+                explanation: "Unlike poles (north and south) attract each other, while like poles repel."
+            },
+            {
+                type: "magnetism_basics",
+                question: "What is a magnetic field?",
+                options: ["Area around magnet where magnetic force acts", "Inside of a magnet", "Only at the poles", "Where electricity flows"],
+                answer: "A",
+                explanation: "The magnetic field is the area around a magnet where magnetic forces can be detected."
+            },
+            // Types of Magnets (21-40)
+            {
+                type: "types_magnets",
+                question: "Which is a natural magnet?",
+                options: ["Lodestone", "Bar magnet", "Horseshoe magnet", "Electromagnet"],
+                answer: "A",
+                explanation: "Lodestone is a naturally occurring magnet (magnetite) that was the first magnet discovered."
+            },
+            {
+                type: "types_magnets",
+                question: "What is an electromagnet?",
+                options: ["Magnet made by electricity flowing through wire", "Natural magnet", "Permanent magnet", "Temporary magnet"],
+                answer: "A",
+                explanation: "An electromagnet is a magnet created by passing electric current through a coil of wire wrapped around an iron core."
+            },
+            {
+                type: "types_magnets",
+                question: "What can increase an electromagnet's strength?",
+                options: ["More coils, more current, iron core", "Bigger battery only", "Thicker wire only", "Longer wire only"],
+                answer: "A",
+                explanation: "Electromagnet strength increases with more coils of wire, more electric current, and using an iron core."
+            },
+            {
+                type: "types_magnets",
+                question: "Which is NOT a magnetic material?",
+                options: ["Wood", "Iron", "Nickel", "Cobalt"],
+                answer: "A",
+                explanation: "Wood is not magnetic. Iron, nickel, and cobalt are the main magnetic materials."
+            },
+            // Electricity Basics (41-60)
+            {
+                type: "electricity_basics",
+                question: "What is static electricity?",
+                options: ["Build-up of electric charge on surface", "Electricity that moves", "Electricity from batteries", "Household electricity"],
+                answer: "A",
+                explanation: "Static electricity is the build-up of electric charge on the surface of objects, often caused by friction."
+            },
+            {
+                type: "electricity_basics",
+                question: "What causes lightning?",
+                options: ["Static electricity in clouds", "Batteries in clouds", "Magnets in clouds", "Solar power"],
+                answer: "A",
+                explanation: "Lightning is caused by static electricity building up in clouds and discharging to the ground or other clouds."
+            },
+            {
+                type: "electricity_basics",
+                question: "Current electricity is:",
+                options: ["Flow of electric charge", "Stationary electric charge", "Magnetic force", "Light energy"],
+                answer: "A",
+                explanation: "Current electricity is the flow of electric charge through a conductor, like in wires."
+            },
+            {
+                type: "electricity_basics",
+                question: "What is a conductor?",
+                options: ["Material that allows electricity to flow", "Material that blocks electricity", "Source of electricity", "Device using electricity"],
+                answer: "A",
+                explanation: "Conductors (like metals) allow electricity to flow through them easily."
+            },
+            {
+                type: "electricity_basics",
+                question: "What is an insulator?",
+                options: ["Material that blocks electricity flow", "Material that conducts electricity", "Source of electricity", "Electric device"],
+                answer: "A",
+                explanation: "Insulators (like rubber, plastic, wood) resist or block the flow of electricity."
+            },
+            // Simple Circuits (61-80)
+            {
+                type: "simple_circuits",
+                question: "What is needed for a simple circuit?",
+                options: ["Power source, wires, load", "Only battery", "Only wires", "Only bulb"],
+                answer: "A",
+                explanation: "A simple circuit needs: power source (battery), conductors (wires), and a load (bulb, motor)."
+            },
+            {
+                type: "simple_circuits",
+                question: "What does a switch do in a circuit?",
+                options: ["Opens or closes the circuit", "Makes electricity", "Stores electricity", "Changes voltage"],
+                answer: "A",
+                explanation: "A switch opens (breaks) or closes (completes) the circuit to control electricity flow."
+            },
+            {
+                type: "simple_circuits",
+                question: "What is a series circuit?",
+                options: ["Components connected in single path", "Components connected in multiple paths", "No complete path", "Circular path only"],
+                answer: "A",
+                explanation: "In a series circuit, components are connected one after another in a single path."
+            },
+            {
+                type: "simple_circuits",
+                question: "What is a parallel circuit?",
+                options: ["Components connected in multiple paths", "Components in single path", "No complete path", "Only one component"],
+                answer: "A",
+                explanation: "In a parallel circuit, components are connected in separate branches or paths."
+            },
+            {
+                type: "simple_circuits",
+                question: "In a series circuit, if one bulb goes out:",
+                options: ["All bulbs go out", "Other bulbs stay on", "Battery dies", "Circuit breaks"],
+                answer: "A",
+                explanation: "In series circuits, all components share the same single path, so if one fails, the circuit is broken."
+            },
+            // Electromagnetism (81-100)
+            {
+                type: "electromagnetism",
+                question: "Who discovered electromagnetism?",
+                options: ["Hans Christian Ørsted", "Thomas Edison", "Albert Einstein", "Isaac Newton"],
+                answer: "A",
+                explanation: "Hans Christian Ørsted discovered in 1820 that electric current creates a magnetic field."
+            },
+            {
+                type: "electromagnetism",
+                question: "What is created when electricity flows through a wire?",
+                options: ["Magnetic field", "Electric field only", "Light energy", "Sound waves"],
+                answer: "A",
+                explanation: "Moving electric charges (current) create a magnetic field around the wire."
+            },
+            {
+                type: "electromagnetism",
+                question: "What device converts electrical energy to motion using magnetism?",
+                options: ["Electric motor", "Generator", "Battery", "Light bulb"],
+                answer: "A",
+                explanation: "Electric motors use electromagnets to convert electrical energy into mechanical motion."
+            },
+            {
+                type: "electromagnetism",
+                question: "What device converts motion to electricity using magnetism?",
+                options: ["Generator", "Motor", "Battery", "Transformer"],
+                answer: "A",
+                explanation: "Generators use magnets and coils to convert mechanical energy into electrical energy."
+            },
+            {
+                type: "electromagnetism",
+                question: "What principle do generators and motors use?",
+                options: ["Electromagnetic induction", "Static electricity", "Chemical reaction", "Solar energy"],
+                answer: "A",
+                explanation: "Both generators and motors work on the principle of electromagnetic induction discovered by Michael Faraday."
+            },
+            // Sources of Electricity (101-120)
+            {
+                type: "sources_electricity",
+                question: "What does a battery do?",
+                options: ["Converts chemical energy to electrical", "Creates electricity from nothing", "Stores electricity only", "Amplifies electricity"],
+                answer: "A",
+                explanation: "Batteries convert stored chemical energy into electrical energy through chemical reactions."
+            },
+            {
+                type: "sources_electricity",
+                question: "What energy source uses sunlight?",
+                options: ["Solar cells", "Batteries", "Generators", "Power plants"],
+                answer: "A",
+                explanation: "Solar cells (photovoltaic cells) convert sunlight directly into electricity."
+            },
+            {
+                type: "sources_electricity",
+                question: "Most electricity is generated using:",
+                options: ["Electromagnetic induction in generators", "Batteries", "Static electricity", "Solar panels"],
+                answer: "A",
+                explanation: "Most power plants use generators with turbines (steam, water, wind) to create electricity through electromagnetic induction."
+            },
+            // Safety (121-140)
+            {
+                type: "safety",
+                question: "Why should you never touch electrical appliances with wet hands?",
+                options: ["Water conducts electricity and can cause shock", "Water damages appliances", "It's just a superstition", "Water creates short circuits only"],
+                answer: "A",
+                explanation: "Water is a good conductor of electricity, so wet hands can provide a path for electricity to flow through your body, causing shock."
+            },
+            {
+                type: "safety",
+                question: "What should you do during an electrical storm?",
+                options: ["Stay indoors, away from windows", "Go outside to watch", "Use electrical appliances", "Stand under trees"],
+                answer: "A",
+                explanation: "During thunderstorms, stay indoors away from windows, plumbing, and electrical appliances to avoid lightning strikes."
+            },
+            // Applications (141-160)
+            {
+                type: "applications",
+                question: "Where are electromagnets used?",
+                options: ["Electric bells, cranes, MRI machines", "Only in motors", "Only in generators", "Only in transformers"],
+                answer: "A",
+                explanation: "Electromagnets are used in many devices: electric bells, cranes, MRI machines, speakers, and relays."
+            },
+            {
+                type: "applications",
+                question: "What uses both electricity and magnetism?",
+                options: ["Electric motor", "Light bulb", "Battery", "Solar panel"],
+                answer: "A",
+                explanation: "Electric motors use electricity to create magnetic fields that produce motion."
+            },
+            // Mixed Practice (161-180)
+            {
+                type: "mixed",
+                question: "What happens when you cut a magnet in half?",
+                options: ["You get two smaller magnets", "You lose magnetism", "Only one piece is magnetic", "Both pieces lose poles"],
+                answer: "A",
+                explanation: "When you cut a magnet, each piece becomes a complete magnet with both north and south poles."
+            },
+            {
+                type: "mixed",
+                question: "What can be magnetized?",
+                options: ["Iron, nickel, cobalt", "All metals", "Only iron", "Plastic and wood"],
+                answer: "A",
+                explanation: "Iron, nickel, and cobalt are ferromagnetic and can be magnetized. Most other materials cannot."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: "",
+            currentTopic: "all"
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent physics knowledge!",
+            "Perfect understanding of magnetism!",
+            "Great circuit analysis!",
+            "Amazing! You're an electricity expert!",
+            "Perfect electromagnetic induction!",
+            "You're a physics champion!",
+            "Outstanding magnetic field recognition!",
+            "Brilliant circuit design!",
+            "You think like a physicist!",
+            "Electromagnetism mastery achieved!"
+        ];
+
+        // Physics terms
+        const physicsTerms = [
+            {
+                term: "Magnet",
+                definition: "Object that produces magnetic field",
+                example: "Attracts iron, nickel, cobalt"
+            },
+            {
+                term: "Magnetic Field",
+                definition: "Area where magnetic force can be detected",
+                characteristic: "Invisible lines from north to south pole"
+            },
+            {
+                term: "Electromagnet",
+                definition: "Magnet created by electric current",
+                example: "Can be turned on/off, strength adjustable"
+            },
+            {
+                term: "Conductor",
+                definition: "Material that allows electricity flow",
+                examples: "Copper, aluminum, gold, silver"
+            },
+            {
+                term: "Insulator",
+                definition: "Material that blocks electricity flow",
+                examples: "Rubber, plastic, glass, wood"
+            },
+            {
+                term: "Circuit",
+                definition: "Complete path for electricity flow",
+                types: "Series, parallel"
+            },
+            {
+                term: "Current",
+                definition: "Flow of electric charge",
+                unit: "Ampere (A)"
+            }
+        ];
+
+        // Types of magnets
+        const magnetTypes = [
+            {
+                name: "Natural Magnet",
+                description: "Occurs naturally in nature",
+                characteristics: "Lodestone (magnetite), permanent, found in rocks",
+                examples: "Lodestone",
+                icon: "🪨",
+                color: "#9C27B0"
+            },
+            {
+                name: "Permanent Magnet",
+                description: "Keeps magnetism for long time",
+                characteristics: "Made from hard magnetic materials, retains magnetism",
+                examples: "Bar magnet, horseshoe magnet, refrigerator magnet",
+                icon: "🧲",
+                color: "#2196F3"
+            },
+            {
+                name: "Temporary Magnet",
+                description: "Loses magnetism quickly",
+                characteristics: "Made from soft magnetic materials, easy to magnetize/demagnetize",
+                examples: "Iron nail near magnet, paper clips",
+                icon: "📎",
+                color: "#FFC107"
+            },
+            {
+                name: "Electromagnet",
+                description: "Magnet created by electricity",
+                characteristics: "Can be turned on/off, strength adjustable with current",
+                examples: "Electric bell, crane, MRI machine",
+                icon: "🔌",
+                color: "#4CAF50"
+            }
+        ];
+
+        // Magnetic materials
+        const magneticMaterials = [
+            {
+                name: "Iron",
+                magnetic: true,
+                strength: "Strong",
+                properties: "Ferromagnetic, can be magnetized",
+                icon: "⚙️",
+                color: "#795548"
+            },
+            {
+                name: "Nickel",
+                magnetic: true,
+                strength: "Moderate",
+                properties: "Ferromagnetic, used in alloys",
+                icon: "🪙",
+                color: "#9E9E9E"
+            },
+            {
+                name: "Cobalt",
+                magnetic: true,
+                strength: "Strong",
+                properties: "Ferromagnetic, retains magnetism well",
+                icon: "🔷",
+                color: "#1976D2"
+            },
+            {
+                name: "Steel",
+                magnetic: true,
+                strength: "Strong",
+                properties: "Iron alloy, can be magnetized",
+                icon: "🏗️",
+                color: "#607D8B"
+            },
+            {
+                name: "Copper",
+                magnetic: false,
+                strength: "Non-magnetic",
+                properties: "Good conductor, diamagnetic",
+                icon: "🔶",
+                color: "#FF9800"
+            },
+            {
+                name: "Aluminum",
+                magnetic: false,
+                strength: "Non-magnetic",
+                properties: "Paramagnetic (very weakly attracted)",
+                icon: "✈️",
+                color: "#9E9E9E"
+            },
+            {
+                name: "Wood",
+                magnetic: false,
+                strength: "Non-magnetic",
+                properties: "Insulator, no magnetic properties",
+                icon: "🪵",
+                color: "#795548"
+            },
+            {
+                name: "Plastic",
+                magnetic: false,
+                strength: "Non-magnetic",
+                properties: "Insulator, no magnetic properties",
+                icon: "🔄",
+                color: "#2196F3"
+            }
+        ];
+
+        // Electricity concepts
+        const electricityConcepts = [
+            {
+                name: "Static Electricity",
+                description: "Build-up of electric charge on surface",
+                examples: "Lightning, balloon sticking to wall, shock from doorknob",
+                icon: "⚡",
+                color: "#FFC107"
+            },
+            {
+                name: "Current Electricity",
+                description: "Flow of electric charge through conductor",
+                examples: "Battery circuits, household electricity",
+                icon: "🔋",
+                color: "#4CAF50"
+            },
+            {
+                name: "Conductor",
+                description: "Material that allows electricity flow",
+                examples: "Copper wire, aluminum, gold, silver",
+                icon: "🔗",
+                color: "#2196F3"
+            },
+            {
+                name: "Insulator",
+                description: "Material that blocks electricity flow",
+                examples: "Rubber, plastic, glass, wood, air",
+                icon: "🛡️",
+                color: "#9C27B0"
+            },
+            {
+                name: "Circuit",
+                description: "Complete path for electricity",
+                examples: "Simple circuit, series, parallel",
+                icon: "🔁",
+                color: "#FF9800"
+            },
+            {
+                name: "Switch",
+                description: "Device to open/close circuit",
+                examples: "Light switch, toggle switch, push button",
+                icon: "⚙️",
+                color: "#607D8B"
+            }
+        ];
+
+        // Circuit components
+        const circuitComponents = [
+            {
+                name: "Battery",
+                symbol: "+ -",
+                function: "Power source - provides voltage",
+                icon: "🔋",
+                color: "#FFC107"
+            },
+            {
+                name: "Bulb",
+                symbol: "○",
+                function: "Load - converts electricity to light",
+                icon: "💡",
+                color: "#FF9800"
+            },
+            {
+                name: "Switch",
+                symbol: "╷╷",
+                function: "Control - opens/closes circuit",
+                icon: "🔘",
+                color: "#4CAF50"
+            },
+            {
+                name: "Wire",
+                symbol: "——",
+                function: "Conductor - carries current",
+                icon: "🔌",
+                color: "#2196F3"
+            },
+            {
+                name: "Motor",
+                symbol: "M",
+                function: "Load - converts electricity to motion",
+                icon: "⚙️",
+                color: "#795548"
+            },
+            {
+                name: "Resistor",
+                symbol: "~~~~",
+                function: "Limits current flow",
+                icon: "📉",
+                color: "#9C27B0"
+            }
+        ];
+
+        // Circuit types
+        const circuitTypes = [
+            {
+                name: "Series Circuit",
+                description: "Components connected one after another",
+                characteristics: "Single path, same current throughout, one break stops all",
+                example: "Christmas lights (old type)",
+                icon: "➡️➡️➡️",
+                color: "#2196F3"
+            },
+            {
+                name: "Parallel Circuit",
+                description: "Components connected in separate branches",
+                characteristics: "Multiple paths, different currents, one break doesn't affect others",
+                example: "Household wiring, new Christmas lights",
+                icon: "⬇️\n⬇️\n⬇️",
+                color: "#4CAF50"
+            },
+            {
+                name: "Simple Circuit",
+                description: "Basic complete circuit",
+                characteristics: "Power source + wires + load, must be complete loop",
+                example: "Flashlight circuit",
+                icon: "🔋💡",
+                color: "#FF9800"
+            }
+        ];
+
+        // Interesting science facts about magnetism and electricity
+        const scienceFacts = [
+            "Earth itself is a giant magnet! Its magnetic field protects us from harmful solar radiation!",
+            "The strongest magnet in the world is 44.14 tesla - over a million times stronger than Earth's magnetic field!",
+            "Electric eels can generate up to 600 volts of electricity - enough to stun a horse!",
+            "Lightning strikes Earth about 100 times every second - that's 8.6 million strikes per day!",
+            "The first battery was invented by Alessandro Volta in 1800 - it was called the 'voltaic pile'!",
+            "Some birds use Earth's magnetic field to navigate during migration - they have built-in compasses!",
+            "Superconductors can conduct electricity with zero resistance, but only at extremely cold temperatures!",
+            "Your brain uses electricity to send signals - your thoughts are electrical impulses traveling between neurons!"
+        ];
+
+        // Electromagnetic devices
+        const electromagneticDevices = [
+            {
+                name: "Electric Motor",
+                description: "Converts electricity to motion",
+                principle: "Electromagnetism - current in magnetic field creates force",
+                uses: "Fans, drills, washing machines, electric cars",
+                icon: "⚙️"
+            },
+            {
+                name: "Generator",
+                description: "Converts motion to electricity",
+                principle: "Electromagnetic induction - moving magnet near coil",
+                uses: "Power plants, wind turbines, bicycle dynamo",
+                icon: "🌀"
+            },
+            {
+                name: "Transformer",
+                description: "Changes voltage level",
+                principle: "Electromagnetic induction between coils",
+                uses: "Power distribution, phone chargers",
+                icon: "🔌"
+            },
+            {
+                name: "Electromagnet",
+                description: "Temporary magnet using electricity",
+                principle: "Current through coil creates magnetic field",
+                uses: "Cranes, MRI machines, doorbells",
+                icon: "🧲"
+            },
+            {
+                name: "Speaker",
+                description: "Converts electrical signals to sound",
+                principle: "Electromagnet vibrates diaphragm",
+                uses: "Headphones, speakers, intercoms",
+                icon: "🔊"
+            },
+            {
+                name: "Microphone",
+                description: "Converts sound to electrical signals",
+                principle: "Sound vibrates diaphragm in magnetic field",
+                uses: "Recording, telephones, live performances",
+                icon: "🎤"
+            }
+        ];
+
+        // Sources of electricity
+        const electricitySources = [
+            {
+                name: "Battery",
+                type: "Chemical",
+                process: "Chemical reactions produce electricity",
+                examples: "AA batteries, car batteries, phone batteries",
+                icon: "🔋"
+            },
+            {
+                name: "Solar Cell",
+                type: "Light",
+                process: "Photovoltaic effect converts sunlight",
+                examples: "Solar panels, calculators, satellites",
+                icon: "☀️"
+            },
+            {
+                name: "Generator",
+                type: "Mechanical",
+                process: "Electromagnetic induction",
+                examples: "Power plants, wind turbines, hydroelectric dams",
+                icon: "🌀"
+            },
+            {
+                name: "Thermocouple",
+                type: "Heat",
+                process: "Temperature difference creates voltage",
+                examples: "Thermometers, spacecraft, industrial sensors",
+                icon: "🌡️"
+            },
+            {
+                name: "Piezoelectric",
+                type: "Pressure",
+                process: "Pressure creates electric charge",
+                examples: "Lighters, microphones, sensors",
+                icon: "💥"
+            }
+        ];
+
+        // Safety rules for electricity
+        const safetyRules = [
+            {
+                rule: "Never touch electrical appliances with wet hands",
+                reason: "Water conducts electricity and can cause shock",
+                icon: "💧🚫"
+            },
+            {
+                rule: "Don't overload electrical outlets",
+                reason: "Too many devices can cause overheating and fire",
+                icon: "🔌⚠️"
+            },
+            {
+                rule: "Keep electrical cords away from heat and water",
+                reason: "Damaged insulation can cause shock or fire",
+                icon: "🔥🚫"
+            },
+            {
+                rule: "Never insert objects into electrical outlets",
+                reason: "Can cause shock, burns, or start fires",
+                icon: "👶🚫"
+            },
+            {
+                rule: "Stay away from fallen power lines",
+                reason: "Live wires can electrocute even without touching",
+                icon: "⚡⚠️"
+            },
+            {
+                rule: "Use proper fuses and circuit breakers",
+                reason: "Protects from overload and short circuits",
+                icon: "⚡🛡️"
+            }
+        ];
+
+        // Real-world applications
+        const realWorldApplications = [
+            {
+                category: "Home",
+                examples: "Refrigerator magnets, doorbells, blender motors, lights",
+                icon: "🏠"
+            },
+            {
+                category: "Transportation",
+                examples: "Car starters, train electromagnets, electric vehicles, aircraft instruments",
+                icon: "🚗"
+            },
+            {
+                category: "Medicine",
+                examples: "MRI machines, pacemakers, surgical tools, hearing aids",
+                icon: "🏥"
+            },
+            {
+                category: "Communication",
+                examples: "Telephones, speakers, microphones, radios, TVs",
+                icon: "📱"
+            },
+            {
+                category: "Industry",
+                examples: "Cranes, motors, generators, magnetic separators",
+                icon: "🏭"
+            },
+            {
+                category: "Entertainment",
+                examples: "Headphones, electric guitars, microphones, speakers",
+                icon: "🎵"
+            }
+        ];
+
+        // Interactive lab experiments
+        const labExperiments = [
+            {
+                name: "Make an Electromagnet",
+                materials: ["Iron nail", "Insulated wire", "Battery", "Paper clips"],
+                process: "Wrap wire around nail, connect to battery",
+                result: "Nail becomes magnet, picks up paper clips"
+            },
+            {
+                name: "Test Conductors",
+                materials: ["Circuit with bulb", "Various materials"],
+                process: "Insert materials into circuit gap",
+                result: "Bulb lights with conductors, stays off with insulators"
+            },
+            {
+                name: "Magnetic Field Visualization",
+                materials: ["Magnet", "Iron filings", "Paper"],
+                process: "Sprinkle filings on paper over magnet",
+                result: "Filings align to show magnetic field lines"
+            },
+            {
+                name: "Simple Circuit",
+                materials: ["Battery", "Wires", "Bulb", "Switch"],
+                process: "Connect all components in complete loop",
+                result: "Bulb lights when switch is closed"
+            }
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const scienceFact = document.getElementById('scienceFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initBackground();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade6ScienceMagnetismElectricity');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade6ScienceMagnetismElectricity', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade6ScienceMagnetismElectricity_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade6ScienceMagnetismElectricity_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a physics expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent knowledge of magnetism and electricity!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep learning to master physics concepts!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Practice more with circuits and magnets!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Understanding physics helps us understand how our world works!";
+            }
+        }
+
+        // Create science fact display
+        function createScienceFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'science-fact';
+            
+            factDiv.innerHTML = `<strong>Amazing Physics Fact:</strong> ${scienceFacts[Math.floor(Math.random() * scienceFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "magnetism_basics": "🧲",
+                "types_magnets": "🔗",
+                "electricity_basics": "⚡",
+                "simple_circuits": "🔋",
+                "electromagnetism": "🌀",
+                "sources_electricity": "🌞",
+                "safety": "⚠️",
+                "applications": "🏠",
+                "mixed": "🎯"
+            };
+            
+            let conceptName = "Magnetism Basics";
+            let conceptIcon = "🧲";
+            
+            if (question.type.includes("magnetism_basics")) {
+                conceptName = "Magnetism Basics";
+                conceptIcon = conceptIcons.magnetism_basics;
+            } else if (question.type.includes("types_magnets")) {
+                conceptName = "Types of Magnets";
+                conceptIcon = conceptIcons.types_magnets;
+            } else if (question.type.includes("electricity_basics")) {
+                conceptName = "Electricity Basics";
+                conceptIcon = conceptIcons.electricity_basics;
+            } else if (question.type.includes("simple_circuits")) {
+                conceptName = "Simple Circuits";
+                conceptIcon = conceptIcons.simple_circuits;
+            } else if (question.type.includes("electromagnetism")) {
+                conceptName = "Electromagnetism";
+                conceptIcon = conceptIcons.electromagnetism;
+            } else if (question.type.includes("sources_electricity")) {
+                conceptName = "Sources of Electricity";
+                conceptIcon = conceptIcons.sources_electricity;
+            } else if (question.type.includes("safety")) {
+                conceptName = "Electrical Safety";
+                conceptIcon = conceptIcons.safety;
+            } else if (question.type.includes("applications")) {
+                conceptName = "Real-World Applications";
+                conceptIcon = conceptIcons.applications;
+            } else if (question.type.includes("mixed")) {
+                conceptName = "Mixed Practice";
+                conceptIcon = conceptIcons.mixed;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("magnetism_basics")) {
+                label.textContent = "Magnetic poles, fields, attraction and repulsion";
+            } else if (question.type.includes("types_magnets")) {
+                label.textContent = "Natural, permanent, temporary magnets and electromagnets";
+            } else if (question.type.includes("electricity_basics")) {
+                label.textContent = "Static and current electricity, conductors, insulators";
+            } else if (question.type.includes("simple_circuits")) {
+                label.textContent = "Series and parallel circuits, components";
+            } else if (question.type.includes("electromagnetism")) {
+                label.textContent = "Relationship between electricity and magnetism";
+            } else if (question.type.includes("sources_electricity")) {
+                label.textContent = "Batteries, generators, solar cells, and other sources";
+            } else if (question.type.includes("safety")) {
+                label.textContent = "Important safety rules for working with electricity";
+            } else if (question.type.includes("applications")) {
+                label.textContent = "Practical uses of magnetism and electricity";
+            } else if (question.type.includes("mixed")) {
+                label.textContent = "Mixed review of all magnetism and electricity concepts";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create physics visualization
+        function createPhysicsVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-purple);">Magnetism & Simple Electricity</h3>
+                
+                <div class="magnetism-container">
+                    <div class="display-title">Types of Magnets</div>
+                    <div class="magnetism-types">
+                        ${magnetTypes.map(magnet => `
+                            <div class="type-card ${magnet.name.toLowerCase().replace(' ', '-')}">
+                                <div class="type-icon">${magnet.icon}</div>
+                                <div class="type-name">${magnet.name}</div>
+                                <div class="type-description">${magnet.description}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">
+                                    Example: ${magnet.examples}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="field-container">
+                    <div class="display-title">Magnetic Field Visualization</div>
+                    <div class="field-diagram">
+                        <div class="magnet">
+                            <div class="magnet-north">N</div>
+                            <div class="magnet-south">S</div>
+                        </div>
+                        <div class="field-line" style="width: 200px; height: 200px; top: 20px; left: 50%; transform: translateX(-50%);"></div>
+                        <div class="field-line" style="width: 180px; height: 180px; top: 30px; left: 50%; transform: translateX(-50%);"></div>
+                        <div class="field-line" style="width: 160px; height: 160px; top: 40px; left: 50%; transform: translateX(-50%);"></div>
+                    </div>
+                    <div style="text-align: center; margin-top: 15px; color: var(--text-secondary);">
+                        Magnetic field lines go from North pole to South pole
+                    </div>
+                </div>
+                
+                <div class="electricity-container">
+                    <div class="display-title">Electricity Concepts</div>
+                    <div class="electricity-grid">
+                        ${electricityConcepts.map(concept => `
+                            <div class="electricity-card">
+                                <div class="electricity-icon">${concept.icon}</div>
+                                <div class="electricity-name">${concept.name}</div>
+                                <div class="electricity-description">${concept.description}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">
+                                    Examples: ${concept.examples.split(', ')[0]}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="circuit-container">
+                    <div class="display-title">Simple Circuits</div>
+                    <div class="circuit-diagram" id="circuitDiagram">
+                        <div class="circuit-component component-battery" onclick="showComponentInfo('battery')">🔋 Battery</div>
+                        <div class="component-wire"></div>
+                        <div class="circuit-component component-switch" onclick="showComponentInfo('switch')">🔘 Switch</div>
+                        <div class="component-wire"></div>
+                        <div class="circuit-component component-bulb" onclick="showComponentInfo('bulb')">💡 Bulb</div>
+                        <div class="component-wire"></div>
+                    </div>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="lab-button" onclick="toggleCircuit()">Toggle Switch</button>
+                        <button class="lab-button" onclick="changeCircuitType()">Change Circuit Type</button>
+                    </div>
+                    <div id="circuitStatus" style="text-align: center; margin-top: 15px; color: var(--text-secondary);">
+                        Circuit: Open (Switch Off)
+                    </div>
+                </div>
+                
+                <div class="comparison-container">
+                    <div class="display-title">Conductors vs Insulators</div>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Definition</th>
+                                <th>Examples</th>
+                                <th>Uses</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-weight: bold; color: var(--accent-green);">Conductor</td>
+                                <td>Allows electricity to flow easily</td>
+                                <td>Copper, aluminum, gold, silver</td>
+                                <td>Wires, electrical components</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold; color: var(--accent-red);">Insulator</td>
+                                <td>Blocks or resists electricity flow</td>
+                                <td>Rubber, plastic, glass, wood</td>
+                                <td>Wire coating, handles, safety gear</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="safety-container">
+                    <div class="display-title">Electrical Safety Rules</div>
+                    <div class="safety-grid">
+                        ${safetyRules.map(rule => `
+                            <div class="safety-card">
+                                <div class="safety-icon">${rule.icon}</div>
+                                <div class="safety-text">
+                                    <div class="safety-rule">${rule.rule}</div>
+                                    <div class="safety-explanation">${rule.reason}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid var(--secondary-blue);">
+                    <div class="display-title">Electromagnetic Devices</div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0;">
+                        ${electromagneticDevices.map(device => `
+                            <div style="background: var(--dark-surface); padding: 15px; border-radius: 8px; text-align: center; border: 2px solid var(--secondary-blue);">
+                                <div style="font-size: 2rem; margin-bottom: 10px;">${device.icon}</div>
+                                <div style="font-weight: bold; color: var(--secondary-blue); margin-bottom: 5px;">${device.name}</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary);">${device.description}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="lab-container">
+                    <div class="display-title">Interactive Physics Lab</div>
+                    <div class="lab-controls">
+                        <div class="lab-button" onclick="startElectromagnetLab()">Make Electromagnet</div>
+                        <div class="lab-button" onclick="startCircuitLab()">Build Circuit</div>
+                        <div class="lab-button" onclick="testConductorsLab()">Test Conductors</div>
+                        <div class="lab-button" onclick="resetLab()">Reset Lab</div>
+                    </div>
+                    <div class="lab-area" id="labArea">
+                        <div style="text-align: center; width: 100%; color: var(--text-secondary);">
+                            Click a lab experiment to begin
+                        </div>
+                    </div>
+                    <div class="lab-result" id="labResult"></div>
+                </div>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Physics Term</th>
+                            <th>Definition</th>
+                            <th>Example/Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${physicsTerms.map(term => `
+                            <tr>
+                                <td style="font-weight: bold; color: var(--accent-teal);">${term.term}</td>
+                                <td>${term.definition}</td>
+                                <td>${term.example || term.characteristic || term.unit}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                
+                <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid var(--primary-purple);">
+                    <div class="display-title">Magnetic Materials</div>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0;">
+                        ${magneticMaterials.map(material => `
+                            <div style="background: var(--dark-surface); padding: 15px; border-radius: 8px; text-align: center; border: 2px solid ${material.magnetic ? 'var(--primary-purple)' : 'var(--text-muted)'};">
+                                <div style="font-size: 2rem; margin-bottom: 5px;">${material.icon}</div>
+                                <div style="font-weight: bold; margin-bottom: 5px;">${material.name}</div>
+                                <div style="font-size: 0.8rem; color: ${material.magnetic ? 'var(--primary-purple)' : 'var(--text-muted)'};">
+                                    ${material.magnetic ? 'Magnetic' : 'Non-magnetic'}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="interactive-practice">
+                    <div class="practice-title">Interactive Practice</div>
+                    <div class="practice-controls">
+                        <div class="practice-button" onclick="practiceMagnetPoles()">Magnet Poles</div>
+                        <div class="practice-button" onclick="practiceCircuitTypes()">Circuit Types</div>
+                        <div class="practice-button" onclick="practiceConductorID()">Identify Conductors</div>
+                        <div class="practice-button" onclick="practiceElectromagnetism()">Electromagnetism</div>
+                    </div>
+                    <div class="practice-display" id="practiceDisplay">
+                        Click buttons above to practice physics concepts
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--accent-orange);">
+                    <div style="color: var(--accent-orange); font-weight: bold; margin-bottom: 10px;">Quick Practice:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. What do like magnetic poles do?<br>
+                        2. Name three parts of a simple circuit<br>
+                        3. What is an electromagnet?<br>
+                        4. What safety rule is most important with electricity?<br>
+                        5. How are electricity and magnetism related?
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--accent-teal);">
+                    <div style="color: var(--accent-teal); font-weight: bold; margin-bottom: 10px; text-align: center;">Physics Facts</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                        <strong>Magnetic Poles:</strong> Like repel, unlike attract<br>
+                        <strong>Circuit Types:</strong> Series (single path), Parallel (multiple paths)<br>
+                        <strong>Electromagnetism:</strong> Current creates magnetic field<br>
+                        <strong>Safety:</strong> Never touch electricity with wet hands
+                    </div>
+                </div>
+            `;
+            
+            return vizDiv;
+        }
+
+        // Interactive functions
+        let circuitClosed = false;
+        let currentCircuitType = "simple";
+        
+        function toggleCircuit() {
+            circuitClosed = !circuitClosed;
+            const circuitStatus = document.getElementById('circuitStatus');
+            const bulb = document.querySelector('.component-bulb');
+            
+            if (circuitStatus && bulb) {
+                if (circuitClosed) {
+                    circuitStatus.innerHTML = `<span style="color: var(--accent-green);">Circuit: Closed (Switch On) - Bulb Lights!</span>`;
+                    bulb.innerHTML = '💡<br>ON';
+                    bulb.style.color = 'var(--accent-orange)';
+                    bulb.style.textShadow = '0 0 10px var(--accent-orange)';
+                } else {
+                    circuitStatus.innerHTML = `<span style="color: var(--text-secondary);">Circuit: Open (Switch Off) - Bulb Off</span>`;
+                    bulb.innerHTML = '💡<br>OFF';
+                    bulb.style.color = '';
+                    bulb.style.textShadow = '';
+                }
+            }
+        }
+        
+        function changeCircuitType() {
+            const circuitTypes = ["simple", "series", "parallel"];
+            const currentIndex = circuitTypes.indexOf(currentCircuitType);
+            currentCircuitType = circuitTypes[(currentIndex + 1) % circuitTypes.length];
+            
+            const circuitDiagram = document.getElementById('circuitDiagram');
+            const circuitStatus = document.getElementById('circuitStatus');
+            
+            if (circuitDiagram && circuitStatus) {
+                if (currentCircuitType === "simple") {
+                    circuitDiagram.innerHTML = `
+                        <div class="circuit-component component-battery">🔋 Battery</div>
+                        <div class="component-wire"></div>
+                        <div class="circuit-component component-switch">🔘 Switch</div>
+                        <div class="component-wire"></div>
+                        <div class="circuit-component component-bulb">💡 Bulb</div>
+                        <div class="component-wire"></div>
+                    `;
+                    circuitStatus.innerHTML = `<span style="color: var(--text-secondary);">Circuit Type: Simple Circuit</span>`;
+                } else if (currentCircuitType === "series") {
+                    circuitDiagram.innerHTML = `
+                        <div class="circuit-component component-battery">🔋 Battery</div>
+                        <div class="component-wire"></div>
+                        <div class="circuit-component component-switch">🔘 Switch</div>
+                        <div class="component-wire"></div>
+                        <div class="circuit-component component-bulb">💡 Bulb 1</div>
+                        <div class="component-wire"></div>
+                        <div class="circuit-component component-bulb">💡 Bulb 2</div>
+                        <div class="component-wire"></div>
+                    `;
+                    circuitStatus.innerHTML = `<span style="color: var(--text-secondary);">Circuit Type: Series Circuit (One break stops all)</span>`;
+                } else if (currentCircuitType === "parallel") {
+                    circuitDiagram.innerHTML = `
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <div class="circuit-component component-battery" style="margin-bottom: 10px;">🔋 Battery</div>
+                            <div style="display: flex; gap: 40px;">
+                                <div style="display: flex; flex-direction: column; align-items: center;">
+                                    <div class="component-wire" style="height: 50px; margin-bottom: 10px;"></div>
+                                    <div class="circuit-component component-bulb">💡 Bulb 1</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: center;">
+                                    <div class="component-wire" style="height: 50px; margin-bottom: 10px;"></div>
+                                    <div class="circuit-component component-bulb">💡 Bulb 2</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    circuitStatus.innerHTML = `<span style="color: var(--text-secondary);">Circuit Type: Parallel Circuit (Independent paths)</span>`;
+                }
+                
+                // Reset circuit state
+                circuitClosed = false;
+            }
+        }
+        
+        function showComponentInfo(component) {
+            let info = "";
+            switch(component) {
+                case "battery":
+                    info = "Battery: Provides electrical energy (voltage) to the circuit. Chemical energy is converted to electrical energy.";
+                    break;
+                case "switch":
+                    info = "Switch: Opens or closes the circuit to control electricity flow. When open, circuit is broken. When closed, circuit is complete.";
+                    break;
+                case "bulb":
+                    info = "Bulb: Converts electrical energy to light and heat energy. Contains a filament that glows when current passes through.";
+                    break;
+            }
+            
+            if (info) {
+                alert(info);
+            }
+        }
+
+        // Interactive lab functions
+        function startElectromagnetLab() {
+            const labArea = document.getElementById('labArea');
+            const labResult = document.getElementById('labResult');
+            
+            if (!labArea || !labResult) return;
+            
+            labArea.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="margin-bottom: 20px; font-size: 1.2rem; color: var(--primary-purple);">Make an Electromagnet</div>
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 30px; margin-bottom: 20px;">
+                        <div class="lab-item" id="nail" onclick="useNail()">
+                            <div style="font-size: 3rem;">🔩</div>
+                            <div>Iron Nail</div>
+                        </div>
+                        <div style="font-size: 2rem;">+</div>
+                        <div class="lab-item battery" id="coil" onclick="addCoil()">
+                            <div style="font-size: 3rem;">🌀</div>
+                            <div>Coil of Wire</div>
+                        </div>
+                        <div style="font-size: 2rem;">+</div>
+                        <div class="lab-item battery" id="batteryLab" onclick="connectBattery()">
+                            <div style="font-size: 3rem;">🔋</div>
+                            <div>Battery</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 2rem; margin: 20px 0;">↓</div>
+                    <div class="lab-item magnet" id="electromagnet" style="opacity: 0.5;">
+                        <div style="font-size: 3rem;">🧲</div>
+                        <div>Electromagnet</div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <div class="lab-item" id="paperclips" style="border-color: var(--text-muted);">
+                            <div style="font-size: 2rem;">📎📎📎</div>
+                            <div>Paper Clips</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <button class="lab-button" onclick="activateElectromagnet()">Activate Electromagnet</button>
+                    </div>
+                </div>
+            `;
+            
+            labResult.textContent = "Build your electromagnet by clicking components, then activate it";
+            labResult.style.color = 'var(--text-secondary)';
+        }
+        
+        function useNail() {
+            const nail = document.getElementById('nail');
+            if (nail) {
+                nail.style.borderColor = 'var(--accent-green)';
+                nail.style.transform = 'scale(1.1)';
+            }
+        }
+        
+        function addCoil() {
+            const coil = document.getElementById('coil');
+            if (coil) {
+                coil.style.borderColor = 'var(--accent-green)';
+                coil.style.transform = 'scale(1.1)';
+            }
+        }
+        
+        function connectBattery() {
+            const battery = document.getElementById('batteryLab');
+            if (battery) {
+                battery.style.borderColor = 'var(--accent-green)';
+                battery.style.transform = 'scale(1.1)';
+            }
+        }
+        
+        function activateElectromagnet() {
+            const electromagnet = document.getElementById('electromagnet');
+            const labResult = document.getElementById('labResult');
+            
+            if (electromagnet && labResult) {
+                electromagnet.style.opacity = '1';
+                electromagnet.style.transform = 'scale(1.1)';
+                electromagnet.innerHTML = `
+                    <div style="font-size: 3rem; animation: magneticPulse 1s infinite;">🧲</div>
+                    <div>Electromagnet (Active)</div>
+                    <div style="font-size: 0.8rem; margin-top: 5px;">Picking up paper clips!</div>
+                `;
+                
+                labResult.innerHTML = `
+                    <span style="color: var(--primary-purple);">⚡ Electromagnet Activated!</span><br>
+                    <span style="font-size: 0.9rem;">Current flowing through coil creates magnetic field<br>
+                    Iron nail becomes magnetized and attracts paper clips</span>
+                `;
+            }
+        }
+        
+        function startCircuitLab() {
+            const labArea = document.getElementById('labArea');
+            const labResult = document.getElementById('labResult');
+            
+            if (!labArea || !labResult) return;
+            
+            labArea.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="margin-bottom: 20px; font-size: 1.2rem; color: var(--secondary-blue);">Build a Simple Circuit</div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
+                        <div class="lab-item battery" onclick="selectComponent('battery')">
+                            <div style="font-size: 3rem;">🔋</div>
+                            <div>Battery</div>
+                        </div>
+                        <div class="lab-item" onclick="selectComponent('wire')">
+                            <div style="font-size: 3rem;">🔌</div>
+                            <div>Wire</div>
+                        </div>
+                        <div class="lab-item bulb" onclick="selectComponent('bulb')">
+                            <div style="font-size: 3rem;">💡</div>
+                            <div>Bulb</div>
+                        </div>
+                        <div class="lab-item" onclick="selectComponent('switch')">
+                            <div style="font-size: 3rem;">🔘</div>
+                            <div>Switch</div>
+                        </div>
+                    </div>
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 20px 0; min-height: 100px;" id="circuitBuildArea">
+                        <div style="color: var(--text-secondary);">Drag components here to build circuit</div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <button class="lab-button" onclick="testCircuit()">Test Circuit</button>
+                        <button class="lab-button" onclick="clearCircuit()">Clear Circuit</button>
+                    </div>
+                </div>
+            `;
+            
+            labResult.textContent = "Select components to build a complete circuit";
+            labResult.style.color = 'var(--text-secondary)';
+        }
+        
+        function selectComponent(component) {
+            const circuitBuildArea = document.getElementById('circuitBuildArea');
+            if (!circuitBuildArea) return;
+            
+            const componentHTML = {
+                'battery': '<div class="lab-item battery" style="display: inline-block; margin: 5px;">🔋 Battery</div>',
+                'wire': '<div class="lab-item" style="display: inline-block; margin: 5px; width: 50px; height: 4px; background: var(--text-muted);"></div>',
+                'bulb': '<div class="lab-item bulb" style="display: inline-block; margin: 5px;">💡 Bulb</div>',
+                'switch': '<div class="lab-item" style="display: inline-block; margin: 5px;">🔘 Switch</div>'
+            };
+            
+            if (circuitBuildArea.innerHTML.includes("Drag components")) {
+                circuitBuildArea.innerHTML = componentHTML[component];
+            } else {
+                circuitBuildArea.innerHTML += componentHTML[component];
+            }
+        }
+        
+        function testCircuit() {
+            const labResult = document.getElementById('labResult');
+            if (!labResult) return;
+            
+            labResult.innerHTML = `
+                <span style="color: var(--accent-green);">✓ Circuit Complete!</span><br>
+                <span style="font-size: 0.9rem;">You built a working circuit! Electricity flows from battery through wires, switch, and bulb.</span>
+            `;
+        }
+        
+        function clearCircuit() {
+            const circuitBuildArea = document.getElementById('circuitBuildArea');
+            const labResult = document.getElementById('labResult');
+            
+            if (circuitBuildArea && labResult) {
+                circuitBuildArea.innerHTML = '<div style="color: var(--text-secondary);">Drag components here to build circuit</div>';
+                labResult.textContent = "Circuit cleared. Build a new circuit!";
+            }
+        }
+        
+        function testConductorsLab() {
+            const labArea = document.getElementById('labArea');
+            const labResult = document.getElementById('labResult');
+            
+            if (!labArea || !labResult) return;
+            
+            labArea.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="margin-bottom: 20px; font-size: 1.2rem; color: var(--accent-yellow);">Test Conductors and Insulators</div>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px;">
+                        <div class="lab-item" onclick="testMaterial('copper')" style="border-color: var(--accent-orange);">
+                            <div style="font-size: 2.5rem;">🔶</div>
+                            <div>Copper</div>
+                        </div>
+                        <div class="lab-item" onclick="testMaterial('aluminum')" style="border-color: var(--text-muted);">
+                            <div style="font-size: 2.5rem;">✈️</div>
+                            <div>Aluminum</div>
+                        </div>
+                        <div class="lab-item" onclick="testMaterial('iron')" style="border-color: var(--primary-purple);">
+                            <div style="font-size: 2.5rem;">⚙️</div>
+                            <div>Iron</div>
+                        </div>
+                        <div class="lab-item" onclick="testMaterial('rubber')" style="border-color: var(--accent-red);">
+                            <div style="font-size: 2.5rem;">🔄</div>
+                            <div>Rubber</div>
+                        </div>
+                        <div class="lab-item" onclick="testMaterial('wood')" style="border-color: var(--accent-brown);">
+                            <div style="font-size: 2.5rem;">🪵</div>
+                            <div>Wood</div>
+                        </div>
+                        <div class="lab-item" onclick="testMaterial('plastic')" style="border-color: var(--secondary-blue);">
+                            <div style="font-size: 2.5rem;">🧱</div>
+                            <div>Plastic</div>
+                        </div>
+                        <div class="lab-item" onclick="testMaterial('glass')" style="border-color: var(--accent-teal);">
+                            <div style="font-size: 2.5rem;">🥛</div>
+                            <div>Glass</div>
+                        </div>
+                        <div class="lab-item" onclick="testMaterial('gold')" style="border-color: var(--accent-yellow);">
+                            <div style="font-size: 2.5rem;">🥇</div>
+                            <div>Gold</div>
+                        </div>
+                    </div>
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 20px 0;">
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+                            <div class="lab-item battery">🔋</div>
+                            <div class="component-wire"></div>
+                            <div id="testMaterial" style="padding: 15px; background: var(--dark-surface); border-radius: 8px; min-width: 100px;">
+                                Test Material
+                            </div>
+                            <div class="component-wire"></div>
+                            <div class="lab-item bulb" id="testBulb">💡</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <button class="lab-button" onclick="resetTest()">Reset Test</button>
+                    </div>
+                </div>
+            `;
+            
+            labResult.textContent = "Click materials to test if they conduct electricity";
+            labResult.style.color = 'var(--text-secondary)';
+        }
+        
+        function testMaterial(material) {
+            const testMaterialDiv = document.getElementById('testMaterial');
+            const testBulb = document.getElementById('testBulb');
+            const labResult = document.getElementById('labResult');
+            
+            if (!testMaterialDiv || !testBulb || !labResult) return;
+            
+            const conductors = ['copper', 'aluminum', 'iron', 'gold'];
+            const isConductor = conductors.includes(material);
+            
+            const materialNames = {
+                'copper': 'Copper 🟠',
+                'aluminum': 'Aluminum ⬜',
+                'iron': 'Iron ⚙️',
+                'rubber': 'Rubber 🔄',
+                'wood': 'Wood 🟤',
+                'plastic': 'Plastic 🔵',
+                'glass': 'Glass 🥛',
+                'gold': 'Gold 🥇'
+            };
+            
+            testMaterialDiv.innerHTML = materialNames[material];
+            testMaterialDiv.style.border = `2px solid ${isConductor ? 'var(--accent-green)' : 'var(--accent-red)'}`;
+            
+            if (isConductor) {
+                testBulb.innerHTML = '💡<br>ON';
+                testBulb.style.color = 'var(--accent-orange)';
+                testBulb.style.textShadow = '0 0 10px var(--accent-orange)';
+                labResult.innerHTML = `
+                    <span style="color: var(--accent-green);">✓ ${materialNames[material].split(' ')[0]} is a CONDUCTOR</span><br>
+                    <span style="font-size: 0.9rem;">Electricity flows through it, so the bulb lights up!</span>
+                `;
+            } else {
+                testBulb.innerHTML = '💡<br>OFF';
+                testBulb.style.color = '';
+                testBulb.style.textShadow = '';
+                labResult.innerHTML = `
+                    <span style="color: var(--accent-red);">✗ ${materialNames[material].split(' ')[0]} is an INSULATOR</span><br>
+                    <span style="font-size: 0.9rem;">Electricity cannot flow through it, so the bulb stays off.</span>
+                `;
+            }
+        }
+        
+        function resetTest() {
+            const testMaterialDiv = document.getElementById('testMaterial');
+            const testBulb = document.getElementById('testBulb');
+            const labResult = document.getElementById('labResult');
+            
+            if (testMaterialDiv && testBulb && labResult) {
+                testMaterialDiv.innerHTML = 'Test Material';
+                testMaterialDiv.style.border = '';
+                testBulb.innerHTML = '💡';
+                testBulb.style.color = '';
+                testBulb.style.textShadow = '';
+                labResult.textContent = "Click materials to test if they conduct electricity";
+            }
+        }
+        
+        function resetLab() {
+            const labArea = document.getElementById('labArea');
+            const labResult = document.getElementById('labResult');
+            
+            if (labArea && labResult) {
+                labArea.innerHTML = `
+                    <div style="text-align: center; width: 100%; color: var(--text-secondary);">
+                        Click a lab experiment to begin
+                    </div>
+                `;
+                labResult.textContent = "";
+            }
+        }
+
+        // Interactive practice functions
+        function practiceMagnetPoles() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary-purple);">Magnetic Poles Practice</div>
+                    <div style="margin-bottom: 20px;">
+                        <strong>Question:</strong> What happens when you bring two NORTH poles together?
+                    </div>
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <div style="font-size: 1.3rem; color: var(--accent-orange);">
+                            Answer: They REPEL each other
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <strong>Question:</strong> What happens when you bring NORTH and SOUTH poles together?
+                    </div>
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <div style="font-size: 1.3rem; color: var(--accent-orange);">
+                            Answer: They ATTRACT each other
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Magnetic Pole Rule:</strong><br>
+                        Like poles REPEL (N-N or S-S)<br>
+                        Unlike poles ATTRACT (N-S)
+                    </div>
+                </div>
+            `;
+        }
+        
+        function practiceCircuitTypes() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--secondary-blue);">Circuit Types Practice</div>
+                    
+                    <div style="margin-bottom: 20px; text-align: left;">
+                        <div style="margin-bottom: 10px;"><strong>Series Circuit:</strong></div>
+                        <div>• Components connected one after another</div>
+                        <div>• Single path for electricity</div>
+                        <div>• One break stops all components</div>
+                        <div>• Example: Old Christmas lights</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px; text-align: left;">
+                        <div style="margin-bottom: 10px;"><strong>Parallel Circuit:</strong></div>
+                        <div>• Components connected in separate branches</div>
+                        <div>• Multiple paths for electricity</div>
+                        <div>• One break doesn't affect others</div>
+                        <div>• Example: Household wiring, new Christmas lights</div>
+                    </div>
+                    
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <div style="font-size: 1.3rem; color: var(--accent-orange);">
+                            Key Difference: Series = single path, Parallel = multiple paths
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function practiceConductorID() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-green);">Identify Conductors and Insulators</div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+                        <div style="background: var(--dark-surface); padding: 15px; border-radius: 8px; border: 2px solid var(--accent-green);">
+                            <div style="font-weight: bold; color: var(--accent-green); margin-bottom: 10px;">CONDUCTORS</div>
+                            <div style="text-align: left;">
+                                <div>• Copper</div>
+                                <div>• Aluminum</div>
+                                <div>• Iron</div>
+                                <div>• Silver</div>
+                                <div>• Gold</div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: var(--dark-surface); padding: 15px; border-radius: 8px; border: 2px solid var(--accent-red);">
+                            <div style="font-weight: bold; color: var(--accent-red); margin-bottom: 10px;">INSULATORS</div>
+                            <div style="text-align: left;">
+                                <div>• Rubber</div>
+                                <div>• Plastic</div>
+                                <div>• Wood</div>
+                                <div>• Glass</div>
+                                <div>• Air (dry)</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <div style="font-size: 1.3rem; color: var(--accent-orange);">
+                            Conductors: Allow electricity to flow<br>
+                            Insulators: Block electricity flow
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function practiceElectromagnetism() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-teal);">Electromagnetism Practice</div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <strong>Key Principle:</strong> Electricity and magnetism are closely related
+                    </div>
+                    
+                    <div style="text-align: left; margin-bottom: 20px;">
+                        <div style="margin-bottom: 10px;"><strong>Electricity → Magnetism:</strong></div>
+                        <div>• Electric current creates magnetic field</div>
+                        <div>• Used in electromagnets</div>
+                        <div>• Discovered by Ørsted (1820)</div>
+                    </div>
+                    
+                    <div style="text-align: left; margin-bottom: 20px;">
+                        <div style="margin-bottom: 10px;"><strong>Magnetism → Electricity:</strong></div>
+                        <div>• Moving magnet near coil creates electricity</div>
+                        <div>• Used in generators</div>
+                        <div>• Discovered by Faraday (1831)</div>
+                    </div>
+                    
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <div style="font-size: 1.3rem; color: var(--accent-orange);">
+                            This relationship is called ELECTROMAGNETIC INDUCTION
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Devices using electromagnetism:</strong><br>
+                        Motors (electricity → motion)<br>
+                        Generators (motion → electricity)<br>
+                        Transformers (change voltage)<br>
+                        Speakers/Microphones
+                    </div>
+                </div>
+            `;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            scienceFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            scienceFact.appendChild(createScienceFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createPhysicsVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

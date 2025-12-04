@@ -1,0 +1,3045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 6 Math - Data Handling & Statistics | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Data Handling Theme */
+        :root {
+            --primary-blue: #2196F3;
+            --secondary-green: #4CAF50;
+            --accent-purple: #9C27B0;
+            --accent-orange: #FF9800;
+            --accent-red: #F44336;
+            --accent-yellow: #FFC107;
+            --accent-teal: #009688;
+            --accent-pink: #E91E63;
+            --accent-indigo: #3F51B5;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(33, 150, 243, 0.3);
+            --chart-glow: 0 0 15px rgba(76, 175, 80, 0.2);
+            --data-glow: 0 0 15px rgba(255, 193, 7, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Data Pattern Background */
+        .data-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                repeating-linear-gradient(45deg, 
+                    transparent, 
+                    transparent 20px, 
+                    rgba(33, 150, 243, 0.05) 20px, 
+                    rgba(33, 150, 243, 0.05) 40px),
+                repeating-linear-gradient(-45deg, 
+                    transparent, 
+                    transparent 20px, 
+                    rgba(76, 175, 80, 0.05) 20px, 
+                    rgba(76, 175, 80, 0.05) 40px);
+            opacity: 0.3;
+        }
+
+        .floating-number {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.05);
+            font-size: 2.5rem;
+            font-weight: bold;
+            animation: floatNumber 15s linear infinite;
+        }
+
+        @keyframes floatNumber {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.1; }
+            25% { transform: translate(-80px, -40px) rotate(90deg); opacity: 0.05; }
+            50% { transform: translate(40px, -80px) rotate(180deg); opacity: 0.1; }
+            75% { transform: translate(80px, 40px) rotate(270deg); opacity: 0.05; }
+            100% { transform: translate(0, 0) rotate(360deg); opacity: 0.1; }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(33, 150, 243, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-blue);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #388E3C;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-green));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .math-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-teal);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-green);
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Charts Container */
+        .charts-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid var(--accent-teal);
+            box-shadow: var(--chart-glow);
+        }
+
+        .display-title {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        /* Bar Chart */
+        .bar-chart-container {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 100%;
+            padding: 20px;
+            background: var(--dark-surface);
+            border-radius: 8px;
+        }
+
+        .bar {
+            width: 40px;
+            background: var(--primary-blue);
+            margin: 0 10px;
+            border-radius: 4px 4px 0 0;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .bar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(33, 150, 243, 0.5);
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: var(--text-primary);
+            font-weight: bold;
+        }
+
+        .y-axis {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px 5px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Pie Chart */
+        .pie-chart-container {
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .pie-chart {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pie-segment {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
+            transform-origin: 50% 50%;
+            border-radius: 50%;
+        }
+
+        .pie-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 10px;
+            background: var(--dark-surface);
+            border-radius: 6px;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+        }
+
+        .legend-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Data Set Display */
+        .data-set-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-yellow);
+        }
+
+        .data-set {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .data-point {
+            background: var(--dark-surface);
+            padding: 10px 15px;
+            border-radius: 6px;
+            border: 2px solid var(--accent-yellow);
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .data-point:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--data-glow);
+        }
+
+        .data-point.sorted {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: var(--secondary-green);
+        }
+
+        .data-point.mean {
+            background: rgba(33, 150, 243, 0.2);
+            border-color: var(--primary-blue);
+        }
+
+        .data-point.median {
+            background: rgba(156, 39, 176, 0.2);
+            border-color: var(--accent-purple);
+        }
+
+        .data-point.mode {
+            background: rgba(255, 193, 7, 0.2);
+            border-color: var(--accent-yellow);
+        }
+
+        /* Measures of Center */
+        .measures-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .measures-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .measures-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .measure-card {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .measure-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .measure-card.mean-card {
+            border-color: var(--primary-blue);
+        }
+
+        .measure-card.median-card {
+            border-color: var(--accent-purple);
+        }
+
+        .measure-card.mode-card {
+            border-color: var(--accent-yellow);
+        }
+
+        .measure-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .measure-title {
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .mean-card .measure-title {
+            color: var(--primary-blue);
+        }
+
+        .median-card .measure-title {
+            color: var(--accent-purple);
+        }
+
+        .mode-card .measure-title {
+            color: var(--accent-yellow);
+        }
+
+        .measure-formula {
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            color: var(--text-secondary);
+        }
+
+        .measure-example {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        /* Frequency Table */
+        .frequency-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-orange);
+        }
+
+        .frequency-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: var(--dark-surface);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .frequency-table th {
+            background: var(--dark-card);
+            padding: 12px;
+            text-align: left;
+            color: var(--accent-orange);
+            border-bottom: 2px solid var(--accent-orange);
+        }
+
+        .frequency-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+        }
+
+        .frequency-table tr:hover {
+            background: rgba(255, 152, 0, 0.05);
+        }
+
+        /* Data Input */
+        .data-input-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-red);
+        }
+
+        .data-inputs {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .data-input {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .data-input input {
+            width: 60px;
+            padding: 8px;
+            background: var(--dark-surface);
+            border: 1px solid var(--dark-border);
+            border-radius: 4px;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        /* Range and Spread */
+        .range-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-indigo);
+        }
+
+        .range-scale {
+            height: 20px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .range-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-blue), var(--accent-purple));
+            border-radius: 10px;
+            position: absolute;
+        }
+
+        .range-min, .range-max {
+            position: absolute;
+            top: 25px;
+            color: var(--text-secondary);
+        }
+
+        .range-min {
+            left: 0;
+        }
+
+        .range-max {
+            right: 0;
+        }
+
+        /* Data Comparison */
+        .comparison-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-teal);
+        }
+
+        .comparison-chart {
+            display: flex;
+            height: 200px;
+            align-items: flex-end;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .comparison-bar {
+            width: 30px;
+            margin: 0 5px;
+            border-radius: 4px 4px 0 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .comparison-bar:hover {
+            transform: scale(1.1);
+        }
+
+        /* Interactive Practice */
+        .interactive-practice {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-teal);
+        }
+
+        .practice-title {
+            color: var(--accent-teal);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .practice-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .practice-button {
+            padding: 10px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-teal);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .practice-button:hover {
+            background: rgba(0, 150, 136, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .practice-display {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .pie-chart-container {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .measures-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .bar-chart-container {
+                height: 250px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes barRise {
+            from { transform: scaleY(0); opacity: 0; }
+            to { transform: scaleY(1); opacity: 1; }
+        }
+        
+        .bar-rise {
+            animation: barRise 0.5s ease forwards;
+            transform-origin: bottom;
+        }
+        
+        @keyframes pieSlice {
+            from { clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%); }
+        }
+        
+        .pie-slice {
+            animation: pieSlice 1s ease forwards;
+        }
+        
+        @keyframes dataGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.3); }
+            50% { box-shadow: 0 0 15px 5px rgba(255, 193, 7, 0.1); }
+        }
+        
+        .data-glow {
+            animation: dataGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes chartGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.2); }
+            50% { box-shadow: 0 0 20px 5px rgba(76, 175, 80, 0.1); }
+        }
+        
+        .chart-glow {
+            animation: chartGlow 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Data Pattern Background -->
+    <div class="data-bg" id="dataBg">
+        <!-- Numbers will be generated by JavaScript -->
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 6 Mathematics</h1>
+            <p class="welcome-subtitle">Become a data detective! Learn how to collect, organize, and analyze data. Create bar charts and pie charts, calculate mean, median, and mode, and discover what stories numbers can tell us about the world!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">📊📈🔢</span>
+                <span class="topic-name">Data Handling & Statistics</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Data Detective Journey</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 120</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0.8%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Math fact display -->
+                <div id="mathFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Data Detective Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background
+        function initBackground() {
+            const dataBg = document.getElementById('dataBg');
+            
+            // Create floating data numbers
+            const numbers = ['5', '8', '12', '15', '20', '25', '30', '7', '10', '18', '22', '6', '9', '14'];
+            
+            for (let i = 0; i < 25; i++) {
+                const number = document.createElement('div');
+                number.className = 'floating-number';
+                number.textContent = numbers[Math.floor(Math.random() * numbers.length)];
+                number.style.left = `${Math.random() * 100}%`;
+                number.style.top = `${Math.random() * 100}%`;
+                number.style.animationDelay = `${Math.random() * 15}s`;
+                number.style.fontSize = `${1.5 + Math.random() * 2}rem`;
+                
+                // Color numbers differently
+                const numValue = parseInt(number.textContent);
+                if (numValue < 10) {
+                    number.style.color = 'rgba(33, 150, 243, 0.1)';
+                } else if (numValue < 20) {
+                    number.style.color = 'rgba(76, 175, 80, 0.1)';
+                } else {
+                    number.style.color = 'rgba(255, 193, 7, 0.1)';
+                }
+                
+                dataBg.appendChild(number);
+            }
+        }
+
+        // Questions array - 120+ Grade 6 Data Handling questions
+        const questions = [
+            // Data Basics (1-20)
+            {
+                type: "data_basics",
+                question: "What is data?",
+                options: ["Collection of facts and numbers", "A type of graph", "A mathematical operation", "A computer program"],
+                answer: "A",
+                explanation: "Data is a collection of facts, numbers, or information that can be analyzed to find patterns or make decisions."
+            },
+            {
+                type: "data_basics",
+                question: "What is a data set?",
+                options: ["Group of related data values", "A single number", "A type of chart", "A computer file"],
+                answer: "A",
+                explanation: "A data set is a collection of related data values, like test scores, temperatures, or survey responses."
+            },
+            {
+                type: "data_basics",
+                question: "What is frequency in data handling?",
+                options: ["How often a value occurs", "The average value", "The highest value", "The difference between values"],
+                answer: "A",
+                explanation: "Frequency tells us how many times a particular value appears in a data set."
+            },
+            {
+                type: "data_basics",
+                question: "What does organizing data mean?",
+                options: ["Arranging data in a useful order", "Deleting unwanted data", "Creating graphs only", "Adding more numbers"],
+                answer: "A",
+                explanation: "Organizing data means arranging it in a systematic way, like sorting numbers or creating frequency tables."
+            },
+            // Bar Charts (21-40)
+            {
+                type: "bar_charts",
+                question: "What is a bar chart used for?",
+                options: ["Comparing different categories", "Showing parts of a whole", "Tracking changes over time", "Finding averages"],
+                answer: "A",
+                explanation: "Bar charts compare different categories using bars of different heights."
+            },
+            {
+                type: "bar_charts",
+                question: "In a bar chart, what does bar height represent?",
+                options: ["Value or frequency", "Color brightness", "Time duration", "Percentage"],
+                answer: "A",
+                explanation: "The height of each bar represents the value or frequency of that category."
+            },
+            {
+                type: "bar_charts",
+                question: "What should every bar chart have?",
+                options: ["Title and labeled axes", "Only bars", "Many colors", "No numbers"],
+                answer: "A",
+                explanation: "A good bar chart needs a title, labeled x-axis and y-axis, and clear categories."
+            },
+            {
+                type: "bar_charts",
+                question: "Which is NOT suitable for a bar chart?",
+                options: ["Showing temperature every minute", "Comparing favorite fruits", "Sports team scores", "Class test averages"],
+                answer: "A",
+                explanation: "Temperature every minute is better shown with a line graph. Bar charts are for comparing categories."
+            },
+            // Pie Charts (41-60)
+            {
+                type: "pie_charts",
+                question: "What is a pie chart used for?",
+                options: ["Showing parts of a whole", "Comparing unrelated items", "Tracking changes over time", "Finding the highest value"],
+                answer: "A",
+                explanation: "Pie charts show how a whole is divided into parts. Each slice represents a percentage of the whole."
+            },
+            {
+                type: "pie_charts",
+                question: "In a pie chart, what does slice size show?",
+                options: ["Percentage or proportion", "Actual numbers", "Time duration", "Distance"],
+                answer: "A",
+                explanation: "The size of each slice shows what percentage or proportion of the whole that category represents."
+            },
+            {
+                type: "pie_charts",
+                question: "What do all slices of a pie chart add up to?",
+                options: ["100% or 1 whole", "50%", "The largest value", "Zero"],
+                answer: "A",
+                explanation: "All slices of a pie chart add up to 100% (or 1 when using fractions)."
+            },
+            {
+                type: "pie_charts",
+                question: "Which is best shown with a pie chart?",
+                options: ["Favorite colors in class", "Monthly rainfall", "Daily temperatures", "Test scores over time"],
+                answer: "A",
+                explanation: "Favorite colors shows parts of a whole class. Pie charts work well for showing proportions like this."
+            },
+            // Mean (Average) (61-80)
+            {
+                type: "mean",
+                question: "What is the mean of numbers?",
+                options: ["The average", "The middle value", "The most frequent value", "The difference"],
+                answer: "A",
+                explanation: "Mean = Sum of all numbers ÷ Count of numbers. It's the mathematical average."
+            },
+            {
+                type: "mean",
+                question: "Find mean of: 5, 8, 12",
+                options: ["8.33", "8", "12", "25"],
+                answer: "A",
+                explanation: "Sum = 5+8+12 = 25, Count = 3, Mean = 25 ÷ 3 = 8.33"
+            },
+            {
+                type: "mean",
+                question: "Mean of: 10, 20, 30, 40",
+                options: ["25", "20", "30", "100"],
+                answer: "A",
+                explanation: "Sum = 10+20+30+40 = 100, Count = 4, Mean = 100 ÷ 4 = 25"
+            },
+            {
+                type: "mean",
+                question: "If mean of 3 numbers is 15, what's their sum?",
+                options: ["45", "15", "5", "30"],
+                answer: "A",
+                explanation: "Mean = Sum ÷ Count → 15 = Sum ÷ 3 → Sum = 15 × 3 = 45"
+            },
+            // Median (81-100)
+            {
+                type: "median",
+                question: "What is the median?",
+                options: ["The middle value when sorted", "The average", "The most common", "The sum"],
+                answer: "A",
+                explanation: "Median is the middle number when all values are arranged in order."
+            },
+            {
+                type: "median",
+                question: "Find median of: 7, 3, 9, 1, 5",
+                options: ["5", "7", "3", "9"],
+                answer: "A",
+                explanation: "Sorted: 1, 3, 5, 7, 9. Middle (3rd) = 5"
+            },
+            {
+                type: "median",
+                question: "Median of: 2, 4, 6, 8",
+                options: ["5", "4", "6", "8"],
+                answer: "A",
+                explanation: "Sorted: 2, 4, 6, 8. Middle two: 4 and 6. Median = (4+6) ÷ 2 = 5"
+            },
+            {
+                type: "median",
+                question: "For odd count of numbers, median is...",
+                options: ["The middle number", "Average of two middle", "Always the mean", "The first number"],
+                answer: "A",
+                explanation: "With odd count (like 5 numbers), median is the exact middle number (3rd in order)."
+            },
+            // Mode (101-120)
+            {
+                type: "mode",
+                question: "What is the mode?",
+                options: ["The most frequent value", "The average", "The middle value", "The sum"],
+                answer: "A",
+                explanation: "Mode is the value that appears most often in a data set."
+            },
+            {
+                type: "mode",
+                question: "Find mode of: 3, 5, 5, 7, 3, 5, 2",
+                options: ["5", "3", "7", "No mode"],
+                answer: "A",
+                explanation: "5 appears 3 times, 3 appears 2 times, others once. Mode = 5 (most frequent)."
+            },
+            {
+                type: "mode",
+                question: "Data set can have...",
+                options: ["One mode, multiple modes, or no mode", "Only one mode", "Always a mode", "Exactly two modes"],
+                answer: "A",
+                explanation: "Data can have: one mode (unimodal), two modes (bimodal), more modes (multimodal), or no mode if all values are unique."
+            },
+            {
+                type: "mode",
+                question: "Mode of: 1, 2, 3, 4, 5",
+                options: ["No mode", "3", "1", "5"],
+                answer: "A",
+                explanation: "All values appear once. No value repeats, so no mode."
+            },
+            // Range (121-140)
+            {
+                type: "range",
+                question: "What is range in statistics?",
+                options: ["Difference between highest and lowest", "The average value", "The middle value", "Sum of values"],
+                answer: "A",
+                explanation: "Range = Highest value - Lowest value. It shows how spread out the data is."
+            },
+            {
+                type: "range",
+                question: "Find range of: 10, 15, 8, 22, 14",
+                options: ["14", "12", "22", "8"],
+                answer: "A",
+                explanation: "Highest = 22, Lowest = 8, Range = 22 - 8 = 14"
+            },
+            // Comparing Charts (141-160)
+            {
+                type: "comparing_charts",
+                question: "When to use bar chart vs pie chart?",
+                options: ["Bar: compare categories, Pie: show parts of whole", "Always use bar", "Always use pie", "They're the same"],
+                answer: "A",
+                explanation: "Bar charts compare different categories. Pie charts show how a whole is divided into parts."
+            },
+            {
+                type: "comparing_charts",
+                question: "Which chart for tracking monthly sales?",
+                options: ["Line graph or bar chart", "Only pie chart", "Only pictograph", "Scatter plot"],
+                answer: "A",
+                explanation: "Monthly sales over time: line graph shows trends, bar chart compares months."
+            },
+            // Real World Applications (161-180)
+            {
+                type: "real_world",
+                question: "Best way to show class favorite sports?",
+                options: ["Bar chart or pie chart", "Line graph", "Scatter plot", "Only table"],
+                answer: "A",
+                explanation: "Favorite sports: bar chart compares counts, pie chart shows proportions of class."
+            },
+            {
+                type: "real_world",
+                question: "To find 'typical' test score, use...",
+                options: ["Mean or median", "Only mode", "Only range", "Only maximum"],
+                answer: "A",
+                explanation: "Mean or median gives a typical or central value. Mean is average, median is middle score."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: "",
+            dataSets: {},
+            currentChartData: null
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent data analysis!",
+            "Perfect chart interpretation!",
+            "Great statistical thinking!",
+            "Amazing! You're a data expert!",
+            "Perfect understanding of measures!",
+            "You're a statistics champion!",
+            "Outstanding chart creation!",
+            "Brilliant mean calculation!",
+            "You think like a data scientist!",
+            "Data handling mastery achieved!"
+        ];
+
+        // Data handling terms
+        const dataTerms = [
+            {
+                term: "Data",
+                definition: "Collection of facts, numbers, or information",
+                example: "Test scores, temperatures, survey responses"
+            },
+            {
+                term: "Data Set",
+                definition: "Group of related data values",
+                example: "All math test scores for Class 6A"
+            },
+            {
+                term: "Frequency",
+                definition: "How often a value occurs",
+                example: "Score 85 appears 3 times"
+            },
+            {
+                term: "Range",
+                definition: "Difference between highest and lowest",
+                formula: "Max - Min"
+            },
+            {
+                term: "Scale",
+                definition: "Interval between values on axis",
+                example: "Each line = 5 units"
+            },
+            {
+                term: "Category",
+                definition: "Group being measured or compared",
+                example: "Fruits, colors, months"
+            }
+        ];
+
+        // Chart types and uses
+        const chartTypes = [
+            {
+                name: "Bar Chart",
+                use: "Comparing different categories",
+                example: "Favorite fruits, sports team scores",
+                icon: "📊"
+            },
+            {
+                name: "Pie Chart",
+                use: "Showing parts of a whole",
+                example: "Class favorite colors, budget allocation",
+                icon: "🥧"
+            },
+            {
+                name: "Line Graph",
+                use: "Tracking changes over time",
+                example: "Temperature over month, growth over years",
+                icon: "📈"
+            },
+            {
+                name: "Pictograph",
+                use: "Comparing with pictures/symbols",
+                example: "Books read using book symbols",
+                icon: "🖼️"
+            }
+        ];
+
+        // Measures of center
+        const measures = [
+            {
+                name: "Mean",
+                definition: "The average (sum divided by count)",
+                formula: "Mean = Sum ÷ Count",
+                example: "Mean of 4, 6, 8 = (4+6+8)÷3 = 6",
+                icon: "⚖️",
+                color: "#2196F3"
+            },
+            {
+                name: "Median",
+                definition: "The middle value when sorted",
+                formula: "Middle value (or average of two middle)",
+                example: "Median of 3, 5, 7, 9, 11 = 7",
+                icon: "🎯",
+                color: "#9C27B0"
+            },
+            {
+                name: "Mode",
+                definition: "The most frequent value",
+                formula: "Value appearing most often",
+                example: "Mode of 2, 3, 3, 5, 5, 5 = 5",
+                icon: "🏆",
+                color: "#FFC107"
+            }
+        ];
+
+        // Interesting math facts about data
+        const mathFacts = [
+            "The word 'statistics' comes from Latin 'statisticum' meaning 'of the state' - originally used for government data!",
+            "The first known bar chart was created by William Playfair in 1786 to show Scotland's imports and exports!",
+            "Pie charts were also invented by William Playfair in 1801 to show proportions of the Turkish Empire!",
+            "The average human brain can process a chart 60,000 times faster than text!",
+            "Florence Nightingale used statistical charts to convince the British government to improve army hospitals!",
+            "Data visualization helps us see patterns and outliers that we might miss in raw numbers!",
+            "The term 'big data' refers to data sets so large that traditional processing is inadequate!",
+            "Every day, humans create about 2.5 quintillion bytes of data - that's 2,500,000,000,000,000,000 bytes!"
+        ];
+
+        // Sample data sets for practice
+        const sampleDataSets = {
+            favoriteFruits: {
+                name: "Favorite Fruits Survey",
+                data: {
+                    "Apple": 12,
+                    "Banana": 8,
+                    "Orange": 6,
+                    "Grapes": 10,
+                    "Mango": 4
+                },
+                total: 40
+            },
+            testScores: {
+                name: "Math Test Scores",
+                data: [85, 92, 78, 88, 95, 85, 90, 78, 85, 92],
+                mean: 87.2,
+                median: 86.5,
+                mode: 85,
+                range: 17
+            },
+            monthlyRainfall: {
+                name: "Monthly Rainfall (cm)",
+                data: {
+                    "Jan": 8.2,
+                    "Feb": 6.5,
+                    "Mar": 7.8,
+                    "Apr": 9.1,
+                    "May": 10.3,
+                    "Jun": 12.4
+                }
+            },
+            classPets: {
+                name: "Pets in Class 6A",
+                data: {
+                    "Dogs": 9,
+                    "Cats": 12,
+                    "Fish": 5,
+                    "Birds": 3,
+                    "None": 6
+                },
+                total: 35
+            }
+        };
+
+        // Color palette for charts
+        const chartColors = [
+            "#2196F3", "#4CAF50", "#FF9800", "#E91E63", "#9C27B0",
+            "#009688", "#3F51B5", "#FFC107", "#795548", "#607D8B"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const mathFact = document.getElementById('mathFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initBackground();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade6MathData');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade6MathData', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade6MathData_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade6MathData_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a data analysis expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent statistical skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep learning to master data handling!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Practice more with charts and measures!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Data handling is essential for understanding our world!";
+            }
+        }
+
+        // Create math fact display
+        function createMathFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'math-fact';
+            
+            factDiv.innerHTML = `<strong>Amazing Data Fact:</strong> ${mathFacts[Math.floor(Math.random() * mathFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "data_basics": "📊",
+                "bar_charts": "📈",
+                "pie_charts": "🥧",
+                "mean": "⚖️",
+                "median": "🎯",
+                "mode": "🏆",
+                "range": "📏",
+                "comparing_charts": "🔄",
+                "real_world": "🌍"
+            };
+            
+            let conceptName = "Data Basics";
+            let conceptIcon = "📊";
+            
+            if (question.type.includes("data_basics")) {
+                conceptName = "Data Basics";
+                conceptIcon = conceptIcons.data_basics;
+            } else if (question.type.includes("bar_charts")) {
+                conceptName = "Bar Charts";
+                conceptIcon = conceptIcons.bar_charts;
+            } else if (question.type.includes("pie_charts")) {
+                conceptName = "Pie Charts";
+                conceptIcon = conceptIcons.pie_charts;
+            } else if (question.type.includes("mean")) {
+                conceptName = "Mean (Average)";
+                conceptIcon = conceptIcons.mean;
+            } else if (question.type.includes("median")) {
+                conceptName = "Median";
+                conceptIcon = conceptIcons.median;
+            } else if (question.type.includes("mode")) {
+                conceptName = "Mode";
+                conceptIcon = conceptIcons.mode;
+            } else if (question.type.includes("range")) {
+                conceptName = "Range";
+                conceptIcon = conceptIcons.range;
+            } else if (question.type.includes("comparing_charts")) {
+                conceptName = "Comparing Charts";
+                conceptIcon = conceptIcons.comparing_charts;
+            } else if (question.type.includes("real_world")) {
+                conceptName = "Real-World Applications";
+                conceptIcon = conceptIcons.real_world;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("data_basics")) {
+                label.textContent = "Understanding data, data sets, frequency, and organization";
+            } else if (question.type.includes("bar_charts")) {
+                label.textContent = "Creating and interpreting bar charts for comparisons";
+            } else if (question.type.includes("pie_charts")) {
+                label.textContent = "Creating and interpreting pie charts for proportions";
+            } else if (question.type.includes("mean")) {
+                label.textContent = "Calculating the average (mean) of data sets";
+            } else if (question.type.includes("median")) {
+                label.textContent = "Finding the middle value (median) in ordered data";
+            } else if (question.type.includes("mode")) {
+                label.textContent = "Identifying the most frequent value (mode)";
+            } else if (question.type.includes("range")) {
+                label.textContent = "Calculating the spread of data (range)";
+            } else if (question.type.includes("comparing_charts")) {
+                label.textContent = "Choosing appropriate charts for different data types";
+            } else if (question.type.includes("real_world")) {
+                label.textContent = "Applying data handling to real-world situations";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create data handling visualization
+        function createDataVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            // Select a random data set
+            const dataSetKeys = Object.keys(sampleDataSets);
+            const randomKey = dataSetKeys[Math.floor(Math.random() * dataSetKeys.length)];
+            const selectedDataSet = sampleDataSets[randomKey];
+            
+            appState.currentChartData = selectedDataSet;
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--secondary-green);">Data Handling & Statistics</h3>
+                
+                <div class="charts-container">
+                    <div class="display-title">${selectedDataSet.name}</div>
+                    
+                    <!-- Bar Chart Section -->
+                    <div style="margin-bottom: 30px;">
+                        <div style="color: var(--primary-blue); font-weight: bold; margin-bottom: 10px; text-align: center;">Bar Chart</div>
+                        <div class="bar-chart-container">
+                            <div class="y-axis">
+                                <span id="yAxisMax"></span>
+                                <span id="yAxisMid"></span>
+                                <span>0</span>
+                            </div>
+                            <div class="bar-chart" id="barChart">
+                                <!-- Bars will be generated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pie Chart Section -->
+                    <div style="margin-bottom: 30px;">
+                        <div style="color: var(--accent-purple); font-weight: bold; margin-bottom: 10px; text-align: center;">Pie Chart</div>
+                        <div class="pie-chart-container">
+                            <div class="pie-chart" id="pieChart">
+                                <!-- Pie slices will be generated by JavaScript -->
+                            </div>
+                        </div>
+                        <div class="pie-legend" id="pieLegend">
+                            <!-- Legend will be generated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button class="btn btn-small btn-primary" onclick="updateChartData()">New Data Set</button>
+                        <button class="btn btn-small btn-secondary" onclick="toggleChartType()">Switch Chart</button>
+                    </div>
+                </div>
+                
+                <div class="data-set-container">
+                    <div class="display-title">Data Set Analysis</div>
+                    <div style="text-align: center; margin: 15px 0; font-family: 'Courier New', monospace;">
+                        ${getDataSetDisplay(selectedDataSet)}
+                    </div>
+                    <div class="data-set" id="dataSetDisplay">
+                        <!-- Data points will be generated by JavaScript -->
+                    </div>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button class="btn btn-small btn-primary" onclick="calculateMeasures()">Calculate Measures</button>
+                        <button class="btn btn-small btn-outline" onclick="sortData()">Sort Data</button>
+                    </div>
+                </div>
+                
+                <div class="measures-container">
+                    <div class="display-title">Measures of Center</div>
+                    <div class="measures-grid">
+                        ${measures.map(measure => `
+                            <div class="measure-card ${measure.name.toLowerCase()}-card">
+                                <div class="measure-icon">${measure.icon}</div>
+                                <div class="measure-title">${measure.name}</div>
+                                <div style="margin: 10px 0; color: var(--text-secondary);">
+                                    ${measure.definition}
+                                </div>
+                                <div class="measure-formula">${measure.formula}</div>
+                                <div class="measure-example">${measure.example}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div id="calculatedMeasures" style="text-align: center; margin-top: 20px; min-height: 40px;">
+                        <!-- Calculated measures will appear here -->
+                    </div>
+                </div>
+                
+                <div class="frequency-container">
+                    <div class="display-title">Frequency Table</div>
+                    <table class="frequency-table" id="frequencyTable">
+                        <thead>
+                            <tr>
+                                <th>Value</th>
+                                <th>Frequency</th>
+                                <th>Tally Marks</th>
+                            </tr>
+                        </thead>
+                        <tbody id="frequencyBody">
+                            <!-- Frequency rows will be generated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="range-container">
+                    <div class="display-title">Range Calculation</div>
+                    <div style="margin: 15px 0;">
+                        <div style="color: var(--text-secondary); margin-bottom: 10px;">
+                            Range = Highest Value - Lowest Value
+                        </div>
+                        <div class="range-scale" id="rangeScale">
+                            <div class="range-fill" id="rangeFill"></div>
+                        </div>
+                        <div class="range-min" id="rangeMin">Min</div>
+                        <div class="range-max" id="rangeMax">Max</div>
+                    </div>
+                    <div id="rangeResult" style="text-align: center; font-size: 1.2rem; color: var(--accent-indigo); min-height: 30px;">
+                        Range will be calculated here
+                    </div>
+                </div>
+                
+                <div class="data-input-container">
+                    <div class="display-title">Create Your Own Data Set</div>
+                    <div class="data-inputs">
+                        <div class="data-input">
+                            <input type="number" id="dataInput1" value="5" min="1" max="100">
+                            <input type="number" id="dataInput2" value="8" min="1" max="100">
+                            <input type="number" id="dataInput3" value="12" min="1" max="100">
+                            <input type="number" id="dataInput4" value="15" min="1" max="100">
+                            <input type="number" id="dataInput5" value="7" min="1" max="100">
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin: 15px 0;">
+                        <button class="btn btn-small btn-primary" onclick="analyzeCustomData()">Analyze Custom Data</button>
+                        <button class="btn btn-small btn-outline" onclick="generateRandomData()">Random Data</button>
+                    </div>
+                    <div id="customDataResults" style="text-align: center; min-height: 40px; color: var(--text-secondary);">
+                        Enter 5 numbers and click Analyze
+                    </div>
+                </div>
+                
+                <table class="coordinate-table">
+                    <thead>
+                        <tr>
+                            <th>Data Term</th>
+                            <th>Definition</th>
+                            <th>Example/Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${dataTerms.map(term => `
+                            <tr>
+                                <td style="font-weight: bold; color: var(--accent-yellow);">${term.term}</td>
+                                <td>${term.definition}</td>
+                                <td>${term.example || term.formula}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                
+                <div class="interactive-practice">
+                    <div class="practice-title">Interactive Practice</div>
+                    <div class="practice-controls">
+                        <div class="practice-button" onclick="practiceMean()">Calculate Mean</div>
+                        <div class="practice-button" onclick="practiceMedian()">Find Median</div>
+                        <div class="practice-button" onclick="practiceMode()">Identify Mode</div>
+                        <div class="practice-button" onclick="practiceChartReading()">Read Charts</div>
+                    </div>
+                    <div class="practice-display" id="practiceDisplay">
+                        Click buttons above to practice data skills
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--accent-orange);">
+                    <div style="color: var(--accent-orange); font-weight: bold; margin-bottom: 10px;">Quick Practice:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. Data: 5, 8, 8, 12, 15 - Find mean, median, mode<br>
+                        2. Create bar chart for: Apples:5, Oranges:8, Bananas:3<br>
+                        3. What chart for "Favorite Colors" survey?<br>
+                        4. Calculate range: 23, 45, 12, 67, 34<br>
+                        5. Frequency of 8 in: 5,8,3,8,9,5,8
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--accent-teal);">
+                    <div style="color: var(--accent-teal); font-weight: bold; margin-bottom: 10px; text-align: center;">Data Tips</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                        <strong>Mean:</strong> Sum ÷ Count (average)<br>
+                        <strong>Median:</strong> Middle when sorted<br>
+                        <strong>Mode:</strong> Most frequent value<br>
+                        <strong>Range:</strong> Max - Min (spread)<br>
+                        <strong>Charts:</strong> Bar=compare, Pie=parts of whole
+                    </div>
+                </div>
+            `;
+            
+            // Initialize charts after DOM is ready
+            setTimeout(() => {
+                createBarChart();
+                createPieChart();
+                displayDataSet();
+                createFrequencyTable();
+                calculateRange();
+            }, 100);
+            
+            return vizDiv;
+        }
+
+        // Helper functions
+        function getDataSetDisplay(dataSet) {
+            if (Array.isArray(dataSet.data)) {
+                return `[${dataSet.data.join(', ')}]`;
+            } else {
+                return Object.entries(dataSet.data).map(([key, value]) => `${key}: ${value}`).join(', ');
+            }
+        }
+
+        function createBarChart() {
+            const barChart = document.getElementById('barChart');
+            const yAxisMax = document.getElementById('yAxisMax');
+            const yAxisMid = document.getElementById('yAxisMid');
+            
+            if (!barChart || !appState.currentChartData) return;
+            
+            barChart.innerHTML = '';
+            
+            const dataSet = appState.currentChartData;
+            let maxValue = 0;
+            let categories = [];
+            let values = [];
+            
+            if (Array.isArray(dataSet.data)) {
+                // For array data, create frequency distribution
+                const freq = {};
+                dataSet.data.forEach(value => {
+                    freq[value] = (freq[value] || 0) + 1;
+                });
+                categories = Object.keys(freq);
+                values = Object.values(freq);
+                maxValue = Math.max(...values);
+            } else {
+                // For object data
+                categories = Object.keys(dataSet.data);
+                values = Object.values(dataSet.data);
+                maxValue = Math.max(...values);
+            }
+            
+            // Set y-axis labels
+            const roundedMax = Math.ceil(maxValue / 5) * 5;
+            yAxisMax.textContent = roundedMax;
+            yAxisMid.textContent = Math.round(roundedMax / 2);
+            
+            // Create bars
+            categories.forEach((category, index) => {
+                const value = values[index];
+                const barHeight = (value / roundedMax) * 100;
+                
+                const bar = document.createElement('div');
+                bar.className = 'bar bar-rise';
+                bar.style.height = `${barHeight}%`;
+                bar.style.background = chartColors[index % chartColors.length];
+                bar.style.animationDelay = `${index * 0.1}s`;
+                
+                const barValue = document.createElement('div');
+                barValue.className = 'bar-value';
+                barValue.textContent = value;
+                
+                const barLabel = document.createElement('div');
+                barLabel.className = 'bar-label';
+                barLabel.textContent = category;
+                
+                bar.appendChild(barValue);
+                bar.appendChild(barLabel);
+                barChart.appendChild(bar);
+            });
+        }
+
+        function createPieChart() {
+            const pieChart = document.getElementById('pieChart');
+            const pieLegend = document.getElementById('pieLegend');
+            
+            if (!pieChart || !appState.currentChartData) return;
+            
+            pieChart.innerHTML = '';
+            pieLegend.innerHTML = '';
+            
+            const dataSet = appState.currentChartData;
+            let categories = [];
+            let values = [];
+            let total = 0;
+            
+            if (Array.isArray(dataSet.data)) {
+                // For array data, create frequency distribution
+                const freq = {};
+                dataSet.data.forEach(value => {
+                    freq[value] = (freq[value] || 0) + 1;
+                });
+                categories = Object.keys(freq);
+                values = Object.values(freq);
+                total = values.reduce((sum, val) => sum + val, 0);
+            } else {
+                // For object data
+                categories = Object.keys(dataSet.data);
+                values = Object.values(dataSet.data);
+                total = dataSet.total || values.reduce((sum, val) => sum + val, 0);
+            }
+            
+            let accumulatedAngle = 0;
+            
+            categories.forEach((category, index) => {
+                const value = values[index];
+                const percentage = (value / total) * 100;
+                const angle = (percentage / 100) * 360;
+                
+                // Create pie segment
+                const segment = document.createElement('div');
+                segment.className = 'pie-segment pie-slice';
+                segment.style.background = chartColors[index % chartColors.length];
+                segment.style.transform = `rotate(${accumulatedAngle}deg)`;
+                segment.style.clipPath = `polygon(50% 50%, 50% 0%, ${50 + 50 * Math.cos(angle * Math.PI / 180)}% ${50 - 50 * Math.sin(angle * Math.PI / 180)}%)`;
+                segment.style.animationDelay = `${index * 0.2}s`;
+                
+                pieChart.appendChild(segment);
+                
+                // Create legend item
+                const legendItem = document.createElement('div');
+                legendItem.className = 'legend-item';
+                
+                const legendColor = document.createElement('div');
+                legendColor.className = 'legend-color';
+                legendColor.style.background = chartColors[index % chartColors.length];
+                
+                const legendLabel = document.createElement('div');
+                legendLabel.className = 'legend-label';
+                legendLabel.textContent = `${category}: ${value} (${percentage.toFixed(1)}%)`;
+                
+                legendItem.appendChild(legendColor);
+                legendItem.appendChild(legendLabel);
+                pieLegend.appendChild(legendItem);
+                
+                accumulatedAngle += angle;
+            });
+        }
+
+        function displayDataSet() {
+            const dataSetDisplay = document.getElementById('dataSetDisplay');
+            if (!dataSetDisplay || !appState.currentChartData) return;
+            
+            dataSetDisplay.innerHTML = '';
+            
+            const dataSet = appState.currentChartData;
+            
+            if (Array.isArray(dataSet.data)) {
+                dataSet.data.forEach((value, index) => {
+                    const dataPoint = document.createElement('div');
+                    dataPoint.className = 'data-point data-glow';
+                    dataPoint.textContent = value;
+                    dataPoint.style.animationDelay = `${index * 0.1}s`;
+                    dataPoint.addEventListener('click', function() {
+                        this.classList.toggle('selected');
+                    });
+                    dataSetDisplay.appendChild(dataPoint);
+                });
+            } else {
+                Object.entries(dataSet.data).forEach(([key, value], index) => {
+                    const dataPoint = document.createElement('div');
+                    dataPoint.className = 'data-point data-glow';
+                    dataPoint.textContent = `${key}: ${value}`;
+                    dataPoint.style.animationDelay = `${index * 0.1}s`;
+                    dataSetDisplay.appendChild(dataPoint);
+                });
+            }
+        }
+
+        function createFrequencyTable() {
+            const frequencyBody = document.getElementById('frequencyBody');
+            if (!frequencyBody || !appState.currentChartData) return;
+            
+            frequencyBody.innerHTML = '';
+            
+            const dataSet = appState.currentChartData;
+            
+            if (Array.isArray(dataSet.data)) {
+                // Create frequency distribution
+                const freq = {};
+                dataSet.data.forEach(value => {
+                    freq[value] = (freq[value] || 0) + 1;
+                });
+                
+                // Sort by value
+                const sortedValues = Object.keys(freq).sort((a, b) => a - b);
+                
+                sortedValues.forEach((value, index) => {
+                    const count = freq[value];
+                    const tally = '|'.repeat(count).match(/.{1,5}/g)?.join(' ') || '';
+                    
+                    const row = document.createElement('tr');
+                    row.style.animationDelay = `${index * 0.1}s`;
+                    row.className = 'fade-in';
+                    
+                    row.innerHTML = `
+                        <td style="font-weight: bold;">${value}</td>
+                        <td>${count}</td>
+                        <td style="font-family: 'Courier New', monospace;">${tally}</td>
+                    `;
+                    
+                    frequencyBody.appendChild(row);
+                });
+            }
+        }
+
+        function calculateRange() {
+            const rangeMin = document.getElementById('rangeMin');
+            const rangeMax = document.getElementById('rangeMax');
+            const rangeFill = document.getElementById('rangeFill');
+            const rangeResult = document.getElementById('rangeResult');
+            
+            if (!rangeMin || !appState.currentChartData) return;
+            
+            const dataSet = appState.currentChartData;
+            
+            if (Array.isArray(dataSet.data) && dataSet.data.length > 0) {
+                const values = dataSet.data;
+                const min = Math.min(...values);
+                const max = Math.max(...values);
+                const range = max - min;
+                
+                rangeMin.textContent = `Min: ${min}`;
+                rangeMax.textContent = `Max: ${max}`;
+                rangeResult.textContent = `Range = ${max} - ${min} = ${range}`;
+                
+                // Visual representation
+                const totalPossibleRange = max + 10; // Add buffer for visualization
+                const minPercent = (min / totalPossibleRange) * 100;
+                const maxPercent = (max / totalPossibleRange) * 100;
+                const widthPercent = maxPercent - minPercent;
+                
+                rangeFill.style.left = `${minPercent}%`;
+                rangeFill.style.width = `${widthPercent}%`;
+            }
+        }
+
+        // Global functions for interactive controls
+        window.updateChartData = function() {
+            const dataSetKeys = Object.keys(sampleDataSets);
+            const randomKey = dataSetKeys[Math.floor(Math.random() * dataSetKeys.length)];
+            appState.currentChartData = sampleDataSets[randomKey];
+            
+            createBarChart();
+            createPieChart();
+            displayDataSet();
+            createFrequencyTable();
+            calculateRange();
+            
+            // Clear previous calculations
+            document.getElementById('calculatedMeasures').innerHTML = '';
+            document.getElementById('customDataResults').innerHTML = 'New data set loaded!';
+        };
+
+        window.toggleChartType = function() {
+            // This would toggle between different chart views in a more complex implementation
+            alert("In a full implementation, this would switch between chart types!");
+        };
+
+        window.calculateMeasures = function() {
+            const calculatedMeasures = document.getElementById('calculatedMeasures');
+            if (!calculatedMeasures || !appState.currentChartData) return;
+            
+            const dataSet = appState.currentChartData;
+            
+            if (Array.isArray(dataSet.data) && dataSet.data.length > 0) {
+                const values = dataSet.data;
+                const sorted = [...values].sort((a, b) => a - b);
+                
+                // Calculate mean
+                const sum = values.reduce((total, val) => total + val, 0);
+                const mean = (sum / values.length).toFixed(2);
+                
+                // Calculate median
+                let median;
+                if (values.length % 2 === 0) {
+                    const mid1 = sorted[values.length / 2 - 1];
+                    const mid2 = sorted[values.length / 2];
+                    median = ((mid1 + mid2) / 2).toFixed(2);
+                } else {
+                    median = sorted[Math.floor(values.length / 2)].toFixed(2);
+                }
+                
+                // Calculate mode
+                const freq = {};
+                values.forEach(val => {
+                    freq[val] = (freq[val] || 0) + 1;
+                });
+                const maxFreq = Math.max(...Object.values(freq));
+                const modes = Object.keys(freq).filter(val => freq[val] === maxFreq);
+                const mode = modes.length === values.length ? "No mode (all unique)" : modes.join(', ');
+                
+                // Calculate range
+                const range = Math.max(...values) - Math.min(...values);
+                
+                calculatedMeasures.innerHTML = `
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 10px;">
+                        <div style="background: rgba(33, 150, 243, 0.1); padding: 10px; border-radius: 8px; border: 2px solid var(--primary-blue);">
+                            <div style="color: var(--primary-blue); font-weight: bold;">Mean</div>
+                            <div>${mean}</div>
+                        </div>
+                        <div style="background: rgba(156, 39, 176, 0.1); padding: 10px; border-radius: 8px; border: 2px solid var(--accent-purple);">
+                            <div style="color: var(--accent-purple); font-weight: bold;">Median</div>
+                            <div>${median}</div>
+                        </div>
+                        <div style="background: rgba(255, 193, 7, 0.1); padding: 10px; border-radius: 8px; border: 2px solid var(--accent-yellow);">
+                            <div style="color: var(--accent-yellow); font-weight: bold;">Mode</div>
+                            <div>${mode}</div>
+                        </div>
+                        <div style="background: rgba(63, 81, 181, 0.1); padding: 10px; border-radius: 8px; border: 2px solid var(--accent-indigo);">
+                            <div style="color: var(--accent-indigo); font-weight: bold;">Range</div>
+                            <div>${range}</div>
+                        </div>
+                    </div>
+                `;
+                
+                // Highlight data points
+                const dataPoints = document.querySelectorAll('.data-point');
+                dataPoints.forEach(point => {
+                    point.classList.remove('mean', 'median', 'mode', 'sorted');
+                    
+                    const value = parseInt(point.textContent);
+                    if (value === parseFloat(mean)) {
+                        point.classList.add('mean');
+                    }
+                    if (value === parseFloat(median)) {
+                        point.classList.add('median');
+                    }
+                    if (modes.includes(value.toString())) {
+                        point.classList.add('mode');
+                    }
+                });
+            }
+        };
+
+        window.sortData = function() {
+            const dataSetDisplay = document.getElementById('dataSetDisplay');
+            if (!dataSetDisplay || !appState.currentChartData) return;
+            
+            const dataSet = appState.currentChartData;
+            
+            if (Array.isArray(dataSet.data)) {
+                const sorted = [...dataSet.data].sort((a, b) => a - b);
+                
+                dataSetDisplay.innerHTML = '';
+                sorted.forEach((value, index) => {
+                    const dataPoint = document.createElement('div');
+                    dataPoint.className = 'data-point sorted data-glow';
+                    dataPoint.textContent = value;
+                    dataPoint.style.animationDelay = `${index * 0.1}s`;
+                    dataSetDisplay.appendChild(dataPoint);
+                });
+            }
+        };
+
+        window.analyzeCustomData = function() {
+            const inputs = ['dataInput1', 'dataInput2', 'dataInput3', 'dataInput4', 'dataInput5'];
+            const values = inputs.map(id => {
+                const input = document.getElementById(id);
+                return input ? parseInt(input.value) || 0 : 0;
+            });
+            
+            // Filter out zeros (if user left inputs empty)
+            const validValues = values.filter(val => val > 0);
+            
+            if (validValues.length === 0) {
+                document.getElementById('customDataResults').innerHTML = 
+                    '<span style="color: var(--accent-red);">Please enter at least one valid number!</span>';
+                return;
+            }
+            
+            // Calculate measures
+            const sum = validValues.reduce((total, val) => total + val, 0);
+            const mean = (sum / validValues.length).toFixed(2);
+            
+            const sorted = [...validValues].sort((a, b) => a - b);
+            let median;
+            if (validValues.length % 2 === 0) {
+                const mid1 = sorted[validValues.length / 2 - 1];
+                const mid2 = sorted[validValues.length / 2];
+                median = ((mid1 + mid2) / 2).toFixed(2);
+            } else {
+                median = sorted[Math.floor(validValues.length / 2)].toFixed(2);
+            }
+            
+            const freq = {};
+            validValues.forEach(val => {
+                freq[val] = (freq[val] || 0) + 1;
+            });
+            const maxFreq = Math.max(...Object.values(freq));
+            const modes = Object.keys(freq).filter(val => freq[val] === maxFreq);
+            const mode = modes.length === validValues.length ? "No mode" : modes.join(', ');
+            
+            const range = Math.max(...validValues) - Math.min(...validValues);
+            
+            document.getElementById('customDataResults').innerHTML = `
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px;">
+                    <div style="background: var(--dark-surface); padding: 8px; border-radius: 6px;">
+                        <div style="color: var(--primary-blue); font-size: 0.9rem;">Mean</div>
+                        <div>${mean}</div>
+                    </div>
+                    <div style="background: var(--dark-surface); padding: 8px; border-radius: 6px;">
+                        <div style="color: var(--accent-purple); font-size: 0.9rem;">Median</div>
+                        <div>${median}</div>
+                    </div>
+                    <div style="background: var(--dark-surface); padding: 8px; border-radius: 6px;">
+                        <div style="color: var(--accent-yellow); font-size: 0.9rem;">Mode</div>
+                        <div>${mode}</div>
+                    </div>
+                    <div style="background: var(--dark-surface); padding: 8px; border-radius: 6px;">
+                        <div style="color: var(--accent-indigo); font-size: 0.9rem;">Range</div>
+                        <div>${range}</div>
+                    </div>
+                </div>
+            `;
+        };
+
+        window.generateRandomData = function() {
+            const inputs = ['dataInput1', 'dataInput2', 'dataInput3', 'dataInput4', 'dataInput5'];
+            
+            inputs.forEach((id, index) => {
+                const input = document.getElementById(id);
+                if (input) {
+                    // Generate random numbers between 1 and 20
+                    input.value = Math.floor(Math.random() * 20) + 1;
+                }
+            });
+            
+            // Automatically analyze the new data
+            setTimeout(() => analyzeCustomData(), 100);
+        };
+
+        // Interactive practice functions
+        window.practiceMean = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const dataSets = [
+                {data: [5, 8, 12], mean: 8.33},
+                {data: [10, 20, 30, 40], mean: 25},
+                {data: [7, 9, 11, 13, 15], mean: 11},
+                {data: [3, 3, 6, 9, 9], mean: 6}
+            ];
+            
+            const dataSet = dataSets[Math.floor(Math.random() * dataSets.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary-blue);">Calculate the Mean</div>
+                    <div style="font-size: 1.2rem; margin-bottom: 20px; font-family: 'Courier New', monospace;">
+                        Data: [${dataSet.data.join(', ')}]
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        Mean = Sum of all numbers ÷ Count of numbers
+                    </div>
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <div style="font-size: 1.3rem; color: var(--accent-orange);">
+                            Sum = ${dataSet.data.reduce((a, b) => a + b, 0)}<br>
+                            Count = ${dataSet.data.length}<br>
+                            Mean = ${dataSet.data.reduce((a, b) => a + b, 0)} ÷ ${dataSet.data.length} = ${dataSet.mean}
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        window.practiceMedian = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const dataSets = [
+                {data: [7, 3, 9, 1, 5], median: 5},
+                {data: [2, 4, 6, 8], median: 5},
+                {data: [12, 18, 15, 21, 14], median: 15},
+                {data: [5, 8, 2, 9, 3, 7], median: 6.5}
+            ];
+            
+            const dataSet = dataSets[Math.floor(Math.random() * dataSets.length)];
+            const sorted = [...dataSet.data].sort((a, b) => a - b);
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-purple);">Find the Median</div>
+                    <div style="font-size: 1.2rem; margin-bottom: 15px; font-family: 'Courier New', monospace;">
+                        Data: [${dataSet.data.join(', ')}]
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <strong>Step 1:</strong> Sort the data
+                    </div>
+                    <div style="background: var(--dark-surface); padding: 10px; border-radius: 8px; margin: 10px 0; font-family: 'Courier New', monospace;">
+                        Sorted: [${sorted.join(', ')}]
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <strong>Step 2:</strong> Find the middle value
+                    </div>
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <div style="font-size: 1.3rem; color: var(--accent-orange);">
+                            Median = ${dataSet.median}
+                        </div>
+                        <div style="margin-top: 10px; font-size: 0.9rem; color: var(--text-secondary);">
+                            ${dataSet.data.length % 2 === 0 ? 
+                                `Even count: average of two middle values (${sorted[sorted.length/2-1]} and ${sorted[sorted.length/2]})` : 
+                                `Odd count: middle value (position ${Math.floor(sorted.length/2) + 1})`
+                            }
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        window.practiceMode = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const dataSets = [
+                {data: [3, 5, 5, 7, 3, 5, 2], mode: 5},
+                {data: [2, 4, 4, 6, 6, 8], mode: "4 and 6 (bimodal)"},
+                {data: [1, 2, 3, 4, 5], mode: "No mode"},
+                {data: [8, 8, 9, 9, 9, 10, 10], mode: 9}
+            ];
+            
+            const dataSet = dataSets[Math.floor(Math.random() * dataSets.length)];
+            
+            // Count frequencies
+            const freq = {};
+            dataSet.data.forEach(val => {
+                freq[val] = (freq[val] || 0) + 1;
+            });
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-yellow);">Identify the Mode</div>
+                    <div style="font-size: 1.2rem; margin-bottom: 15px; font-family: 'Courier New', monospace;">
+                        Data: [${dataSet.data.join(', ')}]
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <strong>Step 1:</strong> Count frequency of each value
+                    </div>
+                    <div style="background: var(--dark-surface); padding: 10px; border-radius: 8px; margin: 10px 0;">
+                        ${Object.entries(freq).map(([val, count]) => 
+                            `<div>${val} appears ${count} time${count > 1 ? 's' : ''}</div>`
+                        ).join('')}
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <strong>Step 2:</strong> Find value with highest frequency
+                    </div>
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <div style="font-size: 1.3rem; color: var(--accent-orange);">
+                            Mode = ${dataSet.mode}
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        window.practiceChartReading = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const chartQuestions = [
+                {
+                    type: "bar",
+                    question: "In a bar chart showing favorite fruits, Apple bar is 12 units high, Banana is 8. How many more people prefer apples?",
+                    answer: "4 more people (12 - 8 = 4)"
+                },
+                {
+                    type: "pie",
+                    question: "A pie chart shows 40% blue, 30% red, 30% green. If total is 50 people, how many prefer blue?",
+                    answer: "20 people (40% of 50 = 20)"
+                },
+                {
+                    type: "bar",
+                    question: "Bar heights: Math=15, Science=12, English=18. Which subject has highest score?",
+                    answer: "English (18 is highest)"
+                },
+                {
+                    type: "pie",
+                    question: "Pie slice represents 25% of total. If total is 80, what is the slice value?",
+                    answer: "20 (25% of 80 = 20)"
+                }
+            ];
+            
+            const question = chartQuestions[Math.floor(Math.random() * chartQuestions.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--secondary-green);">Chart Reading Practice</div>
+                    <div style="margin-bottom: 20px; font-style: italic;">
+                        "${question.question}"
+                    </div>
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <div style="font-size: 1.3rem; color: var(--accent-orange);">
+                            ${question.answer}
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Tip:</strong> ${question.type === "bar" ? 
+                            "Bar height = value" : 
+                            "Pie slice percentage × total = slice value"}
+                    </div>
+                </div>
+            `;
+        };
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            mathFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            mathFact.appendChild(createMathFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createDataVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

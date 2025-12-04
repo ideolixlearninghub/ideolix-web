@@ -1,0 +1,3542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Science - Earth & Space Science | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Earth & Space Theme */
+        :root {
+            --primary-blue: #2196F3;
+            --secondary-green: #4CAF50;
+            --accent-orange: #FF9800;
+            --accent-purple: #9C27B0;
+            --accent-red: #F44336;
+            --accent-teal: #009688;
+            --accent-yellow: #FFEB3B;
+            --accent-indigo: #3F51B5;
+            --accent-brown: #795548;
+            --accent-gray: #9E9E9E;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(33, 150, 243, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        /* Topic Selection */
+        .topic-selection {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        @media (max-width: 768px) {
+            .topic-selection {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .topic-card {
+            background: var(--dark-surface);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 280px;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+
+        .topic-card.active {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .topic-card.rocks {
+            border-color: var(--accent-brown);
+        }
+
+        .topic-card.solar {
+            border-color: var(--accent-orange);
+        }
+
+        .topic-card.earth {
+            border-color: var(--secondary-green);
+        }
+
+        .topic-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .topic-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .topic-card.rocks .topic-title {
+            color: var(--accent-brown);
+        }
+
+        .topic-card.solar .topic-title {
+            color: var(--accent-orange);
+        }
+
+        .topic-card.earth .topic-title {
+            color: var(--secondary-green);
+        }
+
+        .topic-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .topic-examples {
+            text-align: left;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .topic-examples div {
+            margin: 5px 0;
+            padding-left: 10px;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(33, 150, 243, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-blue);
+        }
+
+        .topic-icon-small {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-rocks {
+            background: var(--accent-brown);
+            color: white;
+            box-shadow: 0 4px 15px rgba(121, 85, 72, 0.4);
+        }
+
+        .btn-rocks:hover {
+            background: #5D4037;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(121, 85, 72, 0.5);
+        }
+
+        .btn-solar {
+            background: var(--accent-orange);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+        }
+
+        .btn-solar:hover {
+            background: #F57C00;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.5);
+        }
+
+        .btn-earth {
+            background: var(--secondary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-earth:hover {
+            background: #388E3C;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--accent-teal);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 150, 136, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #00796B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 150, 136, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .science-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-orange);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--accent-teal);
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: var(--accent-red);
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid var(--accent-red);
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: var(--accent-red);
+            color: white;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: var(--accent-red);
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+        }
+
+        /* Rocks Display */
+        .rocks-diagram {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid var(--accent-brown);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .diagram-title {
+            color: var(--accent-brown);
+            margin-bottom: 15px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rock-property {
+            position: relative;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .rock-property:hover {
+            background: rgba(121, 85, 72, 0.1);
+            transform: translateX(5px);
+        }
+
+        .property-label {
+            font-weight: bold;
+            color: var(--accent-brown);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .property-explanation {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            padding-left: 30px;
+        }
+
+        /* Properties Comparison */
+        .properties-comparison {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 992px) {
+            .properties-comparison {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .properties-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .property-card {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .property-card.igneous {
+            border-color: var(--accent-red);
+        }
+
+        .property-card.sedimentary {
+            border-color: var(--accent-brown);
+        }
+
+        .property-card.metamorphic {
+            border-color: var(--accent-purple);
+        }
+
+        .property-card.planet {
+            border-color: var(--accent-orange);
+        }
+
+        .property-card.rotation {
+            border-color: var(--secondary-green);
+        }
+
+        .property-card.revolution {
+            border-color: var(--primary-blue);
+        }
+
+        .property-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .property-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .property-card.igneous .property-name {
+            color: var(--accent-red);
+        }
+
+        .property-card.sedimentary .property-name {
+            color: var(--accent-brown);
+        }
+
+        .property-card.metamorphic .property-name {
+            color: var(--accent-purple);
+        }
+
+        .property-card.planet .property-name {
+            color: var(--accent-orange);
+        }
+
+        .property-card.rotation .property-name {
+            color: var(--secondary-green);
+        }
+
+        .property-card.revolution .property-name {
+            color: var(--primary-blue);
+        }
+
+        .property-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        /* Process Display */
+        .process-display {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-teal);
+        }
+
+        .process-title {
+            color: var(--accent-teal);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .process-step {
+            background: rgba(0, 150, 136, 0.1);
+            padding: 15px;
+            border-radius: 6px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: var(--accent-teal);
+            margin-bottom: 5px;
+        }
+
+        .step-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Planet Display */
+        .planet-display {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .planet-display {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .planet-item {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .planet-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--accent-orange);
+        }
+
+        .planet-title {
+            font-weight: bold;
+            color: var(--accent-orange);
+            margin-bottom: 8px;
+        }
+
+        .planet-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Cycle Display */
+        .cycle-display {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--secondary-green);
+        }
+
+        .cycle-title {
+            color: var(--secondary-green);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .cycle-diagram {
+            background: rgba(76, 175, 80, 0.1);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            text-align: center;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+        .cycle-part {
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin: 0 5px;
+        }
+
+        .rotation-part {
+            background: rgba(76, 175, 80, 0.2);
+            color: var(--secondary-green);
+        }
+
+        .revolution-part {
+            background: rgba(33, 150, 243, 0.2);
+            color: var(--primary-blue);
+        }
+
+        /* Examples Table */
+        .examples-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .examples-table th {
+            background: var(--dark-surface);
+            padding: 12px;
+            text-align: left;
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--primary-blue);
+        }
+
+        .examples-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+        }
+
+        .examples-table tr:hover {
+            background: rgba(33, 150, 243, 0.05);
+        }
+
+        /* Science Challenge */
+        .science-challenge {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .challenge-title {
+            color: var(--accent-orange);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .challenge-area {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .challenge-scenario {
+            font-style: italic;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .challenge-question {
+            font-weight: bold;
+            color: var(--accent-orange);
+            margin-bottom: 15px;
+        }
+
+        .challenge-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .challenge-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .challenge-option {
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .challenge-option:hover {
+            background: rgba(255, 152, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .properties-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .planet-display {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes rockCycle {
+            0% { transform: rotate(0); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .rock-cycle {
+            animation: rockCycle 20s linear infinite;
+        }
+        
+        @keyframes orbit {
+            0% { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+        }
+        
+        .orbit {
+            animation: orbit 10s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .spin {
+            animation: spin 5s linear infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes shine {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+        
+        .shine {
+            animation: shine 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1465101162946-4377e57745c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 5 Science: Earth & Space Science</h1>
+            <p class="welcome-subtitle">Explore the fascinating world beneath our feet and the wonders beyond our planet! Learn about rocks and minerals, discover our solar system, and understand Earth's motions that create day, night, and seasons in this geological and astronomical adventure!</p>
+            
+            <div class="topic-selection" id="topicSelection">
+                <!-- Rocks & Minerals Card -->
+                <div class="topic-card rocks" id="rocksCard">
+                    <div class="topic-icon">🪨💎</div>
+                    <div class="topic-title">Rocks & Minerals</div>
+                    <div class="topic-description">Discover the building blocks of our planet! Learn about different types of rocks, mineral properties, the rock cycle, and how rocks form through amazing geological processes.</div>
+                    <div class="topic-examples">
+                        <div><strong>Igneous:</strong> Granite, basalt, obsidian</div>
+                        <div><strong>Sedimentary:</strong> Sandstone, limestone, shale</div>
+                        <div><strong>Metamorphic:</strong> Marble, slate, quartzite</div>
+                    </div>
+                </div>
+                
+                <!-- Solar System Card -->
+                <div class="topic-card solar" id="solarCard">
+                    <div class="topic-icon">☀️🪐</div>
+                    <div class="topic-title">Solar System</div>
+                    <div class="topic-description">Journey through our cosmic neighborhood! Explore the Sun, planets, moons, asteroids, and comets. Learn about planetary characteristics, orbits, and what makes each celestial body unique.</div>
+                    <div class="topic-examples">
+                        <div><strong>Inner Planets:</strong> Mercury, Venus, Earth, Mars</div>
+                        <div><strong>Outer Planets:</strong> Jupiter, Saturn, Uranus, Neptune</div>
+                        <div><strong>Dwarf Planets:</strong> Pluto, Ceres, Eris</div>
+                    </div>
+                </div>
+                
+                <!-- Earth's Motion Card -->
+                <div class="topic-card earth" id="earthCard">
+                    <div class="topic-icon">🌍🔄</div>
+                    <div class="topic-title">Earth's Motions</div>
+                    <div class="topic-description">Understand Earth's movements in space! Learn how rotation creates day and night, how revolution causes seasons, and explore phenomena like solstices, equinoxes, and time zones.</div>
+                    <div class="topic-examples">
+                        <div><strong>Rotation:</strong> 24 hours, causes day/night</div>
+                        <div><strong>Revolution:</strong> 365.25 days, causes seasons</div>
+                        <div><strong>Effects:</strong> Seasons, climate zones, tides</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-rocks" id="startRocks">
+                    <span>Start Rocks & Minerals Challenge</span>
+                </button>
+                <button class="btn btn-solar" id="startSolar">
+                    <span>Start Solar System Challenge</span>
+                </button>
+                <button class="btn btn-earth" id="startEarth">
+                    <span>Start Earth's Motions Challenge</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 150</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0.7%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Science fact display -->
+                <div id="scienceFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Earth & Space Science Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Rocks & Minerals Questions (50 questions)
+        const rocksQuestions = [
+            // Basic Rocks (1-10)
+            {
+                type: "basic_rocks",
+                question: "What are rocks made of?",
+                options: ["Minerals", "Soil", "Water", "Plants"],
+                answer: "A",
+                explanation: "Rocks are composed of one or more minerals combined together."
+            },
+            {
+                type: "basic_rocks",
+                question: "What is a mineral?",
+                options: ["A naturally occurring solid with a crystal structure", "Any type of rock", "Man-made material", "Liquid substance"],
+                answer: "A",
+                explanation: "Minerals are natural, inorganic solids with definite chemical composition and crystal structure."
+            },
+            {
+                type: "basic_rocks",
+                question: "Which type of rock forms from cooled lava or magma?",
+                options: ["Igneous", "Sedimentary", "Metamorphic", "None of these"],
+                answer: "A",
+                explanation: "Igneous rocks form from the cooling and solidification of magma or lava."
+            },
+            {
+                type: "basic_rocks",
+                question: "Which type of rock forms from layers of sediment?",
+                options: ["Sedimentary", "Igneous", "Metamorphic", "Volcanic"],
+                answer: "A",
+                explanation: "Sedimentary rocks form from accumulated sediments that are compressed over time."
+            },
+            {
+                type: "basic_rocks",
+                question: "Which type of rock forms from heat and pressure?",
+                options: ["Metamorphic", "Igneous", "Sedimentary", "None of these"],
+                answer: "A",
+                explanation: "Metamorphic rocks form when existing rocks are changed by heat and pressure."
+            },
+            {
+                type: "basic_rocks",
+                question: "What is granite?",
+                options: ["An igneous rock", "A sedimentary rock", "A metamorphic rock", "A mineral"],
+                answer: "A",
+                explanation: "Granite is an intrusive igneous rock that forms from cooled magma underground."
+            },
+            {
+                type: "basic_rocks",
+                question: "What is limestone?",
+                options: ["A sedimentary rock", "An igneous rock", "A metamorphic rock", "A type of soil"],
+                answer: "A",
+                explanation: "Limestone is a sedimentary rock often formed from marine organisms' shells."
+            },
+            {
+                type: "basic_rocks",
+                question: "What is marble?",
+                options: ["A metamorphic rock", "An igneous rock", "A sedimentary rock", "A mineral"],
+                answer: "A",
+                explanation: "Marble is a metamorphic rock formed from limestone under heat and pressure."
+            },
+            {
+                type: "basic_rocks",
+                question: "What is the hardest mineral?",
+                options: ["Diamond", "Quartz", "Talc", "Gypsum"],
+                answer: "A",
+                explanation: "Diamond is the hardest natural mineral, rating 10 on Mohs hardness scale."
+            },
+            {
+                type: "basic_rocks",
+                question: "What is the softest mineral?",
+                options: ["Talc", "Diamond", "Quartz", "Feldspar"],
+                answer: "A",
+                explanation: "Talc is the softest mineral, rating 1 on Mohs hardness scale."
+
+            // Mineral Properties (11-20)
+            },
+            {
+                type: "mineral_properties",
+                question: "What is Mohs hardness scale used for?",
+                options: ["Measuring mineral hardness", "Measuring mineral color", "Measuring mineral weight", "Measuring mineral size"],
+                answer: "A",
+                explanation: "Mohs scale ranks minerals from 1 (softest - talc) to 10 (hardest - diamond)."
+            },
+            {
+                type: "mineral_properties",
+                question: "What is streak?",
+                options: ["Color of mineral powder", "Mineral's shine", "Mineral's hardness", "Mineral's shape"],
+                answer: "A",
+                explanation: "Streak is the color of a mineral's powder when rubbed on a streak plate."
+            },
+            {
+                type: "mineral_properties",
+                question: "What is luster?",
+                options: ["How a mineral reflects light", "Mineral's color", "Mineral's hardness", "Mineral's weight"],
+                answer: "A",
+                explanation: "Luster describes how light reflects off a mineral's surface (metallic, glassy, dull)."
+            },
+            {
+                type: "mineral_properties",
+                question: "Which mineral property involves breaking along flat planes?",
+                options: ["Cleavage", "Fracture", "Hardness", "Luster"],
+                answer: "A",
+                explanation: "Cleavage is when minerals break along flat, smooth planes due to weak bonds."
+            },
+            {
+                type: "mineral_properties",
+                question: "What is fracture?",
+                options: ["Breaking with rough or irregular surfaces", "Breaking along flat planes", "Mineral's color", "Mineral's shine"],
+                answer: "A",
+                explanation: "Fracture occurs when minerals break with rough or irregular surfaces."
+            },
+            {
+                type: "mineral_properties",
+                question: "Which mineral has perfect cleavage in one direction?",
+                options: ["Mica", "Quartz", "Diamond", "Feldspar"],
+                answer: "A",
+                explanation: "Mica can be peeled into thin, flexible sheets due to its perfect cleavage."
+            },
+            {
+                type: "mineral_properties",
+                question: "Which mineral is known as 'fool's gold'?",
+                options: ["Pyrite", "Gold", "Copper", "Silver"],
+                answer: "A",
+                explanation: "Pyrite (iron sulfide) looks like gold but is much less valuable."
+            },
+            {
+                type: "mineral_properties",
+                question: "What color is quartz?",
+                options: ["Many colors including clear, purple, pink", "Always clear", "Always purple", "Always pink"],
+                answer: "A",
+                explanation: "Quartz comes in many varieties: clear (rock crystal), purple (amethyst), pink (rose quartz)."
+            },
+            {
+                type: "mineral_properties",
+                question: "Which mineral is the main component of glass?",
+                options: ["Silica (from quartz)", "Calcite", "Feldspar", "Mica"],
+                answer: "A",
+                explanation: "Silica from quartz sand is melted to make glass."
+            },
+            {
+                type: "mineral_properties",
+                question: "What mineral forms salt?",
+                options: ["Halite", "Quartz", "Calcite", "Gypsum"],
+                answer: "A",
+                explanation: "Halite is mineral name for table salt (sodium chloride)."
+
+            // Rock Formation (21-30)
+            },
+            {
+                type: "rock_formation",
+                question: "What is magma?",
+                options: ["Molten rock underground", "Molten rock on surface", "Solid rock", "Sediment"],
+                answer: "A",
+                explanation: "Magma is molten rock beneath Earth's surface; when it erupts, it's called lava."
+            },
+            {
+                type: "rock_formation",
+                question: "What is lava?",
+                options: ["Molten rock on Earth's surface", "Molten rock underground", "Cooled rock", "Melted sediment"],
+                answer: "A",
+                explanation: "Lava is magma that reaches Earth's surface through volcanic eruptions."
+            },
+            {
+                type: "rock_formation",
+                question: "How do sedimentary rocks form?",
+                options: ["Compaction and cementation of sediments", "Cooling of magma", "Heat and pressure", "Melting"],
+                answer: "A",
+                explanation: "Sediments are compressed (compaction) and glued together (cementation) to form sedimentary rocks."
+            },
+            {
+                type: "rock_formation",
+                question: "What is weathering?",
+                options: ["Breaking down rocks at Earth's surface", "Moving rock pieces", "Forming new rocks", "Melting rocks"],
+                answer: "A",
+                explanation: "Weathering breaks rocks into smaller pieces through physical or chemical processes."
+            },
+            {
+                type: "rock_formation",
+                question: "What is erosion?",
+                options: ["Moving weathered rock material", "Breaking down rocks", "Forming new rocks", "Melting rocks"],
+                answer: "A",
+                explanation: "Erosion transports weathered material (by water, wind, ice, or gravity)."
+            },
+            {
+                type: "rock_formation",
+                question: "What is deposition?",
+                options: ["Dropping eroded material in new locations", "Breaking down rocks", "Moving rock material", "Melting rocks"],
+                answer: "A",
+                explanation: "Deposition occurs when eroded material settles in a new location."
+            },
+            {
+                type: "rock_formation",
+                question: "Which rock type can contain fossils?",
+                options: ["Sedimentary", "Igneous", "Metamorphic", "All rocks"],
+                answer: "A",
+                explanation: "Fossils are preserved in sedimentary rocks; heat destroys fossils in igneous and metamorphic rocks."
+            },
+            {
+                type: "rock_formation",
+                question: "What is the rock cycle?",
+                options: ["Continuous process of rock changing forms", "Only rock formation", "Only rock destruction", "A single event"],
+                answer: "A",
+                explanation: "The rock cycle shows how rocks continuously change from one type to another over geological time."
+            },
+            {
+                type: "rock_formation",
+                question: "What rock forms from sandstone under heat and pressure?",
+                options: ["Quartzite", "Marble", "Slate", "Granite"],
+                answer: "A",
+                explanation: "Quartzite is metamorphic rock formed from sandstone (which is made of quartz)."
+            },
+            {
+                type: "rock_formation",
+                question: "What rock forms from shale under heat and pressure?",
+                options: ["Slate", "Marble", "Quartzite", "Granite"],
+                answer: "A",
+                explanation: "Slate is metamorphic rock formed from shale under relatively low heat and pressure."
+
+            // Rock Types & Examples (31-40)
+            },
+            {
+                type: "rock_examples",
+                question: "Which is an example of an intrusive igneous rock?",
+                options: ["Granite", "Basalt", "Obsidian", "Pumice"],
+                answer: "A",
+                explanation: "Granite cools slowly underground (intrusive), giving time for large crystals to form."
+            },
+            {
+                type: "rock_examples",
+                question: "Which is an example of an extrusive igneous rock?",
+                options: ["Basalt", "Granite", "Marble", "Slate"],
+                answer: "A",
+                explanation: "Basalt cools quickly on surface (extrusive), forming small crystals or glassy texture."
+            },
+            {
+                type: "rock_examples",
+                question: "Which rock floats on water?",
+                options: ["Pumice", "Granite", "Basalt", "Marble"],
+                answer: "A",
+                explanation: "Pumice has many air bubbles from volcanic gases, making it less dense than water."
+            },
+            {
+                type: "rock_examples",
+                question: "Which sedimentary rock is made mostly of calcium carbonate?",
+                options: ["Limestone", "Sandstone", "Shale", "Conglomerate"],
+                answer: "A",
+                explanation: "Limestone forms from calcium carbonate shells of marine organisms or chemical precipitation."
+            },
+            {
+                type: "rock_examples",
+                question: "Which sedimentary rock is made of sand-sized grains?",
+                options: ["Sandstone", "Limestone", "Shale", "Conglomerate"],
+                answer: "A",
+                explanation: "Sandstone is composed of sand-sized mineral particles (mostly quartz)."
+            },
+            {
+                type: "rock_examples",
+                question: "Which sedimentary rock is made of clay-sized particles?",
+                options: ["Shale", "Sandstone", "Limestone", "Conglomerate"],
+                answer: "A",
+                explanation: "Shale forms from compacted clay and silt particles."
+            },
+            {
+                type: "rock_examples",
+                question: "Which metamorphic rock is used for chalkboards?",
+                options: ["Slate", "Marble", "Quartzite", "Gneiss"],
+                answer: "A",
+                explanation: "Slate splits into thin, flat sheets ideal for chalkboards and roofing tiles."
+            },
+            {
+                type: "rock_examples",
+                question: "Which rock is commonly used for statues and buildings?",
+                options: ["Marble", "Granite", "Sandstone", "Slate"],
+                answer: "A",
+                explanation: "Marble is valued for sculpture and architecture due to its beauty and workability."
+            },
+            {
+                type: "rock_examples",
+                question: "Which rock has visible layers or bands?",
+                options: ["Gneiss", "Marble", "Granite", "Basalt"],
+                answer: "A",
+                explanation: "Gneiss shows banding of light and dark minerals from intense metamorphism."
+            },
+            {
+                type: "rock_examples",
+                question: "Which rock is volcanic glass?",
+                options: ["Obsidian", "Granite", "Basalt", "Pumice"],
+                answer: "A",
+                explanation: "Obsidian forms when lava cools so quickly that crystals don't have time to form."
+
+            // Earth Processes (41-50)
+            },
+            {
+                type: "earth_processes",
+                question: "What causes metamorphism?",
+                options: ["Heat and pressure", "Cooling and solidifying", "Weathering and erosion", "Melting"],
+                answer: "A",
+                explanation: "Metamorphic rocks form when existing rocks are changed by heat and pressure deep underground."
+            },
+            {
+                type: "earth_processes",
+                question: "What is compaction?",
+                options: ["Sediments squeezed by weight above", "Sediments glued together", "Rocks melting", "Rocks cooling"],
+                answer: "A",
+                explanation: "Compaction squeezes sediments together, reducing pore space between particles."
+            },
+            {
+                type: "earth_processes",
+                question: "What is cementation?",
+                options: ["Minerals glue sediments together", "Squeezing sediments", "Melting rocks", "Cooling magma"],
+                answer: "A",
+                explanation: "Cementation occurs when minerals precipitate from water and bind sediment particles together."
+            },
+            {
+                type: "earth_processes",
+                question: "What type of rock forms from plant material over millions of years?",
+                options: ["Coal", "Limestone", "Sandstone", "Granite"],
+                answer: "A",
+                explanation: "Coal is a sedimentary rock formed from compressed plant remains in swamp environments."
+            },
+            {
+                type: "earth_processes",
+                question: "Which process breaks rocks without changing their composition?",
+                options: ["Physical weathering", "Chemical weathering", "Erosion", "Deposition"],
+                answer: "A",
+                explanation: "Physical weathering breaks rocks into smaller pieces without changing chemical composition."
+            },
+            {
+                type: "earth_processes",
+                question: "Which process breaks rocks by changing their composition?",
+                options: ["Chemical weathering", "Physical weathering", "Erosion", "Deposition"],
+                answer: "A",
+                explanation: "Chemical weathering changes rock composition through chemical reactions (like rusting)."
+            },
+            {
+                type: "earth_processes",
+                question: "What is a conglomerate rock?",
+                options: ["Sedimentary rock with rounded pebbles", "Metamorphic rock with bands", "Igneous rock with holes", "Mineral with cleavage"],
+                answer: "A",
+                explanation: "Conglomerate contains rounded pebbles cemented together, indicating water transport."
+            },
+            {
+                type: "earth_processes",
+                question: "What causes foliation in metamorphic rocks?",
+                options: ["Pressure aligning mineral grains", "Cooling of magma", "Cementation of sediments", "Weathering processes"],
+                answer: "A",
+                explanation: "Pressure during metamorphism causes minerals to align in parallel layers (foliation)."
+            },
+            {
+                type: "earth_processes",
+                question: "Where would you find the youngest rock layers?",
+                options: ["On top (unless disturbed)", "At the bottom", "In the middle", "Randomly placed"],
+                answer: "A",
+                explanation: "In undisturbed sedimentary sequences, youngest layers are on top (law of superposition)."
+            },
+            {
+                type: "earth_processes",
+                question: "What is magma called when it reaches Earth's surface?",
+                options: ["Lava", "Igneous rock", "Sediment", "Metamorphic rock"],
+                answer: "A",
+                explanation: "Magma becomes lava when it erupts onto Earth's surface through volcanoes."
+            }
+        ];
+
+        // Solar System Questions (50 questions)
+        const solarQuestions = [
+            // Basic Solar System (1-10)
+            {
+                type: "basic_solar",
+                question: "What is at the center of our solar system?",
+                options: ["The Sun", "Earth", "Jupiter", "The Moon"],
+                answer: "A",
+                explanation: "The Sun is the center of our solar system, holding everything in orbit with its gravity."
+            },
+            {
+                type: "basic_solar",
+                question: "How many planets are in our solar system?",
+                options: ["8", "9", "7", "10"],
+                answer: "A",
+                explanation: "There are 8 planets: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune."
+            },
+            {
+                type: "basic_solar",
+                question: "Which is the smallest planet?",
+                options: ["Mercury", "Mars", "Earth", "Venus"],
+                answer: "A",
+                explanation: "Mercury is the smallest planet and closest to the Sun."
+            },
+            {
+                type: "basic_solar",
+                question: "Which is the largest planet?",
+                options: ["Jupiter", "Saturn", "Earth", "Neptune"],
+                answer: "A",
+                explanation: "Jupiter is the largest planet - you could fit 1,300 Earths inside it!"
+            },
+            {
+                type: "basic_solar",
+                question: "Which planet is known for its rings?",
+                options: ["Saturn", "Jupiter", "Uranus", "Neptune"],
+                answer: "A",
+                explanation: "Saturn has the most spectacular ring system visible from Earth."
+            },
+            {
+                type: "basic_solar",
+                question: "Which planet is known as the Red Planet?",
+                options: ["Mars", "Venus", "Jupiter", "Mercury"],
+                answer: "A",
+                explanation: "Mars appears red due to iron oxide (rust) on its surface."
+            },
+            {
+                type: "basic_solar",
+                question: "Which planet is known as the Morning Star or Evening Star?",
+                options: ["Venus", "Mercury", "Mars", "Saturn"],
+                answer: "A",
+                explanation: "Venus is often visible just before sunrise or after sunset, appearing very bright."
+            },
+            {
+                type: "basic_solar",
+                question: "Which planet rotates on its side?",
+                options: ["Uranus", "Venus", "Earth", "Mercury"],
+                answer: "A",
+                explanation: "Uranus rotates nearly on its side (98° tilt), possibly from a giant impact."
+            },
+            {
+                type: "basic_solar",
+                question: "Which planet has the Great Red Spot?",
+                options: ["Jupiter", "Saturn", "Mars", "Neptune"],
+                answer: "A",
+                explanation: "Jupiter's Great Red Spot is a giant storm that has raged for centuries."
+            },
+            {
+                type: "basic_solar",
+                question: "Which planet has the most moons?",
+                options: ["Saturn", "Jupiter", "Earth", "Mars"],
+                answer: "A",
+                explanation: "Saturn has over 80 confirmed moons, more than any other planet."
+
+            // Earth & Moon (11-20)
+            },
+            {
+                type: "earth_moon",
+                question: "What is Earth's only natural satellite?",
+                options: ["The Moon", "The Sun", "Mars", "Asteroids"],
+                answer: "A",
+                explanation: "The Moon is Earth's only natural satellite, orbiting about 384,400 km away."
+            },
+            {
+                type: "earth_moon",
+                question: "How long does it take the Moon to orbit Earth?",
+                options: ["About 27.3 days", "About 24 hours", "About 365 days", "About 29.5 days"],
+                answer: "A",
+                explanation: "The Moon takes 27.3 days to complete one orbit around Earth (sidereal month)."
+            },
+            {
+                type: "earth_moon",
+                question: "Why does the Moon have phases?",
+                options: ["We see different amounts of sunlit side", "The Moon changes shape", "Clouds cover parts", "It gets closer and farther"],
+                answer: "A",
+                explanation: "Moon phases change as we see different portions of the sunlit side from Earth."
+            },
+            {
+                type: "earth_moon",
+                question: "What causes tides?",
+                options: ["Moon's gravitational pull", "Sun's heat", "Earth's rotation", "Ocean currents"],
+                answer: "A",
+                explanation: "The Moon's gravity pulls on Earth's oceans, creating bulges that cause tides."
+            },
+            {
+                type: "earth_moon",
+                question: "What is a solar eclipse?",
+                options: ["Moon blocks Sun's light to Earth", "Earth blocks Sun's light to Moon", "Sun blocks Moon", "Clouds block Sun"],
+                answer: "A",
+                explanation: "Solar eclipse occurs when Moon passes between Sun and Earth, casting shadow on Earth."
+            },
+            {
+                type: "earth_moon",
+                question: "What is a lunar eclipse?",
+                options: ["Earth blocks Sun's light to Moon", "Moon blocks Sun's light to Earth", "Sun blocks Earth", "Clouds block Moon"],
+                answer: "A",
+                explanation: "Lunar eclipse occurs when Earth passes between Sun and Moon, casting shadow on Moon."
+            },
+            {
+                type: "earth_moon",
+                question: "What are the dark areas on the Moon called?",
+                options: ["Maria (seas)", "Craters", "Mountains", "Oceans"],
+                answer: "A",
+                explanation: "Maria are dark, flat plains formed by ancient volcanic eruptions on the Moon."
+            },
+            {
+                type: "earth_moon",
+                question: "Why do we always see the same side of the Moon?",
+                options: ["Moon's rotation matches its orbit", "Moon doesn't rotate", "Earth rotates faster", "Only one side is visible"],
+                answer: "A",
+                explanation: "The Moon rotates once for every orbit around Earth, showing us only one side."
+            },
+            {
+                type: "earth_moon",
+                question: "What are moon phases in order?",
+                options: ["New, Waxing Crescent, First Quarter, Waxing Gibbous, Full, Waning Gibbous, Third Quarter, Waning Crescent", "Full, New, Crescent, Quarter", "New, Full, Quarter, Crescent", "Quarter, Crescent, Full, New"],
+                answer: "A",
+                explanation: "This is the complete cycle of lunar phases as Moon orbits Earth."
+            },
+            {
+                type: "earth_moon",
+                question: "How does the Moon affect Earth?",
+                options: ["Causes tides, stabilizes tilt", "Causes seasons", "Causes day/night", "Causes earthquakes"],
+                answer: "A",
+                explanation: "Moon's gravity causes tides and helps stabilize Earth's axial tilt, making climate more stable."
+
+            // Planets Characteristics (21-30)
+            },
+            {
+                type: "planet_chars",
+                question: "Which planets are terrestrial (rocky)?",
+                options: ["Mercury, Venus, Earth, Mars", "Jupiter, Saturn, Uranus, Neptune", "All planets", "Only Earth"],
+                answer: "A",
+                explanation: "The four inner planets are terrestrial - small, dense, rocky with solid surfaces."
+            },
+            {
+                type: "planet_chars",
+                question: "Which planets are gas giants?",
+                options: ["Jupiter and Saturn", "Mercury and Venus", "Earth and Mars", "Uranus and Neptune"],
+                answer: "A",
+                explanation: "Jupiter and Saturn are gas giants - huge planets made mostly of hydrogen and helium."
+            },
+            {
+                type: "planet_chars",
+                question: "Which planets are ice giants?",
+                options: ["Uranus and Neptune", "Jupiter and Saturn", "Earth and Mars", "Mercury and Venus"],
+                answer: "A",
+                explanation: "Uranus and Neptune are ice giants - containing more 'ices' like water, ammonia, methane."
+            },
+            {
+                type: "planet_chars",
+                question: "Which planet has the hottest surface temperature?",
+                options: ["Venus", "Mercury", "Mars", "Earth"],
+                answer: "A",
+                explanation: "Venus is hottest (467°C) due to thick CO₂ atmosphere creating extreme greenhouse effect."
+            },
+            {
+                type: "planet_chars",
+                question: "Which planet has the longest day?",
+                options: ["Venus", "Mercury", "Earth", "Mars"],
+                answer: "A",
+                explanation: "Venus has the longest day - 243 Earth days to rotate once (longer than its year!)."
+            },
+            {
+                type: "planet_chars",
+                question: "Which planet has the shortest day?",
+                options: ["Jupiter", "Mercury", "Earth", "Saturn"],
+                answer: "A",
+                explanation: "Jupiter has the shortest day - about 10 hours to complete one rotation."
+            },
+            {
+                type: "planet_chars",
+                question: "Which planet has the most extreme temperature variations?",
+                options: ["Mercury", "Venus", "Earth", "Mars"],
+                answer: "A",
+                explanation: "Mercury ranges from -180°C at night to 430°C during day (no atmosphere to retain heat)."
+            },
+            {
+                type: "planet_chars",
+                question: "Which planet has water in all three states (solid, liquid, gas)?",
+                options: ["Earth", "Mars", "Venus", "Mercury"],
+                answer: "A",
+                explanation: "Only Earth has conditions for water to exist as ice, liquid water, and water vapor."
+            },
+            {
+                type: "planet_chars",
+                question: "Which planet has polar ice caps?",
+                options: ["Mars", "Venus", "Mercury", "Jupiter"],
+                answer: "A",
+                explanation: "Mars has polar ice caps made of water ice and frozen carbon dioxide."
+            },
+            {
+                type: "planet_chars",
+                question: "Which planet has retrograde rotation?",
+                options: ["Venus", "Earth", "Mars", "Mercury"],
+                answer: "A",
+                explanation: "Venus rotates backwards (retrograde) compared to most planets - sun rises in west, sets in east."
+
+            // Orbits & Motion (31-40)
+            },
+            {
+                type: "orbits_motion",
+                question: "What is an orbit?",
+                options: ["Path an object takes around another object in space", "Object spinning on its axis", "Object falling to ground", "Object moving in straight line"],
+                answer: "A",
+                explanation: "An orbit is the curved path of one object around another due to gravity."
+            },
+            {
+                type: "orbits_motion",
+                question: "What keeps planets in orbit around the Sun?",
+                options: ["Gravity", "Magnetism", "Electricity", "Wind"],
+                answer: "A",
+                explanation: "The Sun's gravity pulls planets toward it, while their forward motion keeps them from falling in."
+            },
+            {
+                type: "orbits_motion",
+                question: "What is revolution?",
+                options: ["Orbiting around another object", "Spinning on an axis", "Moving in straight line", "Falling downward"],
+                answer: "A",
+                explanation: "Revolution is the movement of one object around another (Earth around Sun = 1 year)."
+            },
+            {
+                type: "orbits_motion",
+                question: "What is rotation?",
+                options: ["Spinning on an axis", "Orbiting another object", "Moving in straight line", "Changing direction"],
+                answer: "A",
+                explanation: "Rotation is an object spinning around its own axis (Earth's rotation = 24 hours)."
+            },
+            {
+                type: "orbits_motion",
+                question: "Which planet has the longest year?",
+                options: ["Neptune", "Mercury", "Earth", "Saturn"],
+                answer: "A",
+                explanation: "Neptune takes 165 Earth years to orbit the Sun once - longest year of all planets."
+            },
+            {
+                type: "orbits_motion",
+                question: "Which planet has the shortest year?",
+                options: ["Mercury", "Venus", "Earth", "Mars"],
+                answer: "A",
+                explanation: "Mercury orbits the Sun in just 88 Earth days - shortest year of all planets."
+            },
+            {
+                type: "orbits_motion",
+                question: "What is an asteroid?",
+                options: ["Rocky object orbiting Sun, smaller than planet", "Icy object with tail", "Small planet", "Moon of another planet"],
+                answer: "A",
+                explanation: "Asteroids are rocky, metallic objects mostly found in asteroid belt between Mars and Jupiter."
+            },
+            {
+                type: "orbits_motion",
+                question: "What is a comet?",
+                options: ["Icy object that develops tail near Sun", "Rocky object in asteroid belt", "Small planet", "Moon of Jupiter"],
+                answer: "A",
+                explanation: "Comets are icy bodies that vaporize when near Sun, creating spectacular tails."
+            },
+            {
+                type: "orbits_motion",
+                question: "What is a meteoroid?",
+                options: ["Small rocky object in space", "Rocky object in atmosphere", "Rocky object hitting ground", "Icy object with tail"],
+                answer: "A",
+                explanation: "Meteoroids are small rocky/metallic objects in space; when they enter atmosphere they become meteors."
+            },
+            {
+                type: "orbits_motion",
+                question: "What is a meteor?",
+                options: ["Streak of light when meteoroid enters atmosphere", "Meteoroid in space", "Meteoroid that hits ground", "Icy object with tail"],
+                answer: "A",
+                explanation: "Meteors (shooting stars) are light streaks from meteoroids burning up in atmosphere."
+
+            // Sun & Other Objects (41-50)
+            },
+            {
+                type: "sun_objects",
+                question: "What is the Sun?",
+                options: ["A star", "A planet", "A moon", "An asteroid"],
+                answer: "A",
+                explanation: "The Sun is a medium-sized star at the center of our solar system."
+            },
+            {
+                type: "sun_objects",
+                question: "What process powers the Sun?",
+                options: ["Nuclear fusion", "Nuclear fission", "Burning coal", "Chemical reactions"],
+                answer: "A",
+                explanation: "The Sun converts hydrogen to helium through nuclear fusion, releasing enormous energy."
+            },
+            {
+                type: "sun_objects",
+                question: "How long does sunlight take to reach Earth?",
+                options: ["About 8 minutes", "Instantly", "About 1 hour", "About 1 day"],
+                answer: "A",
+                explanation: "Sunlight travels at light speed (300,000 km/s), taking about 8 minutes to reach Earth."
+            },
+            {
+                type: "sun_objects",
+                question: "What are sunspots?",
+                options: ["Cooler, dark areas on Sun's surface", "Hotter areas on Sun", "Explosions on Sun", "Sun's mountains"],
+                answer: "A",
+                explanation: "Sunspots are relatively cool, dark regions with strong magnetic fields."
+            },
+            {
+                type: "sun_objects",
+                question: "What is a solar flare?",
+                options: ["Sudden explosion of energy on Sun", "Dark spot on Sun", "Sun's rotation", "Sun's atmosphere"],
+                answer: "A",
+                explanation: "Solar flares are sudden eruptions of energy that can affect Earth's communications."
+            },
+            {
+                type: "sun_objects",
+                question: "What is the asteroid belt?",
+                options: ["Region between Mars and Jupiter with many asteroids", "Ring around Saturn", "Path of comets", "Orbit of Earth"],
+                answer: "A",
+                explanation: "Most asteroids orbit in the asteroid belt between Mars and Jupiter."
+            },
+            {
+                type: "sun_objects",
+                question: "What is a dwarf planet?",
+                options: ["Round object orbiting Sun but not clearing its orbit", "Small star", "Moon of planet", "Large asteroid"],
+                answer: "A",
+                explanation: "Dwarf planets like Pluto are round and orbit Sun but haven't cleared their orbital paths."
+            },
+            {
+                type: "sun_objects",
+                question: "What is the Kuiper Belt?",
+                options: ["Region beyond Neptune with icy objects", "Asteroid belt", "Ring of Saturn", "Sun's atmosphere"],
+                answer: "A",
+                explanation: "The Kuiper Belt contains icy bodies including dwarf planets like Pluto."
+            },
+            {
+                type: "sun_objects",
+                question: "What is the Oort Cloud?",
+                options: ["Spherical shell of icy objects far beyond Pluto", "Asteroid belt", "Kuiper Belt", "Sun's corona"],
+                answer: "A",
+                explanation: "The Oort Cloud is a theoretical shell of icy comets at the solar system's edge."
+            },
+            {
+                type: "sun_objects",
+                question: "Why is Pluto now classified as a dwarf planet?",
+                options: ["It hasn't cleared its orbit of other objects", "It's too small", "It's too far away", "It has moons"],
+                answer: "A",
+                explanation: "Pluto orbits in the Kuiper Belt with many other objects, so it hasn't cleared its neighborhood."
+            }
+        ];
+
+        // Earth's Motion Questions (50 questions)
+        const earthQuestions = [
+            // Rotation Basics (1-10)
+            {
+                type: "rotation_basics",
+                question: "What is Earth's rotation?",
+                options: ["Spinning on its axis", "Orbiting the Sun", "Moving through space", "Changing tilt"],
+                answer: "A",
+                explanation: "Rotation is Earth spinning around its imaginary axis through the North and South Poles."
+            },
+            {
+                type: "rotation_basics",
+                question: "How long does Earth take to rotate once?",
+                options: ["About 24 hours", "About 365 days", "About 30 days", "About 12 hours"],
+                answer: "A",
+                explanation: "Earth completes one rotation approximately every 24 hours (one day)."
+            },
+            {
+                type: "rotation_basics",
+                question: "What does Earth's rotation cause?",
+                options: ["Day and night", "Seasons", "Years", "Moon phases"],
+                answer: "A",
+                explanation: "As Earth rotates, different parts face toward or away from the Sun, creating day and night."
+            },
+            {
+                type: "rotation_basics",
+                question: "Which direction does Earth rotate?",
+                options: ["West to east (counterclockwise from above North Pole)", "East to west", "North to south", "Random direction"],
+                answer: "A",
+                explanation: "Earth rotates from west to east, which is why the Sun appears to rise in the east and set in the west."
+            },
+            {
+                type: "rotation_basics",
+                question: "What is the imaginary line through Earth's center called?",
+                options: ["Axis", "Equator", "Orbit", "Prime Meridian"],
+                answer: "A",
+                explanation: "The axis is the imaginary line through Earth's center from North Pole to South Pole."
+            },
+            {
+                type: "rotation_basics",
+                question: "What are the ends of Earth's axis called?",
+                options: ["North Pole and South Pole", "Equator", "Hemispheres", "Tropics"],
+                answer: "A",
+                explanation: "The North Pole and South Pole are the points where Earth's axis meets the surface."
+            },
+            {
+                type: "rotation_basics",
+                question: "What is the speed of Earth's rotation at the equator?",
+                options: ["About 1,670 km/h", "About 100 km/h", "About 500 km/h", "About 10,000 km/h"],
+                answer: "A",
+                explanation: "Earth's surface at the equator moves about 1,670 km/h due to rotation."
+            },
+            {
+                type: "rotation_basics",
+                question: "Why don't we feel Earth's rotation?",
+                options: ["We move with it at constant speed", "It's too slow", "We're not on equator", "Gravity cancels it"],
+                answer: "A",
+                explanation: "We don't feel rotation because everything (including us) moves together at constant speed."
+            },
+            {
+                type: "rotation_basics",
+                question: "What would happen if Earth stopped rotating?",
+                options: ["One side always day, one always night", "No seasons", "No gravity", "Faster orbit"],
+                answer: "A",
+                explanation: "If rotation stopped, one hemisphere would have eternal day, the other eternal night."
+            },
+            {
+                type: "rotation_basics",
+                question: "What evidence shows Earth rotates?",
+                options: ["Foucault pendulum, star trails", "Seasons changing", "Moon phases", "Ocean currents"],
+                answer: "A",
+                explanation: "Foucault pendulum swings change direction, and stars appear to circle due to rotation."
+
+            // Revolution Basics (11-20)
+            },
+            {
+                type: "revolution_basics",
+                question: "What is Earth's revolution?",
+                options: ["Orbiting around the Sun", "Spinning on axis", "Moon orbiting Earth", "Solar system moving"],
+                answer: "A",
+                explanation: "Revolution is Earth's yearly orbit around the Sun."
+            },
+            {
+                type: "revolution_basics",
+                question: "How long does Earth's revolution take?",
+                options: ["About 365.25 days", "About 24 hours", "About 30 days", "About 12 hours"],
+                answer: "A",
+                explanation: "Earth takes approximately 365.25 days to orbit the Sun once (one year)."
+            },
+            {
+                type: "revolution_basics",
+                question: "What does Earth's revolution cause?",
+                options: ["Seasons", "Day and night", "Tides", "Moon phases"],
+                answer: "A",
+                explanation: "Earth's tilted axis combined with revolution around Sun creates the seasons."
+            },
+            {
+                type: "revolution_basics",
+                question: "What is Earth's orbital path shape?",
+                options: ["Ellipse (slightly oval)", "Perfect circle", "Square", "Random shape"],
+                answer: "A",
+                explanation: "Earth's orbit is elliptical (slightly oval), not a perfect circle."
+            },
+            {
+                type: "revolution_basics",
+                question: "What is Earth's average distance from the Sun?",
+                options: ["About 150 million km (1 AU)", "About 50 million km", "About 300 million km", "About 500 million km"],
+                answer: "A",
+                explanation: "1 Astronomical Unit (AU) = average Earth-Sun distance = 149.6 million km."
+            },
+            {
+                type: "revolution_basics",
+                question: "When is Earth closest to the Sun?",
+                options: ["January (perihelion)", "July (aphelion)", "March", "September"],
+                answer: "A",
+                explanation: "Earth is closest to Sun (perihelion) around January 3, not when it's summer in Northern Hemisphere."
+            },
+            {
+                type: "revolution_basics",
+                question: "When is Earth farthest from the Sun?",
+                options: ["July (aphelion)", "January (perihelion)", "March", "September"],
+                answer: "A",
+                explanation: "Earth is farthest from Sun (aphelion) around July 4, not when it's winter in Northern Hemisphere."
+            },
+            {
+                type: "revolution_basics",
+                question: "What proves Earth revolves around Sun?",
+                options: ["Parallax of stars, different constellations each season", "Day and night", "Moon phases", "Ocean tides"],
+                answer: "A",
+                explanation: "Nearby stars appear to shift position (parallax) and we see different constellations as Earth orbits."
+            },
+            {
+                type: "revolution_basics",
+                question: "What would happen if Earth stopped revolving?",
+                options: ["One season forever", "No day/night", "Faster rotation", "Fall off into space"],
+                answer: "A",
+                explanation: "If revolution stopped, Earth would have one permanent season depending on its position."
+            },
+            {
+                type: "revolution_basics",
+                question: "How fast does Earth revolve around Sun?",
+                options: ["About 107,000 km/h", "About 1,000 km/h", "About 500 km/h", "About 10,000 km/h"],
+                answer: "A",
+                explanation: "Earth orbits the Sun at about 107,000 km/h (30 km/s)."
+
+            // Seasons (21-30)
+            },
+            {
+                type: "seasons",
+                question: "What causes seasons?",
+                options: ["Earth's tilted axis and revolution around Sun", "Earth's distance from Sun", "Earth's rotation speed", "Moon's gravity"],
+                answer: "A",
+                explanation: "Seasons occur because Earth's axis is tilted 23.5° relative to its orbit around Sun."
+            },
+            {
+                type: "seasons",
+                question: "What is Earth's axial tilt?",
+                options: ["About 23.5 degrees", "0 degrees", "45 degrees", "90 degrees"],
+                answer: "A",
+                explanation: "Earth's axis is tilted approximately 23.5° from perpendicular to its orbital plane."
+            },
+            {
+                type: "seasons",
+                question: "When does summer solstice occur in Northern Hemisphere?",
+                options: ["Around June 21", "Around December 21", "Around March 21", "Around September 21"],
+                answer: "A",
+                explanation: "June solstice: Northern Hemisphere tilted most toward Sun = longest day, shortest night."
+            },
+            {
+                type: "seasons",
+                question: "When does winter solstice occur in Northern Hemisphere?",
+                options: ["Around December 21", "Around June 21", "Around March 21", "Around September 21"],
+                answer: "A",
+                explanation: "December solstice: Northern Hemisphere tilted most away from Sun = shortest day, longest night."
+            },
+            {
+                type: "seasons",
+                question: "When do equinoxes occur?",
+                options: ["Around March 21 and September 21", "June 21 and December 21", "January 1 and July 4", "April 1 and October 1"],
+                answer: "A",
+                explanation: "Equinoxes (equal day/night) occur when neither hemisphere is tilted toward Sun."
+            },
+            {
+                type: "seasons",
+                question: "What happens during equinox?",
+                options: ["Equal day and night everywhere", "Longest day in north", "Shortest day in north", "No seasons"],
+                answer: "A",
+                explanation: "During equinoxes, the Sun is directly above equator, giving approximately 12 hours day/night globally."
+            },
+            {
+                type: "seasons",
+                question: "Why are seasons opposite in Northern and Southern Hemispheres?",
+                options: ["When north tilts toward Sun, south tilts away", "Different distances from Sun", "Different rotation speeds", "Ocean currents"],
+                answer: "A",
+                explanation: "Hemispheres experience opposite seasons because when one tilts toward Sun, the other tilts away."
+            },
+            {
+                type: "seasons",
+                question: "What season is it in Australia when it's winter in Canada?",
+                options: ["Summer", "Winter", "Spring", "Autumn"],
+                answer: "A",
+                explanation: "Southern Hemisphere seasons are opposite Northern Hemisphere seasons."
+            },
+            {
+                type: "seasons",
+                question: "Which hemisphere has more extreme seasons?",
+                options: ["Southern (more ocean moderates less)", "Northern", "Both equal", "Equator only"],
+                answer: "A",
+                explanation: "Southern Hemisphere has more water, which moderates temperatures, but still has opposite seasons."
+            },
+            {
+                type: "seasons",
+                question: "Why isn't distance from Sun the main reason for seasons?",
+                options: ["Tilt causes direct/indirect sunlight", "Distance changes are small", "Seasons would be same globally", "All of these"],
+                answer: "A",
+                explanation: "Distance variation is minor; tilt causes sunlight to hit at different angles, concentrating or spreading energy."
+
+            // Day/Night & Time (31-40)
+            },
+            {
+                type: "day_night",
+                question: "Why does the Sun appear to rise and set?",
+                options: ["Earth's rotation makes Sun appear to move", "Sun moves around Earth", "Earth moves around Sun", "Atmosphere bends light"],
+                answer: "A",
+                explanation: "Earth's west-to-east rotation makes the Sun appear to move east-to-west across sky."
+            },
+            {
+                type: "day_night",
+                question: "What causes different sunrise/sunset times throughout year?",
+                options: ["Earth's tilt and orbit", "Cloud cover", "Moon position", "Atmosphere thickness"],
+                answer: "A",
+                explanation: "Earth's tilt and elliptical orbit cause Sun's apparent path to change, altering day length."
+            },
+            {
+                type: "day_night",
+                question: "Where on Earth experiences 24 hours of daylight in June?",
+                options: ["Arctic Circle and northward", "Equator", "Antarctica", "Tropics"],
+                answer: "A",
+                explanation: "North of Arctic Circle has midnight sun (24-hour daylight) around June solstice."
+            },
+            {
+                type: "day_night",
+                question: "Where on Earth experiences 24 hours of darkness in December?",
+                options: ["Arctic Circle and northward", "Equator", "Antarctica", "Tropics"],
+                answer: "A",
+                explanation: "North of Arctic Circle has polar night (24-hour darkness) around December solstice."
+            },
+            {
+                type: "day_night",
+                question: "What are time zones?",
+                options: ["Regions with same standard time", "Climate zones", "Seasonal zones", "Ocean current zones"],
+                answer: "A",
+                explanation: "Earth is divided into 24 time zones, each about 15° longitude wide (360° ÷ 24 = 15°)."
+            },
+            {
+                type: "day_night",
+                question: "Why do we need time zones?",
+                options: ["Sun is directly overhead at different times in different places", "Countries want different times", "Earth rotates too fast", "Historical reasons"],
+                answer: "A",
+                explanation: "As Earth rotates, different longitudes experience noon at different times."
+            },
+            {
+                type: "day_night",
+                question: "What is the International Date Line?",
+                options: ["Line where date changes", "0° longitude", "Equator", "Tropic of Cancer"],
+                answer: "A",
+                explanation: "Crossing International Date Line east→west adds a day; west→east subtracts a day."
+            },
+            {
+                type: "day_night",
+                question: "What is Greenwich Mean Time (GMT)?",
+                options: ["Time at 0° longitude (Prime Meridian)", "Time at equator", "Time at International Date Line", "Universal time everywhere"],
+                answer: "A",
+                explanation: "GMT is reference time at Royal Observatory, Greenwich, England (0° longitude)."
+            },
+            {
+                type: "day_night",
+                question: "What is daylight saving time?",
+                options: ["Clocks set forward 1 hour in summer", "Longer days in summer", "Time zone change", "Seasonal time difference"],
+                answer: "A",
+                explanation: "Clocks 'spring forward' to extend evening daylight in summer, 'fall back' in winter."
+            },
+            {
+                type: "day_night",
+                question: "Why does length of day change throughout year?",
+                options: ["Earth's tilt causes Sun's path to change", "Earth's rotation speed changes", "Moon blocks sunlight", "Cloud patterns change"],
+                answer: "A",
+                explanation: "Earth's tilt makes Sun's apparent path higher/lower in sky, changing day length."
+
+            // Effects & Phenomena (41-50)
+            },
+            {
+                type: "effects_phenomena",
+                question: "What causes the Coriolis effect?",
+                options: ["Earth's rotation deflects moving objects", "Earth's revolution", "Moon's gravity", "Sun's gravity"],
+                answer: "A",
+                explanation: "Coriolis effect deflects winds and currents right in Northern Hemisphere, left in Southern."
+            },
+            {
+                type: "effects_phenomena",
+                question: "How does Earth's motion affect weather patterns?",
+                options: ["Creates global wind patterns via Coriolis", "Causes all weather", "Makes storms", "Changes temperature only"],
+                answer: "A",
+                explanation: "Rotation creates Coriolis effect, influencing wind patterns, ocean currents, and storm rotation."
+            },
+            {
+                type: "effects_phenomena",
+                question: "What are trade winds?",
+                options: ["Consistent winds blowing toward equator", "Random winds", "Storm winds", "Seasonal monsoon winds"],
+                answer: "A",
+                explanation: "Trade winds blow consistently from northeast (NH) and southeast (SH) toward equator."
+            },
+            {
+                type: "effects_phenomena",
+                question: "What are prevailing westerlies?",
+                options: ["Winds blowing from west in mid-latitudes", "Winds at equator", "Polar winds", "Trade winds"],
+                answer: "A",
+                explanation: "Prevailing westerlies blow from west to east between 30°-60° latitude in both hemispheres."
+            },
+            {
+                type: "effects_phenomena",
+                question: "What causes ocean currents?",
+                options: ["Winds, Earth's rotation, temperature differences", "Moon only", "Earth's revolution only", "Seasons only"],
+                answer: "A",
+                explanation: "Currents result from wind patterns, Coriolis effect, and temperature/salinity differences."
+            },
+            {
+                type: "effects_phenomena",
+                question: "How does Earth's motion affect climate zones?",
+                options: ["Tilt creates different solar angles = different climates", "Distance creates zones", "Rotation speed creates zones", "Moon creates zones"],
+                answer: "A",
+                explanation: "Different latitudes receive sunlight at different angles, creating tropical, temperate, polar zones."
+            },
+            {
+                type: "effects_phenomena",
+                question: "What are the tropics?",
+                options: ["Region between Tropic of Cancer and Capricorn", "Polar regions", "Temperate zones", "All equatorial areas"],
+                answer: "A",
+                explanation: "Tropics (23.5°N to 23.5°S) receive most direct sunlight year-round."
+            },
+            {
+                type: "effects_phenomena",
+                question: "What causes precession of Earth's axis?",
+                options: ["Slow wobble like a spinning top", "Orbit shape changes", "Rotation speed changes", "Moon's gravity only"],
+                answer: "A",
+                explanation: "Earth's axis slowly wobbles in a 26,000-year cycle, changing which star is North Star."
+            },
+            {
+                type: "effects_phenomena",
+                question: "How does Earth's motion affect satellite orbits?",
+                options: ["Rotation helps launch eastward, orbit affected by shape", "No effect", "Revolution only matters", "Moon affects only"],
+                answer: "A",
+                explanation: "Rockets launch eastward to use Earth's rotation speed; orbits account for Earth's shape and rotation."
+            },
+            {
+                type: "effects_phenomena",
+                question: "What would happen if Earth had no tilt?",
+                options: ["No seasons, equal day/night year-round", "Extreme seasons", "No day/night", "Faster rotation"],
+                answer: "A",
+                explanation: "Without tilt, every location would have consistent day length and no seasonal temperature changes."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: "",
+            topicType: "" // "rocks", "solar", or "earth"
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent earth and space science knowledge!",
+            "Fantastic understanding of geological and astronomical concepts!",
+            "Great job! You're an earth and space science expert!",
+            "Amazing! Perfect geological and astronomical answers!",
+            "Well done! You understand Earth's systems perfectly!",
+            "You're a geology and astronomy champion!",
+            "Perfect! You think like a geologist and astronomer!",
+            "Outstanding earth science understanding!",
+            "Brilliant! You know how our planet and solar system work!",
+            "You're on fire! Great earth and space knowledge!"
+        ];
+
+        // Science facts for display
+        const scienceFacts = [
+            "The oldest rocks on Earth are about 4 billion years old - they were forming when Earth was still being bombarded by space debris!",
+            "If you could drive a car to the Sun at 100 km/h, it would take over 170 years to get there!",
+            "Earth's rotation is actually slowing down - about 1.7 milliseconds per century - meaning days were shorter in dinosaur times!",
+            "The pressure at Earth's core is over 3 million times atmospheric pressure - enough to crush diamonds!",
+            "Saturn is so light it would float in water if you could find an ocean big enough!",
+            "A single day on Venus is longer than a whole year on Venus! It takes 243 Earth days to rotate once but only 225 Earth days to orbit the Sun!",
+            "There are more stars in the universe than grains of sand on all Earth's beaches combined!",
+            "The Moon is slowly moving away from Earth at about 3.8 cm per year - the same rate fingernails grow!"
+        ];
+
+        // Sample earth and space data for visualizations
+        const earthSpaceData = {
+            rockTypes: [
+                {name: "Igneous", icon: "🌋", color: "var(--accent-red)", description: "Formed from cooled magma/lava"},
+                {name: "Sedimentary", icon: "🏞️", color: "var(--accent-brown)", description: "Formed from compressed sediments"},
+                {name: "Metamorphic", icon: "🔥", color: "var(--accent-purple)", description: "Changed by heat and pressure"}
+            ],
+            planets: [
+                {name: "Mercury", type: "Terrestrial", icon: "☿", fact: "Smallest planet, no atmosphere"},
+                {name: "Venus", type: "Terrestrial", icon: "♀", fact: "Hottest planet, thick atmosphere"},
+                {name: "Earth", type: "Terrestrial", icon: "🜨", fact: "Only planet with liquid water"},
+                {name: "Mars", type: "Terrestrial", icon: "♂", fact: "Red planet, polar ice caps"},
+                {name: "Jupiter", type: "Gas Giant", icon: "♃", fact: "Largest planet, Great Red Spot"},
+                {name: "Saturn", type: "Gas Giant", icon: "♄", fact: "Spectacular ring system"},
+                {name: "Uranus", type: "Ice Giant", icon: "⛢", fact: "Rotates on its side"},
+                {name: "Neptune", type: "Ice Giant", icon: "♆", fact: "Windiest planet"}
+            ],
+            earthMotions: [
+                {motion: "Rotation", time: "24 hours", effect: "Day and night", icon: "🌅"},
+                {motion: "Revolution", time: "365.25 days", effect: "Seasons", icon: "🍂"},
+                {motion: "Axial Tilt", angle: "23.5°", effect: "Season intensity", icon: "📐"},
+                {motion: "Precession", cycle: "26,000 years", effect: "Changes North Star", icon: "🌀"}
+            ]
+        };
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startRocksBtn = document.getElementById('startRocks');
+        const startSolarBtn = document.getElementById('startSolar');
+        const startEarthBtn = document.getElementById('startEarth');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const scienceFact = document.getElementById('scienceFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+        
+        // Topic cards
+        const rocksCard = document.getElementById('rocksCard');
+        const solarCard = document.getElementById('solarCard');
+        const earthCard = document.getElementById('earthCard');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade5EarthSpace');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                appState.topicType = parsed.topicType || "";
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade5EarthSpace', JSON.stringify(appState));
+        }
+
+        // Initialize questions based on topic type
+        function initializeQuestions(topicType) {
+            appState.topicType = topicType;
+            
+            switch(topicType) {
+                case "rocks":
+                    appState.currentQuestions = [...rocksQuestions];
+                    break;
+                case "solar":
+                    appState.currentQuestions = [...solarQuestions];
+                    break;
+                case "earth":
+                    appState.currentQuestions = [...earthQuestions];
+                    break;
+            }
+            
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startRocksBtn.addEventListener('click', () => startPractice("rocks"));
+            startSolarBtn.addEventListener('click', () => startPractice("solar"));
+            startEarthBtn.addEventListener('click', () => startPractice("earth"));
+            
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice("rocks");
+                }
+            });
+            
+            // Add click events to topic cards
+            rocksCard.addEventListener('click', () => {
+                clearActiveCards();
+                rocksCard.classList.add('active');
+                startRocksBtn.classList.add('btn-rocks');
+            });
+            
+            solarCard.addEventListener('click', () => {
+                clearActiveCards();
+                solarCard.classList.add('active');
+                startSolarBtn.classList.add('btn-solar');
+            });
+            
+            earthCard.addEventListener('click', () => {
+                clearActiveCards();
+                earthCard.classList.add('active');
+                startEarthBtn.classList.add('btn-earth');
+            });
+        }
+        
+        function clearActiveCards() {
+            rocksCard.classList.remove('active');
+            solarCard.classList.remove('active');
+            earthCard.classList.remove('active');
+            startRocksBtn.classList.remove('btn-rocks');
+            startSolarBtn.classList.remove('btn-solar');
+            startEarthBtn.classList.remove('btn-earth');
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            
+            // Set progress bar color based on topic type
+            switch(appState.topicType) {
+                case "rocks":
+                    progressFill.style.background = "linear-gradient(to right, var(--accent-brown), #5D4037)";
+                    break;
+                case "solar":
+                    progressFill.style.background = "linear-gradient(to right, var(--accent-orange), #F57C00)";
+                    break;
+                case "earth":
+                    progressFill.style.background = "linear-gradient(to right, var(--secondary-green), #388E3C)";
+                    break;
+                default:
+                    progressFill.style.background = "linear-gradient(to right, var(--primary-blue), var(--secondary-green))";
+            }
+            
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem(`ideolixGrade5EarthSpace_${appState.topicType}_highestScore`) || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem(`ideolixGrade5EarthSpace_${appState.topicType}_highestScore`, appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're an earth and space science expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent geological and astronomical knowledge!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep learning to become a geology and astronomy master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review earth and space concepts and try again!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Earth and space knowledge grows with exploration!";
+            }
+        }
+
+        // Create science fact display
+        function createScienceFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'science-fact';
+            
+            factDiv.innerHTML = `<strong>Earth & Space Fact:</strong> ${scienceFacts[Math.floor(Math.random() * scienceFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display based on topic type
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            let conceptName = "";
+            let conceptIcon = "";
+            let conceptColor = "";
+            
+            switch(appState.topicType) {
+                case "rocks":
+                    conceptName = "Rocks & Minerals";
+                    conceptIcon = "🪨💎";
+                    conceptColor = "var(--accent-brown)";
+                    break;
+                case "solar":
+                    conceptName = "Solar System";
+                    conceptIcon = "☀️🪐";
+                    conceptColor = "var(--accent-orange)";
+                    break;
+                case "earth":
+                    conceptName = "Earth's Motions";
+                    conceptIcon = "🌍🔄";
+                    conceptColor = "var(--secondary-green)";
+                    break;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.style.background = `linear-gradient(135deg, ${conceptColor}, ${conceptColor}80)`;
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            // Add specific label based on question type
+            if (question.type.includes("basic_rocks")) {
+                label.textContent = "Basic Rocks & Minerals";
+            } else if (question.type.includes("mineral_properties")) {
+                label.textContent = "Mineral Properties";
+            } else if (question.type.includes("rock_formation")) {
+                label.textContent = "Rock Formation";
+            } else if (question.type.includes("rock_examples")) {
+                label.textContent = "Rock Types & Examples";
+            } else if (question.type.includes("earth_processes")) {
+                label.textContent = "Earth Processes";
+            } else if (question.type.includes("basic_solar")) {
+                label.textContent = "Basic Solar System";
+            } else if (question.type.includes("earth_moon")) {
+                label.textContent = "Earth & Moon";
+            } else if (question.type.includes("planet_chars")) {
+                label.textContent = "Planet Characteristics";
+            } else if (question.type.includes("orbits_motion")) {
+                label.textContent = "Orbits & Motion";
+            } else if (question.type.includes("sun_objects")) {
+                label.textContent = "Sun & Other Objects";
+            } else if (question.type.includes("rotation_basics")) {
+                label.textContent = "Rotation Basics";
+            } else if (question.type.includes("revolution_basics")) {
+                label.textContent = "Revolution Basics";
+            } else if (question.type.includes("seasons")) {
+                label.textContent = "Seasons";
+            } else if (question.type.includes("day_night")) {
+                label.textContent = "Day/Night & Time";
+            } else if (question.type.includes("effects_phenomena")) {
+                label.textContent = "Effects & Phenomena";
+            } else {
+                label.textContent = "Earth & Space Science Concepts";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create visualization based on topic type
+        function createScienceVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            switch(appState.topicType) {
+                case "rocks":
+                    vizDiv.innerHTML = createRocksVisualization(question);
+                    break;
+                case "solar":
+                    vizDiv.innerHTML = createSolarVisualization(question);
+                    break;
+                case "earth":
+                    vizDiv.innerHTML = createEarthVisualization(question);
+                    break;
+            }
+            
+            return vizDiv;
+        }
+
+        // Rocks visualization
+        function createRocksVisualization(question) {
+            return `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-brown);">Rocks & Minerals: Earth's Building Blocks</h3>
+                
+                <div class="rocks-diagram">
+                    <div class="diagram-title">The Rock Cycle</div>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="display: inline-block; padding: 20px; background: rgba(121, 85, 72, 0.1); border-radius: 12px; font-size: 1.2rem;">
+                            🌋 Igneous (Cooled Magma/Lava)<br>
+                            ⬇ Weathering & Erosion<br>
+                            🏞️ Sediment Transport & Deposition<br>
+                            ⬇ Compaction & Cementation<br>
+                            🪨 Sedimentary Rocks<br>
+                            ⬇ Heat & Pressure<br>
+                            🔥 Metamorphic Rocks<br>
+                            ⬇ Melting<br>
+                            🔁 Back to Magma
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="properties-comparison">
+                    ${earthSpaceData.rockTypes.map(rock => `
+                        <div class="property-card ${rock.name.toLowerCase()}">
+                            <div class="property-icon">${rock.icon}</div>
+                            <div class="property-name">${rock.name} Rocks</div>
+                            <div class="property-description">${rock.description}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="process-display">
+                    <div class="process-title">Mineral Identification Properties</div>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-title">Color</div>
+                                <div class="step-description">First observable property, but can be misleading (many minerals have multiple colors)</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-title">Streak</div>
+                                <div class="step-description">Color of powdered mineral (more reliable than surface color)</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-title">Luster</div>
+                                <div class="step-description">How light reflects (metallic, glassy, pearly, dull, earthy)</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="step-title">Hardness</div>
+                                <div class="step-description">Resistance to scratching (Mohs scale: 1=talc to 10=diamond)</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <div class="step-title">Cleavage/Fracture</div>
+                                <div class="step-description">How mineral breaks (flat planes = cleavage, irregular = fracture)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="planet-display">
+                    <div class="planet-item">
+                        <div class="planet-icon">💎</div>
+                        <div class="planet-title">Mohs Hardness Scale</div>
+                        <div class="planet-description">1: Talc (softest)<br>5: Apatite<br>10: Diamond (hardest)</div>
+                    </div>
+                    <div class="planet-item">
+                        <div class="planet-icon">🔍</div>
+                        <div class="planet-title">Common Minerals</div>
+                        <div class="planet-description">Quartz, Feldspar, Mica, Calcite, Halite, Pyrite, Gypsum</div>
+                    </div>
+                    <div class="planet-item">
+                        <div class="planet-icon">🪨</div>
+                        <div class="planet-title">Rock Examples</div>
+                        <div class="planet-description">Granite, Basalt, Sandstone, Limestone, Marble, Slate, Gneiss</div>
+                    </div>
+                    <div class="planet-item">
+                        <div class="planet-icon">🏔️</div>
+                        <div class="planet-title">Rock Uses</div>
+                        <div class="planet-description">Building materials, tools, jewelry, energy sources, soil formation</div>
+                    </div>
+                </div>
+                
+                <table class="examples-table">
+                    <thead>
+                        <tr>
+                            <th>Rock Type</th>
+                            <th>Formation Process</th>
+                            <th>Examples</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: var(--accent-red); font-weight: bold;">Igneous</td>
+                            <td>Cooling and solidification of magma or lava</td>
+                            <td>Granite, Basalt, Obsidian, Pumice</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-brown); font-weight: bold;">Sedimentary</td>
+                            <td>Compaction and cementation of sediments</td>
+                            <td>Sandstone, Limestone, Shale, Conglomerate</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-purple); font-weight: bold;">Metamorphic</td>
+                            <td>Heat and pressure changing existing rocks</td>
+                            <td>Marble, Slate, Quartzite, Gneiss</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="science-challenge">
+                    <div class="challenge-title">Geology Challenge</div>
+                    <div class="challenge-area">
+                        <div class="challenge-scenario">
+                            You find a rock sample that shows distinct layers, contains visible fossils of seashells, and fizzes when you drop vinegar on it.
+                        </div>
+                        <div class="challenge-question">What type of rock is this most likely to be, and what is it made of?</div>
+                        <div class="challenge-options">
+                            <div class="challenge-option">Sedimentary limestone - formed from marine organisms' shells (calcium carbonate)</div>
+                            <div class="challenge-option">Igneous granite - formed from cooled magma with visible crystals</div>
+                            <div class="challenge-option">Metamorphic marble - formed from limestone under heat and pressure</div>
+                            <div class="challenge-option">Sedimentary sandstone - formed from compressed sand grains</div>
+                        </div>
+                        <div style="margin-top: 15px; color: var(--text-secondary); font-size: 0.9rem;">
+                            <strong>Clues:</strong> Layers + Fossils + Fizzes with acid = Limestone (calcium carbonate reacts with acid)
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Solar System visualization
+        function createSolarVisualization(question) {
+            return `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-orange);">Solar System: Our Cosmic Neighborhood</h3>
+                
+                <div class="cycle-display">
+                    <div class="cycle-title">Planet Order from Sun</div>
+                    <div style="text-align: center; margin: 20px 0; font-size: 1.3rem; font-weight: bold;">
+                        ☀️ My Very Educated Mother Just Served Us Nachos ☀️<br>
+                        <div style="margin-top: 10px; font-size: 1.1rem;">
+                            Mercury · Venus · Earth · Mars · Jupiter · Saturn · Uranus · Neptune
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="properties-comparison">
+                    ${earthSpaceData.planets.map(planet => `
+                        <div class="property-card planet">
+                            <div class="property-icon">${planet.icon}</div>
+                            <div class="property-name">${planet.name}</div>
+                            <div class="property-description">${planet.type}<br>${planet.fact}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="process-display">
+                    <div class="process-title">Types of Objects in Our Solar System</div>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-title">Star</div>
+                                <div class="step-description">The Sun - giant ball of hot gas producing light and heat through nuclear fusion</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-title">Planets</div>
+                                <div class="step-description">Large bodies orbiting Sun, cleared their orbits (8 in our solar system)</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-title">Dwarf Planets</div>
+                                <div class="step-description">Round objects orbiting Sun but haven't cleared orbits (Pluto, Ceres, Eris)</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="step-title">Moons</div>
+                                <div class="step-description">Natural satellites orbiting planets (Earth has 1, Jupiter has 80+)</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <div class="step-title">Small Bodies</div>
+                                <div class="step-description">Asteroids, comets, meteoroids - rocky or icy objects</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="planet-display">
+                    <div class="planet-item">
+                        <div class="planet-icon">🌞</div>
+                        <div class="planet-title">The Sun</div>
+                        <div class="planet-description">Medium star, 99.86% of solar system mass, surface: 5,500°C, core: 15 million°C</div>
+                    </div>
+                    <div class="planet-item">
+                        <div class="planet-icon">🌕</div>
+                        <div class="planet-title">Earth's Moon</div>
+                        <div class="planet-description">1/4 Earth's size, no atmosphere, same side always faces Earth, causes tides</div>
+                    </div>
+                    <div class="planet-item">
+                        <div class="planet-icon">☄️</div>
+                        <div class="planet-title">Asteroids & Comets</div>
+                        <div class="planet-description">Asteroids: rocky, mostly in belt. Comets: icy, develop tails near Sun</div>
+                    </div>
+                    <div class="planet-item">
+                        <div class="planet-icon">🌌</div>
+                        <div class="planet-title">Solar System Scale</div>
+                        <div class="planet-description">If Sun were a basketball, Earth would be a peppercorn 25 meters away</div>
+                    </div>
+                </div>
+                
+                <table class="examples-table">
+                    <thead>
+                        <tr>
+                            <th>Planet Type</th>
+                            <th>Characteristics</th>
+                            <th>Planets</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: var(--accent-brown); font-weight: bold;">Terrestrial</td>
+                            <td>Small, dense, rocky, solid surfaces, few/no moons, no rings</td>
+                            <td>Mercury, Venus, Earth, Mars</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-orange); font-weight: bold;">Gas Giants</td>
+                            <td>Large, low density, gaseous, many moons, ring systems</td>
+                            <td>Jupiter, Saturn</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--primary-blue); font-weight: bold;">Ice Giants</td>
+                            <td>Medium size, contain more 'ices', many moons, faint rings</td>
+                            <td>Uranus, Neptune</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="science-challenge">
+                    <div class="challenge-title">Astronomy Challenge</div>
+                    <div class="challenge-area">
+                        <div class="challenge-scenario">
+                            You're planning a mission to study a planet. You need a planet with a solid surface to land on, possibility of past water, and a thin atmosphere that won't crush your spacecraft.
+                        </div>
+                        <div class="challenge-question">Which planet should you choose, and what are two features that make it suitable?</div>
+                        <div class="challenge-options">
+                            <div class="challenge-option">Mars - solid rocky surface, evidence of past water, thin atmosphere</div>
+                            <div class="challenge-option">Jupiter - largest planet, many moons, strong magnetic field</div>
+                            <div class="challenge-option">Venus - similar size to Earth, thick atmosphere, extreme heat</div>
+                            <div class="challenge-option">Mercury - closest to Sun, extreme temperatures, no atmosphere</div>
+                        </div>
+                        <div style="margin-top: 15px; color: var(--text-secondary); font-size: 0.9rem;">
+                            <strong>Think about:</strong> Terrestrial planets have solid surfaces. Mars has the most Earth-like conditions in the past.
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Earth's Motion visualization
+        function createEarthVisualization(question) {
+            return `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--secondary-green);">Earth's Motions: Rotation & Revolution</h3>
+                
+                <div class="cycle-display">
+                    <div class="cycle-title">Earth's Dual Motions</div>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="display: inline-block; padding: 20px; background: rgba(76, 175, 80, 0.1); border-radius: 12px; font-size: 1.2rem;">
+                            <span class="rotation-part">🔄 Rotation: 24 hours → Day/Night</span><br>
+                            <span class="revolution-part">🌍 Revolution: 365.25 days → Seasons</span><br>
+                            📐 Tilt: 23.5° → Seasonal Intensity<br>
+                            🎯 Precession: 26,000-year cycle
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="properties-comparison">
+                    ${earthSpaceData.earthMotions.map(motion => `
+                        <div class="property-card ${motion.motion.toLowerCase()}">
+                            <div class="property-icon">${motion.icon}</div>
+                            <div class="property-name">${motion.motion}</div>
+                            <div class="property-description">${motion.time || motion.angle || motion.cycle}<br>${motion.effect}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="process-display">
+                    <div class="process-title">How Seasons Work (Northern Hemisphere)</div>
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <div class="step-title">June Solstice (Summer)</div>
+                                <div class="step-description">North Pole tilted toward Sun. Most direct sunlight. Longest days, shortest nights.</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <div class="step-title">September Equinox (Fall)</div>
+                                <div class="step-description">Equal sunlight both hemispheres. Equal day/night. Sun directly above equator.</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <div class="step-title">December Solstice (Winter)</div>
+                                <div class="step-description">North Pole tilted away from Sun. Least direct sunlight. Shortest days, longest nights.</div>
+                            </div>
+                        </div>
+                        <div class="process-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <div class="step-title">March Equinox (Spring)</div>
+                                <div class="step-description">Equal sunlight both hemispheres. Equal day/night. Sun directly above equator.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="planet-display">
+                    <div class="planet-item">
+                        <div class="planet-icon">🌅</div>
+                        <div class="planet-title">Day & Night</div>
+                        <div class="planet-description">Rotation causes Sun to appear to move east→west. Different sunrise/sunset times.</div>
+                    </div>
+                    <div class="planet-item">
+                        <div class="planet-icon">🍂</div>
+                        <div class="planet-title">Seasons</div>
+                        <div class="planet-description">Tilt + Revolution = changing Sun angle & day length = temperature variations</div>
+                    </div>
+                    <div class="planet-item">
+                        <div class="planet-icon">🌐</div>
+                        <div class="planet-title">Time Zones</div>
+                        <div class="planet-description">24 zones, each 15° longitude. Sun highest at local noon. Date Line at ~180°.</div>
+                    </div>
+                    <div class="planet-item">
+                        <div class="planet-icon">🌊</div>
+                        <div class="planet-title">Coriolis Effect</div>
+                        <div class="planet-description">Rotation deflects winds/currents: right in NH, left in SH. Affects weather patterns.</div>
+                    </div>
+                </div>
+                
+                <table class="examples-table">
+                    <thead>
+                        <tr>
+                            <th>Motion</th>
+                            <th>Time Period</th>
+                            <th>Main Effects</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="color: var(--secondary-green); font-weight: bold;">Rotation</td>
+                            <td>24 hours (1 day)</td>
+                            <td>Day and night cycle, time zones, Coriolis effect, celestial motion</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--primary-blue); font-weight: bold;">Revolution</td>
+                            <td>365.25 days (1 year)</td>
+                            <td>Seasons, changing constellations, calendar year, perihelion/aphelion</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-purple); font-weight: bold;">Axial Tilt</td>
+                            <td>Constant 23.5°</td>
+                            <td>Season intensity, climate zones, midnight sun/polar night at poles</td>
+                        </tr>
+                        <tr>
+                            <td style="color: var(--accent-orange); font-weight: bold;">Precession</td>
+                            <td>26,000 years</td>
+                            <td>Changes North Star, affects seasonal timing over millennia</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="science-challenge">
+                    <div class="challenge-title">Earth Science Challenge</div>
+                    <div class="challenge-area">
+                        <div class="challenge-scenario">
+                            You're at the North Pole in June. The Sun is visible at midnight, circling the horizon but never setting. Meanwhile, at the South Pole, it's completely dark 24 hours a day.
+                        </div>
+                        <div class="challenge-question">What Earth motion and alignment causes this phenomenon, and what is it called?</div>
+                        <div class="challenge-options">
+                            <div class="challenge-option">Earth's tilt during June solstice - North Pole tilted toward Sun (Midnight Sun), South Pole tilted away (Polar Night)</div>
+                            <div class="challenge-option">Earth's rotation speed - faster rotation makes longer days</div>
+                            <div class="challenge-option">Earth's distance from Sun - closer in June creates more sunlight</div>
+                            <div class="challenge-option">Moon's position - full moon reflects more sunlight to poles</div>
+                        </div>
+                        <div style="margin-top: 15px; color: var(--text-secondary); font-size: 0.9rem;">
+                            <strong>Think about:</strong> When one pole tilts toward Sun, it experiences 24-hour daylight while the opposite pole has 24-hour darkness.
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            scienceFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            scienceFact.appendChild(createScienceFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createScienceVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    feedbackMessage.textContent = `Correct answer: ${correctOption}`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions(appState.topicType);
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            showWelcomePage();
+        }
+
+        // Start practice session
+        function startPractice(topicType) {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions(topicType);
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

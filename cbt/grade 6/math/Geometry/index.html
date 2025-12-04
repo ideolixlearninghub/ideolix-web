@@ -1,0 +1,2952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 6 Math - Geometry | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Geometry Theme */
+        :root {
+            --primary-blue: #2196F3;
+            --secondary-green: #4CAF50;
+            --accent-purple: #9C27B0;
+            --accent-orange: #FF9800;
+            --accent-red: #F44336;
+            --accent-yellow: #FFC107;
+            --accent-teal: #009688;
+            --accent-pink: #E91E63;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(33, 150, 243, 0.3);
+            --angle-glow: 0 0 15px rgba(255, 152, 0, 0.4);
+            --triangle-glow: 0 0 15px rgba(76, 175, 80, 0.4);
+            --quadrilateral-glow: 0 0 15px rgba(156, 39, 176, 0.4);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Geometry Pattern Background */
+        .geometry-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(76, 175, 80, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 152, 0, 0.1) 0%, transparent 50%);
+            opacity: 0.3;
+        }
+
+        .floating-shape {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.05);
+            font-size: 3rem;
+            font-weight: bold;
+            animation: floatShape 20s linear infinite;
+        }
+
+        @keyframes floatShape {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.1; }
+            25% { transform: translateY(-100px) translateX(100px) rotate(90deg); opacity: 0.05; }
+            50% { transform: translateY(-50px) translateX(-100px) rotate(180deg); opacity: 0.1; }
+            75% { transform: translateY(100px) translateX(50px) rotate(270deg); opacity: 0.05; }
+            100% { transform: translateY(0) translateX(0) rotate(360deg); opacity: 0.1; }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(33, 150, 243, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-blue);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #388E3C;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-green), var(--accent-orange));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .math-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-teal);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green), var(--accent-orange));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-green);
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Geometry Display */
+        .geometry-display {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+
+        .display-title {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .angle-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            height: 200px;
+            position: relative;
+        }
+
+        .angle-canvas {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .angle-arm {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 3px;
+            background: var(--primary-blue);
+            transform-origin: left center;
+            width: 100px;
+        }
+
+        .angle-measure {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--dark-surface);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: var(--accent-orange);
+            border: 2px solid var(--accent-orange);
+        }
+
+        /* Shapes Grid */
+        .shapes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .shapes-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .shapes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .shape-card {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .shape-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .shape-card.angle-card {
+            border-color: var(--accent-orange);
+        }
+
+        .shape-card.triangle-card {
+            border-color: var(--secondary-green);
+        }
+
+        .shape-card.quadrilateral-card {
+            border-color: var(--accent-purple);
+        }
+
+        .shape-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shape-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .angle-card .shape-title {
+            color: var(--accent-orange);
+        }
+
+        .triangle-card .shape-title {
+            color: var(--secondary-green);
+        }
+
+        .quadrilateral-card .shape-title {
+            color: var(--accent-purple);
+        }
+
+        .shape-properties {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        /* Triangle Types */
+        .triangle-types {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--secondary-green);
+        }
+
+        .triangle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .triangle-type {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .triangle-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--secondary-green);
+        }
+
+        .triangle-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--secondary-green);
+        }
+
+        .triangle-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Quadrilateral Types */
+        .quadrilateral-types {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .quadrilateral-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .quadrilateral-type {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .quadrilateral-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent-purple);
+        }
+
+        .quadrilateral-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--accent-purple);
+        }
+
+        .quadrilateral-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Properties Display */
+        .properties-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-teal);
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .property-item {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .property-icon {
+            font-size: 1.5rem;
+            color: var(--accent-teal);
+        }
+
+        .property-content {
+            flex: 1;
+        }
+
+        .property-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--accent-teal);
+        }
+
+        .property-value {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Interactive Protractor */
+        .protractor-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-red);
+        }
+
+        .protractor-canvas {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            background: var(--dark-surface);
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .protractor-base {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 150px;
+            background: var(--text-secondary);
+        }
+
+        .protractor-arm {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform-origin: bottom center;
+            width: 2px;
+            height: 150px;
+            background: var(--accent-red);
+            transition: transform 0.5s ease;
+        }
+
+        .angle-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .angle-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 8px;
+            background: var(--dark-surface);
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .angle-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .angle-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-red);
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* Geometry Table */
+        .geometry-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .geometry-table th {
+            background: var(--dark-surface);
+            padding: 12px;
+            text-align: left;
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--primary-blue);
+        }
+
+        .geometry-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+        }
+
+        .geometry-table tr:hover {
+            background: rgba(33, 150, 243, 0.05);
+        }
+
+        /* Interactive Practice */
+        .interactive-practice {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-yellow);
+        }
+
+        .practice-title {
+            color: var(--accent-yellow);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .practice-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .practice-button {
+            padding: 10px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-yellow);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .practice-button:hover {
+            background: rgba(255, 193, 7, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .practice-display {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-green), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .shapes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .triangle-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quadrilateral-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes shapeFloat {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        .shape-float {
+            animation: shapeFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes angleRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(var(--angle-rotation)); }
+        }
+        
+        .angle-rotate {
+            animation: angleRotate 1s ease forwards;
+        }
+        
+        @keyframes geometryReveal {
+            0% { transform: scale(0); opacity: 0; }
+            70% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .geometry-reveal {
+            animation: geometryReveal 0.3s ease forwards;
+        }
+        
+        @keyframes triangleGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); }
+            50% { box-shadow: 0 0 15px 5px rgba(76, 175, 80, 0.2); }
+        }
+        
+        .triangle-glow {
+            animation: triangleGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes quadrilateralGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(156, 39, 176, 0.4); }
+            50% { box-shadow: 0 0 15px 5px rgba(156, 39, 176, 0.2); }
+        }
+        
+        .quadrilateral-glow {
+            animation: quadrilateralGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes angleGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.4); }
+            50% { box-shadow: 0 0 15px 5px rgba(255, 152, 0, 0.2); }
+        }
+        
+        .angle-glow {
+            animation: angleGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes protractorMove {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(90deg); }
+            50% { transform: rotate(180deg); }
+            75% { transform: rotate(270deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .protractor-move {
+            animation: protractorMove 4s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Geometry Pattern Background -->
+    <div class="geometry-bg" id="geometryBg">
+        <!-- Shapes will be generated by JavaScript -->
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 6 Mathematics</h1>
+            <p class="welcome-subtitle">Explore the world of shapes and angles! Learn about different types of angles, triangles, quadrilaterals, and their properties. Master geometry concepts, solve angle problems, and understand shape relationships. Become a geometry expert!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">📐🔺◻️📏</span>
+                <span class="topic-name">Geometry: Angles, Triangles, Quadrilaterals</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Geometry Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 120</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0.8%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Math fact display -->
+                <div id="mathFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Geometry Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background
+        function initBackground() {
+            const geometryBg = document.getElementById('geometryBg');
+            
+            // Create floating geometric shapes
+            const shapes = ['△', '□', '○', '∠', '◇', '▱', '▭', '▣', '◈', '◊'];
+            
+            for (let i = 0; i < 25; i++) {
+                const shape = document.createElement('div');
+                shape.className = 'floating-shape shape-float';
+                shape.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+                shape.style.left = `${Math.random() * 100}%`;
+                shape.style.top = `${Math.random() * 100}%`;
+                shape.style.animationDelay = `${Math.random() * 20}s`;
+                shape.style.fontSize = `${2 + Math.random() * 4}rem`;
+                shape.style.animationDuration = `${3 + Math.random() * 7}s`;
+                
+                // Color based on shape type
+                if (shape.textContent === '△') {
+                    shape.style.color = 'rgba(76, 175, 80, 0.1)';
+                } else if (shape.textContent === '□' || shape.textContent === '▭' || shape.textContent === '▱') {
+                    shape.style.color = 'rgba(156, 39, 176, 0.1)';
+                } else if (shape.textContent === '∠') {
+                    shape.style.color = 'rgba(255, 152, 0, 0.1)';
+                } else {
+                    shape.style.color = 'rgba(33, 150, 243, 0.1)';
+                }
+                
+                geometryBg.appendChild(shape);
+            }
+        }
+
+        // Questions array - 120+ Grade 6 Geometry questions
+        const questions = [
+            // Angle Basics (1-25)
+            {
+                type: "angle_basics",
+                question: "What is the name of an angle that measures exactly 90°?",
+                options: ["Right angle", "Acute angle", "Obtuse angle", "Straight angle"],
+                answer: "A",
+                explanation: "A right angle measures exactly 90°. Acute < 90°, Obtuse > 90° but < 180°, Straight = 180°."
+            },
+            {
+                type: "angle_basics",
+                question: "An angle measuring 45° is called:",
+                options: ["Acute angle", "Right angle", "Obtuse angle", "Reflex angle"],
+                answer: "A",
+                explanation: "Acute angles are less than 90°. 45° < 90°, so it's acute."
+            },
+            {
+                type: "angle_basics",
+                question: "What type of angle measures between 90° and 180°?",
+                options: ["Obtuse angle", "Acute angle", "Right angle", "Reflex angle"],
+                answer: "A",
+                explanation: "Obtuse angles are greater than 90° but less than 180°."
+            },
+            {
+                type: "angle_basics",
+                question: "A straight angle measures:",
+                options: ["180°", "90°", "360°", "45°"],
+                answer: "A",
+                explanation: "A straight angle forms a straight line and measures exactly 180°."
+            },
+            {
+                type: "angle_basics",
+                question: "Two angles that add up to 90° are called:",
+                options: ["Complementary angles", "Supplementary angles", "Adjacent angles", "Vertical angles"],
+                answer: "A",
+                explanation: "Complementary angles sum to 90°. Supplementary angles sum to 180°."
+            },
+            {
+                type: "angle_basics",
+                question: "If angle A = 35°, its complement is:",
+                options: ["55°", "145°", "35°", "65°"],
+                answer: "A",
+                explanation: "Complement = 90° - 35° = 55°. Complementary angles sum to 90°."
+            },
+            {
+                type: "angle_basics",
+                question: "Two angles that add up to 180° are called:",
+                options: ["Supplementary angles", "Complementary angles", "Adjacent angles", "Congruent angles"],
+                answer: "A",
+                explanation: "Supplementary angles sum to 180°. Complementary angles sum to 90°."
+            },
+            {
+                type: "angle_basics",
+                question: "If angle B = 110°, its supplement is:",
+                options: ["70°", "110°", "20°", "90°"],
+                answer: "A",
+                explanation: "Supplement = 180° - 110° = 70°. Supplementary angles sum to 180°."
+            },
+            {
+                type: "angle_basics",
+                question: "Angles sharing a common vertex and side are:",
+                options: ["Adjacent angles", "Vertical angles", "Complementary angles", "Supplementary angles"],
+                answer: "A",
+                explanation: "Adjacent angles share a common vertex and one common side."
+            },
+            {
+                type: "angle_basics",
+                question: "Vertically opposite angles are always:",
+                options: ["Equal", "Complementary", "Supplementary", "Acute"],
+                answer: "A",
+                explanation: "When two lines intersect, vertically opposite angles are equal."
+            },
+            // Triangle Basics (26-50)
+            {
+                type: "triangle_basics",
+                question: "How many sides does a triangle have?",
+                options: ["3", "4", "5", "6"],
+                answer: "A",
+                explanation: "Triangle = tri (three) + angle. A triangle has 3 sides and 3 angles."
+            },
+            {
+                type: "triangle_basics",
+                question: "Sum of angles in any triangle is:",
+                options: ["180°", "90°", "360°", "270°"],
+                answer: "A",
+                explanation: "The sum of the three interior angles of any triangle is always 180°."
+            },
+            {
+                type: "triangle_basics",
+                question: "A triangle with all sides equal is:",
+                options: ["Equilateral triangle", "Isosceles triangle", "Scalene triangle", "Right triangle"],
+                answer: "A",
+                explanation: "Equilateral = equal sides. All sides equal, all angles = 60°."
+            },
+            {
+                type: "triangle_basics",
+                question: "Triangle with two equal sides is:",
+                options: ["Isosceles triangle", "Equilateral triangle", "Scalene triangle", "Right triangle"],
+                answer: "A",
+                explanation: "Isosceles triangle has two equal sides and two equal base angles."
+            },
+            {
+                type: "triangle_basics",
+                question: "Triangle with no equal sides is:",
+                options: ["Scalene triangle", "Isosceles triangle", "Equilateral triangle", "Right triangle"],
+                answer: "A",
+                explanation: "Scalene triangle has all sides of different lengths, all angles different."
+            },
+            {
+                type: "triangle_basics",
+                question: "Triangle with one 90° angle is:",
+                options: ["Right triangle", "Acute triangle", "Obtuse triangle", "Equilateral triangle"],
+                answer: "A",
+                explanation: "Right triangle has one right angle (90°)."
+            },
+            {
+                type: "triangle_basics",
+                question: "In a triangle, angles are 40° and 60°. Third angle is:",
+                options: ["80°", "100°", "20°", "120°"],
+                answer: "A",
+                explanation: "Sum = 180°. 40° + 60° = 100°. Third angle = 180° - 100° = 80°."
+            },
+            {
+                type: "triangle_basics",
+                question: "All angles in equilateral triangle measure:",
+                options: ["60° each", "90° each", "45° each", "30° each"],
+                answer: "A",
+                explanation: "Equilateral triangle has equal sides and equal angles. 180° ÷ 3 = 60° each."
+            },
+            {
+                type: "triangle_basics",
+                question: "Triangle with all angles less than 90° is:",
+                options: ["Acute triangle", "Right triangle", "Obtuse triangle", "Scalene triangle"],
+                answer: "A",
+                explanation: "Acute triangle has all three angles less than 90°."
+            },
+            {
+                type: "triangle_basics",
+                question: "Triangle with one angle greater than 90° is:",
+                options: ["Obtuse triangle", "Acute triangle", "Right triangle", "Equilateral triangle"],
+                answer: "A",
+                explanation: "Obtuse triangle has one angle greater than 90°."
+            },
+            // Quadrilateral Basics (51-75)
+            {
+                type: "quadrilateral_basics",
+                question: "How many sides does a quadrilateral have?",
+                options: ["4", "3", "5", "6"],
+                answer: "A",
+                explanation: "Quadrilateral = quad (four) + lateral (sides). It has 4 sides."
+            },
+            {
+                type: "quadrilateral_basics",
+                question: "Sum of angles in any quadrilateral is:",
+                options: ["360°", "180°", "90°", "540°"],
+                answer: "A",
+                explanation: "The sum of interior angles of any quadrilateral is 360°."
+            },
+            {
+                type: "quadrilateral_basics",
+                question: "Quadrilateral with all sides equal and all angles 90° is:",
+                options: ["Square", "Rectangle", "Rhombus", "Parallelogram"],
+                answer: "A",
+                explanation: "Square: all sides equal, all angles = 90°."
+            },
+            {
+                type: "quadrilateral_basics",
+                question: "Quadrilateral with opposite sides equal and parallel, all angles 90° is:",
+                options: ["Rectangle", "Square", "Rhombus", "Trapezium"],
+                answer: "A",
+                explanation: "Rectangle: opposite sides equal and parallel, all angles = 90°."
+            },
+            {
+                type: "quadrilateral_basics",
+                question: "Quadrilateral with all sides equal but angles not 90° is:",
+                options: ["Rhombus", "Square", "Rectangle", "Parallelogram"],
+                answer: "A",
+                explanation: "Rhombus: all sides equal, opposite angles equal, but not necessarily 90°."
+            },
+            {
+                type: "quadrilateral_basics",
+                question: "Quadrilateral with opposite sides parallel is:",
+                options: ["Parallelogram", "Trapezium", "Kite", "None of these"],
+                answer: "A",
+                explanation: "Parallelogram: both pairs of opposite sides are parallel."
+            },
+            {
+                type: "quadrilateral_basics",
+                question: "Quadrilateral with only one pair of parallel sides is:",
+                options: ["Trapezium", "Parallelogram", "Rhombus", "Rectangle"],
+                answer: "A",
+                explanation: "Trapezium (or trapezoid): exactly one pair of parallel sides."
+            },
+            {
+                type: "quadrilateral_basics",
+                question: "In a quadrilateral, angles are 90°, 80°, 100°. Fourth angle is:",
+                options: ["90°", "80°", "100°", "70°"],
+                answer: "A",
+                explanation: "Sum = 360°. 90° + 80° + 100° = 270°. Fourth = 360° - 270° = 90°."
+            },
+            {
+                type: "quadrilateral_basics",
+                question: "All squares are also:",
+                options: ["Rectangles", "Rhombuses", "Both A and B", "Neither"],
+                answer: "C",
+                explanation: "A square is a special rectangle (all angles 90°) and a special rhombus (all sides equal)."
+            },
+            // Angle Calculations (76-100)
+            {
+                type: "angle_calculations",
+                question: "Two complementary angles are in ratio 2:3. Smaller angle is:",
+                options: ["36°", "54°", "72°", "90°"],
+                answer: "A",
+                explanation: "Complementary = 90°. Ratio 2:3 means 2x + 3x = 90°, 5x = 90°, x = 18°. Smaller = 2×18 = 36°."
+            },
+            {
+                type: "angle_calculations",
+                question: "Two supplementary angles are in ratio 4:5. Larger angle is:",
+                options: ["100°", "80°", "90°", "120°"],
+                answer: "A",
+                explanation: "Supplementary = 180°. 4x + 5x = 180°, 9x = 180°, x = 20°. Larger = 5×20 = 100°."
+            },
+            {
+                type: "angle_calculations",
+                question: "If one angle of linear pair is 65°, the other is:",
+                options: ["115°", "65°", "25°", "90°"],
+                answer: "A",
+                explanation: "Linear pair = supplementary (sum to 180°). 180° - 65° = 115°."
+            },
+            {
+                type: "angle_calculations",
+                question: "Vertically opposite angle to 75° is:",
+                options: ["75°", "105°", "15°", "90°"],
+                answer: "A",
+                explanation: "Vertically opposite angles are equal. So other angle = 75°."
+            },
+            // Triangle Calculations (101-125)
+            {
+                type: "triangle_calculations",
+                question: "Triangle angles are 50° and 70°. Third angle is:",
+                options: ["60°", "50°", "70°", "120°"],
+                answer: "A",
+                explanation: "Sum = 180°. 50° + 70° = 120°. Third = 180° - 120° = 60°."
+            },
+            {
+                type: "triangle_calculations",
+                question: "Right triangle: one acute angle = 30°. Other acute angle = ?",
+                options: ["60°", "30°", "90°", "120°"],
+                answer: "A",
+                explanation: "Right triangle has 90° angle. Sum = 180°. 90° + 30° = 120°. Other acute = 180° - 120° = 60°."
+            },
+            {
+                type: "triangle_calculations",
+                question: "Isosceles triangle: base angle = 40°. Vertex angle = ?",
+                options: ["100°", "40°", "80°", "140°"],
+                answer: "A",
+                explanation: "Isosceles has two equal base angles. 40° + 40° = 80°. Vertex = 180° - 80° = 100°."
+            },
+            {
+                type: "triangle_calculations",
+                question: "Triangle angles ratio 1:2:3. Smallest angle = ?",
+                options: ["30°", "60°", "90°", "45°"],
+                answer: "A",
+                explanation: "Ratio 1:2:3 → x + 2x + 3x = 180°, 6x = 180°, x = 30°. Smallest = 30°."
+            },
+            // Quadrilateral Calculations (126-150)
+            {
+                type: "quadrilateral_calculations",
+                question: "Quadrilateral angles 80°, 95°, 120°. Fourth angle = ?",
+                options: ["65°", "85°", "95°", "75°"],
+                answer: "A",
+                explanation: "Sum = 360°. 80° + 95° + 120° = 295°. Fourth = 360° - 295° = 65°."
+            },
+            {
+                type: "quadrilateral_calculations",
+                question: "Parallelogram: one angle = 75°. Opposite angle = ?",
+                options: ["75°", "105°", "15°", "90°"],
+                answer: "A",
+                explanation: "In parallelogram, opposite angles are equal. So opposite = 75°."
+            },
+            {
+                type: "quadrilateral_calculations",
+                question: "Parallelogram: one angle = 60°. Adjacent angle = ?",
+                options: ["120°", "60°", "30°", "90°"],
+                answer: "A",
+                explanation: "In parallelogram, adjacent angles are supplementary. 180° - 60° = 120°."
+            },
+            {
+                type: "quadrilateral_calculations",
+                question: "Rectangle: one angle = 90°. All other angles = ?",
+                options: ["90° each", "60° each", "45° each", "120° each"],
+                answer: "A",
+                explanation: "Rectangle has all angles = 90°. Opposite angles equal, adjacent supplementary."
+            },
+            // Properties and Relationships (151-180)
+            {
+                type: "properties",
+                question: "In an isosceles triangle, base angles are:",
+                options: ["Equal", "Supplementary", "Complementary", "Right angles"],
+                answer: "A",
+                explanation: "Isosceles triangle has two equal sides and two equal base angles."
+            },
+            {
+                type: "properties",
+                question: "Diagonals of a rectangle are:",
+                options: ["Equal", "Perpendicular", "Not equal", "Parallel"],
+                answer: "A",
+                explanation: "In a rectangle, diagonals are equal in length and bisect each other."
+            },
+            {
+                type: "properties",
+                question: "Diagonals of a rhombus are:",
+                options: ["Perpendicular", "Equal", "Parallel", "None of these"],
+                answer: "A",
+                explanation: "In a rhombus, diagonals are perpendicular bisectors of each other."
+            },
+            {
+                type: "properties",
+                question: "All sides of a rhombus are:",
+                options: ["Equal", "Not equal", "Parallel", "Perpendicular"],
+                answer: "A",
+                explanation: "Rhombus has all four sides of equal length."
+            },
+            {
+                type: "properties",
+                question: "Opposite sides of a parallelogram are:",
+                options: ["Equal and parallel", "Only equal", "Only parallel", "Perpendicular"],
+                answer: "A",
+                explanation: "In a parallelogram, opposite sides are both equal in length and parallel."
+            },
+            // Word Problems (181-200)
+            {
+                type: "word_problems",
+                question: "Ladder leaning against wall forms 70° angle with ground. Angle with wall = ?",
+                options: ["20°", "70°", "90°", "110°"],
+                answer: "A",
+                explanation: "Wall is vertical (90° with ground). Triangle angles sum to 180°. 90° + 70° = 160°. Third angle = 180° - 160° = 20°."
+            },
+            {
+                type: "word_problems",
+                question: "Picture frame is rectangular. One angle = 90°. All other angles = ?",
+                options: ["90°", "45°", "60°", "120°"],
+                answer: "A",
+                explanation: "Rectangle has all four angles = 90°."
+            },
+            {
+                type: "word_problems",
+                question: "Triangular park angles ratio 2:3:4. Largest angle = ?",
+                options: ["80°", "40°", "60°", "100°"],
+                answer: "A",
+                explanation: "2x + 3x + 4x = 180°, 9x = 180°, x = 20°. Largest = 4×20 = 80°."
+            },
+            {
+                type: "word_problems",
+                question: "Quadrilateral field angles: 90°, 90°, 110°. Fourth angle = ?",
+                options: ["70°", "90°", "110°", "250°"],
+                answer: "A",
+                explanation: "Sum = 360°. 90° + 90° + 110° = 290°. Fourth = 360° - 290° = 70°."
+            },
+            // Mixed Concepts (201-220)
+            {
+                type: "mixed_concepts",
+                question: "Angle which is equal to its supplement is:",
+                options: ["90°", "180°", "45°", "60°"],
+                answer: "A",
+                explanation: "Let angle = x. Supplement = 180° - x. x = 180° - x → 2x = 180° → x = 90°."
+            },
+            {
+                type: "mixed_concepts",
+                question: "Triangle can have at most _____ right angle(s):",
+                options: ["1", "2", "3", "0"],
+                answer: "A",
+                explanation: "Sum of angles = 180°. If two right angles (90°+90°=180°), third angle = 0°, which is impossible. So max one right angle."
+            },
+            {
+                type: "mixed_concepts",
+                question: "Triangle can have at most _____ obtuse angle(s):",
+                options: ["1", "2", "3", "0"],
+                answer: "A",
+                explanation: "Obtuse angle > 90°. If two obtuse angles, sum > 180°, impossible. So max one obtuse angle."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent geometric reasoning!",
+            "Perfect angle calculation!",
+            "Great job identifying that shape!",
+            "Amazing! You're a geometry expert!",
+            "Perfect understanding of triangle properties!",
+            "You're an angles and shapes champion!",
+            "Outstanding quadrilateral knowledge!",
+            "Brilliant geometric calculations!",
+            "You think like a mathematician!",
+            "Geometry mastery achieved!"
+        ];
+
+        // Angle types
+        const angleTypes = [
+            {
+                name: "Acute Angle",
+                range: "Less than 90°",
+                example: "45°, 30°, 60°",
+                icon: "📐",
+                color: "#FF9800"
+            },
+            {
+                name: "Right Angle",
+                range: "Exactly 90°",
+                example: "90°",
+                icon: "⬜",
+                color: "#4CAF50"
+            },
+            {
+                name: "Obtuse Angle",
+                range: "Between 90° and 180°",
+                example: "120°, 135°, 150°",
+                icon: "📏",
+                color: "#2196F3"
+            },
+            {
+                name: "Straight Angle",
+                range: "Exactly 180°",
+                example: "180°",
+                icon: "➖",
+                color: "#9C27B0"
+            },
+            {
+                name: "Reflex Angle",
+                range: "Between 180° and 360°",
+                example: "200°, 270°, 300°",
+                icon: "↻",
+                color: "#E91E63"
+            }
+        ];
+
+        // Triangle types
+        const triangleTypes = [
+            {
+                name: "Equilateral",
+                sides: "All sides equal",
+                angles: "All angles = 60°",
+                properties: "Regular polygon, 3 lines of symmetry",
+                icon: "🔺"
+            },
+            {
+                name: "Isosceles",
+                sides: "Two sides equal",
+                angles: "Two angles equal",
+                properties: "1 line of symmetry, base angles equal",
+                icon: "△"
+            },
+            {
+                name: "Scalene",
+                sides: "No sides equal",
+                angles: "All angles different",
+                properties: "No lines of symmetry, all sides different",
+                icon: "▽"
+            },
+            {
+                name: "Right",
+                sides: "One right angle",
+                angles: "One 90° angle",
+                properties: "Follows Pythagorean theorem",
+                icon: "◣"
+            },
+            {
+                name: "Acute",
+                sides: "All angles < 90°",
+                angles: "All acute angles",
+                properties: "All angles less than 90°",
+                icon: "◤"
+            },
+            {
+                name: "Obtuse",
+                sides: "One angle > 90°",
+                angles: "One obtuse angle",
+                properties: "One angle greater than 90°",
+                icon: "◥"
+            }
+        ];
+
+        // Quadrilateral types
+        const quadrilateralTypes = [
+            {
+                name: "Square",
+                sides: "All sides equal",
+                angles: "All angles = 90°",
+                properties: "Regular quadrilateral, 4 lines of symmetry",
+                icon: "◼"
+            },
+            {
+                name: "Rectangle",
+                sides: "Opposite sides equal",
+                angles: "All angles = 90°",
+                properties: "2 lines of symmetry, diagonals equal",
+                icon: "▭"
+            },
+            {
+                name: "Rhombus",
+                sides: "All sides equal",
+                angles: "Opposite angles equal",
+                properties: "2 lines of symmetry, diagonals perpendicular",
+                icon: "◆"
+            },
+            {
+                name: "Parallelogram",
+                sides: "Opposite sides equal & parallel",
+                angles: "Opposite angles equal",
+                properties: "No lines of symmetry, diagonals bisect",
+                icon: "▱"
+            },
+            {
+                name: "Trapezium",
+                sides: "One pair parallel",
+                angles: "No special properties",
+                properties: "Only one pair of parallel sides",
+                icon: "⏢"
+            },
+            {
+                name: "Kite",
+                sides: "Two pairs adjacent sides equal",
+                angles: "One pair opposite angles equal",
+                properties: "1 line of symmetry, diagonals perpendicular",
+                icon: "🎯"
+            }
+        ];
+
+        // Angle relationships
+        const angleRelationships = [
+            {
+                name: "Complementary Angles",
+                definition: "Two angles that sum to 90°",
+                example: "30° and 60°, 45° and 45°",
+                icon: "➕"
+            },
+            {
+                name: "Supplementary Angles",
+                definition: "Two angles that sum to 180°",
+                example: "70° and 110°, 90° and 90°",
+                icon: "📏"
+            },
+            {
+                name: "Adjacent Angles",
+                definition: "Angles sharing a vertex and side",
+                example: "Common in polygons",
+                icon: "↔️"
+            },
+            {
+                name: "Vertically Opposite",
+                definition: "Equal angles formed by intersecting lines",
+                example: "Always equal",
+                icon: "❌"
+            },
+            {
+                name: "Linear Pair",
+                definition: "Adjacent angles that are supplementary",
+                example: "Sum to 180°",
+                icon: "📐"
+            }
+        ];
+
+        // Geometry properties
+        const geometryProperties = [
+            {
+                name: "Sum of Triangle Angles",
+                value: "180°",
+                description: "Interior angles of any triangle always sum to 180°"
+            },
+            {
+                name: "Sum of Quadrilateral Angles",
+                value: "360°",
+                description: "Interior angles of any quadrilateral always sum to 360°"
+            },
+            {
+                name: "Exterior Angle of Triangle",
+                value: "Sum of opposite interior angles",
+                description: "Exterior angle equals sum of two opposite interior angles"
+            },
+            {
+                name: "Pythagorean Theorem",
+                value: "a² + b² = c²",
+                description: "For right triangles, square of hypotenuse equals sum of squares of other two sides"
+            },
+            {
+                name: "Perimeter of Rectangle",
+                value: "2 × (length + width)",
+                description: "Distance around a rectangle"
+            },
+            {
+                name: "Area of Triangle",
+                value: "½ × base × height",
+                description: "Space enclosed by a triangle"
+            }
+        ];
+
+        // Real-world geometry applications
+        const geometryApplications = [
+            {
+                scenario: "Architecture",
+                example: "Right angles in buildings",
+                description: "Ensuring walls are perpendicular to floors"
+            },
+            {
+                scenario: "Navigation",
+                example: "Angles in maps and compasses",
+                description: "Using bearings and directions"
+            },
+            {
+                scenario: "Art and Design",
+                example: "Geometric patterns",
+                description: "Using shapes and symmetry in designs"
+            },
+            {
+                scenario: "Engineering",
+                example: "Triangles in bridges",
+                description: "Using triangular structures for strength"
+            }
+        ];
+
+        // Interesting math facts
+        const mathFacts = [
+            "The word 'geometry' comes from Greek: 'geo' (earth) + 'metron' (measurement)!",
+            "A triangle is the strongest shape - that's why it's used in bridges and roofs!",
+            "There are only 5 regular polyhedra (3D shapes with all faces identical): tetrahedron, cube, octahedron, dodecahedron, icosahedron!",
+            "The sum of angles in any polygon with n sides is (n-2) × 180°!",
+            "π (pi) is the ratio of a circle's circumference to its diameter, approximately 3.14159!",
+            "Euclid, the 'Father of Geometry', wrote 'Elements' around 300 BC - it's one of the most influential works in mathematics!",
+            "The Great Pyramid of Giza was built with astonishing geometric precision!",
+            "Fractals are geometric patterns that repeat at every scale - found in nature like ferns and coastlines!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const mathFact = document.getElementById('mathFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initBackground();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade6MathGeometry');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade6MathGeometry', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade6MathGeometry_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade6MathGeometry_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a geometry expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent geometric reasoning!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing to become a geometry master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review geometric concepts and try again!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Geometry is essential for spatial reasoning!";
+            }
+        }
+
+        // Create math fact display
+        function createMathFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'math-fact';
+            
+            factDiv.innerHTML = `<strong>Amazing Geometry Fact:</strong> ${mathFacts[Math.floor(Math.random() * mathFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "angle_basics": "📐",
+                "triangle_basics": "🔺",
+                "quadrilateral_basics": "◻️",
+                "angle_calculations": "➕",
+                "triangle_calculations": "🧮",
+                "quadrilateral_calculations": "📏",
+                "properties": "⭐",
+                "word_problems": "📚",
+                "mixed_concepts": "🔀"
+            };
+            
+            let conceptName = "Angle Basics";
+            let conceptIcon = "📐";
+            
+            if (question.type.includes("angle_basics")) {
+                conceptName = "Angle Basics";
+                conceptIcon = conceptIcons.angle_basics;
+            } else if (question.type.includes("triangle_basics")) {
+                conceptName = "Triangle Basics";
+                conceptIcon = conceptIcons.triangle_basics;
+            } else if (question.type.includes("quadrilateral_basics")) {
+                conceptName = "Quadrilateral Basics";
+                conceptIcon = conceptIcons.quadrilateral_basics;
+            } else if (question.type.includes("angle_calculations")) {
+                conceptName = "Angle Calculations";
+                conceptIcon = conceptIcons.angle_calculations;
+            } else if (question.type.includes("triangle_calculations")) {
+                conceptName = "Triangle Calculations";
+                conceptIcon = conceptIcons.triangle_calculations;
+            } else if (question.type.includes("quadrilateral_calculations")) {
+                conceptName = "Quadrilateral Calculations";
+                conceptIcon = conceptIcons.quadrilateral_calculations;
+            } else if (question.type.includes("properties")) {
+                conceptName = "Geometric Properties";
+                conceptIcon = conceptIcons.properties;
+            } else if (question.type.includes("word_problems")) {
+                conceptName = "Geometry Word Problems";
+                conceptIcon = conceptIcons.word_problems;
+            } else if (question.type.includes("mixed_concepts")) {
+                conceptName = "Mixed Geometry Concepts";
+                conceptIcon = conceptIcons.mixed_concepts;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("angle_basics")) {
+                label.textContent = "Understanding different types of angles and their measurements";
+            } else if (question.type.includes("triangle_basics")) {
+                label.textContent = "Learning about triangle types and their properties";
+            } else if (question.type.includes("quadrilateral_basics")) {
+                label.textContent = "Understanding different quadrilateral types";
+            } else if (question.type.includes("angle_calculations")) {
+                label.textContent = "Calculating unknown angles using angle relationships";
+            } else if (question.type.includes("triangle_calculations")) {
+                label.textContent = "Finding unknown angles and sides in triangles";
+            } else if (question.type.includes("quadrilateral_calculations")) {
+                label.textContent = "Calculating angles and properties of quadrilaterals";
+            } else if (question.type.includes("properties")) {
+                label.textContent = "Understanding geometric properties and relationships";
+            } else if (question.type.includes("word_problems")) {
+                label.textContent = "Applying geometry to real-world situations";
+            } else if (question.type.includes("mixed_concepts")) {
+                label.textContent = "Mixed review of all geometry concepts";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create geometry visualization
+        function createGeometryVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-blue);">Geometry: Angles, Triangles, Quadrilaterals</h3>
+                
+                <div class="geometry-display">
+                    <div class="display-title">Interactive Angle Demonstration</div>
+                    <div class="angle-container" id="angleContainer">
+                        <!-- Angle will be generated by JavaScript -->
+                    </div>
+                    <div style="text-align: center; margin-top: 20px; color: var(--text-secondary);">
+                        <strong>Angle Type:</strong> <span id="angleType">Acute Angle</span><br>
+                        <strong>Angle Measure:</strong> <span id="angleMeasure">45°</span>
+                    </div>
+                </div>
+                
+                <div class="shapes-grid">
+                    <div class="shape-card angle-card angle-glow">
+                        <div class="shape-icon">📐</div>
+                        <div class="shape-title">ANGLES</div>
+                        <div class="shape-properties">
+                            • Acute: < 90°<br>
+                            • Right: = 90°<br>
+                            • Obtuse: > 90°<br>
+                            • Straight: = 180°
+                        </div>
+                        <div style="margin-top: 10px; font-size: 0.8rem; color: var(--text-muted);">
+                            Click to learn more about angles
+                        </div>
+                    </div>
+                    
+                    <div class="shape-card triangle-card triangle-glow">
+                        <div class="shape-icon">🔺</div>
+                        <div class="shape-title">TRIANGLES</div>
+                        <div class="shape-properties">
+                            • 3 sides, 3 angles<br>
+                            • Sum of angles: 180°<br>
+                            • Types: Equilateral, Isosceles, Scalene
+                        </div>
+                        <div style="margin-top: 10px; font-size: 0.8rem; color: var(--text-muted);">
+                            Click to explore triangle types
+                        </div>
+                    </div>
+                    
+                    <div class="shape-card quadrilateral-card quadrilateral-glow">
+                        <div class="shape-icon">◻️</div>
+                        <div class="shape-title">QUADRILATERALS</div>
+                        <div class="shape-properties">
+                            • 4 sides, 4 angles<br>
+                            • Sum of angles: 360°<br>
+                            • Types: Square, Rectangle, Rhombus, etc.
+                        </div>
+                        <div style="margin-top: 10px; font-size: 0.8rem; color: var(--text-muted);">
+                            Click to explore quadrilaterals
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="triangle-types">
+                    <div class="display-title">Types of Triangles</div>
+                    <div class="triangle-grid">
+                        ${triangleTypes.slice(0, 3).map(triangle => `
+                            <div class="triangle-type">
+                                <div class="triangle-icon">${triangle.icon}</div>
+                                <div class="triangle-name">${triangle.name}</div>
+                                <div class="triangle-description">${triangle.sides}<br>${triangle.angles}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="quadrilateral-types">
+                    <div class="display-title">Types of Quadrilaterals</div>
+                    <div class="quadrilateral-grid">
+                        ${quadrilateralTypes.slice(0, 4).map(quad => `
+                            <div class="quadrilateral-type">
+                                <div class="quadrilateral-icon">${quad.icon}</div>
+                                <div class="quadrilateral-name">${quad.name}</div>
+                                <div class="quadrilateral-description">${quad.sides}<br>${quad.angles}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="properties-container">
+                    <div class="display-title">Key Geometry Properties</div>
+                    <div class="properties-grid">
+                        ${geometryProperties.map(prop => `
+                            <div class="property-item">
+                                <div class="property-icon">📐</div>
+                                <div class="property-content">
+                                    <div class="property-name">${prop.name}</div>
+                                    <div class="property-value">${prop.value}<br><span style="font-size: 0.8rem; color: var(--text-muted);">${prop.description}</span></div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="protractor-container">
+                    <div class="display-title">Interactive Protractor</div>
+                    <div class="protractor-canvas" id="protractorCanvas">
+                        <!-- Protractor will be generated by JavaScript -->
+                    </div>
+                    <div class="angle-control">
+                        <input type="range" min="0" max="180" value="45" class="angle-slider" id="angleSlider">
+                        <div class="angle-value" id="sliderValue">45°</div>
+                    </div>
+                    <div style="text-align: center; margin-top: 10px; color: var(--text-secondary); font-size: 0.9rem;">
+                        Drag slider to create different angles
+                    </div>
+                </div>
+                
+                <table class="geometry-table">
+                    <thead>
+                        <tr>
+                            <th>Angle Type</th>
+                            <th>Measure</th>
+                            <th>Example</th>
+                            <th>Visual</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${angleTypes.map(angle => `
+                            <tr>
+                                <td style="font-weight: bold; color: ${angle.color};">${angle.name}</td>
+                                <td>${angle.range}</td>
+                                <td>${angle.example}</td>
+                                <td style="font-size: 1.5rem;">${angle.icon}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                
+                <div class="interactive-practice">
+                    <div class="practice-title">Interactive Geometry Practice</div>
+                    <div class="practice-controls">
+                        <div class="practice-button" onclick="showAngleDemo()">Angle Types</div>
+                        <div class="practice-button" onclick="showTriangleDemo()">Triangle Types</div>
+                        <div class="practice-button" onclick="showQuadrilateralDemo()">Quadrilateral Types</div>
+                        <div class="practice-button" onclick="showAngleCalculationDemo()">Angle Calculations</div>
+                    </div>
+                    <div class="practice-display" id="practiceDisplay">
+                        Click buttons above to practice different geometry concepts
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--accent-orange);">
+                    <div style="color: var(--accent-orange); font-weight: bold; margin-bottom: 10px;">Quick Practice:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. Name an angle measuring 45°<br>
+                        2. Sum of angles in triangle?<br>
+                        3. Triangle with all sides equal?<br>
+                        4. Quadrilateral with all angles 90°?<br>
+                        5. Two angles summing to 90° are called?
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--accent-teal);">
+                    <div style="color: var(--accent-teal); font-weight: bold; margin-bottom: 10px; text-align: center;">Geometry Memory Tips</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                        <strong>Triangles:</strong> Sum of angles = 180°<br>
+                        <strong>Quadrilaterals:</strong> Sum of angles = 360°<br>
+                        <strong>Acute:</strong> Less than 90° (A-cute = "a cute" small angle)<br>
+                        <strong>Obtuse:</strong> More than 90° (Ob-tuse = "obviously" larger)
+                    </div>
+                </div>
+            `;
+            
+            // Generate interactive angle
+            generateInteractiveAngle();
+            
+            // Generate protractor
+            generateProtractor();
+            
+            // Add event listeners to shape cards
+            setTimeout(() => {
+                const shapeCards = vizDiv.querySelectorAll('.shape-card');
+                shapeCards.forEach(card => {
+                    card.addEventListener('click', function() {
+                        const title = this.querySelector('.shape-title').textContent;
+                        if (title.includes('ANGLES')) {
+                            showAngleDemo();
+                        } else if (title.includes('TRIANGLES')) {
+                            showTriangleDemo();
+                        } else if (title.includes('QUADRILATERALS')) {
+                            showQuadrilateralDemo();
+                        }
+                    });
+                });
+                
+                // Add slider event listener
+                const slider = vizDiv.querySelector('#angleSlider');
+                if (slider) {
+                    slider.addEventListener('input', function() {
+                        updateProtractor(parseInt(this.value));
+                    });
+                }
+            }, 100);
+            
+            return vizDiv;
+        }
+
+        // Helper functions
+        function generateInteractiveAngle() {
+            const container = document.getElementById('angleContainer');
+            if (!container) return;
+            
+            // Create a random angle between 30° and 150°
+            const randomAngle = Math.floor(Math.random() * 121) + 30;
+            
+            container.innerHTML = `
+                <div class="angle-canvas">
+                    <div class="angle-arm" style="transform: rotate(0deg);"></div>
+                    <div class="angle-arm" style="transform: rotate(${randomAngle}deg);"></div>
+                    <div class="angle-measure">${randomAngle}°</div>
+                </div>
+            `;
+            
+            // Update the angle type display
+            const angleTypeElement = document.getElementById('angleType');
+            const angleMeasureElement = document.getElementById('angleMeasure');
+            
+            if (angleTypeElement && angleMeasureElement) {
+                angleMeasureElement.textContent = `${randomAngle}°`;
+                
+                if (randomAngle < 90) {
+                    angleTypeElement.textContent = "Acute Angle";
+                    angleTypeElement.style.color = "var(--accent-orange)";
+                } else if (randomAngle === 90) {
+                    angleTypeElement.textContent = "Right Angle";
+                    angleTypeElement.style.color = "var(--secondary-green)";
+                } else if (randomAngle < 180) {
+                    angleTypeElement.textContent = "Obtuse Angle";
+                    angleTypeElement.style.color = "var(--primary-blue)";
+                } else if (randomAngle === 180) {
+                    angleTypeElement.textContent = "Straight Angle";
+                    angleTypeElement.style.color = "var(--accent-purple)";
+                }
+            }
+        }
+
+        function generateProtractor() {
+            const canvas = document.getElementById('protractorCanvas');
+            if (!canvas) return;
+            
+            canvas.innerHTML = `
+                <div class="protractor-base"></div>
+                <div class="protractor-arm" id="protractorArm" style="transform: rotate(45deg);"></div>
+                <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); color: var(--text-secondary);">
+                    Angle: <span id="currentAngle" style="color: var(--accent-red); font-weight: bold;">45°</span>
+                </div>
+            `;
+        }
+
+        function updateProtractor(angle) {
+            const arm = document.getElementById('protractorArm');
+            const currentAngle = document.getElementById('currentAngle');
+            const sliderValue = document.getElementById('sliderValue');
+            
+            if (arm) {
+                arm.style.transform = `rotate(${angle}deg)`;
+            }
+            
+            if (currentAngle) {
+                currentAngle.textContent = `${angle}°`;
+                
+                // Update color based on angle type
+                if (angle < 90) {
+                    currentAngle.style.color = "var(--accent-orange)";
+                } else if (angle === 90) {
+                    currentAngle.style.color = "var(--secondary-green)";
+                } else if (angle < 180) {
+                    currentAngle.style.color = "var(--primary-blue)";
+                } else if (angle === 180) {
+                    currentAngle.style.color = "var(--accent-purple)";
+                }
+            }
+            
+            if (sliderValue) {
+                sliderValue.textContent = `${angle}°`;
+            }
+        }
+
+        // Global functions for interactive practice
+        window.showAngleDemo = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const angle = Math.floor(Math.random() * 181);
+            let type = "";
+            let color = "";
+            
+            if (angle < 90) {
+                type = "Acute Angle";
+                color = "var(--accent-orange)";
+            } else if (angle === 90) {
+                type = "Right Angle";
+                color = "var(--secondary-green)";
+            } else if (angle < 180) {
+                type = "Obtuse Angle";
+                color = "var(--primary-blue)";
+            } else if (angle === 180) {
+                type = "Straight Angle";
+                color = "var(--accent-purple)";
+            } else {
+                type = "Reflex Angle";
+                color = "var(--accent-pink)";
+            }
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: ${color};">${type}</div>
+                    
+                    <div style="height: 150px; position: relative; margin: 20px 0;">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 2px; height: 100px; background: var(--text-secondary);"></div>
+                        <div style="position: absolute; top: 50%; left: 50%; transform-origin: bottom center; transform: translate(-50%, -50%) rotate(0deg); width: 2px; height: 100px; background: var(--primary-blue);"></div>
+                        <div style="position: absolute; top: 50%; left: 50%; transform-origin: bottom center; transform: translate(-50%, -50%) rotate(${angle}deg); width: 2px; height: 100px; background: ${color};"></div>
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--dark-surface); padding: 10px; border-radius: 8px; border: 2px solid ${color};">
+                            <div style="font-size: 1.2rem; font-weight: bold; color: ${color};">${angle}°</div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--dark-surface); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                        <strong>Angle Classification:</strong><br>
+                        • Acute: Less than 90°<br>
+                        • Right: Exactly 90°<br>
+                        • Obtuse: Between 90° and 180°<br>
+                        • Straight: Exactly 180°<br>
+                        • Reflex: Between 180° and 360°
+                    </div>
+                    
+                    <div style="margin-top: 15px; color: var(--text-secondary);">
+                        <strong>${type} because:</strong> ${getAngleExplanation(angle)}
+                    </div>
+                </div>
+            `;
+        };
+
+        function getAngleExplanation(angle) {
+            if (angle < 90) return `${angle}° is less than 90°`;
+            if (angle === 90) return `${angle}° is exactly 90°`;
+            if (angle < 180) return `${angle}° is between 90° and 180°`;
+            if (angle === 180) return `${angle}° forms a straight line`;
+            return `${angle}° is greater than 180°`;
+        }
+
+        window.showTriangleDemo = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const triangle = triangleTypes[Math.floor(Math.random() * triangleTypes.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--secondary-green);">${triangle.name} Triangle</div>
+                    
+                    <div style="font-size: 3rem; margin: 20px 0; color: var(--secondary-green);">
+                        ${triangle.icon}
+                    </div>
+                    
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 15px 0; border: 2px solid var(--secondary-green);">
+                        <div style="margin-bottom: 10px;">
+                            <strong>Sides:</strong> ${triangle.sides}
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Angles:</strong> ${triangle.angles}
+                        </div>
+                        <div>
+                            <strong>Properties:</strong> ${triangle.properties}
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--dark-surface); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                        <strong>Key Triangle Facts:</strong><br>
+                        • All triangles have 3 sides and 3 angles<br>
+                        • Sum of angles always = 180°<br>
+                        • Equilateral: All sides equal, all angles = 60°<br>
+                        • Isosceles: Two equal sides, two equal angles<br>
+                        • Scalene: All sides different, all angles different
+                    </div>
+                </div>
+            `;
+        };
+
+        window.showQuadrilateralDemo = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const quadrilateral = quadrilateralTypes[Math.floor(Math.random() * quadrilateralTypes.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-purple);">${quadrilateral.name}</div>
+                    
+                    <div style="font-size: 3rem; margin: 20px 0; color: var(--accent-purple);">
+                        ${quadrilateral.icon}
+                    </div>
+                    
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 15px 0; border: 2px solid var(--accent-purple);">
+                        <div style="margin-bottom: 10px;">
+                            <strong>Sides:</strong> ${quadrilateral.sides}
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Angles:</strong> ${quadrilateral.angles}
+                        </div>
+                        <div>
+                            <strong>Properties:</strong> ${quadrilateral.properties}
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--dark-surface); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                        <strong>Key Quadrilateral Facts:</strong><br>
+                        • All quadrilaterals have 4 sides and 4 angles<br>
+                        • Sum of angles always = 360°<br>
+                        • Square: All sides equal, all angles = 90°<br>
+                        • Rectangle: Opposite sides equal, all angles = 90°<br>
+                        • Rhombus: All sides equal, opposite angles equal<br>
+                        • Parallelogram: Opposite sides parallel and equal
+                    </div>
+                </div>
+            `;
+        };
+
+        window.showAngleCalculationDemo = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            // Generate a random angle problem
+            const problemType = Math.floor(Math.random() * 3);
+            let problem = "";
+            let solution = "";
+            let explanation = "";
+            
+            if (problemType === 0) {
+                // Complementary angles
+                const angle1 = Math.floor(Math.random() * 89) + 1;
+                const angle2 = 90 - angle1;
+                problem = `Two complementary angles. One is ${angle1}°. Find the other.`;
+                solution = `${angle2}°`;
+                explanation = `Complementary angles sum to 90°. So: 90° - ${angle1}° = ${angle2}°`;
+            } else if (problemType === 1) {
+                // Supplementary angles
+                const angle1 = Math.floor(Math.random() * 179) + 1;
+                const angle2 = 180 - angle1;
+                problem = `Two supplementary angles. One is ${angle1}°. Find the other.`;
+                solution = `${angle2}°`;
+                explanation = `Supplementary angles sum to 180°. So: 180° - ${angle1}° = ${angle2}°`;
+            } else {
+                // Triangle angle
+                const angle1 = Math.floor(Math.random() * 89) + 1;
+                const angle2 = Math.floor(Math.random() * (179 - angle1)) + 1;
+                const angle3 = 180 - angle1 - angle2;
+                problem = `Triangle angles: ${angle1}° and ${angle2}°. Find third angle.`;
+                solution = `${angle3}°`;
+                explanation = `Triangle angles sum to 180°. So: 180° - ${angle1}° - ${angle2}° = ${angle3}°`;
+            }
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-orange);">Angle Calculation Practice</div>
+                    
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 15px 0; border: 2px solid var(--accent-orange);">
+                        <div style="margin-bottom: 15px; font-size: 1.2rem;">
+                            ${problem}
+                        </div>
+                        
+                        <div style="background: var(--dark-surface); padding: 15px; border-radius: 6px; margin: 10px 0;">
+                            <strong>Solution:</strong> ${solution}
+                        </div>
+                        
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                            ${explanation}
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--dark-surface); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                        <strong>Important Angle Rules:</strong><br>
+                        • Complementary angles: Sum = 90°<br>
+                        • Supplementary angles: Sum = 180°<br>
+                        • Triangle angles: Sum = 180°<br>
+                        • Quadrilateral angles: Sum = 360°
+                    </div>
+                </div>
+            `;
+        };
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            mathFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            mathFact.appendChild(createMathFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createGeometryVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

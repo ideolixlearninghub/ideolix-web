@@ -1,0 +1,2510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Science - Health & Diseases | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Medical/Health Theme */
+        :root {
+            --primary-blue: #2196F3;
+            --secondary-teal: #009688;
+            --accent-red: #F44336;
+            --accent-green: #4CAF50;
+            --accent-orange: #FF9800;
+            --accent-purple: #9C27B0;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(33, 150, 243, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Slideshow */
+        .slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(33, 150, 243, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-blue);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-teal);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 150, 136, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #00796B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 150, 136, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-teal));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .health-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-orange);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-teal);
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+        }
+
+        /* Health Display */
+        .health-display {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid var(--secondary-teal);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .health-title {
+            color: var(--secondary-teal);
+            margin-bottom: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .health-type {
+            display: inline-block;
+            padding: 5px 10px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .preventive .health-type { background: var(--accent-green); }
+        .infectious .health-type { background: var(--accent-red); }
+        .lifestyle .health-type { background: var(--accent-orange); }
+
+        /* Comparison Display */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .health-column {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+        }
+
+        .health-column.infectious {
+            border-color: var(--accent-red);
+        }
+
+        .health-column.non-infectious {
+            border-color: var(--accent-green);
+        }
+
+        .column-title {
+            color: var(--accent-red);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .health-column.non-infectious .column-title {
+            color: var(--accent-green);
+        }
+
+        /* Disease Display */
+        .disease-display {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .disease-display {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .disease-item {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .disease-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--accent-purple);
+        }
+
+        .disease-name {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+        }
+
+        .disease-info {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Prevention Cards */
+        .prevention-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 992px) {
+            .prevention-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .prevention-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .prevention-card {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease;
+        }
+
+        .prevention-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .prevention-card.active {
+            border-color: var(--accent-green);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .prevention-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .prevention-title {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .prevention-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        /* Immune System Display */
+        .immune-display {
+            margin: 20px 0;
+        }
+
+        .immune-step {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--accent-orange);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--accent-orange);
+            border-radius: 50%;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .step-detail {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        /* Healthy Habits Display */
+        .habits-display {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-green);
+        }
+
+        .habits-title {
+            color: var(--accent-green);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .habits-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .habit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 6px;
+        }
+
+        .habit-icon {
+            color: var(--accent-green);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .habit-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Disease Table */
+        .disease-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .disease-table th {
+            background: var(--dark-surface);
+            padding: 12px;
+            text-align: left;
+            color: var(--primary-blue);
+            border-bottom: 2px solid var(--primary-blue);
+        }
+
+        .disease-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+        }
+
+        .disease-table tr:hover {
+            background: rgba(33, 150, 243, 0.05);
+        }
+
+        .infectious-cell {
+            border-left: 4px solid var(--accent-red);
+        }
+
+        .non-infectious-cell {
+            border-left: 4px solid var(--accent-green);
+        }
+
+        .deficiency-cell {
+            border-left: 4px solid var(--accent-orange);
+        }
+
+        /* Interactive Practice */
+        .interactive-practice {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .practice-title {
+            color: var(--accent-orange);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .practice-area {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .scenario-box {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid var(--dark-border);
+            min-height: 150px;
+            position: relative;
+        }
+
+        .solution-box {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid var(--accent-green);
+            min-height: 150px;
+            color: var(--accent-green);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .prevention-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .disease-display {
+                grid-template-columns: 1fr;
+            }
+            
+            .habits-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes immuneResponse {
+            0% { transform: translateX(-10px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        
+        .immune-response {
+            animation: immuneResponse 0.8s ease forwards;
+        }
+        
+        @keyframes healthPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        
+        .health-pulse {
+            animation: healthPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes healing {
+            0% { color: var(--accent-red); }
+            50% { color: var(--accent-orange); }
+            100% { color: var(--accent-green); }
+        }
+        
+        .healing {
+            animation: healing 3s ease-in-out infinite;
+        }
+        
+        @keyframes preventionGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); }
+            50% { box-shadow: 0 0 20px 10px rgba(76, 175, 80, 0.1); }
+        }
+        
+        .prevention-glow {
+            animation: preventionGlow 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Slideshow -->
+    <div class="slideshow" id="slideshow">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"></div>
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 5 Science</h1>
+            <p class="welcome-subtitle">Learn about health, diseases, and how to stay well! Explore different types of diseases, how they spread, and most importantly, how to prevent them. Understand the immune system, healthy habits, and how to maintain good health throughout your life!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">💊🩺🌡️</span>
+                <span class="topic-name">Health and Diseases</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Health Adventure</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 130</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0.8%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Health fact display -->
+                <div id="healthFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Health Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize slideshow
+        function initSlideshow() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000);
+        }
+
+        // Questions array - 130+ Grade 5 Health and Diseases questions
+        const questions = [
+            // Health Basics (1-25)
+            {
+                type: "health_basics",
+                question: "What does 'health' mean?",
+                options: ["Complete physical, mental, and social well-being", "Only not being sick", "Only physical fitness", "Only mental happiness"],
+                answer: "A",
+                explanation: "Health is a state of complete physical, mental, and social well-being, not just the absence of disease."
+            },
+            {
+                type: "health_basics",
+                question: "What are the three main components of health?",
+                options: ["Physical, mental, social", "Exercise, diet, sleep", "School, home, play", "Heart, lungs, brain"],
+                answer: "A",
+                explanation: "Good health includes physical (body), mental (mind), and social (relationships) well-being."
+            },
+            {
+                type: "health_basics",
+                question: "What is physical health?",
+                options: ["Proper functioning of body systems", "Only muscle strength", "Only not having disease", "Only looking good"],
+                answer: "A",
+                explanation: "Physical health means all body systems working properly, having energy, and being free from illness."
+            },
+            {
+                type: "health_basics",
+                question: "What is mental health?",
+                options: ["Emotional and psychological well-being", "Only being smart", "Only not being sad", "Only thinking clearly"],
+                answer: "A",
+                explanation: "Mental health includes emotions, thoughts, coping with stress, and enjoying life."
+            },
+            {
+                type: "health_basics",
+                question: "What is social health?",
+                options: ["Getting along with others and having good relationships", "Only having many friends", "Only using social media", "Only being popular"],
+                answer: "A",
+                explanation: "Social health means having positive relationships and interacting well with others."
+            },
+            {
+                type: "health_basics",
+                question: "What is hygiene?",
+                options: ["Practices to maintain health and prevent disease", "Only washing hands", "Only brushing teeth", "Only taking baths"],
+                answer: "A",
+                explanation: "Hygiene includes all practices that keep us clean and prevent spread of germs."
+            },
+            {
+                type: "health_basics",
+                question: "Why is sleep important for health?",
+                options: ["Body repairs itself and brain processes information", "Only to rest tired muscles", "Only to dream", "Only to save energy"],
+                answer: "A",
+                explanation: "During sleep, the body repairs tissues, strengthens immunity, and brain consolidates memories."
+            },
+            {
+                type: "health_basics",
+                question: "How much sleep do children aged 9-12 need?",
+                options: ["9-12 hours per night", "6-7 hours", "4-5 hours", "13-14 hours"],
+                answer: "A",
+                explanation: "Children need 9-12 hours of sleep for proper growth, learning, and health."
+            },
+            {
+                type: "health_basics",
+                question: "What is exercise?",
+                options: ["Physical activity that keeps body healthy", "Only playing sports", "Only running fast", "Only lifting weights"],
+                answer: "A",
+                explanation: "Exercise includes any physical activity that strengthens muscles, heart, and improves health."
+            },
+            {
+                type: "health_basics",
+                question: "How much exercise should children get daily?",
+                options: ["At least 60 minutes of moderate activity", "30 minutes", "2 hours", "Only on weekends"],
+                answer: "A",
+                explanation: "Children need at least 60 minutes of moderate to vigorous physical activity daily."
+
+            },
+            // Disease Basics (26-50)
+            {
+                type: "disease_basics",
+                question: "What is a disease?",
+                options: ["Condition that affects normal body functioning", "Only caused by germs", "Only serious illnesses", "Only affecting old people"],
+                answer: "A",
+                explanation: "A disease is any condition that impairs normal functioning of the body or mind."
+            },
+            {
+                type: "disease_basics",
+                question: "What are infectious diseases?",
+                options: ["Diseases that spread from person to person", "Diseases from bad food", "Diseases from pollution", "Diseases from genes"],
+                answer: "A",
+                explanation: "Infectious diseases are caused by pathogens (germs) and can spread between people."
+            },
+            {
+                type: "disease_basics",
+                question: "What are non-infectious diseases?",
+                options: ["Diseases that don't spread between people", "Mild diseases", "New diseases", "Animal diseases"],
+                answer: "A",
+                explanation: "Non-infectious diseases are not contagious and include conditions like diabetes, asthma, cancer."
+            },
+            {
+                type: "disease_basics",
+                question: "What are pathogens?",
+                options: ["Germs that cause disease", "Medicines that cure disease", "White blood cells", "Vitamins in food"],
+                answer: "A",
+                explanation: "Pathogens are disease-causing microorganisms like bacteria, viruses, fungi, and parasites."
+            },
+            {
+                type: "disease_basics",
+                question: "What are symptoms?",
+                options: ["Signs that show someone is sick", "Causes of disease", "Treatments for disease", "Preventions for disease"],
+                answer: "A",
+                explanation: "Symptoms are physical or mental signs that indicate the presence of a disease."
+            },
+            {
+                type: "disease_basics",
+                question: "What is immunity?",
+                options: ["Body's ability to fight diseases", "Being vaccinated", "Never getting sick", "Strong muscles"],
+                answer: "A",
+                explanation: "Immunity is the body's defense system against pathogens and diseases."
+            },
+            {
+                type: "disease_basics",
+                question: "What are chronic diseases?",
+                options: ["Long-lasting diseases that develop slowly", "Quick spreading diseases", "Seasonal diseases", "Childhood diseases"],
+                answer: "A",
+                explanation: "Chronic diseases last a long time (often years) and develop gradually, like diabetes or asthma."
+            },
+            {
+                type: "disease_basics",
+                question: "What are acute diseases?",
+                options: ["Diseases that appear suddenly and last short time", "Mild diseases", "Old diseases", "Genetic diseases"],
+                answer: "A",
+                explanation: "Acute diseases develop quickly and last a short time, like common cold or flu."
+            },
+            {
+                type: "disease_basics",
+                question: "What is a vector in disease transmission?",
+                options: ["Organism that carries disease between hosts", "Medicine delivery", "Blood vessel", "Genetic material"],
+                answer: "A",
+                explanation: "Vectors are organisms (like mosquitoes, ticks) that transmit pathogens between hosts."
+            },
+            {
+                type: "disease_basics",
+                question: "What is an epidemic?",
+                options: ["Sudden increase of disease in a community", "Worldwide disease spread", "Disease in animals", "Rare disease"],
+                answer: "A",
+                explanation: "An epidemic is when a disease spreads rapidly to many people in a community or region."
+
+            },
+            // Infectious Diseases (51-75)
+            {
+                type: "infectious_diseases",
+                question: "What causes the common cold?",
+                options: ["Viruses", "Bacteria", "Fungi", "Parasites"],
+                answer: "A",
+                explanation: "The common cold is caused by viruses, most commonly rhinoviruses."
+            },
+            {
+                type: "infectious_diseases",
+                question: "What causes strep throat?",
+                options: ["Bacteria", "Viruses", "Fungi", "Allergies"],
+                answer: "A",
+                explanation: "Strep throat is caused by streptococcus bacteria."
+            },
+            {
+                type: "infectious_diseases",
+                question: "How does COVID-19 spread?",
+                options: ["Through respiratory droplets", "Through food", "Through water", "Through touch only"],
+                answer: "A",
+                explanation: "COVID-19 spreads mainly through respiratory droplets when infected people cough, sneeze, or talk."
+            },
+            {
+                type: "infectious_diseases",
+                question: "What causes malaria?",
+                options: ["Parasite spread by mosquitoes", "Bacteria in water", "Virus in air", "Fungi in soil"],
+                answer: "A",
+                explanation: "Malaria is caused by a parasite transmitted through mosquito bites."
+            },
+            {
+                type: "infectious_diseases",
+                question: "What is influenza (flu)?",
+                options: ["Viral infection of respiratory system", "Bacterial stomach infection", "Fungal skin infection", "Parasitic blood disease"],
+                answer: "A",
+                explanation: "Influenza is a viral infection that attacks the respiratory system (nose, throat, lungs)."
+            },
+            {
+                type: "infectious_diseases",
+                question: "What causes chickenpox?",
+                options: ["Varicella-zoster virus", "Bacteria", "Fungus", "Parasite"],
+                answer: "A",
+                explanation: "Chickenpox is caused by the varicella-zoster virus."
+            },
+            {
+                type: "infectious_diseases",
+                question: "How does tuberculosis (TB) spread?",
+                options: ["Through air when infected person coughs", "Through contaminated water", "Through insect bites", "Through food"],
+                answer: "A",
+                explanation: "TB bacteria spread through the air when an infected person coughs, sneezes, or speaks."
+            },
+            {
+                type: "infectious_diseases",
+                question: "What causes athlete's foot?",
+                options: ["Fungus", "Bacteria", "Virus", "Parasite"],
+                answer: "A",
+                explanation: "Athlete's foot is a fungal infection that usually begins between the toes."
+            },
+            {
+                type: "infectious_diseases",
+                question: "What is conjunctivitis (pink eye)?",
+                options: ["Inflammation of eye's outer membrane", "Ear infection", "Throat infection", "Skin rash"],
+                answer: "A",
+                explanation: "Conjunctivitis is inflammation of the conjunctiva (eye's outer membrane), often caused by viruses or bacteria."
+            },
+            {
+                type: "infectious_diseases",
+                question: "How do foodborne illnesses spread?",
+                options: ["Through contaminated food or water", "Through air", "Through touch", "Through insects"],
+                answer: "A",
+                explanation: "Foodborne illnesses are caused by eating food contaminated with bacteria, viruses, or toxins."
+
+            },
+            // Non-Infectious Diseases (76-100)
+            {
+                type: "non_infectious_diseases",
+                question: "What is diabetes?",
+                options: ["Body can't properly use sugar for energy", "Lung disease", "Heart infection", "Bone weakness"],
+                answer: "A",
+                explanation: "Diabetes is when the body cannot properly use glucose (sugar) for energy due to insulin problems."
+            },
+            {
+                type: "non_infectious_diseases",
+                question: "What is asthma?",
+                options: ["Chronic inflammation of airways", "Stomach disorder", "Skin condition", "Eye disease"],
+                answer: "A",
+                explanation: "Asthma causes airways to become inflamed and narrow, making breathing difficult."
+            },
+            {
+                type: "non_infectious_diseases",
+                question: "What causes most heart diseases?",
+                options: ["Unhealthy lifestyle choices", "Germs", "Genetics only", "Air pollution only"],
+                answer: "A",
+                explanation: "Most heart diseases are caused by lifestyle factors like poor diet, lack of exercise, and smoking."
+            },
+            {
+                type: "non_infectious_diseases",
+                question: "What is hypertension?",
+                options: ["High blood pressure", "Low blood sugar", "Fast heartbeat", "Slow breathing"],
+                answer: "A",
+                explanation: "Hypertension is high blood pressure, which strains the heart and blood vessels."
+            },
+            {
+                type: "non_infectious_diseases",
+                question: "What is obesity?",
+                options: ["Excessive body fat that affects health", "Being tall", "Having big bones", "Being muscular"],
+                answer: "A",
+                explanation: "Obesity is having excessive body fat that increases risk of other health problems."
+            },
+            {
+                type: "non_infectious_diseases",
+                question: "What are allergies?",
+                options: ["Overreaction of immune system to harmless substances", "Infections from germs", "Nutritional deficiencies", "Genetic disorders"],
+                answer: "A",
+                explanation: "Allergies occur when the immune system reacts to normally harmless substances like pollen or certain foods."
+            },
+            {
+                type: "non_infectious_diseases",
+                question: "What is anemia?",
+                options: ["Deficiency of red blood cells or hemoglobin", "Too many white blood cells", "Weak bones", "Poor eyesight"],
+                answer: "A",
+                explanation: "Anemia is a condition where blood doesn't have enough healthy red blood cells to carry oxygen."
+            },
+            {
+                type: "non_infectious_diseases",
+                question: "What causes scurvy?",
+                options: ["Vitamin C deficiency", "Vitamin D deficiency", "Too much sugar", "Lack of exercise"],
+                answer: "A",
+                explanation: "Scurvy is caused by severe lack of vitamin C, leading to weakness, anemia, and gum disease."
+            },
+            {
+                type: "non_infectious_diseases",
+                question: "What is rickets?",
+                options: ["Vitamin D deficiency causing weak bones", "Iron deficiency", "Calcium excess", "Protein deficiency"],
+                answer: "A",
+                explanation: "Rickets is a bone disorder in children caused by vitamin D deficiency, leading to soft, weak bones."
+            },
+            {
+                type: "non_infectious_diseases",
+                question: "What are autoimmune diseases?",
+                options: ["Immune system attacks body's own cells", "Diseases from animals", "Quick spreading diseases", "Ancient diseases"],
+                answer: "A",
+                explanation: "Autoimmune diseases occur when the immune system mistakenly attacks the body's own tissues."
+
+            },
+            // Prevention & Immunity (101-125)
+            {
+                type: "prevention_immunity",
+                question: "How does handwashing prevent disease?",
+                options: ["Removes germs from hands", "Makes skin softer", "Improves blood circulation", "Strengthens nails"],
+                answer: "A",
+                explanation: "Handwashing with soap removes germs that can enter body through mouth, nose, or eyes."
+            },
+            {
+                type: "prevention_immunity",
+                question: "What do vaccines do?",
+                options: ["Train immune system to recognize pathogens", "Kill germs directly", "Clean blood", "Provide vitamins"],
+                answer: "A",
+                explanation: "Vaccines expose the immune system to harmless parts of pathogens so it learns to fight them."
+            },
+            {
+                type: "prevention_immunity",
+                question: "Why cover coughs and sneezes?",
+                options: ["Prevents spread of germs through air", "Makes less noise", "Saves energy", "Looks polite"],
+                answer: "A",
+                explanation: "Covering coughs and sneezes prevents respiratory droplets containing germs from spreading to others."
+            },
+            {
+                type: "prevention_immunity",
+                question: "What is quarantine?",
+                options: ["Separating sick people to prevent spread", "A type of medicine", "Exercise program", "Special diet"],
+                answer: "A",
+                explanation: "Quarantine separates and restricts movement of people exposed to contagious disease."
+            },
+            {
+                type: "prevention_immunity",
+                question: "What are antibodies?",
+                options: ["Proteins that fight specific germs", "White blood cells", "Red blood cells", "Vitamins"],
+                answer: "A",
+                explanation: "Antibodies are proteins produced by the immune system to neutralize specific pathogens."
+            },
+            {
+                type: "prevention_immunity",
+                question: "What do white blood cells do?",
+                options: ["Fight infections", "Carry oxygen", "Help blood clot", "Store energy"],
+                answer: "A",
+                explanation: "White blood cells are part of the immune system that fight infections and diseases."
+            },
+            {
+                type: "prevention_immunity",
+                question: "Why is clean drinking water important?",
+                options: ["Prevents waterborne diseases", "Only for hydration", "Makes food taste better", "Cleans teeth"],
+                answer: "A",
+                explanation: "Clean water prevents diseases like cholera, typhoid, and dysentery caused by waterborne pathogens."
+            },
+            {
+                type: "prevention_immunity",
+                question: "What does 'balanced diet' mean?",
+                options: ["Eating variety of foods from all food groups", "Eating only fruits", "Eating three meals", "Not eating sweets"],
+                answer: "A",
+                explanation: "A balanced diet includes appropriate amounts from all food groups for proper nutrition."
+            },
+            {
+                type: "prevention_immunity",
+                question: "How does exercise boost immunity?",
+                options: ["Improves circulation of immune cells", "Makes muscles bigger", "Burns calories", "Improves sleep"],
+                answer: "A",
+                explanation: "Exercise helps immune cells circulate better and work more effectively."
+            },
+            {
+                type: "prevention_immunity",
+                question: "What is herd immunity?",
+                options: ["When enough people are immune to protect community", "Immunity in animals", "Strong personal immunity", "Immunity from birth"],
+                answer: "A",
+                explanation: "Herd immunity occurs when enough people are immune to a disease, making spread unlikely."
+
+            },
+            // Healthy Habits & Lifestyle (126-150)
+            {
+                type: "healthy_habits",
+                question: "Why is brushing teeth important?",
+                options: ["Prevents tooth decay and gum disease", "Only for fresh breath", "Only for white teeth", "Only after eating sweets"],
+                answer: "A",
+                explanation: "Brushing removes plaque that causes cavities and gum disease, and maintains oral health."
+            },
+            {
+                type: "healthy_habits",
+                question: "Why drink plenty of water?",
+                options: ["Keeps body hydrated and systems working", "Only when thirsty", "Only during exercise", "Only with meals"],
+                answer: "A",
+                explanation: "Water regulates body temperature, transports nutrients, removes waste, and lubricates joints."
+            },
+            {
+                type: "healthy_habits",
+                question: "Why limit sugary foods and drinks?",
+                options: ["Prevents tooth decay, obesity, diabetes", "They taste bad", "They are expensive", "They are colorful"],
+                answer: "A",
+                explanation: "Excess sugar contributes to cavities, weight gain, and increases diabetes risk."
+            },
+            {
+                type: "healthy_habits",
+                question: "Why eat fruits and vegetables?",
+                options: ["Provide vitamins, minerals, and fiber", "Only for color", "Only when sick", "Only for weight loss"],
+                answer: "A",
+                explanation: "Fruits and vegetables provide essential nutrients that prevent diseases and promote health."
+            },
+            {
+                type: "healthy_habits",
+                question: "Why avoid smoking?",
+                options: ["Causes lung disease, heart problems, cancer", "Only smells bad", "Only expensive", "Only for adults"],
+                answer: "A",
+                explanation: "Smoking damages nearly every organ and causes numerous diseases including cancer."
+            },
+            {
+                type: "healthy_habits",
+                question: "Why manage stress?",
+                options: ["Chronic stress weakens immune system", "Stress is always bad", "Stress makes you smart", "Stress is natural"],
+                answer: "A",
+                explanation: "Chronic stress can weaken immunity, increase disease risk, and affect mental health."
+            },
+            {
+                type: "healthy_habits",
+                question: "Why have regular medical check-ups?",
+                options: ["Detect problems early when easier to treat", "Only when sick", "Only for babies", "Only for elderly"],
+                answer: "A",
+                explanation: "Regular check-ups help detect health issues early and monitor growth and development."
+            },
+            {
+                type: "healthy_habits",
+                question: "Why practice good posture?",
+                options: ["Prevents back pain and muscle problems", "Only looks good", "Only for studying", "Only for athletes"],
+                answer: "A",
+                explanation: "Good posture prevents muscle strain, back pain, and keeps bones and joints aligned."
+            },
+            {
+                type: "healthy_habits",
+                question: "Why limit screen time?",
+                options: ["Prevents eye strain, promotes activity", "Screens are expensive", "Screens break easily", "Parents say so"],
+                answer: "A",
+                explanation: "Too much screen time can cause eye strain, affect sleep, and reduce physical activity."
+            },
+            {
+                type: "healthy_habits",
+                question: "Why is personal hygiene important?",
+                options: ["Prevents spread of germs and infections", "Only for social acceptance", "Only for special occasions", "Only in hospitals"],
+                answer: "A",
+                explanation: "Good personal hygiene prevents illness by removing germs and preventing their spread."
+
+            },
+            // Advanced Concepts (151-155)
+            {
+                type: "advanced_concepts",
+                question: "What are communicable diseases?",
+                options: ["Diseases that spread from person to person", "Non-spreading diseases", "Genetic diseases", "Deficiency diseases"],
+                answer: "A",
+                explanation: "Communicable diseases are infectious diseases that can spread between individuals."
+            },
+            {
+                type: "advanced_concepts",
+                question: "What is a pandemic?",
+                options: ["Global spread of a new disease", "Local disease outbreak", "Seasonal disease", "Animal disease"],
+                answer: "A",
+                explanation: "A pandemic is a disease outbreak that spreads across multiple countries or continents."
+            },
+            {
+                type: "advanced_concepts",
+                question: "What are deficiency diseases?",
+                options: ["Caused by lack of essential nutrients", "Caused by germs", "Caused by genetics", "Caused by pollution"],
+                answer: "A",
+                explanation: "Deficiency diseases result from lack of essential vitamins or minerals in diet."
+            },
+            {
+                type: "advanced_concepts",
+                question: "What is antibiotic resistance?",
+                options: ["Bacteria evolve to survive antibiotics", "Body rejects antibiotics", "Antibiotics become stronger", "Viruses resist antibiotics"],
+                answer: "A",
+                explanation: "Antibiotic resistance occurs when bacteria change so antibiotics no longer work against them."
+            },
+            {
+                type: "advanced_concepts",
+                question: "What is immunization?",
+                options: ["Process of making person immune to disease", "Cleaning environment", "Eating healthy food", "Exercising regularly"],
+                answer: "A",
+                explanation: "Immunization is the process by which a person becomes protected against a disease through vaccination."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent health knowledge!",
+            "Fantastic disease prevention understanding!",
+            "Great job! You're a health expert!",
+            "Amazing! Your health knowledge is perfect!",
+            "Well done! Perfect disease identification!",
+            "You're a health and wellness champion!",
+            "Perfect! You understand how to stay healthy!",
+            "Outstanding medical knowledge!",
+            "Brilliant! You think like a healthcare expert!",
+            "You're on fire! Great health insight!"
+        ];
+
+        // Disease information
+        const diseases = {
+            infectious: [
+                {
+                    name: "Common Cold",
+                    cause: "Virus (Rhinovirus)",
+                    symptoms: ["Runny nose", "Sore throat", "Cough", "Sneezing"],
+                    prevention: ["Handwashing", "Avoid sick people", "Cover coughs", "Don't touch face"],
+                    treatment: "Rest, fluids, symptom relief"
+                },
+                {
+                    name: "Influenza (Flu)",
+                    cause: "Influenza virus",
+                    symptoms: ["Fever", "Body aches", "Fatigue", "Cough"],
+                    prevention: ["Annual flu vaccine", "Hand hygiene", "Avoid crowds during outbreaks"],
+                    treatment: "Antiviral drugs, rest, fluids"
+                },
+                {
+                    name: "COVID-19",
+                    cause: "SARS-CoV-2 virus",
+                    symptoms: ["Fever", "Cough", "Loss of taste/smell", "Difficulty breathing"],
+                    prevention: ["Vaccination", "Masks", "Social distancing", "Ventilation"],
+                    treatment: "Antivirals, monoclonal antibodies, supportive care"
+                },
+                {
+                    name: "Strep Throat",
+                    cause: "Streptococcus bacteria",
+                    symptoms: ["Severe sore throat", "Fever", "Swollen tonsils", "White patches"],
+                    prevention: ["Avoid sharing utensils", "Hand hygiene", "Cover mouth"],
+                    treatment: "Antibiotics"
+                }
+            ],
+            nonInfectious: [
+                {
+                    name: "Diabetes",
+                    cause: "Body can't use insulin properly",
+                    symptoms: ["Increased thirst", "Frequent urination", "Fatigue", "Blurred vision"],
+                    prevention: ["Healthy diet", "Regular exercise", "Maintain healthy weight"],
+                    treatment: "Medication, insulin, diet management"
+                },
+                {
+                    name: "Asthma",
+                    cause: "Inflammation of airways",
+                    symptoms: ["Wheezing", "Shortness of breath", "Chest tightness", "Coughing"],
+                    prevention: ["Avoid triggers", "Take prescribed medications", "Regular check-ups"],
+                    treatment: "Inhalers, medication, avoiding triggers"
+                },
+                {
+                    name: "Hypertension",
+                    cause: "High blood pressure",
+                    symptoms: ["Often no symptoms", "Headaches", "Shortness of breath", "Nosebleeds"],
+                    prevention: ["Low-salt diet", "Exercise", "Stress management", "Healthy weight"],
+                    treatment: "Medication, lifestyle changes"
+                },
+                {
+                    name: "Obesity",
+                    cause: "Excess body fat",
+                    symptoms: ["Excess weight", "Difficulty with physical activity", "Breathlessness"],
+                    prevention: ["Balanced diet", "Regular exercise", "Portion control"],
+                    treatment: "Diet, exercise, lifestyle changes"
+                }
+            ],
+            deficiency: [
+                {
+                    name: "Scurvy",
+                    cause: "Vitamin C deficiency",
+                    symptoms: ["Weakness", "Anemia", "Gum disease", "Skin spots"],
+                    prevention: "Eat citrus fruits, berries, vegetables",
+                    treatment: "Vitamin C supplements"
+                },
+                {
+                    name: "Rickets",
+                    cause: "Vitamin D deficiency",
+                    symptoms: ["Bone pain", "Delayed growth", "Bone deformities", "Muscle weakness"],
+                    prevention: "Sunlight exposure, vitamin D foods",
+                    treatment: "Vitamin D and calcium supplements"
+                },
+                {
+                    name: "Anemia",
+                    cause: "Iron deficiency",
+                    symptoms: ["Fatigue", "Pale skin", "Weakness", "Shortness of breath"],
+                    prevention: "Iron-rich foods (meat, beans, leafy greens)",
+                    treatment: "Iron supplements, dietary changes"
+                }
+            ]
+        };
+
+        // Prevention methods
+        const preventionMethods = [
+            {
+                method: "Hand Hygiene",
+                description: "Wash hands with soap for 20 seconds",
+                importance: "Removes germs that cause infections",
+                when: "Before eating, after bathroom, after coughing/sneezing"
+            },
+            {
+                method: "Vaccination",
+                description: "Get recommended vaccines on schedule",
+                importance: "Trains immune system to fight specific diseases",
+                examples: "MMR, Polio, COVID-19, Flu shots"
+            },
+            {
+                method: "Healthy Diet",
+                description: "Eat balanced meals with fruits, vegetables, whole grains",
+                importance: "Provides nutrients for immune system and overall health",
+                tips: "5 servings of fruits/vegetables daily"
+            },
+            {
+                method: "Regular Exercise",
+                description: "60 minutes of physical activity daily",
+                importance: "Strengthens heart, muscles, and immune system",
+                examples: "Running, swimming, cycling, sports"
+            },
+            {
+                method: "Adequate Sleep",
+                description: "9-12 hours for children aged 9-12",
+                importance: "Body repairs itself and consolidates learning",
+                benefits: "Better immunity, mood, and concentration"
+            },
+            {
+                method: "Stress Management",
+                description: "Practice relaxation techniques",
+                importance: "Chronic stress weakens immune system",
+                techniques: "Deep breathing, meditation, hobbies"
+            }
+        ];
+
+        // Immune system process
+        const immuneProcess = [
+            {
+                step: "1. Barrier Defense",
+                description: "Skin, mucus, stomach acid prevent entry",
+                details: "First line of defense against pathogens"
+            },
+            {
+                step: "2. Recognition",
+                description: "White blood cells identify invaders",
+                details: "Detect foreign substances (antigens)"
+            },
+            {
+                step: "3. Attack",
+                description: "Immune cells attack and destroy pathogens",
+                details: "White blood cells engulf bacteria, produce antibodies"
+            },
+            {
+                step: "4. Memory",
+                description: "Immune system remembers pathogens",
+                details: "Creates memory cells for faster response next time"
+            },
+            {
+                step: "5. Healing",
+                description: "Body repairs damage from infection",
+                details: "Tissues heal, symptoms disappear"
+            }
+        ];
+
+        // Healthy habits
+        const healthyHabits = [
+            "Wash hands regularly with soap and water",
+            "Brush teeth twice daily and floss",
+            "Eat 5 servings of fruits and vegetables daily",
+            "Drink 6-8 glasses of water daily",
+            "Get 9-12 hours of sleep each night",
+            "Exercise for at least 60 minutes daily",
+            "Cover coughs and sneezes with elbow",
+            "Avoid sharing personal items",
+            "Stay home when sick",
+            "Get regular medical check-ups",
+            "Manage screen time (max 2 hours recreational)",
+            "Practice good posture",
+            "Use sunscreen when outdoors",
+            "Wear seatbelts and helmets",
+            "Learn to manage stress effectively"
+        ];
+
+        // Interesting health facts
+        const healthFacts = [
+            "Your skin is the largest organ of your body and acts as a barrier against germs!",
+            "Sneezes can travel up to 100 miles per hour and send 100,000 germs into the air!",
+            "The human body has about 1.5 trillion white blood cells ready to fight infections!",
+            "Laughter boosts immunity by decreasing stress hormones and increasing immune cells!",
+            "Regular handwashing can reduce diarrhea incidents by nearly 40%!",
+            "Sleep strengthens immune memory - helping your body remember how to fight germs!",
+            "Exercise increases the circulation of immune cells, making them find pathogens faster!",
+            "Vitamin D from sunlight is crucial for immune function - just 10-15 minutes daily helps!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const healthFact = document.getElementById('healthFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initSlideshow();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade5Health');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade5Health', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade5Health_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade5Health_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a health expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent health knowledge!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep learning to become a health master!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review health concepts and try again!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Health knowledge helps you live better!";
+            }
+        }
+
+        // Create health fact display
+        function createHealthFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'health-fact';
+            
+            factDiv.innerHTML = `<strong>Amazing Health Fact:</strong> ${healthFacts[Math.floor(Math.random() * healthFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "health_basics": "💪",
+                "disease_basics": "🦠",
+                "infectious_diseases": "🤧",
+                "non_infectious_diseases": "🩺",
+                "prevention_immunity": "🛡️",
+                "healthy_habits": "🥗",
+                "advanced_concepts": "🧠"
+            };
+            
+            let conceptName = "Health Basics";
+            let conceptIcon = "💪";
+            
+            if (question.type.includes("health_basics")) {
+                conceptName = "Health Basics";
+                conceptIcon = conceptIcons.health_basics;
+            } else if (question.type.includes("disease_basics")) {
+                conceptName = "Disease Basics";
+                conceptIcon = conceptIcons.disease_basics;
+            } else if (question.type.includes("infectious_diseases")) {
+                conceptName = "Infectious Diseases";
+                conceptIcon = conceptIcons.infectious_diseases;
+            } else if (question.type.includes("non_infectious_diseases")) {
+                conceptName = "Non-Infectious Diseases";
+                conceptIcon = conceptIcons.non_infectious_diseases;
+            } else if (question.type.includes("prevention_immunity")) {
+                conceptName = "Prevention & Immunity";
+                conceptIcon = conceptIcons.prevention_immunity;
+            } else if (question.type.includes("healthy_habits")) {
+                conceptName = "Healthy Habits";
+                conceptIcon = conceptIcons.healthy_habits;
+            } else if (question.type.includes("advanced_concepts")) {
+                conceptName = "Advanced Concepts";
+                conceptIcon = conceptIcons.advanced_concepts;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("health_basics")) {
+                label.textContent = "Understanding what health means and its components";
+            } else if (question.type.includes("disease_basics")) {
+                label.textContent = "Basic concepts about diseases and pathogens";
+            } else if (question.type.includes("infectious_diseases")) {
+                label.textContent = "Diseases that spread from person to person";
+            } else if (question.type.includes("non_infectious_diseases")) {
+                label.textContent = "Diseases that don't spread between people";
+            } else if (question.type.includes("prevention_immunity")) {
+                label.textContent = "How to prevent diseases and how immunity works";
+            } else if (question.type.includes("healthy_habits")) {
+                label.textContent = "Daily practices that maintain and improve health";
+            } else if (question.type.includes("advanced_concepts")) {
+                label.textContent = "Deeper understanding of health and disease concepts";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create health visualization
+        function createHealthVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const infectiousDisease = diseases.infectious[Math.floor(Math.random() * diseases.infectious.length)];
+            const nonInfectiousDisease = diseases.nonInfectious[Math.floor(Math.random() * diseases.nonInfectious.length)];
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-blue);">Health and Diseases</h3>
+                
+                <div class="comparison-container">
+                    <div class="health-column infectious">
+                        <div class="column-title">Infectious Diseases</div>
+                        <div class="health-display infectious">
+                            <div style="text-align: center; margin-bottom: 15px;">
+                                <div style="font-size: 1.3rem; color: var(--accent-red); font-weight: bold;">${infectiousDisease.name}</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary);">Spread between people</div>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <strong>Cause:</strong> ${infectiousDisease.cause}<br>
+                                <strong>Symptoms:</strong> ${infectiousDisease.symptoms.join(', ')}<br>
+                                <strong>Prevention:</strong> ${infectiousDisease.prevention.join(', ')}
+                            </div>
+                            <div>
+                                <strong>Key Points:</strong><br>
+                                • Caused by pathogens (germs)<br>
+                                • Can spread person-to-person<br>
+                                • Examples: Cold, flu, COVID-19<br>
+                                • Prevention: Hygiene, vaccines
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="health-column non-infectious">
+                        <div class="column-title">Non-Infectious Diseases</div>
+                        <div class="health-display non-infectious">
+                            <div style="text-align: center; margin-bottom: 15px;">
+                                <div style="font-size: 1.3rem; color: var(--accent-green); font-weight: bold;">${nonInfectiousDisease.name}</div>
+                                <div style="font-size: 0.9rem; color: var(--text-secondary);">Don't spread between people</div>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <strong>Cause:</strong> ${nonInfectiousDisease.cause}<br>
+                                <strong>Symptoms:</strong> ${nonInfectiousDisease.symptoms.join(', ')}<br>
+                                <strong>Prevention:</strong> ${nonInfectiousDisease.prevention.join(', ')}
+                            </div>
+                            <div>
+                                <strong>Key Points:</strong><br>
+                                • Not caused by germs<br>
+                                • Don't spread to others<br>
+                                • Examples: Diabetes, asthma<br>
+                                • Prevention: Healthy lifestyle
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="disease-display">
+                    <div class="disease-item immune-response" style="animation-delay: 0s">
+                        <div class="disease-icon">🦠</div>
+                        <div class="disease-name">Bacteria</div>
+                        <div class="disease-info">Single-celled organisms, some cause disease</div>
+                    </div>
+                    <div class="disease-item immune-response" style="animation-delay: 0.1s">
+                        <div class="disease-icon">🦠</div>
+                        <div class="disease-name">Viruses</div>
+                        <div class="disease-info">Tiny pathogens that need host cells to reproduce</div>
+                    </div>
+                    <div class="disease-item immune-response" style="animation-delay: 0.2s">
+                        <div class="disease-icon">🍄</div>
+                        <div class="disease-name">Fungi</div>
+                        <div class="disease-info">Can cause skin infections like athlete's foot</div>
+                    </div>
+                    <div class="disease-item immune-response" style="animation-delay: 0.3s">
+                        <div class="disease-icon">🐛</div>
+                        <div class="disease-name">Parasites</div>
+                        <div class="disease-info">Live on or in host, like malaria parasites</div>
+                    </div>
+                </div>
+                
+                <div class="prevention-grid">
+                    ${preventionMethods.map((method, index) => `
+                        <div class="prevention-card health-pulse" style="animation-delay: ${index * 0.1}s">
+                            <div class="prevention-icon">${getPreventionIcon(method.method)}</div>
+                            <div class="prevention-title">${method.method}</div>
+                            <div class="prevention-description">${method.description}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="immune-display">
+                    <h4 style="color: var(--accent-purple); margin-bottom: 15px; text-align: center;">How the Immune System Works</h4>
+                    
+                    ${immuneProcess.map((step, index) => `
+                        <div class="immune-step healing" style="animation-delay: ${index * 0.2}s">
+                            <div class="step-number">${index + 1}</div>
+                            <div class="step-content">
+                                <div class="step-title">${step.step}</div>
+                                <div class="step-detail">${step.description}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">
+                                    ${step.details}
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="habits-display prevention-glow">
+                    <div class="habits-title">Daily Healthy Habits</div>
+                    <div class="habits-list">
+                        ${healthyHabits.slice(0, 8).map((habit, index) => `
+                            <div class="habit-item healing" style="animation-delay: ${index * 0.1}s">
+                                <div class="habit-icon">✓</div>
+                                <div class="habit-text">${habit}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="interactive-practice">
+                    <div class="practice-title">Health Challenge</div>
+                    <div class="practice-area">
+                        <div class="scenario-box">
+                            <strong>Scenario: Your friend has a cold</strong><br><br>
+                            What should you do to avoid getting sick?<br><br>
+                            List 3 preventive measures.
+                        </div>
+                        <div class="solution-box">
+                            <strong>Correct Answer:</strong><br><br>
+                            1. Wash hands frequently with soap<br>
+                            2. Avoid sharing utensils or drinks<br>
+                            3. Keep distance if they're coughing/sneezing<br><br>
+                            <em>Also: Cover your own coughs, don't touch face, clean surfaces</em>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--accent-orange);">
+                    <div style="color: var(--accent-orange); font-weight: bold; margin-bottom: 10px;">Quick Review Questions:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. What's the difference between infectious and non-infectious diseases?<br>
+                        2. Name 3 ways to prevent infectious diseases.<br>
+                        3. Why is handwashing important?<br>
+                        4. What are three components of good health?
+                    </div>
+                </div>
+            `;
+            
+            return vizDiv;
+        }
+
+        // Helper function to get prevention icons
+        function getPreventionIcon(method) {
+            const icons = {
+                "Hand Hygiene": "🧼",
+                "Vaccination": "💉",
+                "Healthy Diet": "🥗",
+                "Regular Exercise": "🏃‍♂️",
+                "Adequate Sleep": "😴",
+                "Stress Management": "🧘‍♀️"
+            };
+            return icons[method] || "🛡️";
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            healthFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            healthFact.appendChild(createHealthFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createHealthVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

@@ -1,0 +1,3275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 6 Science - Matter and Its Changes | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Chemistry Theme */
+        :root {
+            --primary-blue: #2196F3;
+            --secondary-purple: #9C27B0;
+            --accent-teal: #009688;
+            --accent-orange: #FF9800;
+            --accent-red: #F44336;
+            --accent-yellow: #FFC107;
+            --accent-green: #4CAF50;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --glow: 0 0 20px rgba(33, 150, 243, 0.3);
+            --solid-glow: 0 0 15px rgba(33, 150, 243, 0.2);
+            --liquid-glow: 0 0 15px rgba(156, 39, 176, 0.3);
+            --gas-glow: 0 0 15px rgba(0, 150, 136, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Chemistry Pattern Background */
+        .chemistry-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(156, 39, 176, 0.1) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255, 152, 0, 0.05) 2px, rgba(255, 152, 0, 0.05) 4px);
+            opacity: 0.3;
+        }
+
+        .floating-atom {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.05);
+            font-size: 3rem;
+            animation: floatAtom 20s linear infinite;
+        }
+
+        .floating-molecule {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.05);
+            font-size: 3rem;
+            animation: floatMolecule 15s linear infinite;
+        }
+
+        @keyframes floatAtom {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.1; }
+            25% { transform: translate(-100px, -50px) rotate(90deg); opacity: 0.05; }
+            50% { transform: translate(50px, -100px) rotate(180deg); opacity: 0.1; }
+            75% { transform: translate(100px, 50px) rotate(270deg); opacity: 0.05; }
+            100% { transform: translate(0, 0) rotate(360deg); opacity: 0.1; }
+        }
+
+        @keyframes floatMolecule {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0.1; }
+            25% { transform: translate(80px, -60px) rotate(-90deg); opacity: 0.05; }
+            50% { transform: translate(-40px, -80px) rotate(-180deg); opacity: 0.1; }
+            75% { transform: translate(-80px, 60px) rotate(-270deg); opacity: 0.05; }
+            100% { transform: translate(0, 0) rotate(-360deg); opacity: 0.1; }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(33, 150, 243, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-blue);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-purple);
+            color: white;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #7B1FA2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(156, 39, 176, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-purple));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .science-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-orange);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-purple);
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Matter States */
+        .matter-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid var(--primary-blue);
+            box-shadow: var(--glow);
+        }
+
+        .display-title {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .matter-states {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .state-card {
+            background: var(--dark-surface);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .state-card.solid {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .state-card.liquid {
+            border-color: var(--secondary-purple);
+            background: rgba(156, 39, 176, 0.1);
+        }
+
+        .state-card.gas {
+            border-color: var(--accent-teal);
+            background: rgba(0, 150, 136, 0.1);
+        }
+
+        .state-card.plasma {
+            border-color: var(--accent-orange);
+            background: rgba(255, 152, 0, 0.1);
+        }
+
+        .state-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .state-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .state-name {
+            font-weight: bold;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .state-solid .state-name { color: var(--primary-blue); }
+        .state-liquid .state-name { color: var(--secondary-purple); }
+        .state-gas .state-name { color: var(--accent-teal); }
+        .state-plasma .state-name { color: var(--accent-orange); }
+
+        .state-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .state-examples {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Particle Models */
+        .particle-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-teal);
+        }
+
+        .particle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .particle-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .particle-model {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--accent-teal);
+        }
+
+        .particle-diagram {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            font-size: 2rem;
+        }
+
+        .particle-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--accent-teal);
+        }
+
+        .particle-properties {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        /* Changes of State */
+        .changes-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-orange);
+        }
+
+        .changes-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .state-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .solid-circle { 
+            background: var(--primary-blue); 
+            border: 3px solid var(--primary-blue);
+            box-shadow: var(--solid-glow);
+        }
+        .liquid-circle { 
+            background: var(--secondary-purple); 
+            border: 3px solid var(--secondary-purple);
+            box-shadow: var(--liquid-glow);
+        }
+        .gas-circle { 
+            background: var(--accent-teal); 
+            border: 3px solid var(--accent-teal);
+            box-shadow: var(--gas-glow);
+        }
+
+        .change-arrow {
+            width: 2px;
+            height: 50px;
+            background: var(--text-secondary);
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .change-arrow::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: -5px;
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid var(--text-secondary);
+        }
+
+        .change-label {
+            position: absolute;
+            left: 120px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .melting-label { top: 30px; }
+        .freezing-label { top: 180px; }
+        .evaporation-label { top: 110px; left: auto; right: 120px; }
+        .condensation-label { top: 240px; left: auto; right: 120px; }
+        .sublimation-label { top: 350px; }
+        .deposition-label { top: 350px; left: auto; right: 120px; }
+
+        /* Physical vs Chemical Changes */
+        .changes-comparison {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-green);
+        }
+
+        .changes-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .changes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .change-type {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+        }
+
+        .change-type.physical {
+            border-color: var(--accent-green);
+        }
+
+        .change-type.chemical {
+            border-color: var(--accent-red);
+        }
+
+        .change-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .physical .change-title { color: var(--accent-green); }
+        .chemical .change-title { color: var(--accent-red); }
+
+        .change-examples {
+            margin-top: 15px;
+        }
+
+        .change-example {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 6px;
+            margin: 8px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Properties of Matter */
+        .properties-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-yellow);
+        }
+
+        .properties-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: var(--dark-surface);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .properties-table th {
+            background: var(--dark-card);
+            padding: 12px;
+            text-align: left;
+            color: var(--accent-yellow);
+            border-bottom: 2px solid var(--accent-yellow);
+        }
+
+        .properties-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+        }
+
+        .properties-table tr:hover {
+            background: rgba(255, 193, 7, 0.05);
+        }
+
+        /* Interactive Labs */
+        .lab-container {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-orange);
+        }
+
+        .lab-controls {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .lab-button {
+            padding: 10px 15px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-orange);
+            border-radius: 6px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lab-button:hover {
+            background: rgba(255, 152, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .lab-area {
+            background: var(--dark-surface);
+            min-height: 150px;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lab-element {
+            background: var(--dark-card);
+            padding: 15px;
+            border-radius: 6px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .lab-element.solid {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .lab-element.liquid {
+            border-color: var(--secondary-purple);
+            background: rgba(156, 39, 176, 0.1);
+        }
+
+        .lab-element.gas {
+            border-color: var(--accent-teal);
+            background: rgba(0, 150, 136, 0.1);
+        }
+
+        .lab-element:hover {
+            transform: scale(1.05);
+        }
+
+        .lab-result {
+            text-align: center;
+            margin-top: 15px;
+            min-height: 30px;
+            color: var(--text-secondary);
+            font-weight: bold;
+        }
+
+        /* Periodic Table Elements */
+        .elements-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--secondary-purple);
+        }
+
+        .elements-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 5px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .elements-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .element {
+            background: var(--dark-surface);
+            padding: 10px 5px;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .element:hover {
+            transform: scale(1.1);
+        }
+
+        .element-metal { border: 2px solid #2196F3; }
+        .element-nonmetal { border: 2px solid #4CAF50; }
+        .element-metalloid { border: 2px solid #FF9800; }
+
+        .element-symbol {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .element-number {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .element-name {
+            font-size: 0.6rem;
+            margin-top: 2px;
+            color: var(--text-secondary);
+        }
+
+        /* Real-world Applications */
+        .applications-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-red);
+        }
+
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .applications-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .application-card {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid var(--accent-red);
+        }
+
+        .application-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--accent-red);
+            font-size: 1.1rem;
+        }
+
+        .application-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Interactive Practice */
+        .interactive-practice {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-teal);
+        }
+
+        .practice-title {
+            color: var(--accent-teal);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .practice-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .practice-button {
+            padding: 10px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-teal);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .practice-button:hover {
+            background: rgba(0, 150, 136, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .practice-display {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .elements-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .matter-states {
+                flex-direction: column;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes particleVibrate {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(2px); }
+            75% { transform: translateX(-2px); }
+        }
+        
+        .particle-vibrate {
+            animation: particleVibrate 0.5s ease-in-out infinite;
+        }
+        
+        @keyframes stateTransition {
+            0% { opacity: 0.5; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        .state-transition {
+            animation: stateTransition 0.5s ease forwards;
+        }
+        
+        @keyframes heating {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.4); }
+            50% { box-shadow: 0 0 20px 5px rgba(255, 152, 0, 0.2); }
+        }
+        
+        .heating {
+            animation: heating 2s ease-in-out infinite;
+        }
+        
+        @keyframes cooling {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.4); }
+            50% { box-shadow: 0 0 20px 5px rgba(33, 150, 243, 0.2); }
+        }
+        
+        .cooling {
+            animation: cooling 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Chemistry Pattern Background -->
+    <div class="chemistry-bg" id="chemistryBg">
+        <!-- Atoms and molecules will be generated by JavaScript -->
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 6 Science</h1>
+            <p class="welcome-subtitle">Explore the amazing world of matter! Learn about states of matter, physical and chemical changes, particle theory, and how matter transforms in our everyday lives. Discover the building blocks of everything around us!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">⚗️🔥🧊</span>
+                <span class="topic-name">Matter and Its Changes</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Chemistry Exploration</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 120</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0.8%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Science fact display -->
+                <div id="scienceFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Chemistry Explorer Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background
+        function initBackground() {
+            const chemistryBg = document.getElementById('chemistryBg');
+            
+            // Create floating atoms
+            const atoms = ['⚛️', '🔬', '🧪', '⚗️', '🌡️'];
+            for (let i = 0; i < 15; i++) {
+                const atom = document.createElement('div');
+                atom.className = 'floating-atom';
+                atom.textContent = atoms[Math.floor(Math.random() * atoms.length)];
+                atom.style.left = `${Math.random() * 100}%`;
+                atom.style.top = `${Math.random() * 100}%`;
+                atom.style.animationDelay = `${Math.random() * 20}s`;
+                atom.style.fontSize = `${2 + Math.random() * 2}rem`;
+                atom.style.color = 'rgba(33, 150, 243, 0.1)';
+                chemistryBg.appendChild(atom);
+            }
+            
+            // Create floating molecules
+            const molecules = ['🔴⚫🔵', '🧪🧫', '⚗️🔬', '🔥🧊', '🌡️⚛️'];
+            for (let i = 0; i < 10; i++) {
+                const molecule = document.createElement('div');
+                molecule.className = 'floating-molecule';
+                molecule.textContent = molecules[Math.floor(Math.random() * molecules.length)];
+                molecule.style.left = `${Math.random() * 100}%`;
+                molecule.style.top = `${Math.random() * 100}%`;
+                molecule.style.animationDelay = `${Math.random() * 15}s`;
+                molecule.style.fontSize = `${1.5 + Math.random() * 1.5}rem`;
+                molecule.style.color = 'rgba(156, 39, 176, 0.1)';
+                chemistryBg.appendChild(molecule);
+            }
+        }
+
+        // Questions array - 120+ Grade 6 Matter and Changes questions
+        const questions = [
+            // Matter Basics (1-20)
+            {
+                type: "matter_basics",
+                question: "What is matter?",
+                options: ["Anything that has mass and takes up space", "Only things you can see", "Only solids and liquids", "Anything that moves"],
+                answer: "A",
+                explanation: "Matter is anything that has mass and volume (takes up space). This includes solids, liquids, gases, and plasma."
+            },
+            {
+                type: "matter_basics",
+                question: "What are the three common states of matter?",
+                options: ["Solid, liquid, gas", "Hard, soft, medium", "Hot, cold, warm", "Big, small, medium"],
+                answer: "A",
+                explanation: "The three common states of matter are solid (definite shape and volume), liquid (definite volume, takes container shape), and gas (fills container, no definite shape or volume)."
+            },
+            {
+                type: "matter_basics",
+                question: "Which state of matter has definite shape and definite volume?",
+                options: ["Solid", "Liquid", "Gas", "Plasma"],
+                answer: "A",
+                explanation: "Solids have a definite shape and definite volume. The particles are closely packed in a regular arrangement."
+            },
+            {
+                type: "matter_basics",
+                question: "Which state takes the shape of its container but has definite volume?",
+                options: ["Liquid", "Solid", "Gas", "Plasma"],
+                answer: "A",
+                explanation: "Liquids take the shape of their container but have a definite volume. Particles can flow past each other."
+            },
+            {
+                type: "matter_basics",
+                question: "Which state fills its container completely?",
+                options: ["Gas", "Solid", "Liquid", "All of them"],
+                answer: "A",
+                explanation: "Gases have no definite shape or volume - they expand to fill whatever container they're in."
+            },
+            // States of Matter (21-40)
+            {
+                type: "states_matter",
+                question: "What happens to particles when matter changes from solid to liquid?",
+                options: ["They gain energy and move more", "They lose energy and slow down", "They disappear", "They change color"],
+                answer: "A",
+                explanation: "When a solid melts into a liquid, particles gain energy, vibrate more, and can move past each other."
+            },
+            {
+                type: "states_matter",
+                question: "The change from liquid to gas is called:",
+                options: ["Evaporation", "Freezing", "Melting", "Condensation"],
+                answer: "A",
+                explanation: "Evaporation is when a liquid turns into a gas at the surface. Boiling is when it happens throughout the liquid."
+            },
+            {
+                type: "states_matter",
+                question: "Freezing is the change from:",
+                options: ["Liquid to solid", "Solid to liquid", "Gas to liquid", "Liquid to gas"],
+                answer: "A",
+                explanation: "Freezing is when a liquid loses enough energy that particles slow down and form a solid structure."
+            },
+            {
+                type: "states_matter",
+                question: "Condensation is the change from:",
+                options: ["Gas to liquid", "Liquid to gas", "Solid to gas", "Liquid to solid"],
+                answer: "A",
+                explanation: "Condensation occurs when gas particles lose energy and come together to form a liquid (like dew on grass)."
+            },
+            {
+                type: "states_matter",
+                question: "Sublimation is when:",
+                options: ["Solid changes directly to gas", "Gas changes directly to solid", "Liquid changes to gas", "Solid changes to liquid"],
+                answer: "A",
+                explanation: "Sublimation is when a solid turns directly into a gas without becoming a liquid first (like dry ice)."
+            },
+            // Physical Changes (41-60)
+            {
+                type: "physical_changes",
+                question: "Which is an example of a physical change?",
+                options: ["Melting ice cream", "Burning wood", "Rusting iron", "Baking a cake"],
+                answer: "A",
+                explanation: "Melting is a physical change - the substance remains the same chemically, just changes state."
+            },
+            {
+                type: "physical_changes",
+                question: "Physical changes:",
+                options: ["Do not create new substances", "Always create new substances", "Change the chemical composition", "Cannot be reversed"],
+                answer: "A",
+                explanation: "Physical changes alter the form or appearance but not the chemical identity of the substance."
+            },
+            {
+                type: "physical_changes",
+                question: "Which of these is NOT a physical change?",
+                options: ["Burning paper", "Cutting paper", "Crushing paper", "Folding paper"],
+                answer: "A",
+                explanation: "Burning paper is a chemical change - it produces new substances (ash, smoke, gases)."
+            },
+            {
+                type: "physical_changes",
+                question: "Dissolving sugar in water is a:",
+                options: ["Physical change", "Chemical change", "Both", "Neither"],
+                answer: "A",
+                explanation: "Dissolving is physical - sugar molecules spread out in water but remain sugar molecules."
+            },
+            {
+                type: "physical_changes",
+                question: "Which property can be observed without changing the substance?",
+                options: ["Physical property", "Chemical property", "Molecular property", "Atomic property"],
+                answer: "A",
+                explanation: "Physical properties (color, density, melting point) can be observed without changing the substance."
+            },
+            // Chemical Changes (61-80)
+            {
+                type: "chemical_changes",
+                question: "Which is an example of a chemical change?",
+                options: ["Burning wood", "Melting butter", "Breaking glass", "Evaporating water"],
+                answer: "A",
+                explanation: "Burning wood produces new substances (ash, smoke, carbon dioxide) - a chemical change."
+            },
+            {
+                type: "chemical_changes",
+                question: "Chemical changes:",
+                options: ["Produce new substances", "Do not change the substance", "Are easily reversible", "Only change appearance"],
+                answer: "A",
+                explanation: "Chemical changes create new substances with different chemical properties."
+            },
+            {
+                type: "chemical_changes",
+                question: "Signs of a chemical change include:",
+                options: ["Color change, gas production, temperature change", "Change in shape only", "Change in size only", "Melting or freezing"],
+                answer: "A",
+                explanation: "Common signs: color change, gas bubbles, temperature change, precipitate formation, odor change."
+            },
+            {
+                type: "chemical_changes",
+                question: "Rusting of iron is a:",
+                options: ["Chemical change", "Physical change", "State change", "Reversible change"],
+                answer: "A",
+                explanation: "Rusting is chemical - iron reacts with oxygen to form iron oxide (rust), a new substance."
+            },
+            {
+                type: "chemical_changes",
+                question: "Which property describes how a substance reacts with others?",
+                options: ["Chemical property", "Physical property", "State property", "Volume property"],
+                answer: "A",
+                explanation: "Chemical properties describe how substances react with others to form new substances."
+            },
+            // Particle Theory (81-100)
+            {
+                type: "particle_theory",
+                question: "According to particle theory, all matter is made of:",
+                options: ["Tiny particles", "Only atoms", "Only molecules", "Energy waves"],
+                answer: "A",
+                explanation: "All matter is composed of tiny particles (atoms, molecules, or ions) that are always in motion."
+            },
+            {
+                type: "particle_theory",
+                question: "Particles in a solid:",
+                options: ["Vibrate in fixed positions", "Move freely", "Don't move at all", "Only move when heated"],
+                answer: "A",
+                explanation: "In solids, particles vibrate in fixed positions but don't change places with neighboring particles."
+            },
+            {
+                type: "particle_theory",
+                question: "Particles in a liquid:",
+                options: ["Can slide past each other", "Are fixed in position", "Move very fast and far apart", "Don't move"],
+                answer: "A",
+                explanation: "Liquid particles can move past each other, allowing liquids to flow."
+            },
+            {
+                type: "particle_theory",
+                question: "Particles in a gas:",
+                options: ["Move rapidly in all directions", "Don't move", "Only move up and down", "Move slowly in fixed patterns"],
+                answer: "A",
+                explanation: "Gas particles move rapidly in random directions, colliding with each other and container walls."
+            },
+            {
+                type: "particle_theory",
+                question: "When heated, particles:",
+                options: ["Move faster", "Move slower", "Stop moving", "Change color"],
+                answer: "A",
+                explanation: "Adding heat energy makes particles move faster and increases temperature."
+            },
+            // Temperature and Heat (101-120)
+            {
+                type: "temperature_heat",
+                question: "Temperature measures:",
+                options: ["Average particle motion", "Total heat energy", "How hot something feels", "Color of an object"],
+                answer: "A",
+                explanation: "Temperature measures the average kinetic energy (motion) of particles in a substance."
+            },
+            {
+                type: "temperature_heat",
+                question: "Heat is:",
+                options: ["Energy transfer between objects", "Same as temperature", "A type of particle", "A state of matter"],
+                answer: "A",
+                explanation: "Heat is the transfer of thermal energy from warmer to cooler objects."
+            },
+            {
+                type: "temperature_heat",
+                question: "Melting point of water (ice) is:",
+                options: ["0°C", "32°F", "100°C", "Both A and B"],
+                answer: "D",
+                explanation: "Ice melts at 0°C (32°F) at standard atmospheric pressure."
+            },
+            {
+                type: "temperature_heat",
+                question: "Boiling point of water is:",
+                options: ["100°C", "0°C", "212°F", "Both A and C"],
+                answer: "D",
+                explanation: "Water boils at 100°C (212°F) at standard atmospheric pressure."
+            },
+            {
+                type: "temperature_heat",
+                question: "Absolute zero is:",
+                options: ["-273°C", "0°C", "100°C", "273°C"],
+                answer: "A",
+                explanation: "Absolute zero (-273.15°C or 0 Kelvin) is when particles have minimal motion."
+            },
+            // Conservation of Mass (121-140)
+            {
+                type: "conservation_mass",
+                question: "Law of Conservation of Mass states:",
+                options: ["Mass cannot be created or destroyed", "Mass can appear from nothing", "Mass disappears during reactions", "Only energy is conserved"],
+                answer: "A",
+                explanation: "In chemical reactions, the total mass of reactants equals total mass of products."
+            },
+            {
+                type: "conservation_mass",
+                question: "When wood burns, the ash weighs less than the wood. Where did the mass go?",
+                options: ["Into gases like carbon dioxide", "It disappeared", "Into light energy", "Into heat only"],
+                answer: "A",
+                explanation: "Most mass becomes carbon dioxide and water vapor - gases that escape into the air."
+            },
+            // Real-world Applications (141-160)
+            {
+                type: "real_world",
+                question: "Why do puddles disappear on a sunny day?",
+                options: ["Evaporation - liquid water becomes water vapor", "Absorption into ground", "Freezing", "Chemical reaction with air"],
+                answer: "A",
+                explanation: "Water evaporates from the puddle's surface, becoming invisible water vapor in the air."
+            },
+            {
+                type: "real_world",
+                question: "Why does ice float in water?",
+                options: ["Ice is less dense than liquid water", "Ice is heavier than water", "Magic", "Ice has air bubbles"],
+                answer: "A",
+                explanation: "Water is unique - solid ice is less dense than liquid water, so it floats."
+            },
+            {
+                type: "real_world",
+                question: "Why do bridges have expansion joints?",
+                options: ["Metals expand when heated", "To look pretty", "For water drainage", "To make them stronger"],
+                answer: "A",
+                explanation: "Materials expand when heated and contract when cooled. Joints allow for this expansion."
+            },
+            // Mixed Practice (161-180)
+            {
+                type: "mixed",
+                question: "Which process is reversible?",
+                options: ["Melting ice", "Burning wood", "Rusting iron", "Cooking an egg"],
+                answer: "A",
+                explanation: "Melting ice is reversible (physical change). Chemical changes like burning, rusting, and cooking are harder to reverse."
+            },
+            {
+                type: "mixed",
+                question: "Dry ice (solid CO2) changing to gas is called:",
+                options: ["Sublimation", "Evaporation", "Condensation", "Deposition"],
+                answer: "A",
+                explanation: "Dry ice sublimates directly from solid to gas at normal atmospheric pressure."
+            },
+            {
+                type: "mixed",
+                question: "Which has particles with the most energy?",
+                options: ["Steam (water vapor)", "Liquid water", "Ice", "All have equal energy"],
+                answer: "A",
+                explanation: "Gas particles have the most kinetic energy, then liquids, then solids."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: "",
+            currentState: "all"
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent chemistry knowledge!",
+            "Perfect understanding of matter!",
+            "Great particle theory application!",
+            "Amazing! You're a matter expert!",
+            "Perfect classification of changes!",
+            "You're a chemistry champion!",
+            "Outstanding state transition recognition!",
+            "Brilliant property analysis!",
+            "You think like a chemist!",
+            "Matter mastery achieved!"
+        ];
+
+        // Chemistry terms
+        const chemistryTerms = [
+            {
+                term: "Matter",
+                definition: "Anything that has mass and takes up space",
+                example: "Solids, liquids, gases"
+            },
+            {
+                term: "Atom",
+                definition: "Basic unit of matter",
+                characteristic: "Smallest particle of an element"
+            },
+            {
+                term: "Molecule",
+                definition: "Two or more atoms bonded together",
+                example: "H₂O (water), O₂ (oxygen)"
+            },
+            {
+                term: "Element",
+                definition: "Pure substance made of one type of atom",
+                examples: "Gold, oxygen, carbon"
+            },
+            {
+                term: "Compound",
+                definition: "Two or more elements chemically combined",
+                example: "H₂O (water), NaCl (salt)"
+            },
+            {
+                term: "Mixture",
+                definition: "Two or more substances mixed but not chemically combined",
+                examples: "Air, salt water, trail mix"
+            },
+            {
+                term: "Density",
+                definition: "Mass per unit volume",
+                formula: "Density = Mass ÷ Volume"
+            }
+        ];
+
+        // States of matter
+        const matterStates = [
+            {
+                name: "Solid",
+                description: "Definite shape and volume",
+                characteristics: "Particles vibrate in fixed positions, strong attractive forces",
+                examples: "Ice, rock, metal, wood",
+                icon: "🧊",
+                color: "#2196F3",
+                particleArrangement: "Tightly packed, regular pattern",
+                particleMotion: "Vibrate in place"
+            },
+            {
+                name: "Liquid",
+                description: "Definite volume, takes container shape",
+                characteristics: "Particles can slide past each other, moderate attractive forces",
+                examples: "Water, oil, milk, juice",
+                icon: "💧",
+                color: "#9C27B0",
+                particleArrangement: "Close together but not regular",
+                particleMotion: "Flow past each other"
+            },
+            {
+                name: "Gas",
+                description: "No definite shape or volume",
+                characteristics: "Particles move rapidly, fill container, weak attractive forces",
+                examples: "Air, oxygen, steam, helium",
+                icon: "☁️",
+                color: "#009688",
+                particleArrangement: "Far apart, random",
+                particleMotion: "Move quickly in all directions"
+            },
+            {
+                name: "Plasma",
+                description: "High-energy charged particles",
+                characteristics: "Extremely high temperature, conducts electricity",
+                examples: "Stars, lightning, neon signs",
+                icon: "⚡",
+                color: "#FF9800",
+                particleArrangement: "Ionized particles",
+                particleMotion: "Extremely fast, chaotic"
+            }
+        ];
+
+        // Changes of state
+        const stateChanges = [
+            {
+                name: "Melting",
+                from: "Solid",
+                to: "Liquid",
+                process: "Add heat energy",
+                example: "Ice → Water",
+                icon: "🔥",
+                temperature: "Melting point"
+            },
+            {
+                name: "Freezing",
+                from: "Liquid",
+                to: "Solid",
+                process: "Remove heat energy",
+                example: "Water → Ice",
+                icon: "❄️",
+                temperature: "Freezing point"
+            },
+            {
+                name: "Evaporation",
+                from: "Liquid",
+                to: "Gas",
+                process: "Add heat energy (at surface)",
+                example: "Water → Water vapor",
+                icon: "🌡️",
+                temperature: "Below boiling point"
+            },
+            {
+                name: "Boiling",
+                from: "Liquid",
+                to: "Gas",
+                process: "Add heat energy (throughout liquid)",
+                example: "Boiling water → Steam",
+                icon: "♨️",
+                temperature: "Boiling point"
+            },
+            {
+                name: "Condensation",
+                from: "Gas",
+                to: "Liquid",
+                process: "Remove heat energy",
+                example: "Dew on grass",
+                icon: "💦",
+                temperature: "Dew point"
+            },
+            {
+                name: "Sublimation",
+                from: "Solid",
+                to: "Gas",
+                process: "Add heat energy",
+                example: "Dry ice → Carbon dioxide gas",
+                icon: "⬆️",
+                temperature: "Sublimation point"
+            },
+            {
+                name: "Deposition",
+                from: "Gas",
+                to: "Solid",
+                process: "Remove heat energy",
+                example: "Frost formation",
+                icon: "⬇️",
+                temperature: "Below freezing"
+            }
+        ];
+
+        // Physical vs Chemical Changes
+        const changeTypes = {
+            physical: {
+                name: "Physical Change",
+                description: "Changes form or appearance but not chemical identity",
+                characteristics: "Reversible, no new substance formed",
+                examples: [
+                    "Melting ice",
+                    "Boiling water",
+                    "Cutting paper",
+                    "Dissolving sugar",
+                    "Crushing a can",
+                    "Mixing salt and sand"
+                ],
+                icon: "🔄",
+                color: "#4CAF50"
+            },
+            chemical: {
+                name: "Chemical Change",
+                description: "Forms new substances with different properties",
+                characteristics: "Often irreversible, energy changes, signs: color change, gas, heat",
+                examples: [
+                    "Burning wood",
+                    "Rusting iron",
+                    "Cooking an egg",
+                    "Baking a cake",
+                    "Digesting food",
+                    "Milk souring"
+                ],
+                icon: "⚡",
+                color: "#F44336"
+            }
+        };
+
+        // Properties of matter
+        const properties = [
+            {
+                type: "Physical Properties",
+                description: "Can be observed without changing substance",
+                examples: [
+                    {property: "Color", example: "Gold is yellow"},
+                    {property: "Density", example: "Lead is dense"},
+                    {property: "Melting Point", example: "Ice melts at 0°C"},
+                    {property: "Boiling Point", example: "Water boils at 100°C"},
+                    {property: "Hardness", example: "Diamond is hard"},
+                    {property: "Solubility", example: "Sugar dissolves in water"}
+                ]
+            },
+            {
+                type: "Chemical Properties",
+                description: "Describe how substance reacts with others",
+                examples: [
+                    {property: "Flammability", example: "Gasoline burns"},
+                    {property: "Reactivity", example: "Iron rusts with oxygen"},
+                    {property: "Toxicity", example: "Some chemicals are poisonous"},
+                    {property: "Acidity", example: "Vinegar is acidic"},
+                    {property: "Stability", example: "Gold doesn't corrode easily"}
+                ]
+            }
+        ];
+
+        // Interesting science facts about matter
+        const scienceFacts = [
+            "Water is the only substance that naturally exists in all three states (solid, liquid, gas) on Earth's surface!",
+            "A teaspoon of a neutron star would weigh about 10 million tons - that's how dense matter can get!",
+            "There are more atoms in a glass of water than glasses of water in all the oceans on Earth!",
+            "At absolute zero (-273.15°C), particles have minimal motion, but never completely stop due to quantum effects!",
+            "Some materials can exist in more than three states - like Bose-Einstein condensate at near absolute zero!",
+            "Diamond and graphite are both made of carbon atoms, but arranged differently - that's why one is hard and the other soft!",
+            "Water expands when it freezes - that's why ice floats and pipes can burst in winter!",
+            "The air we breathe is about 78% nitrogen, 21% oxygen, and 1% other gases!"
+        ];
+
+        // Common elements
+        const commonElements = [
+            {symbol: "H", name: "Hydrogen", number: 1, type: "nonmetal", state: "Gas"},
+            {symbol: "He", name: "Helium", number: 2, type: "nonmetal", state: "Gas"},
+            {symbol: "C", name: "Carbon", number: 6, type: "nonmetal", state: "Solid"},
+            {symbol: "N", name: "Nitrogen", number: 7, type: "nonmetal", state: "Gas"},
+            {symbol: "O", name: "Oxygen", number: 8, type: "nonmetal", state: "Gas"},
+            {symbol: "Na", name: "Sodium", number: 11, type: "metal", state: "Solid"},
+            {symbol: "Al", name: "Aluminum", number: 13, type: "metal", state: "Solid"},
+            {symbol: "Si", name: "Silicon", number: 14, type: "metalloid", state: "Solid"},
+            {symbol: "Fe", name: "Iron", number: 26, type: "metal", state: "Solid"},
+            {symbol: "Cu", name: "Copper", number: 29, type: "metal", state: "Solid"},
+            {symbol: "Ag", name: "Silver", number: 47, type: "metal", state: "Solid"},
+            {symbol: "Au", name: "Gold", number: 79, type: "metal", state: "Solid"},
+            {symbol: "Hg", name: "Mercury", number: 80, type: "metal", state: "Liquid"}
+        ];
+
+        // Real-world applications
+        const applications = [
+            {
+                title: "Refrigeration",
+                description: "Uses evaporation of refrigerant to absorb heat, cooling the inside",
+                process: "Liquid → Gas (absorbs heat), then Gas → Liquid (releases heat outside)"
+            },
+            {
+                title: "Water Cycle",
+                description: "Earth's natural recycling of water through states",
+                process: "Evaporation → Condensation → Precipitation"
+            },
+            {
+                title: "Cooking",
+                description: "Uses heat to cause chemical changes in food",
+                process: "Proteins denature, starches gelatinize, sugars caramelize"
+            },
+            {
+                title: "Metal Working",
+                description: "Heating metals to change properties",
+                process: "Heating makes metals malleable for shaping, cooling hardens them"
+            }
+        ];
+
+        // Interactive lab examples
+        const labExperiments = [
+            {
+                name: "Ice Melting",
+                materials: ["Ice cube", "Plate"],
+                process: "Observe ice melting at room temperature",
+                change: "Physical (Solid → Liquid)"
+            },
+            {
+                name: "Water Boiling",
+                materials: ["Water", "Pot", "Heat source"],
+                process: "Heat water to boiling point",
+                change: "Physical (Liquid → Gas)"
+            },
+            {
+                name: "Vinegar & Baking Soda",
+                materials: ["Vinegar", "Baking soda", "Container"],
+                process: "Mix to produce carbon dioxide gas",
+                change: "Chemical (Produces new substances)"
+            },
+            {
+                name: "Rust Formation",
+                materials: ["Steel wool", "Water"],
+                process: "Expose steel wool to water and air",
+                change: "Chemical (Iron + Oxygen → Rust)"
+            }
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const scienceFact = document.getElementById('scienceFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initBackground();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade6ScienceMatter');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade6ScienceMatter', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade6ScienceMatter_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade6ScienceMatter_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a chemistry expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent knowledge of matter!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep learning to master chemistry concepts!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Practice more with states of matter and changes!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Understanding matter helps us understand the world around us!";
+            }
+        }
+
+        // Create science fact display
+        function createScienceFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'science-fact';
+            
+            factDiv.innerHTML = `<strong>Amazing Chemistry Fact:</strong> ${scienceFacts[Math.floor(Math.random() * scienceFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "matter_basics": "🧱",
+                "states_matter": "🔁",
+                "physical_changes": "🔄",
+                "chemical_changes": "⚡",
+                "particle_theory": "⚛️",
+                "temperature_heat": "🌡️",
+                "conservation_mass": "⚖️",
+                "real_world": "🌍",
+                "mixed": "🎯"
+            };
+            
+            let conceptName = "Matter Basics";
+            let conceptIcon = "🧱";
+            
+            if (question.type.includes("matter_basics")) {
+                conceptName = "Matter Basics";
+                conceptIcon = conceptIcons.matter_basics;
+            } else if (question.type.includes("states_matter")) {
+                conceptName = "States of Matter";
+                conceptIcon = conceptIcons.states_matter;
+            } else if (question.type.includes("physical_changes")) {
+                conceptName = "Physical Changes";
+                conceptIcon = conceptIcons.physical_changes;
+            } else if (question.type.includes("chemical_changes")) {
+                conceptName = "Chemical Changes";
+                conceptIcon = conceptIcons.chemical_changes;
+            } else if (question.type.includes("particle_theory")) {
+                conceptName = "Particle Theory";
+                conceptIcon = conceptIcons.particle_theory;
+            } else if (question.type.includes("temperature_heat")) {
+                conceptName = "Temperature & Heat";
+                conceptIcon = conceptIcons.temperature_heat;
+            } else if (question.type.includes("conservation_mass")) {
+                conceptName = "Conservation of Mass";
+                conceptIcon = conceptIcons.conservation_mass;
+            } else if (question.type.includes("real_world")) {
+                conceptName = "Real-World Applications";
+                conceptIcon = conceptIcons.real_world;
+            } else if (question.type.includes("mixed")) {
+                conceptName = "Mixed Practice";
+                conceptIcon = conceptIcons.mixed;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("matter_basics")) {
+                label.textContent = "Definition of matter, states of matter, and basic properties";
+            } else if (question.type.includes("states_matter")) {
+                label.textContent = "Solid, liquid, gas characteristics and examples";
+            } else if (question.type.includes("physical_changes")) {
+                label.textContent = "Changes in form or appearance without new substances";
+            } else if (question.type.includes("chemical_changes")) {
+                label.textContent = "Formation of new substances with different properties";
+            } else if (question.type.includes("particle_theory")) {
+                label.textContent = "How particles behave in different states of matter";
+            } else if (question.type.includes("temperature_heat")) {
+                label.textContent = "Temperature measurement, heat transfer, melting/boiling points";
+            } else if (question.type.includes("conservation_mass")) {
+                label.textContent = "Mass is conserved in physical and chemical changes";
+            } else if (question.type.includes("real_world")) {
+                label.textContent = "Practical applications of matter changes in daily life";
+            } else if (question.type.includes("mixed")) {
+                label.textContent = "Mixed review of all matter and changes concepts";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create chemistry visualization
+        function createChemistryVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-blue);">Matter and Its Changes</h3>
+                
+                <div class="matter-container">
+                    <div class="display-title">States of Matter</div>
+                    <div class="matter-states">
+                        ${matterStates.map(state => `
+                            <div class="state-card ${state.name.toLowerCase()}">
+                                <div class="state-icon">${state.icon}</div>
+                                <div class="state-name">${state.name}</div>
+                                <div class="state-description">${state.description}</div>
+                                <div class="state-examples">Examples: ${state.examples.split(', ')[0]}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="particle-container">
+                    <div class="display-title">Particle Theory - How Matter Behaves</div>
+                    <div class="particle-grid">
+                        ${matterStates.map(state => `
+                            <div class="particle-model">
+                                <div class="particle-name">${state.name}</div>
+                                <div class="particle-diagram">
+                                    ${state.name === 'Solid' ? '⬤⬤⬤<br>⬤⬤⬤<br>⬤⬤⬤' : 
+                                      state.name === 'Liquid' ? '⬤ ⬤ ⬤<br> ⬤⬤ ⬤<br>⬤ ⬤ ⬤' : 
+                                      state.name === 'Gas' ? '⬤   ⬤<br><br>   ⬤<br><br>⬤   ⬤' :
+                                      '⚡ ⚡ ⚡'}
+                                </div>
+                                <div class="particle-properties">
+                                    <strong>Arrangement:</strong> ${state.particleArrangement}<br>
+                                    <strong>Motion:</strong> ${state.particleMotion}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="changes-container">
+                    <div class="display-title">Changes of State</div>
+                    <div class="changes-diagram">
+                        <div class="state-circle solid-circle">Solid</div>
+                        <div class="change-label melting-label">Melting (Add Heat)</div>
+                        <div class="change-arrow"></div>
+                        <div class="change-label freezing-label">Freezing (Remove Heat)</div>
+                        
+                        <div class="state-circle liquid-circle">Liquid</div>
+                        <div class="change-label evaporation-label">Evaporation/Boiling (Add Heat)</div>
+                        <div class="change-arrow"></div>
+                        <div class="change-label condensation-label">Condensation (Remove Heat)</div>
+                        
+                        <div class="state-circle gas-circle">Gas</div>
+                        
+                        <div style="display: flex; justify-content: space-between; width: 100%; margin-top: 40px;">
+                            <div style="text-align: center;">
+                                <div class="state-circle solid-circle" style="width: 80px; height: 80px;">S</div>
+                                <div class="change-arrow" style="height: 30px;"></div>
+                                <div class="state-circle gas-circle" style="width: 80px; height: 80px;">G</div>
+                                <div style="margin-top: 10px; font-weight: bold; color: var(--accent-orange);">Sublimation</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div class="state-circle gas-circle" style="width: 80px; height: 80px;">G</div>
+                                <div class="change-arrow" style="height: 30px;"></div>
+                                <div class="state-circle solid-circle" style="width: 80px; height: 80px;">S</div>
+                                <div style="margin-top: 10px; font-weight: bold; color: var(--accent-orange);">Deposition</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: var(--dark-surface); padding: 15px; border-radius: 8px; margin-top: 20px;">
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                            ${stateChanges.map(change => `
+                                <div style="background: var(--dark-card); padding: 10px; border-radius: 6px; border-left: 4px solid var(--accent-orange);">
+                                    <div style="font-weight: bold; color: var(--accent-orange);">${change.name}</div>
+                                    <div style="font-size: 0.9rem;">${change.from} → ${change.to}</div>
+                                    <div style="font-size: 0.8rem; color: var(--text-secondary);">Example: ${change.example}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="changes-comparison">
+                    <div class="display-title">Physical vs Chemical Changes</div>
+                    <div class="changes-grid">
+                        <div class="change-type physical">
+                            <div class="change-title">Physical Changes</div>
+                            <div>${changeTypes.physical.description}</div>
+                            <div style="margin-top: 10px;"><strong>Characteristics:</strong> ${changeTypes.physical.characteristics}</div>
+                            <div class="change-examples">
+                                <strong>Examples:</strong>
+                                ${changeTypes.physical.examples.map(example => `
+                                    <div class="change-example">${example}</div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        
+                        <div class="change-type chemical">
+                            <div class="change-title">Chemical Changes</div>
+                            <div>${changeTypes.chemical.description}</div>
+                            <div style="margin-top: 10px;"><strong>Characteristics:</strong> ${changeTypes.chemical.characteristics}</div>
+                            <div class="change-examples">
+                                <strong>Examples:</strong>
+                                ${changeTypes.chemical.examples.map(example => `
+                                    <div class="change-example">${example}</div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="properties-container">
+                    <div class="display-title">Properties of Matter</div>
+                    <table class="properties-table">
+                        <thead>
+                            <tr>
+                                <th>Property Type</th>
+                                <th>Description</th>
+                                <th>Examples</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${properties.map(prop => `
+                                <tr>
+                                    <td style="font-weight: bold; color: var(--accent-yellow);">${prop.type}</td>
+                                    <td>${prop.description}</td>
+                                    <td>
+                                        ${prop.examples.map(ex => `
+                                            <div><strong>${ex.property}:</strong> ${ex.example}</div>
+                                        `).join('')}
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="elements-container">
+                    <div class="display-title">Common Elements</div>
+                    <div class="elements-grid">
+                        ${commonElements.map(element => `
+                            <div class="element element-${element.type}" onclick="showElementInfo('${element.symbol}')">
+                                <div class="element-symbol">${element.symbol}</div>
+                                <div class="element-number">${element.number}</div>
+                                <div class="element-name">${element.name}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div id="elementInfo" style="margin-top: 20px; padding: 15px; background: var(--dark-surface); border-radius: 8px; display: none;">
+                        <!-- Element info will appear here -->
+                    </div>
+                </div>
+                
+                <div class="applications-container">
+                    <div class="display-title">Real-World Applications</div>
+                    <div class="applications-grid">
+                        ${applications.map(app => `
+                            <div class="application-card">
+                                <div class="application-title">${app.title}</div>
+                                <div class="application-description">${app.description}</div>
+                                <div style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
+                                    <strong>Process:</strong> ${app.process}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="lab-container">
+                    <div class="display-title">Interactive Chemistry Lab</div>
+                    <div class="lab-controls">
+                        <div class="lab-button" onclick="startMeltingLab()">Melting Lab</div>
+                        <div class="lab-button" onclick="startBoilingLab()">Boiling Lab</div>
+                        <div class="lab-button" onclick="startChemicalLab()">Chemical Reaction</div>
+                        <div class="lab-button" onclick="resetLab()">Reset Lab</div>
+                    </div>
+                    <div class="lab-area" id="labArea">
+                        <div style="text-align: center; width: 100%; color: var(--text-secondary);">
+                            Click a lab experiment to begin
+                        </div>
+                    </div>
+                    <div class="lab-result" id="labResult"></div>
+                </div>
+                
+                <table class="properties-table">
+                    <thead>
+                        <tr>
+                            <th>Chemistry Term</th>
+                            <th>Definition</th>
+                            <th>Example/Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${chemistryTerms.map(term => `
+                            <tr>
+                                <td style="font-weight: bold; color: var(--accent-teal);">${term.term}</td>
+                                <td>${term.definition}</td>
+                                <td>${term.example || term.characteristic || term.formula}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                
+                <div class="interactive-practice">
+                    <div class="practice-title">Interactive Practice</div>
+                    <div class="practice-controls">
+                        <div class="practice-button" onclick="practiceStateID()">Identify States</div>
+                        <div class="practice-button" onclick="practiceChangeType()">Classify Changes</div>
+                        <div class="practice-button" onclick="practiceProperties()">Identify Properties</div>
+                        <div class="practice-button" onclick="practiceParticles()">Particle Behavior</div>
+                    </div>
+                    <div class="practice-display" id="practiceDisplay">
+                        Click buttons above to practice matter concepts
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--accent-orange);">
+                    <div style="color: var(--accent-orange); font-weight: bold; margin-bottom: 10px;">Quick Practice:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. Name the three common states of matter<br>
+                        2. What change is ice melting to water?<br>
+                        3. Is burning wood physical or chemical?<br>
+                        4. How do particles move in a gas?<br>
+                        5. What is conservation of mass?
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--accent-teal);">
+                    <div style="color: var(--accent-teal); font-weight: bold; margin-bottom: 10px; text-align: center;">Matter Facts</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                        <strong>States:</strong> Solid, Liquid, Gas, Plasma<br>
+                        <strong>Physical Changes:</strong> Melting, Freezing, Evaporation, Condensation<br>
+                        <strong>Chemical Changes:</strong> Burning, Rusting, Cooking, Digesting<br>
+                        <strong>Temperature:</strong> Water freezes at 0°C, boils at 100°C
+                    </div>
+                </div>
+            `;
+            
+            return vizDiv;
+        }
+
+        // Interactive functions
+        function showElementInfo(symbol) {
+            const elementInfo = document.getElementById('elementInfo');
+            const element = commonElements.find(e => e.symbol === symbol);
+            
+            if (elementInfo && element) {
+                const typeColors = {
+                    "metal": "#2196F3",
+                    "nonmetal": "#4CAF50",
+                    "metalloid": "#FF9800"
+                };
+                
+                elementInfo.innerHTML = `
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <div style="font-size: 3rem; color: ${typeColors[element.type] || '#FFFFFF'};">${element.symbol}</div>
+                        <div>
+                            <div style="font-size: 1.3rem; font-weight: bold;">${element.name} (${element.symbol})</div>
+                            <div style="margin-top: 10px;">
+                                <strong>Atomic Number:</strong> ${element.number}<br>
+                                <strong>Type:</strong> ${element.type.charAt(0).toUpperCase() + element.type.slice(1)}<br>
+                                <strong>State at Room Temp:</strong> ${element.state}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                elementInfo.style.display = 'block';
+            }
+        }
+
+        // Interactive lab functions
+        function startMeltingLab() {
+            const labArea = document.getElementById('labArea');
+            const labResult = document.getElementById('labResult');
+            
+            if (!labArea || !labResult) return;
+            
+            labArea.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="margin-bottom: 20px; font-size: 1.2rem; color: var(--primary-blue);">Melting Lab</div>
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 30px;">
+                        <div class="lab-element solid" id="iceCube" onclick="meltIce()">
+                            <div style="font-size: 3rem;">🧊</div>
+                            <div>Ice Cube</div>
+                            <div style="font-size: 0.8rem; margin-top: 5px;">Solid H₂O</div>
+                        </div>
+                        <div style="font-size: 2rem;">→</div>
+                        <div class="lab-element liquid" id="water" style="opacity: 0.5;">
+                            <div style="font-size: 3rem;">💧</div>
+                            <div>Liquid Water</div>
+                            <div style="font-size: 0.8rem; margin-top: 5px;">Liquid H₂O</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <button class="lab-button" onclick="addHeat()">Add Heat 🔥</button>
+                        <button class="lab-button" onclick="removeHeat()">Remove Heat ❄️</button>
+                    </div>
+                </div>
+            `;
+            
+            labResult.textContent = "Click 'Add Heat' to melt the ice cube";
+            labResult.style.color = var('--text-secondary');
+        }
+
+        function meltIce() {
+            const iceCube = document.getElementById('iceCube');
+            const water = document.getElementById('water');
+            const labResult = document.getElementById('labResult');
+            
+            if (iceCube && water && labResult) {
+                iceCube.style.opacity = '0.5';
+                iceCube.style.transform = 'scale(0.9)';
+                water.style.opacity = '1';
+                water.style.transform = 'scale(1.1)';
+                
+                labResult.innerHTML = `
+                    <span style="color: var(--accent-orange);">Melting Complete!</span><br>
+                    <span style="font-size: 0.9rem;">Physical Change: Solid → Liquid<br>
+                    Energy added breaks bonds between particles</span>
+                `;
+            }
+        }
+
+        function addHeat() {
+            const labResult = document.getElementById('labResult');
+            if (labResult) {
+                labResult.innerHTML = `
+                    <span style="color: var(--accent-orange);">🔥 Heat Added!</span><br>
+                    <span style="font-size: 0.9rem;">Particles gain energy and vibrate faster<br>
+                    Temperature increases</span>
+                `;
+                
+                // Trigger melting after a delay
+                setTimeout(() => {
+                    meltIce();
+                }, 1000);
+            }
+        }
+
+        function removeHeat() {
+            const labResult = document.getElementById('labResult');
+            if (labResult) {
+                labResult.innerHTML = `
+                    <span style="color: var(--primary-blue);">❄️ Heat Removed!</span><br>
+                    <span style="font-size: 0.9rem;">Particles lose energy and slow down<br>
+                    Temperature decreases</span>
+                `;
+            }
+        }
+
+        function startBoilingLab() {
+            const labArea = document.getElementById('labArea');
+            const labResult = document.getElementById('labResult');
+            
+            if (!labArea || !labResult) return;
+            
+            labArea.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="margin-bottom: 20px; font-size: 1.2rem; color: var(--secondary-purple);">Boiling Lab</div>
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 30px;">
+                        <div class="lab-element liquid" id="liquidWater" onclick="boilWater()">
+                            <div style="font-size: 3rem;">💧</div>
+                            <div>Liquid Water</div>
+                            <div style="font-size: 0.8rem; margin-top: 5px;">100°C</div>
+                        </div>
+                        <div style="font-size: 2rem;">→</div>
+                        <div class="lab-element gas" id="steam" style="opacity: 0.5;">
+                            <div style="font-size: 3rem;">☁️</div>
+                            <div>Steam</div>
+                            <div style="font-size: 0.8rem; margin-top: 5px;">Water Vapor</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <div style="margin-bottom: 10px;">
+                            <span style="color: var(--text-secondary);">Temperature: </span>
+                            <span id="tempValue" style="font-weight: bold; color: var(--accent-red);">25°C</span>
+                        </div>
+                        <button class="lab-button" onclick="increaseTemp()">Increase Temperature 🔥</button>
+                        <button class="lab-button" onclick="decreaseTemp()">Decrease Temperature ❄️</button>
+                    </div>
+                </div>
+            `;
+            
+            labResult.textContent = "Increase temperature to 100°C to boil water";
+            labResult.style.color = var('--text-secondary');
+        }
+
+        let currentTemp = 25;
+        function increaseTemp() {
+            currentTemp += 25;
+            if (currentTemp > 100) currentTemp = 100;
+            
+            const tempValue = document.getElementById('tempValue');
+            const labResult = document.getElementById('labResult');
+            
+            if (tempValue) tempValue.textContent = `${currentTemp}°C`;
+            
+            if (currentTemp >= 100) {
+                const liquidWater = document.getElementById('liquidWater');
+                const steam = document.getElementById('steam');
+                
+                if (liquidWater && steam) {
+                    liquidWater.style.opacity = '0.5';
+                    steam.style.opacity = '1';
+                    steam.style.transform = 'scale(1.1)';
+                    
+                    if (labResult) {
+                        labResult.innerHTML = `
+                            <span style="color: var(--accent-orange);">💨 Boiling Complete!</span><br>
+                            <span style="font-size: 0.9rem;">Physical Change: Liquid → Gas<br>
+                            Boiling point reached (100°C)</span>
+                        `;
+                    }
+                }
+            } else if (labResult) {
+                labResult.innerHTML = `
+                    <span style="color: var(--accent-orange);">Temperature: ${currentTemp}°C</span><br>
+                    <span style="font-size: 0.9rem;">Keep heating to reach boiling point (100°C)</span>
+                `;
+            }
+        }
+
+        function decreaseTemp() {
+            currentTemp -= 25;
+            if (currentTemp < 0) currentTemp = 0;
+            
+            const tempValue = document.getElementById('tempValue');
+            if (tempValue) tempValue.textContent = `${currentTemp}°C`;
+        }
+
+        function startChemicalLab() {
+            const labArea = document.getElementById('labArea');
+            const labResult = document.getElementById('labResult');
+            
+            if (!labArea || !labResult) return;
+            
+            labArea.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="margin-bottom: 20px; font-size: 1.2rem; color: var(--accent-red);">Chemical Reaction Lab</div>
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 30px; margin-bottom: 20px;">
+                        <div class="lab-element" style="border-color: var(--accent-green);" onclick="mixVinegar()">
+                            <div style="font-size: 3rem;">🍶</div>
+                            <div>Vinegar</div>
+                            <div style="font-size: 0.8rem; margin-top: 5px;">Acetic Acid</div>
+                        </div>
+                        <div style="font-size: 2rem;">+</div>
+                        <div class="lab-element" style="border-color: var(--accent-yellow);" onclick="mixBakingSoda()">
+                            <div style="font-size: 3rem;">🧂</div>
+                            <div>Baking Soda</div>
+                            <div style="font-size: 0.8rem; margin-top: 5px;">Sodium Bicarbonate</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 2rem; margin: 20px 0;">↓</div>
+                    <div class="lab-element gas" id="gasResult" style="opacity: 0.5;">
+                        <div style="font-size: 3rem;">💨</div>
+                        <div>Carbon Dioxide</div>
+                        <div style="font-size: 0.8rem; margin-top: 5px;">CO₂ Gas</div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <button class="lab-button" onclick="startReaction()">Mix Chemicals 🧪</button>
+                    </div>
+                </div>
+            `;
+            
+            labResult.textContent = "Click 'Mix Chemicals' to start the reaction";
+            labResult.style.color = var('--text-secondary');
+        }
+
+        function startReaction() {
+            const gasResult = document.getElementById('gasResult');
+            const labResult = document.getElementById('labResult');
+            
+            if (gasResult && labResult) {
+                gasResult.style.opacity = '1';
+                gasResult.style.transform = 'scale(1.1)';
+                
+                // Add bubble animation
+                gasResult.innerHTML = `
+                    <div style="font-size: 3rem; animation: particleVibrate 0.5s infinite;">💨💨💨</div>
+                    <div>Carbon Dioxide</div>
+                    <div style="font-size: 0.8rem; margin-top: 5px;">CO₂ Gas</div>
+                `;
+                
+                labResult.innerHTML = `
+                    <span style="color: var(--accent-red);">⚡ Chemical Reaction!</span><br>
+                    <span style="font-size: 0.9rem;">Vinegar + Baking Soda → CO₂ + Water + Sodium Acetate<br>
+                    Gas production indicates chemical change</span>
+                `;
+            }
+        }
+
+        function resetLab() {
+            const labArea = document.getElementById('labArea');
+            const labResult = document.getElementById('labResult');
+            
+            if (labArea && labResult) {
+                labArea.innerHTML = `
+                    <div style="text-align: center; width: 100%; color: var(--text-secondary);">
+                        Click a lab experiment to begin
+                    </div>
+                `;
+                labResult.textContent = "";
+                currentTemp = 25; // Reset temperature
+            }
+        }
+
+        // Interactive practice functions
+        function practiceStateID() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const questions = [
+                {
+                    substance: "Ice",
+                    description: "Definite shape and volume, particles vibrate in place",
+                    answer: "Solid"
+                },
+                {
+                    substance: "Water",
+                    description: "Takes container shape, definite volume, particles flow",
+                    answer: "Liquid"
+                },
+                {
+                    substance: "Steam",
+                    description: "Fills container, no definite shape or volume, particles move rapidly",
+                    answer: "Gas"
+                },
+                {
+                    substance: "Rock",
+                    description: "Rigid structure, doesn't flow, maintains its shape",
+                    answer: "Solid"
+                }
+            ];
+            
+            const question = questions[Math.floor(Math.random() * questions.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary-blue);">Identify the State of Matter</div>
+                    <div style="margin-bottom: 15px;">
+                        <strong>Substance:</strong> ${question.substance}
+                    </div>
+                    <div style="margin-bottom: 20px; font-style: italic;">
+                        "${question.description}"
+                    </div>
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <div style="font-size: 1.3rem; color: var(--accent-orange);">
+                            State: ${question.answer}
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>State Characteristics:</strong><br>
+                        Solid: Definite shape & volume<br>
+                        Liquid: Definite volume, takes container shape<br>
+                        Gas: No definite shape or volume, fills container
+                    </div>
+                </div>
+            `;
+        }
+
+        function practiceChangeType() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const questions = [
+                {
+                    change: "Melting ice",
+                    description: "Ice becomes water when heated",
+                    answer: "Physical Change"
+                },
+                {
+                    change: "Burning wood",
+                    description: "Wood turns to ash, smoke, and gases",
+                    answer: "Chemical Change"
+                },
+                {
+                    change: "Dissolving sugar",
+                    description: "Sugar mixes with water but remains sugar",
+                    answer: "Physical Change"
+                },
+                {
+                    change: "Rusting iron",
+                    description: "Iron reacts with oxygen to form rust",
+                    answer: "Chemical Change"
+                }
+            ];
+            
+            const question = questions[Math.floor(Math.random() * questions.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-green);">Classify the Change</div>
+                    <div style="margin-bottom: 15px;">
+                        <strong>Change:</strong> ${question.change}
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <strong>Description:</strong> ${question.description}
+                    </div>
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <div style="font-size: 1.3rem; color: var(--accent-orange);">
+                            Type: ${question.answer}
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Physical vs Chemical:</strong><br>
+                        Physical: No new substance, reversible<br>
+                        Chemical: New substances formed, often irreversible
+                    </div>
+                </div>
+            `;
+        }
+
+        function practiceProperties() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const questions = [
+                {
+                    property: "Melting point",
+                    description: "Temperature at which solid becomes liquid",
+                    answer: "Physical Property"
+                },
+                {
+                    property: "Flammability",
+                    description: "Ability to burn in air",
+                    answer: "Chemical Property"
+                },
+                {
+                    property: "Color",
+                    description: "Visual appearance of a substance",
+                    answer: "Physical Property"
+                },
+                {
+                    property: "Reactivity with acid",
+                    description: "How a substance reacts with acid",
+                    answer: "Chemical Property"
+                }
+            ];
+            
+            const question = questions[Math.floor(Math.random() * questions.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-yellow);">Identify the Property Type</div>
+                    <div style="margin-bottom: 15px;">
+                        <strong>Property:</strong> ${question.property}
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <strong>Description:</strong> ${question.description}
+                    </div>
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <div style="font-size: 1.3rem; color: var(--accent-orange);">
+                            Property Type: ${question.answer}
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Property Types:</strong><br>
+                        Physical: Can observe without changing substance<br>
+                        Chemical: Describes how substance reacts with others
+                    </div>
+                </div>
+            `;
+        }
+
+        function practiceParticles() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const questions = [
+                {
+                    state: "Solid",
+                    question: "How do particles move in a solid?",
+                    answer: "Vibrate in fixed positions"
+                },
+                {
+                    state: "Liquid",
+                    question: "How do particles move in a liquid?",
+                    answer: "Flow past each other"
+                },
+                {
+                    state: "Gas",
+                    question: "How do particles move in a gas?",
+                    answer: "Move rapidly in all directions"
+                },
+                {
+                    state: "All states",
+                    question: "What happens to particles when heated?",
+                    answer: "Move faster and gain energy"
+                }
+            ];
+            
+            const question = questions[Math.floor(Math.random() * questions.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-teal);">Particle Theory</div>
+                    <div style="margin-bottom: 15px;">
+                        <strong>State:</strong> ${question.state}
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <strong>Question:</strong> ${question.question}
+                    </div>
+                    <div style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <div style="font-size: 1.3rem; color: var(--accent-orange);">
+                            Answer: ${question.answer}
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Particle Theory:</strong><br>
+                        1. All matter made of tiny particles<br>
+                        2. Particles are always moving<br>
+                        3. Particles have spaces between them<br>
+                        4. Adding heat increases particle motion
+                    </div>
+                </div>
+            `;
+        }
+
+        // Global functions for interactive controls
+        window.mixVinegar = function() {
+            // Function for interactive vinegar mixing
+            const labResult = document.getElementById('labResult');
+            if (labResult) {
+                labResult.innerHTML = `<span style="color: var(--accent-green);">Vinegar (Acetic Acid) selected</span>`;
+            }
+        };
+
+        window.mixBakingSoda = function() {
+            // Function for interactive baking soda mixing
+            const labResult = document.getElementById('labResult');
+            if (labResult) {
+                labResult.innerHTML = `<span style="color: var(--accent-yellow);">Baking Soda (Sodium Bicarbonate) selected</span>`;
+            }
+        };
+
+        window.boilWater = function() {
+            // Function for interactive water boiling
+            const labResult = document.getElementById('labResult');
+            if (labResult) {
+                labResult.innerHTML = `<span style="color: var(--secondary-purple);">Water will boil at 100°C</span>`;
+            }
+        };
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            scienceFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            scienceFact.appendChild(createScienceFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createChemistryVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

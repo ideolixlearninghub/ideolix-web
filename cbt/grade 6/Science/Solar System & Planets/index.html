@@ -1,0 +1,2839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 6 Science - Solar System & Planets | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Space Theme */
+        :root {
+            --space-dark: #0A0F2B;
+            --space-darker: #05091E;
+            --space-blue: #1A237E;
+            --space-purple: #4A148C;
+            --planet-yellow: #FFD54F;
+            --planet-orange: #FF9800;
+            --planet-red: #F44336;
+            --planet-blue: #2196F3;
+            --planet-teal: #009688;
+            --planet-green: #4CAF50;
+            --planet-brown: #795548;
+            --planet-gray: #9E9E9E;
+            --star-glow: #FFFFFF;
+            --comet-tail: #64B5F6;
+            --dark-surface: #1A1F3A;
+            --dark-card: #252A45;
+            --dark-border: #3A3F6E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B8C4FF;
+            --text-muted: #7A85CC;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
+            --glow: 0 0 20px rgba(33, 150, 243, 0.4);
+            --planet-glow: 0 0 15px rgba(255, 213, 79, 0.4);
+            --star-glow-effect: 0 0 15px rgba(255, 255, 255, 0.6);
+            --orbit-glow: 0 0 10px rgba(100, 181, 246, 0.3);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--space-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Space Background */
+        .space-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(26, 35, 126, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(74, 20, 140, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
+                linear-gradient(to bottom, #05091E, #0A0F2B);
+            opacity: 1;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .floating-space {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.05);
+            font-size: 3rem;
+            font-weight: bold;
+            animation: floatSpace 20s linear infinite;
+        }
+
+        @keyframes floatSpace {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.1; }
+            25% { transform: translateY(-100px) translateX(100px) rotate(90deg); opacity: 0.05; }
+            50% { transform: translateY(-50px) translateX(-100px) rotate(180deg); opacity: 0.1; }
+            75% { transform: translateY(100px) translateX(50px) rotate(270deg); opacity: 0.05; }
+            100% { transform: translateY(0) translateX(0) rotate(360deg); opacity: 0.1; }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 15, 43, 0.9);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--planet-yellow), var(--planet-blue), var(--space-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(26, 35, 126, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--space-blue);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--space-blue);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--planet-blue);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--planet-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--space-purple);
+            color: white;
+            box-shadow: 0 4px 15px rgba(74, 20, 140, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #38006B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(74, 20, 140, 0.5);
+        }
+
+        .btn-yellow {
+            background: var(--planet-yellow);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(255, 213, 79, 0.4);
+        }
+
+        .btn-yellow:hover {
+            background: #FFCA28;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 213, 79, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--planet-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--planet-yellow), var(--planet-blue), var(--space-purple));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .space-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--planet-yellow);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--planet-yellow), var(--planet-blue), var(--space-purple));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--planet-blue);
+            background: rgba(33, 150, 243, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(76, 175, 80, 0.1);
+            border-color: #4CAF50;
+            color: #4CAF50;
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: var(--planet-red);
+            color: var(--planet-red);
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--space-purple);
+        }
+
+        .option.correct .option-letter {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: var(--planet-red);
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(76, 175, 80, 0.1);
+            border-left: 5px solid #4CAF50;
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid var(--planet-red);
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: #4CAF50;
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: var(--planet-red);
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: #4CAF50;
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: var(--planet-red);
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Solar System Display */
+        .solar-system-display {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+
+        .display-title {
+            color: var(--planet-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .space-container {
+            padding: 20px;
+            background: var(--dark-surface);
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid var(--planet-yellow);
+        }
+
+        .space-scenario {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .space-highlight {
+            background: rgba(255, 213, 79, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            border: 1px solid var(--planet-yellow);
+        }
+
+        .highlight-text {
+            color: var(--planet-yellow);
+            font-weight: bold;
+        }
+
+        /* Solar System Diagram */
+        .solar-system-diagram {
+            width: 100%;
+            height: 300px;
+            background: var(--space-darker);
+            border-radius: 12px;
+            position: relative;
+            margin: 20px 0;
+            overflow: hidden;
+            border: 2px solid var(--space-blue);
+        }
+
+        .orbit {
+            position: absolute;
+            border: 1px solid rgba(100, 181, 246, 0.3);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 0 10px currentColor;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .planet:hover {
+            transform: scale(1.2);
+            z-index: 10;
+        }
+
+        .planet-label {
+            position: absolute;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        /* Planet Info Cards */
+        .planets-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .planets-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .planet-card {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .planet-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .planet-card.mercury {
+            border-color: var(--planet-gray);
+        }
+
+        .planet-card.venus {
+            border-color: var(--planet-orange);
+        }
+
+        .planet-card.earth {
+            border-color: var(--planet-blue);
+        }
+
+        .planet-card.mars {
+            border-color: var(--planet-red);
+        }
+
+        .planet-card.jupiter {
+            border-color: var(--planet-yellow);
+        }
+
+        .planet-card.saturn {
+            border-color: var(--planet-teal);
+        }
+
+        .planet-card.uranus {
+            border-color: #4FC3F7;
+        }
+
+        .planet-card.neptune {
+            border-color: var(--space-blue);
+        }
+
+        .planet-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .planet-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .planet-mercury .planet-title {
+            color: var(--planet-gray);
+        }
+
+        .planet-venus .planet-title {
+            color: var(--planet-orange);
+        }
+
+        .planet-earth .planet-title {
+            color: var(--planet-blue);
+        }
+
+        .planet-mars .planet-title {
+            color: var(--planet-red);
+        }
+
+        .planet-jupiter .planet-title {
+            color: var(--planet-yellow);
+        }
+
+        .planet-saturn .planet-title {
+            color: var(--planet-teal);
+        }
+
+        .planet-uranus .planet-title {
+            color: #4FC3F7;
+        }
+
+        .planet-neptune .planet-title {
+            color: var(--space-blue);
+        }
+
+        .planet-facts {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .planet-feature {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            background: var(--dark-surface);
+            padding: 5px;
+            border-radius: 4px;
+        }
+
+        /* Planets Comparison Table */
+        .planets-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .planets-table th {
+            background: var(--dark-surface);
+            padding: 12px;
+            text-align: left;
+            color: var(--planet-yellow);
+            border-bottom: 2px solid var(--planet-yellow);
+        }
+
+        .planets-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+        }
+
+        .planets-table tr:hover {
+            background: rgba(255, 213, 79, 0.05);
+        }
+
+        /* Celestial Bodies Display */
+        .celestial-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--planet-teal);
+        }
+
+        .celestial-title {
+            color: var(--planet-teal);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .celestial-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .celestial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .celestial-card {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .celestial-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--planet-teal);
+        }
+
+        .celestial-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--planet-teal);
+        }
+
+        .celestial-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Space Missions Display */
+        .missions-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--planet-orange);
+        }
+
+        .missions-title {
+            color: var(--planet-orange);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .missions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .missions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .mission-card {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--planet-orange);
+        }
+
+        .mission-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--planet-orange);
+        }
+
+        .mission-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--planet-orange);
+        }
+
+        .mission-details {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Interactive Solar System Scale */
+        .scale-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--planet-blue);
+        }
+
+        .scale-title {
+            color: var(--planet-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .scale-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .scale-select {
+            padding: 10px 15px;
+            background: var(--dark-surface);
+            border: 2px solid var(--planet-blue);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .scale-btn {
+            padding: 10px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--planet-blue);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .scale-btn:hover {
+            background: rgba(33, 150, 243, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .scale-display {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        /* Space Exploration */
+        .exploration-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .exploration-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .exploration-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .exploration-card {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--space-purple);
+        }
+
+        .exploration-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--space-purple);
+        }
+
+        .exploration-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--space-purple);
+        }
+
+        .exploration-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--planet-yellow), var(--planet-blue), var(--space-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--planet-yellow), var(--planet-blue), var(--space-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--planet-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .planets-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .celestial-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .missions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .exploration-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes spaceReveal {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        
+        .space-reveal {
+            animation: spaceReveal 0.5s ease forwards;
+        }
+        
+        @keyframes orbitAnimation {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .orbit-animation {
+            animation: orbitAnimation 20s linear infinite;
+        }
+        
+        @keyframes planetFloat {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
+        }
+        
+        .planet-float {
+            animation: planetFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes planetGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 213, 79, 0.4); }
+            50% { box-shadow: 0 0 15px 5px rgba(255, 213, 79, 0.2); }
+        }
+        
+        .planet-glow {
+            animation: planetGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes starGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6); }
+            50% { box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.3); }
+        }
+        
+        .star-glow {
+            animation: starGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes comet {
+            0% { transform: translateX(-100px) translateY(-100px) rotate(45deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateX(100px) translateY(100px) rotate(45deg); opacity: 0; }
+        }
+        
+        .comet {
+            animation: comet 5s linear infinite;
+        }
+        
+        @keyframes rotatePlanet {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .rotate-planet {
+            animation: rotatePlanet 10s linear infinite;
+        }
+        
+        @keyframes floatSymbol {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        .float-symbol {
+            animation: floatSymbol 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Space Background -->
+    <div class="space-bg" id="spaceBg">
+        <div class="stars" id="starsContainer"></div>
+        <!-- Space symbols will be generated by JavaScript -->
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 6 Science - Solar System & Planets</h1>
+            <p class="welcome-subtitle">Embark on an interstellar adventure! Explore our solar system, discover fascinating planets, understand celestial phenomena, and learn about space exploration. Journey through the cosmos and uncover the mysteries of our universe!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">🪐🌞🚀⭐🛰️</span>
+                <span class="topic-name">Solar System, Planets & Space Exploration</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Space Exploration</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 80</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1.25%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Space fact display -->
+                <div id="spaceFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Space Exploration Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Explore Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Other Science Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background
+        function initBackground() {
+            const spaceBg = document.getElementById('spaceBg');
+            const starsContainer = document.getElementById('starsContainer');
+            
+            // Create stars
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = star.style.height = `${Math.random() * 3}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                star.style.opacity = Math.random();
+                starsContainer.appendChild(star);
+            }
+            
+            // Create floating space symbols
+            const symbols = ['🪐', '🌞', '🚀', '⭐', '🛰️', '🌕', '🌎', '☄️', '🌌', '✨', '🔭', '🛸'];
+            
+            for (let i = 0; i < 15; i++) {
+                const symbol = document.createElement('div');
+                symbol.className = 'floating-space float-symbol';
+                symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                symbol.style.left = `${Math.random() * 100}%`;
+                symbol.style.top = `${Math.random() * 100}%`;
+                symbol.style.animationDelay = `${Math.random() * 5}s`;
+                symbol.style.fontSize = `${2 + Math.random() * 4}rem`;
+                
+                // Color based on symbol type
+                if (symbol.textContent === '🪐' || symbol.textContent === '🌞') {
+                    symbol.style.color = 'rgba(255, 213, 79, 0.1)';
+                } else if (symbol.textContent === '🚀' || symbol.textContent === '🛰️') {
+                    symbol.style.color = 'rgba(33, 150, 243, 0.1)';
+                } else if (symbol.textContent === '⭐' || symbol.textContent === '✨') {
+                    symbol.style.color = 'rgba(255, 255, 255, 0.1)';
+                } else {
+                    symbol.style.color = 'rgba(74, 20, 140, 0.1)';
+                }
+                
+                spaceBg.appendChild(symbol);
+            }
+        }
+
+        // Questions array - 80+ Grade 6 Solar System & Planets Questions
+        const questions = [
+            // Solar System Basics (1-20)
+            {
+                type: "solar_system_basics",
+                question: "What is the center of our solar system?",
+                options: ["The Sun", "Earth", "Jupiter", "The Moon"],
+                answer: "A",
+                explanation: "The Sun is at the center of our solar system and contains 99.8% of the solar system's mass."
+            },
+            {
+                type: "solar_system_basics",
+                question: "How many planets are in our solar system?",
+                options: ["8", "9", "7", "10"],
+                answer: "A",
+                explanation: "There are 8 planets in our solar system: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune."
+            },
+            {
+                type: "solar_system_basics",
+                question: "What keeps planets in orbit around the Sun?",
+                options: ["Gravity", "Magnetism", "Solar wind", "Electricity"],
+                answer: "A",
+                explanation: "Gravity is the force that keeps planets in orbit around the Sun and moons in orbit around planets."
+            },
+            {
+                type: "solar_system_basics",
+                question: "What are the inner planets also called?",
+                options: ["Terrestrial planets", "Gas giants", "Ice giants", "Dwarf planets"],
+                answer: "A",
+                explanation: "The inner planets (Mercury, Venus, Earth, Mars) are called terrestrial planets because they have solid, rocky surfaces."
+            },
+            {
+                type: "solar_system_basics",
+                question: "What are the outer planets also called?",
+                options: ["Gas giants", "Terrestrial planets", "Rocky planets", "Dwarf planets"],
+                answer: "A",
+                explanation: "The outer planets (Jupiter, Saturn, Uranus, Neptune) are called gas giants because they are mostly made of gas and are much larger than inner planets."
+            },
+            // The Sun (21-40)
+            {
+                type: "the_sun",
+                question: "What type of star is our Sun?",
+                options: ["Yellow dwarf", "Red giant", "White dwarf", "Red dwarf"],
+                answer: "A",
+                explanation: "Our Sun is a yellow dwarf star (G-type main-sequence star) that is about 4.6 billion years old."
+            },
+            {
+                type: "the_sun",
+                question: "What process powers the Sun?",
+                options: ["Nuclear fusion", "Nuclear fission", "Combustion", "Electricity"],
+                answer: "A",
+                explanation: "The Sun is powered by nuclear fusion, where hydrogen atoms combine to form helium, releasing enormous amounts of energy."
+            },
+            {
+                type: "the_sun",
+                question: "How long does sunlight take to reach Earth?",
+                options: ["About 8 minutes", "About 1 second", "About 1 hour", "About 1 day"],
+                answer: "A",
+                explanation: "Sunlight takes about 8 minutes and 20 seconds to travel from the Sun to Earth, which is about 150 million kilometers."
+            },
+            {
+                type: "the_sun",
+                question: "What are the dark spots on the Sun called?",
+                options: ["Sunspots", "Solar flares", "Coronal holes", "Solar wind"],
+                answer: "A",
+                explanation: "Sunspots are temporary dark spots on the Sun's surface that are cooler than surrounding areas."
+            },
+            // Planets - Earth (41-60)
+            {
+                type: "planets_earth",
+                question: "Why is Earth called the 'Blue Planet'?",
+                options: ["Because of its oceans", "Because of its atmosphere", "Because of blue rocks", "Because of ice caps"],
+                answer: "A",
+                explanation: "Earth is called the Blue Planet because about 71% of its surface is covered by water, which appears blue from space."
+            },
+            {
+                type: "planets_earth",
+                question: "What causes day and night on Earth?",
+                options: ["Earth's rotation", "Earth's revolution", "The Moon's orbit", "The Sun's movement"],
+                answer: "A",
+                explanation: "Day and night are caused by Earth's rotation on its axis, which takes about 24 hours."
+            },
+            {
+                type: "planets_earth",
+                question: "What causes seasons on Earth?",
+                options: ["Earth's tilted axis and revolution", "Earth's distance from the Sun", "The Moon's phases", "Solar flares"],
+                answer: "A",
+                explanation: "Seasons are caused by Earth's 23.5-degree tilt on its axis as it revolves around the Sun."
+            },
+            {
+                type: "planets_earth",
+                question: "What is Earth's natural satellite?",
+                options: ["The Moon", "Mars", "The Sun", "Asteroids"],
+                answer: "A",
+                explanation: "The Moon is Earth's only natural satellite, orbiting Earth about every 27.3 days."
+            },
+            // Other Planets (61-80)
+            {
+                type: "other_planets",
+                question: "Which planet is closest to the Sun?",
+                options: ["Mercury", "Venus", "Earth", "Mars"],
+                answer: "A",
+                explanation: "Mercury is the closest planet to the Sun, with an average distance of about 58 million kilometers."
+            },
+            {
+                type: "other_planets",
+                question: "Which planet is known as the 'Red Planet'?",
+                options: ["Mars", "Venus", "Jupiter", "Saturn"],
+                answer: "A",
+                explanation: "Mars is called the Red Planet because of its reddish appearance caused by iron oxide (rust) on its surface."
+            },
+            {
+                type: "other_planets",
+                question: "Which planet is the largest in our solar system?",
+                options: ["Jupiter", "Saturn", "Neptune", "Earth"],
+                answer: "A",
+                explanation: "Jupiter is the largest planet in our solar system, with a diameter about 11 times that of Earth."
+            },
+            {
+                type: "other_planets",
+                question: "Which planet has beautiful rings?",
+                options: ["Saturn", "Jupiter", "Uranus", "Neptune"],
+                answer: "A",
+                explanation: "Saturn is famous for its spectacular ring system made of ice particles, rocks, and dust."
+            },
+            // Moon and Satellites (81-100)
+            {
+                type: "moon_satellites",
+                question: "What are the different shapes of the Moon called?",
+                options: ["Phases", "Craters", "Marias", "Highlands"],
+                answer: "A",
+                explanation: "The changing shapes of the Moon we see from Earth are called lunar phases, caused by the Moon's position relative to Earth and Sun."
+            },
+            {
+                type: "moon_satellites",
+                question: "What causes ocean tides on Earth?",
+                options: ["The Moon's gravity", "The Sun's heat", "Earth's rotation", "Solar winds"],
+                answer: "A",
+                explanation: "Ocean tides are primarily caused by the gravitational pull of the Moon on Earth's oceans."
+            },
+            {
+                type: "moon_satellites",
+                question: "What are natural satellites?",
+                options: ["Moons orbiting planets", "Man-made spacecraft", "Asteroids", "Comets"],
+                answer: "A",
+                explanation: "Natural satellites are celestial bodies that orbit planets, like Earth's Moon or Jupiter's moons."
+            },
+            // Asteroids, Comets, Meteoroids (101-120)
+            {
+                type: "asteroids_comets",
+                question: "What is the asteroid belt?",
+                options: ["A region between Mars and Jupiter with many asteroids", "Rings around Saturn", "The Oort Cloud", "Kuiper Belt"],
+                answer: "A",
+                explanation: "The asteroid belt is a region between Mars and Jupiter where most asteroids in our solar system are found."
+            },
+            {
+                type: "asteroids_comets",
+                question: "What are comets made of?",
+                options: ["Ice, dust, and rocky material", "Only gas", "Only rock", "Metal and rock"],
+                answer: "A",
+                explanation: "Comets are often called 'dirty snowballs' because they are made of ice, dust, and rocky material."
+            },
+            {
+                type: "asteroids_comets",
+                question: "What is a meteor shower?",
+                options: ["Many meteors appearing to come from one point in the sky", "Rain from space", "Solar storm", "Comet passing Earth"],
+                answer: "A",
+                explanation: "A meteor shower occurs when Earth passes through debris left by a comet, causing many meteors to appear in the sky."
+            },
+            // Space Exploration (121-140)
+            {
+                type: "space_exploration",
+                question: "Who was the first person to walk on the Moon?",
+                options: ["Neil Armstrong", "Yuri Gagarin", "Buzz Aldrin", "John Glenn"],
+                answer: "A",
+                explanation: "Neil Armstrong became the first person to walk on the Moon on July 20, 1969, during the Apollo 11 mission."
+            },
+            {
+                type: "space_exploration",
+                question: "What was the first artificial satellite?",
+                options: ["Sputnik 1", "Explorer 1", "Hubble Telescope", "International Space Station"],
+                answer: "A",
+                explanation: "Sputnik 1, launched by the Soviet Union in 1957, was the world's first artificial satellite."
+            },
+            {
+                type: "space_exploration",
+                question: "What is the International Space Station (ISS)?",
+                options: ["A large spacecraft orbiting Earth where astronauts live and work", "A telescope", "A Moon base", "A Mars rover"],
+                answer: "A",
+                explanation: "The ISS is a large spacecraft that orbits Earth, serving as a home where astronauts live and conduct scientific research."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent astronomical knowledge!",
+            "Perfect understanding of our solar system!",
+            "Great job identifying celestial bodies!",
+            "Amazing! You're a space exploration expert!",
+            "Perfect recall of planetary facts!",
+            "You're a future astronomer in the making!",
+            "Outstanding space science comprehension!",
+            "Brilliant solar system identification!",
+            "You think like an astrophysicist!",
+            "Space exploration expertise achieved!"
+        ];
+
+        // Space concepts
+        const spaceConcepts = [
+            {
+                name: "Solar System Basics",
+                description: "Understanding our solar system structure",
+                icon: "🪐"
+            },
+            {
+                name: "The Sun",
+                description: "Our star and its characteristics",
+                icon: "🌞"
+            },
+            {
+                name: "Planets - Earth",
+                description: "Our home planet and its features",
+                icon: "🌎"
+            },
+            {
+                name: "Other Planets",
+                description: "Characteristics of other planets",
+                icon: "🚀"
+            },
+            {
+                name: "Moon & Satellites",
+                description: "Natural satellites and their effects",
+                icon: "🌕"
+            },
+            {
+                name: "Asteroids & Comets",
+                description: "Small celestial bodies",
+                icon: "☄️"
+            },
+            {
+                name: "Space Exploration",
+                description: "Human exploration of space",
+                icon: "🛰️"
+            }
+        ];
+
+        // Planet information
+        const planets = [
+            {
+                name: "Mercury",
+                type: "Terrestrial",
+                diameter: "4,879 km",
+                distanceFromSun: "58 million km",
+                orbitalPeriod: "88 days",
+                interestingFacts: "Smallest planet, no atmosphere, extreme temperature variations",
+                color: "#9E9E9E",
+                icon: "☿"
+            },
+            {
+                name: "Venus",
+                type: "Terrestrial",
+                diameter: "12,104 km",
+                distanceFromSun: "108 million km",
+                orbitalPeriod: "225 days",
+                interestingFacts: "Hottest planet, thick toxic atmosphere, rotates backwards",
+                color: "#FF9800",
+                icon: "♀"
+            },
+            {
+                name: "Earth",
+                type: "Terrestrial",
+                diameter: "12,742 km",
+                distanceFromSun: "150 million km",
+                orbitalPeriod: "365.25 days",
+                interestingFacts: "Only planet with liquid water, supports life, has one moon",
+                color: "#2196F3",
+                icon: "🌎"
+            },
+            {
+                name: "Mars",
+                type: "Terrestrial",
+                diameter: "6,779 km",
+                distanceFromSun: "228 million km",
+                orbitalPeriod: "687 days",
+                interestingFacts: "Red planet, has polar ice caps, two small moons",
+                color: "#F44336",
+                icon: "♂"
+            },
+            {
+                name: "Jupiter",
+                type: "Gas Giant",
+                diameter: "139,820 km",
+                distanceFromSun: "778 million km",
+                orbitalPeriod: "12 years",
+                interestingFacts: "Largest planet, Great Red Spot, has 79+ moons",
+                color: "#FFD54F",
+                icon: "♃"
+            },
+            {
+                name: "Saturn",
+                type: "Gas Giant",
+                diameter: "116,460 km",
+                distanceFromSun: "1.4 billion km",
+                orbitalPeriod: "29 years",
+                interestingFacts: "Spectacular ring system, least dense planet, 82+ moons",
+                color: "#009688",
+                icon: "♄"
+            },
+            {
+                name: "Uranus",
+                type: "Ice Giant",
+                diameter: "50,724 km",
+                distanceFromSun: "2.9 billion km",
+                orbitalPeriod: "84 years",
+                interestingFacts: "Rotates on its side, blue-green color from methane, has rings",
+                color: "#4FC3F7",
+                icon: "♅"
+            },
+            {
+                name: "Neptune",
+                type: "Ice Giant",
+                diameter: "49,244 km",
+                distanceFromSun: "4.5 billion km",
+                orbitalPeriod: "165 years",
+                interestingFacts: "Windiest planet, Great Dark Spot, discovered mathematically",
+                color: "#1A237E",
+                icon: "♆"
+            }
+        ];
+
+        // The Sun information
+        const sunInfo = {
+            name: "The Sun",
+            type: "Yellow Dwarf (G-type)",
+            diameter: "1.39 million km",
+            age: "4.6 billion years",
+            temperature: "Surface: 5,500°C, Core: 15 million°C",
+            composition: "Hydrogen (74%), Helium (24%), Other elements (2%)",
+            facts: [
+                "Contains 99.8% of solar system mass",
+                "Light takes 8 minutes to reach Earth",
+                "Power source: nuclear fusion",
+                "Has sunspots, solar flares, and prominences"
+            ]
+        };
+
+        // Celestial bodies
+        const celestialBodies = [
+            {
+                name: "Asteroids",
+                description: "Rocky objects orbiting the Sun",
+                location: "Mainly in asteroid belt between Mars and Jupiter",
+                size: "From dust particles to 940 km diameter (Ceres)",
+                interesting: "Some asteroids have their own moons"
+            },
+            {
+                name: "Comets",
+                description: "Icy bodies that release gas when near the Sun",
+                composition: "Ice, dust, rocky material",
+                features: "Develop coma and tails when heated by Sun",
+                interesting: "Called 'dirty snowballs', orbits can be very long"
+            },
+            {
+                name: "Meteoroids",
+                description: "Small rocky or metallic bodies in space",
+                difference: "Meteoroid (in space), Meteor (burning in atmosphere), Meteorite (reaches ground)",
+                source: "From asteroids or comets",
+                interesting: "Meteor showers occur when Earth passes through comet debris"
+            },
+            {
+                name: "Dwarf Planets",
+                description: "Celestial bodies that orbit the Sun but haven't cleared their orbit",
+                examples: "Pluto, Ceres, Eris, Haumea, Makemake",
+                location: "Various locations including Kuiper Belt",
+                interesting: "Pluto was reclassified as dwarf planet in 2006"
+            }
+        ];
+
+        // Space missions
+        const spaceMissions = [
+            {
+                name: "Apollo 11",
+                year: "1969",
+                achievement: "First crewed Moon landing",
+                astronauts: "Neil Armstrong, Buzz Aldrin, Michael Collins",
+                facts: "Armstrong's first words: 'That's one small step for man, one giant leap for mankind'"
+            },
+            {
+                name: "Voyager 1 & 2",
+                year: "1977",
+                achievement: "Interstellar space exploration",
+                discoveries: "Detailed information about outer planets, still transmitting data",
+                facts: "Voyager 1 is the most distant human-made object from Earth"
+            },
+            {
+                name: "Hubble Space Telescope",
+                year: "1990",
+                achievement: "Orbiting observatory",
+                discoveries: "Deep field images, age of universe, dark energy",
+                facts: "Has taken over 1.5 million observations of 40,000+ celestial objects"
+            },
+            {
+                name: "International Space Station",
+                year: "1998-present",
+                achievement: "Continuous human presence in space",
+                purpose: "Microgravity research, international cooperation",
+                facts: "Orbits Earth every 90 minutes, visible from Earth with naked eye"
+            },
+            {
+                name: "Mars Rovers",
+                year: "1997-present",
+                achievement: "Exploring Mars surface",
+                rovers: "Sojourner, Spirit, Opportunity, Curiosity, Perseverance",
+                facts: "Perseverance carried the Ingenuity helicopter drone"
+            },
+            {
+                name: "James Webb Space Telescope",
+                year: "2021",
+                achievement: "Infrared space observatory",
+                purpose: "Study early universe, exoplanets, galaxy formation",
+                facts: "Largest space telescope ever built, orbits Sun at L2 point"
+            }
+        ];
+
+        // Space facts
+        const spaceFacts = [
+            "A day on Venus is longer than a year on Venus!",
+            "Jupiter's Great Red Spot is a storm that has raged for over 300 years!",
+            "There are more stars in the universe than grains of sand on all Earth's beaches!",
+            "A teaspoon of neutron star material would weigh about 10 million tons!",
+            "The Sun loses 4 million tons of mass every second through nuclear fusion!",
+            "Saturn would float in water if you could find a bathtub big enough!",
+            "Space is completely silent because there's no air to carry sound!",
+            "One million Earths could fit inside the Sun!"
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const spaceFact = document.getElementById('spaceFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initBackground();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade6SolarSystem');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade6SolarSystem', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade6SolarSystem_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade6SolarSystem_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a solar system expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent astronomical knowledge!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep exploring the cosmos!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review solar system concepts and try again!";
+            } else {
+                scoreMessage.textContent = "Keep learning! The universe is full of amazing discoveries!";
+            }
+        }
+
+        // Create space fact display
+        function createSpaceFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'space-fact';
+            
+            factDiv.innerHTML = `<strong>Amazing Space Fact:</strong> ${spaceFacts[Math.floor(Math.random() * spaceFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "solar_system_basics": "🪐",
+                "the_sun": "🌞",
+                "planets_earth": "🌎",
+                "other_planets": "🚀",
+                "moon_satellites": "🌕",
+                "asteroids_comets": "☄️",
+                "space_exploration": "🛰️"
+            };
+            
+            let conceptName = "Solar System Basics";
+            let conceptIcon = "🪐";
+            
+            if (question.type.includes("solar_system_basics")) {
+                conceptName = "Solar System Basics";
+                conceptIcon = conceptIcons.solar_system_basics;
+            } else if (question.type.includes("the_sun")) {
+                conceptName = "The Sun";
+                conceptIcon = conceptIcons.the_sun;
+            } else if (question.type.includes("planets_earth")) {
+                conceptName = "Planets - Earth";
+                conceptIcon = conceptIcons.planets_earth;
+            } else if (question.type.includes("other_planets")) {
+                conceptName = "Other Planets";
+                conceptIcon = conceptIcons.other_planets;
+            } else if (question.type.includes("moon_satellites")) {
+                conceptName = "Moon & Satellites";
+                conceptIcon = conceptIcons.moon_satellites;
+            } else if (question.type.includes("asteroids_comets")) {
+                conceptName = "Asteroids & Comets";
+                conceptIcon = conceptIcons.asteroids_comets;
+            } else if (question.type.includes("space_exploration")) {
+                conceptName = "Space Exploration";
+                conceptIcon = conceptIcons.space_exploration;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("solar_system_basics")) {
+                label.textContent = "Understanding solar system structure and components";
+            } else if (question.type.includes("the_sun")) {
+                label.textContent = "Our star and its characteristics";
+            } else if (question.type.includes("planets_earth")) {
+                label.textContent = "Our home planet and its unique features";
+            } else if (question.type.includes("other_planets")) {
+                label.textContent = "Characteristics of other planets in our solar system";
+            } else if (question.type.includes("moon_satellites")) {
+                label.textContent = "Natural satellites and their effects";
+            } else if (question.type.includes("asteroids_comets")) {
+                label.textContent = "Small celestial bodies and space debris";
+            } else if (question.type.includes("space_exploration")) {
+                label.textContent = "Human exploration of space";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create solar system visualization
+        function createSolarSystemVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const currentQuestion = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--planet-blue);">Solar System Explorer</h3>
+                
+                <div class="solar-system-display">
+                    <div class="display-title">Current Space Concept</div>
+                    <div class="space-container">
+                        <div class="space-scenario">${currentQuestion.question}</div>
+                        <div class="space-highlight">
+                            <strong>Key Concept:</strong> <span class="highlight-text">${getSpaceConcept(currentQuestion.type)}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Interactive Solar System Diagram -->
+                <div class="solar-system-diagram" id="solarSystemDiagram">
+                    <!-- Solar system diagram will be animated by JavaScript -->
+                </div>
+                <div style="text-align: center; margin-bottom: 20px; color: var(--text-secondary); font-size: 0.9rem;">
+                    Interactive Solar System Model - Click on planets for details
+                </div>
+                
+                <div class="planets-grid">
+                    ${planets.map(planet => `
+                        <div class="planet-card ${planet.name.toLowerCase()} planet-glow" style="border-color: ${planet.color}" onclick="showPlanetDemo('${planet.name}')">
+                            <div class="planet-icon rotate-planet" style="color: ${planet.color}">${planet.icon}</div>
+                            <div class="planet-title" style="color: ${planet.color}">${planet.name}</div>
+                            <div class="planet-facts">
+                                <strong>Type:</strong> ${planet.type}<br>
+                                <strong>Diameter:</strong> ${planet.diameter}<br>
+                                <strong>Orbit Period:</strong> ${planet.orbitalPeriod}
+                            </div>
+                            <div class="planet-feature">
+                                ${planet.interestingFacts.split(', ')[0]}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div class="space-fact" style="margin: 20px 0;">
+                    <strong>The Sun:</strong> ${sunInfo.name} - ${sunInfo.type}<br>
+                    <strong>Diameter:</strong> ${sunInfo.diameter} | <strong>Age:</strong> ${sunInfo.age}<br>
+                    <strong>Temperature:</strong> ${sunInfo.temperature}<br>
+                    <em>${sunInfo.facts[0]}</em>
+                </div>
+                
+                <table class="planets-table">
+                    <thead>
+                        <tr>
+                            <th>Planet</th>
+                            <th>Type</th>
+                            <th>Diameter</th>
+                            <th>Distance from Sun</th>
+                            <th>Orbital Period</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${planets.map(planet => `
+                            <tr>
+                                <td style="font-weight: bold; color: ${planet.color};">${planet.name}</td>
+                                <td>${planet.type}</td>
+                                <td>${planet.diameter}</td>
+                                <td>${planet.distanceFromSun}</td>
+                                <td>${planet.orbitalPeriod}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                
+                <div class="celestial-container">
+                    <div class="celestial-title">Other Celestial Bodies</div>
+                    <div class="celestial-grid">
+                        ${celestialBodies.map(body => `
+                            <div class="celestial-card">
+                                <div class="celestial-icon">${getCelestialIcon(body.name)}</div>
+                                <div class="celestial-name">${body.name}</div>
+                                <div class="celestial-description">
+                                    ${body.description}<br>
+                                    <strong>Location:</strong> ${body.location}<br>
+                                    <strong>Interesting:</strong> ${body.interesting}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="missions-container">
+                    <div class="missions-title">Famous Space Missions</div>
+                    <div class="missions-grid">
+                        ${spaceMissions.map(mission => `
+                            <div class="mission-card">
+                                <div class="mission-icon">🚀</div>
+                                <div class="mission-name">${mission.name} (${mission.year})</div>
+                                <div class="mission-details">
+                                    <strong>Achievement:</strong> ${mission.achievement}<br>
+                                    <strong>Key Facts:</strong> ${mission.facts}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="scale-container">
+                    <div class="scale-title">Solar System Scale Calculator</div>
+                    <div class="scale-controls">
+                        <select class="scale-select" id="scaleType">
+                            <option value="">Select Scale</option>
+                            <option value="distance">Planet Distances</option>
+                            <option value="size">Planet Sizes</option>
+                            <option value="time">Travel Times</option>
+                            <option value="temperature">Planet Temperatures</option>
+                        </select>
+                        <button class="scale-btn" onclick="calculateScale()">Calculate Scale</button>
+                    </div>
+                    <div class="scale-display" id="scaleDisplay">
+                        Select a scale type to compare solar system objects
+                    </div>
+                </div>
+                
+                <div class="exploration-container">
+                    <div class="display-title">Space Exploration Timeline</div>
+                    <div class="exploration-grid">
+                        <div class="exploration-card">
+                            <div class="exploration-icon">🛰️</div>
+                            <div class="exploration-name">1957</div>
+                            <div class="exploration-description">
+                                Sputnik 1 - First artificial satellite<br>
+                                Launched by Soviet Union
+                            </div>
+                        </div>
+                        <div class="exploration-card">
+                            <div class="exploration-icon">👨‍🚀</div>
+                            <div class="exploration-name">1961</div>
+                            <div class="exploration-description">
+                                Yuri Gagarin - First human in space<br>
+                                Orbited Earth for 108 minutes
+                            </div>
+                        </div>
+                        <div class="exploration-card">
+                            <div class="exploration-icon">🌕</div>
+                            <div class="exploration-name">1969</div>
+                            <div class="exploration-description">
+                                Apollo 11 - First Moon landing<br>
+                                "That's one small step..."
+                            </div>
+                        </div>
+                        <div class="exploration-card">
+                            <div class="exploration-icon">🏗️</div>
+                            <div class="exploration-name">1998</div>
+                            <div class="exploration-description">
+                                ISS - International Space Station<br>
+                                Continuous human presence in space
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--planet-orange);">
+                    <div style="color: var(--planet-orange); font-weight: bold; margin-bottom: 10px;">Quick Solar System Guide:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. Sun at center - provides light and heat<br>
+                        2. 8 planets - 4 terrestrial, 4 gas giants<br>
+                        3. Inner planets: Mercury, Venus, Earth, Mars<br>
+                        4. Outer planets: Jupiter, Saturn, Uranus, Neptune<br>
+                        5. Many moons, asteroids, comets, and dwarf planets
+                    </div>
+                </div>
+                
+                <div class="solution-container">
+                    <div class="display-title">Step-by-Step Learning Path</div>
+                    <div class="solution-steps" id="solutionSteps">
+                        ${generateLearningPath(currentQuestion)}
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--space-purple);">
+                    <div style="color: var(--space-purple); font-weight: bold; margin-bottom: 10px; text-align: center;">Space Exploration Tips</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                        <strong>Observe:</strong> Look at the night sky, notice planet movements<br>
+                        <strong>Remember:</strong> Mnemonic for planets: My Very Educated Mother Just Served Us Noodles<br>
+                        <strong>Compare:</strong> Understand relative sizes and distances<br>
+                        <strong>Explore:</strong> Learn about space missions and discoveries<br>
+                        <strong>Imagine:</strong> Think about future space exploration<br>
+                        <em>The universe is waiting to be explored - keep looking up!</em>
+                    </div>
+                </div>
+            `;
+            
+            // Initialize solar system diagram
+            initializeSolarSystemDiagram();
+            
+            return vizDiv;
+        }
+
+        // Helper functions
+        function getSpaceConcept(typeString) {
+            const conceptMap = {
+                "solar_system_basics": "Solar system structure and components",
+                "the_sun": "Our star's characteristics and importance",
+                "planets_earth": "Earth's unique features and conditions for life",
+                "other_planets": "Characteristics of other solar system planets",
+                "moon_satellites": "Natural satellites and their effects",
+                "asteroids_comets": "Small celestial bodies and space phenomena",
+                "space_exploration": "Human exploration of space"
+            };
+            
+            return conceptMap[typeString] || "Space Science";
+        }
+
+        function getCelestialIcon(name) {
+            const iconMap = {
+                "Asteroids": "🪨",
+                "Comets": "☄️",
+                "Meteoroids": "✨",
+                "Dwarf Planets": "🪐"
+            };
+            return iconMap[name] || "⭐";
+        }
+
+        function generateLearningPath(question) {
+            let steps = [];
+            
+            if (question.type.includes("solar_system_basics")) {
+                steps = [
+                    "Step 1: Identify if the question is about solar system structure or components",
+                    "Step 2: Recall the order and characteristics of planets",
+                    "Step 3: Remember key solar system facts",
+                    "Step 4: Eliminate incorrect options",
+                    "Step 5: Select the most accurate answer"
+                ];
+            } else if (question.type.includes("the_sun")) {
+                steps = [
+                    "Step 1: Identify Sun-related concepts",
+                    "Step 2: Recall Sun's characteristics and importance",
+                    "Step 3: Consider Sun's role in solar system",
+                    "Step 4: Eliminate incorrect options",
+                    "Step 5: Select the correct solar fact"
+                ];
+            } else if (question.type.includes("planets_earth")) {
+                steps = [
+                    "Step 1: Identify Earth-specific features",
+                    "Step 2: Recall Earth's unique characteristics",
+                    "Step 3: Consider Earth's position and conditions for life",
+                    "Step 4: Eliminate incorrect options",
+                    "Step 5: Select the best answer about Earth"
+                ];
+            } else {
+                steps = [
+                    "Step 1: Read the question carefully",
+                    "Step 2: Identify key space science concepts",
+                    "Step 3: Recall relevant astronomical principles",
+                    "Step 4: Apply scientific reasoning",
+                    "Step 5: Select the most accurate answer"
+                ];
+            }
+            
+            return steps.map((step, index) => `
+                <div class="solution-step space-reveal" style="animation-delay: ${index * 0.1}s">
+                    <span class="step-number">${index + 1}</span>
+                    <span class="step-description">${step}</span>
+                    ${index === steps.length - 1 ? `
+                        <div class="step-calculation">
+                            <strong>Correct Answer:</strong> ${question.options[question.answer.charCodeAt(0) - 65]}
+                        </div>
+                        <div class="step-explanation">
+                            ${question.explanation}
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        // Global functions for interactive features
+        window.showPlanetDemo = function(planetName) {
+            const solarSystemDiagram = document.getElementById('solarSystemDiagram');
+            if (!solarSystemDiagram) return;
+            
+            const planet = planets.find(p => p.name === planetName);
+            if (!planet) return;
+            
+            // Highlight the selected planet
+            solarSystemDiagram.innerHTML = '';
+            
+            // Create focused view of the selected planet
+            solarSystemDiagram.innerHTML = `
+                <!-- Sun -->
+                <div class="planet" style="background-color: #FFD54F; width: 60px; height: 60px; top: 50%; left: 20%; transform: translate(-50%, -50%);">
+                    ☀️
+                </div>
+                
+                <!-- Selected Planet -->
+                <div class="planet planet-glow" style="background-color: ${planet.color}; width: ${getPlanetSize(planetName)}; height: ${getPlanetSize(planetName)}; top: 50%; left: 80%; transform: translate(-50%, -50%);">
+                    ${planet.icon}
+                </div>
+                
+                <!-- Orbit -->
+                <div class="orbit" style="width: 70%; height: 200px; border-color: rgba(100, 181, 246, 0.5);"></div>
+                
+                <!-- Planet Info -->
+                <div style="position: absolute; top: 20px; left: 0; right: 0; text-align: center; color: ${planet.color}; font-weight: bold; font-size: 1.2rem;">
+                    ${planet.name}
+                </div>
+                
+                <div style="position: absolute; bottom: 60px; left: 0; right: 0; text-align: center; color: var(--text-secondary); font-size: 0.9rem;">
+                    <strong>Type:</strong> ${planet.type}<br>
+                    <strong>Diameter:</strong> ${planet.diameter}<br>
+                    <strong>Orbit Period:</strong> ${planet.orbitalPeriod}
+                </div>
+                
+                <div style="position: absolute; bottom: 20px; left: 10px; right: 10px; text-align: center; color: var(--text-muted); font-size: 0.8rem;">
+                    ${planet.interestingFacts}
+                </div>
+            `;
+        };
+
+        window.calculateScale = function() {
+            const scaleSelect = document.getElementById('scaleType');
+            const scaleDisplay = document.getElementById('scaleDisplay');
+            
+            if (!scaleSelect || !scaleDisplay) return;
+            
+            const scaleType = scaleSelect.value;
+            
+            if (!scaleType) {
+                scaleDisplay.innerHTML = "Please select a scale type.";
+                return;
+            }
+            
+            const scaleData = {
+                distance: {
+                    title: "Planet Distances from Sun",
+                    content: `
+                        <strong>If the Sun were 1 meter wide:</strong><br>
+                        • Mercury: 42 meters away<br>
+                        • Venus: 78 meters away<br>
+                        • Earth: 108 meters away<br>
+                        • Mars: 164 meters away<br>
+                        • Jupiter: 560 meters away<br>
+                        • Saturn: 1,030 meters away<br>
+                        • Uranus: 2,070 meters away<br>
+                        • Neptune: 3,240 meters away<br>
+                        <em>The solar system is mostly empty space!</em>
+                    `
+                },
+                size: {
+                    title: "Planet Size Comparison",
+                    content: `
+                        <strong>If Earth were the size of a basketball:</strong><br>
+                        • Mercury: Tennis ball<br>
+                        • Venus: Slightly smaller basketball<br>
+                        • Mars: Soccer ball<br>
+                        • Jupiter: 11 basketballs wide<br>
+                        • Saturn: 9 basketballs wide<br>
+                        • Uranus: 4 basketballs wide<br>
+                        • Neptune: 4 basketballs wide<br>
+                        • Sun: 109 basketballs wide!<br>
+                        <em>Jupiter is HUGE compared to Earth!</em>
+                    `
+                },
+                time: {
+                    title: "Space Travel Times",
+                    content: `
+                        <strong>Travel times at different speeds:</strong><br>
+                        • To Moon: 3 days (Apollo mission)<br>
+                        • To Mars: 6-8 months (current technology)<br>
+                        • To Jupiter: 5-6 years (Juno mission)<br>
+                        • To Pluto: 9.5 years (New Horizons)<br>
+                        • To nearest star: 70,000+ years!<br><br>
+                        <strong>Light travel time:</strong><br>
+                        • To Moon: 1.3 seconds<br>
+                        • To Sun: 8 minutes<br>
+                        • To Neptune: 4 hours<br>
+                        <em>Space is REALLY big!</em>
+                    `
+                },
+                temperature: {
+                    title: "Planet Temperature Ranges",
+                    content: `
+                        <strong>Average surface temperatures:</strong><br>
+                        • Mercury: -173°C to 427°C<br>
+                        • Venus: 462°C (hottest planet!)<br>
+                        • Earth: -88°C to 58°C<br>
+                        • Mars: -87°C to -5°C<br>
+                        • Jupiter: -108°C (cloud tops)<br>
+                        • Saturn: -139°C<br>
+                        • Uranus: -197°C<br>
+                        • Neptune: -201°C<br>
+                        <em>Earth has the perfect temperature for life!</em>
+                    `
+                }
+            };
+            
+            const data = scaleData[scaleType];
+            
+            scaleDisplay.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-size: 1.5rem; margin-bottom: 10px; color: var(--planet-blue);">
+                        ${data.title}
+                    </div>
+                    
+                    <div style="background: var(--dark-surface); padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        ${data.content}
+                    </div>
+                </div>
+            `;
+        };
+
+        function getPlanetSize(planetName) {
+            const sizes = {
+                "Mercury": "25px",
+                "Venus": "35px",
+                "Earth": "40px",
+                "Mars": "30px",
+                "Jupiter": "80px",
+                "Saturn": "70px",
+                "Uranus": "45px",
+                "Neptune": "45px"
+            };
+            return sizes[planetName] || "30px";
+        }
+
+        function initializeSolarSystemDiagram() {
+            const solarSystemDiagram = document.getElementById('solarSystemDiagram');
+            if (!solarSystemDiagram) return;
+            
+            // Create a simplified solar system diagram
+            solarSystemDiagram.innerHTML = `
+                <!-- Sun -->
+                <div class="planet star-glow" style="background-color: #FFD54F; width: 50px; height: 50px; top: 50%; left: 10%; transform: translate(-50%, -50%);">
+                    ☀️
+                </div>
+                
+                <!-- Inner Planets -->
+                <div class="planet" style="background-color: ${planets[0].color}; width: 15px; height: 15px; top: 50%; left: 20%; transform: translate(-50%, -50%);" onclick="showPlanetDemo('Mercury')">
+                    ${planets[0].icon}
+                </div>
+                
+                <div class="planet" style="background-color: ${planets[1].color}; width: 20px; height: 20px; top: 50%; left: 25%; transform: translate(-50%, -50%);" onclick="showPlanetDemo('Venus')">
+                    ${planets[1].icon}
+                </div>
+                
+                <div class="planet" style="background-color: ${planets[2].color}; width: 25px; height: 25px; top: 50%; left: 30%; transform: translate(-50%, -50%);" onclick="showPlanetDemo('Earth')">
+                    ${planets[2].icon}
+                </div>
+                
+                <div class="planet" style="background-color: ${planets[3].color}; width: 18px; height: 18px; top: 50%; left: 35%; transform: translate(-50%, -50%);" onclick="showPlanetDemo('Mars')">
+                    ${planets[3].icon}
+                </div>
+                
+                <!-- Outer Planets -->
+                <div class="planet" style="background-color: ${planets[4].color}; width: 60px; height: 60px; top: 50%; left: 50%; transform: translate(-50%, -50%);" onclick="showPlanetDemo('Jupiter')">
+                    ${planets[4].icon}
+                </div>
+                
+                <div class="planet" style="background-color: ${planets[5].color}; width: 50px; height: 50px; top: 50%; left: 60%; transform: translate(-50%, -50%);" onclick="showPlanetDemo('Saturn')">
+                    ${planets[5].icon}
+                </div>
+                
+                <div class="planet" style="background-color: ${planets[6].color}; width: 35px; height: 35px; top: 50%; left: 70%; transform: translate(-50%, -50%);" onclick="showPlanetDemo('Uranus')">
+                    ${planets[6].icon}
+                </div>
+                
+                <div class="planet" style="background-color: ${planets[7].color}; width: 35px; height: 35px; top: 50%; left: 80%; transform: translate(-50%, -50%);" onclick="showPlanetDemo('Neptune')">
+                    ${planets[7].icon}
+                </div>
+                
+                <!-- Orbits (simplified) -->
+                <div class="orbit" style="width: 25%; height: 25%;"></div>
+                <div class="orbit" style="width: 40%; height: 40%;"></div>
+                <div class="orbit" style="width: 55%; height: 55%;"></div>
+                <div class="orbit" style="width: 70%; height: 70%;"></div>
+                <div class="orbit" style="width: 85%; height: 85%;"></div>
+                
+                <!-- Title -->
+                <div style="position: absolute; bottom: 10px; left: 0; right: 0; text-align: center; color: var(--text-secondary); font-size: 0.9rem;">
+                    Click on planets for details
+                </div>
+            `;
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            spaceFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            spaceFact.appendChild(createSpaceFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createSolarSystemVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin your space exploration!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

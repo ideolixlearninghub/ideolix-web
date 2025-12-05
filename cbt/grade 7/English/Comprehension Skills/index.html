@@ -1,0 +1,3200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 English - Comprehension Skills | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Reading Theme */
+        :root {
+            --primary-blue: #2196F3;
+            --secondary-teal: #009688;
+            --accent-yellow: #FFEB3B;
+            --accent-green: #4CAF50;
+            --accent-orange: #FF9800;
+            --accent-red: #F44336;
+            --accent-purple: #9C27B0;
+            --accent-indigo: #3F51B5;
+            --accent-cyan: #00BCD4;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --reading-glow: 0 0 20px rgba(33, 150, 243, 0.4);
+            --inference-glow: 0 0 20px rgba(0, 150, 136, 0.4);
+            --vocab-glow: 0 0 20px rgba(255, 235, 59, 0.4);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Reading Pattern Background */
+        .reading-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 150, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 235, 59, 0.1) 0%, transparent 50%),
+                repeating-linear-gradient(45deg, transparent 0px, transparent 5px, rgba(33, 150, 243, 0.05) 6px, transparent 7px),
+                repeating-linear-gradient(-45deg, transparent 0px, transparent 5px, rgba(0, 150, 136, 0.05) 6px, transparent 7px);
+            opacity: 0.3;
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 3rem;
+            font-weight: bold;
+            animation: floatElement 25s linear infinite;
+        }
+
+        @keyframes floatElement {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.1; }
+            25% { transform: translateY(-150px) translateX(100px) rotate(90deg); opacity: 0.05; }
+            50% { transform: translateY(-50px) translateX(-150px) rotate(180deg); opacity: 0.1; }
+            75% { transform: translateY(150px) translateX(50px) rotate(270deg); opacity: 0.05; }
+            100% { transform: translateY(0) translateX(0) rotate(360deg); opacity: 0.1; }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--reading-glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(33, 150, 243, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-blue);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-teal);
+            color: #212121;
+            box-shadow: 0 4px 15px rgba(0, 150, 136, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #00796B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 150, 136, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-teal));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .reading-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-yellow);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-teal);
+            color: #212121;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Passage Display */
+        .passage-display {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 15px 0;
+            border: 2px solid var(--accent-yellow);
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .display-title {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        /* Comprehension Concepts */
+        .concepts-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .comprehension-card {
+            background: var(--dark-card);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 200px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .comprehension-card.inference {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .comprehension-card.vocabulary {
+            border-color: var(--secondary-teal);
+            background: rgba(0, 150, 136, 0.1);
+        }
+
+        .comprehension-card.context {
+            border-color: var(--accent-yellow);
+            background: rgba(255, 235, 59, 0.1);
+        }
+
+        .comprehension-card:hover {
+            transform: scale(1.05);
+        }
+
+        .comprehension-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .comprehension-card.inference .comprehension-name {
+            color: var(--primary-blue);
+        }
+
+        .comprehension-card.vocabulary .comprehension-name {
+            color: var(--secondary-teal);
+        }
+
+        .comprehension-card.context .comprehension-name {
+            color: var(--accent-yellow);
+        }
+
+        .comprehension-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        /* Inference Visualization */
+        .inference-visualization {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-green);
+        }
+
+        .inference-diagram {
+            background: var(--dark-surface);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--dark-border);
+            position: relative;
+        }
+
+        .clue {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .text-clue {
+            background: rgba(33, 150, 243, 0.3);
+            color: white;
+            border: 2px solid var(--primary-blue);
+        }
+
+        .context-clue {
+            background: rgba(76, 175, 80, 0.3);
+            color: white;
+            border: 2px solid var(--accent-green);
+        }
+
+        .inference {
+            background: rgba(255, 152, 0, 0.3);
+            color: white;
+            border: 2px solid var(--accent-orange);
+        }
+
+        .conclusion {
+            background: rgba(156, 39, 176, 0.3);
+            color: white;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .clue:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .analysis-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .analysis-button {
+            padding: 8px 16px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-green);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .analysis-button:hover {
+            background: rgba(76, 175, 80, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Vocabulary Types */
+        .vocabulary-visualization {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-orange);
+        }
+
+        .types-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .type-box {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 150px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .type-box.definition {
+            border-color: var(--accent-green);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .type-box.example {
+            border-color: var(--accent-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .type-box.synonym {
+            border-color: var(--accent-purple);
+            background: rgba(156, 39, 176, 0.1);
+        }
+
+        .type-box.antonym {
+            border-color: var(--accent-red);
+            background: rgba(244, 67, 54, 0.1);
+        }
+
+        .type-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .type-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .type-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .type-box.definition .type-name {
+            color: var(--accent-green);
+        }
+
+        .type-box.example .type-name {
+            color: var(--primary-blue);
+        }
+
+        .type-box.synonym .type-name {
+            color: var(--accent-purple);
+        }
+
+        .type-box.antonym .type-name {
+            color: var(--accent-red);
+        }
+
+        .type-description {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        /* Vocabulary Examples */
+        .examples-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 768px) {
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .example-box {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .example-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .example-box.context-clues {
+            border-color: var(--accent-green);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .example-box.word-parts {
+            border-color: var(--accent-orange);
+            background: rgba(255, 152, 0, 0.1);
+        }
+
+        .example-box.inference {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .example-box.tone {
+            border-color: var(--accent-red);
+            background: rgba(244, 67, 54, 0.1);
+        }
+
+        .example-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .example-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .example-box.context-clues .example-name {
+            color: var(--accent-green);
+        }
+
+        .example-box.word-parts .example-name {
+            color: var(--accent-orange);
+        }
+
+        .example-box.inference .example-name {
+            color: var(--primary-blue);
+        }
+
+        .example-box.tone .example-name {
+            color: var(--accent-red);
+        }
+
+        .example-sentence {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        /* Vocabulary Table */
+        .vocabulary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .vocabulary-table th {
+            background: var(--dark-surface);
+            padding: 12px;
+            text-align: left;
+            color: var(--accent-yellow);
+            border-bottom: 2px solid var(--accent-yellow);
+        }
+
+        .vocabulary-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+            font-family: 'Georgia', serif;
+        }
+
+        .vocabulary-table tr:hover {
+            background: rgba(255, 235, 59, 0.05);
+        }
+
+        /* Interactive Practice */
+        .interactive-practice {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-cyan);
+        }
+
+        .practice-title {
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .practice-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .practice-button {
+            padding: 10px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .practice-button:hover {
+            background: rgba(0, 188, 212, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .practice-display {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Word Highlighting */
+        .highlighted-word {
+            background: rgba(255, 235, 59, 0.3);
+            padding: 2px 4px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .highlighted-word:hover {
+            background: rgba(255, 235, 59, 0.5);
+        }
+
+        /* Passage Types */
+        .passage-type {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .passage-fiction {
+            background: rgba(156, 39, 176, 0.2);
+            color: var(--accent-purple);
+            border: 1px solid var(--accent-purple);
+        }
+
+        .passage-nonfiction {
+            background: rgba(33, 150, 243, 0.2);
+            color: var(--primary-blue);
+            border: 1px solid var(--primary-blue);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .types-display {
+                flex-direction: column;
+            }
+            
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .inference-diagram {
+                flex-direction: column;
+                padding: 15px;
+            }
+        }
+
+        /* Reading Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes readingFlow {
+            0% { transform: translateX(-50px); background-color: rgba(33, 150, 243, 0.2); }
+            50% { transform: translateX(0); background-color: rgba(33, 150, 243, 0.4); }
+            100% { transform: translateX(50px); background-color: rgba(33, 150, 243, 0.2); }
+        }
+        
+        .reading-flow {
+            animation: readingFlow 3s linear infinite;
+        }
+        
+        @keyframes inferenceFlow {
+            0% { transform: translateY(-50px); background-color: rgba(0, 150, 136, 0.2); }
+            50% { transform: translateY(0); background-color: rgba(0, 150, 136, 0.4); }
+            100% { transform: translateY(50px); background-color: rgba(0, 150, 136, 0.2); }
+        }
+        
+        .inference-flow {
+            animation: inferenceFlow 3s linear infinite;
+        }
+        
+        @keyframes wordBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .word-bounce {
+            animation: wordBounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes vocabularySpin {
+            0% { transform: rotate(0deg) translateY(0); }
+            25% { transform: rotate(90deg) translateY(-10px); }
+            50% { transform: rotate(180deg) translateY(0); }
+            75% { transform: rotate(270deg) translateY(10px); }
+            100% { transform: rotate(360deg) translateY(0); }
+        }
+        
+        .vocabulary-spin {
+            animation: vocabularySpin 3s linear infinite;
+        }
+        
+        @keyframes highlightPulse {
+            0%, 100% { background-color: rgba(255, 235, 59, 0.3); }
+            50% { background-color: rgba(255, 235, 59, 0.6); }
+        }
+        
+        .highlight-pulse {
+            animation: highlightPulse 1.5s ease infinite;
+        }
+        
+        @keyframes textReveal {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .text-reveal {
+            animation: textReveal 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Reading Pattern Background -->
+    <div class="reading-bg" id="readingBg">
+        <!-- Elements will be generated by JavaScript -->
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 7 English</h1>
+            <p class="welcome-subtitle">Master the art of understanding! Learn to read between the lines, infer meaning from context, and understand vocabulary in context. These essential comprehension skills will help you analyze texts, understand deeper meanings, and become a more critical reader!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">📚🔍✨</span>
+                <span class="topic-name">Comprehension Skills - Inference & Vocabulary</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Reading Journey</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 120</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0.8%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Reading fact display -->
+                <div id="readingFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <!-- Passage Display Area -->
+                        <div class="passage-display" id="passageDisplay"></div>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Comprehension Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background
+        function initBackground() {
+            const readingBg = document.getElementById('readingBg');
+            
+            // Create floating reading symbols
+            const elements = ['📚', '🔍', '✨', '📖', '📝', '📄', '🔤', '💡', '🎯', '📊', '📈', '📉', '🎓', '🧠', '💭', '🗣️', '✍️', '📋', '📑', '🔎'];
+            
+            for (let i = 0; i < 25; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.textContent = elements[Math.floor(Math.random() * elements.length)];
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+                element.style.animationDelay = `${Math.random() * 20}s`;
+                element.style.fontSize = `${2 + Math.random() * 3}rem`;
+                
+                // Color different types
+                if (['📚', '📖', '📄'].includes(element.textContent)) {
+                    element.style.color = 'rgba(33, 150, 243, 0.1)'; // Blue for reading
+                } else if (['🔍', '🔎', '💡'].includes(element.textContent)) {
+                    element.style.color = 'rgba(0, 150, 136, 0.1)'; // Teal for analysis
+                } else if (['📝', '✍️', '📋'].includes(element.textContent)) {
+                    element.style.color = 'rgba(255, 235, 59, 0.1)'; // Yellow for writing
+                } else {
+                    element.style.color = 'rgba(33, 150, 243, 0.1)'; // Default blue
+                }
+                
+                readingBg.appendChild(element);
+            }
+        }
+
+        // Comprehension passages for practice
+        const passages = [
+            {
+                type: "fiction",
+                title: "The Lost Key",
+                content: "Sarah hurried through the rain, clutching her coat tightly. She had been searching for over an hour, retracing her steps from the park to the library. Her hands were cold and her frustration was growing with each passing minute. Just as she was about to give up, she noticed a glimmer under the bench where she had eaten her lunch. There it was - the small silver key that opened her grandmother's antique jewelry box. Relief washed over her as she realized she wouldn't have to explain another lost item to her meticulous grandmother.",
+                difficulty: "medium",
+                length: "short"
+            },
+            {
+                type: "nonfiction",
+                title: "The Amazing Migration of Monarch Butterflies",
+                content: "Each year, millions of monarch butterflies embark on an incredible journey spanning thousands of miles. These delicate creatures travel from Canada and the northern United States to the warm forests of Mexico. What makes this migration particularly remarkable is that no single butterfly completes the entire round trip. Instead, it takes three to four generations to accomplish the full migration cycle. The butterflies use a combination of environmental cues and an internal biological clock to navigate this extraordinary path.",
+                difficulty: "medium",
+                length: "short"
+            },
+            {
+                type: "fiction",
+                title: "The Old Lighthouse",
+                content: "For decades, the lighthouse had stood as a silent sentinel on the rocky cliffs, its beam cutting through the darkest nights and fiercest storms. Old Captain Harris, now retired, could still recall the countless ships it had guided to safety. Today, the lighthouse stood dark and abandoned, replaced by modern GPS systems. Yet local children whispered stories about mysterious lights still appearing in the tower on foggy nights, and fishermen claimed they could sometimes hear the distant echo of the foghorn when no ship was in sight.",
+                difficulty: "hard",
+                length: "medium"
+            },
+            {
+                type: "nonfiction",
+                title: "The Science of Memory",
+                content: "Human memory is not like a video recording that captures events exactly as they happen. Instead, it's a reconstructive process that can be influenced by many factors. When we recall memories, we're actually rebuilding them from stored fragments, which means memories can change over time. This malleability explains why two people can remember the same event differently. Research has shown that emotions, subsequent experiences, and even suggestions from others can alter how we remember past events.",
+                difficulty: "hard",
+                length: "medium"
+            }
+        ];
+
+        // Questions array - 120+ Grade 7 Comprehension questions
+        const questions = [
+            // Inference Basics (1-20)
+            {
+                type: "inference_basics",
+                passageId: 0,
+                question: "Based on the passage, how does Sarah probably feel when she finds the key?",
+                options: ["Relieved and happy", "Angry and frustrated", "Confused and lost", "Bored and uninterested"],
+                answer: "A",
+                explanation: "The passage states 'Relief washed over her' which shows she feels relieved and happy."
+            },
+            {
+                type: "inference_basics",
+                passageId: 0,
+                question: "What can you infer about Sarah's grandmother?",
+                options: ["She is careful and organized", "She is forgetful and messy", "She is angry and strict", "She is young and careless"],
+                answer: "A",
+                explanation: "Sarah worries about explaining 'another lost item to her meticulous grandmother' - meticulous means very careful and organized."
+            },
+            {
+                type: "inference_basics",
+                passageId: 1,
+                question: "What does 'embark' most likely mean in this passage?",
+                options: ["Begin a journey", "Finish a task", "Rest quietly", "Gather together"],
+                answer: "A",
+                explanation: "Context clues: 'journey', 'travel', 'migration' all relate to beginning a trip."
+            },
+            {
+                type: "inference_basics",
+                passageId: 1,
+                question: "Why is the monarch migration considered 'remarkable'?",
+                options: ["No single butterfly completes the round trip", "Butterflies travel very short distances", "They migrate only once in their lifetime", "They don't use any navigation"],
+                answer: "A",
+                explanation: "The passage specifically states it's remarkable because 'no single butterfly completes the entire round trip.'"
+            },
+            // Vocabulary in Context (21-40)
+            {
+                type: "vocabulary_context",
+                passageId: 2,
+                question: "What does 'sentinel' most likely mean in this context?",
+                options: ["Guard or watchman", "Old building", "Light source", "Musical instrument"],
+                answer: "A",
+                explanation: "Context clues: 'stood as a silent sentinel', 'guided ships to safety' - suggests a protective guard."
+            },
+            {
+                type: "vocabulary_context",
+                passageId: 2,
+                question: "What is the meaning of 'meticulous' as used in the first passage?",
+                options: ["Very careful and precise", "Very forgetful", "Very angry", "Very old"],
+                answer: "A",
+                explanation: "Context: Sarah worries about explaining lost items - meticulous grandmother would notice and care about details."
+            },
+            {
+                type: "vocabulary_context",
+                passageId: 3,
+                question: "What does 'malleability' mean in the context of memory?",
+                options: ["Ability to be shaped or changed", "Ability to be recorded", "Ability to be forgotten", "Ability to be shared"],
+                answer: "A",
+                explanation: "Context clues: 'memories can change', 'alter how we remember' - suggests changeability."
+            },
+            {
+                type: "vocabulary_context",
+                passageId: 3,
+                question: "Based on context, what does 'reconstructive' mean?",
+                options: ["Built again from parts", "Recorded perfectly", "Forgotten quickly", "Shared easily"],
+                answer: "A",
+                explanation: "Context: 'rebuilding them from stored fragments' - re (again) + constructive (building)."
+            },
+            // Drawing Conclusions (41-60)
+            {
+                type: "drawing_conclusions",
+                passageId: 0,
+                question: "What conclusion can you draw about Sarah's relationship with her grandmother?",
+                options: ["She respects her grandmother's expectations", "She is afraid of her grandmother", "She doesn't care about her grandmother", "She rarely sees her grandmother"],
+                answer: "A",
+                explanation: "Sarah's concern about explaining lost items shows she respects her grandmother's expectations."
+            },
+            {
+                type: "drawing_conclusions",
+                passageId: 1,
+                question: "What can you conclude about monarch butterfly navigation?",
+                options: ["It involves complex natural systems", "It is simple and straightforward", "They follow other butterflies blindly", "They use only visual landmarks"],
+                answer: "A",
+                explanation: "The passage mentions 'environmental cues and an internal biological clock' - complex natural systems."
+            },
+            {
+                type: "drawing_conclusions",
+                passageId: 2,
+                question: "What conclusion can you draw about the lighthouse's current state?",
+                options: ["It holds historical and possibly mysterious significance", "It is completely useless now", "It will be destroyed soon", "No one remembers it exists"],
+                answer: "A",
+                explanation: "Children tell stories and fishermen hear echoes - suggests historical and mysterious significance."
+            },
+            // Making Predictions (61-80)
+            {
+                type: "making_predictions",
+                passageId: 0,
+                question: "Based on the passage, what will Sarah most likely do next?",
+                options: ["Return home with the key", "Continue searching for other items", "Get angry about being wet", "Forget about the key again"],
+                answer: "A",
+                explanation: "She found what she was looking for and was relieved - likely to return home."
+            },
+            {
+                type: "making_predictions",
+                passageId: 1,
+                question: "What might happen if monarch butterflies lost their navigation abilities?",
+                options: ["They might not complete their migration successfully", "They would immediately find new routes", "They would stop migrating entirely", "They would migrate to different countries"],
+                answer: "A",
+                explanation: "Migration depends on navigation - losing it would likely disrupt successful migration."
+            },
+            // Context Clues (81-100)
+            {
+                type: "context_clues",
+                passageId: 2,
+                question: "What type of context clue helps understand 'sentinel'?",
+                options: ["Description clue (what it does)", "Synonym clue", "Antonym clue", "Example clue"],
+                answer: "A",
+                explanation: "'Stood as a silent sentinel' followed by description of guiding ships - description clue."
+            },
+            {
+                type: "context_clues",
+                passageId: 3,
+                question: "What context clue helps understand 'reconstructive'?",
+                options: ["Definition clue (explanation follows)", "Synonym clue", "Antonym clue", "Example clue"],
+                answer: "A",
+                explanation: "The sentence explains: 'rebuilding them from stored fragments' - definition clue."
+            },
+            // Tone and Mood (101-120)
+            {
+                type: "tone_mood",
+                passageId: 0,
+                question: "What is the overall tone of the first passage?",
+                options: ["Relieved and determined", "Angry and violent", "Humorous and silly", "Mysterious and scary"],
+                answer: "A",
+                explanation: "Ends with relief after determined search - relieved and determined tone."
+            },
+            {
+                type: "tone_mood",
+                passageId: 2,
+                question: "What mood does the lighthouse passage create?",
+                options: ["Nostalgic and mysterious", "Happy and excited", "Boring and dull", "Angry and frustrated"],
+                answer: "A",
+                explanation: "Focuses on past importance and current mysteries - nostalgic and mysterious."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent reading comprehension!",
+            "Perfect inference skills!",
+            "Great vocabulary analysis!",
+            "You're a reading expert!",
+            "Perfect context clue identification!",
+            "You're a comprehension champion!",
+            "Outstanding analytical skills!",
+            "Brilliant reading between the lines!",
+            "You think like a literary analyst!",
+            "Comprehension mastery achieved!"
+        ];
+
+        // Reading facts
+        const readingFacts = [
+            "The average person reads 200-250 words per minute!",
+            "Reading reduces stress by up to 68% according to studies!",
+            "The longest sentence in literature is 13,955 words in 'Ulysses'!",
+            "The word 'bookkeeper' is the only English word with three consecutive double letters!",
+            "The first known library was in ancient Assyria around 700 BCE!",
+            "The most translated book in the world is the Bible!",
+            "Reading for just 6 minutes can reduce stress levels by 60%!",
+            "The world's largest library is the Library of Congress with over 170 million items!"
+        ];
+
+        // Vocabulary strategies
+        const vocabularyStrategies = [
+            {
+                strategy: "Context Clues",
+                description: "Use surrounding words and sentences to guess meaning",
+                examples: ["Definition clues", "Example clues", "Comparison clues", "Contrast clues"]
+            },
+            {
+                strategy: "Word Parts",
+                description: "Break words into prefixes, roots, and suffixes",
+                examples: ["Un-happy-ness", "Re-write-able", "Pre-dict-ion", "Mis-under-stand"]
+            },
+            {
+                strategy: "Synonyms/Antonyms",
+                description: "Find words with similar or opposite meanings",
+                examples: ["Happy - joyful (synonym)", "Hot - cold (antonym)"]
+            },
+            {
+                strategy: "Visualization",
+                description: "Create mental images based on context",
+                examples: ["Picture the scene", "Imagine the action", "Visualize comparisons"]
+            }
+        ];
+
+        // Inference types
+        const inferenceTypes = [
+            {
+                type: "Character Feelings",
+                description: "Infer emotions based on actions and words",
+                examples: ["Sarah felt relieved when she found the key", "The captain was nostalgic about the lighthouse"]
+            },
+            {
+                type: "Cause and Effect",
+                description: "Connect events to their causes or results",
+                examples: ["Because it was raining, Sarah hurried", "The lighthouse was abandoned due to GPS"]
+            },
+            {
+                type: "Predictions",
+                description: "Make educated guesses about what will happen",
+                examples: ["Sarah will return home", "Monarchs will continue migrating"]
+            },
+            {
+                type: "Theme/Main Idea",
+                description: "Understand the deeper meaning or central message",
+                examples: ["Persistence pays off", "Nature has amazing adaptations"]
+            }
+        ];
+
+        // Context clue types
+        const contextClueTypes = [
+            {
+                type: "Definition Clue",
+                description: "The meaning is explained in the text",
+                example: "A philanthropist, someone who helps others, donated money."
+            },
+            {
+                type: "Example Clue",
+                description: "Examples help explain the word",
+                example: "Celestial bodies like the sun, moon, and stars..."
+            },
+            {
+                type: "Synonym Clue",
+                description: "A similar word is used nearby",
+                example: "The arduous, difficult journey took weeks."
+            },
+            {
+                type: "Antonym Clue",
+                description: "An opposite word helps with meaning",
+                example: "Unlike her gregarious sister, she was quite shy."
+            },
+            {
+                type: "Inference Clue",
+                description: "You must infer from the situation",
+                example: "His vociferous complaints could be heard throughout the building."
+            }
+        ];
+
+        // Challenging vocabulary words
+        const challengingWords = [
+            {
+                word: "meticulous",
+                meaning: "very careful and precise",
+                sentence: "The artist was meticulous about every detail in her painting.",
+                contextClues: ["careful", "precise", "attention to detail"]
+            },
+            {
+                word: "sentinel",
+                meaning: "a guard or watchman",
+                sentence: "The old oak tree stood as a silent sentinel over the valley.",
+                contextClues: ["guard", "watch", "protective"]
+            },
+            {
+                word: "malleable",
+                meaning: "able to be shaped or changed",
+                sentence: "Gold is a malleable metal that can be formed into thin sheets.",
+                contextClues: ["shaped", "changed", "flexible"]
+            },
+            {
+                word: "reconstructive",
+                meaning: "building again from parts",
+                sentence: "Memory is a reconstructive process rather than perfect recording.",
+                contextClues: ["building again", "from parts", "not exact"]
+            },
+            {
+                word: "migration",
+                meaning: "seasonal movement from one region to another",
+                sentence: "The annual bird migration occurs every spring and fall.",
+                contextClues: ["movement", "seasonal", "from one place to another"]
+            }
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const passageDisplay = document.getElementById('passageDisplay');
+        const readingFact = document.getElementById('readingFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Comprehension analysis state
+        let comprehensionState = {
+            currentPassage: null,
+            highlightedWords: [],
+            inferenceAnalysis: null
+        };
+
+        // Initialize the app
+        function initApp() {
+            initBackground();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade7Comprehension');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade7Comprehension', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade7Comprehension_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade7Comprehension_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a comprehension expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent reading skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing inference and vocabulary!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review context clues and inference strategies!";
+            } else {
+                scoreMessage.textContent = "Keep exploring! Reading skills will help you understand complex texts!";
+            }
+        }
+
+        // Create reading fact display
+        function createReadingFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'reading-fact';
+            
+            factDiv.innerHTML = `<strong>Amazing Reading Fact:</strong> ${readingFacts[Math.floor(Math.random() * readingFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "inference_basics": "🔍",
+                "vocabulary_context": "📖",
+                "drawing_conclusions": "🎯",
+                "making_predictions": "🔮",
+                "context_clues": "💡",
+                "tone_mood": "🎭"
+            };
+            
+            let conceptName = "Inference Basics";
+            let conceptIcon = "🔍";
+            
+            if (question.type.includes("inference_basics")) {
+                conceptName = "Inference";
+                conceptIcon = conceptIcons.inference_basics;
+            } else if (question.type.includes("vocabulary_context")) {
+                conceptName = "Vocabulary in Context";
+                conceptIcon = conceptIcons.vocabulary_context;
+            } else if (question.type.includes("drawing_conclusions")) {
+                conceptName = "Drawing Conclusions";
+                conceptIcon = conceptIcons.drawing_conclusions;
+            } else if (question.type.includes("making_predictions")) {
+                conceptName = "Making Predictions";
+                conceptIcon = conceptIcons.making_predictions;
+            } else if (question.type.includes("context_clues")) {
+                conceptName = "Context Clues";
+                conceptIcon = conceptIcons.context_clues;
+            } else if (question.type.includes("tone_mood")) {
+                conceptName = "Tone & Mood";
+                conceptIcon = conceptIcons.tone_mood;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("inference_basics")) {
+                label.textContent = "Reading between the lines to understand implied meaning";
+            } else if (question.type.includes("vocabulary_context")) {
+                label.textContent = "Using context to understand unfamiliar words";
+            } else if (question.type.includes("drawing_conclusions")) {
+                label.textContent = "Combining information to form logical conclusions";
+            } else if (question.type.includes("making_predictions")) {
+                label.textContent = "Using evidence to predict what might happen next";
+            } else if (question.type.includes("context_clues")) {
+                label.textContent = "Identifying clues that reveal word meanings";
+            } else if (question.type.includes("tone_mood")) {
+                label.textContent = "Understanding the author's attitude and emotional atmosphere";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create comprehension concepts visualization
+        function createComprehensionConcepts() {
+            const conceptsDiv = document.createElement('div');
+            
+            conceptsDiv.innerHTML = `
+                <div class="concepts-container">
+                    <div class="comprehension-card inference reading-flow" onclick="showComprehensionDetails('Inference')">
+                        <div class="comprehension-icon">🔍</div>
+                        <div class="comprehension-name">Inference</div>
+                        <div class="comprehension-description" style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px;">
+                            Reading Between Lines
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">
+                            Understanding implied meaning
+                        </div>
+                    </div>
+                    <div class="comprehension-card vocabulary inference-flow" onclick="showComprehensionDetails('Vocabulary')">
+                        <div class="comprehension-icon">📖</div>
+                        <div class="comprehension-name">Vocabulary</div>
+                        <div class="comprehension-description" style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px;">
+                            Words in Context
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">
+                            Using context clues
+                        </div>
+                    </div>
+                    <div class="comprehension-card context vocabulary-spin" onclick="showComprehensionDetails('Context')">
+                        <div class="comprehension-icon">💡</div>
+                        <div class="comprehension-name">Context</div>
+                        <div class="comprehension-description" style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px;">
+                            Surrounding Information
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">
+                            Clues for understanding
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return conceptsDiv;
+        }
+
+        // Create passage display with highlighted words
+        function createPassageDisplay(passageId) {
+            const passage = passages[passageId];
+            const passageDiv = document.createElement('div');
+            passageDiv.className = 'passage-display';
+            
+            // Add passage type badge
+            const typeBadge = document.createElement('div');
+            typeBadge.className = `passage-type passage-${passage.type}`;
+            typeBadge.textContent = passage.type === "fiction" ? "📚 Fiction Story" : "📊 Nonfiction Article";
+            
+            // Add title
+            const title = document.createElement('div');
+            title.style.cssText = 'font-size: 1.3rem; font-weight: bold; margin: 10px 0; color: var(--accent-yellow);';
+            title.textContent = passage.title;
+            
+            // Process content with highlighted words
+            let content = passage.content;
+            
+            // Highlight challenging words based on passage
+            const wordsToHighlight = [];
+            
+            if (passageId === 0) {
+                wordsToHighlight.push({word: "meticulous", color: "var(--primary-blue)"});
+                wordsToHighlight.push({word: "clutching", color: "var(--secondary-teal)"});
+                wordsToHighlight.push({word: "frustration", color: "var(--accent-orange)"});
+            } else if (passageId === 1) {
+                wordsToHighlight.push({word: "embark", color: "var(--primary-blue)"});
+                wordsToHighlight.push({word: "remarkable", color: "var(--secondary-teal)");
+                wordsToHighlight.push({word: "navigation", color: "var(--accent-orange)"});
+            } else if (passageId === 2) {
+                wordsToHighlight.push({word: "sentinel", color: "var(--primary-blue)"});
+                wordsToHighlight.push({word: "meticulous", color: "var(--secondary-teal)"});
+                wordsToHighlight.push({word: "echo", color: "var(--accent-orange)"});
+            } else if (passageId === 3) {
+                wordsToHighlight.push({word: "reconstructive", color: "var(--primary-blue)"});
+                wordsToHighlight.push({word: "malleability", color: "var(--secondary-teal)"});
+                wordsToHighlight.push({word: "alter", color: "var(--accent-orange)"});
+            }
+            
+            // Highlight words in content
+            wordsToHighlight.forEach(wordInfo => {
+                const regex = new RegExp(`\\b${wordInfo.word}\\b`, 'gi');
+                content = content.replace(regex, 
+                    `<span class="highlighted-word highlight-pulse" onclick="showWordDefinition('${wordInfo.word}')" style="color: ${wordInfo.color}; font-weight: bold;">${wordInfo.word}</span>`
+                );
+            });
+            
+            // Create content element
+            const contentDiv = document.createElement('div');
+            contentDiv.style.cssText = 'margin-top: 15px; line-height: 1.8; font-size: 1.1rem;';
+            contentDiv.innerHTML = content;
+            
+            // Add reading tips
+            const tipsDiv = document.createElement('div');
+            tipsDiv.style.cssText = 'margin-top: 20px; padding: 10px; background: rgba(33, 150, 243, 0.1); border-radius: 6px; border-left: 3px solid var(--primary-blue); font-size: 0.9rem;';
+            tipsDiv.innerHTML = `
+                <div style="color: var(--primary-blue); font-weight: bold; margin-bottom: 5px;">Reading Tips:</div>
+                <div style="color: var(--text-secondary);">
+                    • Click highlighted words to see definitions<br>
+                    • Look for context clues in surrounding sentences<br>
+                    • Consider what is implied, not just stated<br>
+                    • Think about the author's purpose
+                </div>
+            `;
+            
+            // Assemble passage display
+            passageDiv.appendChild(typeBadge);
+            passageDiv.appendChild(title);
+            passageDiv.appendChild(contentDiv);
+            passageDiv.appendChild(tipsDiv);
+            
+            // Store highlighted words for later use
+            comprehensionState.highlightedWords = wordsToHighlight;
+            
+            return passageDiv;
+        }
+
+        // Create inference visualization
+        function createInferenceVisualization() {
+            const inferenceDiv = document.createElement('div');
+            inferenceDiv.className = 'inference-visualization';
+            
+            const currentQuestion = appState.currentQuestions[appState.currentQuestionIndex];
+            const passage = passages[currentQuestion.passageId];
+            
+            inferenceDiv.innerHTML = `
+                <div class="display-title">Inference Analysis</div>
+                <div style="text-align: center; color: var(--text-secondary); margin-bottom: 15px;">
+                    How to read between the lines
+                </div>
+                
+                <div class="inference-diagram">
+                    <span class="clue text-clue" onclick="showClueInfo('Text Clue')">Text Evidence</span>
+                    <span style="margin: 0 10px; color: var(--text-secondary);">+</span>
+                    <span class="clue context-clue" onclick="showClueInfo('Context Clue')">Background Knowledge</span>
+                    <span style="margin: 0 10px; color: var(--text-secondary);">=</span>
+                    <span class="clue inference" onclick="showClueInfo('Inference')">Inference</span>
+                    <span style="margin: 0 10px; color: var(--text-secondary);">→</span>
+                    <span class="clue conclusion" onclick="showClueInfo('Conclusion')">Conclusion</span>
+                </div>
+                
+                <div class="analysis-controls">
+                    <div class="analysis-button" onclick="analyzePassageInference()">Analyze Passage</div>
+                    <div class="analysis-button" onclick="identifyClues()">Identify Clues</div>
+                    <div class="analysis-button" onclick="practiceInference()">Practice Inference</div>
+                    <div class="analysis-button" onclick="showInferenceExamples()">See Examples</div>
+                </div>
+                
+                <div id="inferenceResult" style="margin-top: 20px; padding: 15px; background: var(--dark-surface); border-radius: 8px; display: none;"></div>
+                
+                <table class="vocabulary-table">
+                    <thead>
+                        <tr>
+                            <th>Inference Type</th>
+                            <th>Description</th>
+                            <th>Example from Passage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${inferenceTypes.map(type => `
+                            <tr>
+                                <td style="font-weight: bold; color: var(--primary-blue);">${type.type}</td>
+                                <td>${type.description}</td>
+                                <td style="font-family: 'Georgia', serif;">${getInferenceExample(type.type, currentQuestion.passageId)}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            
+            return inferenceDiv;
+        }
+
+        // Helper function to get inference example
+        function getInferenceExample(type, passageId) {
+            const passage = passages[passageId];
+            
+            switch(type) {
+                case "Character Feelings":
+                    if (passageId === 0) return "Sarah felt relieved when she found the key";
+                    if (passageId === 2) return "Captain Harris felt nostalgic about the lighthouse";
+                    return "Infer emotions from actions";
+                case "Cause and Effect":
+                    if (passageId === 0) return "Because it was raining, Sarah hurried";
+                    if (passageId === 1) return "Butterflies migrate because seasons change";
+                    return "Connect actions to results";
+                case "Predictions":
+                    if (passageId === 0) return "Sarah will return home with the key";
+                    if (passageId === 1) return "Monarchs will continue their migration";
+                    return "Guess what happens next";
+                case "Theme/Main Idea":
+                    if (passageId === 0) return "Persistence pays off";
+                    if (passageId === 1) return "Nature has amazing adaptations";
+                    return "Find deeper meaning";
+                default:
+                    return "Example inference";
+            }
+        }
+
+        // Create vocabulary visualization
+        function createVocabularyVisualization() {
+            const vocabDiv = document.createElement('div');
+            vocabDiv.className = 'vocabulary-visualization';
+            
+            vocabDiv.innerHTML = `
+                <div class="display-title">Vocabulary Strategies</div>
+                <div style="text-align: center; color: var(--text-secondary); margin-bottom: 15px;">
+                    Different ways to understand unfamiliar words
+                </div>
+                
+                <div class="types-display">
+                    ${contextClueTypes.map((type, idx) => `
+                        <div class="type-box ${type.type.toLowerCase().replace(' ', '-')} word-bounce" onclick="showContextClueType('${type.type}')">
+                            <div class="type-icon">${getClueIcon(type.type)}</div>
+                            <div class="type-name">${type.type}</div>
+                            <div class="type-description">${type.description}</div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: rgba(33, 150, 243, 0.1); border-radius: 8px; border: 1px solid var(--primary-blue);">
+                    <div style="color: var(--primary-blue); font-weight: bold; margin-bottom: 10px;">Vocabulary Tip:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        When you encounter an unfamiliar word:<br>
+                        1. Read the sentence before and after<br>
+                        2. Look for definition clues, examples, or comparisons<br>
+                        3. Try to break the word into parts (prefix, root, suffix)<br>
+                        4. Substitute your guess to see if it makes sense
+                    </div>
+                </div>
+            `;
+            
+            return vocabDiv;
+        }
+
+        // Helper function to get clue icon
+        function getClueIcon(type) {
+            const icons = {
+                "Definition Clue": "📖",
+                "Example Clue": "🔍",
+                "Synonym Clue": "↔️",
+                "Antonym Clue": "🔄",
+                "Inference Clue": "💡"
+            };
+            return icons[type] || "📝";
+        }
+
+        // Create vocabulary examples visualization
+        function createVocabularyExamples() {
+            const examplesDiv = document.createElement('div');
+            examplesDiv.className = 'examples-container';
+            
+            examplesDiv.innerHTML = `
+                <div class="display-title">Vocabulary Examples</div>
+                <div style="text-align: center; color: var(--text-secondary); margin-bottom: 15px;">
+                    Click on examples to learn different vocabulary strategies
+                </div>
+                
+                <div class="examples-grid">
+                    <div class="example-box context-clues" onclick="showVocabularyExample('Context Clues')">
+                        <div class="example-icon">🔍</div>
+                        <div class="example-name">Context Clues</div>
+                        <div class="example-sentence">"The vociferous crowd cheered loudly."</div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                            "cheered loudly" suggests vociferous means loud
+                        </div>
+                    </div>
+                    <div class="example-box word-parts" onclick="showVocabularyExample('Word Parts')">
+                        <div class="example-icon">🧩</div>
+                        <div class="example-name">Word Parts</div>
+                        <div class="example-sentence">"Unpredictable behavior"</div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                            un- (not) + predict + -able = not able to be predicted
+                        </div>
+                    </div>
+                    <div class="example-box inference" onclick="showVocabularyExample('Inference')">
+                        <div class="example-icon">💡</div>
+                        <div class="example-name">Inference</div>
+                        <div class="example-sentence">"She meticulously arranged each item."</div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                            "arranged each item" suggests carefully, precisely
+                        </div>
+                    </div>
+                    <div class="example-box tone" onclick="showVocabularyExample('Tone')">
+                        <div class="example-icon">🎭</div>
+                        <div class="example-name">Tone Clues</div>
+                        <div class="example-sentence">"His sardonic remark made everyone uncomfortable."</div>
+                        <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                            "made everyone uncomfortable" suggests mocking, sarcastic
+                        </div>
+                    </div>
+                </div>
+                
+                <table class="vocabulary-table">
+                    <thead>
+                        <tr>
+                            <th>Strategy</th>
+                            <th>How It Works</th>
+                            <th>Example Sentence</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: bold; color: var(--primary-blue);">Context Clues</td>
+                            <td>Use surrounding words for hints</td>
+                            <td style="font-family: 'Georgia', serif;">The arid desert had almost no vegetation.</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; color: var(--accent-green);">Word Parts</td>
+                            <td>Break into prefixes, roots, suffixes</td>
+                            <td style="font-family: 'Georgia', serif;">The project was unfinished (un- = not).</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; color: var(--accent-orange);">Synonyms</td>
+                            <td>Find words with similar meanings</td>
+                            <td style="font-family: 'Georgia', serif;">The enormous, huge building towered above.</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; color: var(--accent-red);">Antonyms</td>
+                            <td>Find words with opposite meanings</td>
+                            <td style="font-family: 'Georgia', serif;">Unlike her outgoing sister, she was quite introverted.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            
+            return examplesDiv;
+        }
+
+        // Create comprehension visualization
+        function createComprehensionVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const currentQuestion = appState.currentQuestions[appState.currentQuestionIndex];
+            const passage = passages[currentQuestion.passageId];
+            const currentVocabulary = challengingWords[Math.floor(Math.random() * challengingWords.length)];
+            const currentStrategy = vocabularyStrategies[Math.floor(Math.random() * vocabularyStrategies.length)];
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-yellow);">Comprehension Skills Explorer</h3>
+                
+                ${createComprehensionConcepts().outerHTML}
+                
+                <div class="passage-display" style="border-color: var(--primary-blue);">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; text-align: center;">
+                        Focus: <span style="color: var(--primary-blue); font-weight: bold;">${passage.title}</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.2rem; color: var(--primary-blue); margin-bottom: 10px;">Passage Type</div>
+                            <div style="font-size: 1.1rem; color: var(--text-secondary); padding: 10px; background: rgba(33, 150, 243, 0.1); border-radius: 8px;">
+                                ${passage.type === "fiction" ? "📚 Fiction Story" : "📊 Nonfiction Article"}
+                            </div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">
+                                ${passage.type === "fiction" ? "Creative writing, characters, plot" : "Facts, information, explanations"}
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.2rem; color: var(--secondary-teal); margin-bottom: 10px;">Reading Strategy</div>
+                            <div style="font-size: 1.1rem; color: var(--text-secondary); padding: 10px; background: rgba(0, 150, 136, 0.1); border-radius: 8px;">
+                                ${currentStrategy.strategy}
+                            </div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">
+                                ${currentStrategy.description}
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(255, 235, 59, 0.1); border-radius: 6px; border-left: 3px solid var(--accent-yellow);">
+                        <div style="font-size: 0.9rem; color: var(--accent-yellow);">
+                            <strong>Comprehension Tip:</strong> Good readers constantly ask questions: What does this mean? Why did this happen? What will happen next?
+                        </div>
+                    </div>
+                </div>
+                
+                ${createInferenceVisualization().outerHTML}
+                ${createVocabularyVisualization().outerHTML}
+                ${createVocabularyExamples().outerHTML}
+                
+                <div class="word-focus" style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid var(--accent-orange); font-style: italic;">
+                    <div style="color: var(--accent-orange); font-weight: bold; margin-bottom: 10px;">Word of Focus: ${currentVocabulary.word}</div>
+                    <div style="color: var(--text-secondary); margin-bottom: 10px;">
+                        <strong>Meaning:</strong> ${currentVocabulary.meaning}<br>
+                        <strong>Example:</strong> "${currentVocabulary.sentence}"<br>
+                        <strong>Context Clues:</strong> ${currentVocabulary.contextClues.join(", ")}
+                    </div>
+                    <div style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
+                        Try using this word in your own sentence!
+                    </div>
+                </div>
+                
+                <div class="interactive-practice">
+                    <div class="practice-title">Interactive Comprehension Practice</div>
+                    <div class="practice-controls">
+                        <div class="practice-button" onclick="practiceInferenceSkills()">Practice Inference</div>
+                        <div class="practice-button" onclick="practiceVocabularyContext()">Vocabulary in Context</div>
+                        <div class="practice-button" onclick="practiceContextClues()">Context Clues</div>
+                        <div class="practice-button" onclick="practiceDrawingConclusions()">Drawing Conclusions</div>
+                    </div>
+                    <div class="practice-display" id="practiceDisplay">
+                        Click buttons above to practice comprehension skills
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--accent-red);">
+                    <div style="color: var(--accent-red); font-weight: bold; margin-bottom: 10px;">Quick Practice:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. What can you infer about a character who "sighed deeply and looked at the clock every few minutes"?<br>
+                        2. What does "punctual" mean in: "She was always punctual, never arriving late"?<br>
+                        3. What type of context clue is used in: "The desolate, empty landscape stretched for miles"?<br>
+                        4. Based on: "He practiced daily for months", what can you conclude?<br>
+                        5. What might happen next if: "Dark clouds gathered and the wind began to howl"?
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--primary-blue);">
+                    <div style="color: var(--primary-blue); font-weight: bold; margin-bottom: 10px; text-align: center;">Comprehension Strategies</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                        <strong>Inference:</strong> Text clues + Background knowledge = Implied meaning<br>
+                        <strong>Vocabulary:</strong> Use context, word parts, synonyms/antonyms<br>
+                        <strong>Conclusions:</strong> Combine evidence to form logical ideas<br>
+                        <strong>Predictions:</strong> Use evidence to guess what happens next
+                    </div>
+                </div>
+            `;
+            
+            return vizDiv;
+        }
+
+        // Global functions for interactive practice
+        window.showComprehensionDetails = function(concept) {
+            if (concept === 'Inference') {
+                alert(`🔍 Inference\n\nInference means "reading between the lines" to understand what is implied but not directly stated.\n\nHow to make inferences:\n1. Look for text evidence (what is directly stated)\n2. Add your background knowledge\n3. Make a logical conclusion\n\nExample:\nText: "Sarah's hands shook as she opened the letter."\nInference: Sarah is nervous or anxious about the letter's contents.\n\nPractice: Ask "What does this suggest? What can I conclude?"`);
+            } else if (concept === 'Vocabulary') {
+                alert(`📖 Vocabulary in Context\n\nUnderstanding unfamiliar words using the surrounding text.\n\nStrategies:\n• Context Clues: Use surrounding words/sentences\n• Word Parts: Break into prefixes, roots, suffixes\n• Synonyms/Antonyms: Find similar/opposite words\n• Examples: Look for examples that explain the word\n\nExample:\n"The arid desert had almost no plant life."\nClue: "almost no plant life" suggests arid means dry.\n\nTip: Substitute your guess - does it make sense?`);
+            } else {
+                alert(`💡 Context Clues\n\nTypes of context clues in texts:\n\n1. Definition Clue: Meaning is explained\n   "A philanthropist, someone who helps others..."\n\n2. Example Clue: Examples are given\n   "Celestial bodies like the sun, moon, and stars..."\n\n3. Synonym Clue: Similar word is used\n   "The arduous, difficult journey..."\n\n4. Antonym Clue: Opposite word helps\n   "Unlike her gregarious sister, she was shy."\n\n5. Inference Clue: You must figure it out\n   "His vociferous complaints could be heard everywhere."`);
+            }
+        };
+
+        window.showWordDefinition = function(word) {
+            const wordInfo = challengingWords.find(w => w.word === word);
+            if (!wordInfo) {
+                alert(`Word: ${word}\n\nClick highlighted words to see definitions and context clues.`);
+                return;
+            }
+            
+            alert(`Word: ${wordInfo.word}\n\nMeaning: ${wordInfo.meaning}\n\nExample: "${wordInfo.sentence}"\n\nContext Clues: ${wordInfo.contextClues.join(", ")}\n\nTry using this word in your own sentence!`);
+        };
+
+        window.showClueInfo = function(clueType) {
+            let info = '';
+            
+            switch(clueType) {
+                case 'Text Clue':
+                    info = `📖 Text Evidence\n\nWhat is directly stated in the text.\n\nExamples:\n• Direct statements\n• Descriptions\n• Dialogue\n• Facts and details\n\nLook for: What does the text actually say?`;
+                    break;
+                case 'Context Clue':
+                    info = `🧠 Background Knowledge\n\nWhat you already know about the topic.\n\nIncludes:\n• Personal experiences\n• Prior learning\n• General knowledge\n• Understanding of how things work\n\nCombine with text evidence to make inferences.`;
+                    break;
+                case 'Inference':
+                    info = `💡 Inference\n\nLogical conclusion based on text + background knowledge.\n\nFormula:\nText Evidence + Background Knowledge = Inference\n\nExample:\nText: "She wore a heavy coat and gloves."\nKnowledge: People wear warm clothes in cold weather.\nInference: It is probably cold outside.`;
+                    break;
+                case 'Conclusion':
+                    info = `🎯 Conclusion\n\nFinal understanding or decision based on inferences.\n\nCharacteristics:\n• Supported by evidence\n• Logical and reasonable\n• Explains or summarizes\n• May predict or evaluate\n\nGood conclusions are well-supported and make sense.`;
+                    break;
+            }
+            
+            alert(info);
+        };
+
+        window.showContextClueType = function(type) {
+            const clueType = contextClueTypes.find(c => c.type === type);
+            if (!clueType) return;
+            
+            alert(`${type}\n\n${clueType.description}\n\nExample:\n"${clueType.example}"\n\nHow to use:\n1. Identify the unfamiliar word\n2. Look for the clue type in surrounding text\n3. Use the clue to guess the meaning\n4. Check if your guess makes sense in the sentence`);
+        };
+
+        window.showVocabularyExample = function(exampleType) {
+            let details = '';
+            
+            switch(exampleType) {
+                case 'Context Clues':
+                    details = `🔍 Context Clues\n\nUsing surrounding text to understand words.\n\nExample Sentence:\n"The vociferous crowd cheered loudly at the concert."\n\nAnalysis:\n• Unfamiliar word: "vociferous"\n• Context: "cheered loudly"\n• Inference: "vociferous" probably means loud or noisy\n\nTest: Substitute "loud" - does it make sense?`;
+                    break;
+                case 'Word Parts':
+                    details = `🧩 Word Parts\n\nBreaking words into prefixes, roots, suffixes.\n\nExample Word:\n"Unpredictable"\n\nAnalysis:\n• Prefix: "un-" means "not"\n• Root: "predict" means "tell beforehand"\n• Suffix: "-able" means "able to be"\n• Meaning: "not able to be predicted"\n\nCommon Prefixes: un-, re-, pre-, mis-\nCommon Suffixes: -able, -tion, -ment, -ly`;
+                    break;
+                case 'Inference':
+                    details = `💡 Inference for Vocabulary\n\nUsing the situation to guess word meaning.\n\nExample Sentence:\n"She meticulously arranged each item in perfect order."\n\nAnalysis:\n• Situation: arranging items in perfect order\n• Inference: "meticulously" suggests carefully, precisely\n• Evidence: "perfect order" requires careful attention\n\nThink: What would someone do to get "perfect order"?`;
+                    break;
+                case 'Tone':
+                    details = `🎭 Tone Clues\n\nUsing the author's attitude to understand words.\n\nExample Sentence:\n"His sardonic remark made everyone uncomfortable."\n\nAnalysis:\n• Result: "made everyone uncomfortable"\n• Tone: remarks that make people uncomfortable\n• Inference: "sardonic" probably means mocking, sarcastic\n\nTip: Pay attention to how other characters react.`;
+                    break;
+            }
+            
+            alert(details);
+        };
+
+        // Analysis functions
+        window.analyzePassageInference = function() {
+            const resultDiv = document.getElementById('inferenceResult');
+            if (!resultDiv) return;
+            
+            const currentQuestion = appState.currentQuestions[appState.currentQuestionIndex];
+            const passage = passages[currentQuestion.passageId];
+            
+            resultDiv.innerHTML = `
+                <div style="color: var(--primary-blue); font-weight: bold; margin-bottom: 10px;">Passage Analysis: ${passage.title}</div>
+                <div style="color: var(--text-secondary); margin-bottom: 10px;">
+                    <strong>Passage Type:</strong> ${passage.type === "fiction" ? "Fiction (story)" : "Nonfiction (informational)"}<br>
+                    <strong>Key Inferences Possible:</strong><br>
+                    ${getPassageInferences(currentQuestion.passageId)}
+                </div>
+                <div style="color: var(--accent-yellow); font-size: 0.9rem; margin-top: 10px;">
+                    <strong>Analysis Strategy:</strong> ${getAnalysisStrategy(currentQuestion.type)}
+                </div>
+            `;
+            resultDiv.style.display = 'block';
+        };
+
+        function getPassageInferences(passageId) {
+            const passage = passages[passageId];
+            
+            switch(passageId) {
+                case 0:
+                    return `• Sarah values her grandmother's opinion (worries about explaining lost items)<br>
+                    • The key is important (opens special jewelry box)<br>
+                    • Sarah is persistent (searched for over an hour)<br>
+                    • Weather affects mood (rain adds to frustration)`;
+                case 1:
+                    return `• Migration is complex (multiple generations involved)<br>
+                    • Butterflies have sophisticated navigation systems<br>
+                    • Environmental changes could affect migration<br>
+                    • This is a natural wonder worth protecting`;
+                case 2:
+                    return `• Technology replaces traditional methods (GPS replaces lighthouse)<br>
+                    • Some value tradition and history (stories continue)<br>
+                    • Places can hold memories and significance<br>
+                    • Change can be bittersweet (progress vs. nostalgia)`;
+                case 3:
+                    return `• Memory is not perfectly reliable<br>
+                    • Our understanding evolves with new information<br>
+                    • Different perspectives affect recollection<br>
+                    • Science helps us understand human experience`;
+                default:
+                    return "Look for character motivations, cause-effect relationships, and implied meanings.";
+            }
+        }
+
+        function getAnalysisStrategy(questionType) {
+            switch(questionType) {
+                case "inference_basics":
+                    return "Look for what is implied but not directly stated. Ask: What does this suggest?";
+                case "vocabulary_context":
+                    return "Examine words before and after the unfamiliar word. Look for definitions, examples, or comparisons.";
+                case "drawing_conclusions":
+                    return "Combine multiple pieces of evidence to form a logical conclusion.";
+                case "making_predictions":
+                    return "Use current evidence to make a reasonable guess about what will happen.";
+                case "context_clues":
+                    return "Identify the type of clue: definition, example, synonym, antonym, or inference.";
+                case "tone_mood":
+                    return "Pay attention to word choice, descriptions, and overall feeling created.";
+                default:
+                    return "Read carefully and think about what the text means, not just what it says.";
+            }
+        }
+
+        window.identifyClues = function() {
+            const resultDiv = document.getElementById('inferenceResult');
+            if (!resultDiv) return;
+            
+            const currentQuestion = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            resultDiv.innerHTML = `
+                <div style="color: var(--secondary-teal); font-weight: bold; margin-bottom: 10px;">Clue Identification</div>
+                <div style="color: var(--text-secondary); margin-bottom: 10px;">
+                    <strong>Question Type:</strong> ${currentQuestion.type.replace('_', ' ').toUpperCase()}<br>
+                    <strong>Key Clues to Look For:</strong><br>
+                    ${getClueTypes(currentQuestion.type)}
+                </div>
+                <div style="color: var(--accent-yellow); font-size: 0.9rem; margin-top: 10px;">
+                    <strong>Tip:</strong> Good readers actively search for clues while reading.
+                </div>
+            `;
+            resultDiv.style.display = 'block';
+        };
+
+        function getClueTypes(questionType) {
+            switch(questionType) {
+                case "inference_basics":
+                    return `• Character actions and dialogue<br>
+                    • Descriptive details about setting<br>
+                    • How characters react to events<br>
+                    • What is not said directly`;
+                case "vocabulary_context":
+                    return `• Definitions within the text<br>
+                    • Examples that illustrate meaning<br>
+                    • Synonyms or antonyms nearby<br>
+                    • Word parts (prefixes, roots, suffixes)`;
+                case "drawing_conclusions":
+                    return `• Multiple pieces of evidence<br>
+                    • Patterns or repetitions<br>
+                    • Cause-effect relationships<br>
+                    • Overall message or theme`;
+                case "making_predictions":
+                    return `• Current situation or problem<br>
+                    • Character motivations and traits<br>
+                    • Foreshadowing or hints<br>
+                    • Typical patterns in the genre`;
+                case "context_clues":
+                    return `• Direct definitions<br>
+                    • Examples provided<br>
+                    • Comparisons or contrasts<br>
+                    • Tone or feeling created`;
+                case "tone_mood":
+                    return `• Word choice (positive/negative)<br>
+                    • Figurative language<br>
+                    • Sentence structure<br>
+                    • Overall impression created`;
+                default:
+                    return "Look for evidence in the text that supports your understanding.";
+            }
+        }
+
+        // Interactive practice functions
+        window.practiceInferenceSkills = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const inferenceExercises = [
+                {
+                    text: "Maria checked her watch for the third time in five minutes and sighed heavily.",
+                    question: "What can you infer about Maria?",
+                    options: ["She is impatient or waiting anxiously", "She is bored and tired", "She is checking the time casually", "She is late for an appointment"],
+                    correct: 0,
+                    explanation: "Checking watch repeatedly + sighing heavily suggests impatience or anxiety about time."
+                },
+                {
+                    text: "Despite the heavy rain, the children played outside, laughing and splashing in puddles.",
+                    question: "What can you infer about the children?",
+                    options: ["They enjoy playing in the rain", "They don't like staying indoors", "They are being careless", "They didn't notice the rain"],
+                    correct: 0,
+                    explanation: "'Despite the rain' + 'laughing and splashing' shows they're enjoying it."
+                },
+                {
+                    text: "The old bookstore had a bell that jingled when the door opened, and the smell of aged paper filled the air.",
+                    question: "What mood does this description create?",
+                    options: ["Nostalgic and cozy", "Dark and scary", "Modern and clean", "Busy and noisy"],
+                    correct: 0,
+                    explanation: "'Old bookstore', 'bell that jingled', 'smell of aged paper' creates nostalgic, cozy feeling."
+                }
+            ];
+            
+            const currentExercise = inferenceExercises[Math.floor(Math.random() * inferenceExercises.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary-blue);">Practice Inference</div>
+                    <div style="font-size: 1.2rem; margin-bottom: 15px; font-family: 'Georgia', serif; color: var(--text-primary); font-style: italic;">
+                        "${currentExercise.text}"
+                    </div>
+                    <div style="font-size: 1.1rem; margin-bottom: 20px; color: var(--accent-yellow);">
+                        ${currentExercise.question}
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 10px; margin: 20px 0;">
+                        ${currentExercise.options.map((option, idx) => `
+                            <div class="option" onclick="checkInferenceAnswer(this, ${idx}, ${currentExercise.correct})">
+                                <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                <div class="option-text">${option}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div id="inferencePracticeResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Remember:</strong> Inference = Text evidence + Your knowledge
+                    </div>
+                </div>
+            `;
+            
+            window.currentInferenceExplanation = currentExercise.explanation;
+        };
+
+        window.checkInferenceAnswer = function(element, selectedIndex, correctIndex) {
+            const resultDiv = document.getElementById('inferencePracticeResult');
+            if (!resultDiv) return;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (selectedIndex === correctIndex) {
+                element.classList.add('correct');
+                resultDiv.textContent = "Correct! Excellent inference skills!";
+                resultDiv.style.color = 'var(--primary-blue)';
+            } else {
+                element.classList.add('incorrect');
+                // Find and highlight correct option
+                options.forEach(opt => {
+                    if (Array.from(options).indexOf(opt) === correctIndex) {
+                        opt.classList.add('correct');
+                    }
+                });
+                resultDiv.innerHTML = `Incorrect. ${window.currentInferenceExplanation}`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+            
+            resultDiv.classList.add('pulse');
+            setTimeout(() => resultDiv.classList.remove('pulse'), 500);
+        };
+
+        window.practiceVocabularyContext = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const vocabExercises = [
+                {
+                    sentence: "The teacher's lucid explanation made the complex topic easy to understand.",
+                    word: "lucid",
+                    options: ["Clear and easy to understand", "Complicated and confusing", "Boring and dull", "Quick and brief"],
+                    correct: 0,
+                    explanation: "Context clue: 'made the complex topic easy to understand' suggests lucid means clear."
+                },
+                {
+                    sentence: "His magnanimous gesture of donating his entire bonus to charity surprised everyone.",
+                    word: "magnanimous",
+                    options: ["Generous and noble", "Selfish and greedy", "Small and insignificant", "Expected and normal"],
+                    correct: 0,
+                    explanation: "Context: 'donating his entire bonus to charity' suggests generous, noble action."
+                },
+                {
+                    sentence: "The dilapidated building had broken windows, peeling paint, and a sagging roof.",
+                    word: "dilapidated",
+                    options: ["In poor condition, run-down", "Newly built, modern", "Beautifully decorated", "Strong and sturdy"],
+                    correct: 0,
+                    explanation: "Context clues: 'broken windows, peeling paint, sagging roof' all describe poor condition."
+                }
+            ];
+            
+            const currentExercise = vocabExercises[Math.floor(Math.random() * vocabExercises.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--secondary-teal);">Vocabulary in Context</div>
+                    <div style="font-size: 1.2rem; margin-bottom: 15px; font-family: 'Georgia', serif; color: var(--text-primary);">
+                        "${currentExercise.sentence}"
+                    </div>
+                    <div style="font-size: 1.1rem; margin-bottom: 20px; color: var(--accent-yellow);">
+                        Based on context, what does <strong>${currentExercise.word}</strong> most likely mean?
+                    </div>
+                    
+                    <div style="text-align: left; margin: 20px 0;">
+                        ${currentExercise.options.map((option, idx) => `
+                            <div style="margin: 10px 0; display: flex; align-items: center;">
+                                <input type="radio" id="vocab${idx}" name="vocab" value="${option}" style="margin-right: 10px;">
+                                <label for="vocab${idx}" style="color: var(--text-secondary); cursor: pointer;">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div>
+                        <button class="btn btn-small btn-secondary" onclick="checkVocabAnswer()">Check Answer</button>
+                        <button class="btn btn-small btn-outline" onclick="showVocabSolution()">Show Solution</button>
+                    </div>
+                    
+                    <div id="vocabResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            window.currentVocabAnswer = currentExercise.options[currentExercise.correct];
+            window.currentVocabExplanation = currentExercise.explanation;
+        };
+
+        window.checkVocabAnswer = function() {
+            const resultDiv = document.getElementById('vocabResult');
+            if (!resultDiv) return;
+            
+            const radios = document.querySelectorAll('input[type="radio"]');
+            let selectedValue = '';
+            
+            radios.forEach(radio => {
+                if (radio.checked) {
+                    selectedValue = radio.value;
+                }
+            });
+            
+            if (!selectedValue) {
+                resultDiv.textContent = "Please select an option.";
+                resultDiv.style.color = 'var(--accent-red)';
+                return;
+            }
+            
+            if (selectedValue === window.currentVocabAnswer) {
+                resultDiv.textContent = "Correct! Great vocabulary skills!";
+                resultDiv.style.color = 'var(--primary-blue)';
+            } else {
+                resultDiv.textContent = `Incorrect. The correct meaning is: ${window.currentVocabAnswer}`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+        };
+
+        window.showVocabSolution = function() {
+            const resultDiv = document.getElementById('vocabResult');
+            if (resultDiv && window.currentVocabAnswer) {
+                resultDiv.innerHTML = `
+                    <div>
+                        <div style="color: var(--secondary-teal); margin-bottom: 5px;"><strong>Correct answer:</strong> ${window.currentVocabAnswer}</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">${window.currentVocabExplanation}</div>
+                    </div>
+                `;
+            }
+        };
+
+        window.practiceContextClues = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const contextClueExercises = [
+                {
+                    sentence: "The arid desert, a dry and barren landscape, stretched for miles.",
+                    word: "arid",
+                    clueType: "Definition clue",
+                    explanation: "The meaning is directly explained: 'a dry and barren landscape'"
+                },
+                {
+                    sentence: "Celestial bodies such as the sun, moon, and stars fascinated the ancient astronomers.",
+                    word: "celestial",
+                    clueType: "Example clue",
+                    explanation: "Examples are given: 'the sun, moon, and stars'"
+                },
+                {
+                    sentence: "The arduous, difficult journey took them through mountains and valleys.",
+                    word: "arduous",
+                    clueType: "Synonym clue",
+                    explanation: "A synonym is provided: 'difficult'"
+                },
+                {
+                    sentence: "Unlike her gregarious sister who loved parties, she preferred quiet evenings at home.",
+                    word: "gregarious",
+                    clueType: "Antonym clue",
+                    explanation: "Contrast with 'preferred quiet evenings' suggests opposite meaning"
+                }
+            ];
+            
+            const currentExercise = contextClueExercises[Math.floor(Math.random() * contextClueExercises.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-purple);">Context Clue Practice</div>
+                    <div style="font-size: 1.2rem; margin-bottom: 15px; font-family: 'Georgia', serif; color: var(--text-primary);">
+                        "${currentExercise.sentence}"
+                    </div>
+                    <div style="font-size: 1.1rem; margin-bottom: 20px; color: var(--accent-yellow);">
+                        What type of context clue helps you understand <strong>${currentExercise.word}</strong>?
+                    </div>
+                    
+                    <div style="margin: 20px 0;">
+                        <select id="clueTypeSelect" style="width: 100%; padding: 15px; background: var(--dark-surface); border: 2px solid var(--dark-border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+                            <option value="">Select context clue type...</option>
+                            <option value="Definition clue">Definition clue</option>
+                            <option value="Example clue">Example clue</option>
+                            <option value="Synonym clue">Synonym clue</option>
+                            <option value="Antonym clue">Antonym clue</option>
+                            <option value="Inference clue">Inference clue</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <button class="btn btn-small btn-secondary" onclick="checkClueTypeAnswer()">Check Answer</button>
+                        <button class="btn btn-small btn-outline" onclick="showClueTypeSolution()">Show Solution</button>
+                    </div>
+                    
+                    <div id="clueTypeResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            window.currentClueAnswer = currentExercise.clueType;
+            window.currentClueExplanation = currentExercise.explanation;
+        };
+
+        window.checkClueTypeAnswer = function() {
+            const select = document.getElementById('clueTypeSelect');
+            const resultDiv = document.getElementById('clueTypeResult');
+            
+            if (!select || !resultDiv) return;
+            
+            const selectedValue = select.value;
+            
+            if (!selectedValue) {
+                resultDiv.textContent = "Please select a context clue type.";
+                resultDiv.style.color = 'var(--accent-red)';
+                return;
+            }
+            
+            if (selectedValue === window.currentClueAnswer) {
+                resultDiv.textContent = "Correct! Great context clue identification!";
+                resultDiv.style.color = 'var(--primary-blue)';
+            } else {
+                resultDiv.textContent = `Incorrect. This is a ${window.currentClueAnswer.toLowerCase()}.`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+        };
+
+        window.showClueTypeSolution = function() {
+            const resultDiv = document.getElementById('clueTypeResult');
+            if (resultDiv && window.currentClueAnswer) {
+                resultDiv.innerHTML = `
+                    <div>
+                        <div style="color: var(--secondary-teal); margin-bottom: 5px;"><strong>Correct answer:</strong> ${window.currentClueAnswer}</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">${window.currentClueExplanation}</div>
+                    </div>
+                `;
+            }
+        };
+
+        window.practiceDrawingConclusions = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const conclusionExercises = [
+                {
+                    details: [
+                        "The sky grew dark with thick clouds.",
+                        "The wind began to howl through the trees.",
+                        "Birds stopped singing and sought shelter.",
+                        "The temperature dropped suddenly."
+                    ],
+                    question: "What conclusion can you draw?",
+                    options: ["A storm is approaching", "It is becoming nighttime", "The seasons are changing", "Birds are migrating"],
+                    correct: 0,
+                    explanation: "Multiple weather signs (dark clouds, wind, temperature drop) suggest a storm is coming."
+                },
+                {
+                    details: [
+                        "Maria practiced piano for two hours every day.",
+                        "Her teacher said she was making excellent progress.",
+                        "She was selected to perform at the school concert.",
+                        "Her parents bought her a new music book."
+                    ],
+                    question: "What conclusion can you draw about Maria?",
+                    options: ["She is dedicated to improving her piano skills", "She doesn't enjoy practicing", "Her parents are forcing her to play", "She wants to quit piano"],
+                    correct: 0,
+                    explanation: "Regular practice + progress + performance selection shows dedication to improvement."
+                }
+            ];
+            
+            const currentExercise = conclusionExercises[Math.floor(Math.random() * conclusionExercises.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-orange);">Drawing Conclusions Practice</div>
+                    
+                    <div style="text-align: left; margin: 20px 0; padding: 15px; background: var(--dark-surface); border-radius: 8px;">
+                        <div style="color: var(--text-secondary); margin-bottom: 10px;">Consider these details:</div>
+                        ${currentExercise.details.map(detail => `
+                            <div style="margin: 8px 0; padding-left: 15px; border-left: 3px solid var(--primary-blue); color: var(--text-primary);">
+                                • ${detail}
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div style="font-size: 1.1rem; margin-bottom: 20px; color: var(--accent-yellow);">
+                        ${currentExercise.question}
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 10px; margin: 20px 0;">
+                        ${currentExercise.options.map((option, idx) => `
+                            <div class="option" onclick="checkConclusionAnswer(this, ${idx}, ${currentExercise.correct})">
+                                <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                <div class="option-text">${option}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div id="conclusionResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Remember:</strong> Conclusions combine multiple pieces of evidence.
+                    </div>
+                </div>
+            `;
+            
+            window.currentConclusionExplanation = currentExercise.explanation;
+        };
+
+        window.checkConclusionAnswer = function(element, selectedIndex, correctIndex) {
+            const resultDiv = document.getElementById('conclusionResult');
+            if (!resultDiv) return;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (selectedIndex === correctIndex) {
+                element.classList.add('correct');
+                resultDiv.textContent = "Correct! Excellent conclusion drawing!";
+                resultDiv.style.color = 'var(--primary-blue)';
+            } else {
+                element.classList.add('incorrect');
+                // Find and highlight correct option
+                options.forEach(opt => {
+                    if (Array.from(options).indexOf(opt) === correctIndex) {
+                        opt.classList.add('correct');
+                    }
+                });
+                resultDiv.innerHTML = `Incorrect. ${window.currentConclusionExplanation}`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+            
+            resultDiv.classList.add('pulse');
+            setTimeout(() => resultDiv.classList.remove('pulse'), 500);
+        };
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const passage = passages[question.passageId];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            // Clear containers
+            readingFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            passageDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            // Add content
+            readingFact.appendChild(createReadingFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            passageDisplay.appendChild(createPassageDisplay(question.passageId));
+            visualizationContainer.appendChild(createComprehensionVisualization());
+            
+            // Reset comprehension state
+            comprehensionState.currentPassage = passage;
+            comprehensionState.inferenceAnalysis = null;
+            
+            // Add options
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

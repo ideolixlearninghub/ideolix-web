@@ -1,0 +1,3162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Math - Data Handling | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Data Handling Theme */
+        :root {
+            --primary-blue: #2196F3;
+            --secondary-teal: #009688;
+            --accent-yellow: #FFEB3B;
+            --accent-green: #4CAF50;
+            --accent-orange: #FF9800;
+            --accent-red: #F44336;
+            --accent-purple: #9C27B0;
+            --accent-pink: #E91E63;
+            --accent-indigo: #3F51B5;
+            --accent-cyan: #00BCD4;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --data-glow: 0 0 20px rgba(33, 150, 243, 0.4);
+            --chart-glow: 0 0 20px rgba(0, 150, 136, 0.4);
+            --stats-glow: 0 0 20px rgba(255, 235, 59, 0.4);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Data Pattern Background */
+        .data-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 150, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 235, 59, 0.1) 0%, transparent 50%),
+                linear-gradient(90deg, transparent 49%, rgba(33, 150, 243, 0.05) 50%, transparent 51%),
+                linear-gradient(180deg, transparent 49%, rgba(0, 150, 136, 0.05) 50%, transparent 51%);
+            opacity: 0.3;
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 3rem;
+            font-weight: bold;
+            animation: floatElement 25s linear infinite;
+        }
+
+        @keyframes floatElement {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.1; }
+            25% { transform: translateY(-150px) translateX(100px) rotate(90deg); opacity: 0.05; }
+            50% { transform: translateY(-50px) translateX(-150px) rotate(180deg); opacity: 0.1; }
+            75% { transform: translateY(150px) translateX(50px) rotate(270deg); opacity: 0.05; }
+            100% { transform: translateY(0) translateX(0) rotate(360deg); opacity: 0.1; }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--data-glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(33, 150, 243, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-blue);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-teal);
+            color: #212121;
+            box-shadow: 0 4px 15px rgba(0, 150, 136, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #00796B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 150, 136, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-teal));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .math-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-yellow);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-teal);
+            color: #212121;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Statistics Display */
+        .stats-display {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid var(--accent-yellow);
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+
+        .display-title {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        /* Statistics Concepts */
+        .concepts-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .concept-card {
+            background: var(--dark-card);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 200px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .concept-card.mean {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .concept-card.median {
+            border-color: var(--secondary-teal);
+            background: rgba(0, 150, 136, 0.1);
+        }
+
+        .concept-card.mode {
+            border-color: var(--accent-yellow);
+            background: rgba(255, 235, 59, 0.1);
+        }
+
+        .concept-card.range {
+            border-color: var(--accent-red);
+            background: rgba(244, 67, 54, 0.1);
+        }
+
+        .concept-card:hover {
+            transform: scale(1.05);
+        }
+
+        .concept-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .concept-card.mean .concept-name {
+            color: var(--primary-blue);
+        }
+
+        .concept-card.median .concept-name {
+            color: var(--secondary-teal);
+        }
+
+        .concept-card.mode .concept-name {
+            color: var(--accent-yellow);
+        }
+
+        .concept-card.range .concept-name {
+            color: var(--accent-red);
+        }
+
+        .concept-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        /* Data Set Visualization */
+        .dataset-visualization {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-green);
+        }
+
+        .dataset-display {
+            background: var(--dark-surface);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--dark-border);
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+
+        .data-point {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 5px;
+            background: var(--primary-blue);
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            animation: dataPulse 2s infinite;
+        }
+
+        @keyframes dataPulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .stats-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stats-button {
+            padding: 8px 16px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-green);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .stats-button:hover {
+            background: rgba(76, 175, 80, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Chart Visualization */
+        .chart-visualization {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-orange);
+        }
+
+        .chart-container {
+            background: var(--dark-surface);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 20% 20%;
+        }
+
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 100%;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .bar {
+            width: 40px;
+            background: var(--primary-blue);
+            border-radius: 4px 4px 0 0;
+            transition: height 1s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .bar:hover {
+            background: var(--secondary-teal);
+            transform: scale(1.05);
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-primary);
+            font-weight: bold;
+        }
+
+        .line-chart {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+        }
+
+        .line-path {
+            fill: none;
+            stroke: var(--accent-red);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .data-point-circle {
+            fill: var(--accent-yellow);
+            stroke: var(--dark-bg);
+            stroke-width: 2;
+            cursor: pointer;
+            transition: r 0.3s ease;
+        }
+
+        .data-point-circle:hover {
+            r: 8;
+            fill: var(--primary-blue);
+        }
+
+        .chart-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .chart-button {
+            padding: 10px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-orange);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chart-button:hover {
+            background: rgba(255, 152, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Statistics Table */
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .stats-table th {
+            background: var(--dark-surface);
+            padding: 12px;
+            text-align: left;
+            color: var(--accent-yellow);
+            border-bottom: 2px solid var(--accent-yellow);
+        }
+
+        .stats-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+            font-family: 'Courier New', monospace;
+        }
+
+        .stats-table tr:hover {
+            background: rgba(255, 235, 59, 0.05);
+        }
+
+        /* Interactive Practice */
+        .interactive-practice {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-cyan);
+        }
+
+        .practice-title {
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .practice-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .practice-button {
+            padding: 10px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .practice-button:hover {
+            background: rgba(0, 188, 212, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .practice-display {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .concepts-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .chart-container {
+                height: 250px;
+            }
+            
+            .bar {
+                width: 30px;
+            }
+        }
+
+        /* Data Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes dataFlow {
+            0% { transform: translateX(-50px); background-color: rgba(33, 150, 243, 0.2); }
+            50% { transform: translateX(0); background-color: rgba(33, 150, 243, 0.4); }
+            100% { transform: translateX(50px); background-color: rgba(33, 150, 243, 0.2); }
+        }
+        
+        .data-flow {
+            animation: dataFlow 3s linear infinite;
+        }
+        
+        @keyframes chartFlow {
+            0% { transform: translateY(-50px); background-color: rgba(0, 150, 136, 0.2); }
+            50% { transform: translateY(0); background-color: rgba(0, 150, 136, 0.4); }
+            100% { transform: translateY(50px); background-color: rgba(0, 150, 136, 0.2); }
+        }
+        
+        .chart-flow {
+            animation: chartFlow 3s linear infinite;
+        }
+        
+        @keyframes statBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .stat-bounce {
+            animation: statBounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes barGrow {
+            from { height: 0; opacity: 0; }
+            to { height: var(--bar-height); opacity: 1; }
+        }
+        
+        .bar-grow {
+            animation: barGrow 1s ease forwards;
+        }
+        
+        @keyframes lineDraw {
+            0% { stroke-dashoffset: 1000; }
+            100% { stroke-dashoffset: 0; }
+        }
+        
+        .line-draw {
+            animation: lineDraw 2s ease forwards;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+        }
+        
+        @keyframes meanHighlight {
+            0%, 100% { background-color: rgba(33, 150, 243, 0.1); border-color: var(--primary-blue); }
+            50% { background-color: rgba(33, 150, 243, 0.3); border-color: #1976D2; }
+        }
+        
+        .mean-highlight {
+            animation: meanHighlight 1.5s ease infinite;
+        }
+        
+        @keyframes medianHighlight {
+            0%, 100% { background-color: rgba(0, 150, 136, 0.1); border-color: var(--secondary-teal); }
+            50% { background-color: rgba(0, 150, 136, 0.3); border-color: #00796B; }
+        }
+        
+        .median-highlight {
+            animation: medianHighlight 1.5s ease infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Data Pattern Background -->
+    <div class="data-bg" id="dataBg">
+        <!-- Elements will be generated by JavaScript -->
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 7 Mathematics</h1>
+            <p class="welcome-subtitle">Master the art of data analysis! Learn to calculate mean, median, mode, and range, create bar charts and line graphs, interpret data visualizations, and draw meaningful conclusions. These essential data handling skills will help you understand real-world information and make informed decisions!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">📊📈📉</span>
+                <span class="topic-name">Data Handling & Statistics</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Data Analysis Journey</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 120</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0.8%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Math fact display -->
+                <div id="mathFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Data Analysis Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background
+        function initBackground() {
+            const dataBg = document.getElementById('dataBg');
+            
+            // Create floating data symbols
+            const elements = ['📊', '📈', '📉', '📋', '📝', '🔢', '➕', '➗', '➖', '✖️', '📐', '🎯', '🌟', '∑', 'μ', 'σ', '≈', '≠', '≤', '≥'];
+            
+            for (let i = 0; i < 25; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.textContent = elements[Math.floor(Math.random() * elements.length)];
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+                element.style.animationDelay = `${Math.random() * 20}s`;
+                element.style.fontSize = `${2 + Math.random() * 3}rem`;
+                
+                // Color different types
+                if (['📊', '📈', '📉'].includes(element.textContent)) {
+                    element.style.color = 'rgba(33, 150, 243, 0.1)'; // Blue for charts
+                } else if (['∑', 'μ', 'σ'].includes(element.textContent)) {
+                    element.style.color = 'rgba(0, 150, 136, 0.1)'; // Teal for statistics
+                } else if (['🔢', '➕', '➗', '➖', '✖️'].includes(element.textContent)) {
+                    element.style.color = 'rgba(255, 235, 59, 0.1)'; // Yellow for operations
+                } else {
+                    element.style.color = 'rgba(33, 150, 243, 0.1)'; // Default blue
+                }
+                
+                dataBg.appendChild(element);
+            }
+        }
+
+        // Questions array - 120+ Grade 7 Data Handling questions
+        const questions = [
+            // Mean/Average (1-20)
+            {
+                type: "mean",
+                question: "What is the mean (average) of numbers: 4, 8, 6, 2?",
+                options: ["5", "20", "4", "6"],
+                answer: "A",
+                explanation: "Mean = (4 + 8 + 6 + 2) ÷ 4 = 20 ÷ 4 = 5"
+            },
+            {
+                type: "mean",
+                question: "Find the mean of: 10, 15, 20, 25, 30",
+                options: ["20", "100", "25", "15"],
+                answer: "A",
+                explanation: "Mean = (10 + 15 + 20 + 25 + 30) ÷ 5 = 100 ÷ 5 = 20"
+            },
+            {
+                type: "mean",
+                question: "What does the mean represent in a data set?",
+                options: ["Average value", "Middle value", "Most common value", "Difference between highest and lowest"],
+                answer: "A",
+                explanation: "The mean is the average - sum of all values divided by number of values."
+            },
+            // Median (21-40)
+            {
+                type: "median",
+                question: "Find the median of: 3, 1, 7, 5, 9",
+                options: ["5", "3", "7", "4"],
+                answer: "A",
+                explanation: "Arrange: 1, 3, 5, 7, 9. Middle value is 5 (third number)."
+            },
+            {
+                type: "median",
+                question: "What is the median of: 12, 8, 15, 10, 7, 20?",
+                options: ["11", "10", "12", "15"],
+                answer: "A",
+                explanation: "Arrange: 7, 8, 10, 12, 15, 20. Middle two: 10 and 12. Median = (10+12)÷2 = 11."
+            },
+            {
+                type: "median",
+                question: "What does the median represent?",
+                options: ["Middle value when data is ordered", "Average value", "Most common value", "Total value"],
+                answer: "A",
+                explanation: "Median is the middle value when data is arranged in order."
+            },
+            // Mode (41-60)
+            {
+                type: "mode",
+                question: "Find the mode of: 4, 7, 4, 3, 7, 4, 5",
+                options: ["4", "7", "3", "5"],
+                answer: "A",
+                explanation: "4 appears 3 times, 7 appears 2 times, others appear once. Mode = 4."
+            },
+            {
+                type: "mode",
+                question: "What is the mode of: 2, 2, 3, 3, 4, 4, 5?",
+                options: ["No mode", "2", "3", "4"],
+                answer: "A",
+                explanation: "All numbers appear equally (2 times each). There is no mode."
+            },
+            {
+                type: "mode",
+                question: "What does the mode represent?",
+                options: ["Most common value", "Average value", "Middle value", "Range"],
+                answer: "A",
+                explanation: "Mode is the value that appears most frequently in a data set."
+            },
+            // Range (61-80)
+            {
+                type: "range",
+                question: "Find the range of: 8, 3, 12, 5, 9",
+                options: ["9", "12", "3", "5"],
+                answer: "A",
+                explanation: "Range = Highest - Lowest = 12 - 3 = 9"
+            },
+            {
+                type: "range",
+                question: "What is the range of temperatures: 15°C, 20°C, 25°C, 18°C, 22°C?",
+                options: ["10°C", "25°C", "15°C", "5°C"],
+                answer: "A",
+                explanation: "Range = 25 - 15 = 10°C"
+            },
+            {
+                type: "range",
+                question: "What does range measure?",
+                options: ["Spread of data", "Average value", "Middle value", "Most common value"],
+                answer: "A",
+                explanation: "Range measures how spread out the data is (difference between highest and lowest)."
+            },
+            // Bar Charts (81-100)
+            {
+                type: "bar_charts",
+                question: "What does a bar chart display?",
+                options: ["Categorical data with bars", "Continuous data with points", "Percentages in a circle", "Trends over time"],
+                answer: "A",
+                explanation: "Bar charts use bars to show values for different categories."
+            },
+            {
+                type: "bar_charts",
+                question: "In a bar chart, what does the height of each bar represent?",
+                options: ["Value for that category", "Time period", "Percentage", "Average value"],
+                answer: "A",
+                explanation: "Bar height represents the value for each category."
+            },
+            // Line Graphs (101-120)
+            {
+                type: "line_graphs",
+                question: "What does a line graph typically show?",
+                options: ["Trends over time", "Comparisons between categories", "Parts of a whole", "Frequency distribution"],
+                answer: "A",
+                explanation: "Line graphs show how data changes over time or continuous intervals."
+            },
+            {
+                type: "line_graphs",
+                question: "What do the points on a line graph represent?",
+                options: ["Individual data values", "Averages", "Maximum values", "Minimum values"],
+                answer: "A",
+                explanation: "Points show exact data values at specific times or intervals."
+            },
+            // Data Interpretation (121-140)
+            {
+                type: "interpretation",
+                question: "If mean > median, what can you say about the data?",
+                options: ["Skewed right (positive skew)", "Skewed left (negative skew)", "Symmetrical", "No pattern"],
+                answer: "A",
+                explanation: "When mean > median, data is skewed right (tail on right side)."
+            },
+            {
+                type: "interpretation",
+                question: "Which measure is affected by extreme values?",
+                options: ["Mean", "Median", "Mode", "Range"],
+                answer: "A",
+                explanation: "Mean is affected by outliers because it uses all values in calculation."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent data analysis!",
+            "Perfect statistical thinking!",
+            "Great calculation skills!",
+            "You're a data analysis expert!",
+            "Perfect mean calculation!",
+            "You're a median finding champion!",
+            "Outstanding chart interpretation!",
+            "Brilliant understanding of statistics!",
+            "You think like a data scientist!",
+            "Data handling mastery achieved!"
+        ];
+
+        // Statistics terms and definitions
+        const statsTerms = [
+            {
+                term: "Mean",
+                definition: "Average value",
+                formula: "Sum ÷ Count",
+                example: "Mean of 2, 4, 6 = (2+4+6)÷3 = 4"
+            },
+            {
+                term: "Median",
+                definition: "Middle value when ordered",
+                formula: "Arrange data, find middle",
+                example: "Median of 1, 3, 7 = 3"
+            },
+            {
+                term: "Mode",
+                definition: "Most frequent value",
+                formula: "Value that appears most",
+                example: "Mode of 2, 3, 2, 5 = 2"
+            },
+            {
+                term: "Range",
+                definition: "Spread of data",
+                formula: "Max - Min",
+                example: "Range of 5, 8, 3 = 8-3=5"
+            }
+        ];
+
+        // Example data sets
+        const exampleDatasets = [
+            {
+                name: "Test Scores",
+                data: [85, 92, 78, 95, 88, 92, 85],
+                mean: 87.86,
+                median: 88,
+                mode: [85, 92],
+                range: 17
+            },
+            {
+                name: "Temperatures (°C)",
+                data: [22, 24, 21, 25, 23, 24, 22],
+                mean: 23,
+                median: 23,
+                mode: [22, 24],
+                range: 4
+            },
+            {
+                name: "Book Readings",
+                data: [3, 5, 2, 4, 5, 3, 6, 5],
+                mean: 4.125,
+                median: 4.5,
+                mode: [5],
+                range: 4
+            },
+            {
+                name: "Basketball Points",
+                data: [12, 18, 15, 20, 12, 25, 18],
+                mean: 17.14,
+                median: 18,
+                mode: [12, 18],
+                range: 13
+            }
+        ];
+
+        // Chart data examples
+        const chartExamples = [
+            {
+                type: "Bar Chart",
+                title: "Favorite Fruits",
+                categories: ["Apple", "Banana", "Orange", "Grapes", "Strawberry"],
+                values: [15, 12, 8, 10, 9],
+                colors: ["#2196F3", "#4CAF50", "#FF9800", "#9C27B0", "#F44336"]
+            },
+            {
+                type: "Line Graph",
+                title: "Temperature Over Week",
+                labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                values: [22, 24, 23, 25, 26, 24, 22],
+                color: "#F44336"
+            }
+        ];
+
+        // Real-world data scenarios
+        const realWorldScenarios = [
+            {
+                scenario: "Class Test Scores",
+                data: "Scores: 75, 82, 68, 91, 75, 88, 95, 82",
+                question: "Find mean, median, mode, and range",
+                solution: "Mean: 82, Median: 82, Mode: 75 & 82, Range: 27"
+            },
+            {
+                scenario: "Monthly Rainfall",
+                data: "Rainfall (mm): 45, 38, 52, 40, 48, 45, 55, 42",
+                question: "Which measure best represents typical rainfall?",
+                solution: "Median (45mm) as it's not affected by extreme high value (55mm)"
+            },
+            {
+                scenario: "Pizza Sales",
+                data: "Daily sales: 12, 15, 18, 15, 20, 12, 25",
+                question: "Calculate average daily sales",
+                solution: "Mean = 16.7 pizzas per day"
+            }
+        ];
+
+        // Interesting math facts
+        const mathFacts = [
+            "The word 'statistics' comes from Latin 'statisticum' meaning 'of the state' - originally for government data!",
+            "The average human has one testicle and one ovary! (Mean can be misleading!)",
+            "Bar charts were first used in the 1780s by William Playfair!",
+            "The median is often better than mean for income data because it's not affected by billionaires!",
+            "Mode comes from French 'mode' meaning fashion - what's most popular!",
+            "Range tells you how spread out your data is - like how varied test scores are!",
+            "Data visualization helps our brains understand patterns quickly!",
+            "Statistics help us make decisions based on evidence, not just guesses!"
+        ];
+
+        // Statistics calculation methods
+        const calculationMethods = [
+            {
+                method: "Mean Calculation",
+                steps: ["Add all values", "Count number of values", "Divide sum by count"],
+                example: "2, 4, 6 → Sum=12, Count=3 → Mean=12÷3=4"
+            },
+            {
+                method: "Median Calculation",
+                steps: ["Arrange values in order", "Find middle position", "For even count, average two middle values"],
+                example: "1, 3, 7 → Median=3 | 2, 4, 6, 8 → Median=(4+6)÷2=5"
+            },
+            {
+                method: "Mode Calculation",
+                steps: ["Count frequency of each value", "Find value with highest frequency", "Multiple modes possible"],
+                example: "2, 3, 2, 5 → 2 appears twice (most) → Mode=2"
+            },
+            {
+                method: "Range Calculation",
+                steps: ["Find maximum value", "Find minimum value", "Subtract: Max - Min"],
+                example: "5, 8, 3 → Max=8, Min=3 → Range=8-3=5"
+            }
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const mathFact = document.getElementById('mathFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Chart state
+        let chartState = {
+            currentDataset: null,
+            currentChart: null,
+            chartType: 'bar'
+        };
+
+        // Initialize the app
+        function initApp() {
+            initBackground();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade7DataHandling');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade7DataHandling', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade7DataHandling_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade7DataHandling_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a data analysis expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent statistical skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing data handling!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review mean, median, mode, and range!";
+            } else {
+                scoreMessage.textContent = "Keep exploring! Data skills will help you understand the world!";
+            }
+        }
+
+        // Create math fact display
+        function createMathFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'math-fact';
+            
+            factDiv.innerHTML = `<strong>Amazing Math Fact:</strong> ${mathFacts[Math.floor(Math.random() * mathFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "mean": "📊",
+                "median": "📐",
+                "mode": "🎯",
+                "range": "📏",
+                "bar_charts": "📊",
+                "line_graphs": "📈",
+                "interpretation": "🔍"
+            };
+            
+            let conceptName = "Mean";
+            let conceptIcon = "📊";
+            
+            if (question.type.includes("mean")) {
+                conceptName = "Mean/Average";
+                conceptIcon = conceptIcons.mean;
+            } else if (question.type.includes("median")) {
+                conceptName = "Median";
+                conceptIcon = conceptIcons.median;
+            } else if (question.type.includes("mode")) {
+                conceptName = "Mode";
+                conceptIcon = conceptIcons.mode;
+            } else if (question.type.includes("range")) {
+                conceptName = "Range";
+                conceptIcon = conceptIcons.range;
+            } else if (question.type.includes("bar_charts")) {
+                conceptName = "Bar Charts";
+                conceptIcon = conceptIcons.bar_charts;
+            } else if (question.type.includes("line_graphs")) {
+                conceptName = "Line Graphs";
+                conceptIcon = conceptIcons.line_graphs;
+            } else if (question.type.includes("interpretation")) {
+                conceptName = "Data Interpretation";
+                conceptIcon = conceptIcons.interpretation;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("mean")) {
+                label.textContent = "Calculating averages and understanding mean";
+            } else if (question.type.includes("median")) {
+                label.textContent = "Finding middle values in ordered data";
+            } else if (question.type.includes("mode")) {
+                label.textContent = "Identifying most frequent values";
+            } else if (question.type.includes("range")) {
+                label.textContent = "Measuring spread of data";
+            } else if (question.type.includes("bar_charts")) {
+                label.textContent = "Creating and interpreting bar charts";
+            } else if (question.type.includes("line_graphs")) {
+                label.textContent = "Plotting and analyzing line graphs";
+            } else if (question.type.includes("interpretation")) {
+                label.textContent = "Drawing conclusions from data";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create statistics concepts visualization
+        function createStatsConcepts() {
+            const conceptsDiv = document.createElement('div');
+            
+            conceptsDiv.innerHTML = `
+                <div class="concepts-container">
+                    <div class="concept-card mean data-flow" onclick="showStatsDetails('Mean')">
+                        <div class="concept-icon">📊</div>
+                        <div class="concept-name">Mean</div>
+                        <div class="concept-description" style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px;">
+                            Average value
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; font-family: 'Courier New', monospace;">
+                            Sum ÷ Count
+                        </div>
+                    </div>
+                    <div class="concept-card median chart-flow" onclick="showStatsDetails('Median')">
+                        <div class="concept-icon">📐</div>
+                        <div class="concept-name">Median</div>
+                        <div class="concept-description" style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px;">
+                            Middle value
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; font-family: 'Courier New', monospace;">
+                            Arrange & find middle
+                        </div>
+                    </div>
+                    <div class="concept-card mode stat-bounce" onclick="showStatsDetails('Mode')">
+                        <div class="concept-icon">🎯</div>
+                        <div class="concept-name">Mode</div>
+                        <div class="concept-description" style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px;">
+                            Most frequent
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; font-family: 'Courier New', monospace;">
+                            Value appearing most
+                        </div>
+                    </div>
+                    <div class="concept-card range" onclick="showStatsDetails('Range')">
+                        <div class="concept-icon">📏</div>
+                        <div class="concept-name">Range</div>
+                        <div class="concept-description" style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px;">
+                            Spread of data
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px; font-family: 'Courier New', monospace;">
+                            Max - Min
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return conceptsDiv;
+        }
+
+        // Create dataset visualization
+        function createDatasetVisualization() {
+            const datasetDiv = document.createElement('div');
+            datasetDiv.className = 'dataset-visualization';
+            
+            const currentDataset = exampleDatasets[Math.floor(Math.random() * exampleDatasets.length)];
+            chartState.currentDataset = currentDataset;
+            
+            datasetDiv.innerHTML = `
+                <div class="display-title">Data Set Analysis: ${currentDataset.name}</div>
+                <div style="text-align: center; color: var(--text-secondary); margin-bottom: 15px;">
+                    Click buttons to calculate statistics for this data
+                </div>
+                
+                <div class="dataset-display">
+                    <div id="dataPoints">
+                        ${currentDataset.data.map((value, index) => `
+                            <span class="data-point" style="animation-delay: ${index * 0.2}s">${value}</span>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="stats-controls">
+                    <div class="stats-button" onclick="calculateMean()">Calculate Mean</div>
+                    <div class="stats-button" onclick="calculateMedian()">Calculate Median</div>
+                    <div class="stats-button" onclick="calculateMode()">Calculate Mode</div>
+                    <div class="stats-button" onclick="calculateRange()">Calculate Range</div>
+                    <div class="stats-button" onclick="showAllStats()">Show All Statistics</div>
+                </div>
+                
+                <div id="statsResult" style="margin-top: 20px; padding: 15px; background: var(--dark-surface); border-radius: 8px; display: none;"></div>
+                
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Statistic</th>
+                            <th>Value</th>
+                            <th>Calculation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: bold; color: var(--primary-blue);">Data Set</td>
+                            <td style="font-family: 'Courier New', monospace;">${currentDataset.data.join(', ')}</td>
+                            <td>n = ${currentDataset.data.length} values</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: bold; color: var(--primary-blue);">Sorted Data</td>
+                            <td style="font-family: 'Courier New', monospace;">${[...currentDataset.data].sort((a,b)=>a-b).join(', ')}</td>
+                            <td>Ascending order</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            
+            return datasetDiv;
+        }
+
+        // Calculate and display mean
+        window.calculateMean = function() {
+            const resultDiv = document.getElementById('statsResult');
+            if (!resultDiv || !chartState.currentDataset) return;
+            
+            const data = chartState.currentDataset.data;
+            const sum = data.reduce((a, b) => a + b, 0);
+            const count = data.length;
+            const mean = (sum / count).toFixed(2);
+            
+            resultDiv.innerHTML = `
+                <div style="color: var(--primary-blue); font-weight: bold; margin-bottom: 10px;">Mean Calculation:</div>
+                <div style="color: var(--text-secondary); margin-bottom: 10px;">
+                    Data: ${data.join(' + ')} = ${sum}<br>
+                    Count: ${count} values<br>
+                    Mean = Sum ÷ Count = ${sum} ÷ ${count} = ${mean}
+                </div>
+                <div style="color: var(--accent-yellow); font-size: 0.9rem;">
+                    The mean (average) of ${chartState.currentDataset.name} is ${mean}
+                </div>
+            `;
+            resultDiv.style.display = 'block';
+        };
+
+        // Calculate and display median
+        window.calculateMedian = function() {
+            const resultDiv = document.getElementById('statsResult');
+            if (!resultDiv || !chartState.currentDataset) return;
+            
+            const data = [...chartState.currentDataset.data].sort((a, b) => a - b);
+            const count = data.length;
+            let median;
+            let calculation;
+            
+            if (count % 2 === 1) {
+                // Odd number of values
+                const middleIndex = Math.floor(count / 2);
+                median = data[middleIndex];
+                calculation = `Odd count (${count}): Middle value at position ${middleIndex + 1}`;
+            } else {
+                // Even number of values
+                const middleIndex1 = count / 2 - 1;
+                const middleIndex2 = count / 2;
+                median = (data[middleIndex1] + data[middleIndex2]) / 2;
+                calculation = `Even count (${count}): Average of positions ${middleIndex1 + 1} and ${middleIndex2 + 1}: (${data[middleIndex1]} + ${data[middleIndex2]}) ÷ 2 = ${median}`;
+            }
+            
+            resultDiv.innerHTML = `
+                <div style="color: var(--secondary-teal); font-weight: bold; margin-bottom: 10px;">Median Calculation:</div>
+                <div style="color: var(--text-secondary); margin-bottom: 10px;">
+                    Sorted data: ${data.join(', ')}<br>
+                    ${calculation}
+                </div>
+                <div style="color: var(--accent-yellow); font-size: 0.9rem;">
+                    The median (middle value) of ${chartState.currentDataset.name} is ${median}
+                </div>
+            `;
+            resultDiv.style.display = 'block';
+        };
+
+        // Calculate and display mode
+        window.calculateMode = function() {
+            const resultDiv = document.getElementById('statsResult');
+            if (!resultDiv || !chartState.currentDataset) return;
+            
+            const data = chartState.currentDataset.data;
+            const frequency = {};
+            
+            // Count frequency of each value
+            data.forEach(value => {
+                frequency[value] = (frequency[value] || 0) + 1;
+            });
+            
+            // Find maximum frequency
+            const maxFrequency = Math.max(...Object.values(frequency));
+            
+            // Find all values with maximum frequency
+            const modes = Object.keys(frequency)
+                .filter(key => frequency[key] === maxFrequency)
+                .map(Number);
+            
+            let calculation = `Frequency counts: ${Object.entries(frequency).map(([value, freq]) => `${value} (${freq} times)`).join(', ')}`;
+            
+            resultDiv.innerHTML = `
+                <div style="color: var(--accent-yellow); font-weight: bold; margin-bottom: 10px;">Mode Calculation:</div>
+                <div style="color: var(--text-secondary); margin-bottom: 10px;">
+                    ${calculation}<br>
+                    Highest frequency: ${maxFrequency} times
+                </div>
+                <div style="color: var(--accent-yellow); font-size: 0.9rem;">
+                    ${modes.length === 1 ? 
+                        `The mode (most frequent value) of ${chartState.currentDataset.name} is ${modes[0]}` :
+                        modes.length === data.length ?
+                        `There is no mode (all values appear equally)` :
+                        `The modes (most frequent values) of ${chartState.currentDataset.name} are ${modes.join(', ')}`
+                    }
+                </div>
+            `;
+            resultDiv.style.display = 'block';
+        };
+
+        // Calculate and display range
+        window.calculateRange = function() {
+            const resultDiv = document.getElementById('statsResult');
+            if (!resultDiv || !chartState.currentDataset) return;
+            
+            const data = chartState.currentDataset.data;
+            const max = Math.max(...data);
+            const min = Math.min(...data);
+            const range = max - min;
+            
+            resultDiv.innerHTML = `
+                <div style="color: var(--accent-red); font-weight: bold; margin-bottom: 10px;">Range Calculation:</div>
+                <div style="color: var(--text-secondary); margin-bottom: 10px;">
+                    Maximum value: ${max}<br>
+                    Minimum value: ${min}<br>
+                    Range = Max - Min = ${max} - ${min} = ${range}
+                </div>
+                <div style="color: var(--accent-yellow); font-size: 0.9rem;">
+                    The range (spread) of ${chartState.currentDataset.name} is ${range}
+                </div>
+            `;
+            resultDiv.style.display = 'block';
+        };
+
+        // Show all statistics
+        window.showAllStats = function() {
+            const resultDiv = document.getElementById('statsResult');
+            if (!resultDiv || !chartState.currentDataset) return;
+            
+            const dataset = chartState.currentDataset;
+            
+            resultDiv.innerHTML = `
+                <div style="color: var(--primary-blue); font-weight: bold; margin-bottom: 10px;">Complete Statistics for ${dataset.name}:</div>
+                <div style="color: var(--text-secondary); margin-bottom: 10px;">
+                    <strong>Data:</strong> ${dataset.data.join(', ')}<br>
+                    <strong>Sorted:</strong> ${[...dataset.data].sort((a,b)=>a-b).join(', ')}<br><br>
+                    <strong style="color: var(--primary-blue);">Mean:</strong> ${dataset.mean.toFixed(2)} (average)<br>
+                    <strong style="color: var(--secondary-teal);">Median:</strong> ${dataset.median} (middle value)<br>
+                    <strong style="color: var(--accent-yellow);">Mode:</strong> ${Array.isArray(dataset.mode) ? dataset.mode.join(', ') : dataset.mode} (most frequent)<br>
+                    <strong style="color: var(--accent-red);">Range:</strong> ${dataset.range} (spread: ${Math.min(...dataset.data)} to ${Math.max(...dataset.data)})
+                </div>
+                <div style="color: var(--accent-green); font-size: 0.9rem; margin-top: 10px;">
+                    <strong>Interpretation:</strong> The data ${dataset.name} has average value ${dataset.mean.toFixed(2)}, middle value ${dataset.median}, most common value(s) ${Array.isArray(dataset.mode) ? dataset.mode.join('/') : dataset.mode}, and spreads over ${dataset.range} units.
+                </div>
+            `;
+            resultDiv.style.display = 'block';
+        };
+
+        // Create bar chart visualization
+        function createBarChart() {
+            const chartDiv = document.createElement('div');
+            chartDiv.className = 'chart-visualization';
+            
+            const barChartData = chartExamples[0];
+            
+            chartDiv.innerHTML = `
+                <div class="display-title">Bar Chart: ${barChartData.title}</div>
+                <div style="text-align: center; color: var(--text-secondary); margin-bottom: 15px;">
+                    Each bar shows number of people who prefer that fruit
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart-grid"></div>
+                    <div class="bar-chart" id="barChart">
+                        ${barChartData.categories.map((category, index) => {
+                            const value = barChartData.values[index];
+                            const height = (value / Math.max(...barChartData.values)) * 80 + '%';
+                            const color = barChartData.colors[index];
+                            return `
+                                <div class="bar bar-grow" 
+                                     style="height: ${height}; background: ${color}; --bar-height: ${height}"
+                                     onclick="showBarInfo('${category}', ${value})">
+                                    <div class="bar-value">${value}</div>
+                                    <div class="bar-label">${category}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+                
+                <div class="chart-controls">
+                    <div class="chart-button" onclick="changeChartData()">New Data</div>
+                    <div class="chart-button" onclick="analyzeBarChart()">Analyze Chart</div>
+                    <div class="chart-button" onclick="createLineGraph()">Switch to Line Graph</div>
+                </div>
+                
+                <div id="chartAnalysis" style="margin-top: 20px; padding: 15px; background: var(--dark-surface); border-radius: 8px; display: none;"></div>
+                
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th>Fruit</th>
+                            <th>Votes</th>
+                            <th>Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${barChartData.categories.map((category, index) => {
+                            const value = barChartData.values[index];
+                            const total = barChartData.values.reduce((a, b) => a + b, 0);
+                            const percentage = ((value / total) * 100).toFixed(1);
+                            return `
+                                <tr>
+                                    <td>${category}</td>
+                                    <td style="font-weight: bold; color: ${barChartData.colors[index]};">${value}</td>
+                                    <td>${percentage}%</td>
+                                </tr>
+                            `;
+                        }).join('')}
+                        <tr style="background: rgba(33, 150, 243, 0.1);">
+                            <td style="font-weight: bold;">Total</td>
+                            <td style="font-weight: bold;">${barChartData.values.reduce((a, b) => a + b, 0)}</td>
+                            <td style="font-weight: bold;">100%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            
+            chartState.currentChart = 'bar';
+            return chartDiv;
+        }
+
+        // Create line graph visualization
+        function createLineGraph() {
+            const chartDiv = document.getElementById('chartAnalysis')?.parentElement;
+            if (!chartDiv) return;
+            
+            const lineGraphData = chartExamples[1];
+            
+            // Create SVG for line graph
+            const svgNS = "http://www.w3.org/2000/svg";
+            const svg = document.createElementNS(svgNS, "svg");
+            svg.setAttribute("width", "100%");
+            svg.setAttribute("height", "300");
+            svg.setAttribute("viewBox", "0 0 800 300");
+            svg.style.borderRadius = "8px";
+            svg.style.background = "var(--dark-surface)";
+            svg.style.padding = "20px";
+            
+            // Draw grid lines
+            for (let i = 0; i <= 10; i++) {
+                const x = 50 + i * 70;
+                const line = document.createElementNS(svgNS, "line");
+                line.setAttribute("x1", x);
+                line.setAttribute("y1", "50");
+                line.setAttribute("x2", x);
+                line.setAttribute("y2", "250");
+                line.setAttribute("stroke", "rgba(255, 255, 255, 0.1)");
+                line.setAttribute("stroke-width", "1");
+                svg.appendChild(line);
+                
+                // X-axis labels
+                if (i < lineGraphData.labels.length) {
+                    const text = document.createElementNS(svgNS, "text");
+                    text.setAttribute("x", x);
+                    text.setAttribute("y", "270");
+                    text.setAttribute("text-anchor", "middle");
+                    text.setAttribute("fill", "var(--text-secondary)");
+                    text.setAttribute("font-size", "14");
+                    text.textContent = lineGraphData.labels[i];
+                    svg.appendChild(text);
+                }
+            }
+            
+            for (let i = 0; i <= 5; i++) {
+                const y = 50 + i * 40;
+                const line = document.createElementNS(svgNS, "line");
+                line.setAttribute("x1", "50");
+                line.setAttribute("y1", y);
+                line.setAttribute("x2", "750");
+                line.setAttribute("y2", y);
+                line.setAttribute("stroke", "rgba(255, 255, 255, 0.1)");
+                line.setAttribute("stroke-width", "1");
+                svg.appendChild(line);
+                
+                // Y-axis labels
+                const text = document.createElementNS(svgNS, "text");
+                text.setAttribute("x", "30");
+                text.setAttribute("y", y + 5);
+                text.setAttribute("text-anchor", "end");
+                text.setAttribute("fill", "var(--text-secondary)");
+                text.setAttribute("font-size", "14");
+                text.textContent = `${i * 5 + 20}°C`;
+                svg.appendChild(text);
+            }
+            
+            // Draw line
+            const path = document.createElementNS(svgNS, "path");
+            let pathData = "M ";
+            const maxValue = Math.max(...lineGraphData.values);
+            const minValue = Math.min(...lineGraphData.values);
+            const valueRange = maxValue - minValue;
+            
+            lineGraphData.values.forEach((value, index) => {
+                const x = 50 + index * 70;
+                const y = 250 - ((value - minValue) / valueRange) * 200;
+                pathData += `${index === 0 ? '' : ' L '}${x},${y}`;
+                
+                // Draw point
+                const circle = document.createElementNS(svgNS, "circle");
+                circle.setAttribute("cx", x);
+                circle.setAttribute("cy", y);
+                circle.setAttribute("r", "6");
+                circle.setAttribute("fill", lineGraphData.color);
+                circle.setAttribute("stroke", "var(--dark-bg)");
+                circle.setAttribute("stroke-width", "2");
+                circle.setAttribute("class", "data-point-circle");
+                circle.addEventListener("click", () => showPointInfo(lineGraphData.labels[index], value));
+                svg.appendChild(circle);
+                
+                // Point value label
+                const text = document.createElementNS(svgNS, "text");
+                text.setAttribute("x", x);
+                text.setAttribute("y", y - 15);
+                text.setAttribute("text-anchor", "middle");
+                text.setAttribute("fill", "var(--text-primary)");
+                text.setAttribute("font-size", "12");
+                text.setAttribute("font-weight", "bold");
+                text.textContent = value;
+                svg.appendChild(text);
+            });
+            
+            path.setAttribute("d", pathData);
+            path.setAttribute("fill", "none");
+            path.setAttribute("stroke", lineGraphData.color);
+            path.setAttribute("stroke-width", "3");
+            path.setAttribute("stroke-linecap", "round");
+            path.setAttribute("stroke-linejoin", "round");
+            path.setAttribute("class", "line-path line-draw");
+            svg.appendChild(path);
+            
+            // Replace bar chart with line graph
+            const chartContainer = chartDiv.querySelector('.chart-container');
+            if (chartContainer) {
+                chartContainer.innerHTML = '';
+                chartContainer.appendChild(svg);
+                
+                // Update controls
+                const controls = chartDiv.querySelector('.chart-controls');
+                if (controls) {
+                    controls.innerHTML = `
+                        <div class="chart-button" onclick="changeLineData()">New Data</div>
+                        <div class="chart-button" onclick="analyzeLineGraph()">Analyze Graph</div>
+                        <div class="chart-button" onclick="createBarChartVisualization()">Switch to Bar Chart</div>
+                    `;
+                }
+                
+                // Update title
+                const title = chartDiv.querySelector('.display-title');
+                if (title) {
+                    title.textContent = `Line Graph: ${lineGraphData.title}`;
+                }
+                
+                // Update description
+                const desc = chartDiv.querySelector('.display-title + div');
+                if (desc) {
+                    desc.textContent = "Shows temperature changes throughout the week";
+                }
+                
+                // Update table
+                const table = chartDiv.querySelector('.stats-table');
+                if (table) {
+                    table.innerHTML = `
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Temperature (°C)</th>
+                                <th>Change</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${lineGraphData.labels.map((label, index) => {
+                                const value = lineGraphData.values[index];
+                                const change = index > 0 ? 
+                                    `${value - lineGraphData.values[index-1] > 0 ? '+' : ''}${value - lineGraphData.values[index-1]}°C` : 
+                                    '—';
+                                return `
+                                    <tr>
+                                        <td>${label}</td>
+                                        <td style="font-weight: bold; color: ${lineGraphData.color};">${value}°C</td>
+                                        <td>${change}</td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                            <tr style="background: rgba(33, 150, 243, 0.1);">
+                                <td style="font-weight: bold;">Average</td>
+                                <td style="font-weight: bold;">${(lineGraphData.values.reduce((a,b)=>a+b,0)/lineGraphData.values.length).toFixed(1)}°C</td>
+                                <td style="font-weight: bold;">Range: ${Math.min(...lineGraphData.values)}-${Math.max(...lineGraphData.values)}°C</td>
+                            </tr>
+                        </tbody>
+                    `;
+                }
+                
+                chartState.currentChart = 'line';
+            }
+        }
+
+        // Helper function to recreate bar chart
+        window.createBarChartVisualization = function() {
+            const chartDiv = document.getElementById('chartAnalysis')?.parentElement;
+            if (!chartDiv) return;
+            
+            chartDiv.innerHTML = createBarChart().innerHTML;
+        };
+
+        // Show bar information
+        window.showBarInfo = function(category, value) {
+            const analysisDiv = document.getElementById('chartAnalysis');
+            if (!analysisDiv) return;
+            
+            const total = chartExamples[0].values.reduce((a, b) => a + b, 0);
+            const percentage = ((value / total) * 100).toFixed(1);
+            
+            analysisDiv.innerHTML = `
+                <div style="color: var(--primary-blue); font-weight: bold; margin-bottom: 10px;">Bar Analysis: ${category}</div>
+                <div style="color: var(--text-secondary);">
+                    <strong>Value:</strong> ${value} votes<br>
+                    <strong>Percentage:</strong> ${percentage}% of total<br>
+                    <strong>Rank:</strong> ${chartExamples[0].values.filter(v => v > value).length + 1}${getOrdinalSuffix(chartExamples[0].values.filter(v => v > value).length + 1)} most popular
+                </div>
+            `;
+            analysisDiv.style.display = 'block';
+        };
+
+        // Show point information for line graph
+        window.showPointInfo = function(day, temperature) {
+            const analysisDiv = document.getElementById('chartAnalysis');
+            if (!analysisDiv) return;
+            
+            analysisDiv.innerHTML = `
+                <div style="color: var(--accent-red); font-weight: bold; margin-bottom: 10px;">Point Analysis: ${day}</div>
+                <div style="color: var(--text-secondary);">
+                    <strong>Temperature:</strong> ${temperature}°C<br>
+                    <strong>Day of week:</strong> ${day}<br>
+                    <strong>Comparison:</strong> ${temperature > 24 ? 'Warmer than average' : temperature < 24 ? 'Cooler than average' : 'Average temperature'}
+                </div>
+            `;
+            analysisDiv.style.display = 'block';
+        };
+
+        // Analyze bar chart
+        window.analyzeBarChart = function() {
+            const analysisDiv = document.getElementById('chartAnalysis');
+            if (!analysisDiv) return;
+            
+            const data = chartExamples[0];
+            const total = data.values.reduce((a, b) => a + b, 0);
+            const mean = total / data.values.length;
+            const maxIndex = data.values.indexOf(Math.max(...data.values));
+            const minIndex = data.values.indexOf(Math.min(...data.values));
+            
+            analysisDiv.innerHTML = `
+                <div style="color: var(--primary-blue); font-weight: bold; margin-bottom: 10px;">Bar Chart Analysis</div>
+                <div style="color: var(--text-secondary);">
+                    <strong>Most popular:</strong> ${data.categories[maxIndex]} (${data.values[maxIndex]} votes, ${((data.values[maxIndex]/total)*100).toFixed(1)}%)<br>
+                    <strong>Least popular:</strong> ${data.categories[minIndex]} (${data.values[minIndex]} votes, ${((data.values[minIndex]/total)*100).toFixed(1)}%)<br>
+                    <strong>Average votes:</strong> ${mean.toFixed(1)} per fruit<br>
+                    <strong>Total votes:</strong> ${total}<br>
+                    <strong>Range:</strong> ${Math.max(...data.values) - Math.min(...data.values)} votes difference
+                </div>
+            `;
+            analysisDiv.style.display = 'block';
+        };
+
+        // Analyze line graph
+        window.analyzeLineGraph = function() {
+            const analysisDiv = document.getElementById('chartAnalysis');
+            if (!analysisDiv) return;
+            
+            const data = chartExamples[1];
+            const mean = data.values.reduce((a, b) => a + b, 0) / data.values.length;
+            const max = Math.max(...data.values);
+            const min = Math.min(...data.values);
+            const maxDay = data.labels[data.values.indexOf(max)];
+            const minDay = data.labels[data.values.indexOf(min)];
+            
+            analysisDiv.innerHTML = `
+                <div style="color: var(--accent-red); font-weight: bold; margin-bottom: 10px;">Line Graph Analysis</div>
+                <div style="color: var(--text-secondary);">
+                    <strong>Highest temperature:</strong> ${max}°C on ${maxDay}<br>
+                    <strong>Lowest temperature:</strong> ${min}°C on ${minDay}<br>
+                    <strong>Average temperature:</strong> ${mean.toFixed(1)}°C<br>
+                    <strong>Temperature range:</strong> ${max - min}°C<br>
+                    <strong>Trend:</strong> ${data.values[data.values.length-1] > data.values[0] ? 'Increasing' : data.values[data.values.length-1] < data.values[0] ? 'Decreasing' : 'Stable'}
+                </div>
+            `;
+            analysisDiv.style.display = 'block';
+        };
+
+        // Change chart data
+        window.changeChartData = function() {
+            // For demo, just rotate through different data sets
+            const fruits = ["Apple", "Banana", "Orange", "Grapes", "Strawberry", "Watermelon", "Mango"];
+            const newData = {
+                categories: fruits.slice(0, 5),
+                values: Array.from({length: 5}, () => Math.floor(Math.random() * 20) + 5),
+                colors: ["#2196F3", "#4CAF50", "#FF9800", "#9C27B0", "#F44336"]
+            };
+            
+            chartExamples[0] = {
+                ...chartExamples[0],
+                categories: newData.categories,
+                values: newData.values,
+                colors: newData.colors
+            };
+            
+            createBarChartVisualization();
+        };
+
+        // Change line graph data
+        window.changeLineData = function() {
+            const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+            const newValues = Array.from({length: 7}, () => Math.floor(Math.random() * 15) + 15);
+            
+            chartExamples[1] = {
+                ...chartExamples[1],
+                values: newValues
+            };
+            
+            createLineGraph();
+        };
+
+        // Helper function for ordinal suffixes
+        function getOrdinalSuffix(n) {
+            if (n % 100 >= 11 && n % 100 <= 13) return 'th';
+            switch (n % 10) {
+                case 1: return 'st';
+                case 2: return 'nd';
+                case 3: return 'rd';
+                default: return 'th';
+            }
+        }
+
+        // Create math visualization
+        function createMathVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const currentDataset = exampleDatasets[Math.floor(Math.random() * exampleDatasets.length)];
+            const realWorldScenario = realWorldScenarios[Math.floor(Math.random() * realWorldScenarios.length)];
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-yellow);">Data Handling & Statistics Explorer</h3>
+                
+                ${createStatsConcepts().outerHTML}
+                
+                <div class="stats-display mean-highlight">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px;">
+                        Current Focus: <span style="color: var(--primary-blue); font-weight: bold;">${currentDataset.name}</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.2rem; color: var(--primary-blue); margin-bottom: 10px;">Data Set</div>
+                            <div style="font-size: 1.2rem; color: var(--text-secondary); font-family: 'Courier New', monospace; font-style: italic;">
+                                ${currentDataset.data.join(', ')}
+                            </div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">n = ${currentDataset.data.length} values</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.2rem; color: var(--secondary-teal); margin-bottom: 10px;">Statistics</div>
+                            <div style="font-size: 1.1rem; color: var(--text-secondary);">
+                                Mean: ${currentDataset.mean.toFixed(2)}<br>
+                                Median: ${currentDataset.median}<br>
+                                Mode: ${Array.isArray(currentDataset.mode) ? currentDataset.mode.join(', ') : currentDataset.mode}<br>
+                                Range: ${currentDataset.range}
+                            </div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">Key measures of data</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(255, 235, 59, 0.1); border-radius: 6px; border-left: 3px solid var(--accent-yellow);">
+                        <div style="font-size: 0.9rem; color: var(--accent-yellow);">
+                            <strong>When to use each:</strong> Mean for averages, Median for middle, Mode for most common, Range for spread
+                        </div>
+                    </div>
+                </div>
+                
+                ${createDatasetVisualization().outerHTML}
+                ${createBarChart().outerHTML}
+                
+                <div class="real-world-example" style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid var(--accent-orange); font-style: italic; color: var(--text-secondary);">
+                    <div style="color: var(--accent-orange); font-weight: bold; margin-bottom: 10px;">Real-World Scenario - ${realWorldScenario.scenario}:</div>
+                    "${realWorldScenario.data}"
+                    <div style="margin-top: 10px;">
+                        <strong>Question:</strong> ${realWorldScenario.question}<br>
+                        <strong>Solution:</strong> ${realWorldScenario.solution}
+                    </div>
+                </div>
+                
+                <div class="interactive-practice">
+                    <div class="practice-title">Interactive Data Practice</div>
+                    <div class="practice-controls">
+                        <div class="practice-button" onclick="practiceMean()">Calculate Mean</div>
+                        <div class="practice-button" onclick="practiceMedian()">Find Median</div>
+                        <div class="practice-button" onclick="practiceMode()">Identify Mode</div>
+                        <div class="practice-button" onclick="practiceRange()">Determine Range</div>
+                    </div>
+                    <div class="practice-display" id="practiceDisplay">
+                        Click buttons above to practice statistics skills
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--accent-red);">
+                    <div style="color: var(--accent-red); font-weight: bold; margin-bottom: 10px;">Quick Practice:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. Find mean of: 5, 8, 6, 9, 7<br>
+                        2. Find median of: 12, 15, 18, 20, 22<br>
+                        3. Find mode of: 3, 5, 3, 7, 5, 3, 9<br>
+                        4. Find range of: 25, 30, 22, 28, 35<br>
+                        5. Which measure is best for average income? Why?
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--primary-blue);">
+                    <div style="color: var(--primary-blue); font-weight: bold; margin-bottom: 10px; text-align: center;">Statistics Tips</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                        <strong>Mean:</strong> Use for averages of similar values<br>
+                        <strong>Median:</strong> Use when there are outliers<br>
+                        <strong>Mode:</strong> Use for most common categories<br>
+                        <strong>Range:</strong> Shows how spread out data is
+                    </div>
+                </div>
+            `;
+            
+            return vizDiv;
+        }
+
+        // Global functions for interactive practice
+        window.showStatsDetails = function(statistic) {
+            const stat = statsTerms.find(s => s.term === statistic);
+            if (!stat) return;
+            
+            alert(`${statistic}\n\nDefinition: ${stat.definition}\n\nFormula: ${stat.formula}\n\nExample: ${stat.example}\n\n${statistic === 'Mean' ? "Use mean when you want the average of all values. Sensitive to extreme values." : ""}${statistic === 'Median' ? "Use median when you want the middle value. Not affected by extreme values." : ""}${statistic === 'Mode' ? "Use mode when you want the most common value. Useful for categorical data." : ""}${statistic === 'Range' ? "Use range to see how spread out the data is. Simple measure of variability." : ""}`);
+        };
+
+        // Interactive practice functions
+        window.practiceMean = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const meanProblems = [
+                {
+                    data: [4, 6, 8, 10],
+                    answer: "7",
+                    calculation: "(4+6+8+10) ÷ 4 = 28 ÷ 4 = 7"
+                },
+                {
+                    data: [15, 20, 25, 30, 35],
+                    answer: "25",
+                    calculation: "(15+20+25+30+35) ÷ 5 = 125 ÷ 5 = 25"
+                },
+                {
+                    data: [3, 7, 2, 9, 5, 4],
+                    answer: "5",
+                    calculation: "(3+7+2+9+5+4) ÷ 6 = 30 ÷ 6 = 5"
+                },
+                {
+                    data: [12, 18, 24, 30],
+                    answer: "21",
+                    calculation: "(12+18+24+30) ÷ 4 = 84 ÷ 4 = 21"
+                }
+            ];
+            
+            const currentProblem = meanProblems[Math.floor(Math.random() * meanProblems.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary-blue);">Calculate the Mean</div>
+                    <div style="font-size: 1.2rem; margin-bottom: 15px; font-family: 'Courier New', monospace; color: var(--text-primary);">
+                        Data: ${currentProblem.data.join(', ')}
+                    </div>
+                    
+                    <div style="margin: 20px 0;">
+                        <input type="text" id="meanAnswer" placeholder="Enter the mean (average)" style="width: 100%; padding: 15px; background: var(--dark-surface); border: 2px solid var(--dark-border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+                    </div>
+                    
+                    <div>
+                        <button class="btn btn-small btn-secondary" onclick="checkMeanAnswer()">Check Answer</button>
+                        <button class="btn btn-small btn-outline" onclick="showMeanSolution()">Show Solution</button>
+                    </div>
+                    
+                    <div id="meanResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Formula:</strong> Mean = (Sum of values) ÷ (Number of values)
+                    </div>
+                </div>
+            `;
+            
+            window.currentMeanAnswer = currentProblem.answer;
+            window.currentMeanCalculation = currentProblem.calculation;
+        };
+
+        window.checkMeanAnswer = function() {
+            const answerInput = document.getElementById('meanAnswer');
+            const resultDiv = document.getElementById('meanResult');
+            
+            if (!answerInput || !resultDiv) return;
+            
+            const userAnswer = answerInput.value.trim();
+            const correctAnswer = window.currentMeanAnswer;
+            
+            if (userAnswer === correctAnswer) {
+                resultDiv.textContent = "Correct! Excellent mean calculation!";
+                resultDiv.style.color = 'var(--primary-blue)';
+            } else {
+                resultDiv.textContent = "Try again. Remember: Add all numbers, then divide by how many numbers.";
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+        };
+
+        window.showMeanSolution = function() {
+            const resultDiv = document.getElementById('meanResult');
+            if (resultDiv && window.currentMeanAnswer) {
+                resultDiv.innerHTML = `
+                    <div>
+                        <div style="color: var(--secondary-teal); margin-bottom: 5px;"><strong>Correct answer:</strong> ${window.currentMeanAnswer}</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">Calculation: ${window.currentMeanCalculation}</div>
+                    </div>
+                `;
+            }
+        };
+
+        window.practiceMedian = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const medianProblems = [
+                {
+                    data: [5, 3, 8, 1, 9],
+                    answer: "5",
+                    steps: ["Arrange: 1, 3, 5, 8, 9", "Middle value: 5"]
+                },
+                {
+                    data: [12, 7, 15, 8, 10, 14],
+                    answer: "11",
+                    steps: ["Arrange: 7, 8, 10, 12, 14, 15", "Middle two: 10 and 12", "Median = (10+12)÷2 = 11"]
+                },
+                {
+                    data: [4, 9, 2, 7, 5],
+                    answer: "5",
+                    steps: ["Arrange: 2, 4, 5, 7, 9", "Middle value: 5"]
+                },
+                {
+                    data: [20, 25, 30, 35, 40, 45],
+                    answer: "32.5",
+                    steps: ["Arrange: 20, 25, 30, 35, 40, 45", "Middle two: 30 and 35", "Median = (30+35)÷2 = 32.5"]
+                }
+            ];
+            
+            const currentProblem = medianProblems[Math.floor(Math.random() * medianProblems.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--secondary-teal);">Find the Median</div>
+                    <div style="font-size: 1.2rem; margin-bottom: 15px; font-family: 'Courier New', monospace; color: var(--text-primary);">
+                        Data: ${currentProblem.data.join(', ')}
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
+                        ${currentProblem.data.concat(['None of these']).map((option, idx) => {
+                            if (idx >= 5) return '';
+                            return `
+                                <div class="option" onclick="checkMedianAnswer(this, '${option}', '${currentProblem.answer}')">
+                                    <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                    <div class="option-text">${option}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    
+                    <div id="medianResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Remember:</strong> Arrange numbers in order first, then find middle value(s).
+                    </div>
+                </div>
+            `;
+            
+            window.currentMedianSteps = currentProblem.steps;
+        };
+
+        window.checkMedianAnswer = function(element, selectedAnswer, correctAnswer) {
+            const resultDiv = document.getElementById('medianResult');
+            if (!resultDiv) return;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (selectedAnswer === correctAnswer) {
+                element.classList.add('correct');
+                resultDiv.textContent = "Correct! Perfect median finding!";
+                resultDiv.style.color = 'var(--primary-blue)';
+            } else {
+                element.classList.add('incorrect');
+                // Find and highlight correct option
+                options.forEach(opt => {
+                    if (opt.querySelector('.option-text').textContent === correctAnswer) {
+                        opt.classList.add('correct');
+                    }
+                });
+                resultDiv.innerHTML = `Incorrect. The median is ${correctAnswer}.<br>Steps: ${window.currentMedianSteps.join(' → ')}`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+            
+            resultDiv.classList.add('pulse');
+            setTimeout(() => resultDiv.classList.remove('pulse'), 500);
+        };
+
+        window.practiceMode = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const modeProblems = [
+                {
+                    data: [3, 5, 3, 7, 5, 3, 9],
+                    answer: "3",
+                    explanation: "3 appears 3 times (most frequent)"
+                },
+                {
+                    data: [2, 4, 2, 4, 6, 4, 2],
+                    answer: "2 and 4",
+                    explanation: "Both 2 and 4 appear 3 times (bimodal)"
+                },
+                {
+                    data: [1, 2, 3, 4, 5],
+                    answer: "No mode",
+                    explanation: "All values appear once (no repetition)"
+                },
+                {
+                    data: [8, 8, 8, 8, 8],
+                    answer: "8",
+                    explanation: "8 appears 5 times (all values same)"
+                }
+            ];
+            
+            const currentProblem = modeProblems[Math.floor(Math.random() * modeProblems.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-yellow);">Identify the Mode</div>
+                    <div style="font-size: 1.2rem; margin-bottom: 15px; font-family: 'Courier New', monospace; color: var(--text-primary);">
+                        Data: ${currentProblem.data.join(', ')}
+                    </div>
+                    
+                    <div style="margin: 20px 0;">
+                        <input type="text" id="modeAnswer" placeholder="Enter mode (e.g., '3' or '2 and 4' or 'No mode')" style="width: 100%; padding: 15px; background: var(--dark-surface); border: 2px solid var(--dark-border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+                    </div>
+                    
+                    <div>
+                        <button class="btn btn-small btn-secondary" onclick="checkModeAnswer()">Check Answer</button>
+                        <button class="btn btn-small btn-outline" onclick="showModeSolution()">Show Solution</button>
+                    </div>
+                    
+                    <div id="modeResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            window.currentModeAnswer = currentProblem.answer;
+            window.currentModeExplanation = currentProblem.explanation;
+        };
+
+        window.checkModeAnswer = function() {
+            const answerInput = document.getElementById('modeAnswer');
+            const resultDiv = document.getElementById('modeResult');
+            
+            if (!answerInput || !resultDiv) return;
+            
+            const userAnswer = answerInput.value.trim().toLowerCase();
+            const correctAnswer = window.currentModeAnswer.toLowerCase();
+            
+            if (userAnswer === correctAnswer || 
+                (correctAnswer.includes('no mode') && userAnswer.includes('no')) ||
+                (correctAnswer.includes('and') && userAnswer.includes('2') && userAnswer.includes('4'))) {
+                resultDiv.textContent = "Correct! Great mode identification!";
+                resultDiv.style.color = 'var(--primary-blue)';
+            } else {
+                resultDiv.textContent = "Try again. Count how many times each number appears.";
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+        };
+
+        window.showModeSolution = function() {
+            const resultDiv = document.getElementById('modeResult');
+            if (resultDiv && window.currentModeAnswer) {
+                resultDiv.innerHTML = `
+                    <div>
+                        <div style="color: var(--secondary-teal); margin-bottom: 5px;"><strong>Correct answer:</strong> ${window.currentModeAnswer}</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">${window.currentModeExplanation}</div>
+                    </div>
+                `;
+            }
+        };
+
+        window.practiceRange = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const rangeProblems = [
+                {
+                    data: [25, 30, 22, 28, 35],
+                    answer: "13",
+                    calculation: "35 (max) - 22 (min) = 13"
+                },
+                {
+                    data: [100, 85, 95, 90, 100, 80],
+                    answer: "20",
+                    calculation: "100 (max) - 80 (min) = 20"
+                },
+                {
+                    data: [7, 12, 9, 15, 10, 8],
+                    answer: "8",
+                    calculation: "15 (max) - 7 (min) = 8"
+                },
+                {
+                    data: [45, 50, 48, 52, 47, 49],
+                    answer: "7",
+                    calculation: "52 (max) - 45 (min) = 7"
+                }
+            ];
+            
+            const currentProblem = rangeProblems[Math.floor(Math.random() * rangeProblems.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-red);">Determine the Range</div>
+                    <div style="font-size: 1.2rem; margin-bottom: 15px; font-family: 'Courier New', monospace; color: var(--text-primary);">
+                        Data: ${currentProblem.data.join(', ')}
+                    </div>
+                    
+                    <div style="text-align: left; margin: 20px 0;">
+                        <div style="color: var(--text-secondary); margin-bottom: 10px;">What is the range of this data?</div>
+                        ${["10", "12", "13", "15", "20", "25"].map((option, idx) => `
+                            <div style="margin: 10px 0; display: flex; align-items: center;">
+                                <input type="radio" id="range${idx}" name="range" value="${option}" style="margin-right: 10px;">
+                                <label for="range${idx}" style="color: var(--text-secondary); cursor: pointer;">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div>
+                        <button class="btn btn-small btn-secondary" onclick="checkRangeAnswer()">Check Answer</button>
+                        <button class="btn btn-small btn-outline" onclick="showRangeSolution()">Show Solution</button>
+                    </div>
+                    
+                    <div id="rangeResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            window.currentRangeAnswer = currentProblem.answer;
+            window.currentRangeCalculation = currentProblem.calculation;
+        };
+
+        window.checkRangeAnswer = function() {
+            const resultDiv = document.getElementById('rangeResult');
+            if (!resultDiv) return;
+            
+            const radios = document.querySelectorAll('input[type="radio"]');
+            let selectedValue = '';
+            
+            radios.forEach(radio => {
+                if (radio.checked) {
+                    selectedValue = radio.value;
+                }
+            });
+            
+            if (!selectedValue) {
+                resultDiv.textContent = "Please select an answer.";
+                resultDiv.style.color = 'var(--accent-red)';
+                return;
+            }
+            
+            if (selectedValue === window.currentRangeAnswer) {
+                resultDiv.textContent = "Correct! Perfect range calculation!";
+                resultDiv.style.color = 'var(--primary-blue)';
+            } else {
+                resultDiv.textContent = "Incorrect. Remember: Range = Maximum - Minimum";
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+        };
+
+        window.showRangeSolution = function() {
+            const resultDiv = document.getElementById('rangeResult');
+            if (resultDiv && window.currentRangeAnswer) {
+                resultDiv.innerHTML = `
+                    <div>
+                        <div style="color: var(--secondary-teal); margin-bottom: 5px;"><strong>Correct answer:</strong> ${window.currentRangeAnswer}</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">Calculation: ${window.currentRangeCalculation}</div>
+                    </div>
+                `;
+            }
+        };
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            mathFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            mathFact.appendChild(createMathFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createMathVisualization());
+            
+            // Reset chart state
+            chartState.currentDataset = null;
+            chartState.currentChart = 'bar';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

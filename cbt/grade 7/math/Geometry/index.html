@@ -1,0 +1,3515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Math - Geometry | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Geometry Theme */
+        :root {
+            --primary-blue: #2196F3;
+            --secondary-amber: #FFC107;
+            --accent-green: #4CAF50;
+            --accent-red: #F44336;
+            --accent-orange: #FF9800;
+            --accent-purple: #9C27B0;
+            --accent-teal: #009688;
+            --accent-indigo: #3F51B5;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --angle-glow: 0 0 20px rgba(33, 150, 243, 0.4);
+            --polygon-glow: 0 0 20px rgba(255, 193, 7, 0.4);
+            --circle-glow: 0 0 20px rgba(76, 175, 80, 0.4);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(33, 150, 243, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(255, 193, 7, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(76, 175, 80, 0.03) 0%, transparent 50%);
+        }
+
+        /* Geometry Pattern Background */
+        .geometry-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.1;
+            pointer-events: none;
+            background: 
+                repeating-linear-gradient(60deg, 
+                    transparent, 
+                    transparent 20px, 
+                    rgba(33, 150, 243, 0.05) 20px, 
+                    rgba(33, 150, 243, 0.05) 40px),
+                repeating-linear-gradient(-60deg, 
+                    transparent, 
+                    transparent 20px, 
+                    rgba(255, 193, 7, 0.05) 20px, 
+                    rgba(255, 193, 7, 0.05) 40px);
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 2.5rem;
+            font-weight: bold;
+            animation: floatElement 30s linear infinite;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        @keyframes floatElement {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.05; }
+            25% { transform: translateY(-100px) translateX(80px) rotate(90deg); opacity: 0.03; }
+            50% { transform: translateY(-30px) translateX(-120px) rotate(180deg); opacity: 0.05; }
+            75% { transform: translateY(100px) translateX(40px) rotate(270deg); opacity: 0.03; }
+            100% { transform: translateY(0) translateX(0) rotate(360deg); opacity: 0.05; }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--angle-glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-amber), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(33, 150, 243, 0.15);
+            padding: 12px 24px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 2px solid var(--primary-blue);
+        }
+
+        .topic-icon {
+            font-size: 1.8rem;
+        }
+
+        .topic-name {
+            font-weight: 700;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-amber);
+            color: #212121;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #FFA000;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-amber), var(--accent-green));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .math-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-orange);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-indigo));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-amber);
+            color: #212121;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Angle Visualization */
+        .angle-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid var(--accent-orange);
+            overflow-x: auto;
+        }
+
+        .display-title {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .angle-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .angle-canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            background: var(--dark-surface);
+            position: relative;
+        }
+
+        .angle-measure {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary-amber);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        .angle-type {
+            text-align: center;
+            margin-top: 10px;
+            color: var(--text-secondary);
+            font-weight: bold;
+        }
+
+        /* Polygon Visualization */
+        .polygon-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-green);
+        }
+
+        .polygon-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            margin: 20px 0;
+        }
+
+        .polygon-canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            background: var(--dark-surface);
+        }
+
+        .polygon-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .info-item {
+            background: var(--dark-surface);
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        /* Circle Visualization */
+        .circle-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .circle-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            margin: 20px 0;
+        }
+
+        .circle-canvas {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--dark-surface);
+            border: 3px solid var(--accent-purple);
+            position: relative;
+        }
+
+        .circle-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: var(--secondary-amber);
+            border-radius: 50%;
+        }
+
+        .circle-radius {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 2px;
+            background: var(--accent-green);
+            transform-origin: left center;
+            transform: rotate(45deg);
+        }
+
+        .circle-diameter {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 2px;
+            background: var(--accent-red);
+            transform: translate(-50%, -50%);
+        }
+
+        /* Angle Types */
+        .angle-types-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-teal);
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 768px) {
+            .types-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .type-box {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .type-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .type-box.acute {
+            border-color: var(--accent-green);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .type-box.right {
+            border-color: var(--secondary-amber);
+            background: rgba(255, 193, 7, 0.1);
+        }
+
+        .type-box.obtuse {
+            border-color: var(--accent-orange);
+            background: rgba(255, 152, 0, 0.1);
+        }
+
+        .type-box.straight {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .type-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .type-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .type-box.acute .type-name {
+            color: var(--accent-green);
+        }
+
+        .type-box.right .type-name {
+            color: var(--secondary-amber);
+        }
+
+        .type-box.obtuse .type-name {
+            color: var(--accent-orange);
+        }
+
+        .type-box.straight .type-name {
+            color: var(--primary-blue);
+        }
+
+        .type-range {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Polygon Types */
+        .polygon-types-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-indigo);
+        }
+
+        .polygon-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 768px) {
+            .polygon-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .polygon-box {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .polygon-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .polygon-box.triangle {
+            border-color: var(--accent-green);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .polygon-box.quadrilateral {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .polygon-box.pentagon {
+            border-color: var(--accent-purple);
+            background: rgba(156, 39, 176, 0.1);
+        }
+
+        .polygon-box.hexagon {
+            border-color: var(--accent-orange);
+            background: rgba(255, 152, 0, 0.1);
+        }
+
+        .polygon-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .polygon-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .polygon-box.triangle .polygon-name {
+            color: var(--accent-green);
+        }
+
+        .polygon-box.quadrilateral .polygon-name {
+            color: var(--primary-blue);
+        }
+
+        .polygon-box.pentagon .polygon-name {
+            color: var(--accent-purple);
+        }
+
+        .polygon-box.hexagon .polygon-name {
+            color: var(--accent-orange);
+        }
+
+        .polygon-sides {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Math Table */
+        .math-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .math-table th {
+            background: var(--dark-surface);
+            padding: 12px;
+            text-align: left;
+            color: var(--accent-orange);
+            border-bottom: 2px solid var(--accent-orange);
+        }
+
+        .math-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+        }
+
+        .math-table tr:hover {
+            background: rgba(255, 152, 0, 0.05);
+        }
+
+        /* Interactive Practice */
+        .interactive-practice {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .practice-title {
+            color: var(--accent-purple);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .practice-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .practice-button {
+            padding: 10px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-purple);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .practice-button:hover {
+            background: rgba(156, 39, 176, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .practice-display {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Geometry Tools */
+        .geometry-tools {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--primary-blue);
+        }
+
+        .tools-display {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: right;
+            font-size: 1.5rem;
+            font-family: 'Courier New', monospace;
+            color: var(--secondary-amber);
+            min-height: 60px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .tools-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .tool-btn {
+            padding: 15px;
+            background: var(--dark-surface);
+            border: 1px solid var(--dark-border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .tool-btn:hover {
+            background: rgba(33, 150, 243, 0.1);
+            transform: scale(1.05);
+        }
+
+        .tool-btn.operation {
+            background: rgba(33, 150, 243, 0.2);
+            color: var(--primary-blue);
+        }
+
+        .tool-btn.equals {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .tool-btn.clear {
+            background: rgba(244, 67, 54, 0.2);
+            color: var(--accent-red);
+        }
+
+        .tool-btn.angle {
+            background: rgba(255, 193, 7, 0.2);
+            color: var(--secondary-amber);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-amber), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-amber), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .types-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .polygon-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Geometry Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes rotateShape {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .rotate-shape {
+            animation: rotateShape 5s linear infinite;
+        }
+        
+        @keyframes angleHighlight {
+            0% { background-color: rgba(33, 150, 243, 0.1); }
+            50% { background-color: rgba(33, 150, 243, 0.3); }
+            100% { background-color: rgba(33, 150, 243, 0.1); }
+        }
+        
+        .angle-highlight {
+            animation: angleHighlight 2s ease-in-out infinite;
+        }
+        
+        @keyframes geometryGlow {
+            0% { box-shadow: 0 0 20px rgba(33, 150, 243, 0.4); }
+            33% { box-shadow: 0 0 20px rgba(255, 193, 7, 0.4); }
+            66% { box-shadow: 0 0 20px rgba(76, 175, 80, 0.4); }
+            100% { box-shadow: 0 0 20px rgba(33, 150, 243, 0.4); }
+        }
+        
+        .geometry-glow {
+            animation: geometryGlow 5s linear infinite;
+        }
+        
+        @keyframes shapeBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .shape-bounce {
+            animation: shapeBounce 1s ease-in-out infinite;
+        }
+        
+        @keyframes circlePulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        .circle-pulse {
+            animation: circlePulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Geometry Pattern Background -->
+    <div class="geometry-bg" id="geometryBg">
+        <!-- Elements will be generated by JavaScript -->
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 7 Geometry</h1>
+            <p class="welcome-subtitle">Explore the fascinating world of shapes and angles! Learn about angle properties, different types of polygons, and the magic of circles. Discover how geometry is all around us - in buildings, nature, and everyday objects. Develop spatial reasoning skills that form the foundation for architecture, engineering, and design!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">📐🔺🔵</span>
+                <span class="topic-name">Geometry: Angle Properties, Polygons, Circles</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Begin Geometry Journey</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 120</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0.8%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Math fact display -->
+                <div id="mathFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Geometry Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background
+        function initBackground() {
+            const geometryBg = document.getElementById('geometryBg');
+            
+            // Create floating geometry symbols
+            const elements = ['📐', '🔺', '🔵', '🔶', '🔷', '⬛', '⬜', '⭕', '📏', '📐', '🧭', '🎯', '⚫', '⚪', '🔴', '🟢', '🔵', '🟡', '🟠', '🟣'];
+            
+            for (let i = 0; i < 25; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.textContent = elements[Math.floor(Math.random() * elements.length)];
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+                element.style.animationDelay = `${Math.random() * 20}s`;
+                element.style.fontSize = `${2 + Math.random() * 3}rem`;
+                
+                // Color different geometry concepts
+                if (['📐', '🔺', '🔶', '🔷'].includes(element.textContent)) {
+                    element.style.color = 'rgba(33, 150, 243, 0.1)'; // Blue for polygons
+                } else if (['🔵', '⭕', '⚫', '⚪'].includes(element.textContent)) {
+                    element.style.color = 'rgba(76, 175, 80, 0.1)'; // Green for circles
+                } else if (['📏', '🧭', '🎯'].includes(element.textContent)) {
+                    element.style.color = 'rgba(255, 193, 7, 0.1)'; // Amber for angles
+                } else {
+                    element.style.color = 'rgba(156, 39, 176, 0.1)'; // Purple for geometry
+                }
+                
+                geometryBg.appendChild(element);
+            }
+        }
+
+        // Questions array - 120+ Grade 7 Geometry questions
+        const questions = [
+            // Angle Basics (1-20)
+            {
+                type: "angle_basics",
+                question: "What is an acute angle?",
+                options: ["Angle less than 90°", "Angle exactly 90°", "Angle more than 90° but less than 180°", "Angle exactly 180°"],
+                answer: "A",
+                explanation: "Acute angles are sharp angles less than 90°."
+            },
+            {
+                type: "angle_basics",
+                question: "What is a right angle?",
+                options: ["90° angle", "180° angle", "Less than 90°", "Between 90° and 180°"],
+                answer: "A",
+                explanation: "Right angle = 90°, forms perfect L-shape."
+            },
+            {
+                type: "angle_basics",
+                question: "What is an obtuse angle?",
+                options: ["Angle between 90° and 180°", "Angle less than 90°", "Exactly 90°", "Exactly 180°"],
+                answer: "A",
+                explanation: "Obtuse angles are between 90° and 180°."
+            },
+            {
+                type: "angle_basics",
+                question: "What is a straight angle?",
+                options: ["180° angle", "90° angle", "360° angle", "45° angle"],
+                answer: "A",
+                explanation: "Straight angle = 180°, forms straight line."
+            },
+            {
+                type: "angle_basics",
+                question: "What is a reflex angle?",
+                options: ["Angle between 180° and 360°", "Angle less than 90°", "Exactly 180°", "Exactly 360°"],
+                answer: "A",
+                explanation: "Reflex angles are between 180° and 360°."
+            },
+            // Angle Relationships (21-40)
+            {
+                type: "angle_relationships",
+                question: "What are complementary angles?",
+                options: ["Two angles that add to 90°", "Two angles that add to 180°", "Angles that are equal", "Angles that share a vertex"],
+                answer: "A",
+                explanation: "Complementary angles sum to 90°."
+            },
+            {
+                type: "angle_relationships",
+                question: "What are supplementary angles?",
+                options: ["Two angles that add to 180°", "Two angles that add to 90°", "Angles that are equal", "Angles that are adjacent"],
+                answer: "A",
+                explanation: "Supplementary angles sum to 180°."
+            },
+            {
+                type: "angle_relationships",
+                question: "If two angles are complementary and one is 30°, what is the other?",
+                options: ["60°", "150°", "30°", "90°"],
+                answer: "A",
+                explanation: "Complementary = sum to 90°. 90° - 30° = 60°."
+            },
+            {
+                type: "angle_relationships",
+                question: "If two angles are supplementary and one is 110°, what is the other?",
+                options: ["70°", "110°", "20°", "180°"],
+                answer: "A",
+                explanation: "Supplementary = sum to 180°. 180° - 110° = 70°."
+            },
+            {
+                type: "angle_relationships",
+                question: "What are vertically opposite angles?",
+                options: ["Angles opposite each other when lines cross", "Angles next to each other", "Angles that sum to 90°", "Angles that sum to 180°"],
+                answer: "A",
+                explanation: "Vertically opposite angles are equal when two lines intersect."
+            },
+            // Triangles (41-60)
+            {
+                type: "triangles",
+                question: "What is the sum of angles in a triangle?",
+                options: ["180°", "90°", "360°", "270°"],
+                answer: "A",
+                explanation: "The three angles in any triangle always add to 180°."
+            },
+            {
+                type: "triangles",
+                question: "What is an equilateral triangle?",
+                options: ["All sides equal, all angles 60°", "Two sides equal", "No sides equal", "One right angle"],
+                answer: "A",
+                explanation: "Equilateral = all sides equal, all angles = 60°."
+            },
+            {
+                type: "triangles",
+                question: "What is an isosceles triangle?",
+                options: ["Two sides equal, two angles equal", "All sides equal", "No sides equal", "One right angle"],
+                answer: "A",
+                explanation: "Isosceles = two equal sides, two equal angles."
+            },
+            {
+                type: "triangles",
+                question: "What is a scalene triangle?",
+                options: ["All sides different lengths", "Two sides equal", "All sides equal", "Contains right angle"],
+                answer: "A",
+                explanation: "Scalene = all sides different lengths."
+            },
+            {
+                type: "triangles",
+                question: "What is a right triangle?",
+                options: ["Triangle with one 90° angle", "Triangle with all acute angles", "Triangle with equal sides", "Triangle with no equal sides"],
+                answer: "A",
+                explanation: "Right triangle has one 90° angle."
+            },
+            // Quadrilaterals (61-80)
+            {
+                type: "quadrilaterals",
+                question: "What is the sum of angles in a quadrilateral?",
+                options: ["360°", "180°", "90°", "270°"],
+                answer: "A",
+                explanation: "All quadrilaterals have angles summing to 360°."
+            },
+            {
+                type: "quadrilaterals",
+                question: "What defines a square?",
+                options: ["All sides equal, all angles 90°", "Opposite sides equal, all angles 90°", "All sides equal, opposite angles equal", "Two pairs of parallel sides"],
+                answer: "A",
+                explanation: "Square: all sides equal, all angles 90°."
+            },
+            {
+                type: "quadrilaterals",
+                question: "What defines a rectangle?",
+                options: ["Opposite sides equal, all angles 90°", "All sides equal, all angles 90°", "Opposite sides parallel", "All sides different"],
+                answer: "A",
+                explanation: "Rectangle: opposite sides equal, all angles 90°."
+            },
+            {
+                type: "quadrilaterals",
+                question: "What is a parallelogram?",
+                options: ["Opposite sides parallel and equal", "All sides equal", "All angles 90°", "Only one pair of parallel sides"],
+                answer: "A",
+                explanation: "Parallelogram: opposite sides parallel and equal."
+            },
+            {
+                type: "quadrilaterals",
+                question: "What is a rhombus?",
+                options: ["All sides equal, opposite sides parallel", "All sides equal, all angles 90°", "Opposite sides equal, all angles 90°", "Only one pair of parallel sides"],
+                answer: "A",
+                explanation: "Rhombus: all sides equal, opposite sides parallel."
+            },
+            // Polygons (81-100)
+            {
+                type: "polygons",
+                question: "What is a polygon?",
+                options: ["Closed shape with straight sides", "Any closed shape", "Shape with curved sides", "Three-sided shape"],
+                answer: "A",
+                explanation: "Polygon = closed shape made of straight line segments."
+            },
+            {
+                type: "polygons",
+                question: "What is a pentagon?",
+                options: ["5-sided polygon", "6-sided polygon", "8-sided polygon", "4-sided polygon"],
+                answer: "A",
+                explanation: "Pentagon has 5 sides."
+            },
+            {
+                type: "polygons",
+                question: "What is a hexagon?",
+                options: ["6-sided polygon", "5-sided polygon", "7-sided polygon", "8-sided polygon"],
+                answer: "A",
+                explanation: "Hexagon has 6 sides."
+            },
+            {
+                type: "polygons",
+                question: "What is an octagon?",
+                options: ["8-sided polygon", "6-sided polygon", "5-sided polygon", "10-sided polygon"],
+                answer: "A",
+                explanation: "Octagon has 8 sides."
+            },
+            {
+                type: "polygons",
+                question: "What is a regular polygon?",
+                options: ["All sides equal, all angles equal", "All sides different", "All angles 90°", "Has right angles"],
+                answer: "A",
+                explanation: "Regular polygon: all sides equal, all angles equal."
+            },
+            // Circles (101-120)
+            {
+                type: "circles",
+                question: "What is the radius of a circle?",
+                options: ["Distance from center to any point on circle", "Distance across circle through center", "Distance around circle", "Line touching circle at one point"],
+                answer: "A",
+                explanation: "Radius = center to circumference."
+            },
+            {
+                type: "circles",
+                question: "What is the diameter of a circle?",
+                options: ["Distance across circle through center", "Distance from center to edge", "Distance around circle", "Line touching circle"],
+                answer: "A",
+                explanation: "Diameter = 2 × radius = across through center."
+            },
+            {
+                type: "circles",
+                question: "What is the circumference of a circle?",
+                options: ["Distance around the circle", "Distance across the circle", "Distance from center to edge", "Area inside circle"],
+                answer: "A",
+                explanation: "Circumference = perimeter of circle."
+            },
+            {
+                type: "circles",
+                question: "What is π (pi) approximately?",
+                options: ["3.14", "2.71", "1.61", "4.67"],
+                answer: "A",
+                explanation: "π ≈ 3.14 (more precisely 3.14159...)"
+            },
+            {
+                type: "circles",
+                question: "Formula for circumference of circle:",
+                options: ["C = πd or C = 2πr", "C = πr²", "C = 2r", "C = d²"],
+                answer: "A",
+                explanation: "Circumference = π × diameter = 2 × π × radius."
+            },
+            // Parallel Lines (121-140)
+            {
+                type: "parallel_lines",
+                question: "What are corresponding angles?",
+                options: ["Angles in same position when line crosses parallels", "Angles that sum to 180°", "Angles that are equal", "Angles that sum to 90°"],
+                answer: "A",
+                explanation: "Corresponding angles are equal when lines are parallel."
+            },
+            {
+                type: "parallel_lines",
+                question: "What are alternate angles?",
+                options: ["Angles on opposite sides of transversal, inside parallels", "Angles that sum to 180°", "Angles in same position", "Angles that sum to 90°"],
+                answer: "A",
+                explanation: "Alternate angles are equal when lines are parallel."
+            },
+            {
+                type: "parallel_lines",
+                question: "What are co-interior angles?",
+                options: ["Angles on same side of transversal, inside parallels", "Angles that are equal", "Angles on opposite sides", "Angles that sum to 90°"],
+                answer: "A",
+                explanation: "Co-interior angles sum to 180° when lines are parallel."
+            },
+            // Area and Perimeter (141-160)
+            {
+                type: "area_perimeter",
+                question: "Area of rectangle =",
+                options: ["length × width", "2 × (length + width)", "length + width", "length² + width²"],
+                answer: "A",
+                explanation: "Rectangle area = length × width."
+            },
+            {
+                type: "area_perimeter",
+                question: "Perimeter of rectangle =",
+                options: ["2 × (length + width)", "length × width", "length + width", "4 × length"],
+                answer: "A",
+                explanation: "Rectangle perimeter = 2 × (length + width)."
+            },
+            {
+                type: "area_perimeter",
+                question: "Area of triangle =",
+                options: ["½ × base × height", "base × height", "½ × (base + height)", "base + height"],
+                answer: "A",
+                explanation: "Triangle area = ½ × base × height."
+            },
+            // Symmetry (161-180)
+            {
+                type: "symmetry",
+                question: "What is line symmetry?",
+                options: ["Shape can be folded so halves match", "Shape can rotate and look same", "Shape has equal sides", "Shape has right angles"],
+                answer: "A",
+                explanation: "Line symmetry = mirror symmetry."
+            },
+            {
+                type: "symmetry",
+                question: "How many lines of symmetry does square have?",
+                options: ["4", "2", "1", "Infinite"],
+                answer: "A",
+                explanation: "Square has 4 lines of symmetry."
+            },
+            {
+                type: "symmetry",
+                question: "What is rotational symmetry?",
+                options: ["Shape looks same after rotation", "Shape has mirror lines", "Shape has equal angles", "Shape is regular"],
+                answer: "A",
+                explanation: "Rotational symmetry = shape matches itself when rotated."
+            },
+            // Real-world Geometry (181-200)
+            {
+                type: "real_world",
+                question: "What shape are most wheels?",
+                options: ["Circle", "Square", "Triangle", "Hexagon"],
+                answer: "A",
+                explanation: "Wheels are circular for smooth rolling."
+            },
+            {
+                type: "real_world",
+                question: "Why are triangles used in bridges?",
+                options: ["Strongest shape, distributes force", "Easiest to build", "Lightest shape", "Most beautiful"],
+                answer: "A",
+                explanation: "Triangles are strongest geometric shape for structures."
+            },
+            {
+                type: "real_world",
+                question: "What shape is stop sign?",
+                options: ["Octagon", "Circle", "Triangle", "Square"],
+                answer: "A",
+                explanation: "Stop signs are octagonal (8 sides)."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent geometry skills!",
+            "Perfect angle understanding!",
+            "Great polygon knowledge!",
+            "You're a geometry expert!",
+            "Perfect circle properties!",
+            "You're a shape wizard!",
+            "Outstanding spatial reasoning!",
+            "Brilliant geometric thinking!",
+            "You think like an architect!",
+            "Geometry mastery achieved!"
+        ];
+
+        // Geometry facts
+        const geometryFacts = [
+            "π (pi) has been calculated to over 62 trillion digits!",
+            "The word 'geometry' comes from Greek 'geo' (earth) and 'metron' (measurement)!",
+            "A triangle is the strongest geometric shape - that's why it's used in bridges!",
+            "Honeybees make hexagonal honeycombs because it's the most efficient shape!",
+            "The Great Pyramid of Giza was built with incredible geometric precision!",
+            "Circles appear in nature more than any other shape!",
+            "There are only 3 regular shapes that tessellate: triangles, squares, and hexagons!",
+            "The Parthenon in Greece uses the 'Golden Ratio' in its design!"
+        ];
+
+        // Angle types
+        const angleTypes = [
+            {
+                name: "Acute Angle",
+                range: "0° to 90°",
+                description: "Sharp angle less than 90°",
+                example: "30°, 45°, 60°",
+                icon: "🔺",
+                color: "var(--accent-green)"
+            },
+            {
+                name: "Right Angle",
+                range: "Exactly 90°",
+                description: "Perfect L-shape, forms square corner",
+                example: "Corner of book, door frame",
+                icon: "📐",
+                color: "var(--secondary-amber)"
+            },
+            {
+                name: "Obtuse Angle",
+                range: "90° to 180°",
+                description: "Wider angle between right and straight",
+                example: "110°, 135°, 150°",
+                icon: "🔽",
+                color: "var(--accent-orange)"
+            },
+            {
+                name: "Straight Angle",
+                range: "Exactly 180°",
+                description: "Forms straight line",
+                example: "Straight line, opened book flat",
+                icon: "➖",
+                color: "var(--primary-blue)"
+            },
+            {
+                name: "Reflex Angle",
+                range: "180° to 360°",
+                description: "Angle larger than straight angle",
+                example: "270°, 300°",
+                icon: "↩️",
+                color: "var(--accent-purple)"
+            }
+        ];
+
+        // Triangle types
+        const triangleTypes = [
+            {
+                name: "Equilateral",
+                sides: "All sides equal",
+                angles: "All angles 60°",
+                description: "Perfectly symmetrical triangle",
+                icon: "🔺",
+                color: "var(--accent-green)"
+            },
+            {
+                name: "Isosceles",
+                sides: "Two sides equal",
+                angles: "Two angles equal",
+                description: "At least two equal sides",
+                icon: "🔺",
+                color: "var(--primary-blue)"
+            },
+            {
+                name: "Scalene",
+                sides: "No sides equal",
+                angles: "No angles equal",
+                description: "All sides different",
+                icon: "🔺",
+                color: "var(--accent-orange)"
+            },
+            {
+                name: "Right Triangle",
+                sides: "Can be any combination",
+                angles: "One 90° angle",
+                description: "Contains right angle",
+                icon: "🔺",
+                color: "var(--secondary-amber)"
+            }
+        ];
+
+        // Quadrilateral types
+        const quadrilateralTypes = [
+            {
+                name: "Square",
+                sides: "All sides equal",
+                angles: "All angles 90°",
+                description: "Regular quadrilateral",
+                icon: "⬛",
+                color: "var(--accent-green)"
+            },
+            {
+                name: "Rectangle",
+                sides: "Opposite sides equal",
+                angles: "All angles 90°",
+                description: "Right-angled parallelogram",
+                icon: "⬜",
+                color: "var(--primary-blue)"
+            },
+            {
+                name: "Rhombus",
+                sides: "All sides equal",
+                angles: "Opposite angles equal",
+                description: "Equilateral parallelogram",
+                icon: "🔷",
+                color: "var(--accent-orange)"
+            },
+            {
+                name: "Parallelogram",
+                sides: "Opposite sides equal and parallel",
+                angles: "Opposite angles equal",
+                description: "Both pairs of opposite sides parallel",
+                icon: "🔲",
+                color: "var(--secondary-amber)"
+            },
+            {
+                name: "Trapezium/Trapezoid",
+                sides: "One pair of parallel sides",
+                angles: "Varies",
+                description: "Only one pair of parallel sides",
+                icon: "🔺",
+                color: "var(--accent-purple)"
+            }
+        ];
+
+        // Regular polygons
+        const regularPolygons = [
+            { name: "Triangle", sides: 3, interiorAngle: 60, sumAngles: 180, icon: "🔺" },
+            { name: "Square", sides: 4, interiorAngle: 90, sumAngles: 360, icon: "⬛" },
+            { name: "Pentagon", sides: 5, interiorAngle: 108, sumAngles: 540, icon: "⬟" },
+            { name: "Hexagon", sides: 6, interiorAngle: 120, sumAngles: 720, icon: "⬢" },
+            { name: "Heptagon", sides: 7, interiorAngle: 128.57, sumAngles: 900, icon: "7️⃣" },
+            { name: "Octagon", sides: 8, interiorAngle: 135, sumAngles: 1080, icon: "🛑" },
+            { name: "Nonagon", sides: 9, interiorAngle: 140, sumAngles: 1260, icon: "9️⃣" },
+            { name: "Decagon", sides: 10, interiorAngle: 144, sumAngles: 1440, icon: "🔟" }
+        ];
+
+        // Circle properties
+        const circleProperties = [
+            {
+                term: "Radius",
+                definition: "Distance from center to circumference",
+                symbol: "r",
+                formula: "Half of diameter",
+                example: "If diameter = 10 cm, radius = 5 cm",
+                icon: "📏"
+            },
+            {
+                term: "Diameter",
+                definition: "Distance across circle through center",
+                symbol: "d",
+                formula: "d = 2r",
+                example: "Twice the radius",
+                icon: "➖"
+            },
+            {
+                term: "Circumference",
+                definition: "Distance around the circle",
+                symbol: "C",
+                formula: "C = πd = 2πr",
+                example: "Perimeter of circle",
+                icon: "⭕"
+            },
+            {
+                term: "Chord",
+                definition: "Line segment connecting two points on circle",
+                symbol: "-",
+                formula: "Not through center",
+                example: "Diameter is longest chord",
+                icon: "➖"
+            },
+            {
+                term: "Arc",
+                definition: "Part of circumference",
+                symbol: "⌒",
+                formula: "Fraction of circumference",
+                example: "Half-circle is 180° arc",
+                icon: "↷"
+            },
+            {
+                term: "Sector",
+                definition: "Pizza-slice shape in circle",
+                symbol: "◡",
+                formula: "Fraction of circle area",
+                example: "Quarter circle is 90° sector",
+                icon: "🍕"
+            }
+        ];
+
+        // Angle relationships
+        const angleRelationships = [
+            {
+                name: "Complementary",
+                definition: "Two angles that add to 90°",
+                example: "30° + 60° = 90°",
+                symbol: "∟",
+                realWorld: "Corner of picture frame"
+            },
+            {
+                name: "Supplementary",
+                definition: "Two angles that add to 180°",
+                example: "120° + 60° = 180°",
+                symbol: "—",
+                realWorld: "Straight line"
+            },
+            {
+                name: "Adjacent",
+                definition: "Angles sharing a vertex and side",
+                example: "Next to each other",
+                symbol: "∠",
+                realWorld: "Clock hands at 3:00"
+            },
+            {
+                name: "Vertically Opposite",
+                definition: "Angles opposite each other when lines cross",
+                example: "Always equal",
+                symbol: "X",
+                realWorld: "Scissors blades"
+            }
+        ];
+
+        // Parallel line angles
+        const parallelLineAngles = [
+            {
+                name: "Corresponding",
+                definition: "Angles in same position at each intersection",
+                property: "Equal when lines parallel",
+                example: "F shape",
+                icon: "F"
+            },
+            {
+                name: "Alternate",
+                definition: "Angles on opposite sides of transversal",
+                property: "Equal when lines parallel",
+                example: "Z shape",
+                icon: "Z"
+            },
+            {
+                name: "Co-interior",
+                definition: "Angles on same side of transversal, between parallels",
+                property: "Sum to 180° when lines parallel",
+                example: "C shape",
+                icon: "C"
+            }
+        ];
+
+        // Real-world geometry examples
+        const realWorldGeometry = [
+            {
+                object: "Pyramid",
+                shape: "Triangular faces",
+                geometry: "3D shape with polygon base and triangular sides",
+                fact: "Great Pyramid aligned with amazing precision",
+                icon: "🔺"
+            },
+            {
+                object: "Honeycomb",
+                shape: "Hexagonal cells",
+                geometry: "Regular hexagons tessellate perfectly",
+                fact: "Most efficient use of space and wax",
+                icon: "🐝"
+            },
+            {
+                object: "Wheel",
+                shape: "Circle",
+                geometry: "All points equidistant from center",
+                fact: "Circles roll smoothly without bumps",
+                icon: "🚗"
+            },
+            {
+                object: "Soccer ball",
+                shape: "Truncated icosahedron",
+                geometry: "32 faces (12 pentagons, 20 hexagons)",
+                fact: "Pattern discovered by Archimedes",
+                icon: "⚽"
+            },
+            {
+                object: "Stop sign",
+                shape: "Regular octagon",
+                geometry: "8 equal sides, 8 equal angles",
+                fact: "Unique shape recognizable from distance",
+                icon: "🛑"
+            }
+        ];
+
+        // Symmetry examples
+        const symmetryExamples = [
+            {
+                shape: "Square",
+                lines: 4,
+                rotational: "90°, 180°, 270°, 360°",
+                description: "Full symmetry",
+                icon: "⬛"
+            },
+            {
+                shape: "Rectangle",
+                lines: 2,
+                rotational: "180°, 360°",
+                description: "Only through center",
+                icon: "⬜"
+            },
+            {
+                shape: "Circle",
+                lines: "Infinite",
+                rotational: "Any angle",
+                description: "Perfect symmetry",
+                icon: "⭕"
+            },
+            {
+                shape: "Equilateral Triangle",
+                lines: 3,
+                rotational: "120°, 240°, 360°",
+                description: "Three-fold symmetry",
+                icon: "🔺"
+            },
+            {
+                shape: "Regular Hexagon",
+                lines: 6,
+                rotational: "60°, 120°, 180°, 240°, 300°, 360°",
+                description: "Six-fold symmetry",
+                icon: "⬢"
+            }
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const mathFact = document.getElementById('mathFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initBackground();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade7MathGeometry');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade7MathGeometry', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade7MathGeometry_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade7MathGeometry_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a geometry expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Excellent! You have strong geometric reasoning!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Great work! You understand shapes and angles well!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Good job! Keep practicing geometry concepts!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Geometry is the language of design!";
+            }
+        }
+
+        // Create math fact display
+        function createMathFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'math-fact';
+            
+            factDiv.innerHTML = `<strong>Amazing Geometry Fact:</strong> ${geometryFacts[Math.floor(Math.random() * geometryFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "angle_basics": "📐",
+                "angle_relationships": "⚖️",
+                "triangles": "🔺",
+                "quadrilaterals": "⬛",
+                "polygons": "🔶",
+                "circles": "🔵",
+                "parallel_lines": "➖",
+                "area_perimeter": "📏",
+                "symmetry": "🔄",
+                "real_world": "🌍"
+            };
+            
+            let conceptName = "Angle Basics";
+            let conceptIcon = "📐";
+            
+            if (question.type.includes("angle_basics")) {
+                conceptName = "Angle Basics";
+                conceptIcon = conceptIcons.angle_basics;
+            } else if (question.type.includes("angle_relationships")) {
+                conceptName = "Angle Relationships";
+                conceptIcon = conceptIcons.angle_relationships;
+            } else if (question.type.includes("triangles")) {
+                conceptName = "Triangles";
+                conceptIcon = conceptIcons.triangles;
+            } else if (question.type.includes("quadrilaterals")) {
+                conceptName = "Quadrilaterals";
+                conceptIcon = conceptIcons.quadrilaterals;
+            } else if (question.type.includes("polygons")) {
+                conceptName = "Polygons";
+                conceptIcon = conceptIcons.polygons;
+            } else if (question.type.includes("circles")) {
+                conceptName = "Circles";
+                conceptIcon = conceptIcons.circles;
+            } else if (question.type.includes("parallel_lines")) {
+                conceptName = "Parallel Lines";
+                conceptIcon = conceptIcons.parallel_lines;
+            } else if (question.type.includes("area_perimeter")) {
+                conceptName = "Area & Perimeter";
+                conceptIcon = conceptIcons.area_perimeter;
+            } else if (question.type.includes("symmetry")) {
+                conceptName = "Symmetry";
+                conceptIcon = conceptIcons.symmetry;
+            } else if (question.type.includes("real_world")) {
+                conceptName = "Real World Geometry";
+                conceptIcon = conceptIcons.real_world;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("angle_basics")) {
+                label.textContent = "Understanding different types of angles";
+            } else if (question.type.includes("angle_relationships")) {
+                label.textContent = "Complementary, supplementary, and related angles";
+            } else if (question.type.includes("triangles")) {
+                label.textContent = "Types and properties of triangles";
+            } else if (question.type.includes("quadrilaterals")) {
+                label.textContent = "Four-sided shapes and their properties";
+            } else if (question.type.includes("polygons")) {
+                label.textContent = "Many-sided shapes and regular polygons";
+            } else if (question.type.includes("circles")) {
+                label.textContent = "Circle properties and formulas";
+            } else if (question.type.includes("parallel_lines")) {
+                label.textContent = "Angles formed by parallel lines and transversals";
+            } else if (question.type.includes("area_perimeter")) {
+                label.textContent = "Calculating area and perimeter of shapes";
+            } else if (question.type.includes("symmetry")) {
+                label.textContent = "Line and rotational symmetry";
+            } else if (question.type.includes("real_world")) {
+                label.textContent = "Geometry in everyday life and nature";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create geometry visualization
+        function createGeometryVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const randomAngle = Math.floor(Math.random() * 180) + 1;
+            const randomPolygon = regularPolygons[Math.floor(Math.random() * 4) + 2]; // 3-6 sides
+            const randomRealWorld = realWorldGeometry[Math.floor(Math.random() * realWorldGeometry.length)];
+            const randomCircleRadius = Math.floor(Math.random() * 10) + 5;
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-orange);">Geometry Explorer</h3>
+                
+                <div class="angle-container geometry-glow">
+                    <div class="display-title">Angle Explorer</div>
+                    
+                    <div class="angle-display">
+                        <canvas id="angleCanvas" width="300" height="200" style="border-radius: 8px; background: var(--dark-surface);"></canvas>
+                        <div class="angle-measure" id="angleMeasure">${randomAngle}°</div>
+                    </div>
+                    
+                    <div class="angle-type" id="angleType">
+                        ${getAngleType(randomAngle)}
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn btn-small btn-primary" onclick="showAngleDetails(${randomAngle})">
+                            Learn About This Angle
+                        </button>
+                        <button class="btn btn-small btn-secondary" onclick="generateNewAngle()">
+                            New Random Angle
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="angle-types-container">
+                    <div class="display-title">Types of Angles</div>
+                    
+                    <div class="types-grid">
+                        ${angleTypes.map((type, idx) => `
+                            <div class="type-box ${type.name.toLowerCase().includes('acute') ? 'acute' : 
+                                                 type.name.toLowerCase().includes('right') ? 'right' : 
+                                                 type.name.toLowerCase().includes('obtuse') ? 'obtuse' : 
+                                                 type.name.toLowerCase().includes('straight') ? 'straight' : 'reflex'}" 
+                                 onclick="showAngleType('${type.name}')">
+                                <div class="type-icon">${type.icon}</div>
+                                <div class="type-name">${type.name}</div>
+                                <div class="type-range">${type.range}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="polygon-container">
+                    <div class="display-title">Polygon Explorer: ${randomPolygon.name}</div>
+                    
+                    <div class="polygon-display">
+                        <canvas id="polygonCanvas" width="300" height="200" style="border-radius: 8px; background: var(--dark-surface);"></canvas>
+                    </div>
+                    
+                    <div class="polygon-info">
+                        <div class="info-item">
+                            <div class="info-label">Number of Sides</div>
+                            <div class="info-value">${randomPolygon.sides}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Interior Angle</div>
+                            <div class="info-value">${randomPolygon.interiorAngle}°</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Angle Sum</div>
+                            <div class="info-value">${randomPolygon.sumAngles}°</div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn btn-small btn-primary" onclick="showPolygonDetails(${randomPolygon.sides})">
+                            Learn About ${randomPolygon.name}
+                        </button>
+                        <button class="btn btn-small btn-secondary" onclick="generateNewPolygon()">
+                            New Random Polygon
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="polygon-types-container">
+                    <div class="display-title">Types of Quadrilaterals</div>
+                    
+                    <div class="polygon-grid">
+                        ${quadrilateralTypes.slice(0, 4).map((type, idx) => `
+                            <div class="polygon-box ${type.name.toLowerCase()}" onclick="showQuadrilateralType('${type.name}')">
+                                <div class="polygon-icon">${type.icon}</div>
+                                <div class="polygon-name">${type.name}</div>
+                                <div class="polygon-sides">${type.sides}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="circle-container">
+                    <div class="display-title">Circle Explorer</div>
+                    
+                    <div class="circle-display">
+                        <div class="circle-canvas" id="circleCanvas">
+                            <div class="circle-center"></div>
+                            <div class="circle-radius"></div>
+                            <div class="circle-diameter"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="polygon-info">
+                        <div class="info-item">
+                            <div class="info-label">Radius</div>
+                            <div class="info-value">${randomCircleRadius} units</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Diameter</div>
+                            <div class="info-value">${randomCircleRadius * 2} units</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Circumference</div>
+                            <div class="info-value">${(2 * Math.PI * randomCircleRadius).toFixed(2)} units</div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn btn-small btn-primary" onclick="showCircleDetails(${randomCircleRadius})">
+                            Learn About Circles
+                        </button>
+                        <button class="btn btn-small btn-secondary" onclick="calculateCircleProperties()">
+                            Calculate Circle Values
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="real-world-example" style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid var(--accent-teal);">
+                    <div style="color: var(--accent-teal); font-weight: bold; margin-bottom: 10px; text-align: center;">
+                        Real-World Geometry: ${randomRealWorld.object}
+                    </div>
+                    <div style="text-align: center; margin: 15px 0;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">${randomRealWorld.icon}</div>
+                        <div style="color: var(--primary-blue); font-weight: bold; margin-bottom: 10px;">
+                            ${randomRealWorld.shape}
+                        </div>
+                        <div style="color: var(--text-secondary); margin-bottom: 10px;">
+                            ${randomRealWorld.geometry}
+                        </div>
+                        <div style="color: var(--text-muted); font-style: italic;">
+                            ${randomRealWorld.fact}
+                        </div>
+                    </div>
+                </div>
+                
+                <table class="math-table">
+                    <thead>
+                        <tr>
+                            <th>Shape</th>
+                            <th>Sides</th>
+                            <th>Interior Angle</th>
+                            <th>Angle Sum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${regularPolygons.slice(0, 6).map((polygon, idx) => `
+                            <tr onclick="showPolygonDetails(${polygon.sides})" style="cursor: pointer;">
+                                <td style="font-weight: bold; color: var(--primary-blue);">${polygon.name}</td>
+                                <td>${polygon.sides}</td>
+                                <td>${polygon.interiorAngle}°</td>
+                                <td>${polygon.sumAngles}°</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                
+                <div class="geometry-tools">
+                    <div class="display-title">Geometry Calculator</div>
+                    <div class="tools-display" id="toolsDisplay">0</div>
+                    <div class="tools-buttons">
+                        <div class="tool-btn" onclick="toolInput('7')">7</div>
+                        <div class="tool-btn" onclick="toolInput('8')">8</div>
+                        <div class="tool-btn" onclick="toolInput('9')">9</div>
+                        <div class="tool-btn angle" onclick="toolInput('∠')">∠</div>
+                        <div class="tool-btn" onclick="toolInput('4')">4</div>
+                        <div class="tool-btn" onclick="toolInput('5')">5</div>
+                        <div class="tool-btn" onclick="toolInput('6')">6</div>
+                        <div class="tool-btn operation" onclick="toolInput('+')">+</div>
+                        <div class="tool-btn" onclick="toolInput('1')">1</div>
+                        <div class="tool-btn" onclick="toolInput('2')">2</div>
+                        <div class="tool-btn" onclick="toolInput('3')">3</div>
+                        <div class="tool-btn operation" onclick="toolInput('-')">-</div>
+                        <div class="tool-btn" onclick="toolInput('0')">0</div>
+                        <div class="tool-btn" onclick="toolInput('.')">.</div>
+                        <div class="tool-btn clear" onclick="clearTools()">C</div>
+                        <div class="tool-btn operation" onclick="toolInput('×')">×</div>
+                        <div class="tool-btn" onclick="toolInput('π')">π</div>
+                        <div class="tool-btn" onclick="toolInput('(')">(</div>
+                        <div class="tool-btn" onclick="toolInput(')')">)</div>
+                        <div class="tool-btn operation" onclick="toolInput('÷')">÷</div>
+                        <div class="tool-btn equals" onclick="calculateGeometry()" style="grid-column: span 4;">=</div>
+                    </div>
+                </div>
+                
+                <div class="interactive-practice">
+                    <div class="practice-title">Interactive Geometry Practice</div>
+                    <div class="practice-controls">
+                        <div class="practice-button" onclick="angleClassification()">Classify Angles</div>
+                        <div class="practice-button" onclick="triangleProperties()">Triangle Properties</div>
+                        <div class="practice-button" onclick="circleCalculations()">Circle Calculations</div>
+                        <div class="practice-button" onclick="shapeSymmetry()">Shape Symmetry</div>
+                    </div>
+                    <div class="practice-display" id="practiceDisplay">
+                        Click buttons above to practice geometry skills
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--accent-orange);">
+                    <div style="color: var(--accent-orange); font-weight: bold; margin-bottom: 10px;">Quick Geometry Practice:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. Classify a 45° angle.<br>
+                        2. What is sum of angles in triangle?<br>
+                        3. How many sides does hexagon have?<br>
+                        4. What is radius if diameter = 14 cm?<br>
+                        5. Complementary angles sum to ___°.
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--primary-blue);">
+                    <div style="color: var(--primary-blue); font-weight: bold; margin-bottom: 10px; text-align: center;">Geometry Formulas Quick Reference</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                        <strong>Triangle sum:</strong> 180°<br>
+                        <strong>Quadrilateral sum:</strong> 360°<br>
+                        <strong>Circle circumference:</strong> C = πd = 2πr<br>
+                        <strong>Rectangle area:</strong> A = l × w<br>
+                        <strong>Triangle area:</strong> A = ½ × b × h
+                    </div>
+                </div>
+                
+                <div class="symmetry-chart" style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--secondary-amber);">
+                    <div class="display-title">Symmetry Examples</div>
+                    <div style="text-align: center; margin-bottom: 15px; color: var(--text-secondary);">
+                        Understanding line and rotational symmetry
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 20px 0;">
+                        ${symmetryExamples.slice(0, 4).map((shape, idx) => `
+                            <div class="symmetry-box" onclick="showSymmetry('${shape.shape}')" 
+                                 style="background: var(--dark-surface); padding: 15px; border-radius: 8px; text-align: center; cursor: pointer;">
+                                <div style="font-size: 2rem; margin-bottom: 5px;">${shape.icon}</div>
+                                <div style="font-weight: bold; color: var(--secondary-amber); margin-bottom: 5px;">${shape.shape}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px;">
+                                    Lines: ${shape.lines}<br>Rotation: ${shape.rotational}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            // Draw the angle on canvas
+            setTimeout(() => {
+                drawAngle(randomAngle);
+                drawPolygon(randomPolygon.sides);
+            }, 100);
+            
+            return vizDiv;
+        }
+
+        // Helper functions
+        function getAngleType(angle) {
+            if (angle < 90) return "Acute Angle";
+            if (angle === 90) return "Right Angle";
+            if (angle < 180) return "Obtuse Angle";
+            if (angle === 180) return "Straight Angle";
+            return "Reflex Angle";
+        }
+
+        function drawAngle(angle) {
+            const canvas = document.getElementById('angleCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 80;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw angle
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(centerX + radius, centerY);
+            ctx.lineTo(centerX + radius * Math.cos(angle * Math.PI / 180), 
+                      centerY - radius * Math.sin(angle * Math.PI / 180));
+            ctx.closePath();
+            
+            // Fill angle
+            ctx.fillStyle = 'rgba(33, 150, 243, 0.3)';
+            ctx.fill();
+            
+            // Draw lines
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(centerX + radius, centerY);
+            ctx.moveTo(centerX, centerY);
+            ctx.lineTo(centerX + radius * Math.cos(angle * Math.PI / 180), 
+                      centerY - radius * Math.sin(angle * Math.PI / 180));
+            ctx.strokeStyle = '#2196F3';
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            // Draw arc
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 30, 0, angle * Math.PI / 180, false);
+            ctx.strokeStyle = '#FFC107';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        function drawPolygon(sides) {
+            const canvas = document.getElementById('polygonCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 70;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw polygon
+            ctx.beginPath();
+            for (let i = 0; i < sides; i++) {
+                const angle = (i * 2 * Math.PI / sides) - Math.PI / 2;
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+                
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+            
+            // Fill polygon
+            const colors = ['#4CAF50', '#2196F3', '#FF9800', '#9C27B0', '#FFC107'];
+            ctx.fillStyle = colors[(sides - 3) % colors.length] + '40';
+            ctx.fill();
+            
+            // Draw outline
+            ctx.strokeStyle = colors[(sides - 3) % colors.length];
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            
+            // Draw vertices
+            for (let i = 0; i < sides; i++) {
+                const angle = (i * 2 * Math.PI / sides) - Math.PI / 2;
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+                
+                ctx.beginPath();
+                ctx.arc(x, y, 5, 0, 2 * Math.PI);
+                ctx.fillStyle = '#FFFFFF';
+                ctx.fill();
+                ctx.strokeStyle = colors[(sides - 3) % colors.length];
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+        }
+
+        // Global functions for interactive practice
+        window.showAngleDetails = function(angle) {
+            const type = getAngleType(angle);
+            let info = `${angle}° - ${type}\n\n`;
+            
+            if (angle < 90) {
+                info += `• Acute angle (less than 90°)\n`;
+                info += `• Examples: 30°, 45°, 60°\n`;
+                info += `• Real-world: Sharp corner, pizza slice\n`;
+            } else if (angle === 90) {
+                info += `• Right angle (exactly 90°)\n`;
+                info += `• Forms perfect L-shape\n`;
+                info += `• Real-world: Corner of room, book, screen\n`;
+            } else if (angle < 180) {
+                info += `• Obtuse angle (between 90° and 180°)\n`;
+                info += `• Examples: 100°, 135°, 150°\n`;
+                info += `• Real-world: Opened book, clock at 4:00\n`;
+            } else if (angle === 180) {
+                info += `• Straight angle (exactly 180°)\n`;
+                info += `• Forms straight line\n`;
+                info += `• Real-world: Straight road, ruler\n`;
+            } else {
+                info += `• Reflex angle (between 180° and 360°)\n`;
+                info += `• Examples: 200°, 270°, 300°\n`;
+                info += `• Real-world: Clock between 6:00 and 12:00\n`;
+            }
+            
+            info += `\nComplementary angle: ${90 - angle > 0 ? 90 - angle : "N/A"}°\n`;
+            info += `Supplementary angle: ${180 - angle}°\n`;
+            
+            alert(info);
+        };
+
+        window.generateNewAngle = function() {
+            const newAngle = Math.floor(Math.random() * 180) + 1;
+            const angleMeasure = document.getElementById('angleMeasure');
+            const angleType = document.getElementById('angleType');
+            
+            if (angleMeasure) angleMeasure.textContent = `${newAngle}°`;
+            if (angleType) angleType.textContent = getAngleType(newAngle);
+            
+            drawAngle(newAngle);
+        };
+
+        window.showAngleType = function(typeName) {
+            const type = angleTypes.find(t => t.name === typeName);
+            if (!type) return;
+            
+            let info = `${type.name}\n\n`;
+            info += `Range: ${type.range}\n`;
+            info += `Description: ${type.description}\n`;
+            info += `Examples: ${type.example}\n\n`;
+            info += `Real-world examples:\n`;
+            
+            if (typeName.includes('Acute')) {
+                info += `• Corner of piece of paper\n• Slice of pizza\n• Hands of clock at 1:00\n• Letter 'V'`;
+            } else if (typeName.includes('Right')) {
+                info += `• Corner of room\n• Edge of book\n• Computer screen corner\n• Door frame`;
+            } else if (typeName.includes('Obtuse')) {
+                info += `• Opened book at 120°\n• Clock at 4:00 (120°)\n• Reclined chair\n• Scissors opened wide`;
+            } else if (typeName.includes('Straight')) {
+                info += `• Straight road\n• Ruler\n• Horizon line\n• Opened book lying flat`;
+            } else if (typeName.includes('Reflex')) {
+                info += `• Clock between 7:00 and 12:00\n• Opened fan\n• Swing of pendulum\n• Slice of pie (large piece)`;
+            }
+            
+            alert(info);
+        };
+
+        window.showPolygonDetails = function(sides) {
+            const polygon = regularPolygons.find(p => p.sides === sides);
+            if (!polygon) return;
+            
+            const interiorAngle = polygon.interiorAngle;
+            const exteriorAngle = 360 / sides;
+            
+            let info = `${polygon.name}\n\n`;
+            info += `Number of sides: ${sides}\n`;
+            info += `Interior angle: ${interiorAngle}°\n`;
+            info += `Exterior angle: ${exteriorAngle}°\n`;
+            info += `Sum of interior angles: ${polygon.sumAngles}°\n\n`;
+            info += `Formula for interior angle: (n-2) × 180° ÷ n\n`;
+            info += `Formula for angle sum: (n-2) × 180°\n\n`;
+            info += `Real-world examples:\n`;
+            
+            if (sides === 3) {
+                info += `• Traffic warning signs\n• Pyramids (faces)\n• Sandwich halves\n• Musical triangles`;
+            } else if (sides === 4) {
+                info += `• Windows\n• Doors\n• Books\n• Screens\n• Tiles`;
+            } else if (sides === 5) {
+                info += `• Home plate in baseball\n• Pentagon building\n• Soccer ball sections\n• Some flowers`;
+            } else if (sides === 6) {
+                info += `• Honeycomb cells\n• Bolts and nuts\n• Snowflakes\n• Turtle shells`;
+            } else if (sides === 8) {
+                info += `• Stop signs\n• Umbrellas\n• Some tables\n• Building designs`;
+            }
+            
+            alert(info);
+        };
+
+        window.generateNewPolygon = function() {
+            const sides = Math.floor(Math.random() * 6) + 3; // 3-8 sides
+            const polygon = regularPolygons.find(p => p.sides === sides);
+            const title = document.querySelector('.polygon-container .display-title');
+            const polygonInfo = document.querySelector('.polygon-info');
+            
+            if (title && polygon) {
+                title.textContent = `Polygon Explorer: ${polygon.name}`;
+            }
+            
+            if (polygonInfo && polygon) {
+                polygonInfo.innerHTML = `
+                    <div class="info-item">
+                        <div class="info-label">Number of Sides</div>
+                        <div class="info-value">${polygon.sides}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Interior Angle</div>
+                        <div class="info-value">${polygon.interiorAngle}°</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Angle Sum</div>
+                        <div class="info-value">${polygon.sumAngles}°</div>
+                    </div>
+                `;
+            }
+            
+            drawPolygon(sides);
+        };
+
+        window.showQuadrilateralType = function(typeName) {
+            const type = quadrilateralTypes.find(t => t.name === typeName);
+            if (!type) return;
+            
+            let info = `${type.name}\n\n`;
+            info += `Sides: ${type.sides}\n`;
+            info += `Angles: ${type.angles}\n`;
+            info += `Description: ${type.description}\n\n`;
+            info += `Properties:\n`;
+            
+            if (typeName === 'Square') {
+                info += `• All sides equal\n• All angles 90°\n• Opposite sides parallel\n• Diagonals equal and bisect at 90°\n• Maximum symmetry`;
+            } else if (typeName === 'Rectangle') {
+                info += `• Opposite sides equal\n• All angles 90°\n• Opposite sides parallel\n• Diagonals equal\n• 2 lines of symmetry`;
+            } else if (typeName === 'Rhombus') {
+                info += `• All sides equal\n• Opposite angles equal\n• Opposite sides parallel\n• Diagonals bisect at 90°\n• Sometimes called diamond`;
+            } else if (typeName === 'Parallelogram') {
+                info += `• Opposite sides equal and parallel\n• Opposite angles equal\n• Adjacent angles supplementary\n• Diagonals bisect each other`;
+            } else if (typeName.includes('Trapezium') || typeName.includes('Trapezoid')) {
+                info += `• Only one pair of parallel sides\n• Called trapezium in UK, trapezoid in US\n• Parallel sides called bases\n• Non-parallel sides called legs`;
+            }
+            
+            info += `\nReal-world examples:\n`;
+            info += getQuadrilateralExamples(typeName);
+            
+            alert(info);
+        };
+
+        function getQuadrilateralExamples(typeName) {
+            const examples = {
+                'Square': 'Chessboard squares, tiles, windows, stamps',
+                'Rectangle': 'Doors, books, screens, paper, flags',
+                'Rhombus': 'Kites, diamond shapes, road signs, baseball field',
+                'Parallelogram': 'Tiles, solar panels, erasers, steps',
+                'Trapezium/Trapezoid': 'Bridge supports, handbags, lampshades, car front'
+            };
+            return examples[typeName] || 'Various objects in daily life';
+        }
+
+        window.showCircleDetails = function(radius) {
+            const diameter = radius * 2;
+            const circumference = (2 * Math.PI * radius).toFixed(2);
+            const area = (Math.PI * radius * radius).toFixed(2);
+            
+            let info = `Circle with radius ${radius} units\n\n`;
+            info += `Diameter: ${diameter} units (2 × radius)\n`;
+            info += `Circumference: ${circumference} units (2πr = πd)\n`;
+            info += `Area: ${area} square units (πr²)\n\n`;
+            info += `Key Circle Terms:\n`;
+            info += `• Radius: Center to edge\n`;
+            info += `• Diameter: Through center, edge to edge\n`;
+            info += `• Chord: Line connecting two circle points\n`;
+            info += `• Arc: Part of circumference\n`;
+            info += `• Sector: Pizza-slice shaped area\n`;
+            info += `• Segment: Region between chord and arc\n\n`;
+            info += `π (pi) ≈ 3.14159... (never-ending, never-repeating)\n`;
+            info += `Circumference/Diameter = π for all circles`;
+            
+            alert(info);
+        };
+
+        window.calculateCircleProperties = function() {
+            const radius = prompt("Enter radius of circle:");
+            if (!radius || isNaN(radius) || radius <= 0) {
+                alert("Please enter a valid positive number for radius.");
+                return;
+            }
+            
+            const r = parseFloat(radius);
+            const diameter = 2 * r;
+            const circumference = (2 * Math.PI * r).toFixed(2);
+            const area = (Math.PI * r * r).toFixed(2);
+            
+            alert(`Circle Calculations:\n\nRadius: ${r}\nDiameter: ${diameter}\nCircumference: ${circumference}\nArea: ${area}`);
+        };
+
+        window.showSymmetry = function(shapeName) {
+            const shape = symmetryExamples.find(s => s.shape === shapeName);
+            if (!shape) return;
+            
+            let info = `${shape.shape} - Symmetry\n\n`;
+            info += `Lines of symmetry: ${shape.lines}\n`;
+            info += `Rotational symmetry: ${shape.rotational}\n`;
+            info += `Description: ${shape.description}\n\n`;
+            
+            if (shapeName === 'Square') {
+                info += `• 4 lines of symmetry (vertical, horizontal, two diagonals)\n`;
+                info += `• Rotates 90°, 180°, 270°, 360° to match itself\n`;
+                info += `• Highest symmetry for quadrilateral`;
+            } else if (shapeName === 'Rectangle') {
+                info += `• 2 lines of symmetry (vertical, horizontal through center)\n`;
+                info += `• Rotates 180°, 360° to match itself\n`;
+                info += `• No diagonal symmetry unless it's a square`;
+            } else if (shapeName === 'Circle') {
+                info += `• Infinite lines of symmetry (any diameter)\n`;
+                info += `• Rotates any angle to match itself\n`;
+                info += `• Perfect symmetry in all directions`;
+            } else if (shapeName.includes('Equilateral Triangle')) {
+                info += `• 3 lines of symmetry (through each vertex to midpoint of opposite side)\n`;
+                info += `• Rotates 120°, 240°, 360° to match itself\n`;
+                info += `• Three-fold symmetry`;
+            } else if (shapeName.includes('Regular Hexagon')) {
+                info += `• 6 lines of symmetry (through opposite vertices and midpoints)\n`;
+                info += `• Rotates 60°, 120°, 180°, 240°, 300°, 360° to match itself\n`;
+                info += `• Six-fold symmetry like honeycomb`;
+            }
+            
+            alert(info);
+        };
+
+        // Geometry calculator functions
+        let toolExpression = '0';
+        let lastResult = null;
+
+        window.toolInput = function(input) {
+            const display = document.getElementById('toolsDisplay');
+            
+            if (toolExpression === '0' && !isNaN(input)) {
+                toolExpression = input;
+            } else if (input === 'π') {
+                toolExpression += Math.PI.toFixed(2);
+            } else if (input === '∠') {
+                toolExpression += '°';
+            } else {
+                toolExpression += input;
+            }
+            
+            display.textContent = toolExpression;
+        };
+
+        window.clearTools = function() {
+            toolExpression = '0';
+            lastResult = null;
+            document.getElementById('toolsDisplay').textContent = toolExpression;
+        };
+
+        window.calculateGeometry = function() {
+            const display = document.getElementById('toolsDisplay');
+            
+            try {
+                // Replace symbols for evaluation
+                let expression = toolExpression
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/')
+                    .replace(/π/g, Math.PI.toString())
+                    .replace(/∠/g, '')
+                    .replace(/°/g, '');
+                
+                // Evaluate safely
+                const result = eval(expression);
+                
+                if (isNaN(result) || !isFinite(result)) {
+                    display.textContent = "Error";
+                } else {
+                    lastResult = result;
+                    toolExpression = result.toString();
+                    display.textContent = result;
+                    
+                    // Check if it's an angle calculation
+                    if (toolExpression.includes('°') || expression.includes('angle')) {
+                        setTimeout(() => {
+                            const angle = parseFloat(result);
+                            if (angle >= 0 && angle <= 360) {
+                                alert(`${angle}° is a ${getAngleType(angle)}`);
+                            }
+                        }, 300);
+                    }
+                }
+            } catch (error) {
+                display.textContent = "Error";
+            }
+        };
+
+        // Interactive practice functions
+        window.angleClassification = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const angles = [
+                { angle: 45, type: "Acute", explanation: "Less than 90°" },
+                { angle: 90, type: "Right", explanation: "Exactly 90°" },
+                { angle: 120, type: "Obtuse", explanation: "Between 90° and 180°" },
+                { angle: 180, type: "Straight", explanation: "Exactly 180°" }
+            ];
+            
+            const currentAngle = angles[Math.floor(Math.random() * angles.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary-blue);">Classify Angles</div>
+                    <div style="font-size: 3rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">
+                        ${currentAngle.angle}°
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: var(--accent-blue); font-weight: bold; margin-bottom: 10px;">
+                            What type of angle is this?
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
+                        ${["Acute", "Right", "Obtuse", "Straight"].map((type, idx) => `
+                            <div class="option" onclick="checkAngleClassification(this, '${type}', '${currentAngle.type}')">
+                                <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                <div class="option-text">${type} Angle</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div id="angleClassificationResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            window.currentAngleExplanation = currentAngle.explanation;
+        };
+
+        window.checkAngleClassification = function(element, selectedType, correctType) {
+            const resultDiv = document.getElementById('angleClassificationResult');
+            if (!resultDiv) return;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (selectedType === correctType) {
+                element.classList.add('correct');
+                resultDiv.textContent = `Correct! ${window.currentAngleExplanation}`;
+                resultDiv.style.color = 'var(--primary-blue)';
+            } else {
+                element.classList.add('incorrect');
+                // Find and highlight correct option
+                options.forEach(opt => {
+                    if (opt.querySelector('.option-text').textContent.includes(correctType)) {
+                        opt.classList.add('correct');
+                    }
+                });
+                resultDiv.textContent = `Incorrect. It's a ${correctType} Angle. ${window.currentAngleExplanation}`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+            
+            resultDiv.classList.add('pulse');
+            setTimeout(() => resultDiv.classList.remove('pulse'), 500);
+        };
+
+        window.triangleProperties = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const triangles = [
+                { type: "Equilateral", sides: "All equal", angles: "All 60°", explanation: "All sides equal, all angles 60°" },
+                { type: "Isosceles", sides: "Two equal", angles: "Two equal", explanation: "At least two equal sides and angles" },
+                { type: "Scalene", sides: "None equal", angles: "None equal", explanation: "All sides and angles different" },
+                { type: "Right", sides: "Can vary", angles: "One 90°", explanation: "Contains one right angle (90°)" }
+            ];
+            
+            const currentTriangle = triangles[Math.floor(Math.random() * triangles.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-green);">Triangle Properties</div>
+                    <div style="font-size: 1.8rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">
+                        ${currentTriangle.type} Triangle
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: var(--accent-blue); font-weight: bold; margin-bottom: 10px;">
+                            What is true about this triangle?
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 10px; margin: 20px 0;">
+                        ${[
+                            `Sides: ${currentTriangle.sides}, Angles: ${currentTriangle.angles}`,
+                            `Sides: All different, Angles: All 60°`,
+                            `Sides: Two equal, Angles: One 90°`,
+                            `Sides: All equal, Angles: One 90°`
+                        ].map((option, idx) => `
+                            <div class="option" onclick="checkTriangleProperty(this, '${option}', 'Sides: ${currentTriangle.sides}, Angles: ${currentTriangle.angles}')">
+                                <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                <div class="option-text">${option}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div id="trianglePropertyResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            window.currentTriangleExplanation = currentTriangle.explanation;
+        };
+
+        window.checkTriangleProperty = function(element, selectedOption, correctOption) {
+            const resultDiv = document.getElementById('trianglePropertyResult');
+            if (!resultDiv) return;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (selectedOption === correctOption) {
+                element.classList.add('correct');
+                resultDiv.textContent = `Correct! ${window.currentTriangleExplanation}`;
+                resultDiv.style.color = 'var(--primary-blue)';
+            } else {
+                element.classList.add('incorrect');
+                // Find and highlight correct option
+                options.forEach(opt => {
+                    if (opt.querySelector('.option-text').textContent === correctOption) {
+                        opt.classList.add('correct');
+                    }
+                });
+                resultDiv.textContent = `Incorrect. ${window.currentTriangleExplanation}`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+            
+            resultDiv.classList.add('pulse');
+            setTimeout(() => resultDiv.classList.remove('pulse'), 500);
+        };
+
+        window.circleCalculations = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const radius = Math.floor(Math.random() * 10) + 5;
+            const diameter = radius * 2;
+            const circumference = (2 * Math.PI * radius).toFixed(2);
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-purple);">Circle Calculations</div>
+                    <div style="font-size: 1.8rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">
+                        Radius = ${radius} units
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: var(--accent-blue); font-weight: bold; margin-bottom: 10px;">
+                            What is the circumference? (Use π ≈ 3.14)
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
+                        ${[
+                            `${circumference} units`,
+                            `${(Math.PI * radius * radius).toFixed(2)} units`,
+                            `${diameter} units`,
+                            `${radius} units`
+                        ].map((option, idx) => `
+                            <div class="option" onclick="checkCircleCalculation(this, '${option}', '${circumference} units')">
+                                <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                <div class="option-text">${option}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div id="circleCalculationResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            window.currentCircleExplanation = `Circumference = 2πr = 2 × 3.14 × ${radius} = ${circumference} units`;
+        };
+
+        window.checkCircleCalculation = function(element, selectedAnswer, correctAnswer) {
+            const resultDiv = document.getElementById('circleCalculationResult');
+            if (!resultDiv) return;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (selectedAnswer === correctAnswer) {
+                element.classList.add('correct');
+                resultDiv.textContent = `Correct! ${window.currentCircleExplanation}`;
+                resultDiv.style.color = 'var(--primary-blue)';
+            } else {
+                element.classList.add('incorrect');
+                // Find and highlight correct option
+                options.forEach(opt => {
+                    if (opt.querySelector('.option-text').textContent === correctAnswer) {
+                        opt.classList.add('correct');
+                    }
+                });
+                resultDiv.textContent = `Incorrect. ${window.currentCircleExplanation}`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+            
+            resultDiv.classList.add('pulse');
+            setTimeout(() => resultDiv.classList.remove('pulse'), 500);
+        };
+
+        window.shapeSymmetry = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const shapes = [
+                { name: "Square", lines: 4, explanation: "Has vertical, horizontal, and two diagonal lines of symmetry" },
+                { name: "Rectangle", lines: 2, explanation: "Has vertical and horizontal lines through center only" },
+                { name: "Circle", lines: "Infinite", explanation: "Has infinite lines of symmetry (any diameter)" },
+                { name: "Equilateral Triangle", lines: 3, explanation: "Has 3 lines of symmetry through vertices to opposite sides" }
+            ];
+            
+            const currentShape = shapes[Math.floor(Math.random() * shapes.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--secondary-amber);">Shape Symmetry</div>
+                    <div style="font-size: 2rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">
+                        ${currentShape.name}
+                    </div>
+                    
+                    <div style="margin: 20px 0; color: var(--text-secondary);">
+                        How many lines of symmetry does this shape have?
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
+                        ${[
+                            currentShape.lines.toString(),
+                            (typeof currentShape.lines === 'number' ? currentShape.lines * 2 : 'Many').toString(),
+                            "1",
+                            "0"
+                        ].map((option, idx) => `
+                            <div class="option" onclick="checkSymmetry(this, '${option}', '${currentShape.lines}')">
+                                <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                <div class="option-text">${option} lines</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div id="symmetryResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            window.currentSymmetryExplanation = currentShape.explanation;
+        };
+
+        window.checkSymmetry = function(element, selectedAnswer, correctAnswer) {
+            const resultDiv = document.getElementById('symmetryResult');
+            if (!resultDiv) return;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (selectedAnswer === correctAnswer.toString()) {
+                element.classList.add('correct');
+                resultDiv.textContent = `Correct! ${window.currentSymmetryExplanation}`;
+                resultDiv.style.color = 'var(--primary-blue)';
+            } else {
+                element.classList.add('incorrect');
+                // Find and highlight correct option
+                options.forEach(opt => {
+                    if (opt.querySelector('.option-text').textContent === `${correctAnswer} lines`) {
+                        opt.classList.add('correct');
+                    }
+                });
+                resultDiv.textContent = `Incorrect. It has ${correctAnswer} lines of symmetry. ${window.currentSymmetryExplanation}`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+            
+            resultDiv.classList.add('pulse');
+            setTimeout(() => resultDiv.classList.remove('pulse'), 500);
+        };
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            mathFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            mathFact.appendChild(createMathFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createGeometryVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

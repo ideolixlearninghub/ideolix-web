@@ -1,0 +1,2992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Math - Graphs of Linear Functions | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Graphs Theme */
+        :root {
+            --primary-blue: #2196F3;
+            --secondary-teal: #009688;
+            --accent-yellow: #FFEB3B;
+            --accent-green: #4CAF50;
+            --accent-orange: #FF9800;
+            --accent-red: #F44336;
+            --accent-purple: #9C27B0;
+            --accent-pink: #E91E63;
+            --accent-indigo: #3F51B5;
+            --accent-cyan: #00BCD4;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --graph-glow: 0 0 20px rgba(33, 150, 243, 0.4);
+            --coordinate-glow: 0 0 20px rgba(0, 150, 136, 0.4);
+            --slope-glow: 0 0 20px rgba(255, 235, 59, 0.4);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Graph Pattern Background */
+        .graph-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 150, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 235, 59, 0.1) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 49%, rgba(33, 150, 243, 0.05) 50%, transparent 51%),
+                linear-gradient(-45deg, transparent 49%, rgba(0, 150, 136, 0.05) 50%, transparent 51%);
+            opacity: 0.3;
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 3rem;
+            font-weight: bold;
+            animation: floatElement 25s linear infinite;
+        }
+
+        @keyframes floatElement {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.1; }
+            25% { transform: translateY(-150px) translateX(100px) rotate(90deg); opacity: 0.05; }
+            50% { transform: translateY(-50px) translateX(-150px) rotate(180deg); opacity: 0.1; }
+            75% { transform: translateY(150px) translateX(50px) rotate(270deg); opacity: 0.05; }
+            100% { transform: translateY(0) translateX(0) rotate(360deg); opacity: 0.1; }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--graph-glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(33, 150, 243, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-blue);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(33, 150, 243, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-teal);
+            color: #212121;
+            box-shadow: 0 4px 15px rgba(0, 150, 136, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #00796B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 150, 136, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-teal));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .math-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-yellow);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-teal);
+            color: #212121;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 5px solid var(--primary-blue);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-blue);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Graph Display */
+        .graph-display {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid var(--accent-yellow);
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+
+        .display-title {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        /* Graph Types Comparison */
+        .comparison-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .comparison-box {
+            background: var(--dark-card);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 200px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .comparison-box.coordinates {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .comparison-box.slope {
+            border-color: var(--secondary-teal);
+            background: rgba(0, 150, 136, 0.1);
+        }
+
+        .comparison-box.intercept {
+            border-color: var(--accent-yellow);
+            background: rgba(255, 235, 59, 0.1);
+        }
+
+        .comparison-box:hover {
+            transform: scale(1.05);
+        }
+
+        .comparison-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .comparison-box.coordinates .comparison-name {
+            color: var(--primary-blue);
+        }
+
+        .comparison-box.slope .comparison-name {
+            color: var(--secondary-teal);
+        }
+
+        .comparison-box.intercept .comparison-name {
+            color: var(--accent-yellow);
+        }
+
+        .comparison-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        /* Coordinate Plane */
+        .coordinate-plane {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-green);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plane-container {
+            width: 100%;
+            height: 300px;
+            position: relative;
+            background: var(--dark-surface);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .grid-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .axis {
+            position: absolute;
+            background: var(--accent-yellow);
+        }
+
+        .x-axis {
+            width: 100%;
+            height: 2px;
+            bottom: 50%;
+            left: 0;
+        }
+
+        .y-axis {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            top: 0;
+        }
+
+        .point {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            transform: translate(-50%, 50%);
+            box-shadow: 0 0 10px var(--primary-blue);
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .point-label {
+            position: absolute;
+            color: var(--text-primary);
+            font-size: 0.8rem;
+            transform: translate(10px, -10px);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2px 6px;
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .line-graph {
+            position: absolute;
+            height: 3px;
+            background: var(--accent-red);
+            transform-origin: 0 0;
+            box-shadow: 0 0 10px var(--accent-red);
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .control-panel {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .control-button {
+            padding: 8px 16px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-green);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-button:hover {
+            background: rgba(76, 175, 80, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Slope Visualization */
+        .slope-visualization {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-orange);
+        }
+
+        .slope-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .slope-box {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 150px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .slope-box.positive {
+            border-color: var(--accent-green);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .slope-box.negative {
+            border-color: var(--accent-red);
+            background: rgba(244, 67, 54, 0.1);
+        }
+
+        .slope-box.zero {
+            border-color: var(--accent-yellow);
+            background: rgba(255, 235, 59, 0.1);
+        }
+
+        .slope-box.undefined {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .slope-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .slope-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .slope-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .slope-box.positive .slope-name {
+            color: var(--accent-green);
+        }
+
+        .slope-box.negative .slope-name {
+            color: var(--accent-red);
+        }
+
+        .slope-box.zero .slope-name {
+            color: var(--accent-yellow);
+        }
+
+        .slope-box.undefined .slope-name {
+            color: var(--primary-blue);
+        }
+
+        .slope-description {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        /* Function Examples */
+        .function-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .function-examples {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 768px) {
+            .function-examples {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .example-box {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .example-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .example-box.positive-slope {
+            border-color: var(--accent-green);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .example-box.negative-slope {
+            border-color: var(--accent-red);
+            background: rgba(244, 67, 54, 0.1);
+        }
+
+        .example-box.horizontal {
+            border-color: var(--accent-yellow);
+            background: rgba(255, 235, 59, 0.1);
+        }
+
+        .example-box.vertical {
+            border-color: var(--primary-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .function-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .function-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .example-box.positive-slope .function-name {
+            color: var(--accent-green);
+        }
+
+        .example-box.negative-slope .function-name {
+            color: var(--accent-red);
+        }
+
+        .example-box.horizontal .function-name {
+            color: var(--accent-yellow);
+        }
+
+        .example-box.vertical .function-name {
+            color: var(--primary-blue);
+        }
+
+        .function-equation {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-family: 'Courier New', monospace;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        /* Function Table */
+        .function-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .function-table th {
+            background: var(--dark-surface);
+            padding: 12px;
+            text-align: center;
+            color: var(--accent-yellow);
+            border-bottom: 2px solid var(--accent-yellow);
+        }
+
+        .function-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .function-table tr:hover {
+            background: rgba(255, 235, 59, 0.05);
+        }
+
+        /* Interactive Practice */
+        .interactive-practice {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-cyan);
+        }
+
+        .practice-title {
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .practice-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .practice-button {
+            padding: 10px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .practice-button:hover {
+            background: rgba(0, 188, 212, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .practice-display {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .slope-display {
+                flex-direction: column;
+            }
+            
+            .function-examples {
+                grid-template-columns: 1fr;
+            }
+            
+            .plane-container {
+                height: 250px;
+            }
+        }
+
+        /* Graph Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes graphFlow {
+            0% { transform: translateX(-50px); background-color: rgba(33, 150, 243, 0.2); }
+            50% { transform: translateX(0); background-color: rgba(33, 150, 243, 0.4); }
+            100% { transform: translateX(50px); background-color: rgba(33, 150, 243, 0.2); }
+        }
+        
+        .graph-flow {
+            animation: graphFlow 3s linear infinite;
+        }
+        
+        @keyframes pointGlow {
+            0%, 100% { box-shadow: 0 0 10px var(--primary-blue); }
+            50% { box-shadow: 0 0 20px var(--primary-blue); }
+        }
+        
+        .point-glow {
+            animation: pointGlow 1s ease-in-out infinite;
+        }
+        
+        @keyframes lineDraw {
+            0% { width: 0; opacity: 0; }
+            100% { width: var(--line-width); opacity: 1; }
+        }
+        
+        .line-draw {
+            animation: lineDraw 1s ease forwards;
+        }
+        
+        @keyframes slopeMove {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .slope-move {
+            animation: slopeMove 2s ease-in-out infinite;
+        }
+        
+        @keyframes coordinateSpin {
+            0% { transform: rotate(0deg) translateY(0); }
+            25% { transform: rotate(90deg) translateY(-10px); }
+            50% { transform: rotate(180deg) translateY(0); }
+            75% { transform: rotate(270deg) translateY(10px); }
+            100% { transform: rotate(360deg) translateY(0); }
+        }
+        
+        .coordinate-spin {
+            animation: coordinateSpin 3s linear infinite;
+        }
+        
+        @keyframes interceptHighlight {
+            0%, 100% { background-color: rgba(255, 235, 59, 0.1); border-color: var(--accent-yellow); }
+            50% { background-color: rgba(255, 235, 59, 0.3); border-color: #FFC107; }
+        }
+        
+        .intercept-highlight {
+            animation: interceptHighlight 1.5s ease infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Graph Pattern Background -->
+    <div class="graph-bg" id="graphBg">
+        <!-- Elements will be generated by JavaScript -->
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 7 Mathematics</h1>
+            <p class="welcome-subtitle">Discover the visual language of algebra! Learn to graph linear functions, understand slope and intercepts, plot points on coordinate planes, and interpret graphs. These essential graphing skills will help you visualize mathematical relationships and solve real-world problems!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">📈📊📍</span>
+                <span class="topic-name">Graphs of Linear Functions</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Graphing Journey</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 120</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0.8%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Math fact display -->
+                <div id="mathFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Graphing Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background
+        function initBackground() {
+            const graphBg = document.getElementById('graphBg');
+            
+            // Create floating graph symbols
+            const elements = ['📈', '📊', '📍', '📐', '➕', '➖', '✖️', '➗', '🔢', '📉', '🎯', '🌟', 'x', 'y', '=', '(', ')', '[]', '{}', '↗️', '↘️', '↔️', '↕️'];
+            
+            for (let i = 0; i < 25; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.textContent = elements[Math.floor(Math.random() * elements.length)];
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+                element.style.animationDelay = `${Math.random() * 20}s`;
+                element.style.fontSize = `${2 + Math.random() * 3}rem`;
+                
+                // Color different types
+                if (['📈', '📊', '📍'].includes(element.textContent)) {
+                    element.style.color = 'rgba(33, 150, 243, 0.1)'; // Blue for graphs
+                } else if (['x', 'y', '🔢'].includes(element.textContent)) {
+                    element.style.color = 'rgba(0, 150, 136, 0.1)'; // Teal for variables
+                } else if (['↗️', '↘️', '↔️', '↕️'].includes(element.textContent)) {
+                    element.style.color = 'rgba(255, 235, 59, 0.1)'; // Yellow for directions
+                } else {
+                    element.style.color = 'rgba(33, 150, 243, 0.1)'; // Default blue
+                }
+                
+                graphBg.appendChild(element);
+            }
+        }
+
+        // Questions array - 120+ Grade 7 Graphing Linear Functions questions
+        const questions = [
+            // Coordinate Plane Basics (1-20)
+            {
+                type: "coordinate_basics",
+                question: "What is the coordinate plane?",
+                options: ["A grid with x and y axes", "A type of graph paper", "A circle graph", "A 3D space"],
+                answer: "A",
+                explanation: "The coordinate plane is a two-dimensional grid formed by the intersection of horizontal x-axis and vertical y-axis."
+            },
+            {
+                type: "coordinate_basics",
+                question: "What are the coordinates of the origin?",
+                options: ["(0, 0)", "(1, 1)", "(-1, -1)", "(0, 1)"],
+                answer: "A",
+                explanation: "The origin is where the x-axis and y-axis intersect, with coordinates (0, 0)."
+            },
+            {
+                type: "coordinate_basics",
+                question: "In the ordered pair (3, -2), what does 3 represent?",
+                options: ["x-coordinate", "y-coordinate", "Slope", "Intercept"],
+                answer: "A",
+                explanation: "In ordered pairs (x, y), the first number is the x-coordinate and the second is the y-coordinate."
+            },
+            {
+                type: "coordinate_basics",
+                question: "Which quadrant contains points with positive x and positive y coordinates?",
+                options: ["Quadrant I", "Quadrant II", "Quadrant III", "Quadrant IV"],
+                answer: "A",
+                explanation: "Quadrant I (top right) has both x and y positive. Quadrant II: x negative, y positive. Quadrant III: both negative. Quadrant IV: x positive, y negative."
+            },
+            // Plotting Points (21-40)
+            {
+                type: "plotting_points",
+                question: "Where is point (2, 3) located?",
+                options: ["2 right, 3 up", "2 left, 3 up", "2 right, 3 down", "2 left, 3 down"],
+                answer: "A",
+                explanation: "From origin (0,0): move 2 units right (positive x), then 3 units up (positive y)."
+            },
+            {
+                type: "plotting_points",
+                question: "Which point is at (-4, 1)?",
+                options: ["4 left, 1 up", "4 right, 1 up", "4 left, 1 down", "4 right, 1 down"],
+                answer: "A",
+                explanation: "Negative x means move left, positive y means move up."
+            },
+            {
+                type: "plotting_points",
+                question: "What are the coordinates of a point 5 units right and 2 units down from origin?",
+                options: ["(5, -2)", "(-5, 2)", "(2, -5)", "(-2, 5)"],
+                answer: "A",
+                explanation: "Right = positive x, down = negative y, so (5, -2)."
+            },
+            {
+                type: "plotting_points",
+                question: "Point (-3, -4) is in which quadrant?",
+                options: ["Quadrant III", "Quadrant I", "Quadrant II", "Quadrant IV"],
+                answer: "A",
+                explanation: "Both coordinates negative = Quadrant III (bottom left)."
+            },
+            // Linear Functions Basics (41-60)
+            {
+                type: "function_basics",
+                question: "What is a linear function?",
+                options: ["Function whose graph is a straight line", "Any function with x", "Function with curves", "Function with squares"],
+                answer: "A",
+                explanation: "Linear functions have the form y = mx + b and graph as straight lines."
+            },
+            {
+                type: "function_basics",
+                question: "What does 'y = 2x + 1' represent?",
+                options: ["A linear function", "A circle", "A quadratic function", "An equation only"],
+                answer: "A",
+                explanation: "This is the slope-intercept form of a linear function: y = mx + b."
+            },
+            {
+                type: "function_basics",
+                question: "In y = 3x - 2, what is the slope?",
+                options: ["3", "-2", "2", "-3"],
+                answer: "A",
+                explanation: "In y = mx + b, m is the slope. Here m = 3."
+            },
+            {
+                type: "function_basics",
+                question: "In y = -x + 4, what is the y-intercept?",
+                options: ["4", "-1", "1", "-4"],
+                answer: "A",
+                explanation: "In y = mx + b, b is the y-intercept. Here b = 4."
+            },
+            // Slope Concepts (61-80)
+            {
+                type: "slope_concepts",
+                question: "What does slope measure?",
+                options: ["Steepness of a line", "Length of a line", "Color of a line", "Width of a line"],
+                answer: "A",
+                explanation: "Slope measures how steep a line is: rise over run."
+            },
+            {
+                type: "slope_concepts",
+                question: "How do you calculate slope between (1, 2) and (3, 4)?",
+                options: ["(4-2)/(3-1) = 2/2 = 1", "(3-1)/(4-2) = 2/2 = 1", "(2+4)/(1+3)", "(2×4)/(1×3)"],
+                answer: "A",
+                explanation: "Slope = (change in y)/(change in x) = (y2 - y1)/(x2 - x1)."
+            },
+            {
+                type: "slope_concepts",
+                question: "What is the slope of a horizontal line?",
+                options: ["0", "1", "Undefined", "-1"],
+                answer: "A",
+                explanation: "Horizontal lines have zero slope (no rise, only run)."
+            },
+            {
+                type: "slope_concepts",
+                question: "What is the slope of a vertical line?",
+                options: ["Undefined", "0", "1", "-1"],
+                answer: "A",
+                explanation: "Vertical lines have undefined slope (run = 0, can't divide by zero)."
+            },
+            // Intercepts (81-100)
+            {
+                type: "intercepts",
+                question: "What is the y-intercept of y = 2x + 5?",
+                options: ["5", "2", "-5", "-2"],
+                answer: "A",
+                explanation: "In y = mx + b, b is the y-intercept. Here b = 5, so line crosses y-axis at (0, 5)."
+            },
+            {
+                type: "intercepts",
+                question: "How do you find the x-intercept?",
+                options: ["Set y = 0 and solve for x", "Set x = 0 and solve for y", "Find where line crosses y-axis", "Calculate slope"],
+                answer: "A",
+                explanation: "x-intercept is where line crosses x-axis (y = 0). Set y = 0 in equation and solve for x."
+            },
+            {
+                type: "intercepts",
+                question: "What is the x-intercept of y = 3x - 6?",
+                options: ["2", "-2", "6", "-6"],
+                answer: "A",
+                explanation: "Set y = 0: 0 = 3x - 6 → 3x = 6 → x = 2. So x-intercept is (2, 0)."
+            },
+            // Graphing Linear Equations (101-120)
+            {
+                type: "graphing",
+                question: "How many points are needed to graph a line?",
+                options: ["2", "1", "3", "4"],
+                answer: "A",
+                explanation: "Two points determine a line. A third point can be used to check accuracy."
+            },
+            {
+                type: "graphing",
+                question: "Which method uses slope and y-intercept to graph?",
+                options: ["Slope-intercept method", "Point-plotting method", "Guess and check", "Trial and error"],
+                answer: "A",
+                explanation: "Slope-intercept form y = mx + b gives y-intercept (start point) and slope (direction)."
+            },
+            {
+                type: "graphing",
+                question: "Graph y = 2x + 1. Which point is on this line?",
+                options: ["(1, 3)", "(2, 1)", "(1, 2)", "(3, 1)"],
+                answer: "A",
+                explanation: "Check: when x=1, y=2(1)+1=3. So (1,3) is on the line."
+            },
+            {
+                type: "graphing",
+                question: "What is the graph of y = 4?",
+                options: ["Horizontal line at y=4", "Vertical line at x=4", "Line with slope 4", "Diagonal line"],
+                answer: "A",
+                explanation: "y = constant is a horizontal line. All points have y-coordinate = 4."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent graphing skills!",
+            "Perfect coordinate plotting!",
+            "Great understanding of slope!",
+            "You're a graphing expert!",
+            "Perfect linear function analysis!",
+            "You're a slope-intercept champion!",
+            "Outstanding visual math skills!",
+            "Brilliant graph interpretation!",
+            "You think like a mathematician!",
+            "Graphing mastery achieved!"
+        ];
+
+        // Math terms and definitions for graphing
+        const mathTerms = [
+            {
+                term: "Coordinate Plane",
+                definition: "Grid with x and y axes",
+                example: "Used to plot points and graph functions"
+            },
+            {
+                term: "Ordered Pair",
+                definition: "(x, y) coordinates of a point",
+                example: "(3, 4) means x=3, y=4"
+            },
+            {
+                term: "Slope",
+                definition: "Steepness of a line (rise/run)",
+                example: "m in y = mx + b"
+            },
+            {
+                term: "Y-intercept",
+                definition: "Where line crosses y-axis",
+                example: "b in y = mx + b, point (0, b)"
+            },
+            {
+                term: "Linear Function",
+                definition: "Function whose graph is a straight line",
+                example: "y = 2x + 3"
+            }
+        ];
+
+        // Function examples
+        const functionExamples = [
+            {
+                type: "Positive Slope",
+                equation: "y = 2x + 1",
+                slope: "2",
+                intercept: "1",
+                graph: "Line rising from left to right"
+            },
+            {
+                type: "Negative Slope",
+                equation: "y = -x + 4",
+                slope: "-1",
+                intercept: "4",
+                graph: "Line falling from left to right"
+            },
+            {
+                type: "Zero Slope",
+                equation: "y = 3",
+                slope: "0",
+                intercept: "3",
+                graph: "Horizontal line at y = 3"
+            },
+            {
+                type: "Steep Slope",
+                equation: "y = 4x - 2",
+                slope: "4",
+                intercept: "-2",
+                graph: "Steep line rising quickly"
+            }
+        ];
+
+        // Slope types
+        const slopeTypes = [
+            {
+                type: "Positive",
+                description: "Line rises left to right",
+                example: "y = 2x + 1",
+                icon: "↗️"
+            },
+            {
+                type: "Negative",
+                description: "Line falls left to right",
+                example: "y = -x + 3",
+                icon: "↘️"
+            },
+            {
+                type: "Zero",
+                description: "Horizontal line",
+                example: "y = 4",
+                icon: "↔️"
+            },
+            {
+                type: "Undefined",
+                description: "Vertical line",
+                example: "x = 2",
+                icon: "↕️"
+            }
+        ];
+
+        // Graphing methods
+        const graphingMethods = [
+            {
+                method: "Slope-Intercept",
+                steps: ["Start at y-intercept (0, b)", "Use slope m = rise/run", "Plot second point", "Draw line through points"],
+                example: "y = 2x + 1: Start at (0,1), slope 2/1 = up 2, right 1"
+            },
+            {
+                method: "Table of Values",
+                steps: ["Choose x-values", "Calculate y-values", "Plot (x,y) points", "Draw line through points"],
+                example: "For y = 2x + 1: (0,1), (1,3), (2,5)"
+            },
+            {
+                method: "Intercepts",
+                steps: ["Find x-intercept (set y=0)", "Find y-intercept (set x=0)", "Plot intercepts", "Draw line through them"],
+                example: "For 2x + y = 4: x-intercept (2,0), y-intercept (0,4)"
+            }
+        ];
+
+        // Interesting math facts
+        const mathFacts = [
+            "The coordinate plane is also called the Cartesian plane, named after René Descartes!",
+            "Graphs help visualize relationships between variables in science and economics!",
+            "Slope is used in real life for ramps, roofs, and roads!",
+            "The concept of zero as a number originated in ancient India!",
+            "Graphing linear equations is essential for computer graphics and game design!",
+            "Negative numbers were once called 'fictitious' or 'absurd' numbers!",
+            "The slope-intercept form y = mx + b is one of the most useful equations in algebra!",
+            "Graphs turn abstract equations into visual patterns we can understand!"
+        ];
+
+        // Real-world applications
+        const realWorldApplications = [
+            {
+                application: "Phone Plans",
+                problem: "Plan costs $20 plus $0.10 per minute",
+                equation: "C = 0.10m + 20",
+                graph: "Line with slope 0.10, intercept 20"
+            },
+            {
+                application: "Car Rental",
+                problem: "$30 daily fee plus $0.25 per mile",
+                equation: "C = 0.25m + 30",
+                graph: "Line with slope 0.25, intercept 30"
+            },
+            {
+                application: "Temperature",
+                problem: "Fahrenheit to Celsius conversion",
+                equation: "F = 1.8C + 32",
+                graph: "Line with slope 1.8, intercept 32"
+            },
+            {
+                application: "Savings",
+                problem: "Start with $50, save $10 per week",
+                equation: "S = 10w + 50",
+                graph: "Line with slope 10, intercept 50"
+            }
+        ];
+
+        // Common function patterns
+        const functionPatterns = [
+            {
+                pattern: "y = mx + b",
+                description: "Slope-intercept form",
+                features: "m = slope, b = y-intercept"
+            },
+            {
+                pattern: "y = b",
+                description: "Horizontal line",
+                features: "Slope = 0, y always equals b"
+            },
+            {
+                pattern: "x = a",
+                description: "Vertical line",
+                features: "Undefined slope, x always equals a"
+            },
+            {
+                pattern: "y = mx",
+                description: "Direct variation",
+                features: "Line through origin (0,0)"
+            }
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const mathFact = document.getElementById('mathFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Coordinate plane state
+        let coordinatePlaneState = {
+            points: [],
+            lines: [],
+            currentFunction: null
+        };
+
+        // Initialize the app
+        function initApp() {
+            initBackground();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade7Graphing');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade7Graphing', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade7Graphing_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade7Graphing_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a graphing functions expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent graphing skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing coordinate graphing!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review slope and intercept concepts!";
+            } else {
+                scoreMessage.textContent = "Keep exploring! Graphing skills will help you visualize mathematical relationships!";
+            }
+        }
+
+        // Create math fact display
+        function createMathFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'math-fact';
+            
+            factDiv.innerHTML = `<strong>Amazing Math Fact:</strong> ${mathFacts[Math.floor(Math.random() * mathFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "coordinate_basics": "📍",
+                "plotting_points": "📌",
+                "function_basics": "📈",
+                "slope_concepts": "↗️",
+                "intercepts": "🎯",
+                "graphing": "✏️"
+            };
+            
+            let conceptName = "Coordinate Basics";
+            let conceptIcon = "📍";
+            
+            if (question.type.includes("coordinate_basics")) {
+                conceptName = "Coordinate Plane";
+                conceptIcon = conceptIcons.coordinate_basics;
+            } else if (question.type.includes("plotting_points")) {
+                conceptName = "Plotting Points";
+                conceptIcon = conceptIcons.plotting_points;
+            } else if (question.type.includes("function_basics")) {
+                conceptName = "Linear Functions";
+                conceptIcon = conceptIcons.function_basics;
+            } else if (question.type.includes("slope_concepts")) {
+                conceptName = "Slope";
+                conceptIcon = conceptIcons.slope_concepts;
+            } else if (question.type.includes("intercepts")) {
+                conceptName = "Intercepts";
+                conceptIcon = conceptIcons.intercepts;
+            } else if (question.type.includes("graphing")) {
+                conceptName = "Graphing Lines";
+                conceptIcon = conceptIcons.graphing;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("coordinate_basics")) {
+                label.textContent = "Understanding the coordinate plane and quadrants";
+            } else if (question.type.includes("plotting_points")) {
+                label.textContent = "Plotting and identifying points on the coordinate plane";
+            } else if (question.type.includes("function_basics")) {
+                label.textContent = "Understanding linear functions and their components";
+            } else if (question.type.includes("slope_concepts")) {
+                label.textContent = "Calculating and interpreting slope";
+            } else if (question.type.includes("intercepts")) {
+                label.textContent = "Finding and interpreting x and y intercepts";
+            } else if (question.type.includes("graphing")) {
+                label.textContent = "Graphing linear equations using different methods";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create coordinate plane visualization
+        function createCoordinatePlane() {
+            const planeDiv = document.createElement('div');
+            planeDiv.className = 'coordinate-plane';
+            
+            planeDiv.innerHTML = `
+                <div class="display-title">Interactive Coordinate Plane</div>
+                <div style="text-align: center; color: var(--text-secondary); margin-bottom: 15px;">
+                    Click buttons to plot points and draw lines
+                </div>
+                
+                <div class="plane-container" id="planeContainer">
+                    <div class="grid-lines"></div>
+                    <div class="x-axis"></div>
+                    <div class="y-axis"></div>
+                    <!-- Points and lines will be added here -->
+                </div>
+                
+                <div class="control-panel">
+                    <div class="control-button" onclick="plotPoint(2, 3)">Plot (2, 3)</div>
+                    <div class="control-button" onclick="plotPoint(-3, 1)">Plot (-3, 1)</div>
+                    <div class="control-button" onclick="plotPoint(0, -2)">Plot (0, -2)</div>
+                    <div class="control-button" onclick="clearPoints()">Clear Points</div>
+                    <div class="control-button" onclick="graphFunction('y=2x+1')">Graph y=2x+1</div>
+                    <div class="control-button" onclick="graphFunction('y=-x+3')">Graph y=-x+3</div>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: var(--dark-surface); border-radius: 8px;">
+                    <div style="color: var(--accent-yellow); margin-bottom: 10px; font-weight: bold;">Current Points:</div>
+                    <div id="pointsList" style="color: var(--text-secondary); font-family: 'Courier New', monospace;">
+                        No points plotted yet
+                    </div>
+                </div>
+            `;
+            
+            return planeDiv;
+        }
+
+        // Plot a point on the coordinate plane
+        window.plotPoint = function(x, y) {
+            const container = document.getElementById('planeContainer');
+            const pointsList = document.getElementById('pointsList');
+            
+            if (!container) return;
+            
+            // Convert coordinates to pixel positions
+            const centerX = container.offsetWidth / 2;
+            const centerY = container.offsetHeight / 2;
+            const scale = 40; // pixels per unit
+            
+            const pixelX = centerX + (x * scale);
+            const pixelY = centerY - (y * scale); // Invert y for screen coordinates
+            
+            // Create point element
+            const point = document.createElement('div');
+            point.className = 'point point-glow';
+            point.style.left = `${pixelX}px`;
+            point.style.top = `${pixelY}px`;
+            point.setAttribute('data-x', x);
+            point.setAttribute('data-y', y);
+            
+            // Add label
+            const label = document.createElement('div');
+            label.className = 'point-label';
+            label.textContent = `(${x}, ${y})`;
+            label.style.left = `${pixelX}px`;
+            label.style.top = `${pixelY}px`;
+            
+            container.appendChild(point);
+            container.appendChild(label);
+            
+            // Store point
+            coordinatePlaneState.points.push({x, y, element: point, label});
+            
+            // Update points list
+            updatePointsList();
+        };
+
+        // Update the points list display
+        function updatePointsList() {
+            const pointsList = document.getElementById('pointsList');
+            if (!pointsList) return;
+            
+            if (coordinatePlaneState.points.length === 0) {
+                pointsList.textContent = "No points plotted yet";
+                return;
+            }
+            
+            pointsList.innerHTML = coordinatePlaneState.points.map((p, i) => 
+                `(${p.x}, ${p.y})${i < coordinatePlaneState.points.length - 1 ? ', ' : ''}`
+            ).join('');
+        }
+
+        // Clear all points
+        window.clearPoints = function() {
+            const container = document.getElementById('planeContainer');
+            if (!container) return;
+            
+            // Remove all points and labels
+            document.querySelectorAll('.point, .point-label, .line-graph').forEach(el => el.remove());
+            
+            // Clear state
+            coordinatePlaneState.points = [];
+            coordinatePlaneState.lines = [];
+            
+            // Update display
+            updatePointsList();
+        };
+
+        // Graph a linear function
+        window.graphFunction = function(equation) {
+            const container = document.getElementById('planeContainer');
+            if (!container) return;
+            
+            // Clear existing lines
+            document.querySelectorAll('.line-graph').forEach(el => el.remove());
+            
+            // Parse equation (simple parsing for demo)
+            let m, b;
+            if (equation === 'y=2x+1') {
+                m = 2;
+                b = 1;
+            } else if (equation === 'y=-x+3') {
+                m = -1;
+                b = 3;
+            } else {
+                return;
+            }
+            
+            // Calculate two points for the line
+            const x1 = -5;
+            const y1 = m * x1 + b;
+            const x2 = 5;
+            const y2 = m * x2 + b;
+            
+            // Convert to pixel coordinates
+            const centerX = container.offsetWidth / 2;
+            const centerY = container.offsetHeight / 2;
+            const scale = 40;
+            
+            const pixelX1 = centerX + (x1 * scale);
+            const pixelY1 = centerY - (y1 * scale);
+            const pixelX2 = centerX + (x2 * scale);
+            const pixelY2 = centerY - (y2 * scale);
+            
+            // Calculate line properties
+            const dx = pixelX2 - pixelX1;
+            const dy = pixelY2 - pixelY1;
+            const length = Math.sqrt(dx * dx + dy * dy);
+            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+            
+            // Create line element
+            const line = document.createElement('div');
+            line.className = 'line-graph line-draw';
+            line.style.left = `${pixelX1}px`;
+            line.style.top = `${pixelY1}px`;
+            line.style.width = `${length}px`;
+            line.style.transform = `rotate(${angle}deg)`;
+            
+            // Store line
+            coordinatePlaneState.lines.push({equation, element: line});
+            
+            container.appendChild(line);
+        };
+
+        // Create slope visualization
+        function createSlopeVisualization() {
+            const slopeDiv = document.createElement('div');
+            slopeDiv.className = 'slope-visualization';
+            
+            slopeDiv.innerHTML = `
+                <div class="display-title">Understanding Slope</div>
+                <div style="text-align: center; color: var(--text-secondary); margin-bottom: 15px;">
+                    Slope = Rise / Run = Change in y / Change in x
+                </div>
+                
+                <div class="slope-display">
+                    ${slopeTypes.map((type, idx) => `
+                        <div class="slope-box ${type.type.toLowerCase()}" onclick="showSlopeDetails('${type.type}')">
+                            <div class="slope-icon slope-move">${type.icon}</div>
+                            <div class="slope-name">${type.type} Slope</div>
+                            <div class="slope-description">${type.description}</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px; font-family: 'Courier New', monospace;">
+                                ${type.example}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: rgba(33, 150, 243, 0.1); border-radius: 8px; border: 1px solid var(--primary-blue);">
+                    <div style="color: var(--primary-blue); font-weight: bold; margin-bottom: 10px;">Calculating Slope:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        <strong>Formula:</strong> m = (y₂ - y₁) / (x₂ - x₁)<br>
+                        <strong>Example:</strong> Points (1, 2) and (3, 6): m = (6-2)/(3-1) = 4/2 = 2<br>
+                        <strong>Meaning:</strong> For every 1 unit right, go 2 units up
+                    </div>
+                </div>
+            `;
+            
+            return slopeDiv;
+        }
+
+        // Create function examples visualization
+        function createFunctionVisualization() {
+            const funcDiv = document.createElement('div');
+            funcDiv.className = 'function-container';
+            
+            funcDiv.innerHTML = `
+                <div class="display-title">Linear Function Examples</div>
+                <div style="text-align: center; color: var(--text-secondary); margin-bottom: 15px;">
+                    Different types of linear functions and their graphs
+                </div>
+                
+                <div class="function-examples">
+                    ${functionExamples.map((func, idx) => `
+                        <div class="example-box ${func.type.toLowerCase().replace(' ', '-')}" onclick="showFunctionDetails('${func.type}')">
+                            <div class="function-icon">${func.type === 'Positive Slope' ? '↗️' : func.type === 'Negative Slope' ? '↘️' : func.type === 'Zero Slope' ? '↔️' : '↗️↗️'}</div>
+                            <div class="function-name">${func.type}</div>
+                            <div class="function-equation">${func.equation}</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                                Slope: ${func.slope}, Intercept: ${func.intercept}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <table class="function-table">
+                    <thead>
+                        <tr>
+                            <th>Function</th>
+                            <th>Slope (m)</th>
+                            <th>Y-intercept (b)</th>
+                            <th>Graph Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-family: 'Courier New', monospace;">y = 2x + 1</td>
+                            <td style="color: var(--accent-green); font-weight: bold;">2</td>
+                            <td style="color: var(--accent-yellow); font-weight: bold;">1</td>
+                            <td>Line rising left to right</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: 'Courier New', monospace;">y = -x + 3</td>
+                            <td style="color: var(--accent-red); font-weight: bold;">-1</td>
+                            <td style="color: var(--accent-yellow); font-weight: bold;">3</td>
+                            <td>Line falling left to right</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: 'Courier New', monospace;">y = 4</td>
+                            <td style="color: var(--text-secondary); font-weight: bold;">0</td>
+                            <td style="color: var(--accent-yellow); font-weight: bold;">4</td>
+                            <td>Horizontal line at y=4</td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: 'Courier New', monospace;">y = 0.5x - 2</td>
+                            <td style="color: var(--accent-green); font-weight: bold;">0.5</td>
+                            <td style="color: var(--accent-yellow); font-weight: bold;">-2</td>
+                            <td>Gentle rising line</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            
+            return funcDiv;
+        }
+
+        // Create math visualization
+        function createMathVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const selectedFunction = functionExamples[Math.floor(Math.random() * functionExamples.length)];
+            const selectedSlopeType = slopeTypes[Math.floor(Math.random() * slopeTypes.length)];
+            const realWorldApp = realWorldApplications[Math.floor(Math.random() * realWorldApplications.length)];
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-yellow);">Linear Functions Graphing Explorer</h3>
+                
+                <div class="comparison-container">
+                    <div class="comparison-box coordinates graph-flow" onclick="showGraphDetails('Coordinates')">
+                        <div class="comparison-icon">📍</div>
+                        <div class="comparison-name">Coordinates</div>
+                        <div class="comparison-label" style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px;">
+                            Plotting points (x, y)
+                        </div>
+                    </div>
+                    <div class="comparison-box slope coordinate-spin" onclick="showGraphDetails('Slope')">
+                        <div class="comparison-icon">↗️</div>
+                        <div class="comparison-name">Slope</div>
+                        <div class="comparison-label" style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px;">
+                            Steepness of lines
+                        </div>
+                    </div>
+                    <div class="comparison-box intercept intercept-highlight" onclick="showGraphDetails('Intercept')">
+                        <div class="comparison-icon">🎯</div>
+                        <div class="comparison-name">Intercept</div>
+                        <div class="comparison-label" style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px;">
+                            Where line crosses axis
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="graph-display">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px;">
+                        Function: <span style="color: var(--primary-blue); font-weight: bold;">${selectedFunction.type}</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.2rem; color: var(--primary-blue); margin-bottom: 10px;">Equation</div>
+                            <div style="font-size: 1.5rem; color: var(--text-secondary); font-family: 'Courier New', monospace; font-style: italic;">${selectedFunction.equation}</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">y = mx + b form</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.2rem; color: var(--secondary-teal); margin-bottom: 10px;">Characteristics</div>
+                            <div style="font-size: 1.1rem; color: var(--text-secondary);">
+                                Slope: ${selectedFunction.slope}<br>
+                                Y-intercept: ${selectedFunction.intercept}
+                            </div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">${selectedFunction.graph}</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(255, 235, 59, 0.1); border-radius: 6px; border-left: 3px solid var(--accent-yellow);">
+                        <div style="font-size: 0.9rem; color: var(--accent-yellow);">
+                            <strong>To graph:</strong> Start at (0, ${selectedFunction.intercept}), use slope ${selectedFunction.slope} = rise/run
+                        </div>
+                    </div>
+                </div>
+                
+                ${createCoordinatePlane().outerHTML}
+                ${createSlopeVisualization().outerHTML}
+                ${createFunctionVisualization().outerHTML}
+                
+                <div class="real-world-example" style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid var(--accent-orange); font-style: italic; color: var(--text-secondary);">
+                    <div style="color: var(--accent-orange); font-weight: bold; margin-bottom: 10px;">Real-World Application - ${realWorldApp.application}:</div>
+                    "${realWorldApp.problem}"
+                    <div style="margin-top: 10px;">
+                        <strong>Equation:</strong> ${realWorldApp.equation}<br>
+                        <strong>Graph:</strong> ${realWorldApp.graph}
+                    </div>
+                </div>
+                
+                <div class="interactive-practice">
+                    <div class="practice-title">Interactive Graphing Practice</div>
+                    <div class="practice-controls">
+                        <div class="practice-button" onclick="practicePlotting()">Plot Points</div>
+                        <div class="practice-button" onclick="practiceSlope()">Calculate Slope</div>
+                        <div class="practice-button" onclick="practiceGraphing()">Graph Functions</div>
+                        <div class="practice-button" onclick="practiceIntercepts()">Find Intercepts</div>
+                    </div>
+                    <div class="practice-display" id="practiceDisplay">
+                        Click buttons above to practice graphing skills
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--accent-red);">
+                    <div style="color: var(--accent-red); font-weight: bold; margin-bottom: 10px;">Quick Practice:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. Plot the point (3, -2)<br>
+                        2. Find slope between (1, 2) and (3, 6)<br>
+                        3. Graph y = 2x - 1<br>
+                        4. Find y-intercept of y = -3x + 4<br>
+                        5. Identify slope of y = 5
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--primary-blue);">
+                    <div style="color: var(--primary-blue); font-weight: bold; margin-bottom: 10px; text-align: center;">Graphing Tips</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                        <strong>Remember:</strong> Positive slope ↗️, Negative slope ↘️<br>
+                        <strong>Zero slope:</strong> Horizontal line ↔️<br>
+                        <strong>Undefined slope:</strong> Vertical line ↕️<br>
+                        <strong>Y-intercept:</strong> Where line crosses y-axis (x=0)
+                    </div>
+                </div>
+            `;
+            
+            // Store current examples for interactive functions
+            window.currentSelectedFunction = selectedFunction;
+            window.currentSelectedSlopeType = selectedSlopeType;
+            window.currentRealWorldApp = realWorldApp;
+            
+            return vizDiv;
+        }
+
+        // Global functions for interactive practice
+        window.showGraphDetails = function(type) {
+            if (type === 'Coordinates') {
+                alert(`📍 Coordinates\n\n• Ordered pair (x, y) gives point location\n• x: horizontal position (left/right)\n• y: vertical position (up/down)\n• Origin: (0, 0)\n• Quadrants: I (+,+), II (-,+), III (-,-), IV (+,-)\n\nTo plot (3, -2):\n1. Start at origin (0,0)\n2. Move 3 right (positive x)\n3. Move 2 down (negative y)`);
+            } else if (type === 'Slope') {
+                alert(`↗️ Slope\n\n• Measures line steepness: m = rise/run\n• Positive: ↗️ rises left to right\n• Negative: ↘️ falls left to right\n• Zero: ↔️ horizontal line\n• Undefined: ↕️ vertical line\n\nCalculating slope:\nm = (y₂ - y₁) / (x₂ - x₁)\nExample: (1,2) to (3,6):\nm = (6-2)/(3-1) = 4/2 = 2`);
+            } else {
+                alert(`🎯 Intercepts\n\n• Y-intercept: where line crosses y-axis (x=0)\n• X-intercept: where line crosses x-axis (y=0)\n\nFinding intercepts:\nFor y = 2x + 4:\n• Y-intercept: Set x=0 → y=4 → (0,4)\n• X-intercept: Set y=0 → 0=2x+4 → x=-2 → (-2,0)\n\nIntercepts are useful for graphing!`);
+            }
+        };
+
+        window.showSlopeDetails = function(type) {
+            const slopeType = slopeTypes.find(s => s.type === type);
+            if (!slopeType) return;
+            
+            alert(`${slopeType.icon} ${type} Slope\n\nDescription: ${slopeType.description}\n\nExample: ${slopeType.example}\n\n${type === 'Positive' ? "As x increases, y increases. The line goes uphill from left to right." : ""}${type === 'Negative' ? "As x increases, y decreases. The line goes downhill from left to right." : ""}${type === 'Zero' ? "y is constant. The line is perfectly horizontal. No matter what x is, y stays the same." : ""}${type === 'Undefined' ? "x is constant. The line is perfectly vertical. Slope calculation involves division by zero." : ""}`);
+        };
+
+        window.showFunctionDetails = function(type) {
+            const func = functionExamples.find(f => f.type === type);
+            if (!func) return;
+            
+            alert(`${type}\n\nEquation: ${func.equation}\n\nSlope: ${func.slope}\nY-intercept: ${func.intercept}\n\nGraph: ${func.graph}\n\nTo graph this function:\n1. Plot y-intercept at (0, ${func.intercept})\n2. Use slope ${func.slope} = ${func.slope}/1\n3. From intercept, move up ${Math.abs(func.slope)} units and right 1 unit\n4. Plot second point\n5. Draw line through both points`);
+        };
+
+        // Interactive practice functions
+        window.practicePlotting = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const plottingExercises = [
+                {
+                    instruction: "Plot the point (4, 1)",
+                    points: ["(4, 1)", "(-4, 1)", "(1, 4)", "(-1, -4)"]
+                },
+                {
+                    instruction: "Which point is at (-2, 3)?",
+                    points: ["2 left, 3 up", "2 right, 3 up", "2 left, 3 down", "2 right, 3 down"]
+                },
+                {
+                    instruction: "What are coordinates of point 3 left, 2 down from origin?",
+                    points: ["(-3, -2)", "(3, -2)", "(-3, 2)", "(3, 2)"]
+                },
+                {
+                    instruction: "Point (5, -3) is in which quadrant?",
+                    points: ["Quadrant IV", "Quadrant I", "Quadrant II", "Quadrant III"]
+                }
+            ];
+            
+            const currentExercise = plottingExercises[Math.floor(Math.random() * plottingExercises.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary-blue);">Plotting Points Practice</div>
+                    <div style="font-size: 1.2rem; margin-bottom: 15px; font-style: italic; color: var(--text-primary);">
+                        ${currentExercise.instruction}
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
+                        ${currentExercise.points.map((point, idx) => `
+                            <div class="option" onclick="checkPlottingAnswer(this, '${point}', '${currentExercise.points[0]}')">
+                                <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                <div class="option-text">${point}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div id="plottingResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Remember:</strong> (x, y) → x: left/right, y: up/down. Positive: right/up, Negative: left/down.
+                    </div>
+                </div>
+            `;
+            
+            window.currentPlottingAnswer = currentExercise.points[0];
+        };
+
+        window.checkPlottingAnswer = function(element, selectedAnswer, correctAnswer) {
+            const resultDiv = document.getElementById('plottingResult');
+            if (!resultDiv) return;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (selectedAnswer === correctAnswer) {
+                element.classList.add('correct');
+                resultDiv.textContent = "Correct! Great point plotting skills!";
+                resultDiv.style.color = 'var(--primary-blue)';
+            } else {
+                element.classList.add('incorrect');
+                // Find and highlight correct option
+                options.forEach(opt => {
+                    if (opt.querySelector('.option-text').textContent === correctAnswer) {
+                        opt.classList.add('correct');
+                    }
+                });
+                resultDiv.textContent = `Incorrect. The correct answer is: ${correctAnswer}`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+            
+            resultDiv.classList.add('pulse');
+            setTimeout(() => resultDiv.classList.remove('pulse'), 500);
+        };
+
+        window.practiceSlope = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const slopeExercises = [
+                {
+                    points: "(1, 2) and (3, 6)",
+                    slope: "2",
+                    calculation: "(6-2)/(3-1) = 4/2 = 2"
+                },
+                {
+                    points: "(0, 4) and (2, 0)",
+                    slope: "-2",
+                    calculation: "(0-4)/(2-0) = -4/2 = -2"
+                },
+                {
+                    points: "(-1, 3) and (2, 3)",
+                    slope: "0",
+                    calculation: "(3-3)/(2-(-1)) = 0/3 = 0"
+                },
+                {
+                    points: "(2, 1) and (2, 5)",
+                    slope: "Undefined",
+                    calculation: "(5-1)/(2-2) = 4/0 = Undefined"
+                }
+            ];
+            
+            const currentExercise = slopeExercises[Math.floor(Math.random() * slopeExercises.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--secondary-teal);">Slope Calculation Practice</div>
+                    <div style="font-size: 1.2rem; margin-bottom: 15px; color: var(--text-primary);">
+                        Find slope between ${currentExercise.points}
+                    </div>
+                    
+                    <div style="margin: 20px 0;">
+                        <input type="text" id="slopeAnswer" placeholder="Enter slope (e.g., 2 or -1 or 0 or 'Undefined')" style="width: 100%; padding: 15px; background: var(--dark-surface); border: 2px solid var(--dark-border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+                    </div>
+                    
+                    <div>
+                        <button class="btn btn-small btn-secondary" onclick="checkSlopeAnswer()">Check Answer</button>
+                        <button class="btn btn-small btn-outline" onclick="showSlopeSolution()">Show Solution</button>
+                    </div>
+                    
+                    <div id="slopeResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Formula:</strong> m = (y₂ - y₁) / (x₂ - x₁) = rise/run
+                    </div>
+                </div>
+            `;
+            
+            window.currentSlopeAnswer = currentExercise.slope;
+            window.currentSlopeCalculation = currentExercise.calculation;
+        };
+
+        window.checkSlopeAnswer = function() {
+            const answerInput = document.getElementById('slopeAnswer');
+            const resultDiv = document.getElementById('slopeResult');
+            
+            if (!answerInput || !resultDiv) return;
+            
+            const userAnswer = answerInput.value.trim().toLowerCase();
+            const correctAnswer = window.currentSlopeAnswer.toLowerCase();
+            
+            if (userAnswer === correctAnswer) {
+                resultDiv.textContent = "Excellent slope calculation!";
+                resultDiv.style.color = 'var(--primary-blue)';
+            } else if (userAnswer.includes(correctAnswer) || correctAnswer.includes(userAnswer)) {
+                resultDiv.textContent = "Close! Check your formatting.";
+                resultDiv.style.color = 'var(--secondary-teal)';
+            } else {
+                resultDiv.textContent = "Try again. Remember: m = (y₂ - y₁) / (x₂ - x₁)";
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+        };
+
+        window.showSlopeSolution = function() {
+            const resultDiv = document.getElementById('slopeResult');
+            if (resultDiv && window.currentSlopeAnswer) {
+                resultDiv.innerHTML = `
+                    <div>
+                        <div style="color: var(--secondary-teal); margin-bottom: 5px;"><strong>Correct answer:</strong> ${window.currentSlopeAnswer}</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">Calculation: ${window.currentSlopeCalculation}</div>
+                    </div>
+                `;
+            }
+        };
+
+        window.practiceGraphing = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const graphingExercises = [
+                {
+                    equation: "y = 2x - 1",
+                    points: "(0, -1) and (1, 1)",
+                    steps: ["Start at y-intercept (0, -1)", "Slope = 2 = 2/1", "From (0,-1), up 2, right 1 to (1,1)", "Draw line through points"]
+                },
+                {
+                    equation: "y = -x + 3",
+                    points: "(0, 3) and (1, 2)",
+                    steps: ["Start at y-intercept (0, 3)", "Slope = -1 = -1/1", "From (0,3), down 1, right 1 to (1,2)", "Draw line through points"]
+                },
+                {
+                    equation: "y = 3",
+                    points: "(0, 3) and (2, 3)",
+                    steps: ["Horizontal line at y=3", "Plot (0,3) and (2,3)", "Draw horizontal line through points"]
+                },
+                {
+                    equation: "y = 0.5x + 2",
+                    points: "(0, 2) and (2, 3)",
+                    steps: ["Start at y-intercept (0, 2)", "Slope = 0.5 = 1/2", "From (0,2), up 1, right 2 to (2,3)", "Draw line through points"]
+                }
+            ];
+            
+            const currentExercise = graphingExercises[Math.floor(Math.random() * graphingExercises.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-yellow);">Graphing Practice</div>
+                    <div style="font-size: 1.3rem; margin-bottom: 15px; font-family: 'Courier New', monospace; color: var(--text-primary);">
+                        Graph: ${currentExercise.equation}
+                    </div>
+                    
+                    <div style="text-align: left; margin: 20px 0;">
+                        <div style="color: var(--text-secondary); margin-bottom: 10px;">What two points would you use to graph this line?</div>
+                        ${["(0, -1) and (1, 1)", "(0, 3) and (1, 2)", "(0, 2) and (2, 3)", "(0, 3) and (2, 3)", "(1, 1) and (2, 3)"].map((option, idx) => `
+                            <div style="margin: 10px 0; display: flex; align-items: center;">
+                                <input type="radio" id="graphing${idx}" name="graphing" value="${option}" style="margin-right: 10px;">
+                                <label for="graphing${idx}" style="color: var(--text-secondary); cursor: pointer; font-family: 'Courier New', monospace;">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div>
+                        <button class="btn btn-small btn-secondary" onclick="checkGraphingAnswer()">Check Answer</button>
+                        <button class="btn btn-small btn-outline" onclick="showGraphingSolution()">Show Solution</button>
+                    </div>
+                    
+                    <div id="graphingResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            window.currentGraphingAnswer = currentExercise.points;
+            window.currentGraphingSteps = currentExercise.steps;
+        };
+
+        window.checkGraphingAnswer = function() {
+            const resultDiv = document.getElementById('graphingResult');
+            if (!resultDiv) return;
+            
+            const radios = document.querySelectorAll('input[type="radio"]');
+            let selectedValue = '';
+            
+            radios.forEach(radio => {
+                if (radio.checked) {
+                    selectedValue = radio.value;
+                }
+            });
+            
+            if (!selectedValue) {
+                resultDiv.textContent = "Please select an option.";
+                resultDiv.style.color = 'var(--accent-red)';
+                return;
+            }
+            
+            if (selectedValue === window.currentGraphingAnswer) {
+                resultDiv.textContent = "Perfect! Those are good points for graphing!";
+                resultDiv.style.color = 'var(--primary-blue)';
+            } else {
+                resultDiv.textContent = "Not quite. Remember to use the y-intercept and slope.";
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+        };
+
+        window.showGraphingSolution = function() {
+            const resultDiv = document.getElementById('graphingResult');
+            if (resultDiv && window.currentGraphingAnswer) {
+                resultDiv.innerHTML = `
+                    <div>
+                        <div style="color: var(--secondary-teal); margin-bottom: 5px;"><strong>Points to use:</strong> ${window.currentGraphingAnswer}</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                            <strong>Steps:</strong><br>${window.currentGraphingSteps.map(step => `• ${step}`).join('<br>')}
+                        </div>
+                    </div>
+                `;
+            }
+        };
+
+        window.practiceIntercepts = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const interceptExercises = [
+                {
+                    equation: "y = 3x + 6",
+                    yIntercept: "6",
+                    xIntercept: "-2",
+                    steps: ["Y-intercept: x=0 → y=6 → (0,6)", "X-intercept: y=0 → 0=3x+6 → 3x=-6 → x=-2 → (-2,0)"]
+                },
+                {
+                    equation: "y = -2x + 4",
+                    yIntercept: "4",
+                    xIntercept: "2",
+                    steps: ["Y-intercept: x=0 → y=4 → (0,4)", "X-intercept: y=0 → 0=-2x+4 → 2x=4 → x=2 → (2,0)"]
+                },
+                {
+                    equation: "y = 0.5x - 3",
+                    yIntercept: "-3",
+                    xIntercept: "6",
+                    steps: ["Y-intercept: x=0 → y=-3 → (0,-3)", "X-intercept: y=0 → 0=0.5x-3 → 0.5x=3 → x=6 → (6,0)"]
+                },
+                {
+                    equation: "y = -x + 5",
+                    yIntercept: "5",
+                    xIntercept: "5",
+                    steps: ["Y-intercept: x=0 → y=5 → (0,5)", "X-intercept: y=0 → 0=-x+5 → x=5 → (5,0)"]
+                }
+            ];
+            
+            const currentExercise = interceptExercises[Math.floor(Math.random() * interceptExercises.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-purple);">Intercepts Practice</div>
+                    <div style="font-size: 1.3rem; margin-bottom: 15px; font-family: 'Courier New', monospace; color: var(--text-primary);">
+                        ${currentExercise.equation}
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                        <div style="text-align: center;">
+                            <div style="color: var(--accent-yellow); margin-bottom: 10px; font-weight: bold;">Y-intercept</div>
+                            <input type="text" id="yIntercept" placeholder="Enter number" style="width: 100%; padding: 10px; background: var(--dark-surface); border: 2px solid var(--dark-border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+                            <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px;">Where line crosses y-axis</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="color: var(--accent-orange); margin-bottom: 10px; font-weight: bold;">X-intercept</div>
+                            <input type="text" id="xIntercept" placeholder="Enter number" style="width: 100%; padding: 10px; background: var(--dark-surface); border: 2px solid var(--dark-border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+                            <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px;">Where line crosses x-axis</div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <button class="btn btn-small btn-secondary" onclick="checkInterceptsAnswer()">Check Answers</button>
+                        <button class="btn btn-small btn-outline" onclick="showInterceptsSolution()">Show Solution</button>
+                    </div>
+                    
+                    <div id="interceptsResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            window.currentIntercepts = {
+                y: currentExercise.yIntercept,
+                x: currentExercise.xIntercept,
+                steps: currentExercise.steps
+            };
+        };
+
+        window.checkInterceptsAnswer = function() {
+            const yInput = document.getElementById('yIntercept');
+            const xInput = document.getElementById('xIntercept');
+            const resultDiv = document.getElementById('interceptsResult');
+            
+            if (!yInput || !xInput || !resultDiv) return;
+            
+            const userY = yInput.value.trim();
+            const userX = xInput.value.trim();
+            const correctY = window.currentIntercepts.y;
+            const correctX = window.currentIntercepts.x;
+            
+            const yCorrect = userY === correctY;
+            const xCorrect = userX === correctX;
+            
+            if (yCorrect && xCorrect) {
+                resultDiv.textContent = "Perfect! You found both intercepts correctly!";
+                resultDiv.style.color = 'var(--primary-blue)';
+            } else if (yCorrect || xCorrect) {
+                resultDiv.textContent = `Partially correct. ${yCorrect ? 'Y-intercept is right' : 'Y-intercept is wrong'}. ${xCorrect ? 'X-intercept is right' : 'X-intercept is wrong'}.`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            } else {
+                resultDiv.textContent = "Try again. Remember: Y-intercept (x=0), X-intercept (y=0).";
+                resultDiv.style.color = 'var(--accent-red)';
+            }
+        };
+
+        window.showInterceptsSolution = function() {
+            const resultDiv = document.getElementById('interceptsResult');
+            if (resultDiv && window.currentIntercepts) {
+                resultDiv.innerHTML = `
+                    <div>
+                        <div style="color: var(--secondary-teal); margin-bottom: 5px;">
+                            <strong>Y-intercept:</strong> ${window.currentIntercepts.y} (point: 0, ${window.currentIntercepts.y})<br>
+                            <strong>X-intercept:</strong> ${window.currentIntercepts.x} (point: ${window.currentIntercepts.x}, 0)
+                        </div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;">
+                            <strong>Steps:</strong><br>${window.currentIntercepts.steps.map(step => `• ${step}`).join('<br>')}
+                        </div>
+                    </div>
+                `;
+            }
+        };
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            mathFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            mathFact.appendChild(createMathFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createMathVisualization());
+            
+            // Clear coordinate plane state
+            coordinatePlaneState.points = [];
+            coordinatePlaneState.lines = [];
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

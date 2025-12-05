@@ -1,0 +1,2996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Math - Number & Place Value | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Math Theme */
+        :root {
+            --primary-teal: #009688;
+            --secondary-amber: #FFC107;
+            --accent-purple: #673AB7;
+            --accent-pink: #E91E63;
+            --accent-blue: #2196F3;
+            --accent-green: #4CAF50;
+            --accent-orange: #FF9800;
+            --accent-red: #F44336;
+            --accent-cyan: #00BCD4;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --integer-glow: 0 0 20px rgba(0, 150, 136, 0.4);
+            --placevalue-glow: 0 0 20px rgba(255, 193, 7, 0.4);
+            --number-glow: 0 0 20px rgba(103, 58, 183, 0.4);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 150, 136, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(255, 193, 7, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(103, 58, 183, 0.03) 0%, transparent 50%);
+        }
+
+        /* Math Pattern Background */
+        .math-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.1;
+            pointer-events: none;
+            background: 
+                repeating-linear-gradient(90deg, 
+                    transparent, 
+                    transparent 20px, 
+                    rgba(0, 150, 136, 0.05) 20px, 
+                    rgba(0, 150, 136, 0.05) 40px),
+                repeating-linear-gradient(0deg, 
+                    transparent, 
+                    transparent 20px, 
+                    rgba(255, 193, 7, 0.05) 20px, 
+                    rgba(255, 193, 7, 0.05) 40px);
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 2.5rem;
+            font-weight: bold;
+            animation: floatElement 30s linear infinite;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        @keyframes floatElement {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.05; }
+            25% { transform: translateY(-100px) translateX(80px) rotate(90deg); opacity: 0.03; }
+            50% { transform: translateY(-30px) translateX(-120px) rotate(180deg); opacity: 0.05; }
+            75% { transform: translateY(100px) translateX(40px) rotate(270deg); opacity: 0.03; }
+            100% { transform: translateY(0) translateX(0) rotate(360deg); opacity: 0.05; }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--integer-glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-amber), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 150, 136, 0.15);
+            padding: 12px 24px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 2px solid var(--primary-teal);
+        }
+
+        .topic-icon {
+            font-size: 1.8rem;
+        }
+
+        .topic-name {
+            font-weight: 700;
+            color: var(--primary-teal);
+            font-size: 1.2rem;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            box-shadow: 0 0 0 3px rgba(0, 150, 136, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-teal);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 150, 136, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #00796B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 150, 136, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-amber);
+            color: #212121;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #FFA000;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-teal);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-teal), var(--secondary-amber), var(--accent-blue));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0, 150, 136, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .math-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-pink);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-teal), var(--accent-blue));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(0, 150, 136, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-teal);
+            background: rgba(0, 150, 136, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 150, 136, 0.1);
+            border-color: var(--primary-teal);
+            color: var(--primary-teal);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-amber);
+            color: #212121;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-teal);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 150, 136, 0.1);
+            border-left: 5px solid var(--primary-teal);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-teal);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-teal);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Number Line Visualization */
+        .numberline-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid var(--accent-pink);
+            overflow-x: auto;
+        }
+
+        .display-title {
+            color: var(--primary-teal);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .number-line {
+            position: relative;
+            height: 80px;
+            margin: 30px 0;
+            background: linear-gradient(90deg, var(--accent-red), var(--secondary-amber), var(--accent-green));
+            border-radius: 8px;
+            padding: 10px 0;
+        }
+
+        .number-line-axis {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: white;
+            transform: translateY(-50%);
+        }
+
+        .number-tick {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .number-tick.positive {
+            color: var(--accent-green);
+        }
+
+        .number-tick.negative {
+            color: var(--accent-red);
+        }
+
+        .number-tick.zero {
+            color: var(--secondary-amber);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .number-tick:hover {
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+
+        /* Place Value Chart */
+        .placevalue-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-blue);
+        }
+
+        .placevalue-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 5px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .placevalue-grid {
+                grid-template-columns: repeat(4, 1fr);
+                font-size: 0.9rem;
+            }
+        }
+
+        .placevalue-cell {
+            background: var(--dark-surface);
+            padding: 10px 5px;
+            border-radius: 4px;
+            border: 1px solid var(--dark-border);
+        }
+
+        .placevalue-cell.header {
+            background: var(--primary-teal);
+            color: white;
+            font-weight: bold;
+        }
+
+        .placevalue-cell.value {
+            background: rgba(0, 150, 136, 0.1);
+            border-color: var(--primary-teal);
+            font-weight: bold;
+        }
+
+        /* Large Number Visualizer */
+        .largenumber-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-green);
+        }
+
+        .number-display {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            color: var(--secondary-amber);
+            font-family: 'Courier New', monospace;
+        }
+
+        .number-segments {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .number-segment {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 80px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .number-segment:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-blue);
+        }
+
+        .segment-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-teal);
+            margin-bottom: 5px;
+        }
+
+        .segment-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Integer Operations */
+        .operations-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-orange);
+        }
+
+        .operations-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 768px) {
+            .operations-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .operation-box {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .operation-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .operation-box.addition {
+            border-color: var(--accent-green);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .operation-box.subtraction {
+            border-color: var(--accent-red);
+            background: rgba(244, 67, 54, 0.1);
+        }
+
+        .operation-box.multiplication {
+            border-color: var(--accent-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .operation-box.division {
+            border-color: var(--accent-purple);
+            background: rgba(103, 58, 183, 0.1);
+        }
+
+        .operation-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .operation-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .operation-box.addition .operation-name {
+            color: var(--accent-green);
+        }
+
+        .operation-box.subtraction .operation-name {
+            color: var(--accent-red);
+        }
+
+        .operation-box.multiplication .operation-name {
+            color: var(--accent-blue);
+        }
+
+        .operation-box.division .operation-name {
+            color: var(--accent-purple);
+        }
+
+        /* Number Types */
+        .numbertypes-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 768px) {
+            .types-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .type-box {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .type-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .type-box.integer {
+            border-color: var(--primary-teal);
+            background: rgba(0, 150, 136, 0.1);
+        }
+
+        .type-box.whole {
+            border-color: var(--secondary-amber);
+            background: rgba(255, 193, 7, 0.1);
+        }
+
+        .type-box.natural {
+            border-color: var(--accent-green);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .type-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .type-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .type-box.integer .type-name {
+            color: var(--primary-teal);
+        }
+
+        .type-box.whole .type-name {
+            color: var(--secondary-amber);
+        }
+
+        .type-box.natural .type-name {
+            color: var(--accent-green);
+        }
+
+        /* Math Table */
+        .math-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .math-table th {
+            background: var(--dark-surface);
+            padding: 12px;
+            text-align: left;
+            color: var(--accent-pink);
+            border-bottom: 2px solid var(--accent-pink);
+        }
+
+        .math-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+        }
+
+        .math-table tr:hover {
+            background: rgba(233, 30, 99, 0.05);
+        }
+
+        /* Interactive Practice */
+        .interactive-practice {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .practice-title {
+            color: var(--accent-purple);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .practice-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .practice-button {
+            padding: 10px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-purple);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .practice-button:hover {
+            background: rgba(103, 58, 183, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .practice-display {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Calculator Display */
+        .calculator-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--primary-teal);
+        }
+
+        .calculator-display {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: right;
+            font-size: 2rem;
+            font-family: 'Courier New', monospace;
+            color: var(--secondary-amber);
+            min-height: 60px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .calc-btn {
+            padding: 15px;
+            background: var(--dark-surface);
+            border: 1px solid var(--dark-border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .calc-btn:hover {
+            background: rgba(0, 150, 136, 0.1);
+            transform: scale(1.05);
+        }
+
+        .calc-btn.operation {
+            background: rgba(0, 150, 136, 0.2);
+            color: var(--primary-teal);
+        }
+
+        .calc-btn.equals {
+            background: var(--primary-teal);
+            color: white;
+        }
+
+        .calc-btn.clear {
+            background: rgba(244, 67, 54, 0.2);
+            color: var(--accent-red);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-amber), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-teal), var(--secondary-amber), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-teal);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .types-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .operations-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Math Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes numberCount {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .number-count {
+            animation: numberCount 0.5s ease forwards;
+        }
+        
+        @keyframes placeValueHighlight {
+            0% { background-color: rgba(0, 150, 136, 0.1); }
+            50% { background-color: rgba(0, 150, 136, 0.3); }
+            100% { background-color: rgba(0, 150, 136, 0.1); }
+        }
+        
+        .placevalue-highlight {
+            animation: placeValueHighlight 2s ease-in-out infinite;
+        }
+        
+        @keyframes numberLineFlow {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { transform: translateX(0); opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        
+        .numberline-flow {
+            animation: numberLineFlow 5s linear infinite;
+        }
+        
+        @keyframes mathGlow {
+            0% { box-shadow: 0 0 20px rgba(0, 150, 136, 0.4); }
+            33% { box-shadow: 0 0 20px rgba(255, 193, 7, 0.4); }
+            66% { box-shadow: 0 0 20px rgba(33, 150, 243, 0.4); }
+            100% { box-shadow: 0 0 20px rgba(0, 150, 136, 0.4); }
+        }
+        
+        .math-glow {
+            animation: mathGlow 5s linear infinite;
+        }
+        
+        @keyframes integerBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .integer-bounce {
+            animation: integerBounce 1s ease-in-out infinite;
+        }
+        
+        @keyframes calculationSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .calculation-spin {
+            animation: calculationSpin 1s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Math Pattern Background -->
+    <div class="math-bg" id="mathBg">
+        <!-- Elements will be generated by JavaScript -->
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 7 Mathematics</h1>
+            <p class="welcome-subtitle">Master the world of numbers! Explore integers, place value, and large numbers. Learn to work with positive and negative numbers, understand number systems, and handle very large numbers. Develop strong numerical reasoning skills that form the foundation for all higher mathematics!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">🔢🎯📊</span>
+                <span class="topic-name">Number & Place Value (Integers, Large Numbers)</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Begin Math Journey</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 120</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0.8%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Math fact display -->
+                <div id="mathFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Math Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background
+        function initBackground() {
+            const mathBg = document.getElementById('mathBg');
+            
+            // Create floating math symbols
+            const elements = ['🔢', '➕', '➖', '✖️', '➗', '🎯', '📊', '📈', '📉', '⚖️', '🔣', '🎲', '🧮', '📐'];
+            
+            for (let i = 0; i < 25; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.textContent = elements[Math.floor(Math.random() * elements.length)];
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+                element.style.animationDelay = `${Math.random() * 20}s`;
+                element.style.fontSize = `${2 + Math.random() * 3}rem`;
+                
+                // Color different math concepts
+                if (['➕', '➖', '✖️', '➗'].includes(element.textContent)) {
+                    element.style.color = 'rgba(0, 150, 136, 0.1)'; // Teal for operations
+                } else if (['🔢', '🧮', '🔣'].includes(element.textContent)) {
+                    element.style.color = 'rgba(255, 193, 7, 0.1)'; // Amber for numbers
+                } else if (['📊', '📈', '📉', '⚖️'].includes(element.textContent)) {
+                    element.style.color = 'rgba(33, 150, 243, 0.1)'; // Blue for data
+                } else {
+                    element.style.color = 'rgba(103, 58, 183, 0.1)'; // Purple for math
+                }
+                
+                mathBg.appendChild(element);
+            }
+        }
+
+        // Questions array - 120+ Grade 7 Number & Place Value questions
+        const questions = [
+            // Integer Basics (1-20)
+            {
+                type: "integer_basics",
+                question: "What are integers?",
+                options: ["Whole numbers and their negatives", "Only positive numbers", "Only negative numbers", "Decimal numbers"],
+                answer: "A",
+                explanation: "Integers include: ..., -3, -2, -1, 0, 1, 2, 3, ..."
+            },
+            {
+                type: "integer_basics",
+                question: "Which of these is an integer?",
+                options: ["-15", "3.14", "1/2", "√2"],
+                answer: "A",
+                explanation: "-15 is a negative whole number, so it's an integer."
+            },
+            {
+                type: "integer_basics",
+                question: "What is the opposite of +7?",
+                options: ["-7", "+7", "0", "14"],
+                answer: "A",
+                explanation: "Opposite numbers have same magnitude but different signs."
+            },
+            {
+                type: "integer_basics",
+                question: "Which integer is greater: -5 or -3?",
+                options: ["-3", "-5", "They're equal", "Can't compare"],
+                answer: "A",
+                explanation: "On number line, numbers increase from left to right: -5 < -3."
+            },
+            {
+                type: "integer_basics",
+                question: "Absolute value of -8 is:",
+                options: ["8", "-8", "0", "Both 8 and -8"],
+                answer: "A",
+                explanation: "Absolute value = distance from zero, always positive or zero."
+            },
+            // Integer Operations (21-40)
+            {
+                type: "integer_operations",
+                question: "(-5) + (-3) = ?",
+                options: ["-8", "-2", "2", "8"],
+                answer: "A",
+                explanation: "Same signs: add absolute values, keep sign: |-5| + |-3| = 8, negative = -8."
+            },
+            {
+                type: "integer_operations",
+                question: "(-7) + 4 = ?",
+                options: ["-3", "3", "11", "-11"],
+                answer: "A",
+                explanation: "Different signs: subtract smaller from larger, keep sign of larger: |-7| - |4| = 3, negative = -3."
+            },
+            {
+                type: "integer_operations",
+                question: "8 - (-3) = ?",
+                options: ["11", "5", "-5", "-11"],
+                answer: "A",
+                explanation: "Subtracting negative = adding positive: 8 - (-3) = 8 + 3 = 11."
+            },
+            {
+                type: "integer_operations",
+                question: "(-4) × 6 = ?",
+                options: ["-24", "24", "2", "-2"],
+                answer: "A",
+                explanation: "Negative × Positive = Negative: (-4) × 6 = -24."
+            },
+            {
+                type: "integer_operations",
+                question: "(-12) ÷ (-3) = ?",
+                options: ["4", "-4", "9", "-9"],
+                answer: "A",
+                explanation: "Negative ÷ Negative = Positive: (-12) ÷ (-3) = 4."
+            },
+            // Place Value Basics (41-60)
+            {
+                type: "placevalue_basics",
+                question: "In 3,456, what digit is in the hundreds place?",
+                options: ["4", "3", "5", "6"],
+                answer: "A",
+                explanation: "3,456: thousands=3, hundreds=4, tens=5, ones=6."
+            },
+            {
+                type: "placevalue_basics",
+                question: "What is the value of 7 in 27,389?",
+                options: ["7,000", "700", "70", "7"],
+                answer: "A",
+                explanation: "27,389: 2 is 20,000; 7 is 7,000; 3 is 300; 8 is 80; 9 is 9."
+            },
+            {
+                type: "placevalue_basics",
+                question: "Write 5,000 + 300 + 20 + 9 in standard form:",
+                options: ["5,329", "5,239", "5,923", "5,392"],
+                answer: "A",
+                explanation: "5,000 + 300 + 20 + 9 = 5,329."
+            },
+            // Large Numbers (61-80)
+            {
+                type: "large_numbers",
+                question: "How do you write 1,000,000 in words?",
+                options: ["One million", "Ten thousand", "One hundred thousand", "Ten million"],
+                answer: "A",
+                explanation: "1,000,000 = one million (6 zeros)."
+            },
+            {
+                type: "large_numbers",
+                question: "What is 10^6?",
+                options: ["1,000,000", "100,000", "10,000", "1,000"],
+                answer: "A",
+                explanation: "10^6 = 10 × 10 × 10 × 10 × 10 × 10 = 1,000,000."
+            },
+            {
+                type: "large_numbers",
+                question: "Round 4,782 to nearest hundred:",
+                options: ["4,800", "4,700", "4,780", "4,800"],
+                answer: "A",
+                explanation: "782 → look at tens digit (8 ≥ 5) → round up: 4,800."
+            },
+            {
+                type: "large_numbers",
+                question: "Which is greater: 45,678 or 45,768?",
+                options: ["45,768", "45,678", "Equal", "Can't tell"],
+                answer: "A",
+                explanation: "Compare digit by digit: 45,6?? vs 45,7?? → 7 > 6 → 45,768 > 45,678."
+            },
+            // Number Systems (81-100)
+            {
+                type: "number_systems",
+                question: "Natural numbers start from:",
+                options: ["1", "0", "-1", "0.5"],
+                answer: "A",
+                explanation: "Natural numbers: 1, 2, 3, 4, ... (counting numbers)."
+            },
+            {
+                type: "number_systems",
+                question: "Whole numbers include:",
+                options: ["0 and natural numbers", "Only positive numbers", "Only negative numbers", "Fractions"],
+                answer: "A",
+                explanation: "Whole numbers: 0, 1, 2, 3, ..."
+            },
+            {
+                type: "number_systems",
+                question: "Which set is largest?",
+                options: ["Integers", "Whole numbers", "Natural numbers", "They're equal"],
+                answer: "A",
+                explanation: "Integers include negatives, zero, and positives → largest set."
+            },
+            // Applications (101-120)
+            {
+                type: "applications",
+                question: "Temperature drops from 5°C to -3°C. What's the change?",
+                options: ["-8°C", "8°C", "2°C", "-2°C"],
+                answer: "A",
+                explanation: "Change = final - initial = (-3) - 5 = -8°C (drop of 8°C)."
+            },
+            {
+                type: "applications",
+                question: "Debt of $15 represented as:",
+                options: ["-15", "+15", "0", "15"],
+                answer: "A",
+                explanation: "Debt/owing money = negative number."
+            },
+            {
+                type: "applications",
+                question: "Sea level = 0. Mountain 1500m, valley -200m. Difference?",
+                options: ["1700m", "1300m", "1500m", "200m"],
+                answer: "A",
+                explanation: "Difference = 1500 - (-200) = 1500 + 200 = 1700m."
+            },
+            // Comparing and Ordering (121-140)
+            {
+                type: "comparing",
+                question: "Order from least to greatest: -3, 0, -5, 2",
+                options: ["-5, -3, 0, 2", "-3, -5, 0, 2", "0, 2, -3, -5", "2, 0, -3, -5"],
+                answer: "A",
+                explanation: "On number line: -5 < -3 < 0 < 2."
+            },
+            {
+                type: "comparing",
+                question: "Which inequality is true?",
+                options: ["-8 < -3", "-8 > -3", "0 < -5", "-10 > 0"],
+                answer: "A",
+                explanation: "-8 is left of -3 on number line → -8 < -3."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent math skills!",
+            "Perfect number sense!",
+            "Great integer understanding!",
+            "You're a math expert!",
+            "Perfect place value knowledge!",
+            "You're a number wizard!",
+            "Outstanding calculation skills!",
+            "Brilliant numerical reasoning!",
+            "You think like a mathematician!",
+            "Math mastery achieved!"
+        ];
+
+        // Math facts
+        const mathFacts = [
+            "Zero is neither positive nor negative - it's neutral!",
+            "The number googol is 1 followed by 100 zeros!",
+            "Integers were first used in ancient India around 600 AD!",
+            "The largest named number is googolplex - 1 followed by googol zeros!",
+            "Negative numbers were once called 'absurd numbers'!",
+            "The number system we use is called Hindu-Arabic numerals!",
+            "Place value system was invented in ancient India!",
+            "Roman numerals have no place value - that's why they're hard to calculate with!"
+        ];
+
+        // Large number names
+        const largeNumbers = [
+            { name: "Thousand", value: 1_000, zeros: 3, example: "1,000" },
+            { name: "Million", value: 1_000_000, zeros: 6, example: "1,000,000" },
+            { name: "Billion", value: 1_000_000_000, zeros: 9, example: "1,000,000,000" },
+            { name: "Trillion", value: 1_000_000_000_000, zeros: 12, example: "1,000,000,000,000" },
+            { name: "Quadrillion", value: 1_000_000_000_000_000, zeros: 15, example: "1,000,000,000,000,000" },
+            { name: "Quintillion", value: 1_000_000_000_000_000_000, zeros: 18, example: "1,000,000,000,000,000,000" }
+        ];
+
+        // Number types
+        const numberTypes = [
+            {
+                type: "Natural Numbers",
+                symbol: "ℕ",
+                definition: "Counting numbers starting from 1",
+                examples: "1, 2, 3, 4, 5, ...",
+                includes: "Positive integers only",
+                icon: "🔢"
+            },
+            {
+                type: "Whole Numbers",
+                symbol: "𝕎",
+                definition: "Natural numbers plus zero",
+                examples: "0, 1, 2, 3, 4, ...",
+                includes: "Zero and positive integers",
+                icon: "0️⃣"
+            },
+            {
+                type: "Integers",
+                symbol: "ℤ",
+                definition: "Whole numbers and their negatives",
+                examples: "..., -3, -2, -1, 0, 1, 2, 3, ...",
+                includes: "Positive, negative, and zero",
+                icon: "⚖️"
+            }
+        ];
+
+        // Place value chart
+        const placeValues = [
+            { name: "Ones", value: 1, power: 10^0, example: "9" },
+            { name: "Tens", value: 10, power: 10^1, example: "90" },
+            { name: "Hundreds", value: 100, power: 10^2, example: "900" },
+            { name: "Thousands", value: 1_000, power: 10^3, example: "9,000" },
+            { name: "Ten Thousands", value: 10_000, power: 10^4, example: "90,000" },
+            { name: "Hundred Thousands", value: 100_000, power: 10^5, example: "900,000" },
+            { name: "Millions", value: 1_000_000, power: 10^6, example: "9,000,000" },
+            { name: "Ten Millions", value: 10_000_000, power: 10^7, example: "90,000,000" }
+        ];
+
+        // Integer rules
+        const integerRules = [
+            {
+                operation: "Addition",
+                rule: "Same signs: add, keep sign. Different signs: subtract, keep sign of larger.",
+                examples: "(-3) + (-5) = -8, (-7) + 4 = -3",
+                icon: "➕"
+            },
+            {
+                operation: "Subtraction",
+                rule: "Change subtraction to addition of opposite: a - b = a + (-b)",
+                examples: "8 - (-3) = 8 + 3 = 11, (-4) - 5 = (-4) + (-5) = -9",
+                icon: "➖"
+            },
+            {
+                operation: "Multiplication",
+                rule: "Same signs: positive. Different signs: negative.",
+                examples: "(-3) × (-4) = 12, (-5) × 6 = -30",
+                icon: "✖️"
+            },
+            {
+                operation: "Division",
+                rule: "Same signs: positive. Different signs: negative.",
+                examples: "(-12) ÷ (-3) = 4, 15 ÷ (-5) = -3",
+                icon: "➗"
+            }
+        ];
+
+        // Real-world integer examples
+        const realWorldIntegers = [
+            {
+                context: "Temperature",
+                positive: "Above zero: +25°C",
+                negative: "Below zero: -10°C",
+                zero: "Freezing point of water: 0°C",
+                icon: "🌡️"
+            },
+            {
+                context: "Elevation",
+                positive: "Above sea level: +1500m",
+                negative: "Below sea level: -200m",
+                zero: "Sea level: 0m",
+                icon: "🏔️"
+            },
+            {
+                context: "Money",
+                positive: "Profit/savings: +$500",
+                negative: "Debt/loss: -$300",
+                zero: "Break even: $0",
+                icon: "💰"
+            },
+            {
+                context: "Sports",
+                positive: "Points gained: +10",
+                negative: "Points lost: -5",
+                zero: "No change: 0",
+                icon: "⚽"
+            }
+        ];
+
+        // Number line examples
+        const numberLineExamples = [
+            { range: "-10 to 10", points: [-10, -5, 0, 5, 10], description: "Basic integer number line" },
+            { range: "-20 to 20", points: [-20, -15, -10, -5, 0, 5, 10, 15, 20], description: "Extended integer range" },
+            { range: "-100 to 100", points: [-100, -50, 0, 50, 100], description: "Large integer scale" }
+        ];
+
+        // Comparison symbols
+        const comparisonSymbols = [
+            { symbol: "<", name: "Less than", example: "-5 < 2", description: "Left number is smaller" },
+            { symbol: ">", name: "Greater than", example: "8 > 3", description: "Left number is larger" },
+            { symbol: "=", name: "Equal to", example: "4 = 4", description: "Numbers are equal" },
+            { symbol: "≤", name: "Less than or equal", example: "x ≤ 5", description: "Number is 5 or less" },
+            { symbol: "≥", name: "Greater than or equal", example: "y ≥ -2", description: "Number is -2 or more" }
+        ];
+
+        // Rounding rules
+        const roundingRules = [
+            {
+                place: "Nearest ten",
+                rule: "Look at ones digit: 0-4 → round down, 5-9 → round up",
+                example: "47 → 50, 43 → 40",
+                icon: "🔟"
+            },
+            {
+                place: "Nearest hundred",
+                rule: "Look at tens digit: 0-4 → round down, 5-9 → round up",
+                example: "478 → 500, 432 → 400",
+                icon: "💯"
+            },
+            {
+                place: "Nearest thousand",
+                rule: "Look at hundreds digit: 0-4 → round down, 5-9 → round up",
+                example: "4,782 → 5,000, 4,312 → 4,000",
+                icon: "📈"
+            }
+        ];
+
+        // Powers of 10
+        const powersOfTen = [
+            { power: "10^0", value: 1, name: "One", zeros: 0 },
+            { power: "10^1", value: 10, name: "Ten", zeros: 1 },
+            { power: "10^2", value: 100, name: "Hundred", zeros: 2 },
+            { power: "10^3", value: 1_000, name: "Thousand", zeros: 3 },
+            { power: "10^4", value: 10_000, name: "Ten Thousand", zeros: 4 },
+            { power: "10^5", value: 100_000, name: "Hundred Thousand", zeros: 5 },
+            { power: "10^6", value: 1_000_000, name: "Million", zeros: 6 }
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const mathFact = document.getElementById('mathFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initBackground();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade7MathNumbers');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade7MathNumbers', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade7MathNumbers_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade7MathNumbers_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a number theory expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent number sense!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing integers and place value!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review integer operations and large numbers!";
+            } else {
+                scoreMessage.textContent = "Keep exploring! Numbers are the foundation of all mathematics!";
+            }
+        }
+
+        // Create math fact display
+        function createMathFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'math-fact';
+            
+            factDiv.innerHTML = `<strong>Amazing Math Fact:</strong> ${mathFacts[Math.floor(Math.random() * mathFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "integer_basics": "🔢",
+                "integer_operations": "➕",
+                "placevalue_basics": "📊",
+                "large_numbers": "🎯",
+                "number_systems": "📈",
+                "applications": "🌡️",
+                "comparing": "⚖️"
+            };
+            
+            let conceptName = "Integer Basics";
+            let conceptIcon = "🔢";
+            
+            if (question.type.includes("integer_basics")) {
+                conceptName = "Integer Basics";
+                conceptIcon = conceptIcons.integer_basics;
+            } else if (question.type.includes("integer_operations")) {
+                conceptName = "Integer Operations";
+                conceptIcon = conceptIcons.integer_operations;
+            } else if (question.type.includes("placevalue_basics")) {
+                conceptName = "Place Value";
+                conceptIcon = conceptIcons.placevalue_basics;
+            } else if (question.type.includes("large_numbers")) {
+                conceptName = "Large Numbers";
+                conceptIcon = conceptIcons.large_numbers;
+            } else if (question.type.includes("number_systems")) {
+                conceptName = "Number Systems";
+                conceptIcon = conceptIcons.number_systems;
+            } else if (question.type.includes("applications")) {
+                conceptName = "Real Applications";
+                conceptIcon = conceptIcons.applications;
+            } else if (question.type.includes("comparing")) {
+                conceptName = "Comparing Numbers";
+                conceptIcon = conceptIcons.comparing;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("integer_basics")) {
+                label.textContent = "Understanding positive and negative numbers";
+            } else if (question.type.includes("integer_operations")) {
+                label.textContent = "Adding, subtracting, multiplying, dividing integers";
+            } else if (question.type.includes("placevalue_basics")) {
+                label.textContent = "Understanding digit positions and values";
+            } else if (question.type.includes("large_numbers")) {
+                label.textContent = "Working with millions, billions, and beyond";
+            } else if (question.type.includes("number_systems")) {
+                label.textContent = "Natural, whole, integer number systems";
+            } else if (question.type.includes("applications")) {
+                label.textContent = "Using numbers in real-world situations";
+            } else if (question.type.includes("comparing")) {
+                label.textContent = "Ordering and comparing integers";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create math visualization
+        function createMathVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const randomLargeNumber = Math.floor(Math.random() * 9000000) + 1000000;
+            const randomRealWorld = realWorldIntegers[Math.floor(Math.random() * realWorldIntegers.length)];
+            const randomNumberLine = numberLineExamples[Math.floor(Math.random() * numberLineExamples.length)];
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-pink);">Number & Place Value Explorer</h3>
+                
+                <div class="numberline-container math-glow">
+                    <div class="display-title">Integer Number Line</div>
+                    <div style="text-align: center; margin-bottom: 10px; color: var(--text-secondary);">
+                        ${randomNumberLine.range}: ${randomNumberLine.description}
+                    </div>
+                    
+                    <div class="number-line">
+                        <div class="number-line-axis"></div>
+                        ${randomNumberLine.points.map((point, index) => {
+                            const percentage = ((point - randomNumberLine.points[0]) / 
+                                (randomNumberLine.points[randomNumberLine.points.length - 1] - randomNumberLine.points[0])) * 100;
+                            const isPositive = point > 0;
+                            const isNegative = point < 0;
+                            const isZero = point === 0;
+                            
+                            return `
+                                <div class="number-tick ${isPositive ? 'positive' : isNegative ? 'negative' : 'zero'}" 
+                                     onclick="showNumberPoint(${point})"
+                                     style="left: ${percentage}%;">
+                                    ${point}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    <div style="text-align: center; margin-top: 15px; color: var(--text-secondary);">
+                        Click on numbers to learn about their properties
+                    </div>
+                </div>
+                
+                <div class="placevalue-container">
+                    <div class="display-title">Place Value Chart - Understanding Large Numbers</div>
+                    
+                    <div class="placevalue-grid">
+                        <div class="placevalue-cell header">Millions</div>
+                        <div class="placevalue-cell header">Hundred Thousands</div>
+                        <div class="placevalue-cell header">Ten Thousands</div>
+                        <div class="placevalue-cell header">Thousands</div>
+                        <div class="placevalue-cell header">Hundreds</div>
+                        <div class="placevalue-cell header">Tens</div>
+                        <div class="placevalue-cell header">Ones</div>
+                        <div class="placevalue-cell header">Value</div>
+                        
+                        ${randomLargeNumber.toString().split('').reverse().map((digit, index) => {
+                            const place = placeValues[index];
+                            const value = parseInt(digit) * Math.pow(10, index);
+                            return `
+                                <div class="placevalue-cell value">${digit}</div>
+                                <div class="placevalue-cell">${value.toLocaleString()}</div>
+                            `;
+                        }).join('')}
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 15px;">
+                        <div style="font-weight: bold; color: var(--primary-teal);">Number: ${randomLargeNumber.toLocaleString()}</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                            Expanded form: ${expandNumber(randomLargeNumber)}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="largenumber-container">
+                    <div class="display-title">Large Numbers in Real World</div>
+                    <div class="number-display integer-bounce">
+                        ${randomLargeNumber.toLocaleString()}
+                    </div>
+                    
+                    <div class="number-segments">
+                        ${getNumberSegments(randomLargeNumber).map(segment => `
+                            <div class="number-segment" onclick="showNumberSegment('${segment.label}')">
+                                <div class="segment-value">${segment.value}</div>
+                                <div class="segment-label">${segment.label}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 15px; color: var(--text-secondary);">
+                        This number could represent: population, distance in meters, or money in dollars
+                    </div>
+                </div>
+                
+                <div class="operations-container">
+                    <div class="display-title">Integer Operations Rules</div>
+                    <div style="text-align: center; margin-bottom: 15px; color: var(--text-secondary);">
+                        Click on operations to learn the rules
+                    </div>
+                    
+                    <div class="operations-grid">
+                        ${integerRules.map((rule, idx) => `
+                            <div class="operation-box ${rule.operation.toLowerCase()}" onclick="showOperationRule('${rule.operation}')">
+                                <div class="operation-icon">${rule.icon}</div>
+                                <div class="operation-name">${rule.operation}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px;">${rule.rule.split('.')[0]}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="numbertypes-container">
+                    <div class="display-title">Number Systems - Types of Numbers</div>
+                    <div style="text-align: center; margin-bottom: 15px; color: var(--text-secondary);">
+                        Understanding different number classifications
+                    </div>
+                    
+                    <div class="types-grid">
+                        ${numberTypes.map((type, idx) => `
+                            <div class="type-box ${type.type.includes('Natural') ? 'natural' : type.type.includes('Whole') ? 'whole' : 'integer'}" 
+                                 onclick="showNumberType('${type.type}')">
+                                <div class="type-icon">${type.icon}</div>
+                                <div class="type-name">${type.type}</div>
+                                <div style="font-size: 0.9rem; margin: 10px 0;">Symbol: ${type.symbol}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary);">${type.definition}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="real-world-example" style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid var(--accent-orange);">
+                    <div style="color: var(--accent-orange); font-weight: bold; margin-bottom: 10px; text-align: center;">Real-World Integer Application: ${randomRealWorld.context}</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0;">
+                        <div style="text-align: center;">
+                            <div style="color: var(--accent-green); font-weight: bold;">Positive</div>
+                            <div style="color: var(--text-secondary);">${randomRealWorld.positive}</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="color: var(--accent-red); font-weight: bold;">Negative</div>
+                            <div style="color: var(--text-secondary);">${randomRealWorld.negative}</div>
+                        </div>
+                        <div style="text-align: center; grid-column: span 2;">
+                            <div style="color: var(--secondary-amber); font-weight: bold;">Zero</div>
+                            <div style="color: var(--text-secondary);">${randomRealWorld.zero}</div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; font-size: 3rem; margin-top: 10px;">
+                        ${randomRealWorld.icon}
+                    </div>
+                </div>
+                
+                <table class="math-table">
+                    <thead>
+                        <tr>
+                            <th>Large Number</th>
+                            <th>Name</th>
+                            <th>Zeros</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${largeNumbers.slice(0, 5).map((number, idx) => `
+                            <tr>
+                                <td style="font-weight: bold; color: var(--primary-teal);">${number.value.toLocaleString()}</td>
+                                <td>${number.name}</td>
+                                <td>${number.zeros}</td>
+                                <td>${number.example}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                
+                <div class="calculator-container">
+                    <div class="display-title">Integer Calculator</div>
+                    <div class="calculator-display" id="calcDisplay">0</div>
+                    <div class="calculator-buttons">
+                        <div class="calc-btn" onclick="calcInput('7')">7</div>
+                        <div class="calc-btn" onclick="calcInput('8')">8</div>
+                        <div class="calc-btn" onclick="calcInput('9')">9</div>
+                        <div class="calc-btn operation" onclick="calcInput('+')">+</div>
+                        <div class="calc-btn" onclick="calcInput('4')">4</div>
+                        <div class="calc-btn" onclick="calcInput('5')">5</div>
+                        <div class="calc-btn" onclick="calcInput('6')">6</div>
+                        <div class="calc-btn operation" onclick="calcInput('-')">-</div>
+                        <div class="calc-btn" onclick="calcInput('1')">1</div>
+                        <div class="calc-btn" onclick="calcInput('2')">2</div>
+                        <div class="calc-btn" onclick="calcInput('3')">3</div>
+                        <div class="calc-btn operation" onclick="calcInput('*')">×</div>
+                        <div class="calc-btn" onclick="calcInput('0')">0</div>
+                        <div class="calc-btn" onclick="calcInput('-')">-/+</div>
+                        <div class="calc-btn clear" onclick="clearCalc()">C</div>
+                        <div class="calc-btn operation" onclick="calcInput('/')">÷</div>
+                        <div class="calc-btn equals" onclick="calculate()" style="grid-column: span 4;">=</div>
+                    </div>
+                </div>
+                
+                <div class="interactive-practice">
+                    <div class="practice-title">Interactive Math Practice</div>
+                    <div class="practice-controls">
+                        <div class="practice-button" onclick="compareIntegers()">Compare Integers</div>
+                        <div class="practice-button" onclick="placeValueChallenge()">Place Value Challenge</div>
+                        <div class="practice-button" onclick="integerOperations()">Integer Operations</div>
+                        <div class="practice-button" onclick="largeNumberReading()">Read Large Numbers</div>
+                    </div>
+                    <div class="practice-display" id="practiceDisplay">
+                        Click buttons above to practice number skills
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--accent-pink);">
+                    <div style="color: var(--accent-pink); font-weight: bold; margin-bottom: 10px;">Quick Math Practice:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. Which is greater: -8 or -3?<br>
+                        2. What is (-5) + 9?<br>
+                        3. In 45,678, what is the value of 6?<br>
+                        4. Round 4,782 to nearest hundred.<br>
+                        5. Write 3,000,000 in words.
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--primary-teal);">
+                    <div style="color: var(--primary-teal); font-weight: bold; margin-bottom: 10px; text-align: center;">Math Rules Quick Reference</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                        <strong>Integer Addition:</strong> Same signs add, different signs subtract<br>
+                        <strong>Integer Multiplication:</strong> Same signs positive, different signs negative<br>
+                        <strong>Place Value:</strong> Each position is 10× the position to its right<br>
+                        <strong>Rounding:</strong> 0-4 round down, 5-9 round up
+                    </div>
+                </div>
+                
+                <div class="comparison-chart" style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--secondary-amber);">
+                    <div class="display-title">Comparison Symbols Guide</div>
+                    <div style="text-align: center; margin-bottom: 15px; color: var(--text-secondary);">
+                        Understanding mathematical comparisons
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0;">
+                        ${comparisonSymbols.map((symbol, idx) => `
+                            <div class="comparison-box" onclick="showComparisonSymbol('${symbol.symbol}')" 
+                                 style="background: var(--dark-surface); padding: 15px; border-radius: 8px; text-align: center; cursor: pointer;">
+                                <div style="font-size: 2rem; font-weight: bold; color: var(--secondary-amber); margin-bottom: 5px;">${symbol.symbol}</div>
+                                <div style="font-weight: bold;">${symbol.name}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px;">${symbol.example}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            return vizDiv;
+        }
+
+        // Helper functions
+        function expandNumber(num) {
+            const str = num.toString();
+            let result = [];
+            for (let i = 0; i < str.length; i++) {
+                const digit = parseInt(str[i]);
+                const place = Math.pow(10, str.length - i - 1);
+                if (digit !== 0) {
+                    result.push(`${digit} × ${place.toLocaleString()}`);
+                }
+            }
+            return result.join(' + ');
+        }
+
+        function getNumberSegments(num) {
+            const str = num.toString();
+            const segments = [];
+            let currentSegment = '';
+            
+            for (let i = str.length - 1, j = 0; i >= 0; i--, j++) {
+                currentSegment = str[i] + currentSegment;
+                if ((j + 1) % 3 === 0 || i === 0) {
+                    const label = j === 0 ? 'Ones' : 
+                                 j === 3 ? 'Thousands' : 
+                                 j === 6 ? 'Millions' : 
+                                 j === 9 ? 'Billions' : 'Segment';
+                    segments.unshift({
+                        value: parseInt(currentSegment).toLocaleString(),
+                        label: label
+                    });
+                    currentSegment = '';
+                }
+            }
+            
+            return segments;
+        }
+
+        // Global functions for interactive practice
+        window.showNumberPoint = function(point) {
+            const absValue = Math.abs(point);
+            const sign = point < 0 ? 'negative' : point > 0 ? 'positive' : 'zero';
+            
+            let info = `Number: ${point}\n\n`;
+            info += `Type: ${sign} integer\n`;
+            info += `Absolute value: ${absValue}\n`;
+            info += `Opposite: ${-point}\n\n`;
+            
+            if (point < 0) {
+                info += `Real-world examples:\n• ${absValue} meters below sea level\n• Debt of $${absValue}\n• Temperature of ${point}°C`;
+            } else if (point > 0) {
+                info += `Real-world examples:\n• ${point} meters above sea level\n• Profit of $${point}\n• Temperature of +${point}°C`;
+            } else {
+                info += `Real-world examples:\n• Sea level (0m elevation)\n• Break even ($0)\n• Freezing point of water (0°C)`;
+            }
+            
+            alert(info);
+        };
+
+        window.showNumberSegment = function(segmentName) {
+            const segmentInfo = {
+                "Ones": "Ones place: 1-9\nRepresents single units\nBase of our number system",
+                "Thousands": "Thousands place: 1,000-9,000\nRepresents groups of one thousand\nCommon in population counts",
+                "Millions": "Millions place: 1,000,000-9,000,000\nRepresents groups of one million\nUsed for city populations, large sums of money",
+                "Billions": "Billions place: 1,000,000,000-9,000,000,000\nRepresents groups of one billion\nUsed for national populations, global statistics",
+                "Segment": "Each group of three digits is called a period\nMakes large numbers easier to read\nCommas separate periods"
+            };
+            
+            alert(`${segmentName}\n\n${segmentInfo[segmentName] || "Part of a larger number"}`);
+        };
+
+        window.showOperationRule = function(operation) {
+            const rule = integerRules.find(r => r.operation === operation);
+            if (!rule) return;
+            
+            alert(`${operation} of Integers\n\nRule: ${rule.rule}\n\nExamples: ${rule.examples}\n\nKey Point: ${getOperationKeyPoint(operation)}`);
+        };
+
+        function getOperationKeyPoint(operation) {
+            const keyPoints = {
+                "Addition": "Think of number line movement or temperature changes",
+                "Subtraction": "Change to addition of opposite: a - b = a + (-b)",
+                "Multiplication": "Same signs = positive, Different signs = negative",
+                "Division": "Same signs = positive, Different signs = negative (can't divide by zero!)"
+            };
+            return keyPoints[operation] || "Practice with number line for better understanding";
+        }
+
+        window.showNumberType = function(typeName) {
+            const type = numberTypes.find(t => t.type === typeName);
+            if (!type) return;
+            
+            alert(`${type.type} (${type.symbol})\n\nDefinition: ${type.definition}\n\nExamples: ${type.examples}\n\nIncludes: ${type.includes}\n\nVisual: ${getNumberTypeVisual(typeName)}`);
+        };
+
+        function getNumberTypeVisual(typeName) {
+            const visuals = {
+                "Natural Numbers": "1 → 2 → 3 → 4 → ...\nCounting numbers, no zero or negatives",
+                "Whole Numbers": "0 → 1 → 2 → 3 → ...\nNatural numbers plus zero",
+                "Integers": "... → -3 → -2 → -1 → 0 → 1 → 2 → 3 → ...\nIncludes positives, negatives, and zero"
+            };
+            return visuals[typeName] || "Think of number line representation";
+        }
+
+        window.showComparisonSymbol = function(symbol) {
+            const comparison = comparisonSymbols.find(c => c.symbol === symbol);
+            if (!comparison) return;
+            
+            alert(`${comparison.symbol} - ${comparison.name}\n\nMeaning: ${comparison.description}\n\nExample: ${comparison.example}\n\nMemory tip: ${getComparisonTip(symbol)}`);
+        };
+
+        function getComparisonTip(symbol) {
+            const tips = {
+                "<": "The '<' looks like an L for 'Less than'",
+                ">": "The '>' points to the smaller number",
+                "=": "Equal means exactly the same value",
+                "≤": "Less than OR equal to - includes the number",
+                "≥": "Greater than OR equal to - includes the number"
+            };
+            return tips[symbol] || "Read from left to right";
+        }
+
+        // Calculator functions
+        let calcExpression = '0';
+        let lastResult = null;
+
+        window.calcInput = function(input) {
+            const display = document.getElementById('calcDisplay');
+            
+            if (calcExpression === '0' && !isNaN(input)) {
+                calcExpression = input;
+            } else if (input === '-/+' && calcExpression !== '0') {
+                if (calcExpression.startsWith('-')) {
+                    calcExpression = calcExpression.substring(1);
+                } else {
+                    calcExpression = '-' + calcExpression;
+                }
+            } else {
+                calcExpression += input;
+            }
+            
+            display.textContent = calcExpression;
+        };
+
+        window.clearCalc = function() {
+            calcExpression = '0';
+            lastResult = null;
+            document.getElementById('calcDisplay').textContent = calcExpression;
+        };
+
+        window.calculate = function() {
+            const display = document.getElementById('calcDisplay');
+            
+            try {
+                // Replace × with * for evaluation
+                let expression = calcExpression.replace(/×/g, '*').replace(/÷/g, '/');
+                
+                // Handle double negatives
+                expression = expression.replace(/--/g, '+');
+                
+                // Evaluate safely
+                const result = eval(expression);
+                
+                if (isNaN(result) || !isFinite(result)) {
+                    display.textContent = "Error";
+                } else {
+                    lastResult = result;
+                    calcExpression = result.toString();
+                    display.textContent = result;
+                    
+                    // Show explanation for integer operations
+                    showCalculationExplanation(expression, result);
+                }
+            } catch (error) {
+                display.textContent = "Error";
+            }
+        };
+
+        function showCalculationExplanation(expression, result) {
+            const parts = expression.split(/([+\-*/])/);
+            if (parts.length === 3) {
+                const a = parseInt(parts[0]);
+                const op = parts[1];
+                const b = parseInt(parts[2]);
+                
+                let explanation = `${a} ${op} ${b} = ${result}\n\n`;
+                
+                if (op === '+') {
+                    if (a >= 0 && b >= 0) {
+                        explanation += "Positive + Positive = Positive";
+                    } else if (a < 0 && b < 0) {
+                        explanation += "Negative + Negative = Negative\nAdd absolute values, keep negative sign";
+                    } else {
+                        explanation += "Different signs: subtract smaller from larger, keep sign of larger";
+                    }
+                } else if (op === '-') {
+                    explanation += `Subtraction = Addition of opposite:\n${a} - ${b} = ${a} + (${-b})`;
+                } else if (op === '*') {
+                    if ((a < 0 && b < 0) || (a >= 0 && b >= 0)) {
+                        explanation += "Same signs = Positive";
+                    } else {
+                        explanation += "Different signs = Negative";
+                    }
+                } else if (op === '/') {
+                    if (b === 0) {
+                        explanation += "Division by zero is undefined!";
+                    } else if ((a < 0 && b < 0) || (a >= 0 && b >= 0)) {
+                        explanation += "Same signs = Positive";
+                    } else {
+                        explanation += "Different signs = Negative";
+                    }
+                }
+                
+                setTimeout(() => alert(explanation), 300);
+            }
+        }
+
+        // Interactive practice functions
+        window.compareIntegers = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const pairs = [
+                { a: -8, b: -3, answer: "<", explanation: "-8 is less than -3 (further left on number line)" },
+                { a: 5, b: -2, answer: ">", explanation: "Positive numbers are always greater than negative numbers" },
+                { a: -4, b: -4, answer: "=", explanation: "Same number, equal" },
+                { a: 0, b: -7, answer: ">", explanation: "Zero is greater than any negative number" }
+            ];
+            
+            const currentPair = pairs[Math.floor(Math.random() * pairs.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary-teal);">Compare Integers</div>
+                    <div style="font-size: 2rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">
+                        ${currentPair.a} _ ${currentPair.b}
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0;">
+                        ${["<", ">", "="].map((symbol, idx) => `
+                            <div class="option" onclick="checkComparison(this, '${symbol}', '${currentPair.answer}', ${currentPair.a}, ${currentPair.b})">
+                                <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                <div class="option-text" style="font-size: 1.5rem; font-weight: bold;">${symbol}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div id="comparisonResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--text-secondary);">
+                        <strong>Hint:</strong> Positive > 0 > Negative. On number line, left is smaller.
+                    </div>
+                </div>
+            `;
+            
+            window.currentComparisonExplanation = currentPair.explanation;
+        };
+
+        window.checkComparison = function(element, selectedSymbol, correctSymbol, a, b) {
+            const resultDiv = document.getElementById('comparisonResult');
+            if (!resultDiv) return;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (selectedSymbol === correctSymbol) {
+                element.classList.add('correct');
+                resultDiv.textContent = `Correct! ${a} ${correctSymbol} ${b}. ${window.currentComparisonExplanation}`;
+                resultDiv.style.color = 'var(--primary-teal)';
+            } else {
+                element.classList.add('incorrect');
+                // Find and highlight correct option
+                options.forEach(opt => {
+                    if (opt.querySelector('.option-text').textContent === correctSymbol) {
+                        opt.classList.add('correct');
+                    }
+                });
+                resultDiv.textContent = `Incorrect. ${a} ${correctSymbol} ${b}. ${window.currentComparisonExplanation}`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+            
+            resultDiv.classList.add('pulse');
+            setTimeout(() => resultDiv.classList.remove('pulse'), 500);
+        };
+
+        window.placeValueChallenge = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const numbers = [
+                { number: 45,678, place: "hundreds", digit: 6, value: 600, explanation: "The 6 is in hundreds place: 6 × 100 = 600" },
+                { number: 123,456, place: "ten thousands", digit: 2, value: 20_000, explanation: "The 2 is in ten thousands place: 2 × 10,000 = 20,000" },
+                { number: 9,876,543, place: "millions", digit: 9, value: 9_000_000, explanation: "The 9 is in millions place: 9 × 1,000,000 = 9,000,000" },
+                { number: 704,321, place: "thousands", digit: 4, value: 4_000, explanation: "The 4 is in thousands place: 4 × 1,000 = 4,000" }
+            ];
+            
+            const currentNumber = numbers[Math.floor(Math.random() * numbers.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--secondary-amber);">Place Value Challenge</div>
+                    <div style="font-size: 1.8rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">
+                        ${currentNumber.number.toLocaleString()}
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: var(--accent-blue); font-weight: bold; margin-bottom: 10px;">
+                            What is the value of the digit ${currentNumber.digit}?
+                        </div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                            (The ${currentNumber.digit} is in the ${currentNumber.place} place)
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 10px; margin: 20px 0;">
+                        ${[
+                            currentNumber.value.toLocaleString(),
+                            (currentNumber.value / 10).toLocaleString(),
+                            (currentNumber.value * 10).toLocaleString(),
+                            currentNumber.digit.toString()
+                        ].map((option, idx) => `
+                            <div class="option" onclick="checkPlaceValue(this, '${option}', '${currentNumber.value.toLocaleString()}')">
+                                <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                <div class="option-text">${option}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div id="placeValueResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            window.currentPlaceValueExplanation = currentNumber.explanation;
+        };
+
+        window.checkPlaceValue = function(element, selectedValue, correctValue) {
+            const resultDiv = document.getElementById('placeValueResult');
+            if (!resultDiv) return;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (selectedValue === correctValue) {
+                element.classList.add('correct');
+                resultDiv.textContent = `Correct! Value = ${correctValue}. ${window.currentPlaceValueExplanation}`;
+                resultDiv.style.color = 'var(--primary-teal)';
+            } else {
+                element.classList.add('incorrect');
+                // Find and highlight correct option
+                options.forEach(opt => {
+                    if (opt.querySelector('.option-text').textContent === correctValue) {
+                        opt.classList.add('correct');
+                    }
+                });
+                resultDiv.textContent = `Incorrect. Value = ${correctValue}. ${window.currentPlaceValueExplanation}`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+            
+            resultDiv.classList.add('pulse');
+            setTimeout(() => resultDiv.classList.remove('pulse'), 500);
+        };
+
+        window.integerOperations = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const operations = [
+                { problem: "(-5) + (-3)", answer: "-8", explanation: "Same signs: add absolute values (5+3=8), keep negative sign" },
+                { problem: "8 - (-2)", answer: "10", explanation: "Subtracting negative = adding positive: 8 + 2 = 10" },
+                { problem: "(-4) × 6", answer: "-24", explanation: "Negative × Positive = Negative: 4 × 6 = 24, negative = -24" },
+                { problem: "(-15) ÷ (-3)", answer: "5", explanation: "Negative ÷ Negative = Positive: 15 ÷ 3 = 5" }
+            ];
+            
+            const currentOperation = operations[Math.floor(Math.random() * operations.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-purple);">Integer Operations</div>
+                    <div style="font-size: 2rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">
+                        ${currentOperation.problem} = ?
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
+                        ${[
+                            currentOperation.answer,
+                            (parseInt(currentOperation.answer) * -1).toString(),
+                            "0",
+                            Math.abs(parseInt(currentOperation.answer)).toString()
+                        ].map((option, idx) => `
+                            <div class="option" onclick="checkIntegerOperation(this, '${option}', '${currentOperation.answer}')">
+                                <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                <div class="option-text">${option}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div id="integerOperationResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            window.currentIntegerExplanation = currentOperation.explanation;
+        };
+
+        window.checkIntegerOperation = function(element, selectedAnswer, correctAnswer) {
+            const resultDiv = document.getElementById('integerOperationResult');
+            if (!resultDiv) return;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (selectedAnswer === correctAnswer) {
+                element.classList.add('correct');
+                resultDiv.textContent = `Correct! ${window.currentIntegerExplanation}`;
+                resultDiv.style.color = 'var(--primary-teal)';
+            } else {
+                element.classList.add('incorrect');
+                // Find and highlight correct option
+                options.forEach(opt => {
+                    if (opt.querySelector('.option-text').textContent === correctAnswer) {
+                        opt.classList.add('correct');
+                    }
+                });
+                resultDiv.textContent = `Incorrect. Answer is ${correctAnswer}. ${window.currentIntegerExplanation}`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+            
+            resultDiv.classList.add('pulse');
+            setTimeout(() => resultDiv.classList.remove('pulse'), 500);
+        };
+
+        window.largeNumberReading = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const numbers = [
+                { number: 1_000_000, words: "One million", explanation: "1 followed by 6 zeros" },
+                { number: 45_000, words: "Forty-five thousand", explanation: "45 thousands" },
+                { number: 3_456_789, words: "Three million, four hundred fifty-six thousand, seven hundred eighty-nine", explanation: "Read each period separately" },
+                { number: 100_000_000, words: "One hundred million", explanation: "100 millions" }
+            ];
+            
+            const currentNumber = numbers[Math.floor(Math.random() * numbers.length)];
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-green);">Read Large Numbers</div>
+                    <div style="font-size: 2rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">
+                        ${currentNumber.number.toLocaleString()}
+                    </div>
+                    
+                    <div style="margin: 20px 0;">
+                        <input type="text" id="numberWords" placeholder="Type the number in words..." style="width: 100%; padding: 12px; background: var(--dark-surface); border: 2px solid var(--dark-border); border-radius: 8px; color: var(--text-primary); font-size: 1.1rem;">
+                    </div>
+                    
+                    <div>
+                        <button class="btn btn-small btn-secondary" onclick="checkNumberReading('${currentNumber.words}')">Check Answer</button>
+                        <button class="btn btn-small btn-outline" onclick="showNumberReadingHint()">Hint</button>
+                        <button class="btn btn-small btn-outline" onclick="showNumberReadingAnswer('${currentNumber.words}', '${currentNumber.explanation}')">Show Answer</button>
+                    </div>
+                    
+                    <div id="numberReadingResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+        };
+
+        window.checkNumberReading = function(correctWords) {
+            const answerInput = document.getElementById('numberWords');
+            const resultDiv = document.getElementById('numberReadingResult');
+            
+            if (!answerInput || !resultDiv) return;
+            
+            const userAnswer = answerInput.value.trim().toLowerCase();
+            const correctAnswer = correctWords.toLowerCase();
+            
+            // Allow for minor variations (commas, hyphens)
+            const cleanUserAnswer = userAnswer.replace(/[,-]/g, ' ').replace(/\s+/g, ' ').trim();
+            const cleanCorrectAnswer = correctAnswer.replace(/[,-]/g, ' ').replace(/\s+/g, ' ').trim();
+            
+            if (cleanUserAnswer === cleanCorrectAnswer) {
+                resultDiv.textContent = "Perfect! You read the large number correctly!";
+                resultDiv.style.color = 'var(--primary-teal)';
+            } else if (cleanUserAnswer.includes(cleanCorrectAnswer.split(' ')[0]) && 
+                       cleanUserAnswer.includes(cleanCorrectAnswer.split(' ')[1])) {
+                resultDiv.textContent = "Good! Close enough. Check spelling and word order.";
+                resultDiv.style.color = 'var(--secondary-amber)';
+            } else {
+                resultDiv.textContent = "Try again! Remember to read each period separately.";
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+            
+            resultDiv.classList.add('pulse');
+            setTimeout(() => resultDiv.classList.remove('pulse'), 500);
+        };
+
+        window.showNumberReadingHint = function() {
+            const resultDiv = document.getElementById('numberReadingResult');
+            if (resultDiv) {
+                resultDiv.textContent = "Hint: Read from left to right, say each period name (million, thousand), then the number in that period.";
+                resultDiv.style.color = 'var(--secondary-amber)';
+            }
+        };
+
+        window.showNumberReadingAnswer = function(correctWords, explanation) {
+            const resultDiv = document.getElementById('numberReadingResult');
+            if (resultDiv) {
+                resultDiv.innerHTML = `Answer: <span style="color: var(--primary-teal); font-weight: bold;">${correctWords}</span><br>${explanation}`;
+                resultDiv.style.color = 'var(--text-secondary)';
+            }
+        };
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            mathFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            mathFact.appendChild(createMathFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createMathVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

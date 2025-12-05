@@ -1,0 +1,3473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Math - Geometric Constructions | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Geometry Theme */
+        :root {
+            --primary-blue: #2962FF;
+            --secondary-teal: #00BFA5;
+            --accent-amber: #FFAB00;
+            --accent-purple: #AA00FF;
+            --accent-pink: #FF4081;
+            --accent-green: #00C853;
+            --dark-bg: #0D1B2A;
+            --dark-surface: #1B2B3A;
+            --dark-card: #253447;
+            --dark-border: #3A4A5A;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B8D0E0;
+            --text-muted: #7A94A8;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --glow: 0 0 20px rgba(41, 98, 255, 0.3);
+            --construction-glow: 0 0 15px rgba(0, 191, 165, 0.4);
+            --geometry-glow: 0 0 15px rgba(255, 171, 0, 0.4);
+            --measurement-glow: 0 0 15px rgba(170, 0, 255, 0.4);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Geometry Pattern Background */
+        .geometry-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(41, 98, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 191, 165, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 171, 0, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #0D1B2A, #1B2B3A);
+            opacity: 0.8;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.05);
+            font-size: 3rem;
+            font-weight: bold;
+            animation: floatShapes 20s linear infinite;
+        }
+
+        @keyframes floatShapes {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.1; }
+            25% { transform: translateY(-100px) translateX(100px) rotate(90deg); opacity: 0.05; }
+            50% { transform: translateY(-50px) translateX(-100px) rotate(180deg); opacity: 0.1; }
+            75% { transform: translateY(100px) translateX(50px) rotate(270deg); opacity: 0.05; }
+            100% { transform: translateY(0) translateX(0) rotate(360deg); opacity: 0.1; }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 27, 42, 0.9);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal), var(--accent-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(41, 98, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-blue);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(41, 98, 255, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(41, 98, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1A56DB;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(41, 98, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-teal);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 191, 165, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #009688;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 191, 165, 0.5);
+        }
+
+        .btn-amber {
+            background: var(--accent-amber);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(255, 171, 0, 0.4);
+        }
+
+        .btn-amber:hover {
+            background: #FF9800;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 171, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-teal), var(--accent-amber));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(41, 98, 255, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .geometry-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-purple);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal), var(--accent-amber));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(41, 98, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(41, 98, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .option.incorrect {
+            background: rgba(255, 64, 129, 0.1);
+            border-color: var(--accent-pink);
+            color: var(--accent-pink);
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-teal);
+        }
+
+        .option.correct .option-letter {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: var(--accent-pink);
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--accent-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(255, 64, 129, 0.1);
+            border-left: 5px solid var(--accent-pink);
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--accent-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: var(--accent-pink);
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--accent-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: var(--accent-pink);
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Geometry Display */
+        .geometry-display {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+
+        .display-title {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .geometry-container {
+            padding: 20px;
+            background: var(--dark-surface);
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid var(--accent-purple);
+        }
+
+        .geometry-scenario {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .geometry-highlight {
+            background: rgba(170, 0, 255, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            border: 1px solid var(--accent-purple);
+        }
+
+        .highlight-text {
+            color: var(--accent-purple);
+            font-weight: bold;
+        }
+
+        /* Construction Canvas */
+        .construction-canvas {
+            width: 100%;
+            height: 300px;
+            background: var(--dark-surface);
+            border-radius: 12px;
+            position: relative;
+            margin: 20px 0;
+            overflow: hidden;
+            border: 2px solid var(--secondary-teal);
+            padding: 20px;
+        }
+
+        #geometryCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            background: var(--dark-surface);
+        }
+
+        .geometry-element {
+            position: absolute;
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .geometry-element:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        .geometry-connection {
+            position: absolute;
+            background: var(--primary-blue);
+            height: 2px;
+            border-radius: 2px;
+            opacity: 0.6;
+        }
+
+        /* Geometry Types Grid */
+        .geometry-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 992px) {
+            .geometry-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .geometry-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .geometry-card {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .geometry-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .geometry-card.basics {
+            border-color: var(--secondary-teal);
+        }
+
+        .geometry-card.angles {
+            border-color: var(--accent-amber);
+        }
+
+        .geometry-card.triangles {
+            border-color: var(--accent-purple);
+        }
+
+        .geometry-card.circles {
+            border-color: var(--accent-green);
+        }
+
+        .geometry-card.perpendicular {
+            border-color: var(--accent-pink);
+        }
+
+        .geometry-card.parallel {
+            border-color: var(--primary-blue);
+        }
+
+        .geometry-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .basics .geometry-icon {
+            color: var(--secondary-teal);
+        }
+
+        .angles .geometry-icon {
+            color: var(--accent-amber);
+        }
+
+        .triangles .geometry-icon {
+            color: var(--accent-purple);
+        }
+
+        .circles .geometry-icon {
+            color: var(--accent-green);
+        }
+
+        .perpendicular .geometry-icon {
+            color: var(--accent-pink);
+        }
+
+        .parallel .geometry-icon {
+            color: var(--primary-blue);
+        }
+
+        .geometry-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .basics .geometry-title {
+            color: var(--secondary-teal);
+        }
+
+        .angles .geometry-title {
+            color: var(--accent-amber);
+        }
+
+        .triangles .geometry-title {
+            color: var(--accent-purple);
+        }
+
+        .circles .geometry-title {
+            color: var(--accent-green);
+        }
+
+        .perpendicular .geometry-title {
+            color: var(--accent-pink);
+        }
+
+        .parallel .geometry-title {
+            color: var(--primary-blue);
+        }
+
+        .geometry-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .geometry-examples {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            background: var(--dark-surface);
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        /* Construction Steps Table */
+        .construction-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .construction-table th {
+            background: var(--dark-surface);
+            padding: 12px;
+            text-align: left;
+            color: var(--accent-purple);
+            border-bottom: 2px solid var(--accent-purple);
+        }
+
+        .construction-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+        }
+
+        .construction-table tr:hover {
+            background: rgba(170, 0, 255, 0.05);
+        }
+
+        /* Construction Display */
+        .basics-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--secondary-teal);
+        }
+
+        .basics-title {
+            color: var(--secondary-teal);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .basics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .basics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .basic-card {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .basic-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--secondary-teal);
+        }
+
+        .basic-type {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--secondary-teal);
+            font-size: 1.2rem;
+        }
+
+        .basic-steps {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Angle Display */
+        .angles-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-amber);
+        }
+
+        .angles-title {
+            color: var(--accent-amber);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .angles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .angles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .angle-card {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .angle-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent-amber);
+        }
+
+        .angle-type {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--accent-amber);
+            font-size: 1.2rem;
+        }
+
+        .angle-steps {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Triangle Display */
+        .triangles-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .triangles-title {
+            color: var(--accent-purple);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .triangles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .triangles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .triangle-card {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .triangle-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent-purple);
+        }
+
+        .triangle-type {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--accent-purple);
+            font-size: 1.2rem;
+        }
+
+        .triangle-steps {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Interactive Construction Builder */
+        .builder-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--primary-blue);
+        }
+
+        .builder-title {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .builder-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .builder-select {
+            padding: 10px 15px;
+            background: var(--dark-surface);
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .builder-input {
+            padding: 15px;
+            background: var(--dark-surface);
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .builder-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .builder-btn {
+            padding: 10px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .builder-btn:hover {
+            background: rgba(41, 98, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .builder-display {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Geometry Study Display */
+        .geometry-study-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .geometry-study-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .geometry-study-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .study-card {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--accent-green);
+        }
+
+        .study-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent-green);
+        }
+
+        .study-concept {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--accent-green);
+        }
+
+        .study-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal), var(--accent-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal), var(--accent-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Geometry Visual Elements */
+        .construction-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(0, 191, 165, 0.05);
+            border-radius: 6px;
+            border-left: 4px solid var(--secondary-teal);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--secondary-teal);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+
+        .step-description {
+            flex: 1;
+        }
+
+        .tool-box {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 0 5px;
+            background: rgba(255, 171, 0, 0.1);
+            border-radius: 4px;
+            border: 1px solid var(--accent-amber);
+            font-weight: bold;
+        }
+
+        .point-marker {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-pink);
+            border-radius: 50%;
+            margin: 0 5px;
+        }
+
+        .line-element {
+            display: inline-block;
+            height: 2px;
+            width: 30px;
+            background: var(--primary-blue);
+            margin: 0 5px;
+            vertical-align: middle;
+        }
+
+        .angle-marker {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-amber);
+            margin: 0 5px;
+            position: relative;
+        }
+
+        .angle-marker::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-amber);
+            opacity: 0.3;
+        }
+
+        /* Canvas Styling */
+        canvas {
+            cursor: crosshair;
+        }
+
+        .canvas-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .canvas-btn {
+            padding: 8px 12px;
+            background: var(--dark-surface);
+            border: 1px solid var(--dark-border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .canvas-btn:hover {
+            background: rgba(41, 98, 255, 0.1);
+            border-color: var(--primary-blue);
+        }
+
+        .canvas-btn.active {
+            background: rgba(41, 98, 255, 0.2);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .geometry-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .basics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .angles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .triangles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .geometry-study-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes geometryReveal {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        
+        .geometry-reveal {
+            animation: geometryReveal 0.5s ease forwards;
+        }
+        
+        @keyframes constructionGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 191, 165, 0.4); }
+            50% { box-shadow: 0 0 15px 5px rgba(0, 191, 165, 0.2); }
+        }
+        
+        .construction-glow {
+            animation: constructionGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes angleGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 171, 0, 0.4); }
+            50% { box-shadow: 0 0 15px 5px rgba(255, 171, 0, 0.2); }
+        }
+        
+        .angle-glow {
+            animation: angleGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes measurementGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(170, 0, 255, 0.4); }
+            50% { box-shadow: 0 0 15px 5px rgba(170, 0, 255, 0.2); }
+        }
+        
+        .measurement-glow {
+            animation: measurementGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes floatSymbol {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        .float-symbol {
+            animation: floatSymbol 3s ease-in-out infinite;
+        }
+        
+        @keyframes geometryGlow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .geometry-glow {
+            animation: geometryGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes construct {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .construct {
+            animation: construct 0.5s ease forwards;
+        }
+        
+        @keyframes drawLine {
+            0% { stroke-dashoffset: 100; }
+            100% { stroke-dashoffset: 0; }
+        }
+        
+        .draw-line {
+            animation: drawLine 1s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Geometry Pattern Background -->
+    <div class="geometry-bg" id="geometryBg">
+        <!-- Geometry symbols will be generated by JavaScript -->
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 7 Math - Geometric Constructions</h1>
+            <p class="welcome-subtitle">Master the art of geometric construction! Learn to create perfect angles, bisect lines, construct triangles, circles, and polygons using only a ruler and compass. Develop precision, spatial reasoning, and understanding of geometric principles through hands-on construction!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">📏 🧭 📐 △ ○ ⟂ ∥ ∠</span>
+                <span class="topic-name">Ruler & Compass Constructions</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Geometry Journey</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 80</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1.25%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Geometry fact display -->
+                <div id="geometryFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Geometry Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Practice Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Other Math Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background
+        function initBackground() {
+            const geometryBg = document.getElementById('geometryBg');
+            
+            // Create floating geometry symbols
+            const symbols = ['△', '○', '□', '◇', '∠', '∥', '⟂', '≈', '≅', '≡', '°', 'π', '√', '∴', '∵', '∞', '⊥'];
+            
+            for (let i = 0; i < 25; i++) {
+                const symbol = document.createElement('div');
+                symbol.className = 'floating-shapes float-symbol';
+                symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                symbol.style.left = `${Math.random() * 100}%`;
+                symbol.style.top = `${Math.random() * 100}%`;
+                symbol.style.animationDelay = `${Math.random() * 5}s`;
+                symbol.style.fontSize = `${2 + Math.random() * 4}rem`;
+                
+                // Color based on symbol type
+                if (symbol.textContent === '△' || symbol.textContent === '□' || symbol.textContent === '◇') {
+                    symbol.style.color = 'rgba(0, 191, 165, 0.1)';
+                } else if (symbol.textContent === '○' || symbol.textContent === 'π') {
+                    symbol.style.color = 'rgba(255, 171, 0, 0.1)';
+                } else if (symbol.textContent === '∠' || symbol.textContent === '°') {
+                    symbol.style.color = 'rgba(170, 0, 255, 0.1)';
+                } else {
+                    symbol.style.color = 'rgba(41, 98, 255, 0.1)';
+                }
+                
+                geometryBg.appendChild(symbol);
+            }
+        }
+
+        // Questions array - 80+ Grade 7 Geometry Construction Questions
+        const questions = [
+            // Basic Tools and Concepts (1-20)
+            {
+                type: "tools_concepts",
+                question: "Which tool is used to draw straight lines in geometric constructions?",
+                options: ["Straightedge (ruler without markings)", "Protractor", "Compass", "Set square"],
+                answer: "A",
+                explanation: "A straightedge (ruler without measurement markings) is used to draw straight lines. Geometric constructions use unmarked rulers to ensure constructions rely only on geometry principles."
+            },
+            {
+                type: "tools_concepts",
+                question: "What is the main purpose of a compass in geometric constructions?",
+                options: ["To draw circles and arcs", "To measure angles", "To draw straight lines", "To measure length"],
+                answer: "A",
+                explanation: "A compass is used to draw circles and arcs of specific radii, which helps in transferring distances and creating intersections."
+            },
+            {
+                type: "tools_concepts",
+                question: "What does it mean to 'bisect' a line segment?",
+                options: ["Divide into two equal parts", "Make a copy of it", "Extend it", "Measure its length"],
+                answer: "A",
+                explanation: "Bisecting means dividing into two equal parts. For a line segment, bisecting creates two segments of equal length."
+            },
+            {
+                type: "tools_concepts",
+                question: "What is a 'perpendicular bisector'?",
+                options: ["A line that divides a segment into two equal parts at 90°", "A line parallel to the segment", "A line at 45° to the segment", "An extension of the segment"],
+                answer: "A",
+                explanation: "A perpendicular bisector is a line that intersects a segment at its midpoint, forming 90° angles with the segment."
+            },
+            {
+                type: "tools_concepts",
+                question: "What is an 'angle bisector'?",
+                options: ["A ray that divides an angle into two equal angles", "A line perpendicular to the angle", "A line parallel to one arm", "An extension of the angle"],
+                answer: "A",
+                explanation: "An angle bisector is a ray that divides an angle into two congruent (equal) angles."
+            },
+            // Basic Constructions (21-40)
+            {
+                type: "basic_constructions",
+                question: "How do you construct a line segment of specific length?",
+                options: ["Use compass to mark distance from ruler, then transfer", "Measure with marked ruler", "Estimate visually", "Use protractor"],
+                answer: "A",
+                explanation: "Set compass to desired length using a marked ruler, then use the compass to mark the distance on paper."
+            },
+            {
+                type: "basic_constructions",
+                question: "What is the first step in constructing a perpendicular bisector?",
+                options: ["Draw arcs from both endpoints with same radius", "Measure the length", "Draw the line segment", "Use protractor to make 90°"],
+                answer: "A",
+                explanation: "From each endpoint, draw arcs with same radius (greater than half the segment length) that intersect above and below the segment."
+            },
+            {
+                type: "basic_constructions",
+                question: "How do you construct a 90° angle?",
+                options: ["Construct perpendicular to a line at a point", "Use protractor", "Bisect 180° angle", "Both A and C"],
+                answer: "D",
+                explanation: "You can construct 90° by creating a perpendicular line at a point, or by bisecting a straight angle (180°)."
+            },
+            {
+                type: "basic_constructions",
+                question: "What is constructed by drawing arcs from a point on a line?",
+                options: ["Perpendicular at that point", "Parallel line", "Angle bisector", "Circle"],
+                answer: "A",
+                explanation: "Drawing equal arcs from a point on a line and connecting their intersections creates a perpendicular at that point."
+            },
+            {
+                type: "basic_constructions",
+                question: "How do you copy an angle using compass and straightedge?",
+                options: ["Draw arcs on original, transfer distances, draw congruent angle", "Measure with protractor", "Trace the angle", "Estimate visually"],
+                answer: "A",
+                explanation: "Draw arc on original angle, same radius arc on new ray, measure chord distance, transfer to create congruent angle."
+            },
+            // Angle Constructions (41-60)
+            {
+                type: "angle_constructions",
+                question: "How do you construct a 60° angle?",
+                options: ["Construct equilateral triangle", "Bisect 120° angle", "Use protractor", "Divide circle into 6 parts"],
+                answer: "A",
+                explanation: "Constructing an equilateral triangle gives 60° angles. Draw segment, arcs from endpoints, connect intersections."
+            },
+            {
+                type: "angle_constructions",
+                question: "How do you construct a 30° angle?",
+                options: ["Bisect a 60° angle", "Construct equilateral triangle", "Use protractor", "Divide circle into 12 parts"],
+                answer: "A",
+                explanation: "First construct 60° angle (equilateral triangle), then bisect it to get 30°."
+            },
+            {
+                type: "angle_constructions",
+                question: "How do you construct a 45° angle?",
+                options: ["Bisect a 90° angle", "Construct right triangle", "Use protractor", "Both A and B"],
+                answer: "D",
+                explanation: "45° can be made by bisecting 90°, or constructing a right isosceles triangle."
+            },
+            {
+                type: "angle_constructions",
+                question: "What angle is formed by bisecting a straight angle (180°)?",
+                options: ["90°", "45°", "60°", "30°"],
+                answer: "A",
+                explanation: "Bisecting 180° gives two 90° angles (right angles)."
+            },
+            {
+                type: "angle_constructions",
+                question: "How do you construct a 120° angle?",
+                options: ["Construct 60° and extend", "Bisect 240°", "Add two 60° angles", "Both A and C"],
+                answer: "D",
+                explanation: "120° = 60° + 60°, or extend one side of 60° angle to supplementary angle (180° - 60° = 120°)."
+            },
+            // Triangle Constructions (61-80)
+            {
+                type: "triangle_constructions",
+                question: "What triangle can be constructed knowing all three sides?",
+                options: ["Any triangle (SSS construction)", "Only right triangle", "Only isosceles triangle", "Only equilateral triangle"],
+                answer: "A",
+                explanation: "SSS (Side-Side-Side) construction: Draw one side, arcs from endpoints with other side lengths, connect intersection."
+            },
+            {
+                type: "triangle_constructions",
+                question: "How do you construct an equilateral triangle?",
+                options: ["Draw segment, arcs from endpoints with same radius, connect", "Draw three equal segments", "Use protractor for 60° angles", "All of the above"],
+                answer: "D",
+                explanation: "Multiple methods: SSS with three equal sides, or construct 60° angles at endpoints of base."
+            },
+            {
+                type: "triangle_constructions",
+                question: "What is needed to construct a triangle using SAS method?",
+                options: ["Two sides and included angle", "Two angles and included side", "Three sides", "Right angle and hypotenuse"],
+                answer: "A",
+                explanation: "SAS (Side-Angle-Side): Construct given angle, mark sides on rays, connect endpoints."
+            },
+            {
+                type: "triangle_constructions",
+                question: "How do you construct a right triangle with given legs?",
+                options: ["Construct 90° angle, mark legs, connect", "Use Pythagorean theorem", "Construct hypotenuse first", "Measure with protractor"],
+                answer: "A",
+                explanation: "Construct perpendicular lines, mark given lengths on each, connect endpoints to form right triangle."
+            },
+            {
+                type: "triangle_constructions",
+                question: "What is special about constructing an isosceles triangle?",
+                options: ["Two equal sides, construct using arcs of equal radius", "All sides different", "Contains right angle", "Base angles are 60°"],
+                answer: "A",
+                explanation: "For isosceles triangle, two sides are equal, so arcs from base endpoints with same radius will intersect."
+            },
+            // Circle Constructions (81-100)
+            {
+                type: "circle_constructions",
+                question: "How do you find the center of a given circle?",
+                options: ["Draw two chords, construct their perpendicular bisectors", "Measure diameter", "Estimate visually", "Use protractor"],
+                answer: "A",
+                explanation: "Draw any two chords, construct perpendicular bisectors of each. Their intersection is the circle's center."
+            },
+            {
+                type: "circle_constructions",
+                question: "How do you construct a circle through three non-collinear points?",
+                options: ["Find circumcenter of triangle formed by points", "Estimate center", "Use one point as center", "Draw three separate circles"],
+                answer: "A",
+                explanation: "Connect points to form triangle, find circumcenter (intersection of perpendicular bisectors of sides), draw circle with that center through any point."
+            },
+            {
+                type: "circle_constructions",
+                question: "How do you construct a tangent to a circle at a point on the circle?",
+                options: ["Draw radius, construct perpendicular at endpoint", "Draw line touching circle", "Estimate visually", "Use protractor for specific angle"],
+                answer: "A",
+                explanation: "Draw radius to the point, then construct line perpendicular to radius at that point. This line is tangent to the circle."
+            },
+            {
+                type: "circle_constructions",
+                question: "What is the inscribed circle of a triangle?",
+                options: ["Circle touching all three sides", "Circle through all three vertices", "Circle with center at centroid", "Circle with diameter as one side"],
+                answer: "A",
+                explanation: "Inscribed circle (incircle) touches all three sides. Its center is the intersection of angle bisectors."
+            },
+            {
+                type: "circle_constructions",
+                question: "How do you construct a regular hexagon?",
+                options: ["Divide circle into six equal arcs using radius", "Construct six equilateral triangles", "Both A and B", "Use protractor for 60° angles"],
+                answer: "C",
+                explanation: "Multiple methods: Using circle (radius divides circumference into 6), or constructing 6 equilateral triangles around center."
+            },
+            // Parallel and Perpendicular Lines (101-120)
+            {
+                type: "parallel_perpendicular",
+                question: "How do you construct a line parallel to a given line through a point not on the line?",
+                options: ["Construct equal corresponding angles", "Draw line in same direction", "Use set square", "Measure distance"],
+                answer: "A",
+                explanation: "Draw transversal through point, copy corresponding angle from given line to create parallel line."
+            },
+            {
+                type: "parallel_perpendicular",
+                question: "What construction creates a line parallel to AB through point P?",
+                options: ["Draw line through P making equal angles with transversal", "Draw line same length as AB", "Extend AB through P", "Measure distance from P to AB"],
+                answer: "A",
+                explanation: "Draw any line through P intersecting AB, copy angle at intersection to create parallel line through P."
+            },
+            {
+                type: "parallel_perpendicular",
+                question: "How do you construct a perpendicular from a point to a line?",
+                options: ["Draw arcs from point to intersect line, connect intersections", "Use protractor for 90°", "Estimate visually", "Measure shortest distance"],
+                answer: "A",
+                explanation: "From point, draw arcs intersecting line at two points, construct perpendicular bisector of those two intersection points."
+            },
+            {
+                type: "parallel_perpendicular",
+                question: "What is the shortest distance from a point to a line?",
+                options: ["Length of perpendicular from point to line", "Horizontal distance", "Vertical distance", "Direct measurement"],
+                answer: "A",
+                explanation: "The perpendicular distance is the shortest distance from a point to a line."
+            },
+            // Special Constructions (121-140)
+            {
+                type: "special_constructions",
+                question: "How do you divide a line segment into equal parts?",
+                options: ["Use parallel lines method (Thales theorem)", "Measure and mark", "Use compass to step off equal distances", "Both A and C"],
+                answer: "D",
+                explanation: "Thales theorem: Draw ray, mark equal segments, connect endpoints, draw parallels. Or step off equal compass distances if dividing into simple ratios."
+            },
+            {
+                type: "special_constructions",
+                question: "What is the golden ratio construction?",
+                options: ["Divide segment such that whole:long part = long part:short part", "Divide into equal parts", "Create 1:2 ratio", "Construct √2 proportion"],
+                answer: "A",
+                explanation: "Golden ratio φ ≈ 1.618: Construct square, extend side, draw arc from midpoint of extended side to create golden rectangle."
+            },
+            {
+                type: "special_constructions",
+                question: "How do you construct √2 times a given segment?",
+                options: ["Construct square, diagonal is √2 times side", "Double the segment", "Use Pythagorean theorem with 1-1-√2 triangle", "Both A and C"],
+                answer: "D",
+                explanation: "Construct square with side = given segment, diagonal = √2 times side. Or construct right isosceles triangle (45-45-90)."
+            },
+            {
+                type: "special_constructions",
+                question: "What construction creates a segment of length a+b?",
+                options: ["Extend line, mark a then b from endpoint", "Add numerically", "Construct parallelogram", "Draw two separate segments"],
+                answer: "A",
+                explanation: "Draw ray, use compass to transfer length a, then from that endpoint transfer length b. Total = a+b."
+            },
+            // Practical Applications (141-160)
+            {
+                type: "practical_applications",
+                question: "In architecture, why are geometric constructions important?",
+                options: ["Ensure precise angles and proportions without measurement errors", "Make drawings look nice", "Save time", "Follow tradition"],
+                answer: "A",
+                explanation: "Constructions ensure geometric accuracy independent of measurement precision, crucial in architectural design."
+            },
+            {
+                type: "practical_applications",
+                question: "How would you layout a rectangular garden using only rope?",
+                options: ["Construct 3-4-5 right triangle for right angles", "Estimate visually", "Use protractor", "Measure all sides"],
+                answer: "A",
+                explanation: "Use 3-4-5 triangle method: Mark 3 units on one side, 4 on adjacent, diagonal should be 5 units for perfect right angle."
+            },
+            {
+                type: "practical_applications",
+                question: "Why can't you trisect an arbitrary angle with only compass and straightedge?",
+                options: ["Mathematically proven impossible for general case", "Too difficult", "Requires special tools", "No one has figured it out"],
+                answer: "A",
+                explanation: "Proven mathematically (Wantzel, 1837) that arbitrary angle trisection is impossible with only compass and straightedge."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent geometric reasoning!",
+            "Perfect construction knowledge!",
+            "Great job with ruler and compass techniques!",
+            "Amazing! You're a geometry construction champion!",
+            "Perfect understanding of geometric principles!",
+            "You're a future architect or engineer in the making!",
+            "Outstanding spatial reasoning skills!",
+            "Brilliant construction methodology!",
+            "You think like a geometrician!",
+            "Geometry construction mastery achieved!"
+        ];
+
+        // Geometry concepts
+        const geometryConcepts = [
+            {
+                name: "Basic Tools",
+                description: "Ruler and compass fundamentals",
+                icon: "📏🧭"
+            },
+            {
+                name: "Angle Constructions",
+                description: "Creating specific angles",
+                icon: "∠"
+            },
+            {
+                name: "Triangle Constructions",
+                description: "Building triangles from given data",
+                icon: "△"
+            },
+            {
+                name: "Circle Constructions",
+                description: "Working with circles and arcs",
+                icon: "○"
+            },
+            {
+                name: "Parallel/Perpendicular",
+                description: "Creating parallel and perpendicular lines",
+                icon: "∥⟂"
+            },
+            {
+                name: "Special Constructions",
+                description: "Advanced geometric constructions",
+                icon: "⚡"
+            }
+        ];
+
+        // Geometry types
+        const geometryTypes = [
+            {
+                name: "Basic Tools",
+                description: "Understanding and using ruler and compass",
+                examples: "Drawing lines, circles, transferring distances",
+                characteristics: "Unmarked ruler, adjustable compass, no measurements",
+                icon: "📏🧭",
+                color: "#00BFA5"
+            },
+            {
+                name: "Angle Constructions",
+                description: "Creating specific angles without protractor",
+                examples: "60°, 90°, 45°, 30°, 120° angles",
+                characteristics: "Using equilateral triangles, bisection, angle copying",
+                icon: "∠",
+                color: "#FFAB00"
+            },
+            {
+                name: "Triangle Constructions",
+                description: "Constructing triangles from given information",
+                examples: "SSS, SAS, ASA triangle constructions",
+                characteristics: "Three sides, two sides and included angle, etc.",
+                icon: "△",
+                color: "#AA00FF"
+            },
+            {
+                name: "Circle Constructions",
+                description: "Working with circles, tangents, and related constructions",
+                examples: "Finding center, inscribed/circumscribed circles",
+                characteristics: "Using arcs, chords, perpendicular bisectors",
+                icon: "○",
+                color: "#00C853"
+            },
+            {
+                name: "Parallel/Perpendicular",
+                description: "Creating parallel and perpendicular lines",
+                examples: "Perpendicular bisector, parallel through point",
+                characteristics: "Equal angles for parallel, 90° for perpendicular",
+                icon: "∥⟂",
+                color: "#FF4081"
+            },
+            {
+                name: "Special Constructions",
+                description: "Advanced and practical constructions",
+                examples: "Golden ratio, √2, dividing segments",
+                characteristics: "Historical significance, practical applications",
+                icon: "⚡",
+                color: "#2962FF"
+            }
+        ];
+
+        // Basic construction examples
+        const basicConstructionExamples = [
+            {
+                type: "Copy Segment",
+                steps: "1. Draw ray 2. Set compass to segment length 3. Mark distance on ray",
+                tools: "Compass, Straightedge"
+            },
+            {
+                type: "Perpendicular Bisector",
+                steps: "1. Arcs from endpoints (same radius) 2. Connect intersection points",
+                tools: "Compass, Straightedge"
+            },
+            {
+                type: "Angle Bisector",
+                steps: "1. Arc from vertex 2. Arcs from intersection points 3. Connect vertex to arc intersection",
+                tools: "Compass, Straightedge"
+            },
+            {
+                type: "Copy Angle",
+                steps: "1. Draw arc on original 2. Draw same arc on new ray 3. Transfer chord distance 4. Draw second ray",
+                tools: "Compass, Straightedge"
+            }
+        ];
+
+        // Angle construction examples
+        const angleConstructionExamples = [
+            {
+                angle: "60°",
+                method: "Equilateral triangle construction",
+                steps: "Draw segment, arcs from endpoints (radius = segment), connect"
+            },
+            {
+                angle: "90°",
+                method: "Perpendicular construction",
+                steps: "From point on line, equal arcs, connect intersections"
+            },
+            {
+                angle: "45°",
+                method: "Bisect 90° angle",
+                steps: "Construct 90°, then bisect it"
+            },
+            {
+                angle: "30°",
+                method: "Bisect 60° angle",
+                steps: "Construct 60°, then bisect it"
+            },
+            {
+                angle: "120°",
+                method: "Supplementary to 60°",
+                steps: "Construct 60°, extend one side to form linear pair"
+            }
+        ];
+
+        // Triangle construction examples
+        const triangleConstructionExamples = [
+            {
+                type: "SSS",
+                given: "Three sides (a, b, c)",
+                steps: "Draw base = a, arcs with radii b and c, connect intersection"
+            },
+            {
+                type: "SAS",
+                given: "Two sides and included angle",
+                steps: "Construct angle, mark sides on rays, connect endpoints"
+            },
+            {
+                type: "ASA",
+                given: "Two angles and included side",
+                steps: "Draw side, construct angles at endpoints, intersect rays"
+            },
+            {
+                type: "Right Triangle",
+                given: "Two legs (a, b)",
+                steps: "Construct 90° angle, mark legs, connect"
+            },
+            {
+                type: "Equilateral",
+                given: "Side length",
+                steps: "All sides equal, construct using 60° angles"
+            }
+        ];
+
+        // Circle construction examples
+        const circleConstructionExamples = [
+            {
+                construction: "Find Center",
+                steps: "Draw two chords, construct perpendicular bisectors, intersection is center"
+            },
+            {
+                construction: "Tangent at Point",
+                steps: "Draw radius to point, construct perpendicular to radius at point"
+            },
+            {
+                construction: "Circle through 3 Points",
+                steps: "Form triangle, find circumcenter (perpendicular bisector intersection)"
+            },
+            {
+                construction: "Inscribed Circle",
+                steps: "Bisect two angles of triangle, intersection is incenter"
+            },
+            {
+                construction: "Regular Hexagon",
+                steps: "Draw circle, radius divides circumference into 6 equal arcs"
+            }
+        ];
+
+        // Geometry facts
+        const geometryFacts = [
+            "Geometric construction dates back to ancient Greece (Euclid, ~300 BC)!",
+            "The compass and straightedge are the only tools allowed in 'pure' geometric constructions!",
+            "Three famous impossible constructions: trisecting an angle, doubling a cube, squaring a circle!",
+            "The golden ratio (φ ≈ 1.618) appears in many geometric constructions!",
+            "Constructing regular polygons was a major mathematical problem for centuries!",
+            "The 3-4-5 triangle method for right angles was used by ancient Egyptian builders!",
+            "Geometric constructions don't require measurements - only relative positions matter!",
+            "Many architectural wonders were designed using only compass and straightedge constructions!"
+        ];
+
+        // Geometry study concepts
+        const geometryStudyConcepts = [
+            {
+                concept: "Construction Principles",
+                description: "Fundamental rules of geometric construction",
+                examples: "Only compass and straightedge, no measurements, exact constructions"
+            },
+            {
+                concept: "Common Constructions",
+                description: "Essential constructions to master",
+                examples: "Perpendicular bisector, angle bisector, copying segments/angles"
+            },
+            {
+                concept: "Accuracy Tips",
+                description: "How to make precise constructions",
+                examples: "Sharp pencil, firm compass setting, light construction lines"
+            },
+            {
+                concept: "Real Applications",
+                description: "Where constructions are used in real life",
+                examples: "Architecture, engineering, art, navigation, computer graphics"
+            }
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const geometryFact = document.getElementById('geometryFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Canvas state
+        let canvas = null;
+        let ctx = null;
+        let constructionSteps = [];
+        let currentStep = 0;
+        let isDrawing = false;
+        let startX, startY;
+        let constructionType = 'line';
+
+        // Initialize the app
+        function initApp() {
+            initBackground();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade7Geometry');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade7Geometry', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade7Geometry_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a geometry construction expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent construction skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing your constructions!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review construction methods and try again!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Geometric constructions build spatial reasoning and precision!";
+            }
+        }
+
+        // Create geometry fact display
+        function createGeometryFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'geometry-fact';
+            
+            factDiv.innerHTML = `<strong>Interesting Geometry Fact:</strong> ${geometryFacts[Math.floor(Math.random() * geometryFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "tools_concepts": "📏🧭",
+                "basic_constructions": "✏️",
+                "angle_constructions": "∠",
+                "triangle_constructions": "△",
+                "circle_constructions": "○",
+                "parallel_perpendicular": "∥⟂",
+                "special_constructions": "⚡",
+                "practical_applications": "🏗️"
+            };
+            
+            let conceptName = "Tools & Concepts";
+            let conceptIcon = "📏🧭";
+            
+            if (question.type.includes("tools_concepts")) {
+                conceptName = "Tools & Concepts";
+                conceptIcon = conceptIcons.tools_concepts;
+            } else if (question.type.includes("basic_constructions")) {
+                conceptName = "Basic Constructions";
+                conceptIcon = conceptIcons.basic_constructions;
+            } else if (question.type.includes("angle_constructions")) {
+                conceptName = "Angle Constructions";
+                conceptIcon = conceptIcons.angle_constructions;
+            } else if (question.type.includes("triangle_constructions")) {
+                conceptName = "Triangle Constructions";
+                conceptIcon = conceptIcons.triangle_constructions;
+            } else if (question.type.includes("circle_constructions")) {
+                conceptName = "Circle Constructions";
+                conceptIcon = conceptIcons.circle_constructions;
+            } else if (question.type.includes("parallel_perpendicular")) {
+                conceptName = "Parallel & Perpendicular";
+                conceptIcon = conceptIcons.parallel_perpendicular;
+            } else if (question.type.includes("special_constructions")) {
+                conceptName = "Special Constructions";
+                conceptIcon = conceptIcons.special_constructions;
+            } else if (question.type.includes("practical_applications")) {
+                conceptName = "Practical Applications";
+                conceptIcon = conceptIcons.practical_applications;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("tools_concepts")) {
+                label.textContent = "Understanding geometric tools: ruler (straightedge) and compass";
+            } else if (question.type.includes("basic_constructions")) {
+                label.textContent = "Fundamental constructions: copying, bisecting, perpendiculars";
+            } else if (question.type.includes("angle_constructions")) {
+                label.textContent = "Constructing specific angles: 30°, 45°, 60°, 90°, 120°";
+            } else if (question.type.includes("triangle_constructions")) {
+                label.textContent = "Constructing triangles from given information: SSS, SAS, ASA";
+            } else if (question.type.includes("circle_constructions")) {
+                label.textContent = "Working with circles: center, tangents, inscribed/circumscribed";
+            } else if (question.type.includes("parallel_perpendicular")) {
+                label.textContent = "Creating parallel and perpendicular lines";
+            } else if (question.type.includes("special_constructions")) {
+                label.textContent = "Advanced constructions: golden ratio, √2, dividing segments";
+            } else if (question.type.includes("practical_applications")) {
+                label.textContent = "Real-world applications of geometric constructions";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create geometry visualization
+        function createGeometryVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const currentQuestion = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-blue);">Geometry Construction Explorer</h3>
+                
+                <div class="geometry-display">
+                    <div class="display-title">Current Construction Concept</div>
+                    <div class="geometry-container">
+                        <div class="geometry-scenario">${currentQuestion.question}</div>
+                        <div class="geometry-highlight">
+                            <strong>Key Concept:</strong> <span class="highlight-text">${getGeometryConcept(currentQuestion.type)}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Construction Canvas -->
+                <div class="construction-canvas">
+                    <canvas id="geometryCanvas" width="600" height="280"></canvas>
+                    <div class="canvas-controls">
+                        <button class="canvas-btn" onclick="setConstructionType('line')">Line</button>
+                        <button class="canvas-btn" onclick="setConstructionType('circle')">Circle</button>
+                        <button class="canvas-btn" onclick="setConstructionType('point')">Point</button>
+                        <button class="canvas-btn" onclick="clearCanvas()">Clear</button>
+                        <button class="canvas-btn" onclick="undoLast()">Undo</button>
+                        <button class="canvas-btn" onclick="showConstruction('perpendicular_bisector')">Perp. Bisector</button>
+                        <button class="canvas-btn" onclick="showConstruction('angle_bisector')">Angle Bisector</button>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-bottom: 20px; color: var(--text-secondary); font-size: 0.9rem;">
+                    Interactive Construction Canvas - Try geometric constructions (Click buttons above)
+                </div>
+                
+                <div class="geometry-grid">
+                    ${geometryTypes.map(type => `
+                        <div class="geometry-card ${type.name.toLowerCase().replace(' ', '_')} ${type.name.toLowerCase().replace(' ', '_')}-glow" style="border-color: ${type.color}" onclick="showGeometryDemo('${type.name}')">
+                            <div class="geometry-icon geometry-glow" style="color: ${type.color}">${type.icon}</div>
+                            <div class="geometry-title" style="color: ${type.color}">${type.name}</div>
+                            <div class="geometry-description">${type.description}</div>
+                            <div class="geometry-examples">
+                                <strong>Examples:</strong> ${type.examples}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <table class="construction-table">
+                    <thead>
+                        <tr>
+                            <th>Construction</th>
+                            <th>Purpose</th>
+                            <th>Key Step</th>
+                            <th>Tools</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${basicConstructionExamples.slice(0, 4).map(construction => `
+                            <tr>
+                                <td style="font-weight: bold; color: var(--secondary-teal);">${construction.type}</td>
+                                <td>${construction.type}</td>
+                                <td style="color: var(--accent-purple);">${construction.steps.split(' ')[0]}...</td>
+                                <td style="font-style: italic;">${construction.tools}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                
+                <div class="basics-container construction-glow">
+                    <div class="basics-title">Basic Constructions</div>
+                    <div class="basics-grid">
+                        ${basicConstructionExamples.map(construction => `
+                            <div class="basic-card">
+                                <div class="basic-icon">✏️</div>
+                                <div class="basic-type">${construction.type}</div>
+                                <div class="basic-steps">
+                                    <strong>Steps:</strong> ${construction.steps}<br>
+                                    <strong>Tools:</strong> ${construction.tools}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="angles-container angle-glow">
+                    <div class="angles-title">Angle Constructions</div>
+                    <div class="angles-grid">
+                        ${angleConstructionExamples.slice(0, 4).map(angle => `
+                            <div class="angle-card">
+                                <div class="angle-icon">∠</div>
+                                <div class="angle-type">${angle.angle}</div>
+                                <div class="angle-steps">
+                                    <strong>Method:</strong> ${angle.method}<br>
+                                    <strong>Steps:</strong> ${angle.steps}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="triangles-container measurement-glow">
+                    <div class="triangles-title">Triangle Constructions</div>
+                    <div class="triangles-grid">
+                        ${triangleConstructionExamples.slice(0, 4).map(triangle => `
+                            <div class="triangle-card">
+                                <div class="triangle-icon">△</div>
+                                <div class="triangle-type">${triangle.type}</div>
+                                <div class="triangle-steps">
+                                    <strong>Given:</strong> ${triangle.given}<br>
+                                    <strong>Steps:</strong> ${triangle.steps}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="builder-container">
+                    <div class="builder-title">Interactive Construction Guide</div>
+                    <div class="builder-controls">
+                        <select class="builder-select" id="constructionType">
+                            <option value="">Select Construction</option>
+                            <option value="perpendicular_bisector">Perpendicular Bisector</option>
+                            <option value="angle_bisector">Angle Bisector</option>
+                            <option value="copy_segment">Copy a Segment</option>
+                            <option value="copy_angle">Copy an Angle</option>
+                            <option value="equilateral_triangle">Equilateral Triangle</option>
+                            <option value="right_angle">Right Angle (90°)</option>
+                        </select>
+                        <textarea class="builder-input" id="constructionInput" placeholder="Describe your construction problem... Example: 'Bisect line segment AB' or 'Construct 60° angle'"></textarea>
+                        <div class="builder-buttons">
+                            <button class="builder-btn" onclick="guideConstruction()">Show Steps</button>
+                            <button class="builder-btn" onclick="getConstructionChallenge()">Get Challenge</button>
+                            <button class="builder-btn" onclick="clearConstructionBuilder()">Clear</button>
+                        </div>
+                    </div>
+                    <div class="builder-display" id="builderDisplay">
+                        Your construction guide will appear here...
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--accent-purple);">
+                    <div style="color: var(--accent-purple); font-weight: bold; margin-bottom: 10px;">Quick Construction Guide:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. Straightedge: Draws straight lines (no measurements)<br>
+                        2. Compass: Draws circles/arcs, transfers distances<br>
+                        3. Perpendicular Bisector: Arcs from endpoints, connect intersections<br>
+                        4. Angle Bisector: Arc from vertex, arcs from intersections, connect<br>
+                        5. Copy Segment: Compass measures, transfers distance<br>
+                        6. Copy Angle: Transfer arc and chord distances<br>
+                        7. 60° Angle: Equilateral triangle construction<br>
+                        8. 90° Angle: Perpendicular construction or bisect 180°
+                    </div>
+                </div>
+                
+                <div class="geometry-study-container">
+                    <div class="display-title">Geometry Study Strategies</div>
+                    <div class="geometry-study-grid">
+                        ${geometryStudyConcepts.map(concept => `
+                            <div class="study-card">
+                                <div class="study-icon">📚</div>
+                                <div class="study-concept">${concept.concept}</div>
+                                <div class="study-description">
+                                    <strong>Description:</strong> ${concept.description}<br>
+                                    <strong>Examples:</strong> ${concept.examples}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="solution-container">
+                    <div class="display-title">Step-by-Step Learning Path</div>
+                    <div class="solution-steps" id="solutionSteps">
+                        ${generateLearningPath(currentQuestion)}
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--secondary-teal);">
+                    <div style="color: var(--secondary-teal); font-weight: bold; margin-bottom: 10px; text-align: center;">Construction Tips</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                        <strong>Use Sharp Pencil:</strong> Fine point for accurate constructions<br>
+                        <strong>Light Construction Lines:</strong> Draw lightly for arcs and guidelines<br>
+                        <strong>Firm Compass:</strong> Keep compass setting tight to avoid slipping<br>
+                        <strong>Check Intersections:</strong> Ensure arcs intersect clearly<br>
+                        <strong>Practice Regularly:</strong> Constructions improve with repetition<br>
+                        <em>Geometric constructions develop precision, patience, and spatial reasoning - essential skills for many careers!</em>
+                    </div>
+                </div>
+            `;
+            
+            // Initialize canvas after DOM is updated
+            setTimeout(() => {
+                initializeCanvas();
+            }, 100);
+            
+            return vizDiv;
+        }
+
+        // Helper functions
+        function getGeometryConcept(typeString) {
+            const conceptMap = {
+                "tools_concepts": "Tools & Concepts - Understanding ruler and compass, basic geometric terms",
+                "basic_constructions": "Basic Constructions - Copying segments/angles, bisecting, perpendiculars",
+                "angle_constructions": "Angle Constructions - Creating specific angles (30°, 45°, 60°, 90°, 120°)",
+                "triangle_constructions": "Triangle Constructions - Building triangles from given data (SSS, SAS, ASA)",
+                "circle_constructions": "Circle Constructions - Working with circles, tangents, centers",
+                "parallel_perpendicular": "Parallel & Perpendicular Lines - Creating parallel and perpendicular lines",
+                "special_constructions": "Special Constructions - Advanced constructions (golden ratio, √2, dividing segments)",
+                "practical_applications": "Practical Applications - Real-world uses of geometric constructions"
+            };
+            
+            return conceptMap[typeString] || "Geometric Construction";
+        }
+
+        function generateLearningPath(question) {
+            let steps = [];
+            
+            if (question.type.includes("tools_concepts")) {
+                steps = [
+                    "Step 1: Understand the purpose of each tool",
+                    "Step 2: Learn what 'construction' means in geometry",
+                    "Step 3: Recognize that measurements aren't used in pure constructions",
+                    "Step 4: Understand geometric terms (bisect, perpendicular, etc.)",
+                    "Step 5: Apply these concepts to construction problems"
+                ];
+            } else if (question.type.includes("basic_constructions")) {
+                steps = [
+                    "Step 1: Identify what needs to be constructed",
+                    "Step 2: Recall the standard construction method",
+                    "Step 3: Visualize the construction steps",
+                    "Step 4: Apply compass and straightedge techniques",
+                    "Step 5: Verify the construction meets requirements"
+                ];
+            } else if (question.type.includes("angle_constructions")) {
+                steps = [
+                    "Step 1: Identify the target angle",
+                    "Step 2: Recall construction method for that angle",
+                    "Step 3: Start with basic constructions if needed (e.g., 60° before 30°)",
+                    "Step 4: Execute construction steps precisely",
+                    "Step 5: Check angle using known relationships"
+                ];
+            } else if (question.type.includes("triangle_constructions")) {
+                steps = [
+                    "Step 1: Identify given information (SSS, SAS, ASA, etc.)",
+                    "Step 2: Choose appropriate construction method",
+                    "Step 3: Construct base or starting element",
+                    "Step 4: Use arcs to locate third vertex",
+                    "Step 5: Complete triangle and verify measurements"
+                ];
+            } else {
+                steps = [
+                    "Step 1: Read the construction problem carefully",
+                    "Step 2: Identify the geometry concept being tested",
+                    "Step 3: Recall the standard construction procedure",
+                    "Step 4: Apply compass and straightedge techniques",
+                    "Step 5: Verify the construction solves the problem"
+                ];
+            }
+            
+            return steps.map((step, index) => `
+                <div class="construction-step geometry-reveal" style="animation-delay: ${index * 0.1}s">
+                    <span class="step-number">${index + 1}</span>
+                    <span class="step-description">${step}</span>
+                    ${index === steps.length - 1 ? `
+                        <div style="margin-top: 10px; padding: 10px; background: rgba(170, 0, 255, 0.05); border-radius: 6px;">
+                            <strong>Correct Answer:</strong> ${question.options[question.answer.charCodeAt(0) - 65]}
+                        </div>
+                        <div style="margin-top: 10px; font-style: italic; color: var(--text-secondary);">
+                            ${question.explanation}
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        // Canvas initialization and functions
+        function initializeCanvas() {
+            canvas = document.getElementById('geometryCanvas');
+            if (!canvas) return;
+            
+            ctx = canvas.getContext('2d');
+            constructionSteps = [];
+            currentStep = 0;
+            
+            // Set canvas size
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth - 40;
+            canvas.height = 280;
+            
+            // Event listeners for canvas
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+            
+            // Draw grid
+            drawGrid();
+            
+            // Initial instructions
+            ctx.font = '14px Arial';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.textAlign = 'center';
+            ctx.fillText('Click buttons above to try different constructions', canvas.width/2, canvas.height/2);
+        }
+
+        function drawGrid() {
+            if (!ctx) return;
+            
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 1;
+            
+            // Vertical lines
+            for (let x = 0; x <= canvas.width; x += 20) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+            
+            // Horizontal lines
+            for (let y = 0; y <= canvas.height; y += 20) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+        }
+
+        function startDrawing(e) {
+            if (!canvas) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            startX = e.clientX - rect.left;
+            startY = e.clientY - rect.top;
+            isDrawing = true;
+        }
+
+        function draw(e) {
+            if (!isDrawing || !ctx || !canvas) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawGrid();
+            
+            // Redraw previous steps
+            redrawSteps();
+            
+            // Draw current
+            ctx.strokeStyle = 'rgba(0, 191, 165, 0.8)';
+            ctx.lineWidth = 2;
+            
+            if (constructionType === 'line') {
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+                ctx.lineTo(x, y);
+                ctx.stroke();
+            } else if (constructionType === 'circle') {
+                const radius = Math.sqrt(Math.pow(x - startX, 2) + Math.pow(y - startY, 2));
+                ctx.beginPath();
+                ctx.arc(startX, startY, radius, 0, Math.PI * 2);
+                ctx.stroke();
+            } else if (constructionType === 'point') {
+                ctx.fillStyle = 'rgba(255, 64, 129, 0.8)';
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function stopDrawing() {
+            if (!isDrawing || !ctx) return;
+            
+            isDrawing = false;
+            
+            // Save the drawing
+            if (constructionType === 'line' || constructionType === 'circle') {
+                constructionSteps.push({
+                    type: constructionType,
+                    startX, startY,
+                    endX: startX + 1, endY: startY + 1 // For circle, radius is calculated differently
+                });
+            }
+        }
+
+        function redrawSteps() {
+            if (!ctx) return;
+            
+            constructionSteps.forEach(step => {
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+                ctx.lineWidth = 2;
+                
+                if (step.type === 'line') {
+                    ctx.beginPath();
+                    ctx.moveTo(step.startX, step.startY);
+                    ctx.lineTo(step.endX, step.endY);
+                    ctx.stroke();
+                } else if (step.type === 'circle') {
+                    const radius = Math.sqrt(Math.pow(step.endX - step.startX, 2) + Math.pow(step.endY - step.startY, 2));
+                    ctx.beginPath();
+                    ctx.arc(step.startX, step.startY, radius, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+            });
+        }
+
+        function clearCanvas() {
+            if (!ctx || !canvas) return;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            constructionSteps = [];
+            drawGrid();
+        }
+
+        function undoLast() {
+            if (constructionSteps.length > 0) {
+                constructionSteps.pop();
+                if (ctx && canvas) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    drawGrid();
+                    redrawSteps();
+                }
+            }
+        }
+
+        // Global functions for interactive features
+        window.setConstructionType = function(type) {
+            constructionType = type;
+            
+            // Update button states
+            document.querySelectorAll('.canvas-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        };
+
+        window.showConstruction = function(construction) {
+            if (!ctx || !canvas) return;
+            
+            clearCanvas();
+            
+            switch(construction) {
+                case 'perpendicular_bisector':
+                    drawPerpendicularBisectorDemo();
+                    break;
+                case 'angle_bisector':
+                    drawAngleBisectorDemo();
+                    break;
+            }
+        };
+
+        function drawPerpendicularBisectorDemo() {
+            // Draw segment AB
+            const A = {x: canvas.width * 0.3, y: canvas.height * 0.5};
+            const B = {x: canvas.width * 0.7, y: canvas.height * 0.5};
+            
+            // Segment
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(A.x, A.y);
+            ctx.lineTo(B.x, B.y);
+            ctx.stroke();
+            
+            // Arcs from A and B
+            const radius = Math.sqrt(Math.pow(B.x - A.x, 2) + Math.pow(B.y - A.y, 2)) / 2 * 1.2;
+            
+            ctx.strokeStyle = 'rgba(0, 191, 165, 0.6)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([5, 5]);
+            
+            // Arc from A
+            ctx.beginPath();
+            ctx.arc(A.x, A.y, radius, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            // Arc from B
+            ctx.beginPath();
+            ctx.arc(B.x, B.y, radius, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            ctx.setLineDash([]);
+            
+            // Intersection points
+            const C = {x: (A.x + B.x) / 2, y: A.y - radius * 0.6};
+            const D = {x: (A.x + B.x) / 2, y: A.y + radius * 0.6};
+            
+            // Perpendicular bisector
+            ctx.strokeStyle = 'rgba(255, 171, 0, 0.8)';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(C.x, C.y);
+            ctx.lineTo(D.x, D.y);
+            ctx.stroke();
+            
+            // Labels
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.font = 'bold 16px Arial';
+            ctx.fillText('A', A.x - 15, A.y - 10);
+            ctx.fillText('B', B.x + 10, B.y - 10);
+            ctx.fillText('Perpendicular Bisector', canvas.width/2, C.y - 15);
+            
+            // Save to steps for undo functionality
+            constructionSteps.push({type: 'demo', name: 'perpendicular_bisector'});
+        }
+
+        function drawAngleBisectorDemo() {
+            // Draw angle AOB
+            const O = {x: canvas.width * 0.5, y: canvas.height * 0.6};
+            const A = {x: canvas.width * 0.3, y: canvas.height * 0.3};
+            const B = {x: canvas.width * 0.7, y: canvas.height * 0.3};
+            
+            // Angle arms
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(O.x, O.y);
+            ctx.lineTo(A.x, A.y);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.moveTo(O.x, O.y);
+            ctx.lineTo(B.x, B.y);
+            ctx.stroke();
+            
+            // Arc from O
+            const radius = 80;
+            ctx.strokeStyle = 'rgba(0, 191, 165, 0.6)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.arc(O.x, O.y, radius, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            // Intersection points
+            const angleOA = Math.atan2(A.y - O.y, A.x - O.x);
+            const angleOB = Math.atan2(B.y - O.y, B.x - O.x);
+            const C = {
+                x: O.x + radius * Math.cos(angleOA),
+                y: O.y + radius * Math.sin(angleOA)
+            };
+            const D = {
+                x: O.x + radius * Math.cos(angleOB),
+                y: O.y + radius * Math.sin(angleOB)
+            };
+            
+            // Arcs from C and D
+            const smallRadius = 60;
+            ctx.strokeStyle = 'rgba(170, 0, 255, 0.6)';
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.arc(C.x, C.y, smallRadius, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.arc(D.x, D.y, smallRadius, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            // Angle bisector
+            const bisectorAngle = (angleOA + angleOB) / 2;
+            const E = {
+                x: O.x + 150 * Math.cos(bisectorAngle),
+                y: O.y + 150 * Math.sin(bisectorAngle)
+            };
+            
+            ctx.strokeStyle = 'rgba(255, 171, 0, 0.8)';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(O.x, O.y);
+            ctx.lineTo(E.x, E.y);
+            ctx.stroke();
+            
+            // Labels
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.font = 'bold 16px Arial';
+            ctx.fillText('O', O.x - 20, O.y + 20);
+            ctx.fillText('A', A.x - 10, A.y - 10);
+            ctx.fillText('B', B.x + 10, B.y - 10);
+            ctx.fillText('Angle Bisector', E.x + 10, E.y);
+            
+            constructionSteps.push({type: 'demo', name: 'angle_bisector'});
+        }
+
+        window.showGeometryDemo = function(geometryName) {
+            const canvasElement = document.getElementById('geometryCanvas');
+            if (!canvasElement) return;
+            
+            const geometry = geometryTypes.find(g => g.name === geometryName);
+            if (!geometry) return;
+            
+            clearCanvas();
+            
+            if (geometryName === "Basic Tools") {
+                // Draw tools
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                ctx.font = 'bold 18px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('Basic Geometric Tools', canvas.width/2, 30);
+                
+                // Draw ruler
+                ctx.strokeStyle = 'rgba(0, 191, 165, 0.8)';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(canvas.width * 0.3, 100);
+                ctx.lineTo(canvas.width * 0.7, 100);
+                ctx.stroke();
+                
+                ctx.fillText('Straightedge (Ruler without markings)', canvas.width/2, 140);
+                
+                // Draw compass
+                ctx.beginPath();
+                ctx.arc(canvas.width/2, 200, 40, 0, Math.PI * 2);
+                ctx.stroke();
+                
+                ctx.beginPath();
+                ctx.moveTo(canvas.width/2, 160);
+                ctx.lineTo(canvas.width/2, 240);
+                ctx.stroke();
+                
+                ctx.fillText('Compass (for circles and arcs)', canvas.width/2, 280);
+                
+            } else if (geometryName === "Angle Constructions") {
+                drawAngleConstructionsDemo();
+            }
+        };
+
+        function drawAngleConstructionsDemo() {
+            // Draw various angle constructions
+            const angles = [
+                {angle: '60°', x: canvas.width * 0.2, y: 100, color: 'rgba(0, 191, 165, 0.8)'},
+                {angle: '90°', x: canvas.width * 0.5, y: 100, color: 'rgba(255, 171, 0, 0.8)'},
+                {angle: '45°', x: canvas.width * 0.8, y: 100, color: 'rgba(170, 0, 255, 0.8)'},
+                {angle: '30°', x: canvas.width * 0.2, y: 220, color: 'rgba(0, 200, 83, 0.8)'},
+                {angle: '120°', x: canvas.width * 0.5, y: 220, color: 'rgba(255, 64, 129, 0.8)'}
+            ];
+            
+            angles.forEach(item => {
+                // Draw angle based on type
+                ctx.strokeStyle = item.color;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(item.x, item.y);
+                
+                let angle = 0;
+                switch(item.angle) {
+                    case '60°': angle = Math.PI/3; break;
+                    case '90°': angle = Math.PI/2; break;
+                    case '45°': angle = Math.PI/4; break;
+                    case '30°': angle = Math.PI/6; break;
+                    case '120°': angle = 2*Math.PI/3; break;
+                }
+                
+                ctx.lineTo(item.x + 60 * Math.cos(0), item.y + 60 * Math.sin(0));
+                ctx.stroke();
+                
+                ctx.beginPath();
+                ctx.moveTo(item.x, item.y);
+                ctx.lineTo(item.x + 60 * Math.cos(angle), item.y + 60 * Math.sin(angle));
+                ctx.stroke();
+                
+                // Label
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                ctx.font = 'bold 16px Arial';
+                ctx.fillText(item.angle, item.x, item.y - 10);
+            });
+            
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.font = 'bold 18px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Common Angle Constructions', canvas.width/2, 40);
+        }
+
+        // Construction guide function
+        window.guideConstruction = function() {
+            const constructionTypeSelect = document.getElementById('constructionType');
+            const constructionInput = document.getElementById('constructionInput');
+            const builderDisplay = document.getElementById('builderDisplay');
+            
+            if (!constructionTypeSelect || !constructionInput || !builderDisplay) return;
+            
+            const selectedType = constructionTypeSelect.value;
+            const userInput = constructionInput.value.trim();
+            
+            if (!selectedType && !userInput) {
+                builderDisplay.innerHTML = "Please select a construction type or describe your construction problem.";
+                return;
+            }
+            
+            const constructionData = {
+                perpendicular_bisector: {
+                    title: "Perpendicular Bisector",
+                    color: "#00BFA5",
+                    icon: "⟂",
+                    steps: [
+                        "Step 1: Draw line segment AB",
+                        "Step 2: Set compass width > half of AB",
+                        "Step 3: From point A, draw arc above and below AB",
+                        "Step 4: From point B, draw arc above and below AB (same radius)",
+                        "Step 5: Mark intersection points C and D where arcs cross",
+                        "Step 6: Draw line through C and D - this is perpendicular bisector"
+                    ],
+                    tips: "Arcs must have same radius. Perpendicular bisector intersects AB at midpoint at 90°."
+                },
+                angle_bisector: {
+                    title: "Angle Bisector",
+                    color: "#FFAB00",
+                    icon: "∠",
+                    steps: [
+                        "Step 1: Draw angle AOB (O is vertex)",
+                        "Step 2: From O, draw arc intersecting both arms at points C and D",
+                        "Step 3: From C, draw arc inside the angle",
+                        "Step 4: From D, draw arc with same radius, intersecting at E",
+                        "Step 5: Draw ray from O through E - this is angle bisector"
+                    ],
+                    tips: "Bisector divides angle into two equal angles. Useful for constructing 45° from 90°, 30° from 60°, etc."
+                },
+                copy_segment: {
+                    title: "Copy a Segment",
+                    color: "#AA00FF",
+                    icon: "—",
+                    steps: [
+                        "Step 1: Draw segment AB to be copied",
+                        "Step 2: Draw ray where copy will be placed",
+                        "Step 3: Set compass to length AB",
+                        "Step 4: Place compass point at start of ray",
+                        "Step 5: Draw arc intersecting ray at point C",
+                        "Step 6: Segment from start to C is congruent to AB"
+                    ],
+                    tips: "Compass preserves distance without measurement. Essential for many constructions."
+                },
+                copy_angle: {
+                    title: "Copy an Angle",
+                    color: "#00C853",
+                    icon: "∠",
+                    steps: [
+                        "Step 1: Draw angle AOB to be copied",
+                        "Step 2: Draw ray O'P where copy will start",
+                        "Step 3: From O, draw arc intersecting arms at C and D",
+                        "Step 4: Same radius arc from O' intersecting O'P at C'",
+                        "Step 5: Set compass to distance CD",
+                        "Step 6: From C', draw arc intersecting first arc at D'",
+                        "Step 7: Draw ray O'D' - angle is congruent to AOB"
+                    ],
+                    tips: "Transfers both radius (arc) and chord (CD) distances. Used in parallel line construction."
+                },
+                equilateral_triangle: {
+                    title: "Equilateral Triangle",
+                    color: "#FF4081",
+                    icon: "△",
+                    steps: [
+                        "Step 1: Draw segment AB (base of triangle)",
+                        "Step 2: Set compass to length AB",
+                        "Step 3: From A, draw arc above AB",
+                        "Step 4: From B, draw arc above AB (same radius)",
+                        "Step 5: Mark intersection point C",
+                        "Step 6: Draw AC and BC",
+                        "Step 7: Triangle ABC is equilateral (all sides equal, all angles 60°)"
+                    ],
+                    tips: "Also constructs 60° angle. Foundation for many other constructions."
+                },
+                right_angle: {
+                    title: "Right Angle (90°)",
+                    color: "#2962FF",
+                    icon: "∟",
+                    steps: [
+                        "Step 1: Draw line segment AB",
+                        "Step 2: Choose point P on AB where perpendicular is needed",
+                        "Step 3: From P, draw equal arcs intersecting AB at C and D",
+                        "Step 4: From C and D, draw arcs above AB with same radius",
+                        "Step 5: Mark intersection point E",
+                        "Step 6: Draw line through P and E - perpendicular to AB at P"
+                    ],
+                    tips: "Also called 'dropping a perpendicular'. Creates 90° angle at point P on line."
+                }
+            };
+            
+            let data;
+            if (selectedType && constructionData[selectedType]) {
+                data = constructionData[selectedType];
+            } else {
+                // Try to determine from user input
+                const input = userInput.toLowerCase();
+                if (input.includes('perpendicular') || input.includes('bisect') && input.includes('line')) {
+                    data = constructionData.perpendicular_bisector;
+                } else if (input.includes('angle') && input.includes('bisect')) {
+                    data = constructionData.angle_bisector;
+                } else if (input.includes('copy') && input.includes('segment')) {
+                    data = constructionData.copy_segment;
+                } else if (input.includes('copy') && input.includes('angle')) {
+                    data = constructionData.copy_angle;
+                } else if (input.includes('equilateral') || input.includes('60°')) {
+                    data = constructionData.equilateral_triangle;
+                } else if (input.includes('right') || input.includes('90°') || input.includes('perpendicular')) {
+                    data = constructionData.right_angle;
+                } else {
+                    // Default to perpendicular bisector
+                    data = constructionData.perpendicular_bisector;
+                }
+            }
+            
+            const stepsHTML = data.steps.map((step, index) => `
+                <div class="construction-step" style="animation-delay: ${index * 0.1}s">
+                    <span class="step-number">${index + 1}</span>
+                    <span class="step-description">${step}</span>
+                </div>
+            `).join('');
+            
+            builderDisplay.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-size: 1.5rem; margin-bottom: 10px; color: ${data.color};">
+                        ${data.icon} ${data.title} Construction
+                    </div>
+                    
+                    ${userInput ? `<div style="background: var(--dark-surface); padding: 10px; border-radius: 8px; margin: 10px 0;">
+                        <strong>Your Request:</strong> ${userInput}
+                    </div>` : ''}
+                    
+                    <div style="text-align: left;">
+                        <div style="color: ${data.color}; font-weight: bold; margin: 15px 0 10px;">Construction Steps:</div>
+                        ${stepsHTML}
+                        
+                        <div style="background: rgba(${parseInt(data.color.slice(1,3), 16)}, ${parseInt(data.color.slice(3,5), 16)}, ${parseInt(data.color.slice(5,7), 16)}, 0.1); padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid ${data.color};">
+                            <strong>Tips:</strong> ${data.tips}
+                        </div>
+                    </div>
+                    
+                    <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 15px;">
+                        <strong>Remember:</strong> Use sharp pencil, draw construction lines lightly, check intersections carefully!
+                    </div>
+                </div>
+            `;
+            
+            // Show the construction on canvas if possible
+            if (selectedType && canvas) {
+                showConstruction(selectedType);
+            }
+        };
+
+        window.getConstructionChallenge = function() {
+            const constructionTypeSelect = document.getElementById('constructionType');
+            const constructionInput = document.getElementById('constructionInput');
+            
+            if (!constructionTypeSelect || !constructionInput) return;
+            
+            const challenges = [
+                "Construct the perpendicular bisector of a 6cm line segment",
+                "Bisect a 75° angle",
+                "Copy a given line segment to a new position",
+                "Construct an equilateral triangle with 5cm sides",
+                "Construct a right angle at point P on line AB",
+                "Copy angle XYZ to a new position",
+                "Construct a 45° angle using only compass and straightedge",
+                "Construct a line parallel to AB through point P (not on AB)",
+                "Find the center of a given circle using only compass and straightedge",
+                "Construct a tangent to a circle at point P on the circle"
+            ];
+            
+            const randomChallenge = challenges[Math.floor(Math.random() * challenges.length)];
+            constructionInput.value = randomChallenge;
+            constructionInput.focus();
+        };
+
+        window.clearConstructionBuilder = function() {
+            const constructionInput = document.getElementById('constructionInput');
+            const builderDisplay = document.getElementById('builderDisplay');
+            
+            if (constructionInput) constructionInput.value = '';
+            if (builderDisplay) {
+                builderDisplay.innerHTML = "Your construction guide will appear here...";
+            }
+        };
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            geometryFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            geometryFact.appendChild(createGeometryFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createGeometryVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin your geometry journey!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

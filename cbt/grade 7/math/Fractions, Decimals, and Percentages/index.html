@@ -1,0 +1,3320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Math - Fractions, Decimals, and Percentages | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Math Theme */
+        :root {
+            --primary-blue: #2962FF;
+            --secondary-teal: #00BFA5;
+            --accent-amber: #FFAB00;
+            --accent-purple: #AA00FF;
+            --accent-pink: #FF4081;
+            --accent-green: #00C853;
+            --dark-bg: #0D1B2A;
+            --dark-surface: #1B2B3A;
+            --dark-card: #253447;
+            --dark-border: #3A4A5A;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B8D0E0;
+            --text-muted: #7A94A8;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --glow: 0 0 20px rgba(41, 98, 255, 0.3);
+            --fraction-glow: 0 0 15px rgba(0, 191, 165, 0.4);
+            --decimal-glow: 0 0 15px rgba(255, 171, 0, 0.4);
+            --percentage-glow: 0 0 15px rgba(170, 0, 255, 0.4);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Math Pattern Background */
+        .math-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(41, 98, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 191, 165, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 171, 0, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #0D1B2A, #1B2B3A);
+            opacity: 0.8;
+        }
+
+        .floating-symbols {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.05);
+            font-size: 3rem;
+            font-weight: bold;
+            animation: floatSymbols 20s linear infinite;
+        }
+
+        @keyframes floatSymbols {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.1; }
+            25% { transform: translateY(-100px) translateX(100px) rotate(90deg); opacity: 0.05; }
+            50% { transform: translateY(-50px) translateX(-100px) rotate(180deg); opacity: 0.1; }
+            75% { transform: translateY(100px) translateX(50px) rotate(270deg); opacity: 0.05; }
+            100% { transform: translateY(0) translateX(0) rotate(360deg); opacity: 0.1; }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 27, 42, 0.9);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal), var(--accent-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(41, 98, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary-blue);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(41, 98, 255, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 15px rgba(41, 98, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1A56DB;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(41, 98, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-teal);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 191, 165, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #009688;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 191, 165, 0.5);
+        }
+
+        .btn-amber {
+            background: var(--accent-amber);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(255, 171, 0, 0.4);
+        }
+
+        .btn-amber:hover {
+            background: #FF9800;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 171, 0, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-teal), var(--accent-amber));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(41, 98, 255, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .math-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-purple);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal), var(--accent-amber));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(41, 98, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(41, 98, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .option.incorrect {
+            background: rgba(255, 64, 129, 0.1);
+            border-color: var(--accent-pink);
+            color: var(--accent-pink);
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-teal);
+        }
+
+        .option.correct .option-letter {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: var(--accent-pink);
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(0, 200, 83, 0.1);
+            border-left: 5px solid var(--accent-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(255, 64, 129, 0.1);
+            border-left: 5px solid var(--accent-pink);
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--accent-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: var(--accent-pink);
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--accent-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: var(--accent-pink);
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Math Display */
+        .math-display {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+
+        .display-title {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .math-container {
+            padding: 20px;
+            background: var(--dark-surface);
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid var(--accent-purple);
+        }
+
+        .math-scenario {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .math-highlight {
+            background: rgba(170, 0, 255, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            border: 1px solid var(--accent-purple);
+        }
+
+        .highlight-text {
+            color: var(--accent-purple);
+            font-weight: bold;
+        }
+
+        /* Fraction Visualizer */
+        .fraction-visualizer {
+            width: 100%;
+            height: 250px;
+            background: var(--dark-surface);
+            border-radius: 12px;
+            position: relative;
+            margin: 20px 0;
+            overflow: hidden;
+            border: 2px solid var(--secondary-teal);
+            padding: 20px;
+        }
+
+        .fraction-element {
+            position: absolute;
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .fraction-element:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        .fraction-connection {
+            position: absolute;
+            background: var(--primary-blue);
+            height: 2px;
+            border-radius: 2px;
+            opacity: 0.6;
+        }
+
+        /* Math Types Grid */
+        .math-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 992px) {
+            .math-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .math-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .math-card {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .math-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .math-card.fractions {
+            border-color: var(--secondary-teal);
+        }
+
+        .math-card.decimals {
+            border-color: var(--accent-amber);
+        }
+
+        .math-card.percentages {
+            border-color: var(--accent-purple);
+        }
+
+        .math-card.operations {
+            border-color: var(--accent-green);
+        }
+
+        .math-card.conversions {
+            border-color: var(--accent-pink);
+        }
+
+        .math-card.applications {
+            border-color: var(--primary-blue);
+        }
+
+        .math-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .fractions .math-icon {
+            color: var(--secondary-teal);
+        }
+
+        .decimals .math-icon {
+            color: var(--accent-amber);
+        }
+
+        .percentages .math-icon {
+            color: var(--accent-purple);
+        }
+
+        .operations .math-icon {
+            color: var(--accent-green);
+        }
+
+        .conversions .math-icon {
+            color: var(--accent-pink);
+        }
+
+        .applications .math-icon {
+            color: var(--primary-blue);
+        }
+
+        .math-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .fractions .math-title {
+            color: var(--secondary-teal);
+        }
+
+        .decimals .math-title {
+            color: var(--accent-amber);
+        }
+
+        .percentages .math-title {
+            color: var(--accent-purple);
+        }
+
+        .operations .math-title {
+            color: var(--accent-green);
+        }
+
+        .conversions .math-title {
+            color: var(--accent-pink);
+        }
+
+        .applications .math-title {
+            color: var(--primary-blue);
+        }
+
+        .math-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .math-examples {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+            background: var(--dark-surface);
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        /* Math Operations Table */
+        .operations-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .operations-table th {
+            background: var(--dark-surface);
+            padding: 12px;
+            text-align: left;
+            color: var(--accent-purple);
+            border-bottom: 2px solid var(--accent-purple);
+        }
+
+        .operations-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+        }
+
+        .operations-table tr:hover {
+            background: rgba(170, 0, 255, 0.05);
+        }
+
+        /* Fractions Display */
+        .fractions-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--secondary-teal);
+        }
+
+        .fractions-title {
+            color: var(--secondary-teal);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .fractions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .fractions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .fraction-card {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .fraction-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--secondary-teal);
+        }
+
+        .fraction-operation {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--secondary-teal);
+            font-size: 1.2rem;
+        }
+
+        .fraction-example {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Decimals Display */
+        .decimals-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-amber);
+        }
+
+        .decimals-title {
+            color: var(--accent-amber);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .decimals-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .decimals-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .decimal-card {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .decimal-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent-amber);
+        }
+
+        .decimal-operation {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--accent-amber);
+            font-size: 1.2rem;
+        }
+
+        .decimal-example {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Percentages Display */
+        .percentages-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .percentages-title {
+            color: var(--accent-purple);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .percentages-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .percentages-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .percentage-card {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .percentage-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent-purple);
+        }
+
+        .percentage-operation {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--accent-purple);
+            font-size: 1.2rem;
+        }
+
+        .percentage-example {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Interactive Math Builder */
+        .builder-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--primary-blue);
+        }
+
+        .builder-title {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .builder-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .builder-select {
+            padding: 10px 15px;
+            background: var(--dark-surface);
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .builder-input {
+            padding: 15px;
+            background: var(--dark-surface);
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .builder-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .builder-btn {
+            padding: 10px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .builder-btn:hover {
+            background: rgba(41, 98, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .builder-display {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Math Study Display */
+        .math-study-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .math-study-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .math-study-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .study-card {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--accent-green);
+        }
+
+        .study-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent-green);
+        }
+
+        .study-concept {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--accent-green);
+        }
+
+        .study-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal), var(--accent-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal), var(--accent-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Fraction Visual Elements */
+        .fraction-display {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 5px;
+            padding: 10px;
+            background: rgba(0, 191, 165, 0.1);
+            border-radius: 8px;
+            border: 1px solid var(--secondary-teal);
+        }
+
+        .fraction-numerator {
+            border-bottom: 2px solid var(--secondary-teal);
+            padding: 0 10px;
+            font-weight: bold;
+        }
+
+        .fraction-denominator {
+            padding: 0 10px;
+            font-weight: bold;
+        }
+
+        .decimal-place {
+            display: inline-block;
+            padding: 2px 4px;
+            margin: 0 1px;
+            border-radius: 3px;
+            background: rgba(255, 171, 0, 0.1);
+            border: 1px solid var(--accent-amber);
+        }
+
+        .percentage-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: conic-gradient(var(--accent-purple) var(--percent, 0%), transparent 0%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .percentage-value {
+            background: var(--dark-surface);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .math-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .fractions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .decimals-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .percentages-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .math-study-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes mathReveal {
+            0% { transform: translateX(-100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        
+        .math-reveal {
+            animation: mathReveal 0.5s ease forwards;
+        }
+        
+        @keyframes fractionGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 191, 165, 0.4); }
+            50% { box-shadow: 0 0 15px 5px rgba(0, 191, 165, 0.2); }
+        }
+        
+        .fraction-glow {
+            animation: fractionGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes decimalGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 171, 0, 0.4); }
+            50% { box-shadow: 0 0 15px 5px rgba(255, 171, 0, 0.2); }
+        }
+        
+        .decimal-glow {
+            animation: decimalGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes percentageGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(170, 0, 255, 0.4); }
+            50% { box-shadow: 0 0 15px 5px rgba(170, 0, 255, 0.2); }
+        }
+        
+        .percentage-glow {
+            animation: percentageGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes floatSymbol {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        .float-symbol {
+            animation: floatSymbol 3s ease-in-out infinite;
+        }
+        
+        @keyframes mathGlow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .math-glow {
+            animation: mathGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes calculate {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .calculate {
+            animation: calculate 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Math Pattern Background -->
+    <div class="math-bg" id="mathBg">
+        <!-- Math symbols will be generated by JavaScript -->
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 7 Math - Fractions, Decimals & Percentages</h1>
+            <p class="welcome-subtitle">Master advanced operations with fractions, decimals, and percentages! Learn to convert between these forms, perform complex calculations, solve real-world problems, and develop strong mathematical reasoning skills for academic success and everyday life!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">½ 0.75 75% ➗ ✖️ ➕ ➖</span>
+                <span class="topic-name">Advanced Operations & Applications</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Start Math Journey</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 80</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1.25%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Math fact display -->
+                <div id="mathFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Math Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Practice Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Other Math Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background
+        function initBackground() {
+            const mathBg = document.getElementById('mathBg');
+            
+            // Create floating math symbols
+            const symbols = ['½', '¾', '⅓', '¼', 'π', '≈', '÷', '×', '+', '−', '=', '√', '%', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+            
+            for (let i = 0; i < 25; i++) {
+                const symbol = document.createElement('div');
+                symbol.className = 'floating-symbols float-symbol';
+                symbol.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                symbol.style.left = `${Math.random() * 100}%`;
+                symbol.style.top = `${Math.random() * 100}%`;
+                symbol.style.animationDelay = `${Math.random() * 5}s`;
+                symbol.style.fontSize = `${2 + Math.random() * 4}rem`;
+                
+                // Color based on symbol type
+                if (symbol.textContent === '½' || symbol.textContent === '¾' || symbol.textContent === '⅓' || symbol.textContent === '¼') {
+                    symbol.style.color = 'rgba(0, 191, 165, 0.1)';
+                } else if (symbol.textContent === '%') {
+                    symbol.style.color = 'rgba(170, 0, 255, 0.1)';
+                } else if (symbol.textContent === '.' || symbol.textContent.match(/[0-9]/)) {
+                    symbol.style.color = 'rgba(255, 171, 0, 0.1)';
+                } else {
+                    symbol.style.color = 'rgba(41, 98, 255, 0.1)';
+                }
+                
+                mathBg.appendChild(symbol);
+            }
+        }
+
+        // Questions array - 80+ Grade 7 Math Questions
+        const questions = [
+            // Fractions - Operations (1-20)
+            {
+                type: "fractions_operations",
+                question: "What is 3/4 + 1/2?",
+                options: ["5/4 or 1¼", "4/6 or ⅔", "3/6 or ½", "4/4 or 1"],
+                answer: "A",
+                explanation: "3/4 + 1/2 = 3/4 + 2/4 = 5/4 = 1¼. Find common denominator (4)."
+            },
+            {
+                type: "fractions_operations",
+                question: "What is 5/6 - 1/3?",
+                options: ["3/6 or ½", "4/3 or 1⅓", "6/9 or ⅔", "4/6 or ⅔"],
+                answer: "A",
+                explanation: "5/6 - 1/3 = 5/6 - 2/6 = 3/6 = ½. Convert 1/3 to 2/6 for common denominator."
+            },
+            {
+                type: "fractions_operations",
+                question: "What is 2/3 × 3/5?",
+                options: ["6/15 or ⅖", "5/8", "6/8 or ¾", "2/5"],
+                answer: "A",
+                explanation: "2/3 × 3/5 = (2×3)/(3×5) = 6/15 = ⅖. Multiply numerators and denominators."
+            },
+            {
+                type: "fractions_operations",
+                question: "What is 3/4 ÷ 2/5?",
+                options: ["15/8 or 1⅞", "6/20 or 3/10", "5/9", "8/15"],
+                answer: "A",
+                explanation: "3/4 ÷ 2/5 = 3/4 × 5/2 = 15/8 = 1⅞. Multiply by reciprocal."
+            },
+            {
+                type: "fractions_operations",
+                question: "Simplify 12/18 to lowest terms:",
+                options: ["⅔", "¾", "6/9", "2/3"],
+                answer: "A",
+                explanation: "12/18 = (12÷6)/(18÷6) = ⅔. Divide numerator and denominator by GCF (6)."
+            },
+            // Decimals - Operations (21-40)
+            {
+                type: "decimals_operations",
+                question: "What is 3.75 + 2.5?",
+                options: ["6.25", "5.25", "6.00", "5.75"],
+                answer: "A",
+                explanation: "3.75 + 2.50 = 6.25. Line up decimal points and add."
+            },
+            {
+                type: "decimals_operations",
+                question: "What is 5.6 - 2.34?",
+                options: ["3.26", "3.34", "2.26", "2.34"],
+                answer: "A",
+                explanation: "5.60 - 2.34 = 3.26. Add zero to 5.6 for easier subtraction."
+            },
+            {
+                type: "decimals_operations",
+                question: "What is 1.5 × 0.4?",
+                options: ["0.6", "0.4", "0.9", "1.0"],
+                answer: "A",
+                explanation: "1.5 × 0.4 = 0.6. Multiply normally, then count decimal places (1+1=2)."
+            },
+            {
+                type: "decimals_operations",
+                question: "What is 6.3 ÷ 0.9?",
+                options: ["7", "6", "0.7", "0.6"],
+                answer: "A",
+                explanation: "6.3 ÷ 0.9 = 7. Multiply both by 10 to get 63 ÷ 9 = 7."
+            },
+            {
+                type: "decimals_operations",
+                question: "Round 4.678 to the nearest hundredth:",
+                options: ["4.68", "4.67", "4.7", "4.6"],
+                answer: "A",
+                explanation: "4.678 rounded to hundredths: Look at thousandths digit (8) ≥ 5, so round up hundredths digit (7→8) = 4.68."
+            },
+            // Percentages - Operations (41-60)
+            {
+                type: "percentages_operations",
+                question: "What is 25% of 80?",
+                options: ["20", "25", "30", "40"],
+                answer: "A",
+                explanation: "25% of 80 = 0.25 × 80 = 20. Convert percentage to decimal and multiply."
+            },
+            {
+                type: "percentages_operations",
+                question: "What percentage is 15 of 60?",
+                options: ["25%", "15%", "30%", "40%"],
+                answer: "A",
+                explanation: "15/60 = 0.25 = 25%. Divide part by whole, multiply by 100%."
+            },
+            {
+                type: "percentages_operations",
+                question: "Increase 200 by 15%:",
+                options: ["230", "215", "230", "245"],
+                answer: "A",
+                explanation: "15% of 200 = 30. 200 + 30 = 230. Or: 200 × 1.15 = 230."
+            },
+            {
+                type: "percentages_operations",
+                question: "Decrease 150 by 20%:",
+                options: ["120", "130", "125", "110"],
+                answer: "A",
+                explanation: "20% of 150 = 30. 150 - 30 = 120. Or: 150 × 0.8 = 120."
+            },
+            {
+                type: "percentages_operations",
+                question: "A shirt costs $40 after a 20% discount. What was original price?",
+                options: ["$50", "$48", "$45", "$52"],
+                answer: "A",
+                explanation: "If $40 is 80% of original (100% - 20%), then original = 40 ÷ 0.8 = $50."
+            },
+            // Conversions (61-80)
+            {
+                type: "conversions",
+                question: "Convert ¾ to decimal:",
+                options: ["0.75", "0.25", "0.5", "0.3"],
+                answer: "A",
+                explanation: "¾ = 3 ÷ 4 = 0.75. Divide numerator by denominator."
+            },
+            {
+                type: "conversions",
+                question: "Convert 0.6 to fraction in simplest form:",
+                options: ["⅗", "6/10", "3/5", "⅔"],
+                answer: "A",
+                explanation: "0.6 = 6/10 = 3/5. Simplify by dividing numerator and denominator by 2."
+            },
+            {
+                type: "conversions",
+                question: "Convert ⅖ to percentage:",
+                options: ["40%", "20%", "25%", "50%"],
+                answer: "A",
+                explanation: "⅖ = 0.4 = 40%. Divide 2 by 5, multiply by 100%."
+            },
+            {
+                type: "conversions",
+                question: "Convert 65% to fraction in simplest form:",
+                options: ["13/20", "65/100", "6.5/10", "7/10"],
+                answer: "A",
+                explanation: "65% = 65/100 = 13/20. Simplify by dividing numerator and denominator by 5."
+            },
+            {
+                type: "conversions",
+                question: "Convert 0.125 to fraction in simplest form:",
+                options: ["⅛", "125/1000", "1/8", "¼"],
+                answer: "A",
+                explanation: "0.125 = 125/1000 = ⅛. Simplify by dividing numerator and denominator by 125."
+            },
+            // Word Problems (81-100)
+            {
+                type: "word_problems",
+                question: "Sarah ate ⅔ of a pizza and John ate ¼. How much pizza did they eat together?",
+                options: ["11/12", "¾", "7/12", "1"],
+                answer: "A",
+                explanation: "⅔ + ¼ = 8/12 + 3/12 = 11/12. Find common denominator (12)."
+            },
+            {
+                type: "word_problems",
+                question: "A store has 300 items. 40% are sold. How many items remain?",
+                options: ["180", "120", "160", "200"],
+                answer: "A",
+                explanation: "40% of 300 = 120 sold. 300 - 120 = 180 remain. Or: 300 × 0.6 = 180."
+            },
+            {
+                type: "word_problems",
+                question: "If ⅗ of students are girls and there are 450 students, how many are boys?",
+                options: ["180", "270", "200", "250"],
+                answer: "A",
+                explanation: "⅗ are girls = 0.6 × 450 = 270 girls. Boys = 450 - 270 = 180."
+            },
+            {
+                type: "word_problems",
+                question: "A recipe needs ¾ cup flour. Making 2½ times the recipe needs how much flour?",
+                options: ["1⅞ cups", "1½ cups", "1¾ cups", "2 cups"],
+                answer: "A",
+                explanation: "¾ × 2½ = ¾ × 5/2 = 15/8 = 1⅞ cups."
+            },
+            // Advanced Concepts (101-120)
+            {
+                type: "advanced_concepts",
+                question: "What is 33⅓% as a fraction?",
+                options: ["⅓", "33/100", "1/3", "0.333"],
+                answer: "A",
+                explanation: "33⅓% = 33⅓/100 = 100/300 = ⅓."
+            },
+            {
+                type: "advanced_concepts",
+                question: "What is 0.3̅ (repeating) as a fraction?",
+                options: ["⅓", "3/10", "1/3", "0.333"],
+                answer: "A",
+                explanation: "0.333... = ⅓. Let x = 0.333..., then 10x = 3.333..., subtract: 9x = 3, so x = ⅓."
+            },
+            {
+                type: "advanced_concepts",
+                question: "Order from least to greatest: 0.6, ⅝, 65%",
+                options: ["⅝, 0.6, 65%", "0.6, ⅝, 65%", "65%, 0.6, ⅝", "⅝, 65%, 0.6"],
+                answer: "A",
+                explanation: "Convert all: ⅝ = 0.625, 0.6 = 0.6, 65% = 0.65. So: 0.6, 0.625, 0.65 = 0.6, ⅝, 65%."
+            },
+            // Mixed Operations (121-140)
+            {
+                type: "mixed_operations",
+                question: "(¾ + 0.5) × 80% = ?",
+                options: ["1", "0.9", "1.1", "1.2"],
+                answer: "A",
+                explanation: "¾ = 0.75, so 0.75 + 0.5 = 1.25. 80% = 0.8. 1.25 × 0.8 = 1."
+            },
+            {
+                type: "mixed_operations",
+                question: "What is 150% of ⅔?",
+                options: ["1", "1½", "1⅓", "1"],
+                answer: "A",
+                explanation: "150% = 1.5. 1.5 × ⅔ = 3/2 × ⅔ = 6/6 = 1."
+            },
+            {
+                type: "mixed_operations",
+                question: "Convert 7/8 to decimal and percentage:",
+                options: ["0.875, 87.5%", "0.78, 78%", "0.875, 87.5%", "0.7, 70%"],
+                answer: "A",
+                explanation: "7/8 = 0.875 = 87.5%. Divide 7 by 8, multiply by 100%."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent mathematical thinking!",
+            "Perfect calculation!",
+            "Great job with number operations!",
+            "Amazing! You're a math champion!",
+            "Perfect understanding of fractions/decimals/percentages!",
+            "You're a future mathematician in the making!",
+            "Outstanding problem-solving skills!",
+            "Brilliant mathematical reasoning!",
+            "You think like a mathematician!",
+            "Math mastery achieved!"
+        ];
+
+        // Math concepts
+        const mathConcepts = [
+            {
+                name: "Fractions",
+                description: "Parts of a whole",
+                icon: "½"
+            },
+            {
+                name: "Decimals",
+                description: "Base-10 number system",
+                icon: "0.75"
+            },
+            {
+                name: "Percentages",
+                description: "Per hundred",
+                icon: "%"
+            },
+            {
+                name: "Operations",
+                description: "Add, subtract, multiply, divide",
+                icon: "➗"
+            },
+            {
+                name: "Conversions",
+                description: "Changing between forms",
+                icon: "🔄"
+            },
+            {
+                name: "Word Problems",
+                description: "Real-world applications",
+                icon: "📝"
+            }
+        ];
+
+        // Math types
+        const mathTypes = [
+            {
+                name: "Fractions",
+                description: "Numbers expressed as a ratio of integers",
+                examples: "½, ¾, ⅔, ⅝",
+                characteristics: "Numerator/denominator, proper/improper, mixed numbers",
+                icon: "½",
+                color: "#00BFA5"
+            },
+            {
+                name: "Decimals",
+                description: "Numbers in base-10 place value system",
+                examples: "0.5, 0.75, 1.25, 3.14",
+                characteristics: "Tenths, hundredths, thousandths, place value",
+                icon: "0.75",
+                color: "#FFAB00"
+            },
+            {
+                name: "Percentages",
+                description: "Parts per hundred",
+                examples: "25%, 50%, 75%, 100%",
+                characteristics: "Always out of 100, used for comparisons",
+                icon: "%",
+                color: "#AA00FF"
+            },
+            {
+                name: "Operations",
+                description: "Mathematical procedures",
+                examples: "+ - × ÷, with fractions/decimals/percentages",
+                characteristics: "Addition, subtraction, multiplication, division",
+                icon: "➗",
+                color: "#00C853"
+            },
+            {
+                name: "Conversions",
+                description: "Changing between different forms",
+                examples: "½ = 0.5 = 50%, ¾ = 0.75 = 75%",
+                characteristics: "Fraction ↔ Decimal ↔ Percentage",
+                icon: "🔄",
+                color: "#FF4081"
+            },
+            {
+                name: "Applications",
+                description: "Real-world problem solving",
+                examples: "Shopping discounts, recipe adjustments, test scores",
+                characteristics: "Word problems, real-life scenarios",
+                icon: "📝",
+                color: "#2962FF"
+            }
+        ];
+
+        // Fractions examples
+        const fractionsExamples = [
+            {
+                operation: "Addition",
+                example: "½ + ⅓ = 3/6 + 2/6 = 5/6",
+                steps: "Find common denominator, add numerators"
+            },
+            {
+                operation: "Subtraction",
+                example: "¾ - ½ = ¾ - 2/4 = ¼",
+                steps: "Find common denominator, subtract numerators"
+            },
+            {
+                operation: "Multiplication",
+                example: "⅔ × ¾ = (2×3)/(3×4) = 6/12 = ½",
+                steps: "Multiply numerators, multiply denominators, simplify"
+            },
+            {
+                operation: "Division",
+                example: "½ ÷ ⅓ = ½ × 3/1 = 3/2 = 1½",
+                steps: "Multiply by reciprocal of divisor"
+            },
+            {
+                operation: "Simplification",
+                example: "8/12 = (8÷4)/(12÷4) = ⅔",
+                steps: "Divide numerator and denominator by GCF"
+            },
+            {
+                operation: "Mixed Numbers",
+                example: "1⅔ = 5/3, 2½ = 5/2",
+                steps: "Multiply whole by denominator, add numerator"
+            }
+        ];
+
+        // Decimals examples
+        const decimalsExamples = [
+            {
+                operation: "Addition",
+                example: "3.75 + 2.4 = 6.15",
+                steps: "Line up decimal points, add"
+            },
+            {
+                operation: "Subtraction",
+                example: "5.6 - 2.34 = 3.26",
+                steps: "Line up decimal points, subtract"
+            },
+            {
+                operation: "Multiplication",
+                example: "2.5 × 1.2 = 3.0",
+                steps: "Multiply normally, count decimal places"
+            },
+            {
+                operation: "Division",
+                example: "6.3 ÷ 0.9 = 7",
+                steps: "Multiply by power of 10 to remove decimals"
+            },
+            {
+                operation: "Rounding",
+                example: "4.678 to hundredths = 4.68",
+                steps: "Look at next digit, round up if ≥5"
+            },
+            {
+                operation: "Place Value",
+                example: "3.142 = 3 ones, 1 tenth, 4 hundredths, 2 thousandths",
+                steps: "Each place is 10× smaller than previous"
+            }
+        ];
+
+        // Percentages examples
+        const percentagesExamples = [
+            {
+                operation: "Finding Percentage",
+                example: "What is 25% of 80? = 0.25 × 80 = 20",
+                steps: "Convert % to decimal, multiply"
+            },
+            {
+                operation: "Finding Percent",
+                example: "15 is what % of 60? = 15/60 = 0.25 = 25%",
+                steps: "Divide part by whole, multiply by 100%"
+            },
+            {
+                operation: "Percentage Increase",
+                example: "Increase 200 by 15% = 200 × 1.15 = 230",
+                steps: "Multiply by (1 + percentage as decimal)"
+            },
+            {
+                operation: "Percentage Decrease",
+                example: "Decrease 150 by 20% = 150 × 0.8 = 120",
+                steps: "Multiply by (1 - percentage as decimal)"
+            },
+            {
+                operation: "Original Price",
+                example: "$40 after 20% discount = $40 ÷ 0.8 = $50",
+                steps: "Divide by (1 - discount percentage)"
+            },
+            {
+                operation: "Percentage Points",
+                example: "From 40% to 50% is a 10 percentage point increase",
+                steps: "Difference in percentage values"
+            }
+        ];
+
+        // Conversion examples
+        const conversionExamples = [
+            {
+                from: "Fraction to Decimal",
+                example: "¾ = 3 ÷ 4 = 0.75",
+                steps: "Divide numerator by denominator"
+            },
+            {
+                from: "Decimal to Fraction",
+                example: "0.6 = 6/10 = 3/5",
+                steps: "Write as fraction over 10, 100, etc., simplify"
+            },
+            {
+                from: "Fraction to Percentage",
+                example: "⅖ = 0.4 = 40%",
+                steps: "Divide numerator by denominator, multiply by 100%"
+            },
+            {
+                from: "Percentage to Fraction",
+                example: "65% = 65/100 = 13/20",
+                steps: "Write over 100, simplify"
+            },
+            {
+                from: "Decimal to Percentage",
+                example: "0.125 = 12.5%",
+                steps: "Multiply by 100%"
+            },
+            {
+                from: "Percentage to Decimal",
+                example: "37.5% = 0.375",
+                steps: "Divide by 100"
+            }
+        ];
+
+        // Math facts
+        const mathFacts = [
+            "The word 'fraction' comes from Latin 'fractio' meaning 'to break'!",
+            "The decimal system was invented by Indian mathematicians around 500 AD!",
+            "Percent means 'per hundred' - from Latin 'per centum'!",
+            "⅓ = 0.333... (repeating forever)!",
+            "½ + ⅓ + ⅙ = 1 (Egyptian fractions)!",
+            "The equals sign (=) was invented in 1557 by Robert Recorde!",
+            "π (pi) is approximately 3.14159, but its decimal representation goes on forever without repeating!",
+            "0.999... (repeating) is exactly equal to 1!"
+        ];
+
+        // Word study concepts
+        const mathStudyConcepts = [
+            {
+                concept: "Common Fractions",
+                description: "Fractions you should know",
+                examples: "½ = 0.5 = 50%, ¼ = 0.25 = 25%, ⅓ ≈ 0.333 = 33.3%, ⅔ ≈ 0.667 = 66.7%"
+            },
+            {
+                concept: "Decimal Places",
+                description: "Understanding place value",
+                examples: "Tenths (0.1), Hundredths (0.01), Thousandths (0.001)"
+            },
+            {
+                concept: "Percentage Shortcuts",
+                description: "Quick mental calculations",
+                examples: "50% = half, 25% = quarter, 10% = move decimal one left, 1% = move decimal two left"
+            },
+            {
+                concept: "Conversion Tips",
+                description: "Quick ways to convert",
+                examples: "Fraction to %: Divide top by bottom × 100. Decimal to fraction: Read as 'tenths/hundredths'"
+            }
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const mathFact = document.getElementById('mathFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initBackground();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade7Math');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade7Math', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade7Math_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade7Math_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a fractions/decimals/percentages expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Great job! You have excellent mathematical skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Good work! Keep practicing your math operations!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Not bad! Review conversions and try again!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Math skills open doors to many opportunities!";
+            }
+        }
+
+        // Create math fact display
+        function createMathFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'math-fact';
+            
+            factDiv.innerHTML = `<strong>Interesting Math Fact:</strong> ${mathFacts[Math.floor(Math.random() * mathFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "fractions_operations": "½",
+                "decimals_operations": "0.75",
+                "percentages_operations": "%",
+                "conversions": "🔄",
+                "word_problems": "📝",
+                "advanced_concepts": "⚡",
+                "mixed_operations": "➗"
+            };
+            
+            let conceptName = "Fractions Operations";
+            let conceptIcon = "½";
+            
+            if (question.type.includes("fractions")) {
+                conceptName = "Fractions";
+                conceptIcon = conceptIcons.fractions_operations;
+            } else if (question.type.includes("decimals")) {
+                conceptName = "Decimals";
+                conceptIcon = conceptIcons.decimals_operations;
+            } else if (question.type.includes("percentages")) {
+                conceptName = "Percentages";
+                conceptIcon = conceptIcons.percentages_operations;
+            } else if (question.type.includes("conversions")) {
+                conceptName = "Conversions";
+                conceptIcon = conceptIcons.conversions;
+            } else if (question.type.includes("word_problems")) {
+                conceptName = "Word Problems";
+                conceptIcon = conceptIcons.word_problems;
+            } else if (question.type.includes("advanced_concepts")) {
+                conceptName = "Advanced Concepts";
+                conceptIcon = conceptIcons.advanced_concepts;
+            } else if (question.type.includes("mixed_operations")) {
+                conceptName = "Mixed Operations";
+                conceptIcon = conceptIcons.mixed_operations;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("fractions")) {
+                label.textContent = "Operations with fractions (add, subtract, multiply, divide)";
+            } else if (question.type.includes("decimals")) {
+                label.textContent = "Operations with decimals and place value";
+            } else if (question.type.includes("percentages")) {
+                label.textContent = "Calculating percentages, increases, decreases";
+            } else if (question.type.includes("conversions")) {
+                label.textContent = "Converting between fractions, decimals, and percentages";
+            } else if (question.type.includes("word_problems")) {
+                label.textContent = "Real-world applications of math concepts";
+            } else if (question.type.includes("advanced_concepts")) {
+                label.textContent = "Repeating decimals, mixed numbers, complex operations";
+            } else if (question.type.includes("mixed_operations")) {
+                label.textContent = "Combining multiple operations and concepts";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create math visualization
+        function createMathVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const currentQuestion = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary-blue);">Math Operations Explorer</h3>
+                
+                <div class="math-display">
+                    <div class="display-title">Current Math Concept</div>
+                    <div class="math-container">
+                        <div class="math-scenario">${currentQuestion.question}</div>
+                        <div class="math-highlight">
+                            <strong>Key Concept:</strong> <span class="highlight-text">${getMathConcept(currentQuestion.type)}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Fraction Visualizer -->
+                <div class="fraction-visualizer" id="fractionVisualizer">
+                    <!-- Fraction visualization will be animated by JavaScript -->
+                </div>
+                <div style="text-align: center; margin-bottom: 20px; color: var(--text-secondary); font-size: 0.9rem;">
+                    Interactive Math Visualizer - See fractions, decimals, and percentages in action
+                </div>
+                
+                <div class="math-grid">
+                    ${mathTypes.map(type => `
+                        <div class="math-card ${type.name.toLowerCase()} ${type.name.toLowerCase()}-glow" style="border-color: ${type.color}" onclick="showMathDemo('${type.name}')">
+                            <div class="math-icon math-glow" style="color: ${type.color}">${type.icon}</div>
+                            <div class="math-title" style="color: ${type.color}">${type.name}</div>
+                            <div class="math-description">${type.description}</div>
+                            <div class="math-examples">
+                                <strong>Examples:</strong> ${type.examples}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <table class="operations-table">
+                    <thead>
+                        <tr>
+                            <th>Math Type</th>
+                            <th>Definition</th>
+                            <th>Key Concept</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${mathTypes.slice(0, 4).map(type => `
+                            <tr>
+                                <td style="font-weight: bold; color: ${type.color};">${type.name}</td>
+                                <td>${type.description}</td>
+                                <td style="color: var(--accent-purple);">${type.characteristics.split(', ')[0]}</td>
+                                <td style="font-style: italic; color: ${type.color};">${type.examples.split(', ')[0]}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                
+                <div class="fractions-container fraction-glow">
+                    <div class="fractions-title">Fraction Operations</div>
+                    <div class="fractions-grid">
+                        ${fractionsExamples.slice(0, 4).map(fraction => `
+                            <div class="fraction-card">
+                                <div class="fraction-icon">½</div>
+                                <div class="fraction-operation">${fraction.operation}</div>
+                                <div class="fraction-example">
+                                    <strong>Example:</strong> ${fraction.example}<br>
+                                    <strong>Steps:</strong> ${fraction.steps}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="decimals-container decimal-glow">
+                    <div class="decimals-title">Decimal Operations</div>
+                    <div class="decimals-grid">
+                        ${decimalsExamples.slice(0, 4).map(decimal => `
+                            <div class="decimal-card">
+                                <div class="decimal-icon">0.5</div>
+                                <div class="decimal-operation">${decimal.operation}</div>
+                                <div class="decimal-example">
+                                    <strong>Example:</strong> ${decimal.example}<br>
+                                    <strong>Steps:</strong> ${decimal.steps}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="percentages-container percentage-glow">
+                    <div class="percentages-title">Percentage Operations</div>
+                    <div class="percentages-grid">
+                        ${percentagesExamples.slice(0, 4).map(percentage => `
+                            <div class="percentage-card">
+                                <div class="percentage-icon">%</div>
+                                <div class="percentage-operation">${percentage.operation}</div>
+                                <div class="percentage-example">
+                                    <strong>Example:</strong> ${percentage.example}<br>
+                                    <strong>Steps:</strong> ${percentage.steps}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="builder-container">
+                    <div class="builder-title">Interactive Math Calculator</div>
+                    <div class="builder-controls">
+                        <select class="builder-select" id="mathType">
+                            <option value="">Select Operation</option>
+                            <option value="fraction_operations">Fraction Operations</option>
+                            <option value="decimal_operations">Decimal Operations</option>
+                            <option value="percentage_operations">Percentage Operations</option>
+                            <option value="conversions">Conversions</option>
+                        </select>
+                        <textarea class="builder-input" id="mathInput" placeholder="Enter a math problem... Example: '3/4 + 1/2' or '25% of 80'"></textarea>
+                        <div class="builder-buttons">
+                            <button class="builder-btn" onclick="calculateMath()">Calculate</button>
+                            <button class="builder-btn" onclick="getMathChallenge()">Get Challenge</button>
+                            <button class="builder-btn" onclick="clearMathBuilder()">Clear</button>
+                        </div>
+                    </div>
+                    <div class="builder-display" id="builderDisplay">
+                        Your math calculation will appear here...
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--accent-purple);">
+                    <div style="color: var(--accent-purple); font-weight: bold; margin-bottom: 10px;">Quick Math Guide:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. Fractions: Numerator/Denominator (½ = 1 of 2 equal parts)<br>
+                        2. Decimals: Base-10 system (0.5 = 5 tenths)<br>
+                        3. Percentages: Per hundred (50% = 50 per 100)<br>
+                        4. Common Conversions: ½ = 0.5 = 50%, ¼ = 0.25 = 25%<br>
+                        5. To convert fraction to decimal: Divide numerator by denominator<br>
+                        6. To convert decimal to percentage: Multiply by 100%<br>
+                        7. To find percentage of number: Convert % to decimal, multiply
+                    </div>
+                </div>
+                
+                <div class="math-study-container">
+                    <div class="display-title">Math Study Strategies</div>
+                    <div class="math-study-grid">
+                        ${mathStudyConcepts.map(concept => `
+                            <div class="study-card">
+                                <div class="study-icon">📚</div>
+                                <div class="study-concept">${concept.concept}</div>
+                                <div class="study-description">
+                                    <strong>Description:</strong> ${concept.description}<br>
+                                    <strong>Examples:</strong> ${concept.examples}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="solution-container">
+                    <div class="display-title">Step-by-Step Learning Path</div>
+                    <div class="solution-steps" id="solutionSteps">
+                        ${generateLearningPath(currentQuestion)}
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--secondary-teal);">
+                    <div style="color: var(--secondary-teal); font-weight: bold; margin-bottom: 10px; text-align: center;">Math Building Tips</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                        <strong>Practice Daily:</strong> Regular practice builds math fluency<br>
+                        <strong>Learn Common Conversions:</strong> Know ½, ¼, ⅓, ⅔ in decimal and percentage forms<br>
+                        <strong>Use Real-World Examples:</strong> Apply math to shopping, cooking, sports statistics<br>
+                        <strong>Check Your Work:</strong> Always verify calculations, especially with decimals<br>
+                        <strong>Understand Why:</strong> Don't just memorize procedures - understand the concepts<br>
+                        <em>Strong math skills are essential for science, technology, engineering, and everyday life!</em>
+                    </div>
+                </div>
+            `;
+            
+            // Initialize fraction visualizer
+            initializeFractionVisualizer(currentQuestion);
+            
+            return vizDiv;
+        }
+
+        // Helper functions
+        function getMathConcept(typeString) {
+            const conceptMap = {
+                "fractions_operations": "Fraction Operations - Adding, subtracting, multiplying, dividing fractions",
+                "decimals_operations": "Decimal Operations - Calculations with decimals",
+                "percentages_operations": "Percentage Operations - Finding percentages, increases, decreases",
+                "conversions": "Conversions - Changing between fractions, decimals, and percentages",
+                "word_problems": "Word Problems - Real-world applications of math",
+                "advanced_concepts": "Advanced Concepts - Repeating decimals, complex operations",
+                "mixed_operations": "Mixed Operations - Combining multiple math concepts"
+            };
+            
+            return conceptMap[typeString] || "Math Operations";
+        }
+
+        function generateLearningPath(question) {
+            let steps = [];
+            
+            if (question.type.includes("fractions")) {
+                steps = [
+                    "Step 1: Identify the operation needed (add, subtract, multiply, divide)",
+                    "Step 2: For addition/subtraction, find a common denominator",
+                    "Step 3: Convert fractions to equivalent fractions with common denominator",
+                    "Step 4: Perform the operation on numerators",
+                    "Step 5: Simplify the result if possible"
+                ];
+            } else if (question.type.includes("decimals")) {
+                steps = [
+                    "Step 1: Align decimal points vertically",
+                    "Step 2: Add zeros if needed for place value alignment",
+                    "Step 3: Perform the operation as with whole numbers",
+                    "Step 4: Place decimal point in the answer",
+                    "Step 5: Check for simplification or rounding"
+                ];
+            } else if (question.type.includes("percentages")) {
+                steps = [
+                    "Step 1: Convert percentage to decimal (divide by 100)",
+                    "Step 2: Identify what operation is needed",
+                    "Step 3: Apply the decimal to the base number",
+                    "Step 4: For increases: multiply by (1 + decimal)",
+                    "Step 5: For decreases: multiply by (1 - decimal)"
+                ];
+            } else if (question.type.includes("conversions")) {
+                steps = [
+                    "Step 1: Identify the starting format and target format",
+                    "Step 2: Fraction to decimal: divide numerator by denominator",
+                    "Step 3: Decimal to fraction: write as fraction over 10, 100, etc.",
+                    "Step 4: Fraction/Decimal to percentage: multiply by 100%",
+                    "Step 5: Percentage to fraction/decimal: divide by 100"
+                ];
+            } else {
+                steps = [
+                    "Step 1: Read the problem carefully",
+                    "Step 2: Identify the math concept being tested",
+                    "Step 3: Determine the correct operation or conversion",
+                    "Step 4: Apply your knowledge to solve",
+                    "Step 5: Verify your answer makes sense"
+                ];
+            }
+            
+            return steps.map((step, index) => `
+                <div class="solution-step math-reveal" style="animation-delay: ${index * 0.1}s">
+                    <span class="step-number">${index + 1}</span>
+                    <span class="step-description">${step}</span>
+                    ${index === steps.length - 1 ? `
+                        <div class="step-calculation">
+                            <strong>Correct Answer:</strong> ${question.options[question.answer.charCodeAt(0) - 65]}
+                        </div>
+                        <div class="step-explanation">
+                            ${question.explanation}
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        // Initialize fraction visualizer
+        function initializeFractionVisualizer(question) {
+            const fractionVisualizer = document.getElementById('fractionVisualizer');
+            if (!fractionVisualizer) return;
+            
+            // Create visualization based on question type
+            fractionVisualizer.innerHTML = '';
+            
+            if (question.type.includes("fractions")) {
+                // Show fraction circles
+                fractionVisualizer.innerHTML = `
+                    <div style="display: flex; justify-content: space-around; align-items: center; height: 100%;">
+                        <div style="text-align: center;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: conic-gradient(var(--secondary-teal) 0% 75%, var(--dark-border) 75% 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
+                                <div style="background: var(--dark-surface); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                                    ¾
+                                </div>
+                            </div>
+                            <div>¾ = 0.75 = 75%</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: conic-gradient(var(--accent-amber) 0% 50%, var(--dark-border) 50% 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
+                                <div style="background: var(--dark-surface); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                                    ½
+                                </div>
+                            </div>
+                            <div>½ = 0.5 = 50%</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <div style="width: 80px; height: 80px; border-radius: 50%; background: conic-gradient(var(--accent-purple) 0% 33.3%, var(--dark-border) 33.3% 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px;">
+                                <div style="background: var(--dark-surface); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                                    ⅓
+                                </div>
+                            </div>
+                            <div>⅓ ≈ 0.333 = 33.3%</div>
+                        </div>
+                    </div>
+                    
+                    <div style="position: absolute; bottom: 10px; left: 0; right: 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem;">
+                        Fraction Circles Showing Parts of a Whole
+                    </div>
+                `;
+            } else if (question.type.includes("decimals")) {
+                // Show decimal place value
+                fractionVisualizer.innerHTML = `
+                    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
+                        <div style="font-size: 1.5rem; margin-bottom: 20px; color: var(--accent-amber);">3 . 1 4 2</div>
+                        
+                        <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                            <div style="text-align: center;">
+                                <div class="decimal-place">3</div>
+                                <div style="font-size: 0.7rem; color: var(--text-secondary);">Ones</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div class="decimal-place">1</div>
+                                <div style="font-size: 0.7rem; color: var(--text-secondary);">Tenths</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div class="decimal-place">4</div>
+                                <div style="font-size: 0.7rem; color: var(--text-secondary);">Hundredths</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div class="decimal-place">2</div>
+                                <div style="font-size: 0.7rem; color: var(--text-secondary);">Thousandths</div>
+                            </div>
+                        </div>
+                        
+                        <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                            3.142 = 3 + 0.1 + 0.04 + 0.002<br>
+                            = 3 + 1/10 + 4/100 + 2/1000
+                        </div>
+                    </div>
+                    
+                    <div style="position: absolute; bottom: 10px; left: 0; right: 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem;">
+                        Decimal Place Value System
+                    </div>
+                `;
+            } else if (question.type.includes("percentages")) {
+                // Show percentage circles
+                fractionVisualizer.innerHTML = `
+                    <div style="display: flex; justify-content: space-around; align-items: center; height: 100%;">
+                        <div style="text-align: center;">
+                            <div class="percentage-circle" style="--percent: 25%">
+                                <div class="percentage-value">25%</div>
+                            </div>
+                            <div>¼ = 25%</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <div class="percentage-circle" style="--percent: 50%">
+                                <div class="percentage-value">50%</div>
+                            </div>
+                            <div>½ = 50%</div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <div class="percentage-circle" style="--percent: 75%">
+                                <div class="percentage-value">75%</div>
+                            </div>
+                            <div>¾ = 75%</div>
+                        </div>
+                    </div>
+                    
+                    <div style="position: absolute; bottom: 10px; left: 0; right: 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem;">
+                        Percentage Circles - Parts per Hundred
+                    </div>
+                `;
+            }
+        }
+
+        // Global functions for interactive features
+        window.showMathDemo = function(mathName) {
+            const fractionVisualizer = document.getElementById('fractionVisualizer');
+            if (!fractionVisualizer) return;
+            
+            const math = mathTypes.find(m => m.name === mathName);
+            if (!math) return;
+            
+            // Show the selected math type
+            fractionVisualizer.innerHTML = '';
+            
+            if (mathName === "Fractions") {
+                fractionVisualizer.innerHTML = `
+                    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
+                        <div style="display: flex; gap: 30px; margin-bottom: 20px;">
+                            <div style="text-align: center;">
+                                <div class="fraction-display">
+                                    <div class="fraction-numerator">1</div>
+                                    <div class="fraction-denominator">2</div>
+                                </div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary);">½ = One Half</div>
+                            </div>
+                            
+                            <div style="text-align: center;">
+                                <div class="fraction-display">
+                                    <div class="fraction-numerator">3</div>
+                                    <div class="fraction-denominator">4</div>
+                                </div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary);">¾ = Three Quarters</div>
+                            </div>
+                            
+                            <div style="text-align: center;">
+                                <div class="fraction-display">
+                                    <div class="fraction-numerator">2</div>
+                                    <div class="fraction-denominator">3</div>
+                                </div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary);">⅔ = Two Thirds</div>
+                            </div>
+                        </div>
+                        
+                        <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center; max-width: 80%;">
+                            <strong>Fractions represent parts of a whole.</strong><br>
+                            Numerator = How many parts we have<br>
+                            Denominator = How many equal parts the whole is divided into
+                        </div>
+                    </div>
+                    
+                    <div style="position: absolute; bottom: 10px; left: 0; right: 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem;">
+                        <strong>${math.name}:</strong> ${math.description}
+                    </div>
+                `;
+            } else if (mathName === "Decimals") {
+                fractionVisualizer.innerHTML = `
+                    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
+                        <div style="font-size: 1.5rem; margin-bottom: 20px; color: var(--accent-amber);">
+                            0 . 7 5
+                        </div>
+                        
+                        <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; color: var(--accent-amber);">0.5</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary);">Five Tenths</div>
+                            </div>
+                            
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; color: var(--accent-amber);">0.25</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary);">Twenty-Five Hundredths</div>
+                            </div>
+                            
+                            <div style="text-align: center;">
+                                <div style="font-size: 2rem; color: var(--accent-amber);">0.125</div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary);">One Hundred Twenty-Five Thousandths</div>
+                            </div>
+                        </div>
+                        
+                        <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center; max-width: 80%;">
+                            <strong>Decimals are based on powers of 10.</strong><br>
+                            Each place value is 10 times smaller than the one to its left.<br>
+                            0.75 = 7 tenths + 5 hundredths = 75 hundredths
+                        </div>
+                    </div>
+                    
+                    <div style="position: absolute; bottom: 10px; left: 0; right: 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem;">
+                        <strong>${math.name}:</strong> ${math.description}
+                    </div>
+                `;
+            } else if (mathName === "Percentages") {
+                fractionVisualizer.innerHTML = `
+                    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
+                        <div style="display: flex; gap: 30px; margin-bottom: 20px;">
+                            <div style="text-align: center;">
+                                <div class="percentage-circle" style="--percent: 25%">
+                                    <div class="percentage-value">25%</div>
+                                </div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary);">Quarter</div>
+                            </div>
+                            
+                            <div style="text-align: center;">
+                                <div class="percentage-circle" style="--percent: 50%">
+                                    <div class="percentage-value">50%</div>
+                                </div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary);">Half</div>
+                            </div>
+                            
+                            <div style="text-align: center;">
+                                <div class="percentage-circle" style="--percent: 75%">
+                                    <div class="percentage-value">75%</div>
+                                </div>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary);">Three Quarters</div>
+                            </div>
+                        </div>
+                        
+                        <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center; max-width: 80%;">
+                            <strong>Percent means "per hundred".</strong><br>
+                            50% = 50 per 100 = 50/100 = ½<br>
+                            Useful for comparisons: "40% of students passed" means 40 out of every 100 students
+                        </div>
+                    </div>
+                    
+                    <div style="position: absolute; bottom: 10px; left: 0; right: 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem;">
+                        <strong>${math.name}:</strong> ${math.description}
+                    </div>
+                `;
+            }
+        };
+
+        // Math calculation function
+        window.calculateMath = function() {
+            const mathTypeSelect = document.getElementById('mathType');
+            const mathInput = document.getElementById('mathInput');
+            const builderDisplay = document.getElementById('builderDisplay');
+            
+            if (!mathTypeSelect || !mathInput || !builderDisplay) return;
+            
+            const activityType = mathTypeSelect.value;
+            const userInput = mathInput.value.trim();
+            
+            if (!activityType) {
+                builderDisplay.innerHTML = "Please select an operation type.";
+                return;
+            }
+            
+            if (!userInput) {
+                builderDisplay.innerHTML = "Please enter a math problem to calculate.";
+                return;
+            }
+            
+            const activityData = {
+                fraction_operations: {
+                    title: "Fraction Operations",
+                    color: "#00BFA5",
+                    icon: "½",
+                    calculate: function(problem) {
+                        try {
+                            // Simple fraction calculator
+                            const patterns = [
+                                {regex: /(\d+)\/(\d+)\s*\+\s*(\d+)\/(\d+)/, calculate: (a,b,c,d) => `${a*d + c*b}/${b*d} = ${(a/b)+(c/d)}`},
+                                {regex: /(\d+)\/(\d+)\s*-\s*(\d+)\/(\d+)/, calculate: (a,b,c,d) => `${a*d - c*b}/${b*d} = ${(a/b)-(c/d)}`},
+                                {regex: /(\d+)\/(\d+)\s*\*\s*(\d+)\/(\d+)/, calculate: (a,b,c,d) => `${a*c}/${b*d} = ${(a/b)*(c/d)}`},
+                                {regex: /(\d+)\/(\d+)\s*÷\s*(\d+)\/(\d+)/, calculate: (a,b,c,d) => `${a*d}/${b*c} = ${(a/b)/(c/d)}`}
+                            ];
+                            
+                            for (const pattern of patterns) {
+                                const match = problem.match(pattern.regex);
+                                if (match) {
+                                    const [_, a, b, c, d] = match.map(Number);
+                                    const result = pattern.calculate(a, b, c, d);
+                                    return `
+                                        <strong>Problem:</strong> ${problem}<br>
+                                        <strong>Solution:</strong> ${result}<br>
+                                        <strong>Steps:</strong> ${getFractionSteps(problem, a, b, c, d)}
+                                    `;
+                                }
+                            }
+                            
+                            return `Could not parse fraction problem. Try format like: "3/4 + 1/2" or "2/3 × 3/5"`;
+                        } catch (e) {
+                            return `Error calculating. Try format like: "3/4 + 1/2" or "2/3 × 3/5"`;
+                        }
+                    }
+                },
+                decimal_operations: {
+                    title: "Decimal Operations",
+                    color: "#FFAB00",
+                    icon: "0.5",
+                    calculate: function(problem) {
+                        try {
+                            // Simple decimal calculator
+                            const result = eval(problem.replace(/[^0-9\+\-\*\/\.]/g, ''));
+                            return `
+                                <strong>Problem:</strong> ${problem}<br>
+                                <strong>Solution:</strong> ${result}<br>
+                                <strong>Steps:</strong> ${getDecimalSteps(problem)}
+                            `;
+                        } catch (e) {
+                            return `Error calculating. Try format like: "3.75 + 2.5" or "1.5 × 0.4"`;
+                        }
+                    }
+                },
+                percentage_operations: {
+                    title: "Percentage Operations",
+                    color: "#AA00FF",
+                    icon: "%",
+                    calculate: function(problem) {
+                        try {
+                            // Simple percentage calculator
+                            if (problem.includes("% of")) {
+                                const match = problem.match(/(\d+)%\s+of\s+(\d+)/);
+                                if (match) {
+                                    const percent = Number(match[1]);
+                                    const number = Number(match[2]);
+                                    const result = (percent/100) * number;
+                                    return `
+                                        <strong>Problem:</strong> ${problem}<br>
+                                        <strong>Solution:</strong> ${percent}% of ${number} = ${result}<br>
+                                        <strong>Steps:</strong> ${percent}% = ${percent/100}, ${percent/100} × ${number} = ${result}
+                                    `;
+                                }
+                            } else if (problem.includes("increase") || problem.includes("decrease")) {
+                                const increase = problem.includes("increase");
+                                const match = problem.match(/(\d+)\s+by\s+(\d+)%/);
+                                if (match) {
+                                    const number = Number(match[1]);
+                                    const percent = Number(match[2]);
+                                    const change = number * (percent/100);
+                                    const result = increase ? number + change : number - change;
+                                    return `
+                                        <strong>Problem:</strong> ${problem}<br>
+                                        <strong>Solution:</strong> ${number} ${increase ? "increased" : "decreased"} by ${percent}% = ${result}<br>
+                                        <strong>Steps:</strong> ${percent}% of ${number} = ${change}, ${number} ${increase ? "+" : "-"} ${change} = ${result}
+                                    `;
+                                }
+                            }
+                            
+                            return `Could not parse percentage problem. Try format like: "25% of 80" or "Increase 200 by 15%"`;
+                        } catch (e) {
+                            return `Error calculating. Try format like: "25% of 80" or "Increase 200 by 15%"`;
+                        }
+                    }
+                },
+                conversions: {
+                    title: "Conversions",
+                    color: "#FF4081",
+                    icon: "🔄",
+                    calculate: function(problem) {
+                        try {
+                            // Conversion calculator
+                            if (problem.includes("/") && (problem.includes("to decimal") || problem.includes("="))) {
+                                const match = problem.match(/(\d+)\/(\d+)/);
+                                if (match) {
+                                    const a = Number(match[1]);
+                                    const b = Number(match[2]);
+                                    const decimal = a / b;
+                                    const percentage = decimal * 100;
+                                    return `
+                                        <strong>Fraction:</strong> ${a}/${b}<br>
+                                        <strong>As Decimal:</strong> ${decimal.toFixed(3)}<br>
+                                        <strong>As Percentage:</strong> ${percentage.toFixed(1)}%<br>
+                                        <strong>Steps:</strong> ${a} ÷ ${b} = ${decimal}, ${decimal} × 100% = ${percentage}%
+                                    `;
+                                }
+                            } else if (problem.includes("%") && problem.includes("to fraction")) {
+                                const match = problem.match(/(\d+)%/);
+                                if (match) {
+                                    const percent = Number(match[1]);
+                                    const fraction = `${percent}/100`;
+                                    const simplified = simplifyFraction(percent, 100);
+                                    return `
+                                        <strong>Percentage:</strong> ${percent}%<br>
+                                        <strong>As Fraction:</strong> ${fraction} = ${simplified}<br>
+                                        <strong>As Decimal:</strong> ${percent/100}<br>
+                                        <strong>Steps:</strong> ${percent}% = ${percent}/100 = ${simplified}, ${percent} ÷ 100 = ${percent/100}
+                                    `;
+                                }
+                            } else if (problem.includes(".") && problem.includes("to fraction")) {
+                                const match = problem.match(/(\d+\.\d+)/);
+                                if (match) {
+                                    const decimal = Number(match[1]);
+                                    const fraction = decimalToFraction(decimal);
+                                    const percentage = decimal * 100;
+                                    return `
+                                        <strong>Decimal:</strong> ${decimal}<br>
+                                        <strong>As Fraction:</strong> ${fraction}<br>
+                                        <strong>As Percentage:</strong> ${percentage.toFixed(1)}%<br>
+                                        <strong>Steps:</strong> ${decimal} = ${fraction}, ${decimal} × 100% = ${percentage}%
+                                    `;
+                                }
+                            }
+                            
+                            return `Could not parse conversion. Try format like: "3/4 to decimal" or "65% to fraction"`;
+                        } catch (e) {
+                            return `Error converting. Try format like: "3/4 to decimal" or "65% to fraction"`;
+                        }
+                    }
+                }
+            };
+            
+            const data = activityData[activityType];
+            if (!data) {
+                builderDisplay.innerHTML = "Invalid operation type selected.";
+                return;
+            }
+            
+            const calculation = data.calculate(userInput);
+            
+            builderDisplay.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-size: 1.5rem; margin-bottom: 10px; color: ${data.color};">
+                        ${data.icon} ${data.title}
+                    </div>
+                    
+                    <div style="background: var(--dark-surface); padding: 15px; border-radius: 8px; margin: 10px 0;">
+                        <strong>Your Problem:</strong><br>
+                        <span style="color: ${data.color}; font-style: italic;">${userInput}</span>
+                    </div>
+                    
+                    <div style="background: rgba(${parseInt(data.color.slice(1,3), 16)}, ${parseInt(data.color.slice(3,5), 16)}, ${parseInt(data.color.slice(5,7), 16)}, 0.1); padding: 15px; border-radius: 8px; margin: 10px 0; border: 1px solid ${data.color};">
+                        ${calculation}
+                    </div>
+                    
+                    <div style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 15px;">
+                        <strong>Math Tip:</strong> Always check your work and understand each step of the calculation!
+                    </div>
+                </div>
+            `;
+        };
+
+        // Helper functions for calculations
+        function getFractionSteps(problem, a, b, c, d) {
+            if (problem.includes("+")) {
+                return `Find common denominator: ${b} × ${d} = ${b*d}. Convert: ${a}/${b} = ${a*d}/${b*d}, ${c}/${d} = ${c*b}/${b*d}. Add: ${a*d} + ${c*b} = ${a*d + c*b}. Result: ${a*d + c*b}/${b*d}.`;
+            } else if (problem.includes("-")) {
+                return `Find common denominator: ${b} × ${d} = ${b*d}. Convert: ${a}/${b} = ${a*d}/${b*d}, ${c}/${d} = ${c*b}/${b*d}. Subtract: ${a*d} - ${c*b} = ${a*d - c*b}. Result: ${a*d - c*b}/${b*d}.`;
+            } else if (problem.includes("×") || problem.includes("*")) {
+                return `Multiply numerators: ${a} × ${c} = ${a*c}. Multiply denominators: ${b} × ${d} = ${b*d}. Result: ${a*c}/${b*d}.`;
+            } else if (problem.includes("÷") || problem.includes("/")) {
+                return `Multiply by reciprocal: ${a}/${b} × ${d}/${c} = ${a*d}/${b*c}. Result: ${a*d}/${b*c}.`;
+            }
+            return "Perform the operation on fractions.";
+        }
+
+        function getDecimalSteps(problem) {
+            if (problem.includes("+")) {
+                return "Line up decimal points and add as whole numbers.";
+            } else if (problem.includes("-")) {
+                return "Line up decimal points and subtract as whole numbers.";
+            } else if (problem.includes("×") || problem.includes("*")) {
+                return "Multiply as whole numbers, then count total decimal places in factors.";
+            } else if (problem.includes("÷") || problem.includes("/")) {
+                return "Multiply divisor and dividend by power of 10 to make divisor whole number.";
+            }
+            return "Perform the operation on decimals.";
+        }
+
+        function simplifyFraction(numerator, denominator) {
+            const gcd = (a, b) => b ? gcd(b, a % b) : a;
+            const divisor = gcd(numerator, denominator);
+            return `${numerator/divisor}/${denominator/divisor}`;
+        }
+
+        function decimalToFraction(decimal) {
+            // Simple conversion for common decimals
+            const common = {
+                0.125: "⅛",
+                0.25: "¼",
+                0.333: "⅓",
+                0.375: "⅜",
+                0.5: "½",
+                0.625: "⅝",
+                0.666: "⅔",
+                0.75: "¾",
+                0.875: "⅞"
+            };
+            
+            // Find closest match
+            for (const [key, value] of Object.entries(common)) {
+                if (Math.abs(decimal - parseFloat(key)) < 0.01) {
+                    return value;
+                }
+            }
+            
+            // Otherwise return as fraction over 1000
+            const numerator = Math.round(decimal * 1000);
+            return `${numerator}/1000`;
+        }
+
+        window.getMathChallenge = function() {
+            const mathTypeSelect = document.getElementById('mathType');
+            const mathInput = document.getElementById('mathInput');
+            
+            if (!mathTypeSelect || !mathInput) return;
+            
+            const activityType = mathTypeSelect.value;
+            
+            if (!activityType) {
+                alert("Please select an operation type first!");
+                return;
+            }
+            
+            const challenges = {
+                fraction_operations: [
+                    "What is ¾ + ½?",
+                    "Calculate ⅔ - ¼",
+                    "Find ½ × ¾",
+                    "What is ⅗ ÷ ½?",
+                    "Simplify 12/16 to lowest terms"
+                ],
+                decimal_operations: [
+                    "What is 4.25 + 3.75?",
+                    "Calculate 7.8 - 3.25",
+                    "Find 2.5 × 1.4",
+                    "What is 9.6 ÷ 1.2?",
+                    "Round 5.678 to the nearest tenth"
+                ],
+                percentage_operations: [
+                    "What is 30% of 150?",
+                    "15 is what percentage of 60?",
+                    "Increase 80 by 25%",
+                    "Decrease 120 by 15%",
+                    "A $60 shirt is 20% off. What's the sale price?"
+                ],
+                conversions: [
+                    "Convert ⅝ to decimal",
+                    "Change 0.4 to fraction in simplest form",
+                    "Convert ⅗ to percentage",
+                    "Change 45% to fraction in simplest form",
+                    "Convert 0.875 to fraction"
+                ]
+            };
+            
+            const activityChallenges = challenges[activityType];
+            if (activityChallenges) {
+                const randomChallenge = activityChallenges[Math.floor(Math.random() * activityChallenges.length)];
+                mathInput.value = randomChallenge;
+                mathInput.focus();
+            }
+        };
+
+        window.clearMathBuilder = function() {
+            const mathInput = document.getElementById('mathInput');
+            const builderDisplay = document.getElementById('builderDisplay');
+            
+            if (mathInput) mathInput.value = '';
+            if (builderDisplay) {
+                builderDisplay.innerHTML = "Your math calculation will appear here...";
+            }
+        };
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            mathFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            mathFact.appendChild(createMathFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createMathVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin your math journey!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

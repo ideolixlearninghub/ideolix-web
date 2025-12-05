@@ -1,0 +1,3394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 7 Math - Perimeter, Area & Volume | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Measurement Theme */
+        :root {
+            --primary-green: #4CAF50;
+            --secondary-amber: #FFC107;
+            --accent-blue: #2196F3;
+            --accent-red: #F44336;
+            --accent-orange: #FF9800;
+            --accent-purple: #9C27B0;
+            --accent-teal: #009688;
+            --accent-indigo: #3F51B5;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #888;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --perimeter-glow: 0 0 20px rgba(76, 175, 80, 0.4);
+            --area-glow: 0 0 20px rgba(33, 150, 243, 0.4);
+            --volume-glow: 0 0 20px rgba(255, 193, 7, 0.4);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(76, 175, 80, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(33, 150, 243, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 193, 7, 0.03) 0%, transparent 50%);
+        }
+
+        /* Measurement Pattern Background */
+        .measurement-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.1;
+            pointer-events: none;
+            background: 
+                repeating-linear-gradient(0deg, 
+                    transparent, 
+                    transparent 20px, 
+                    rgba(76, 175, 80, 0.05) 20px, 
+                    rgba(76, 175, 80, 0.05) 40px),
+                repeating-linear-gradient(90deg, 
+                    transparent, 
+                    transparent 20px, 
+                    rgba(33, 150, 243, 0.05) 20px, 
+                    rgba(33, 150, 243, 0.05) 40px);
+        }
+
+        .floating-element {
+            position: absolute;
+            font-size: 2.5rem;
+            font-weight: bold;
+            animation: floatElement 30s linear infinite;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        @keyframes floatElement {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.05; }
+            25% { transform: translateY(-100px) translateX(80px) rotate(90deg); opacity: 0.03; }
+            50% { transform: translateY(-30px) translateX(-120px) rotate(180deg); opacity: 0.05; }
+            75% { transform: translateY(100px) translateX(40px) rotate(270deg); opacity: 0.03; }
+            100% { transform: translateY(0) translateX(0) rotate(360deg); opacity: 0.05; }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: -1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info {
+            flex: 1;
+        }
+
+        .brand-info h1 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(5px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow), var(--perimeter-glow);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: var(--dark-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-logo img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .welcome-title {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-blue), var(--secondary-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(76, 175, 80, 0.15);
+            padding: 12px 24px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            border: 2px solid var(--primary-green);
+        }
+
+        .topic-icon {
+            font-size: 1.8rem;
+        }
+
+        .topic-name {
+            font-weight: 700;
+            color: var(--primary-green);
+            font-size: 1.2rem;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #388E3C;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-amber);
+            color: #212121;
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #FFA000;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-green);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Mode */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 25px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 12px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary-green), var(--accent-blue), var(--secondary-amber));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+
+        .question-container {
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .math-fact {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--accent-orange);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Content Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .question-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .visualization-side {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-teal));
+            padding: 20px 30px;
+            border-radius: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .concept-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option {
+            padding: 18px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: var(--primary-green);
+            background: rgba(76, 175, 80, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(76, 175, 80, 0.1);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--dark-card);
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+            color: white;
+            background: var(--secondary-amber);
+            color: #212121;
+        }
+
+        .option.correct .option-letter {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+            color: white;
+        }
+
+        .feedback-container {
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(76, 175, 80, 0.1);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 5px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--primary-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-message {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feedback-explanation {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Components */
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            height: 100%;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Perimeter Visualization */
+        .perimeter-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid var(--accent-orange);
+            overflow-x: auto;
+        }
+
+        .display-title {
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.3rem;
+        }
+
+        .shape-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .shape-canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            background: var(--dark-surface);
+            position: relative;
+        }
+
+        .measurement-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--secondary-amber);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .formula-display {
+            text-align: center;
+            margin-top: 10px;
+            color: var(--text-secondary);
+            font-weight: bold;
+        }
+
+        /* Area Visualization */
+        .area-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-blue);
+        }
+
+        .area-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 768px) {
+            .area-grid {
+                grid-template-columns: repeat(2, 1fr);
+                font-size: 0.9rem;
+            }
+        }
+
+        .area-cell {
+            background: var(--dark-surface);
+            padding: 15px 5px;
+            border-radius: 8px;
+            border: 1px solid var(--dark-border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .area-cell:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 4px 8px rgba(33, 150, 243, 0.2);
+        }
+
+        .area-cell.header {
+            background: var(--accent-blue);
+            color: white;
+            font-weight: bold;
+        }
+
+        .shape-icon {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .shape-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--primary-green);
+        }
+
+        .shape-formula {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Volume Visualization */
+        .volume-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--secondary-amber);
+        }
+
+        .volume-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            margin: 20px 0;
+        }
+
+        .volume-canvas {
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            background: var(--dark-surface);
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: rgba(76, 175, 80, 0.2);
+            border: 2px solid var(--primary-green);
+        }
+
+        .cube-face.front {
+            transform: translateZ(50px);
+        }
+
+        .cube-face.back {
+            transform: rotateY(180deg) translateZ(50px);
+        }
+
+        .cube-face.right {
+            transform: rotateY(90deg) translateZ(50px);
+        }
+
+        .cube-face.left {
+            transform: rotateY(-90deg) translateZ(50px);
+        }
+
+        .cube-face.top {
+            transform: rotateX(90deg) translateZ(50px);
+        }
+
+        .cube-face.bottom {
+            transform: rotateX(-90deg) translateZ(50px);
+        }
+
+        .dimension-display {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        /* Composite Shapes */
+        .composite-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .composite-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            margin: 20px 0;
+        }
+
+        .composite-canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            background: var(--dark-surface);
+            position: relative;
+        }
+
+        .shape-part {
+            position: absolute;
+            background: rgba(76, 175, 80, 0.3);
+            border: 2px solid var(--primary-green);
+        }
+
+        .shape-part.rectangle {
+            background: rgba(33, 150, 243, 0.3);
+            border-color: var(--accent-blue);
+        }
+
+        .shape-part.triangle {
+            background: rgba(255, 193, 7, 0.3);
+            border-color: var(--secondary-amber);
+        }
+
+        .shape-part.semi-circle {
+            background: rgba(156, 39, 176, 0.3);
+            border-color: var(--accent-purple);
+        }
+
+        /* Units & Conversions */
+        .units-container {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-teal);
+        }
+
+        .units-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 768px) {
+            .units-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .unit-box {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .unit-box:hover {
+            transform: translateY(-3px);
+        }
+
+        .unit-box.length {
+            border-color: var(--primary-green);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .unit-box.area {
+            border-color: var(--accent-blue);
+            background: rgba(33, 150, 243, 0.1);
+        }
+
+        .unit-box.volume {
+            border-color: var(--secondary-amber);
+            background: rgba(255, 193, 7, 0.1);
+        }
+
+        .unit-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .unit-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .unit-box.length .unit-name {
+            color: var(--primary-green);
+        }
+
+        .unit-box.area .unit-name {
+            color: var(--accent-blue);
+        }
+
+        .unit-box.volume .unit-name {
+            color: var(--secondary-amber);
+        }
+
+        .unit-conversion {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        /* Math Table */
+        .math-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--dark-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .math-table th {
+            background: var(--dark-surface);
+            padding: 12px;
+            text-align: left;
+            color: var(--accent-orange);
+            border-bottom: 2px solid var(--accent-orange);
+        }
+
+        .math-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+        }
+
+        .math-table tr:hover {
+            background: rgba(255, 152, 0, 0.05);
+        }
+
+        /* Interactive Practice */
+        .interactive-practice {
+            background: var(--dark-card);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .practice-title {
+            color: var(--accent-purple);
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .practice-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .practice-button {
+            padding: 10px 20px;
+            background: var(--dark-surface);
+            border: 2px solid var(--accent-purple);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .practice-button:hover {
+            background: rgba(156, 39, 176, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .practice-display {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        /* Measurement Calculator */
+        .measurement-calculator {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid var(--primary-green);
+        }
+
+        .calculator-display {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: right;
+            font-size: 2rem;
+            font-family: 'Courier New', monospace;
+            color: var(--secondary-amber);
+            min-height: 60px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .calc-btn {
+            padding: 15px;
+            background: var(--dark-surface);
+            border: 1px solid var(--dark-border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .calc-btn:hover {
+            background: rgba(76, 175, 80, 0.1);
+            transform: scale(1.05);
+        }
+
+        .calc-btn.operation {
+            background: rgba(76, 175, 80, 0.2);
+            color: var(--primary-green);
+        }
+
+        .calc-btn.equals {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .calc-btn.clear {
+            background: rgba(244, 67, 54, 0.2);
+            color: var(--accent-red);
+        }
+
+        .calc-btn.measure {
+            background: rgba(33, 150, 243, 0.2);
+            color: var(--accent-blue);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .results-title {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-blue), var(--secondary-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-blue), var(--secondary-amber));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--dark-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.2rem;
+            }
+            
+            .score-value {
+                font-size: 3rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .concept-box {
+                min-width: 140px;
+                font-size: 1.5rem;
+                padding: 15px 20px;
+            }
+            
+            .units-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .area-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Measurement Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+        
+        @keyframes grow {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .grow {
+            animation: grow 0.5s ease forwards;
+        }
+        
+        @keyframes measureScale {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .measure-scale {
+            animation: measureScale 1s ease-in-out;
+        }
+        
+        @keyframes perimeterHighlight {
+            0% { border-color: rgba(76, 175, 80, 0.5); }
+            50% { border-color: rgba(76, 175, 80, 1); }
+            100% { border-color: rgba(76, 175, 80, 0.5); }
+        }
+        
+        .perimeter-highlight {
+            animation: perimeterHighlight 2s ease-in-out infinite;
+        }
+        
+        @keyframes measurementGlow {
+            0% { box-shadow: 0 0 20px rgba(76, 175, 80, 0.4); }
+            33% { box-shadow: 0 0 20px rgba(33, 150, 243, 0.4); }
+            66% { box-shadow: 0 0 20px rgba(255, 193, 7, 0.4); }
+            100% { box-shadow: 0 0 20px rgba(76, 175, 80, 0.4); }
+        }
+        
+        .measurement-glow {
+            animation: measurementGlow 5s linear infinite;
+        }
+        
+        @keyframes shapeTransform {
+            0% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.05) rotate(5deg); }
+            50% { transform: scale(1) rotate(0deg); }
+            75% { transform: scale(0.95) rotate(-5deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+        
+        .shape-transform {
+            animation: shapeTransform 3s ease-in-out infinite;
+        }
+        
+        @keyframes cubeRotate {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+        
+        .cube-rotate {
+            animation: cubeRotate 20s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Measurement Pattern Background -->
+    <div class="measurement-bg" id="measurementBg">
+        <!-- Elements will be generated by JavaScript -->
+    </div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToTopics">Other Topics</button>
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <div class="welcome-logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <h1 class="welcome-title">Grade 7 Measurement</h1>
+            <p class="welcome-subtitle">Master the art of measurement! Learn to calculate perimeter, area, and volume of composite shapes. Discover how to break down complex shapes into simpler ones and solve real-world measurement problems. Develop practical skills for architecture, engineering, and everyday life!</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">📏📐🧊</span>
+                <span class="topic-name">Perimeter, Area & Volume (Composite Shapes)</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your full name:</label>
+                <input type="text" id="studentName" placeholder="Your full name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>Begin Measurement Journey</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 120</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0.8%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <!-- Math fact display -->
+                <div id="mathFact"></div>
+                
+                <!-- Concept display area -->
+                <div id="conceptDisplay"></div>
+                
+                <!-- Content Wrapper: Questions on left, Visualizations on right -->
+                <div class="content-wrapper" id="contentWrapper">
+                    <!-- Left side: Question and Options -->
+                    <div class="question-side">
+                        <h2 class="question-text" id="questionText"></h2>
+                        
+                        <div class="options-container" id="optionsContainer"></div>
+                        
+                        <div class="feedback-container" id="feedbackContainer">
+                            <div class="feedback-header">
+                                <div class="feedback-icon"></div>
+                                <div class="feedback-title"></div>
+                            </div>
+                            <div class="feedback-message"></div>
+                            <div class="feedback-explanation"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right side: Visualizations -->
+                    <div class="visualization-side">
+                        <div class="visualization-container" id="visualizationContainer">
+                            <!-- All visualizations will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Measurement Mastery Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Correct Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Incorrect Answers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="skippedQuestions">0</div>
+                        <div class="stat-label">Skipped Questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="highestScore">0</div>
+                        <div class="stat-label">Highest Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                <button class="btn btn-secondary" id="viewTopics">Explore Other Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize background
+        function initBackground() {
+            const measurementBg = document.getElementById('measurementBg');
+            
+            // Create floating measurement symbols
+            const elements = ['📏', '📐', '🧊', '📊', '📈', '📉', '⚖️', '📦', '🏠', '🏗️', '🔲', '🔳', '⬛', '⬜', '🔶', '🔷', '⏹️', '⏺️'];
+            
+            for (let i = 0; i < 25; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.textContent = elements[Math.floor(Math.random() * elements.length)];
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+                element.style.animationDelay = `${Math.random() * 20}s`;
+                element.style.fontSize = `${2 + Math.random() * 3}rem`;
+                
+                // Color different measurement concepts
+                if (['📏', '📐', '📊'].includes(element.textContent)) {
+                    element.style.color = 'rgba(76, 175, 80, 0.1)'; // Green for measurement
+                } else if (['🧊', '📦', '🏗️'].includes(element.textContent)) {
+                    element.style.color = 'rgba(33, 150, 243, 0.1)'; // Blue for volume
+                } else if (['⚖️', '📈', '📉'].includes(element.textContent)) {
+                    element.style.color = 'rgba(255, 193, 7, 0.1)'; // Amber for area
+                } else {
+                    element.style.color = 'rgba(156, 39, 176, 0.1)'; // Purple for shapes
+                }
+                
+                measurementBg.appendChild(element);
+            }
+        }
+
+        // Questions array - 120+ Grade 7 Perimeter, Area & Volume questions
+        const questions = [
+            // Perimeter Basics (1-20)
+            {
+                type: "perimeter_basics",
+                question: "What is perimeter?",
+                options: ["Distance around a shape", "Space inside a shape", "Volume of shape", "Height of shape"],
+                answer: "A",
+                explanation: "Perimeter = total distance around the outside of a shape."
+            },
+            {
+                type: "perimeter_basics",
+                question: "Perimeter of rectangle: length=8cm, width=5cm",
+                options: ["26 cm", "13 cm", "40 cm", "20 cm"],
+                answer: "A",
+                explanation: "P = 2(l + w) = 2(8 + 5) = 2 × 13 = 26 cm."
+            },
+            {
+                type: "perimeter_basics",
+                question: "Perimeter of square with side 6 cm",
+                options: ["24 cm", "12 cm", "36 cm", "18 cm"],
+                answer: "A",
+                explanation: "Square perimeter = 4 × side = 4 × 6 = 24 cm."
+            },
+            {
+                type: "perimeter_basics",
+                question: "Triangle sides: 7cm, 8cm, 9cm. Perimeter?",
+                options: ["24 cm", "15 cm", "72 cm", "504 cm"],
+                answer: "A",
+                explanation: "Triangle perimeter = sum of all sides = 7 + 8 + 9 = 24 cm."
+            },
+            // Area Basics (21-40)
+            {
+                type: "area_basics",
+                question: "What is area?",
+                options: ["Space inside a 2D shape", "Distance around shape", "Space inside 3D shape", "Length of shape"],
+                answer: "A",
+                explanation: "Area = amount of space inside a 2-dimensional shape."
+            },
+            {
+                type: "area_basics",
+                question: "Area of rectangle: length=10m, width=4m",
+                options: ["40 m²", "14 m²", "28 m²", "100 m²"],
+                answer: "A",
+                explanation: "Rectangle area = length × width = 10 × 4 = 40 m²."
+            },
+            {
+                type: "area_basics",
+                question: "Area of square with side 5 cm",
+                options: ["25 cm²", "10 cm²", "20 cm²", "125 cm²"],
+                answer: "A",
+                explanation: "Square area = side × side = 5 × 5 = 25 cm²."
+            },
+            {
+                type: "area_basics",
+                question: "Area of triangle: base=12cm, height=8cm",
+                options: ["48 cm²", "20 cm²", "96 cm²", "24 cm²"],
+                answer: "A",
+                explanation: "Triangle area = ½ × base × height = ½ × 12 × 8 = 48 cm²."
+            },
+            // Volume Basics (41-60)
+            {
+                type: "volume_basics",
+                question: "What is volume?",
+                options: ["Space inside 3D shape", "Space inside 2D shape", "Distance around shape", "Surface of shape"],
+                answer: "A",
+                explanation: "Volume = amount of space occupied by a 3-dimensional object."
+            },
+            {
+                type: "volume_basics",
+                question: "Volume of cube with side 3 cm",
+                options: ["27 cm³", "9 cm³", "18 cm³", "54 cm³"],
+                answer: "A",
+                explanation: "Cube volume = side × side × side = 3 × 3 × 3 = 27 cm³."
+            },
+            {
+                type: "volume_basics",
+                question: "Volume of rectangular prism: l=6cm, w=4cm, h=5cm",
+                options: ["120 cm³", "15 cm³", "24 cm³", "30 cm³"],
+                answer: "A",
+                explanation: "Rectangular prism volume = l × w × h = 6 × 4 × 5 = 120 cm³."
+            },
+            // Composite Shapes - Perimeter (61-80)
+            {
+                type: "composite_perimeter",
+                question: "L-shaped figure: two rectangles attached. How to find perimeter?",
+                options: ["Add all outside edges", "Find area of each part", "Multiply dimensions", "Find volume"],
+                answer: "A",
+                explanation: "For composite shapes, add lengths of all outer sides only."
+            },
+            {
+                type: "composite_perimeter",
+                question: "Shape made of square (side 4cm) and rectangle (6cm×4cm) attached. Total perimeter?",
+                options: ["32 cm", "24 cm", "40 cm", "28 cm"],
+                answer: "A",
+                explanation: "When attached, shared side not counted: P = 4×3 + 6×2 + 4×2 = 12+12+8=32cm."
+            },
+            // Composite Shapes - Area (81-100)
+            {
+                type: "composite_area",
+                question: "How to find area of L-shaped figure?",
+                options: ["Break into rectangles, find each area, add", "Multiply all dimensions", "Find perimeter first", "Estimate visually"],
+                answer: "A",
+                explanation: "Divide composite shape into simple shapes, calculate each area, then add."
+            },
+            {
+                type: "composite_area",
+                question: "L-shape: rectangle A=10m×4m, rectangle B=6m×3m attached. Total area?",
+                options: ["58 m²", "40 m²", "18 m²", "52 m²"],
+                answer: "A",
+                explanation: "Area A = 40m², Area B = 18m², Total = 40 + 18 = 58 m²."
+            },
+            // Circles (101-120)
+            {
+                type: "circles",
+                question: "Circumference of circle with radius 7cm (π≈22/7)",
+                options: ["44 cm", "14 cm", "154 cm", "22 cm"],
+                answer: "A",
+                explanation: "C = 2πr = 2 × 22/7 × 7 = 44 cm."
+            },
+            {
+                type: "circles",
+                question: "Area of circle with radius 7cm (π≈22/7)",
+                options: ["154 cm²", "44 cm²", "22 cm²", "308 cm²"],
+                answer: "A",
+                explanation: "Area = πr² = 22/7 × 7 × 7 = 154 cm²."
+            },
+            // Units & Conversions (121-140)
+            {
+                type: "units_conversions",
+                question: "Convert 3.5 m to cm",
+                options: ["350 cm", "35 cm", "0.35 cm", "3500 cm"],
+                answer: "A",
+                explanation: "1 m = 100 cm, so 3.5 m = 3.5 × 100 = 350 cm."
+            },
+            {
+                type: "units_conversions",
+                question: "Convert 2500 cm² to m²",
+                options: ["0.25 m²", "2.5 m²", "25 m²", "0.025 m²"],
+                answer: "A",
+                explanation: "1 m² = 10,000 cm², so 2500 cm² = 2500 ÷ 10000 = 0.25 m²."
+            },
+            // Real-world Applications (141-160)
+            {
+                type: "real_world",
+                question: "Room: 5m×4m. How much carpet needed?",
+                options: ["20 m²", "18 m", "9 m³", "10 m"],
+                answer: "A",
+                explanation: "Carpet covers area: 5 × 4 = 20 m²."
+            },
+            {
+                type: "real_world",
+                question: "Swimming pool: 10m×6m×2m. Volume of water?",
+                options: ["120 m³", "32 m³", "60 m³", "18 m³"],
+                answer: "A",
+                explanation: "Volume = length × width × depth = 10 × 6 × 2 = 120 m³."
+            },
+            // Problem Solving (161-180)
+            {
+                type: "problem_solving",
+                question: "Garden: rectangle 12m×8m with circular pond radius 2m. Grass area?",
+                options: ["(96 - 4π) m²", "96 m²", "4π m²", "(96 + 4π) m²"],
+                answer: "A",
+                explanation: "Grass area = rectangle area - circle area = (12×8) - (π×2²) = 96 - 4π m²."
+            },
+            {
+                type: "problem_solving",
+                question: "Box: 30cm×20cm×15cm. Maximum books (each 10cm×15cm×2cm) that fit?",
+                options: ["30 books", "45 books", "15 books", "60 books"],
+                answer: "A",
+                explanation: "Box volume = 9000 cm³. Book volume = 300 cm³. 9000 ÷ 300 = 30 books."
+            },
+            // Scale & Ratio (181-200)
+            {
+                type: "scale_ratio",
+                question: "Scale 1:100. Room on plan: 3cm×2cm. Actual dimensions?",
+                options: ["3m×2m", "30m×20m", "0.3m×0.2m", "300m×200m"],
+                answer: "A",
+                explanation: "Scale 1:100 means 1cm on plan = 100cm (1m) actual. So 3cm = 3m, 2cm = 2m."
+            },
+            // Missing Dimensions (201-220)
+            {
+                type: "missing_dimensions",
+                question: "Rectangle area=48cm², length=8cm. Width?",
+                options: ["6 cm", "4 cm", "12 cm", "40 cm"],
+                answer: "A",
+                explanation: "Area = length × width. Width = Area ÷ length = 48 ÷ 8 = 6 cm."
+            },
+            {
+                type: "missing_dimensions",
+                question: "Square perimeter=36cm. Side length?",
+                options: ["9 cm", "6 cm", "12 cm", "18 cm"],
+                answer: "A",
+                explanation: "Square perimeter = 4 × side. Side = perimeter ÷ 4 = 36 ÷ 4 = 9 cm."
+            },
+            // Cost Calculations (221-240)
+            {
+                type: "cost_calculations",
+                question: "Fencing costs $15/m. Garden perimeter=24m. Total cost?",
+                options: ["$360", "$240", "$180", "$300"],
+                answer: "A",
+                explanation: "Cost = perimeter × cost per meter = 24 × 15 = $360."
+            },
+            {
+                type: "cost_calculations",
+                question: "Paint covers 10m² per liter. Wall: 4m×3m. Liters needed?",
+                options: ["1.2 liters", "12 liters", "0.12 liters", "120 liters"],
+                answer: "A",
+                explanation: "Wall area = 12 m². 12 ÷ 10 = 1.2 liters needed."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            currentQuestions: [],
+            studentName: ""
+        };
+
+        // Positive feedback messages
+        const positiveMessages = [
+            "Excellent measurement skills!",
+            "Perfect perimeter calculation!",
+            "Great area understanding!",
+            "You're a volume expert!",
+            "Perfect composite shape analysis!",
+            "You're a measurement wizard!",
+            "Outstanding spatial reasoning!",
+            "Brilliant measurement thinking!",
+            "You think like an engineer!",
+            "Measurement mastery achieved!"
+        ];
+
+        // Measurement facts
+        const measurementFacts = [
+            "The Great Pyramid of Giza covers about 53,000 square meters!",
+            "The largest swimming pool in the world holds 250 million liters of water!",
+            "A football field is about 5,350 square meters (including end zones)!",
+            "The Eiffel Tower would fit inside a cube 125 meters on each side!",
+            "Central Park in New York is 3.41 square kilometers (341 hectares)!",
+            "The volume of the Earth is about 1 trillion cubic kilometers!",
+            "The Great Wall of China has a perimeter of about 21,196 km!",
+            "A standard Olympic swimming pool holds 2.5 million liters of water!"
+        ];
+
+        // Shape formulas
+        const shapeFormulas = [
+            {
+                shape: "Square",
+                perimeter: "P = 4s",
+                area: "A = s²",
+                volume: "V = s³ (cube)",
+                icon: "⬛"
+            },
+            {
+                shape: "Rectangle",
+                perimeter: "P = 2(l + w)",
+                area: "A = l × w",
+                volume: "V = l × w × h",
+                icon: "⬜"
+            },
+            {
+                shape: "Triangle",
+                perimeter: "P = a + b + c",
+                area: "A = ½ × b × h",
+                volume: "N/A",
+                icon: "🔺"
+            },
+            {
+                shape: "Circle",
+                perimeter: "C = 2πr = πd",
+                area: "A = πr²",
+                volume: "V = ⁴⁄₃πr³ (sphere)",
+                icon: "🔵"
+            },
+            {
+                shape: "Trapezium",
+                perimeter: "P = a + b + c + d",
+                area: "A = ½(a + b)h",
+                volume: "N/A",
+                icon: "🔺"
+            },
+            {
+                shape: "Parallelogram",
+                perimeter: "P = 2(a + b)",
+                area: "A = b × h",
+                volume: "N/A",
+                icon: "🔲"
+            }
+        ];
+
+        // Composite shape examples
+        const compositeShapes = [
+            {
+                name: "L-Shape",
+                description: "Two rectangles joined",
+                method: "Break into two rectangles",
+                example: "Find area of each rectangle, then add",
+                icon: "🔳"
+            },
+            {
+                name: "U-Shape",
+                description: "Three rectangles forming U",
+                method: "Find area of outer rectangle minus inner rectangle",
+                example: "Like a picture frame",
+                icon: "⛔"
+            },
+            {
+                name: "T-Shape",
+                description: "Two rectangles forming T",
+                method: "Break into vertical and horizontal rectangles",
+                example: "Calculate each part separately",
+                icon: "🔤"
+            },
+            {
+                name: "House Shape",
+                description: "Rectangle with triangle on top",
+                method: "Area of rectangle + area of triangle",
+                example: "Common in architecture",
+                icon: "🏠"
+            },
+            {
+                name: "Donut Shape",
+                description: "Circle with circle cut out",
+                method: "Area of large circle - area of small circle",
+                example: "Ring, washer, donut",
+                icon: "🍩"
+            }
+        ];
+
+        // Unit conversions
+        const unitConversions = [
+            {
+                type: "Length",
+                units: ["mm", "cm", "m", "km"],
+                conversions: ["1 cm = 10 mm", "1 m = 100 cm", "1 km = 1000 m"],
+                icon: "📏"
+            },
+            {
+                type: "Area",
+                units: ["mm²", "cm²", "m²", "ha", "km²"],
+                conversions: ["1 cm² = 100 mm²", "1 m² = 10,000 cm²", "1 ha = 10,000 m²"],
+                icon: "📐"
+            },
+            {
+                type: "Volume",
+                units: ["cm³", "m³", "L", "mL"],
+                conversions: ["1 L = 1000 mL", "1 m³ = 1000 L", "1 cm³ = 1 mL"],
+                icon: "🧊"
+            },
+            {
+                type: "Mass",
+                units: ["g", "kg", "t"],
+                conversions: ["1 kg = 1000 g", "1 t = 1000 kg"],
+                icon: "⚖️"
+            }
+        ];
+
+        // Real-world measurement examples
+        const realWorldMeasurements = [
+            {
+                object: "Classroom",
+                dimensions: "10m × 8m × 3m",
+                area: "80 m² (floor)",
+                volume: "240 m³",
+                fact: "Needs about 8 liters of paint for walls",
+                icon: "🏫"
+            },
+            {
+                object: "Soccer Ball",
+                diameter: "22 cm",
+                circumference: "69 cm",
+                volume: "≈ 5,500 cm³",
+                fact: "Weighs about 400-450 grams",
+                icon: "⚽"
+            },
+            {
+                object: "Smartphone",
+                dimensions: "15cm × 7cm × 0.8cm",
+                area: "105 cm² (screen)",
+                volume: "84 cm³",
+                fact: "Screen measured diagonally in inches",
+                icon: "📱"
+            },
+            {
+                object: "Water Bottle",
+                capacity: "500 mL",
+                height: "22 cm",
+                diameter: "7 cm",
+                fact: "Holds half a liter of water",
+                icon: "💧"
+            },
+            {
+                object: "Book",
+                dimensions: "20cm × 15cm × 2cm",
+                area: "300 cm² (cover)",
+                volume: "600 cm³",
+                fact: "About 400 pages at 0.05mm each",
+                icon: "📚"
+            }
+        ];
+
+        // Perimeter calculation strategies
+        const perimeterStrategies = [
+            {
+                shape: "Regular Polygon",
+                strategy: "Number of sides × side length",
+                example: "Hexagon with side 5cm: P = 6 × 5 = 30cm",
+                tip: "Count all sides"
+            },
+            {
+                shape: "Irregular Shape",
+                strategy: "Add all side lengths",
+                example: "Triangle 3cm, 4cm, 5cm: P = 3+4+5 = 12cm",
+                tip: "Don't forget any sides"
+            },
+            {
+                shape: "Composite Shape",
+                strategy: "Add only outer edges",
+                example: "L-shape: trace around outside only",
+                tip: "Ignore shared interior sides"
+            },
+            {
+                shape: "Circle",
+                strategy: "C = π × diameter or 2 × π × radius",
+                example: "Radius 7cm: C = 2 × π × 7 ≈ 44cm",
+                tip: "π ≈ 3.14 or 22/7"
+            }
+        ];
+
+        // Area calculation strategies
+        const areaStrategies = [
+            {
+                shape: "Composite Shape",
+                strategy: "Divide and conquer",
+                example: "Break into rectangles, triangles, circles",
+                tip: "Calculate each part, then add/subtract"
+            },
+            {
+                shape: "Irregular Shape",
+                strategy: "Grid method",
+                example: "Count squares on grid paper",
+                tip: "Estimate partial squares"
+            },
+            {
+                shape: "Circle Sector",
+                strategy: "Fraction of circle",
+                example: "Quarter circle: ¼ × πr²",
+                tip: "Use angle/360 as fraction"
+            },
+            {
+                shape: "Trapezium",
+                strategy: "Average parallel sides × height",
+                example: "A = ½(a + b)h",
+                tip: "Find parallel sides first"
+            }
+        ];
+
+        // Volume calculation strategies
+        const volumeStrategies = [
+            {
+                shape: "Prism",
+                strategy: "Area of base × height",
+                example: "Triangular prism: triangle area × length",
+                tip: "Base can be any shape"
+            },
+            {
+                shape: "Pyramid",
+                strategy: "⅓ × area of base × height",
+                example: "Square pyramid: ⅓ × side² × height",
+                tip: "One-third of prism volume"
+            },
+            {
+                shape: "Composite Solid",
+                strategy: "Sum of parts",
+                example: "House = rectangular prism + triangular prism",
+                tip: "Break into simple solids"
+            },
+            {
+                shape: "Cylinder",
+                strategy: "πr²h",
+                example: "Radius 3cm, height 10cm: π×9×10 ≈ 283cm³",
+                tip: "Like stacking circles"
+            }
+        ];
+
+        // Common mistakes
+        const commonMistakes = [
+            {
+                mistake: "Adding interior lines in perimeter",
+                correction: "Only count outside edges",
+                example: "L-shape: shared side not counted twice",
+                icon: "❌"
+            },
+            {
+                mistake: "Confusing area and perimeter",
+                correction: "Area = space inside, Perimeter = distance around",
+                example: "Fencing = perimeter, Grass = area",
+                icon: "🔄"
+            },
+            {
+                mistake: "Forgetting to square units for area",
+                correction: "Area always in square units",
+                example: "cm², m², not cm or m",
+                icon: "²"
+            },
+            {
+                mistake: "Cubing instead of squaring",
+                correction: "Volume = cubic units, Area = square units",
+                example: "cm³ vs cm²",
+                icon: "³"
+            },
+            {
+                mistake: "Not converting units",
+                correction: "Convert all measurements to same unit first",
+                example: "Don't mix cm and m in same calculation",
+                icon: "📏"
+            }
+        ];
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const mathFact = document.getElementById('mathFact');
+        const conceptDisplay = document.getElementById('conceptDisplay');
+        const visualizationContainer = document.getElementById('visualizationContainer');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const backToTopicsBtn = document.getElementById('backToTopics');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const correctAnswers = document.getElementById('correctAnswers');
+        const incorrectAnswers = document.getElementById('incorrectAnswers');
+        const skippedQuestions = document.getElementById('skippedQuestions');
+        const highestScore = document.getElementById('highestScore');
+
+        // Initialize the app
+        function initApp() {
+            initBackground();
+            loadStateFromStorage();
+            setupEventListeners();
+            
+            if (appState.studentName && appState.currentQuestions.length > 0) {
+                showPracticePage();
+            } else {
+                showWelcomePage();
+            }
+        }
+
+        // Load state from localStorage
+        function loadStateFromStorage() {
+            const savedState = localStorage.getItem('ideolixGrade7MathMeasurement');
+            if (savedState) {
+                const parsed = JSON.parse(savedState);
+                appState.studentName = parsed.studentName || "";
+                appState.currentQuestionIndex = parsed.currentQuestionIndex || 0;
+                appState.score = parsed.score || 0;
+                appState.skipped = parsed.skipped || 0;
+                appState.answered = parsed.answered || 0;
+                appState.currentQuestions = parsed.currentQuestions || [];
+                
+                if (appState.currentQuestions.length === 0) {
+                    initializeQuestions();
+                }
+            }
+        }
+
+        // Save state to localStorage
+        function saveStateToStorage() {
+            localStorage.setItem('ideolixGrade7MathMeasurement', JSON.stringify(appState));
+        }
+
+        // Initialize and shuffle questions
+        function initializeQuestions() {
+            appState.currentQuestions = [...questions];
+            shuffleArray(appState.currentQuestions);
+        }
+
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', backToHome);
+            backToTopicsBtn.addEventListener('click', backToTopics);
+            viewTopicsBtn.addEventListener('click', backToTopics);
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    startPractice();
+                }
+            });
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const totalQuestions = appState.currentQuestions.length;
+            const percentage = Math.round((appState.score / totalQuestions) * 100);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            correctAnswers.textContent = appState.score;
+            incorrectAnswers.textContent = appState.answered - appState.score;
+            skippedQuestions.textContent = appState.skipped;
+            
+            const highest = localStorage.getItem('ideolixGrade7MathMeasurement_highestScore') || 0;
+            highestScore.textContent = Math.max(highest, appState.score);
+            
+            if (appState.score > highest) {
+                localStorage.setItem('ideolixGrade7MathMeasurement_highestScore', appState.score);
+            }
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You're a measurement expert!";
+            } else if (percentage >= 80) {
+                scoreMessage.textContent = "Excellent! You have strong measurement skills!";
+            } else if (percentage >= 70) {
+                scoreMessage.textContent = "Great work! You understand perimeter, area, and volume well!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Good job! Keep practicing composite shapes!";
+            } else {
+                scoreMessage.textContent = "Keep learning! Measurement is essential for real-world problem solving!";
+            }
+        }
+
+        // Create math fact display
+        function createMathFact() {
+            const factDiv = document.createElement('div');
+            factDiv.className = 'math-fact';
+            
+            factDiv.innerHTML = `<strong>Amazing Measurement Fact:</strong> ${measurementFacts[Math.floor(Math.random() * measurementFacts.length)]}`;
+            
+            return factDiv;
+        }
+
+        // Create concept display
+        function createConceptDisplay() {
+            const display = document.createElement('div');
+            display.className = 'concept-display';
+            
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            const conceptIcons = {
+                "perimeter_basics": "📏",
+                "area_basics": "📐",
+                "volume_basics": "🧊",
+                "composite_perimeter": "🔳",
+                "composite_area": "🏠",
+                "circles": "🔵",
+                "units_conversions": "🔄",
+                "real_world": "🌍",
+                "problem_solving": "🧩",
+                "scale_ratio": "⚖️",
+                "missing_dimensions": "❓",
+                "cost_calculations": "💰"
+            };
+            
+            let conceptName = "Perimeter Basics";
+            let conceptIcon = "📏";
+            
+            if (question.type.includes("perimeter_basics")) {
+                conceptName = "Perimeter Basics";
+                conceptIcon = conceptIcons.perimeter_basics;
+            } else if (question.type.includes("area_basics")) {
+                conceptName = "Area Basics";
+                conceptIcon = conceptIcons.area_basics;
+            } else if (question.type.includes("volume_basics")) {
+                conceptName = "Volume Basics";
+                conceptIcon = conceptIcons.volume_basics;
+            } else if (question.type.includes("composite_perimeter")) {
+                conceptName = "Composite Perimeter";
+                conceptIcon = conceptIcons.composite_perimeter;
+            } else if (question.type.includes("composite_area")) {
+                conceptName = "Composite Area";
+                conceptIcon = conceptIcons.composite_area;
+            } else if (question.type.includes("circles")) {
+                conceptName = "Circle Measurements";
+                conceptIcon = conceptIcons.circles;
+            } else if (question.type.includes("units_conversions")) {
+                conceptName = "Units & Conversions";
+                conceptIcon = conceptIcons.units_conversions;
+            } else if (question.type.includes("real_world")) {
+                conceptName = "Real World Applications";
+                conceptIcon = conceptIcons.real_world;
+            } else if (question.type.includes("problem_solving")) {
+                conceptName = "Problem Solving";
+                conceptIcon = conceptIcons.problem_solving;
+            } else if (question.type.includes("scale_ratio")) {
+                conceptName = "Scale & Ratio";
+                conceptIcon = conceptIcons.scale_ratio;
+            } else if (question.type.includes("missing_dimensions")) {
+                conceptName = "Missing Dimensions";
+                conceptIcon = conceptIcons.missing_dimensions;
+            } else if (question.type.includes("cost_calculations")) {
+                conceptName = "Cost Calculations";
+                conceptIcon = conceptIcons.cost_calculations;
+            }
+            
+            const conceptBox = document.createElement('div');
+            conceptBox.className = 'concept-box grow';
+            conceptBox.innerHTML = `
+                <div class="concept-icon">${conceptIcon}</div>
+                <div class="concept-text">${conceptName.toUpperCase()}</div>
+            `;
+            
+            const label = document.createElement('div');
+            label.className = 'concept-label';
+            
+            if (question.type.includes("perimeter_basics")) {
+                label.textContent = "Understanding distance around shapes";
+            } else if (question.type.includes("area_basics")) {
+                label.textContent = "Calculating space inside 2D shapes";
+            } else if (question.type.includes("volume_basics")) {
+                label.textContent = "Finding space inside 3D objects";
+            } else if (question.type.includes("composite_perimeter")) {
+                label.textContent = "Perimeter of combined shapes";
+            } else if (question.type.includes("composite_area")) {
+                label.textContent = "Area of complex shapes by breaking them down";
+            } else if (question.type.includes("circles")) {
+                label.textContent = "Circumference and area of circles";
+            } else if (question.type.includes("units_conversions")) {
+                label.textContent = "Converting between different measurement units";
+            } else if (question.type.includes("real_world")) {
+                label.textContent = "Practical applications of measurement";
+            } else if (question.type.includes("problem_solving")) {
+                label.textContent = "Solving complex measurement problems";
+            } else if (question.type.includes("scale_ratio")) {
+                label.textContent = "Working with scale drawings and ratios";
+            } else if (question.type.includes("missing_dimensions")) {
+                label.textContent = "Finding missing measurements using formulas";
+            } else if (question.type.includes("cost_calculations")) {
+                label.textContent = "Calculating costs based on measurements";
+            }
+            
+            display.appendChild(conceptBox);
+            display.appendChild(label);
+            
+            return display;
+        }
+
+        // Create measurement visualization
+        function createMeasurementVisualization() {
+            const vizDiv = document.createElement('div');
+            vizDiv.className = 'visualization-container';
+            
+            const randomLength = Math.floor(Math.random() * 20) + 5;
+            const randomWidth = Math.floor(Math.random() * 15) + 3;
+            const randomHeight = Math.floor(Math.random() * 10) + 2;
+            const randomRadius = Math.floor(Math.random() * 8) + 2;
+            const randomComposite = compositeShapes[Math.floor(Math.random() * compositeShapes.length)];
+            const randomRealWorld = realWorldMeasurements[Math.floor(Math.random() * realWorldMeasurements.length)];
+            
+            vizDiv.innerHTML = `
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--accent-orange);">Measurement Explorer</h3>
+                
+                <div class="perimeter-container measurement-glow">
+                    <div class="display-title">Perimeter Explorer</div>
+                    
+                    <div class="shape-display">
+                        <canvas id="perimeterCanvas" width="300" height="200" style="border-radius: 8px; background: var(--dark-surface);"></canvas>
+                        <div class="measurement-display" id="perimeterMeasure">
+                            P = ${2 * (randomLength + randomWidth)} units
+                        </div>
+                    </div>
+                    
+                    <div class="formula-display">
+                        Rectangle: P = 2(l + w) = 2(${randomLength} + ${randomWidth}) = ${2 * (randomLength + randomWidth)} units
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn btn-small btn-primary" onclick="showPerimeterDetails(${randomLength}, ${randomWidth})">
+                            Learn About Perimeter
+                        </button>
+                        <button class="btn btn-small btn-secondary" onclick="generateNewShape()">
+                            New Random Shape
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="area-container">
+                    <div class="display-title">Area Formulas</div>
+                    
+                    <div class="area-grid">
+                        <div class="area-cell header">Shape</div>
+                        <div class="area-cell header">Icon</div>
+                        <div class="area-cell header">Perimeter</div>
+                        <div class="area-cell header">Area</div>
+                        
+                        ${shapeFormulas.slice(0, 4).map((shape, idx) => `
+                            <div class="area-cell" onclick="showShapeFormula('${shape.shape}')">
+                                <div class="shape-name">${shape.shape}</div>
+                            </div>
+                            <div class="area-cell">
+                                <div class="shape-icon">${shape.icon}</div>
+                            </div>
+                            <div class="area-cell">
+                                <div class="shape-formula">${shape.perimeter}</div>
+                            </div>
+                            <div class="area-cell">
+                                <div class="shape-formula">${shape.area}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="volume-container">
+                    <div class="display-title">Volume Explorer</div>
+                    
+                    <div class="volume-display">
+                        <div class="volume-canvas cube-rotate" id="volumeCanvas">
+                            <div class="cube-face front"></div>
+                            <div class="cube-face back"></div>
+                            <div class="cube-face right"></div>
+                            <div class="cube-face left"></div>
+                            <div class="cube-face top"></div>
+                            <div class="cube-face bottom"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="dimension-display">
+                        Cube: side = ${randomHeight} units<br>
+                        Volume = ${randomHeight}³ = ${randomHeight * randomHeight * randomHeight} units³
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn btn-small btn-primary" onclick="showVolumeDetails(${randomHeight})">
+                            Learn About Volume
+                        </button>
+                        <button class="btn btn-small btn-secondary" onclick="calculateVolume()">
+                            Calculate Volume
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="composite-container">
+                    <div class="display-title">Composite Shapes: ${randomComposite.name}</div>
+                    
+                    <div class="composite-display">
+                        <canvas id="compositeCanvas" width="300" height="200" style="border-radius: 8px; background: var(--dark-surface);"></canvas>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 15px; color: var(--text-secondary);">
+                        ${randomComposite.description}
+                    </div>
+                    <div style="text-align: center; color: var(--text-muted); font-style: italic;">
+                        Method: ${randomComposite.method}
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn btn-small btn-primary" onclick="showCompositeDetails('${randomComposite.name}')">
+                            Learn About ${randomComposite.name}
+                        </button>
+                        <button class="btn btn-small btn-secondary" onclick="explainCompositeShapes()">
+                            How to Solve Composite Shapes
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="units-container">
+                    <div class="display-title">Measurement Units & Conversions</div>
+                    
+                    <div class="units-grid">
+                        ${unitConversions.map((unitType, idx) => `
+                            <div class="unit-box ${unitType.type.toLowerCase()}" onclick="showUnitConversions('${unitType.type}')">
+                                <div class="unit-icon">${unitType.icon}</div>
+                                <div class="unit-name">${unitType.type}</div>
+                                <div class="unit-conversion">${unitType.conversions[0]}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div class="real-world-example" style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid var(--accent-teal);">
+                    <div style="color: var(--accent-teal); font-weight: bold; margin-bottom: 10px; text-align: center;">
+                        Real-World Measurement: ${randomRealWorld.object}
+                    </div>
+                    <div style="text-align: center; margin: 15px 0;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">${randomRealWorld.icon}</div>
+                        <div style="color: var(--primary-green); font-weight: bold; margin-bottom: 10px;">
+                            Dimensions: ${randomRealWorld.dimensions}
+                        </div>
+                        <div style="color: var(--accent-blue); margin-bottom: 5px;">
+                            Area: ${randomRealWorld.area}
+                        </div>
+                        <div style="color: var(--secondary-amber); margin-bottom: 10px;">
+                            Volume: ${randomRealWorld.volume}
+                        </div>
+                        <div style="color: var(--text-muted); font-style: italic;">
+                            ${randomRealWorld.fact}
+                        </div>
+                    </div>
+                </div>
+                
+                <table class="math-table">
+                    <thead>
+                        <tr>
+                            <th>Measurement</th>
+                            <th>Formula</th>
+                            <th>Units</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${[
+                            {measure: "Rectangle Perimeter", formula: "P = 2(l + w)", units: "cm, m, km", example: "l=5cm, w=3cm: P=16cm"},
+                            {measure: "Rectangle Area", formula: "A = l × w", units: "cm², m², km²", example: "l=5cm, w=3cm: A=15cm²"},
+                            {measure: "Cube Volume", formula: "V = s³", units: "cm³, m³", example: "s=4cm: V=64cm³"},
+                            {measure: "Circle Circumference", formula: "C = 2πr", units: "cm, m", example: "r=7cm: C≈44cm"},
+                            {measure: "Circle Area", formula: "A = πr²", units: "cm², m²", example: "r=7cm: A≈154cm²"},
+                            {measure: "Triangle Area", formula: "A = ½bh", units: "cm², m²", example: "b=10cm, h=6cm: A=30cm²"}
+                        ].map((item, idx) => `
+                            <tr onclick="showMeasurementExample('${item.measure}')" style="cursor: pointer;">
+                                <td style="font-weight: bold; color: var(--primary-green);">${item.measure}</td>
+                                <td>${item.formula}</td>
+                                <td>${item.units}</td>
+                                <td style="color: var(--text-secondary);">${item.example}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                
+                <div class="measurement-calculator">
+                    <div class="display-title">Measurement Calculator</div>
+                    <div class="calculator-display" id="calcDisplay">0</div>
+                    <div class="calculator-buttons">
+                        <div class="calc-btn" onclick="calcInput('7')">7</div>
+                        <div class="calc-btn" onclick="calcInput('8')">8</div>
+                        <div class="calc-btn" onclick="calcInput('9')">9</div>
+                        <div class="calc-btn measure" onclick="calcInput('π')">π</div>
+                        <div class="calc-btn" onclick="calcInput('4')">4</div>
+                        <div class="calc-btn" onclick="calcInput('5')">5</div>
+                        <div class="calc-btn" onclick="calcInput('6')">6</div>
+                        <div class="calc-btn operation" onclick="calcInput('+')">+</div>
+                        <div class="calc-btn" onclick="calcInput('1')">1</div>
+                        <div class="calc-btn" onclick="calcInput('2')">2</div>
+                        <div class="calc-btn" onclick="calcInput('3')">3</div>
+                        <div class="calc-btn operation" onclick="calcInput('-')">-</div>
+                        <div class="calc-btn" onclick="calcInput('0')">0</div>
+                        <div class="calc-btn" onclick="calcInput('.')">.</div>
+                        <div class="calc-btn clear" onclick="clearCalc()">C</div>
+                        <div class="calc-btn operation" onclick="calcInput('×')">×</div>
+                        <div class="calc-btn" onclick="calcInput('(')">(</div>
+                        <div class="calc-btn" onclick="calcInput(')')">)</div>
+                        <div class="calc-btn operation" onclick="calcInput('÷')">÷</div>
+                        <div class="calc-btn" onclick="calcInput('²')">x²</div>
+                        <div class="calc-btn" onclick="calcInput('³')">x³</div>
+                        <div class="calc-btn equals" onclick="calculateMeasurement()" style="grid-column: span 2;">=</div>
+                    </div>
+                </div>
+                
+                <div class="interactive-practice">
+                    <div class="practice-title">Interactive Measurement Practice</div>
+                    <div class="practice-controls">
+                        <div class="practice-button" onclick="perimeterPractice()">Perimeter Practice</div>
+                        <div class="practice-button" onclick="areaPractice()">Area Practice</div>
+                        <div class="practice-button" onclick="volumePractice()">Volume Practice</div>
+                        <div class="practice-button" onclick="compositeShapesPractice()">Composite Shapes</div>
+                    </div>
+                    <div class="practice-display" id="practiceDisplay">
+                        Click buttons above to practice measurement skills
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid var(--accent-orange);">
+                    <div style="color: var(--accent-orange); font-weight: bold; margin-bottom: 10px;">Quick Measurement Practice:</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                        1. Rectangle: 8cm × 5cm. Find perimeter.<br>
+                        2. Square side 7cm. Find area.<br>
+                        3. Cube side 4cm. Find volume.<br>
+                        4. Convert 2.5m to cm.<br>
+                        5. Circle radius 14cm. Find circumference (π≈22/7).
+                    </div>
+                </div>
+                
+                <div style="background: var(--dark-card); padding: 15px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--primary-green);">
+                    <div style="color: var(--primary-green); font-weight: bold; margin-bottom: 10px; text-align: center;">Measurement Formulas Quick Reference</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                        <strong>Rectangle Perimeter:</strong> P = 2(l + w)<br>
+                        <strong>Rectangle Area:</strong> A = l × w<br>
+                        <strong>Triangle Area:</strong> A = ½ × b × h<br>
+                        <strong>Circle Circumference:</strong> C = 2πr = πd<br>
+                        <strong>Circle Area:</strong> A = πr²<br>
+                        <strong>Cube Volume:</strong> V = s³
+                    </div>
+                </div>
+                
+                <div class="common-mistakes" style="background: var(--dark-card); padding: 20px; border-radius: 8px; margin-top: 20px; border: 2px solid var(--accent-red);">
+                    <div class="display-title">Common Measurement Mistakes</div>
+                    <div style="text-align: center; margin-bottom: 15px; color: var(--text-secondary);">
+                        Watch out for these common errors!
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 10px; margin: 20px 0;">
+                        ${commonMistakes.slice(0, 3).map((mistake, idx) => `
+                            <div class="mistake-box" onclick="showCommonMistake(${idx})" 
+                                 style="background: var(--dark-surface); padding: 15px; border-radius: 8px; text-align: center; cursor: pointer;">
+                                <div style="font-weight: bold; color: var(--accent-red); margin-bottom: 5px;">${mistake.mistake}</div>
+                                <div style="color: var(--text-secondary); font-size: 0.9rem;">${mistake.correction}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            // Draw the shapes on canvas
+            setTimeout(() => {
+                drawRectangle(randomLength, randomWidth);
+                drawCompositeShape(randomComposite.name);
+            }, 100);
+            
+            return vizDiv;
+        }
+
+        // Helper functions
+        function drawRectangle(length, width) {
+            const canvas = document.getElementById('perimeterCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const scale = 8; // Scale for visualization
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const rectWidth = width * scale;
+            const rectHeight = length * scale;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw rectangle
+            ctx.fillStyle = 'rgba(76, 175, 80, 0.3)';
+            ctx.fillRect(centerX - rectWidth/2, centerY - rectHeight/2, rectWidth, rectHeight);
+            
+            // Draw outline
+            ctx.strokeStyle = '#4CAF50';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(centerX - rectWidth/2, centerY - rectHeight/2, rectWidth, rectHeight);
+            
+            // Draw dimensions
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = '14px Arial';
+            ctx.fillText(`${width}`, centerX, centerY - rectHeight/2 - 10);
+            ctx.fillText(`${length}`, centerX + rectWidth/2 + 10, centerY);
+            
+            // Draw perimeter animation
+            ctx.beginPath();
+            ctx.setLineDash([5, 5]);
+            ctx.strokeStyle = '#FFC107';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(centerX - rectWidth/2, centerY - rectHeight/2, rectWidth, rectHeight);
+            ctx.setLineDash([]);
+        }
+
+        function drawCompositeShape(shapeName) {
+            const canvas = document.getElementById('compositeCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw different composite shapes
+            if (shapeName === 'L-Shape') {
+                // Draw L-shape (two rectangles)
+                ctx.fillStyle = 'rgba(76, 175, 80, 0.3)';
+                ctx.fillRect(50, 50, 100, 50); // Vertical part
+                ctx.fillRect(50, 50, 50, 100); // Horizontal part
+                
+                ctx.strokeStyle = '#4CAF50';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(50, 50, 100, 50);
+                ctx.strokeRect(50, 50, 50, 100);
+                
+                // Label parts
+                ctx.fillStyle = '#FFFFFF';
+                ctx.font = '12px Arial';
+                ctx.fillText('Part A', 70, 75);
+                ctx.fillText('Part B', 95, 110);
+                
+            } else if (shapeName === 'U-Shape') {
+                // Draw U-shape
+                ctx.fillStyle = 'rgba(33, 150, 243, 0.3)';
+                ctx.fillRect(50, 50, 150, 100); // Outer rectangle
+                ctx.clearRect(100, 75, 50, 50); // Cut out inner rectangle
+                
+                ctx.strokeStyle = '#2196F3';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(50, 50, 150, 100);
+                ctx.strokeRect(100, 75, 50, 50);
+                
+            } else if (shapeName === 'House Shape') {
+                // Draw house (rectangle + triangle)
+                ctx.fillStyle = 'rgba(255, 193, 7, 0.3)';
+                ctx.fillRect(75, 100, 100, 75); // House body
+                
+                // Roof triangle
+                ctx.beginPath();
+                ctx.moveTo(75, 100);
+                ctx.lineTo(175, 100);
+                ctx.lineTo(125, 50);
+                ctx.closePath();
+                ctx.fillStyle = 'rgba(244, 67, 54, 0.3)';
+                ctx.fill();
+                
+                ctx.strokeStyle = '#FFC107';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(75, 100, 100, 75);
+                
+                ctx.strokeStyle = '#F44336';
+                ctx.beginPath();
+                ctx.moveTo(75, 100);
+                ctx.lineTo(175, 100);
+                ctx.lineTo(125, 50);
+                ctx.closePath();
+                ctx.stroke();
+            }
+        }
+
+        // Global functions for interactive practice
+        window.showPerimeterDetails = function(length, width) {
+            const perimeter = 2 * (length + width);
+            let info = `Rectangle: ${length} × ${width}\n\n`;
+            info += `Perimeter = 2 × (length + width)\n`;
+            info += `= 2 × (${length} + ${width})\n`;
+            info += `= 2 × ${length + width}\n`;
+            info += `= ${perimeter} units\n\n`;
+            info += `Real-world applications:\n`;
+            info += `• Fencing a garden\n`;
+            info += `• Picture frame molding\n`;
+            info += `• Running track around field\n`;
+            info += `• Border around swimming pool\n\n`;
+            info += `Remember: Perimeter is distance AROUND a shape.`;
+            
+            alert(info);
+        };
+
+        window.generateNewShape = function() {
+            const newLength = Math.floor(Math.random() * 20) + 5;
+            const newWidth = Math.floor(Math.random() * 15) + 3;
+            const perimeterMeasure = document.getElementById('perimeterMeasure');
+            
+            if (perimeterMeasure) {
+                perimeterMeasure.textContent = `P = ${2 * (newLength + newWidth)} units`;
+                perimeterMeasure.classList.add('measure-scale');
+                setTimeout(() => perimeterMeasure.classList.remove('measure-scale'), 1000);
+            }
+            
+            drawRectangle(newLength, newWidth);
+        };
+
+        window.showShapeFormula = function(shapeName) {
+            const shape = shapeFormulas.find(s => s.shape === shapeName);
+            if (!shape) return;
+            
+            let info = `${shape.shape}\n\n`;
+            info += `Perimeter: ${shape.perimeter}\n`;
+            info += `Area: ${shape.area}\n`;
+            if (shape.volume !== "N/A") info += `Volume: ${shape.volume}\n`;
+            info += `\nExamples:\n`;
+            
+            if (shapeName === 'Square') {
+                info += `• Side = 5cm\n`;
+                info += `  Perimeter = 4 × 5 = 20cm\n`;
+                info += `  Area = 5 × 5 = 25cm²\n`;
+                info += `  Volume (cube) = 5 × 5 × 5 = 125cm³\n`;
+            } else if (shapeName === 'Rectangle') {
+                info += `• Length = 8cm, Width = 3cm\n`;
+                info += `  Perimeter = 2 × (8 + 3) = 22cm\n`;
+                info += `  Area = 8 × 3 = 24cm²\n`;
+                info += `  Volume (prism) = 8 × 3 × height\n`;
+            } else if (shapeName === 'Triangle') {
+                info += `• Base = 10cm, Height = 6cm\n`;
+                info += `  Area = ½ × 10 × 6 = 30cm²\n`;
+                info += `  Perimeter = sum of 3 sides\n`;
+            } else if (shapeName === 'Circle') {
+                info += `• Radius = 7cm\n`;
+                info += `  Circumference = 2 × π × 7 ≈ 44cm\n`;
+                info += `  Area = π × 7 × 7 ≈ 154cm²\n`;
+                info += `  Volume (sphere) = ⁴⁄₃ × π × 7³ ≈ 1437cm³\n`;
+            }
+            
+            alert(info);
+        };
+
+        window.showVolumeDetails = function(side) {
+            const volume = side * side * side;
+            let info = `Cube: side = ${side} units\n\n`;
+            info += `Volume = side × side × side\n`;
+            info += `= ${side} × ${side} × ${side}\n`;
+            info += `= ${side}³\n`;
+            info += `= ${volume} cubic units\n\n`;
+            info += `Real-world applications:\n`;
+            info += `• Storage boxes\n`;
+            info += `• Room capacity\n`;
+            info += `• Water tanks\n`;
+            info += `• Packing space\n\n`;
+            info += `Remember: Volume is space INSIDE a 3D object.\n`;
+            info += `Units are cubed (cm³, m³, etc.).`;
+            
+            alert(info);
+        };
+
+        window.calculateVolume = function() {
+            const length = prompt("Enter length:");
+            const width = prompt("Enter width:");
+            const height = prompt("Enter height:");
+            
+            if (!length || !width || !height || isNaN(length) || isNaN(width) || isNaN(height)) {
+                alert("Please enter valid numbers for all dimensions.");
+                return;
+            }
+            
+            const l = parseFloat(length);
+            const w = parseFloat(width);
+            const h = parseFloat(height);
+            const volume = l * w * h;
+            
+            alert(`Volume Calculation:\n\nLength: ${l}\nWidth: ${w}\nHeight: ${h}\n\nVolume = l × w × h\n= ${l} × ${w} × ${h}\n= ${volume} cubic units`);
+        };
+
+        window.showCompositeDetails = function(shapeName) {
+            const shape = compositeShapes.find(s => s.name === shapeName);
+            if (!shape) return;
+            
+            let info = `${shape.name}\n\n`;
+            info += `Description: ${shape.description}\n`;
+            info += `Method: ${shape.method}\n`;
+            info += `Example: ${shape.example}\n\n`;
+            info += `How to solve:\n`;
+            
+            if (shapeName === 'L-Shape') {
+                info += `1. Divide into two rectangles\n`;
+                info += `2. Find dimensions of each part\n`;
+                info += `3. Calculate area of each rectangle\n`;
+                info += `4. Add the areas together\n`;
+                info += `5. For perimeter: add all outer edges\n`;
+            } else if (shapeName === 'U-Shape') {
+                info += `1. Find area of outer rectangle\n`;
+                info += `2. Find area of inner rectangle (cut-out)\n`;
+                info += `3. Subtract: Outer - Inner\n`;
+                info += `4. Perimeter: outer perimeter + inner perimeter\n`;
+            } else if (shapeName === 'House Shape') {
+                info += `1. Find area of rectangle (house body)\n`;
+                info += `2. Find area of triangle (roof)\n`;
+                info += `3. Add: Rectangle + Triangle\n`;
+                info += `4. Perimeter: sum of all sides\n`;
+            } else if (shapeName === 'Donut Shape') {
+                info += `1. Find area of large circle\n`;
+                info += `2. Find area of small circle\n`;
+                info += `3. Subtract: Large - Small\n`;
+                info += `4. Perimeter: both circumferences\n`;
+            }
+            
+            info += `\nTip: Draw the shape and label all measurements!`;
+            
+            alert(info);
+        };
+
+        window.explainCompositeShapes = function() {
+            let info = `How to Solve Composite Shapes:\n\n`;
+            info += `Step 1: Identify Simple Shapes\n`;
+            info += `• Look for rectangles, triangles, circles\n`;
+            info += `• Draw dotted lines to separate parts\n\n`;
+            info += `Step 2: Find Missing Measurements\n`;
+            info += `• Use given information\n`;
+            info += `• Look for equal sides\n`;
+            info += `• Calculate using subtraction/addition\n\n`;
+            info += `Step 3: Calculate Each Part\n`;
+            info += `• Use appropriate formulas\n`;
+            info += `• Keep units consistent\n`;
+            info += `• Show your work clearly\n\n`;
+            info += `Step 4: Combine Results\n`;
+            info += `• For area: Add all parts\n`;
+            info += `• For perimeter: Add outer edges only\n`;
+            info += `• For holes: Subtract cut-out areas\n\n`;
+            info += `Step 5: Check Your Answer\n`;
+            info += `• Does it make sense?\n`;
+            info += `• Are units correct?\n`;
+            info += `• Did you include all parts?\n\n`;
+            info += `Practice makes perfect!`;
+            
+            alert(info);
+        };
+
+        window.showUnitConversions = function(unitType) {
+            const unit = unitConversions.find(u => u.type === unitType);
+            if (!unit) return;
+            
+            let info = `${unit.type} Units\n\n`;
+            info += `Common units: ${unit.units.join(', ')}\n\n`;
+            info += `Key conversions:\n`;
+            unit.conversions.forEach(conv => {
+                info += `• ${conv}\n`;
+            });
+            info += `\nExamples:\n`;
+            
+            if (unitType === 'Length') {
+                info += `• 2.5 m = 250 cm (2.5 × 100)\n`;
+                info += `• 3500 m = 3.5 km (3500 ÷ 1000)\n`;
+                info += `• 75 mm = 7.5 cm (75 ÷ 10)\n`;
+            } else if (unitType === 'Area') {
+                info += `• 3 m² = 30,000 cm² (3 × 10,000)\n`;
+                info += `• 5000 cm² = 0.5 m² (5000 ÷ 10,000)\n`;
+                info += `• 2 ha = 20,000 m² (2 × 10,000)\n`;
+            } else if (unitType === 'Volume') {
+                info += `• 5 L = 5000 mL (5 × 1000)\n`;
+                info += `• 2500 cm³ = 2.5 L (2500 ÷ 1000)\n`;
+                info += `• 0.75 m³ = 750 L (0.75 × 1000)\n`;
+            } else if (unitType === 'Mass') {
+                info += `• 3.2 kg = 3200 g (3.2 × 1000)\n`;
+                info += `• 4500 g = 4.5 kg (4500 ÷ 1000)\n`;
+                info += `• 2.5 t = 2500 kg (2.5 × 1000)\n`;
+            }
+            
+            info += `\nTip: For area conversions, square the length conversion!\n`;
+            info += `1 m = 100 cm, so 1 m² = 100² cm² = 10,000 cm²`;
+            
+            alert(info);
+        };
+
+        window.showMeasurementExample = function(measurement) {
+            let info = `${measurement}\n\n`;
+            
+            if (measurement.includes('Rectangle Perimeter')) {
+                info += `Formula: P = 2(l + w)\n`;
+                info += `Example: l = 8cm, w = 5cm\n`;
+                info += `P = 2 × (8 + 5) = 2 × 13 = 26cm\n\n`;
+                info += `Real-world: Fencing a garden`;
+            } else if (measurement.includes('Rectangle Area')) {
+                info += `Formula: A = l × w\n`;
+                info += `Example: l = 8cm, w = 5cm\n`;
+                info += `A = 8 × 5 = 40cm²\n\n`;
+                info += `Real-world: Carpet for a room`;
+            } else if (measurement.includes('Cube Volume')) {
+                info += `Formula: V = s³\n`;
+                info += `Example: s = 4cm\n`;
+                info += `V = 4 × 4 × 4 = 64cm³\n\n`;
+                info += `Real-world: Storage box capacity`;
+            } else if (measurement.includes('Circle Circumference')) {
+                info += `Formula: C = 2πr or C = πd\n`;
+                info += `Example: r = 7cm (π ≈ 22/7)\n`;
+                info += `C = 2 × 22/7 × 7 = 44cm\n\n`;
+                info += `Real-world: Tire track distance`;
+            } else if (measurement.includes('Circle Area')) {
+                info += `Formula: A = πr²\n`;
+                info += `Example: r = 7cm (π ≈ 22/7)\n`;
+                info += `A = 22/7 × 7 × 7 = 154cm²\n\n`;
+                info += `Real-world: Pizza area`;
+            } else if (measurement.includes('Triangle Area')) {
+                info += `Formula: A = ½ × b × h\n`;
+                info += `Example: b = 10cm, h = 6cm\n`;
+                info += `A = ½ × 10 × 6 = 30cm²\n\n`;
+                info += `Real-world: Sail area`;
+            }
+            
+            info += `\nUnits: Always include correct units!`;
+            
+            alert(info);
+        };
+
+        window.showCommonMistake = function(index) {
+            const mistake = commonMistakes[index];
+            if (!mistake) return;
+            
+            let info = `Common Mistake: ${mistake.mistake}\n\n`;
+            info += `Correction: ${mistake.correction}\n`;
+            info += `Example: ${mistake.example}\n\n`;
+            info += `How to avoid:\n`;
+            
+            if (index === 0) {
+                info += `• Trace the outside edge with your finger\n`;
+                info += `• Shared sides are inside, not outside\n`;
+                info += `• Count each outside edge only once`;
+            } else if (index === 1) {
+                info += `• Perimeter = distance AROUND (fence)\n`;
+                info += `• Area = space INSIDE (grass)\n`;
+                info += `• Area has square units, perimeter has linear units`;
+            } else if (index === 2) {
+                info += `• Write "cm²" not "cm" for area\n`;
+                info += `• Remember: area = length × width = cm × cm = cm²\n`;
+                info += `• Say "square centimeters" not "centimeters"`;
+            }
+            
+            alert(info);
+        };
+
+        // Measurement calculator functions
+        let calcExpression = '0';
+        let lastResult = null;
+
+        window.calcInput = function(input) {
+            const display = document.getElementById('calcDisplay');
+            
+            if (calcExpression === '0' && !isNaN(input)) {
+                calcExpression = input;
+            } else if (input === 'π') {
+                calcExpression += Math.PI.toFixed(2);
+            } else if (input === '²') {
+                calcExpression += '**2';
+            } else if (input === '³') {
+                calcExpression += '**3';
+            } else {
+                calcExpression += input;
+            }
+            
+            display.textContent = calcExpression;
+        };
+
+        window.clearCalc = function() {
+            calcExpression = '0';
+            lastResult = null;
+            document.getElementById('calcDisplay').textContent = calcExpression;
+        };
+
+        window.calculateMeasurement = function() {
+            const display = document.getElementById('calcDisplay');
+            
+            try {
+                // Replace symbols for evaluation
+                let expression = calcExpression
+                    .replace(/×/g, '*')
+                    .replace(/÷/g, '/')
+                    .replace(/π/g, Math.PI.toString());
+                
+                // Evaluate safely
+                const result = eval(expression);
+                
+                if (isNaN(result) || !isFinite(result)) {
+                    display.textContent = "Error";
+                } else {
+                    lastResult = result;
+                    calcExpression = result.toString();
+                    display.textContent = result;
+                    
+                    // Show unit suggestions
+                    if (expression.includes('**2')) {
+                        setTimeout(() => alert(`Result: ${result}\n\nThis is an area measurement (units²)`), 300);
+                    } else if (expression.includes('**3')) {
+                        setTimeout(() => alert(`Result: ${result}\n\nThis is a volume measurement (units³)`), 300);
+                    }
+                }
+            } catch (error) {
+                display.textContent = "Error";
+            }
+        };
+
+        // Interactive practice functions
+        window.perimeterPractice = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const length = Math.floor(Math.random() * 15) + 5;
+            const width = Math.floor(Math.random() * 10) + 3;
+            const perimeter = 2 * (length + width);
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--primary-green);">Perimeter Practice</div>
+                    <div style="font-size: 1.8rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">
+                        Rectangle: ${length}cm × ${width}cm
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: var(--accent-blue); font-weight: bold; margin-bottom: 10px;">
+                            What is the perimeter?
+                        </div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                            Formula: P = 2(l + w)
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
+                        ${[
+                            `${perimeter} cm`,
+                            `${length + width} cm`,
+                            `${length * width} cm`,
+                            `${2 * length + width} cm`
+                        ].map((option, idx) => `
+                            <div class="option" onclick="checkPerimeterAnswer(this, '${option}', '${perimeter} cm')">
+                                <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                <div class="option-text">${option}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div id="perimeterResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            window.currentPerimeterExplanation = `P = 2(${length} + ${width}) = 2 × ${length + width} = ${perimeter} cm`;
+        };
+
+        window.checkPerimeterAnswer = function(element, selectedAnswer, correctAnswer) {
+            const resultDiv = document.getElementById('perimeterResult');
+            if (!resultDiv) return;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (selectedAnswer === correctAnswer) {
+                element.classList.add('correct');
+                resultDiv.textContent = `Correct! ${window.currentPerimeterExplanation}`;
+                resultDiv.style.color = 'var(--primary-green)';
+            } else {
+                element.classList.add('incorrect');
+                // Find and highlight correct option
+                options.forEach(opt => {
+                    if (opt.querySelector('.option-text').textContent === correctAnswer) {
+                        opt.classList.add('correct');
+                    }
+                });
+                resultDiv.textContent = `Incorrect. ${window.currentPerimeterExplanation}`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+            
+            resultDiv.classList.add('pulse');
+            setTimeout(() => resultDiv.classList.remove('pulse'), 500);
+        };
+
+        window.areaPractice = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const length = Math.floor(Math.random() * 12) + 4;
+            const width = Math.floor(Math.random() * 8) + 2;
+            const area = length * width;
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-blue);">Area Practice</div>
+                    <div style="font-size: 1.8rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">
+                        Rectangle: ${length}cm × ${width}cm
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: var(--accent-green); font-weight: bold; margin-bottom: 10px;">
+                            What is the area?
+                        </div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                            Formula: A = l × w
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
+                        ${[
+                            `${area} cm²`,
+                            `${2 * (length + width)} cm²`,
+                            `${length + width} cm²`,
+                            `${length * 2 + width * 2} cm²`
+                        ].map((option, idx) => `
+                            <div class="option" onclick="checkAreaAnswer(this, '${option}', '${area} cm²')">
+                                <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                <div class="option-text">${option}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div id="areaResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            window.currentAreaExplanation = `A = ${length} × ${width} = ${area} cm²`;
+        };
+
+        window.checkAreaAnswer = function(element, selectedAnswer, correctAnswer) {
+            const resultDiv = document.getElementById('areaResult');
+            if (!resultDiv) return;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (selectedAnswer === correctAnswer) {
+                element.classList.add('correct');
+                resultDiv.textContent = `Correct! ${window.currentAreaExplanation}`;
+                resultDiv.style.color = 'var(--primary-green)';
+            } else {
+                element.classList.add('incorrect');
+                // Find and highlight correct option
+                options.forEach(opt => {
+                    if (opt.querySelector('.option-text').textContent === correctAnswer) {
+                        opt.classList.add('correct');
+                    }
+                });
+                resultDiv.textContent = `Incorrect. ${window.currentAreaExplanation}`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+            
+            resultDiv.classList.add('pulse');
+            setTimeout(() => resultDiv.classList.remove('pulse'), 500);
+        };
+
+        window.volumePractice = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const side = Math.floor(Math.random() * 8) + 2;
+            const volume = side * side * side;
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--secondary-amber);">Volume Practice</div>
+                    <div style="font-size: 1.8rem; margin-bottom: 15px; font-weight: bold; color: var(--text-primary);">
+                        Cube: side = ${side}cm
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: var(--accent-purple); font-weight: bold; margin-bottom: 10px;">
+                            What is the volume?
+                        </div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                            Formula: V = s³
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
+                        ${[
+                            `${volume} cm³`,
+                            `${side * side} cm³`,
+                            `${6 * side * side} cm³`,
+                            `${side * 4} cm³`
+                        ].map((option, idx) => `
+                            <div class="option" onclick="checkVolumeAnswer(this, '${option}', '${volume} cm³')">
+                                <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                <div class="option-text">${option}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div id="volumeResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            window.currentVolumeExplanation = `V = ${side} × ${side} × ${side} = ${side}³ = ${volume} cm³`;
+        };
+
+        window.checkVolumeAnswer = function(element, selectedAnswer, correctAnswer) {
+            const resultDiv = document.getElementById('volumeResult');
+            if (!resultDiv) return;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (selectedAnswer === correctAnswer) {
+                element.classList.add('correct');
+                resultDiv.textContent = `Correct! ${window.currentVolumeExplanation}`;
+                resultDiv.style.color = 'var(--primary-green)';
+            } else {
+                element.classList.add('incorrect');
+                // Find and highlight correct option
+                options.forEach(opt => {
+                    if (opt.querySelector('.option-text').textContent === correctAnswer) {
+                        opt.classList.add('correct');
+                    }
+                });
+                resultDiv.textContent = `Incorrect. ${window.currentVolumeExplanation}`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+            
+            resultDiv.classList.add('pulse');
+            setTimeout(() => resultDiv.classList.remove('pulse'), 500);
+        };
+
+        window.compositeShapesPractice = function() {
+            const practiceDisplay = document.getElementById('practiceDisplay');
+            if (!practiceDisplay) return;
+            
+            const rectangle1 = { length: 8, width: 4 };
+            const rectangle2 = { length: 5, width: 3 };
+            const totalArea = (rectangle1.length * rectangle1.width) + (rectangle2.length * rectangle2.width);
+            
+            practiceDisplay.innerHTML = `
+                <div style="text-align: center; width: 100%;">
+                    <div style="font-size: 1.5rem; margin-bottom: 15px; color: var(--accent-purple);">Composite Shapes Practice</div>
+                    <div style="margin-bottom: 15px; color: var(--text-primary);">
+                        L-shape made of:<br>
+                        Rectangle A: ${rectangle1.length}cm × ${rectangle1.width}cm<br>
+                        Rectangle B: ${rectangle2.length}cm × ${rectangle2.width}cm
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: var(--accent-blue); font-weight: bold; margin-bottom: 10px;">
+                            What is the total area?
+                        </div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">
+                            Add areas of both rectangles
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0;">
+                        ${[
+                            `${totalArea} cm²`,
+                            `${(rectangle1.length + rectangle2.length) * (rectangle1.width + rectangle2.width)} cm²`,
+                            `${rectangle1.length * rectangle2.width} cm²`,
+                            `${rectangle1.length + rectangle2.length + rectangle1.width + rectangle2.width} cm²`
+                        ].map((option, idx) => `
+                            <div class="option" onclick="checkCompositeAnswer(this, '${option}', '${totalArea} cm²')">
+                                <div class="option-letter">${String.fromCharCode(65 + idx)}</div>
+                                <div class="option-text">${option}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div id="compositeResult" style="margin-top: 20px; min-height: 30px; font-weight: bold;"></div>
+                </div>
+            `;
+            
+            window.currentCompositeExplanation = `Area A = ${rectangle1.length} × ${rectangle1.width} = ${rectangle1.length * rectangle1.width} cm²<br>Area B = ${rectangle2.length} × ${rectangle2.width} = ${rectangle2.length * rectangle2.width} cm²<br>Total = ${rectangle1.length * rectangle1.width} + ${rectangle2.length * rectangle2.width} = ${totalArea} cm²`;
+        };
+
+        window.checkCompositeAnswer = function(element, selectedAnswer, correctAnswer) {
+            const resultDiv = document.getElementById('compositeResult');
+            if (!resultDiv) return;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            if (selectedAnswer === correctAnswer) {
+                element.classList.add('correct');
+                resultDiv.innerHTML = `Correct!<br>${window.currentCompositeExplanation}`;
+                resultDiv.style.color = 'var(--primary-green)';
+            } else {
+                element.classList.add('incorrect');
+                // Find and highlight correct option
+                options.forEach(opt => {
+                    if (opt.querySelector('.option-text').textContent === correctAnswer) {
+                        opt.classList.add('correct');
+                    }
+                });
+                resultDiv.innerHTML = `Incorrect.<br>${window.currentCompositeExplanation}`;
+                resultDiv.style.color = 'var(--accent-orange)';
+            }
+            
+            resultDiv.classList.add('pulse');
+            setTimeout(() => resultDiv.classList.remove('pulse'), 500);
+        };
+
+        // Load current question
+        function loadQuestion() {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${appState.currentQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / appState.currentQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            mathFact.innerHTML = '';
+            conceptDisplay.innerHTML = '';
+            visualizationContainer.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            mathFact.appendChild(createMathFact());
+            conceptDisplay.appendChild(createConceptDisplay());
+            visualizationContainer.appendChild(createMeasurementVisualization());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = appState.currentQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation, question.answer);
+            }
+            
+            nextQuestionBtn.disabled = false;
+            saveStateToStorage();
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation, correctAnswer = null) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackMessage = feedbackContainer.querySelector('.feedback-message');
+            const feedbackExplanation = feedbackContainer.querySelector('.feedback-explanation');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = positiveMessages[Math.floor(Math.random() * positiveMessages.length)];
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+                if (correctAnswer) {
+                    const correctOption = String.fromCharCode(65 + (correctAnswer.charCodeAt(0) - 65));
+                    const correctText = questions.find(q => 
+                        appState.currentQuestions[appState.currentQuestionIndex].question === q.question
+                    )?.options[correctAnswer.charCodeAt(0) - 65];
+                    
+                    feedbackMessage.textContent = `Correct answer: ${correctOption} (${correctText})`;
+                }
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Move to next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Skip current question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < appState.currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+            
+            saveStateToStorage();
+        }
+
+        // Retry the topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            initializeQuestions();
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Go back to home page
+        function backToHome() {
+            showWelcomePage();
+        }
+
+        // Go back to topics page
+        function backToTopics() {
+            alert("In a complete implementation, this would navigate to the topics selection page.");
+        }
+
+        // Start practice session
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            
+            if (appState.currentQuestions.length === 0) {
+                initializeQuestions();
+            }
+            
+            saveStateToStorage();
+            showPracticePage();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

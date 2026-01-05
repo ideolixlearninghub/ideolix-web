@@ -1,0 +1,3633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 9 Math - Probability: Combined Events | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Probability Theme */
+        :root {
+            --probability-blue: #2196F3;
+            --event-green: #4CAF50;
+            --union-orange: #FF9800;
+            --intersection-purple: #9C27B0;
+            --complement-red: #F44336;
+            --sample-space-teal: #009688;
+            --outcome-yellow: #FFC107;
+            --indigo-accent: #3F51B5;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(33, 150, 243, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 30%, rgba(76, 175, 80, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 50% 80%, rgba(255, 152, 0, 0.08) 0%, transparent 40%);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            border: 1px solid var(--dark-border);
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info h1 {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 1px solid var(--dark-border);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .welcome-title {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, var(--probability-blue), var(--intersection-purple), var(--outcome-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(33, 150, 243, 0.15);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            border: 2px solid var(--probability-blue);
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--dark-border);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--probability-blue);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-probability {
+            background: var(--probability-blue);
+            color: white;
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+        }
+
+        .btn-probability:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-event {
+            background: var(--event-green);
+            color: white;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-event:hover {
+            background: #388E3C;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-union {
+            background: var(--union-orange);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+        }
+
+        .btn-union:hover {
+            background: #F57C00;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 152, 0, 0.4);
+        }
+
+        .btn-intersection {
+            background: var(--intersection-purple);
+            color: white;
+            box-shadow: 0 4px 12px rgba(156, 39, 176, 0.3);
+        }
+
+        .btn-intersection:hover {
+            background: #7B1FA2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(156, 39, 176, 0.4);
+        }
+
+        .btn-complement {
+            background: var(--complement-red);
+            color: white;
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+        }
+
+        .btn-complement:hover {
+            background: #D32F2F;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(244, 67, 54, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--probability-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Page */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 20px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--dark-surface);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--probability-blue), var(--intersection-purple));
+            border-radius: 8px;
+            transition: width 0.5s ease;
+        }
+
+        .question-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .probability-tip {
+            background: rgba(255, 193, 7, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid var(--outcome-yellow);
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Options */
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .option {
+            padding: 15px;
+            background: var(--dark-card);
+            border: 2px solid var(--dark-border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--probability-blue);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(76, 175, 80, 0.1);
+            border-color: var(--event-green);
+            color: var(--event-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+            color: #F44336;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 25px;
+            height: 25px;
+            background: var(--probability-blue);
+            border-radius: 50%;
+            margin-right: 12px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .option.correct .option-letter {
+            background: var(--event-green);
+        }
+
+        .option.incorrect .option-letter {
+            background: #F44336;
+        }
+
+        /* Feedback */
+        .feedback-container {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid var(--event-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 4px solid #F44336;
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--event-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: #F44336;
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--event-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: #F44336;
+        }
+
+        .feedback-explanation {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Navigation */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Probability Practice Area */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+            max-height: 900px;
+        }
+
+        /* Practice Sections */
+        .practice-section {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid;
+            position: relative;
+        }
+
+        .basic-section {
+            border-color: var(--probability-blue);
+        }
+
+        .independent-section {
+            border-color: var(--event-green);
+        }
+
+        .dependent-section {
+            border-color: var(--union-orange);
+        }
+
+        .mutually-exclusive-section {
+            border-color: var(--intersection-purple);
+        }
+
+        .venn-section {
+            border-color: var(--complement-red);
+        }
+
+        .sample-space-section {
+            border-color: var(--sample-space-teal);
+        }
+
+        .counting-section {
+            border-color: var(--outcome-yellow);
+        }
+
+        .section-title {
+            color: inherit;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        /* Venn Diagram Canvas */
+        .venn-canvas-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            background: var(--dark-surface);
+            border-radius: 6px;
+            margin: 10px 0;
+            overflow: hidden;
+            border: 1px solid var(--dark-border);
+        }
+
+        .venn-canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Measurement Input */
+        .measurement-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .measurement-input {
+            width: 100px;
+            padding: 8px;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .measurement-input:focus {
+            outline: none;
+            border-color: var(--probability-blue);
+        }
+
+        .measurement-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            min-width: 100px;
+        }
+
+        .unit-display {
+            color: var(--outcome-yellow);
+            font-size: 0.9rem;
+            margin-left: 5px;
+        }
+
+        /* Probability Display */
+        .probability-display {
+            background: rgba(33, 150, 243, 0.1);
+            border-radius: 6px;
+            padding: 12px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            text-align: center;
+            color: var(--probability-blue);
+            border-left: 3px solid var(--probability-blue);
+        }
+
+        /* Formula Display */
+        .formula-display {
+            background: rgba(33, 150, 243, 0.1);
+            border-radius: 6px;
+            padding: 12px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            text-align: center;
+            color: var(--probability-blue);
+            border-left: 3px solid var(--probability-blue);
+        }
+
+        /* Outcome List */
+        .outcomes-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .outcome-item {
+            background: var(--dark-surface);
+            border-radius: 6px;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid var(--dark-border);
+            font-size: 0.9rem;
+        }
+
+        .outcome-item.highlight {
+            background: rgba(33, 150, 243, 0.2);
+            border-color: var(--probability-blue);
+        }
+
+        /* Tree Diagram Container */
+        .tree-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background: var(--dark-surface);
+            border-radius: 6px;
+            margin: 10px 0;
+            overflow: auto;
+            border: 1px solid var(--dark-border);
+            padding: 10px;
+        }
+
+        /* Slider */
+        .probability-slider-container {
+            margin: 15px 0;
+        }
+
+        .probability-slider {
+            width: 100%;
+            height: 6px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: var(--dark-surface);
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .probability-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--probability-blue);
+            cursor: pointer;
+        }
+
+        .probability-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--probability-blue);
+            cursor: pointer;
+            border: none;
+        }
+
+        /* Event Controls */
+        .event-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+            justify-content: center;
+        }
+
+        /* Step Display */
+        .step-display {
+            background: var(--dark-surface);
+            border-radius: 6px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: var(--text-secondary);
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        /* Solution Display */
+        .solution-display {
+            background: var(--dark-surface);
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+        }
+
+        /* Quick Reference */
+        .reference-section {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid var(--outcome-yellow);
+        }
+
+        .formulas-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--dark-surface);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .formulas-table th {
+            background: var(--dark-card);
+            padding: 12px;
+            text-align: left;
+            font-size: 0.9rem;
+            border-bottom: 2px solid var(--outcome-yellow);
+            color: var(--outcome-yellow);
+        }
+
+        .formulas-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        .formula-cell {
+            font-family: 'Courier New', monospace;
+            color: var(--probability-blue);
+        }
+
+        /* Probability Values Display */
+        .prob-values-display {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .prob-value-item {
+            background: var(--dark-surface);
+            border-radius: 6px;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid var(--dark-border);
+        }
+
+        .prob-function {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .prob-value {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .results-title {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--probability-blue), var(--intersection-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--probability-blue), var(--intersection-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .prob-values-display {
+                grid-template-columns: 1fr;
+            }
+            
+            .outcomes-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--probability-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .rotate {
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes highlight {
+            0% { background-color: transparent; }
+            50% { background-color: rgba(33, 150, 243, 0.3); }
+            100% { background-color: transparent; }
+        }
+
+        .highlight {
+            animation: highlight 1.5s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 1.8rem;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .event-controls {
+                flex-direction: column;
+            }
+            
+            .event-controls .btn {
+                width: 100%;
+            }
+            
+            .measurement-input-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .measurement-input {
+                width: 100%;
+            }
+        }
+
+        /* Dice and Coin Styles */
+        .dice-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .die-face {
+            width: 60px;
+            height: 60px;
+            background: var(--dark-surface);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: 2px solid var(--dark-border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .die-face:hover {
+            transform: scale(1.1);
+            border-color: var(--probability-blue);
+        }
+
+        .die-face.selected {
+            background: rgba(33, 150, 243, 0.2);
+            border-color: var(--probability-blue);
+        }
+
+        .coin-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .coin-face {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            border: 3px solid var(--dark-border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .coin-heads {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+        }
+
+        .coin-tails {
+            background: linear-gradient(135deg, #C0C0C0, #808080);
+        }
+
+        .coin-face.selected {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(33, 150, 243, 0.5);
+        }
+
+        /* Card Deck Styles */
+        .card-deck-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .card-suit {
+            padding: 10px;
+            background: var(--dark-surface);
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--dark-border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .card-suit:hover {
+            transform: translateY(-3px);
+            border-color: var(--probability-blue);
+        }
+
+        .card-suit.selected {
+            background: rgba(33, 150, 243, 0.2);
+            border-color: var(--probability-blue);
+        }
+
+        .suit-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        /* Probability Wheel */
+        .wheel-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 15px auto;
+            border-radius: 50%;
+            background: var(--dark-surface);
+            border: 2px solid var(--dark-border);
+            overflow: hidden;
+        }
+
+        .wheel-segment {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-origin: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Probability Bar Chart */
+        .bar-chart-container {
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            margin: 15px 0;
+            padding: 10px;
+            background: var(--dark-surface);
+            border-radius: 8px;
+            border: 1px solid var(--dark-border);
+        }
+
+        .bar {
+            width: 30px;
+            background: var(--probability-blue);
+            border-radius: 4px 4px 0 0;
+            transition: height 0.5s ease;
+        }
+
+        .bar-label {
+            text-align: center;
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <h1 class="welcome-title">Probability: Combined Events</h1>
+            <p class="welcome-subtitle">Master the probability of combined events. Learn to calculate probabilities for independent, dependent, and mutually exclusive events using Venn diagrams, tree diagrams, and probability rules.</p>
+            
+            <div class="topic-badge">
+                <span>🎲 Independent Events • 🃏 Dependent Events • 📊 Venn Diagrams • 🌳 Tree Diagrams • 🔄 Mutually Exclusive • 📈 Probability Rules</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your name:</label>
+                <input type="text" id="studentName" placeholder="Your name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-probability" id="startPractice">
+                    <span>📚 Begin Probability Practice (100+ Questions)</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div id="probabilityTip"></div>
+                
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-explanation" id="feedbackExplanation"></div>
+                </div>
+            </div>
+            
+            <!-- Probability Practice Area -->
+            <div class="content-wrapper">
+                <div class="visualization-container">
+                    <!-- Basic Probability Calculator -->
+                    <div class="practice-section basic-section">
+                        <div class="section-title">Basic Probability Calculator</div>
+                        
+                        <div class="formula-display">
+                            P(event) = favorable outcomes ÷ total outcomes
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">Favorable outcomes:</span>
+                            <input type="number" id="favorableOutcomes" class="measurement-input" value="1" min="1" step="1">
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">Total outcomes:</span>
+                            <input type="number" id="totalOutcomes" class="measurement-input" value="6" min="1" step="1">
+                        </div>
+                        
+                        <div class="event-controls">
+                            <button class="btn btn-small btn-probability" onclick="calculateBasicProbability()">Calculate Probability</button>
+                            <button class="btn btn-small btn-outline" onclick="explainBasicProbability()">Learn Formula</button>
+                            <button class="btn btn-small btn-outline" onclick="generateDiceProblem()">Dice Example</button>
+                        </div>
+                        
+                        <div class="solution-display" id="basicProbabilityResult">
+                            P(event) = 1 ÷ 6 = 0.1667 ≈ 16.67%
+                        </div>
+                        
+                        <div class="step-display" id="basicProbabilitySteps">
+                            Steps will appear here
+                        </div>
+                    </div>
+                    
+                    <!-- Sample Space Generator -->
+                    <div class="practice-section sample-space-section">
+                        <div class="section-title">Sample Space Generator</div>
+                        
+                        <div class="formula-display">
+                            Sample Space: All possible outcomes
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">Event 1 outcomes:</span>
+                            <input type="number" id="event1Outcomes" class="measurement-input" value="2" min="1" step="1">
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">Event 2 outcomes:</span>
+                            <input type="number" id="event2Outcomes" class="measurement-input" value="3" min="1" step="1">
+                        </div>
+                        
+                        <div class="event-controls">
+                            <button class="btn btn-small" style="background: var(--sample-space-teal); color: white;" onclick="generateSampleSpace()">Generate Sample Space</button>
+                            <button class="btn btn-small btn-outline" onclick="clearSampleSpace()">Clear</button>
+                            <button class="btn btn-small btn-outline" onclick="explainSampleSpace()">What is Sample Space?</button>
+                        </div>
+                        
+                        <div class="outcomes-list" id="sampleSpaceDisplay">
+                            <div class="outcome-item">H1</div>
+                            <div class="outcome-item">H2</div>
+                            <div class="outcome-item">H3</div>
+                            <div class="outcome-item">T1</div>
+                            <div class="outcome-item">T2</div>
+                            <div class="outcome-item">T3</div>
+                        </div>
+                        
+                        <div class="probability-display" id="sampleSpaceInfo">
+                            Total outcomes: 6
+                        </div>
+                    </div>
+                    
+                    <!-- Independent Events Calculator -->
+                    <div class="practice-section independent-section">
+                        <div class="section-title">Independent Events</div>
+                        
+                        <div class="formula-display">
+                            P(A and B) = P(A) × P(B)
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">P(A):</span>
+                            <input type="number" id="probA" class="measurement-input" value="0.5" min="0" max="1" step="0.1">
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">P(B):</span>
+                            <input type="number" id="probB" class="measurement-input" value="0.5" min="0" max="1" step="0.1">
+                        </div>
+                        
+                        <div class="probability-slider-container">
+                            <span class="measurement-label">P(A):</span>
+                            <input type="range" id="probASlider" class="probability-slider" min="0" max="100" value="50" step="1">
+                        </div>
+                        
+                        <div class="event-controls">
+                            <button class="btn btn-small btn-event" onclick="calculateIndependentProbability()">Calculate P(A and B)</button>
+                            <button class="btn btn-small btn-outline" onclick="explainIndependentEvents()">Learn Independent Events</button>
+                            <button class="btn btn-small btn-outline" onclick="coinTossExample()">Coin Toss Example</button>
+                        </div>
+                        
+                        <div class="solution-display" id="independentResult">
+                            P(A and B) = 0.5 × 0.5 = 0.25 = 25%
+                        </div>
+                        
+                        <div class="step-display" id="independentSteps">
+                            For independent events, multiply individual probabilities
+                        </div>
+                    </div>
+                    
+                    <!-- Dependent Events Calculator -->
+                    <div class="practice-section dependent-section">
+                        <div class="section-title">Dependent Events</div>
+                        
+                        <div class="formula-display">
+                            P(A then B) = P(A) × P(B|A)
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">Total items:</span>
+                            <input type="number" id="totalItems" class="measurement-input" value="10" min="2" step="1">
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">Desired items:</span>
+                            <input type="number" id="desiredItems" class="measurement-input" value="3" min="1" step="1">
+                        </div>
+                        
+                        <div class="event-controls">
+                            <button class="btn btn-small btn-union" onclick="calculateDependentProbability()">Calculate Without Replacement</button>
+                            <button class="btn btn-small btn-outline" onclick="explainDependentEvents()">Learn Dependent Events</button>
+                            <button class="btn btn-small btn-outline" onclick="cardDrawingExample()">Card Drawing Example</button>
+                        </div>
+                        
+                        <div class="solution-display" id="dependentResult">
+                            P(first) = 3/10 = 0.3<br>
+                            P(second|first) = 2/9 ≈ 0.222<br>
+                            P(both) = 3/10 × 2/9 = 6/90 = 1/15 ≈ 0.0667
+                        </div>
+                        
+                        <div class="step-display" id="dependentSteps">
+                            For dependent events, probability changes after first event
+                        </div>
+                    </div>
+                    
+                    <!-- Mutually Exclusive Events -->
+                    <div class="practice-section mutually-exclusive-section">
+                        <div class="section-title">Mutually Exclusive Events</div>
+                        
+                        <div class="formula-display">
+                            P(A or B) = P(A) + P(B)
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">P(A):</span>
+                            <input type="number" id="probA_mutual" class="measurement-input" value="0.3" min="0" max="1" step="0.1">
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">P(B):</span>
+                            <input type="number" id="probB_mutual" class="measurement-input" value="0.2" min="0" max="1" step="0.1">
+                        </div>
+                        
+                        <div class="event-controls">
+                            <button class="btn btn-small btn-intersection" onclick="calculateMutuallyExclusive()">Calculate P(A or B)</button>
+                            <button class="btn btn-small btn-outline" onclick="explainMutuallyExclusive()">Learn Mutually Exclusive</button>
+                            <button class="btn btn-small btn-outline" onclick="diceExample()">Dice Example</button>
+                        </div>
+                        
+                        <div class="solution-display" id="mutuallyExclusiveResult">
+                            P(A or B) = 0.3 + 0.2 = 0.5 = 50%
+                        </div>
+                        
+                        <div class="step-display" id="mutuallyExclusiveSteps">
+                            For mutually exclusive events, add probabilities
+                        </div>
+                    </div>
+                    
+                    <!-- Venn Diagram Visualizer -->
+                    <div class="practice-section venn-section">
+                        <div class="section-title">Venn Diagram Visualizer</div>
+                        
+                        <div class="venn-canvas-container">
+                            <canvas class="venn-canvas" id="vennCanvas" width="400" height="200"></canvas>
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">P(A):</span>
+                            <input type="number" id="probA_venn" class="measurement-input" value="0.4" min="0" max="1" step="0.1">
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">P(B):</span>
+                            <input type="number" id="probB_venn" class="measurement-input" value="0.3" min="0" max="1" step="0.1">
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">P(A∩B):</span>
+                            <input type="number" id="probIntersection" class="measurement-input" value="0.1" min="0" max="1" step="0.1">
+                        </div>
+                        
+                        <div class="event-controls">
+                            <button class="btn btn-small btn-complement" onclick="drawVennDiagram()">Update Venn Diagram</button>
+                            <button class="btn btn-small btn-outline" onclick="explainVennDiagrams()">Learn Venn Diagrams</button>
+                            <button class="btn btn-small btn-outline" onclick="calculateUnionProbability()">Calculate P(A∪B)</button>
+                        </div>
+                        
+                        <div class="solution-display" id="vennResult">
+                            P(A∪B) = P(A) + P(B) - P(A∩B)<br>
+                            = 0.4 + 0.3 - 0.1 = 0.6 = 60%
+                        </div>
+                    </div>
+                    
+                    <!-- Complement Rule -->
+                    <div class="practice-section basic-section">
+                        <div class="section-title">Complement Rule</div>
+                        
+                        <div class="formula-display">
+                            P(A') = 1 - P(A)
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">P(event):</span>
+                            <input type="number" id="probEvent" class="measurement-input" value="0.25" min="0" max="1" step="0.05">
+                        </div>
+                        
+                        <div class="probability-slider-container">
+                            <span class="measurement-label">P(event):</span>
+                            <input type="range" id="probEventSlider" class="probability-slider" min="0" max="100" value="25" step="1">
+                        </div>
+                        
+                        <div class="event-controls">
+                            <button class="btn btn-small btn-complement" onclick="calculateComplement()">Calculate Complement</button>
+                            <button class="btn btn-small btn-outline" onclick="explainComplement()">Learn Complement Rule</button>
+                            <button class="btn btn-small btn-outline" onclick="weatherExample()">Weather Example</button>
+                        </div>
+                        
+                        <div class="prob-values-display">
+                            <div class="prob-value-item">
+                                <div class="prob-function">P(event)</div>
+                                <div class="prob-value" id="probEventValue">0.25</div>
+                            </div>
+                            <div class="prob-value-item">
+                                <div class="prob-function">P(event')</div>
+                                <div class="prob-value" id="probComplementValue">0.75</div>
+                            </div>
+                        </div>
+                        
+                        <div class="step-display">
+                            The complement is everything that is NOT the event
+                        </div>
+                    </div>
+                    
+                    <!-- Tree Diagram Generator -->
+                    <div class="practice-section counting-section">
+                        <div class="section-title">Tree Diagram Generator</div>
+                        
+                        <div class="tree-container" id="treeDiagramContainer">
+                            <!-- Tree diagram will be generated here -->
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">First stage outcomes:</span>
+                            <input type="number" id="firstStage" class="measurement-input" value="2" min="1" max="5" step="1">
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">Second stage outcomes:</span>
+                            <input type="number" id="secondStage" class="measurement-input" value="3" min="1" max="5" step="1">
+                        </div>
+                        
+                        <div class="event-controls">
+                            <button class="btn btn-small" style="background: var(--outcome-yellow); color: #333;" onclick="generateTreeDiagram()">Generate Tree Diagram</button>
+                            <button class="btn btn-small btn-outline" onclick="explainTreeDiagrams()">Learn Tree Diagrams</button>
+                            <button class="btn btn-small btn-outline" onclick="twoStageExperiment()">Two-stage Experiment</button>
+                        </div>
+                        
+                        <div class="probability-display" id="treeDiagramInfo">
+                            Total paths: 6
+                        </div>
+                    </div>
+                    
+                    <!-- Fundamental Counting Principle -->
+                    <div class="practice-section counting-section">
+                        <div class="section-title">Counting Principle</div>
+                        
+                        <div class="formula-display">
+                            Total outcomes = n₁ × n₂ × n₃ × ...
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">Choices 1:</span>
+                            <input type="number" id="choices1" class="measurement-input" value="3" min="1" step="1">
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">Choices 2:</span>
+                            <input type="number" id="choices2" class="measurement-input" value="4" min="1" step="1">
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">Choices 3:</span>
+                            <input type="number" id="choices3" class="measurement-input" value="2" min="1" step="1">
+                        </div>
+                        
+                        <div class="event-controls">
+                            <button class="btn btn-small" style="background: var(--indigo-accent); color: white;" onclick="calculateTotalOutcomes()">Calculate Total Outcomes</button>
+                            <button class="btn btn-small btn-outline" onclick="explainCountingPrinciple()">Learn Counting Principle</button>
+                            <button class="btn btn-small btn-outline" onclick="outfitExample()">Outfit Example</button>
+                        </div>
+                        
+                        <div class="solution-display" id="countingResult">
+                            Total outcomes = 3 × 4 × 2 = 24
+                        </div>
+                        
+                        <div class="step-display" id="countingSteps">
+                            Multiply the number of choices at each stage
+                        </div>
+                    </div>
+                    
+                    <!-- Probability Rules Reference -->
+                    <div class="reference-section">
+                        <div class="section-title">Probability Rules Reference</div>
+                        <table class="formulas-table">
+                            <thead>
+                                <tr>
+                                    <th>Rule</th>
+                                    <th>Formula</th>
+                                    <th>When to Use</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Basic Probability</td>
+                                    <td class="formula-cell">P(A) = n(A)/n(S)</td>
+                                    <td>Single event</td>
+                                </tr>
+                                <tr>
+                                    <td>Complement</td>
+                                    <td class="formula-cell">P(A') = 1 - P(A)</td>
+                                    <td>"Not A" events</td>
+                                </tr>
+                                <tr>
+                                    <td>Independent Events</td>
+                                    <td class="formula-cell">P(A∩B) = P(A)×P(B)</td>
+                                    <td>Events don't affect each other</td>
+                                </tr>
+                                <tr>
+                                    <td>Dependent Events</td>
+                                    <td class="formula-cell">P(A∩B) = P(A)×P(B|A)</td>
+                                    <td>Events affect each other</td>
+                                </tr>
+                                <tr>
+                                    <td>Mutually Exclusive</td>
+                                    <td class="formula-cell">P(A∪B) = P(A) + P(B)</td>
+                                    <td>Events can't happen together</td>
+                                </tr>
+                                <tr>
+                                    <td>General Addition</td>
+                                    <td class="formula-cell">P(A∪B) = P(A)+P(B)-P(A∩B)</td>
+                                    <td>Any two events</td>
+                                </tr>
+                                <tr>
+                                    <td>Conditional</td>
+                                    <td class="formula-cell">P(A|B) = P(A∩B)/P(B)</td>
+                                    <td>Probability of A given B</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Probability Practice Problems -->
+                    <div class="practice-section basic-section">
+                        <div class="section-title">Practice Problem Generator</div>
+                        
+                        <div class="formula-display" id="practiceProblem">
+                            What is the probability of rolling a 3 on a fair die?
+                        </div>
+                        
+                        <div class="event-controls">
+                            <button class="btn btn-small btn-probability" onclick="generatePracticeProblem()">New Problem</button>
+                            <button class="btn btn-small btn-event" onclick="showSolution()">Show Solution</button>
+                            <button class="btn btn-small btn-outline" onclick="checkAnswer()">Check Your Answer</button>
+                        </div>
+                        
+                        <div class="solution-display" id="practiceSolution" style="display: none;">
+                            P(3) = 1/6 ≈ 0.1667 = 16.67%
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">Your answer (as fraction):</span>
+                            <input type="text" id="userAnswer" class="measurement-input" placeholder="e.g., 1/6">
+                        </div>
+                    </div>
+                    
+                    <!-- Dice Probability Calculator -->
+                    <div class="practice-section sample-space-section">
+                        <div class="section-title">Dice Probability</div>
+                        
+                        <div class="dice-container">
+                            <div class="die-face" onclick="selectDieFace(1)">1</div>
+                            <div class="die-face" onclick="selectDieFace(2)">2</div>
+                            <div class="die-face" onclick="selectDieFace(3)">3</div>
+                            <div class="die-face" onclick="selectDieFace(4)">4</div>
+                            <div class="die-face" onclick="selectDieFace(5)">5</div>
+                            <div class="die-face" onclick="selectDieFace(6)">6</div>
+                        </div>
+                        
+                        <div class="event-controls">
+                            <button class="btn btn-small" style="background: var(--sample-space-teal); color: white;" onclick="calculateDieProbability()">Calculate Probability</button>
+                            <button class="btn btn-small btn-outline" onclick="selectMultipleDice()">Select Multiple</button>
+                            <button class="btn btn-small btn-outline" onclick="clearDieSelection()">Clear</button>
+                        </div>
+                        
+                        <div class="solution-display" id="dieProbabilityResult">
+                            Select dice faces to calculate probability
+                        </div>
+                        
+                        <div class="outcomes-list" id="selectedFaces">
+                            <!-- Selected faces will appear here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Coin Toss Probability -->
+                    <div class="practice-section independent-section">
+                        <div class="section-title">Coin Toss Probability</div>
+                        
+                        <div class="coin-container">
+                            <div class="coin-face coin-heads" onclick="selectCoinFace('H')">Heads</div>
+                            <div class="coin-face coin-tails" onclick="selectCoinFace('T')">Tails</div>
+                        </div>
+                        
+                        <div class="measurement-input-group">
+                            <span class="measurement-label">Number of tosses:</span>
+                            <input type="number" id="numTosses" class="measurement-input" value="2" min="1" max="5" step="1">
+                        </div>
+                        
+                        <div class="event-controls">
+                            <button class="btn btn-small btn-event" onclick="calculateCoinProbability()">Calculate Probability</button>
+                            <button class="btn btn-small btn-outline" onclick="generateCoinOutcomes()">Show All Outcomes</button>
+                            <button class="btn btn-small btn-outline" onclick="explainCoinProbability()">Learn</button>
+                        </div>
+                        
+                        <div class="solution-display" id="coinProbabilityResult">
+                            P(Heads) = 1/2 = 0.5 = 50%
+                        </div>
+                        
+                        <div class="outcomes-list" id="coinOutcomes">
+                            <!-- Coin outcomes will appear here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Card Probability -->
+                    <div class="practice-section dependent-section">
+                        <div class="section-title">Card Probability</div>
+                        
+                        <div class="card-deck-container">
+                            <div class="card-suit" onclick="selectCardSuit('hearts')">
+                                <div class="suit-icon">♥</div>
+                                <div>Hearts</div>
+                            </div>
+                            <div class="card-suit" onclick="selectCardSuit('diamonds')">
+                                <div class="suit-icon">♦</div>
+                                <div>Diamonds</div>
+                            </div>
+                            <div class="card-suit" onclick="selectCardSuit('clubs')">
+                                <div class="suit-icon">♣</div>
+                                <div>Clubs</div>
+                            </div>
+                            <div class="card-suit" onclick="selectCardSuit('spades')">
+                                <div class="suit-icon">♠</div>
+                                <div>Spades</div>
+                            </div>
+                        </div>
+                        
+                        <div class="event-controls">
+                            <button class="btn btn-small btn-union" onclick="calculateCardProbability()">Calculate Probability</button>
+                            <button class="btn btn-small btn-outline" onclick="explainCardProbability()">Learn Card Probability</button>
+                            <button class="btn btn-small btn-outline" onclick="faceCardExample()">Face Cards</button>
+                        </div>
+                        
+                        <div class="solution-display" id="cardProbabilityResult">
+                            Standard deck: 52 cards, 13 per suit
+                        </div>
+                        
+                        <div class="step-display" id="cardProbabilitySteps">
+                            Select a suit to calculate its probability
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="navigation-buttons">
+                <button class="btn btn-event" id="skipQuestion">Skip Question</button>
+                <button class="btn btn-union" id="nextQuestion" disabled>Next Question</button>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Probability Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="basicScore">0</div>
+                        <div class="stat-label">Basic Probability</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="independentScore">0</div>
+                        <div class="stat-label">Independent Events</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="dependentScore">0</div>
+                        <div class="stat-label">Dependent Events</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="mutuallyExclusiveScore">0</div>
+                        <div class="stat-label">Mutually Exclusive</div>
+                    </div>
+                </div>
+                
+                <div class="btn-group" style="margin-top: 20px;">
+                    <button class="btn btn-probability" id="retryTopic">Try Again</button>
+                    <button class="btn btn-event" id="viewTopics">Other Topics</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // COMPREHENSIVE 100+ QUESTIONS ON PROBABILITY: COMBINED EVENTS
+        
+        const questions = [
+            // Basic Probability (1-20)
+            {
+                question: "A fair die is rolled. What is the probability of rolling a 4?",
+                options: ["1/6", "1/4", "1/3", "1/2"],
+                answer: "A",
+                explanation: "There is 1 favorable outcome (rolling a 4) out of 6 possible outcomes (1,2,3,4,5,6). So P(4) = 1/6.",
+                type: "basic"
+            },
+            {
+                question: "A coin is tossed. What is the probability of getting heads?",
+                options: ["1/2", "1/3", "1/4", "2/3"],
+                answer: "A",
+                explanation: "There are 2 equally likely outcomes: heads or tails. P(heads) = 1/2.",
+                type: "basic"
+            },
+            {
+                question: "A standard deck has 52 cards. What is P(drawing a heart)?",
+                options: ["1/4", "1/13", "1/52", "4/13"],
+                answer: "A",
+                explanation: "There are 13 hearts in 52 cards. P(heart) = 13/52 = 1/4.",
+                type: "basic"
+            },
+            {
+                question: "A bag has 3 red, 4 blue, and 5 green marbles. P(red) = ?",
+                options: ["1/4", "1/3", "1/2", "3/12"],
+                answer: "A",
+                explanation: "Total marbles = 3+4+5=12. Red marbles = 3. P(red) = 3/12 = 1/4.",
+                type: "basic"
+            },
+            {
+                question: "What is the probability of an impossible event?",
+                options: ["0", "1", "0.5", "0.25"],
+                answer: "A",
+                explanation: "An impossible event has probability 0.",
+                type: "basic"
+            },
+            {
+                question: "What is the probability of a certain event?",
+                options: ["1", "0", "0.5", "0.75"],
+                answer: "A",
+                explanation: "A certain event has probability 1.",
+                type: "basic"
+            },
+            {
+                question: "If P(A)=0.3, what is P(not A)?",
+                options: ["0.7", "0.3", "0.5", "1.3"],
+                answer: "A",
+                explanation: "P(A') = 1 - P(A) = 1 - 0.3 = 0.7",
+                type: "basic"
+            },
+            {
+                question: "A spinner has 8 equal sections numbered 1-8. P(even number) = ?",
+                options: ["1/2", "1/4", "1/8", "3/8"],
+                answer: "A",
+                explanation: "Even numbers: 2,4,6,8 (4 outcomes). Total outcomes: 8. P(even)=4/8=1/2.",
+                type: "basic"
+            },
+            {
+                question: "Probability is always between:",
+                options: ["0 and 1", "-1 and 1", "0 and 100", "0 and infinity"],
+                answer: "A",
+                explanation: "Probability values range from 0 (impossible) to 1 (certain).",
+                type: "basic"
+            },
+            {
+                question: "A jar has 5 white and 7 black balls. P(white) = ?",
+                options: ["5/12", "7/12", "1/2", "5/7"],
+                answer: "A",
+                explanation: "Total balls = 5+7=12. White balls = 5. P(white)=5/12.",
+                type: "basic"
+            },
+
+            // Independent Events (21-40)
+            {
+                question: "Two coins are tossed. P(both heads) = ?",
+                options: ["1/4", "1/2", "3/4", "1/3"],
+                answer: "A",
+                explanation: "P(heads on first)=1/2, P(heads on second)=1/2. Independent events: P(both heads)=1/2 × 1/2 = 1/4.",
+                type: "independent"
+            },
+            {
+                question: "A die rolled twice. P(both 6) = ?",
+                options: ["1/36", "1/6", "1/12", "1/18"],
+                answer: "A",
+                explanation: "P(6)=1/6. For independent events: P(both 6)=1/6 × 1/6 = 1/36.",
+                type: "independent"
+            },
+            {
+                question: "Two independent events: P(A)=0.4, P(B)=0.5. P(A and B) = ?",
+                options: ["0.2", "0.9", "0.1", "1.0"],
+                answer: "A",
+                explanation: "For independent events: P(A∩B)=P(A)×P(B)=0.4×0.5=0.2",
+                type: "independent"
+            },
+            {
+                question: "Coin tossed 3 times. P(all heads) = ?",
+                options: ["1/8", "1/2", "1/4", "3/8"],
+                answer: "A",
+                explanation: "P(heads)=1/2 each toss. Independent: (1/2)×(1/2)×(1/2)=1/8.",
+                type: "independent"
+            },
+            {
+                question: "P(A)=0.6, P(B)=0.3, independent. P(A and B) = ?",
+                options: ["0.18", "0.9", "0.3", "0.2"],
+                answer: "A",
+                explanation: "Independent events: P(A∩B)=0.6×0.3=0.18",
+                type: "independent"
+            },
+            {
+                question: "Two dice rolled. P(first die 3, second die even) = ?",
+                options: ["1/12", "1/6", "1/4", "1/36"],
+                answer: "A",
+                explanation: "P(3 on first)=1/6. P(even on second)=1/2. Independent: (1/6)×(1/2)=1/12.",
+                type: "independent"
+            },
+            {
+                question: "Spinner with 1/4 red, coin tossed. P(red and tails) = ?",
+                options: ["1/8", "1/4", "1/2", "3/8"],
+                answer: "A",
+                explanation: "P(red)=1/4, P(tails)=1/2. Independent: (1/4)×(1/2)=1/8.",
+                type: "independent"
+            },
+            {
+                question: "Probability of rain today 0.3, tomorrow 0.4. P(rain both days) = ?",
+                options: ["0.12", "0.7", "0.1", "0.5"],
+                answer: "A",
+                explanation: "Assuming independent: 0.3 × 0.4 = 0.12",
+                type: "independent"
+            },
+            {
+                question: "Two independent events: P(A)=0.8, P(B)=0.25. P(A and B) = ?",
+                options: ["0.2", "1.05", "0.55", "0.75"],
+                answer: "A",
+                explanation: "0.8 × 0.25 = 0.2",
+                type: "independent"
+            },
+            {
+                question: "3 coins tossed. P(all tails) = ?",
+                options: ["1/8", "1/2", "3/8", "1/6"],
+                answer: "A",
+                explanation: "(1/2)×(1/2)×(1/2)=1/8",
+                type: "independent"
+            },
+
+            // Dependent Events (41-60)
+            {
+                question: "Bag: 3 red, 2 blue marbles. Pick 2 without replacement. P(both red) = ?",
+                options: ["3/10", "9/25", "1/2", "3/5"],
+                answer: "A",
+                explanation: "P(first red)=3/5, P(second red|first red)=2/4=1/2. Dependent: (3/5)×(1/2)=3/10.",
+                type: "dependent"
+            },
+            {
+                question: "Deck of 52 cards. Draw 2 cards without replacement. P(both aces) = ?",
+                options: ["1/221", "1/169", "4/52", "1/13"],
+                answer: "A",
+                explanation: "P(first ace)=4/52=1/13, P(second ace|first ace)=3/51=1/17. Dependent: (1/13)×(1/17)=1/221.",
+                type: "dependent"
+            },
+            {
+                question: "Class: 12 boys, 8 girls. Pick 2 students. P(both boys) = ?",
+                options: ["33/95", "3/10", "9/25", "12/20"],
+                answer: "A",
+                explanation: "Total=20. P(first boy)=12/20=3/5, P(second boy|first boy)=11/19. Dependent: (3/5)×(11/19)=33/95.",
+                type: "dependent"
+            },
+            {
+                question: "Bag: 5 white, 3 black balls. Draw 2 without replacement. P(both white) = ?",
+                options: ["5/14", "25/64", "5/8", "3/28"],
+                answer: "A",
+                explanation: "P(first white)=5/8, P(second white|first white)=4/7. Dependent: (5/8)×(4/7)=20/56=5/14.",
+                type: "dependent"
+            },
+            {
+                question: "Deck: Draw 2 cards without replacement. P(both hearts) = ?",
+                options: ["1/17", "1/16", "1/4", "13/52"],
+                answer: "A",
+                explanation: "P(first heart)=13/52=1/4, P(second heart|first heart)=12/51=4/17. Dependent: (1/4)×(4/17)=4/68=1/17.",
+                type: "dependent"
+            },
+            {
+                question: "Urn: 4 red, 6 blue. Draw 2 without replacement. P(red then blue) = ?",
+                options: ["4/15", "2/5", "6/25", "24/100"],
+                answer: "A",
+                explanation: "P(first red)=4/10=2/5, P(second blue|first red)=6/9=2/3. Dependent: (2/5)×(2/3)=4/15.",
+                type: "dependent"
+            },
+            {
+                question: "Bag: 3 green, 4 yellow marbles. Draw 2 without replacement. P(both green) = ?",
+                options: ["3/14", "9/49", "3/7", "1/7"],
+                answer: "A",
+                explanation: "P(first green)=3/7, P(second green|first green)=2/6=1/3. Dependent: (3/7)×(1/3)=3/21=1/7.",
+                type: "dependent"
+            },
+            {
+                question: "Box: 8 good, 2 defective items. Pick 2 without replacement. P(both good) = ?",
+                options: ["28/45", "16/25", "4/5", "8/10"],
+                answer: "A",
+                explanation: "P(first good)=8/10=4/5, P(second good|first good)=7/9. Dependent: (4/5)×(7/9)=28/45.",
+                type: "dependent"
+            },
+            {
+                question: "Cards: 26 red, 26 black. Draw 2 without replacement. P(both red) = ?",
+                options: ["25/102", "1/4", "13/51", "169/2704"],
+                answer: "A",
+                explanation: "P(first red)=26/52=1/2, P(second red|first red)=25/51. Dependent: (1/2)×(25/51)=25/102.",
+                type: "dependent"
+            },
+            {
+                question: "Draw 2 cards without replacement. P(both face cards) = ?",
+                options: ["11/221", "9/169", "3/13", "12/52"],
+                answer: "A",
+                explanation: "Face cards: J,Q,K (12 total). P(first face)=12/52=3/13, P(second face|first face)=11/51. Dependent: (3/13)×(11/51)=33/663=11/221.",
+                type: "dependent"
+            },
+
+            // Mutually Exclusive Events (61-80)
+            {
+                question: "Die rolled. P(2 or 5) = ?",
+                options: ["1/3", "1/6", "1/18", "2/3"],
+                answer: "A",
+                explanation: "Events are mutually exclusive: P(2 or 5)=P(2)+P(5)=1/6+1/6=2/6=1/3.",
+                type: "mutually-exclusive"
+            },
+            {
+                question: "P(A)=0.4, P(B)=0.3, mutually exclusive. P(A or B) = ?",
+                options: ["0.7", "0.12", "0.1", "1.0"],
+                answer: "A",
+                explanation: "Mutually exclusive: P(A∪B)=P(A)+P(B)=0.4+0.3=0.7",
+                type: "mutually-exclusive"
+            },
+            {
+                question: "Card drawn. P(heart or spade) = ?",
+                options: ["1/2", "1/4", "1/13", "2/13"],
+                answer: "A",
+                explanation: "Heart and spade are mutually exclusive suits: P(heart)=1/4, P(spade)=1/4. P(heart or spade)=1/4+1/4=1/2.",
+                type: "mutually-exclusive"
+            },
+            {
+                question: "Die rolled. P(even or less than 3) = ?",
+                options: ["2/3", "1/2", "5/6", "4/6"],
+                answer: "A",
+                explanation: "Even: {2,4,6}, Less than 3: {1,2}. Not mutually exclusive (2 is in both). Use general rule.",
+                type: "mutually-exclusive"
+            },
+            {
+                question: "Events A and B are mutually exclusive. P(A and B) = ?",
+                options: ["0", "1", "P(A)×P(B)", "P(A)+P(B)"],
+                answer: "A",
+                explanation: "Mutually exclusive events cannot occur together, so P(A∩B)=0.",
+                type: "mutually-exclusive"
+            },
+            {
+                question: "P(rain)=0.3, P(snow)=0.1 (mutually exclusive). P(rain or snow) = ?",
+                options: ["0.4", "0.03", "0.2", "0.5"],
+                answer: "A",
+                explanation: "Mutually exclusive: 0.3 + 0.1 = 0.4",
+                type: "mutually-exclusive"
+            },
+            {
+                question: "Spinner: 1-8. P(prime or even) = ?",
+                options: ["3/4", "1/2", "5/8", "7/8"],
+                answer: "A",
+                explanation: "Prime: {2,3,5,7}, Even: {2,4,6,8}. Not mutually exclusive (2 in both).",
+                type: "mutually-exclusive"
+            },
+            {
+                question: "Two mutually exclusive events: P(A)=0.6, P(B)=0.2. P(A or B) = ?",
+                options: ["0.8", "0.12", "0.4", "0.6"],
+                answer: "A",
+                explanation: "0.6 + 0.2 = 0.8",
+                type: "mutually-exclusive"
+            },
+            {
+                question: "Die rolled. P(1 or 6) = ?",
+                options: ["1/3", "1/36", "1/6", "2/36"],
+                answer: "A",
+                explanation: "Mutually exclusive: 1/6 + 1/6 = 2/6 = 1/3",
+                type: "mutually-exclusive"
+            },
+            {
+                question: "If A and B are mutually exclusive, which is true?",
+                options: ["P(A∩B)=0", "P(A∪B)=P(A)×P(B)", "P(A|B)=P(A)", "P(A)+P(B)=1"],
+                answer: "A",
+                explanation: "Mutually exclusive events cannot occur together, so their intersection probability is 0.",
+                type: "mutually-exclusive"
+            },
+
+            // General Addition Rule (81-100)
+            {
+                question: "P(A)=0.5, P(B)=0.4, P(A∩B)=0.2. P(A∪B) = ?",
+                options: ["0.7", "0.9", "0.2", "0.1"],
+                answer: "A",
+                explanation: "General addition: P(A∪B)=P(A)+P(B)-P(A∩B)=0.5+0.4-0.2=0.7",
+                type: "general-addition"
+            },
+            {
+                question: "P(A)=0.6, P(B)=0.3, P(A∩B)=0.1. P(A∪B) = ?",
+                options: ["0.8", "0.9", "0.18", "0.4"],
+                answer: "A",
+                explanation: "0.6 + 0.3 - 0.1 = 0.8",
+                type: "general-addition"
+            },
+            {
+                question: "Survey: 60% like tea, 40% like coffee, 20% like both. Like tea or coffee?",
+                options: ["80%", "100%", "60%", "20%"],
+                answer: "A",
+                explanation: "P(T∪C)=60%+40%-20%=80%",
+                type: "general-addition"
+            },
+            {
+                question: "P(A)=0.7, P(B)=0.5, P(A∩B)=0.3. P(A∪B) = ?",
+                options: ["0.9", "1.2", "0.4", "0.35"],
+                answer: "A",
+                explanation: "0.7 + 0.5 - 0.3 = 0.9",
+                type: "general-addition"
+            },
+            {
+                question: "Class: 70% passed math, 60% passed science, 50% passed both. Passed at least one?",
+                options: ["80%", "130%", "10%", "50%"],
+                answer: "A",
+                explanation: "70% + 60% - 50% = 80%",
+                type: "general-addition"
+            },
+            {
+                question: "P(A)=0.4, P(B)=0.5, P(A∩B)=0.2. P(A∪B) = ?",
+                options: ["0.7", "0.9", "0.1", "0.08"],
+                answer: "A",
+                explanation: "0.4 + 0.5 - 0.2 = 0.7",
+                type: "general-addition"
+            },
+            {
+                question: "If P(A∪B)=0.8, P(A)=0.5, P(B)=0.4, find P(A∩B)",
+                options: ["0.1", "0.9", "0.2", "0.3"],
+                answer: "A",
+                explanation: "P(A∩B)=P(A)+P(B)-P(A∪B)=0.5+0.4-0.8=0.1",
+                type: "general-addition"
+            },
+            {
+                question: "For any events A and B: P(A∪B) = ?",
+                options: ["P(A)+P(B)-P(A∩B)", "P(A)+P(B)", "P(A)×P(B)", "P(A)+P(B)+P(A∩B)"],
+                answer: "A",
+                explanation: "This is the general addition rule for probability.",
+                type: "general-addition"
+            },
+            {
+                question: "P(A)=0.8, P(B)=0.6, P(A∪B)=0.9. P(A∩B) = ?",
+                options: ["0.5", "1.4", "0.2", "0.48"],
+                answer: "A",
+                explanation: "P(A∩B)=0.8+0.6-0.9=0.5",
+                type: "general-addition"
+            },
+            {
+                question: "If P(A∩B)=0, then P(A∪B) = ?",
+                options: ["P(A)+P(B)", "P(A)×P(B)", "0", "1"],
+                answer: "A",
+                explanation: "When P(A∩B)=0, events are mutually exclusive, so P(A∪B)=P(A)+P(B).",
+                type: "general-addition"
+            }
+        ];
+
+        // Probability tips
+        const probabilityTips = [
+            "Tip: Probability always ranges from 0 to 1 (or 0% to 100%)",
+            "Tip: P(A') = 1 - P(A) (Complement Rule)",
+            "Tip: For independent events: P(A and B) = P(A) × P(B)",
+            "Tip: For mutually exclusive events: P(A or B) = P(A) + P(B)",
+            "Tip: General addition: P(A or B) = P(A) + P(B) - P(A and B)",
+            "Tip: For dependent events: P(A then B) = P(A) × P(B|A)",
+            "Tip: Sample space is all possible outcomes",
+            "Tip: Favorable outcomes ÷ Total outcomes = Probability"
+        ];
+
+        // Common probability values
+        const commonProbabilities = {
+            coin: {
+                heads: 0.5,
+                tails: 0.5
+            },
+            dice: {
+                specific: 1/6,
+                even: 0.5,
+                odd: 0.5,
+                prime: 2/3,
+                greaterThan4: 1/3
+            },
+            cards: {
+                suit: 1/4,
+                face: 3/13,
+                ace: 1/13,
+                heart: 1/4,
+                red: 1/2
+            }
+        };
+
+        // Practice problems
+        const practiceProblems = [
+            {
+                problem: "A fair coin is tossed 3 times. What's the probability of getting exactly 2 heads?",
+                solution: "P(2 heads) = 3/8",
+                explanation: "Sample space has 8 equally likely outcomes. Favorable: HHT, HTH, THH (3 outcomes). P=3/8."
+            },
+            {
+                problem: "Two dice are rolled. What's the probability of getting a sum of 7?",
+                solution: "P(sum=7) = 1/6",
+                explanation: "There are 6 ways to get sum 7: (1,6),(2,5),(3,4),(4,3),(5,2),(6,1). Total outcomes: 36. P=6/36=1/6."
+            },
+            {
+                problem: "A bag has 4 red, 3 blue, and 5 green marbles. Two marbles are drawn without replacement. What's P(both are green)?",
+                solution: "P(both green) = 5/33",
+                explanation: "P(first green)=5/12, P(second green|first green)=4/11. Multiply: (5/12)×(4/11)=20/132=5/33."
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            studentName: "",
+            startTime: null,
+            basicScore: 0,
+            independentScore: 0,
+            dependentScore: 0,
+            mutuallyExclusiveScore: 0,
+            vennCanvas: null,
+            vennCtx: null,
+            selectedDieFaces: [],
+            selectedCoinFaces: [],
+            selectedCardSuits: []
+        };
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const probabilityTip = document.getElementById('probabilityTip');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const feedbackExplanation = document.getElementById('feedbackExplanation');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const basicScore = document.getElementById('basicScore');
+        const independentScore = document.getElementById('independentScore');
+        const dependentScore = document.getElementById('dependentScore');
+        const mutuallyExclusiveScore = document.getElementById('mutuallyExclusiveScore');
+
+        // Practice area elements
+        const basicProbabilityResult = document.getElementById('basicProbabilityResult');
+        const basicProbabilitySteps = document.getElementById('basicProbabilitySteps');
+        const sampleSpaceDisplay = document.getElementById('sampleSpaceDisplay');
+        const sampleSpaceInfo = document.getElementById('sampleSpaceInfo');
+        const independentResult = document.getElementById('independentResult');
+        const independentSteps = document.getElementById('independentSteps');
+        const dependentResult = document.getElementById('dependentResult');
+        const dependentSteps = document.getElementById('dependentSteps');
+        const mutuallyExclusiveResult = document.getElementById('mutuallyExclusiveResult');
+        const mutuallyExclusiveSteps = document.getElementById('mutuallyExclusiveSteps');
+        const vennResult = document.getElementById('vennResult');
+        const treeDiagramInfo = document.getElementById('treeDiagramInfo');
+        const countingResult = document.getElementById('countingResult');
+        const countingSteps = document.getElementById('countingSteps');
+        const dieProbabilityResult = document.getElementById('dieProbabilityResult');
+        const selectedFaces = document.getElementById('selectedFaces');
+        const coinProbabilityResult = document.getElementById('coinProbabilityResult');
+        const coinOutcomes = document.getElementById('coinOutcomes');
+        const cardProbabilityResult = document.getElementById('cardProbabilityResult');
+        const cardProbabilitySteps = document.getElementById('cardProbabilitySteps');
+
+        // Initialize
+        function initApp() {
+            setupEventListeners();
+            showWelcomePage();
+            setupProbabilityTools();
+            initializeCanvases();
+            setupSliders();
+            generateSampleSpace();
+            drawVennDiagram();
+        }
+
+        // Setup probability tools
+        function setupProbabilityTools() {
+            // Initialize with default values
+            updateProbabilityDisplays();
+        }
+
+        // Initialize canvases
+        function initializeCanvases() {
+            // Venn diagram canvas
+            appState.vennCanvas = document.getElementById('vennCanvas');
+            appState.vennCtx = appState.vennCanvas.getContext('2d');
+        }
+
+        // Setup sliders
+        function setupSliders() {
+            const probASlider = document.getElementById('probASlider');
+            const probBSlider = document.getElementById('probEventSlider');
+            const probA = document.getElementById('probA');
+            const probEvent = document.getElementById('probEvent');
+            
+            probASlider.addEventListener('input', function() {
+                probA.value = (this.value / 100).toFixed(2);
+                calculateIndependentProbability();
+            });
+            
+            probA.addEventListener('change', function() {
+                probASlider.value = (this.value * 100);
+                calculateIndependentProbability();
+            });
+            
+            probBSlider.addEventListener('input', function() {
+                probEvent.value = (this.value / 100).toFixed(2);
+                calculateComplement();
+            });
+            
+            probEvent.addEventListener('change', function() {
+                probBSlider.value = (this.value * 100);
+                calculateComplement();
+            });
+        }
+
+        // Basic probability calculator
+        function calculateBasicProbability() {
+            const favorable = parseInt(document.getElementById('favorableOutcomes').value) || 1;
+            const total = parseInt(document.getElementById('totalOutcomes').value) || 6;
+            
+            if (favorable <= 0 || total <= 0 || favorable > total) {
+                basicProbabilityResult.innerHTML = "Please enter valid numbers: 0 < favorable ≤ total";
+                return;
+            }
+            
+            const probability = favorable / total;
+            const percentage = (probability * 100).toFixed(2);
+            
+            basicProbabilityResult.innerHTML = `
+                <strong>P(event) = ${favorable}/${total} = ${probability.toFixed(4)}</strong><br>
+                <strong>${percentage}%</strong><br><br>
+                <strong>Fraction:</strong> ${favorable}/${total}<br>
+                <strong>Decimal:</strong> ${probability.toFixed(4)}<br>
+                <strong>Percentage:</strong> ${percentage}%`;
+            
+            basicProbabilitySteps.innerHTML = `
+                <strong>Step-by-step:</strong><br>
+                1. Count favorable outcomes: ${favorable}<br>
+                2. Count total outcomes: ${total}<br>
+                3. Divide: ${favorable} ÷ ${total} = ${probability.toFixed(4)}<br>
+                4. Multiply by 100 for percentage: ${probability.toFixed(4)} × 100 = ${percentage}%`;
+            
+            basicProbabilityResult.classList.add('pulse');
+            setTimeout(() => basicProbabilityResult.classList.remove('pulse'), 1000);
+        }
+
+        function explainBasicProbability() {
+            alert(`BASIC PROBABILITY FORMULA:
+
+Probability = (Number of favorable outcomes) ÷ (Total number of possible outcomes)
+
+EXAMPLES:
+
+1. Rolling a die:
+   • Favorable: rolling a 3 (1 outcome)
+   • Total: 6 possible outcomes (1,2,3,4,5,6)
+   • P(3) = 1/6 ≈ 0.1667 = 16.67%
+
+2. Drawing a card:
+   • Favorable: drawing a heart (13 cards)
+   • Total: 52 cards
+   • P(heart) = 13/52 = 1/4 = 0.25 = 25%
+
+KEY POINTS:
+• Probability always ranges from 0 to 1 (or 0% to 100%)
+• P(event) = 0 means impossible
+• P(event) = 1 means certain
+• P(event') = 1 - P(event) (complement rule)`);
+        }
+
+        function generateDiceProblem() {
+            const dieNumber = Math.floor(Math.random() * 6) + 1;
+            document.getElementById('favorableOutcomes').value = 1;
+            document.getElementById('totalOutcomes').value = 6;
+            
+            basicProbabilityResult.innerHTML = `
+                <strong>Dice Example:</strong><br>
+                Probability of rolling a ${dieNumber} on a fair die<br><br>
+                P(${dieNumber}) = 1/6 ≈ 0.1667 = 16.67%`;
+            
+            calculateBasicProbability();
+        }
+
+        // Sample space generator
+        function generateSampleSpace() {
+            const event1 = parseInt(document.getElementById('event1Outcomes').value) || 2;
+            const event2 = parseInt(document.getElementById('event2Outcomes').value) || 3;
+            
+            const outcomes1 = ['H', 'T', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'].slice(0, event1);
+            const outcomes2 = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].slice(0, event2);
+            
+            sampleSpaceDisplay.innerHTML = '';
+            let totalOutcomes = 0;
+            
+            for (let i = 0; i < outcomes1.length; i++) {
+                for (let j = 0; j < outcomes2.length; j++) {
+                    const outcome = `${outcomes1[i]}${outcomes2[j]}`;
+                    const outcomeElement = document.createElement('div');
+                    outcomeElement.className = 'outcome-item';
+                    outcomeElement.textContent = outcome;
+                    outcomeElement.onclick = function() { this.classList.toggle('highlight'); };
+                    sampleSpaceDisplay.appendChild(outcomeElement);
+                    totalOutcomes++;
+                }
+            }
+            
+            sampleSpaceInfo.innerHTML = `
+                <strong>Sample Space Generated</strong><br>
+                Total outcomes: ${totalOutcomes}<br>
+                Event 1: ${event1} outcomes, Event 2: ${event2} outcomes<br>
+                Fundamental Counting Principle: ${event1} × ${event2} = ${totalOutcomes}`;
+            
+            sampleSpaceInfo.classList.add('pulse');
+            setTimeout(() => sampleSpaceInfo.classList.remove('pulse'), 1000);
+        }
+
+        function clearSampleSpace() {
+            sampleSpaceDisplay.innerHTML = '';
+            sampleSpaceInfo.innerHTML = 'Select outcomes to highlight them';
+        }
+
+        function explainSampleSpace() {
+            alert(`SAMPLE SPACE:
+
+DEFINITION:
+• The set of all possible outcomes of an experiment
+• Usually denoted by S
+• Total number of outcomes = n(S)
+
+EXAMPLES:
+
+1. Coin toss:
+   • S = {Heads, Tails}
+   • n(S) = 2
+
+2. Die roll:
+   • S = {1, 2, 3, 4, 5, 6}
+   • n(S) = 6
+
+3. Two coin tosses:
+   • S = {HH, HT, TH, TT}
+   • n(S) = 4
+
+FUNDAMENTAL COUNTING PRINCIPLE:
+If event A has m outcomes and event B has n outcomes, then the total number of outcomes for A followed by B is m × n.
+
+IMPORTANCE:
+• The denominator in probability calculations
+• Helps identify all possible outcomes
+• Essential for calculating probabilities of combined events`);
+        }
+
+        // Independent events calculator
+        function calculateIndependentProbability() {
+            const probA = parseFloat(document.getElementById('probA').value) || 0.5;
+            const probB = parseFloat(document.getElementById('probB').value) || 0.5;
+            
+            if (probA < 0 || probA > 1 || probB < 0 || probB > 1) {
+                independentResult.innerHTML = "Probabilities must be between 0 and 1";
+                return;
+            }
+            
+            const probBoth = probA * probB;
+            const probEither = 1 - ((1 - probA) * (1 - probB));
+            
+            independentResult.innerHTML = `
+                <strong>Independent Events:</strong><br><br>
+                <strong>P(A and B) = P(A) × P(B)</strong><br>
+                = ${probA} × ${probB}<br>
+                = ${probBoth.toFixed(4)} = ${(probBoth * 100).toFixed(2)}%<br><br>
+                <strong>P(at least one) = 1 - P(neither)</strong><br>
+                = 1 - (${(1-probA).toFixed(2)} × ${(1-probB).toFixed(2)})<br>
+                = ${probEither.toFixed(4)} = ${(probEither * 100).toFixed(2)}%`;
+            
+            independentSteps.innerHTML = `
+                <strong>Step-by-step for P(A and B):</strong><br>
+                1. Identify events are independent (one doesn't affect the other)<br>
+                2. Multiply individual probabilities: ${probA} × ${probB}<br>
+                3. Calculate: ${probA} × ${probB} = ${probBoth.toFixed(4)}<br><br>
+                <strong>For independent events:</strong><br>
+                • P(A and B) = P(A) × P(B)<br>
+                • P(A or B) = P(A) + P(B) - P(A)×P(B)`;
+            
+            independentResult.classList.add('pulse');
+            setTimeout(() => independentResult.classList.remove('pulse'), 1000);
+        }
+
+        function explainIndependentEvents() {
+            alert(`INDEPENDENT EVENTS:
+
+DEFINITION:
+• Two events are independent if the occurrence of one does NOT affect the probability of the other
+• Example: Tossing a coin twice
+
+FORMULA:
+• P(A and B) = P(A) × P(B)
+
+EXAMPLES:
+
+1. Coin toss (twice):
+   • P(Heads on first) = 1/2
+   • P(Heads on second) = 1/2
+   • P(Heads on both) = (1/2) × (1/2) = 1/4
+
+2. Die roll (twice):
+   • P(6 on first) = 1/6
+   • P(6 on second) = 1/6
+   • P(6 on both) = (1/6) × (1/6) = 1/36
+
+KEY TESTS FOR INDEPENDENCE:
+1. P(A|B) = P(A)   (Probability of A given B equals probability of A)
+2. P(B|A) = P(B)   (Probability of B given A equals probability of B)
+3. P(A∩B) = P(A)×P(B)
+
+COMMON INDEPENDENT EVENTS:
+• Tossing coins multiple times
+• Rolling dice multiple times
+• Spinning spinners multiple times
+• Drawing cards WITH replacement`);
+        }
+
+        function coinTossExample() {
+            document.getElementById('probA').value = 0.5;
+            document.getElementById('probB').value = 0.5;
+            
+            independentResult.innerHTML = `
+                <strong>Coin Toss Example:</strong><br>
+                Two fair coins tossed independently<br><br>
+                P(Heads on first) = 1/2<br>
+                P(Heads on second) = 1/2<br><br>
+                <strong>P(both heads) = (1/2) × (1/2) = 1/4 = 0.25 = 25%</strong>`;
+            
+            calculateIndependentProbability();
+        }
+
+        // Dependent events calculator
+        function calculateDependentProbability() {
+            const totalItems = parseInt(document.getElementById('totalItems').value) || 10;
+            const desiredItems = parseInt(document.getElementById('desiredItems').value) || 3;
+            
+            if (desiredItems <= 0 || totalItems <= 0 || desiredItems > totalItems) {
+                dependentResult.innerHTML = "Please enter valid numbers: 0 < desired ≤ total";
+                return;
+            }
+            
+            // Probability of drawing desired item first
+            const probFirst = desiredItems / totalItems;
+            
+            // Probability of drawing desired item second, given first was desired
+            const probSecondGivenFirst = (desiredItems - 1) / (totalItems - 1);
+            
+            // Probability of both
+            const probBoth = probFirst * probSecondGivenFirst;
+            
+            // Probability of at least one
+            const probNoneFirst = (totalItems - desiredItems) / totalItems;
+            const probNoneSecondGivenNoneFirst = (totalItems - desiredItems - 1) / (totalItems - 1);
+            const probNone = probNoneFirst * probNoneSecondGivenNoneFirst;
+            const probAtLeastOne = 1 - probNone;
+            
+            dependentResult.innerHTML = `
+                <strong>Dependent Events (without replacement):</strong><br><br>
+                <strong>First draw:</strong> P(desired) = ${desiredItems}/${totalItems} = ${probFirst.toFixed(4)}<br>
+                <strong>Second draw:</strong> P(desired|first was desired) = ${desiredItems-1}/${totalItems-1} = ${probSecondGivenFirst.toFixed(4)}<br><br>
+                <strong>P(both desired) = ${probFirst.toFixed(4)} × ${probSecondGivenFirst.toFixed(4)}</strong><br>
+                = ${probBoth.toFixed(4)} = ${(probBoth * 100).toFixed(2)}%<br><br>
+                <strong>P(at least one) = 1 - P(none)</strong><br>
+                = ${probAtLeastOne.toFixed(4)} = ${(probAtLeastOne * 100).toFixed(2)}%`;
+            
+            dependentSteps.innerHTML = `
+                <strong>Step-by-step for dependent events:</strong><br>
+                1. First draw: ${desiredItems} desired out of ${totalItems} total<br>
+                   P(first desired) = ${desiredItems}/${totalItems} = ${probFirst.toFixed(4)}<br>
+                2. After first desired drawn: ${desiredItems-1} desired left out of ${totalItems-1} total<br>
+                   P(second desired|first desired) = ${desiredItems-1}/${totalItems-1} = ${probSecondGivenFirst.toFixed(4)}<br>
+                3. Multiply: ${probFirst.toFixed(4)} × ${probSecondGivenFirst.toFixed(4)} = ${probBoth.toFixed(4)}<br><br>
+                <strong>For dependent events:</strong><br>
+                • P(A then B) = P(A) × P(B|A)<br>
+                • The second probability depends on what happened first`;
+            
+            dependentResult.classList.add('pulse');
+            setTimeout(() => dependentResult.classList.remove('pulse'), 1000);
+        }
+
+        function explainDependentEvents() {
+            alert(`DEPENDENT EVENTS:
+
+DEFINITION:
+• Two events are dependent if the occurrence of one AFFECTS the probability of the other
+• Example: Drawing cards without replacement
+
+FORMULA:
+• P(A then B) = P(A) × P(B|A)
+• Where P(B|A) means "probability of B given A occurred"
+
+EXAMPLES:
+
+1. Drawing cards without replacement:
+   • Deck: 52 cards, 4 aces
+   • P(first ace) = 4/52 = 1/13
+   • P(second ace|first ace) = 3/51 = 1/17
+   • P(both aces) = (1/13) × (1/17) = 1/221
+
+2. Marbles without replacement:
+   • Bag: 3 red, 2 blue
+   • P(first red) = 3/5
+   • P(second red|first red) = 2/4 = 1/2
+   • P(both red) = (3/5) × (1/2) = 3/10
+
+KEY POINTS:
+• "Without replacement" means dependent
+• "With replacement" means independent
+• The denominator changes after the first draw
+• P(B|A) = (favorable outcomes after A) ÷ (total outcomes after A)`);
+        }
+
+        function cardDrawingExample() {
+            document.getElementById('totalItems').value = 52;
+            document.getElementById('desiredItems').value = 4;
+            
+            dependentResult.innerHTML = `
+                <strong>Card Drawing Example:</strong><br>
+                Drawing 2 aces from a standard deck without replacement<br><br>
+                P(first ace) = 4/52 = 1/13<br>
+                P(second ace|first ace) = 3/51 = 1/17<br><br>
+                <strong>P(both aces) = (1/13) × (1/17) = 1/221 ≈ 0.0045 = 0.45%</strong>`;
+            
+            calculateDependentProbability();
+        }
+
+        // Mutually exclusive events calculator
+        function calculateMutuallyExclusive() {
+            const probA = parseFloat(document.getElementById('probA_mutual').value) || 0.3;
+            const probB = parseFloat(document.getElementById('probB_mutual').value) || 0.2;
+            
+            if (probA < 0 || probA > 1 || probB < 0 || probB > 1) {
+                mutuallyExclusiveResult.innerHTML = "Probabilities must be between 0 and 1";
+                return;
+            }
+            
+            if (probA + probB > 1) {
+                mutuallyExclusiveResult.innerHTML = "Sum exceeds 1. Events cannot be mutually exclusive with these probabilities.";
+                return;
+            }
+            
+            const probEither = probA + probB;
+            
+            mutuallyExclusiveResult.innerHTML = `
+                <strong>Mutually Exclusive Events:</strong><br><br>
+                <strong>P(A or B) = P(A) + P(B)</strong><br>
+                = ${probA} + ${probB}<br>
+                = ${probEither.toFixed(4)} = ${(probEither * 100).toFixed(2)}%<br><br>
+                <strong>P(neither) = 1 - P(A or B)</strong><br>
+                = 1 - ${probEither.toFixed(4)}<br>
+                = ${(1 - probEither).toFixed(4)} = ${((1 - probEither) * 100).toFixed(2)}%`;
+            
+            mutuallyExclusiveSteps.innerHTML = `
+                <strong>Step-by-step for mutually exclusive events:</strong><br>
+                1. Verify events cannot occur together (mutually exclusive)<br>
+                2. Add individual probabilities: ${probA} + ${probB}<br>
+                3. Calculate: ${probA} + ${probB} = ${probEither.toFixed(4)}<br><br>
+                <strong>For mutually exclusive events:</strong><br>
+                • P(A or B) = P(A) + P(B)<br>
+                • P(A and B) = 0<br>
+                • "Or" means addition`;
+            
+            mutuallyExclusiveResult.classList.add('pulse');
+            setTimeout(() => mutuallyExclusiveResult.classList.remove('pulse'), 1000);
+        }
+
+        function explainMutuallyExclusive() {
+            alert(`MUTUALLY EXCLUSIVE EVENTS:
+
+DEFINITION:
+• Two events are mutually exclusive if they CANNOT occur at the same time
+• Example: Rolling a die and getting both 2 and 5 on the same roll
+
+FORMULA:
+• P(A or B) = P(A) + P(B)
+• P(A and B) = 0
+
+EXAMPLES:
+
+1. Die roll:
+   • P(2 or 5) = P(2) + P(5) = 1/6 + 1/6 = 2/6 = 1/3
+
+2. Card draw:
+   • P(heart or spade) = P(heart) + P(spade) = 1/4 + 1/4 = 1/2
+
+3. Coin toss:
+   • P(heads or tails) = P(heads) + P(tails) = 1/2 + 1/2 = 1
+
+KEY TESTS:
+1. Can both events happen together? If no, they're mutually exclusive
+2. Check if P(A∩B) = 0
+
+CONTRAST WITH INDEPENDENT EVENTS:
+• Mutually exclusive: P(A∩B) = 0
+• Independent: P(A∩B) = P(A)×P(B)
+• Events can be neither mutually exclusive nor independent`);
+        }
+
+        function diceExample() {
+            document.getElementById('probA_mutual').value = (1/6).toFixed(4);
+            document.getElementById('probB_mutual').value = (1/6).toFixed(4);
+            
+            mutuallyExclusiveResult.innerHTML = `
+                <strong>Dice Example:</strong><br>
+                Rolling a fair die once<br><br>
+                P(rolling a 2) = 1/6<br>
+                P(rolling a 5) = 1/6<br><br>
+                <strong>P(2 or 5) = 1/6 + 1/6 = 2/6 = 1/3 ≈ 0.3333 = 33.33%</strong>`;
+            
+            calculateMutuallyExclusive();
+        }
+
+        // Venn diagram functions
+        function drawVennDiagram() {
+            const ctx = appState.vennCtx;
+            const width = appState.vennCanvas.width;
+            const height = appState.vennCanvas.height;
+            
+            ctx.clearRect(0, 0, width, height);
+            
+            // Get probabilities
+            const probA = parseFloat(document.getElementById('probA_venn').value) || 0.4;
+            const probB = parseFloat(document.getElementById('probB_venn').value) || 0.3;
+            const probIntersection = parseFloat(document.getElementById('probIntersection').value) || 0.1;
+            
+            // Calculate other probabilities
+            const probAOnly = probA - probIntersection;
+            const probBOnly = probB - probIntersection;
+            const probUnion = probA + probB - probIntersection;
+            const probOutside = 1 - probUnion;
+            
+            // Validate probabilities
+            if (probA < 0 || probA > 1 || probB < 0 || probB > 1 || probIntersection < 0 || probIntersection > 1) {
+                vennResult.innerHTML = "Probabilities must be between 0 and 1";
+                return;
+            }
+            
+            if (probIntersection > Math.min(probA, probB)) {
+                vennResult.innerHTML = "P(A∩B) cannot exceed P(A) or P(B)";
+                return;
+            }
+            
+            if (probUnion > 1) {
+                vennResult.innerHTML = "P(A∪B) cannot exceed 1";
+                return;
+            }
+            
+            // Draw circles
+            const centerX1 = width * 0.4;
+            const centerX2 = width * 0.6;
+            const centerY = height * 0.5;
+            const radius = 80;
+            
+            // Circle A (left)
+            ctx.strokeStyle = '#2196F3';
+            ctx.lineWidth = 3;
+            ctx.fillStyle = 'rgba(33, 150, 243, 0.2)';
+            ctx.beginPath();
+            ctx.arc(centerX1, centerY, radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            
+            // Circle B (right)
+            ctx.strokeStyle = '#4CAF50';
+            ctx.fillStyle = 'rgba(76, 175, 80, 0.2)';
+            ctx.beginPath();
+            ctx.arc(centerX2, centerY, radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            
+            // Labels
+            ctx.fillStyle = '#2196F3';
+            ctx.font = 'bold 16px Arial';
+            ctx.fillText('A', centerX1 - 20, centerY);
+            
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillText('B', centerX2 + 20, centerY);
+            
+            // Probability labels
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = '14px Arial';
+            
+            // A only
+            ctx.fillText(`P(A only) = ${probAOnly.toFixed(2)}`, centerX1 - 60, centerY - 30);
+            
+            // B only
+            ctx.fillText(`P(B only) = ${probBOnly.toFixed(2)}`, centerX2 + 20, centerY - 30);
+            
+            // Intersection
+            ctx.fillStyle = '#9C27B0';
+            ctx.fillText(`P(A∩B) = ${probIntersection.toFixed(2)}`, (centerX1 + centerX2) / 2, centerY);
+            
+            // Outside
+            ctx.fillStyle = '#FF9800';
+            ctx.fillText(`P(none) = ${probOutside.toFixed(2)}`, width / 2, height - 20);
+            
+            // Update result display
+            vennResult.innerHTML = `
+                <strong>Venn Diagram Analysis:</strong><br><br>
+                <strong>P(A) = ${probA}</strong><br>
+                <strong>P(B) = ${probB}</strong><br>
+                <strong>P(A∩B) = ${probIntersection}</strong><br><br>
+                <strong>P(A only) = P(A) - P(A∩B) = ${probA} - ${probIntersection} = ${probAOnly.toFixed(4)}</strong><br>
+                <strong>P(B only) = P(B) - P(A∩B) = ${probB} - ${probIntersection} = ${probBOnly.toFixed(4)}</strong><br><br>
+                <strong>P(A∪B) = P(A) + P(B) - P(A∩B)</strong><br>
+                = ${probA} + ${probB} - ${probIntersection}<br>
+                = ${probUnion.toFixed(4)} = ${(probUnion * 100).toFixed(2)}%<br><br>
+                <strong>P(neither) = 1 - P(A∪B) = ${probOutside.toFixed(4)} = ${(probOutside * 100).toFixed(2)}%</strong>`;
+            
+            vennResult.classList.add('pulse');
+            setTimeout(() => vennResult.classList.remove('pulse'), 1000);
+        }
+
+        function explainVennDiagrams() {
+            alert(`VENN DIAGRAMS IN PROBABILITY:
+
+WHAT IS A VENN DIAGRAM?
+• A visual representation of sets and their relationships
+• Circles represent events
+• Overlap represents intersection
+
+KEY REGIONS:
+
+1. A only: Elements in A but not in B
+2. B only: Elements in B but not in A
+3. A∩B: Elements in both A and B (intersection)
+4. Outside: Elements in neither A nor B
+
+PROBABILITY FORMULAS:
+
+1. P(A only) = P(A) - P(A∩B)
+2. P(B only) = P(B) - P(A∩B)
+3. P(A∪B) = P(A) + P(B) - P(A∩B)
+4. P(neither) = 1 - P(A∪B)
+
+EXAMPLE:
+In a class of 100 students:
+• 60 like math (A)
+• 40 like science (B)
+• 20 like both (A∩B)
+
+From Venn diagram:
+• Math only: 60 - 20 = 40
+• Science only: 40 - 20 = 20
+• Like math or science: 60 + 40 - 20 = 80
+• Like neither: 100 - 80 = 20`);
+        }
+
+        function calculateUnionProbability() {
+            const probA = parseFloat(document.getElementById('probA_venn').value) || 0.4;
+            const probB = parseFloat(document.getElementById('probB_venn').value) || 0.3;
+            const probIntersection = parseFloat(document.getElementById('probIntersection').value) || 0.1;
+            
+            const probUnion = probA + probB - probIntersection;
+            
+            alert(`UNION PROBABILITY CALCULATION:
+
+P(A∪B) = P(A) + P(B) - P(A∩B)
+
+Given:
+P(A) = ${probA}
+P(B) = ${probB}
+P(A∩B) = ${probIntersection}
+
+Calculation:
+P(A∪B) = ${probA} + ${probB} - ${probIntersection}
+        = ${probUnion.toFixed(4)}
+
+Interpretation:
+• Probability that either A or B or both occur
+• ${(probUnion * 100).toFixed(2)}% chance
+• Add individual probabilities, subtract intersection (to avoid double-counting)
+
+General Addition Rule:
+This formula works for ANY two events, whether they're mutually exclusive, independent, or dependent.`);
+        }
+
+        // Complement rule
+        function calculateComplement() {
+            const probEvent = parseFloat(document.getElementById('probEvent').value) || 0.25;
+            
+            if (probEvent < 0 || probEvent > 1) {
+                document.getElementById('probEventValue').textContent = "Invalid";
+                document.getElementById('probComplementValue').textContent = "Invalid";
+                return;
+            }
+            
+            const probComplement = 1 - probEvent;
+            
+            document.getElementById('probEventValue').textContent = probEvent.toFixed(4);
+            document.getElementById('probComplementValue').textContent = probComplement.toFixed(4);
+            
+            // Visual feedback
+            const probEventValue = document.getElementById('probEventValue');
+            const probComplementValue = document.getElementById('probComplementValue');
+            
+            probEventValue.classList.add('pulse');
+            probComplementValue.classList.add('pulse');
+            setTimeout(() => {
+                probEventValue.classList.remove('pulse');
+                probComplementValue.classList.remove('pulse');
+            }, 1000);
+        }
+
+        function explainComplement() {
+            alert(`COMPLEMENT RULE:
+
+DEFINITION:
+• The complement of event A (denoted A') is everything that is NOT A
+• A and A' are mutually exclusive and exhaustive
+
+FORMULA:
+• P(A') = 1 - P(A)
+• P(A) + P(A') = 1
+
+EXAMPLES:
+
+1. Coin toss:
+   • P(heads) = 0.5
+   • P(not heads) = P(tails) = 1 - 0.5 = 0.5
+
+2. Die roll:
+   • P(6) = 1/6
+   • P(not 6) = 1 - 1/6 = 5/6
+
+3. Weather:
+   • P(rain) = 0.3
+   • P(no rain) = 1 - 0.3 = 0.7
+
+USEFUL APPLICATIONS:
+1. Sometimes easier to calculate P(A') than P(A)
+2. P(at least one) = 1 - P(none)
+3. P(A) = 1 - P(A')
+
+VISUALIZATION:
+In a probability space of size 1 (or 100%), the complement is whatever remains after removing event A.`);
+        }
+
+        function weatherExample() {
+            document.getElementById('probEvent').value = 0.3;
+            document.getElementById('probEventSlider').value = 30;
+            
+            alert(`WEATHER EXAMPLE:
+
+Suppose the probability of rain tomorrow is 30%.
+
+Using complement rule:
+P(rain) = 0.3
+P(no rain) = 1 - P(rain) = 1 - 0.3 = 0.7
+
+Interpretation:
+• 30% chance it will rain
+• 70% chance it will NOT rain
+
+The complement rule is useful because sometimes it's easier to think about what WON'T happen than what WILL happen.`);
+            
+            calculateComplement();
+        }
+
+        // Tree diagram generator
+        function generateTreeDiagram() {
+            const firstStage = parseInt(document.getElementById('firstStage').value) || 2;
+            const secondStage = parseInt(document.getElementById('secondStage').value) || 3;
+            
+            const container = document.getElementById('treeDiagramContainer');
+            container.innerHTML = '';
+            
+            // Create a simple text representation (in a real app, you'd draw it)
+            const outcomes1 = ['H', 'T', 'A', 'B', 'C'].slice(0, firstStage);
+            const outcomes2 = ['1', '2', '3', '4', '5'].slice(0, secondStage);
+            
+            let html = '<div style="font-family: monospace; line-height: 1.5;">';
+            html += '<strong>Tree Diagram:</strong><br><br>';
+            
+            let totalPaths = 0;
+            
+            for (let i = 0; i < outcomes1.length; i++) {
+                html += `${outcomes1[i]}<br>`;
+                for (let j = 0; j < outcomes2.length; j++) {
+                    html += `&nbsp;&nbsp;&nbsp;&nbsp;→ ${outcomes2[j]} (${outcomes1[i]}${outcomes2[j]})<br>`;
+                    totalPaths++;
+                }
+                if (i < outcomes1.length - 1) html += '<br>';
+            }
+            
+            html += '</div>';
+            container.innerHTML = html;
+            
+            treeDiagramInfo.innerHTML = `
+                <strong>Tree Diagram Generated</strong><br>
+                First stage: ${firstStage} outcomes<br>
+                Second stage: ${secondStage} outcomes<br>
+                Total paths: ${totalPaths}<br>
+                Each path represents one possible sequence of events`;
+            
+            treeDiagramInfo.classList.add('pulse');
+            setTimeout(() => treeDiagramInfo.classList.remove('pulse'), 1000);
+        }
+
+        function explainTreeDiagrams() {
+            alert(`TREE DIAGRAMS IN PROBABILITY:
+
+WHAT IS A TREE DIAGRAM?
+• A visual way to represent sequential events
+• Branches show possible outcomes at each stage
+• Paths from start to end represent sequences
+
+HOW TO USE:
+
+1. Draw branches for first event
+2. From each branch, draw branches for second event
+3. Continue for all events
+4. Label each branch with its probability
+5. Multiply along paths for sequence probability
+
+EXAMPLE: Two coin tosses
+• First toss: H or T
+• From H: H or T for second toss
+• From T: H or T for second toss
+• Total paths: 4 (HH, HT, TH, TT)
+
+ADVANTAGES:
+1. Shows all possible outcomes clearly
+2. Helps calculate probabilities of sequences
+3. Visualizes conditional probabilities
+4. Good for multi-stage experiments
+
+PROBABILITY CALCULATION:
+• Probability of a path = product of branch probabilities
+• Sum probabilities of paths for "or" events`);
+        }
+
+        function twoStageExperiment() {
+            document.getElementById('firstStage').value = 2;
+            document.getElementById('secondStage').value = 2;
+            
+            generateTreeDiagram();
+            
+            alert(`TWO-STAGE EXPERIMENT EXAMPLE:
+
+Tossing a coin twice:
+
+First stage (first toss):
+• Heads (H)
+• Tails (T)
+
+Second stage (second toss):
+• From H: H or T
+• From T: H or T
+
+Possible outcomes (paths):
+1. H → H (HH)
+2. H → T (HT)
+3. T → H (TH)
+4. T → T (TT)
+
+Total outcomes: 4
+Each outcome equally likely: P(each) = 1/4 = 0.25
+
+Tree diagrams help visualize all possible sequences.`);
+        }
+
+        // Counting principle
+        function calculateTotalOutcomes() {
+            const choices1 = parseInt(document.getElementById('choices1').value) || 3;
+            const choices2 = parseInt(document.getElementById('choices2').value) || 4;
+            const choices3 = parseInt(document.getElementById('choices3').value) || 2;
+            
+            const total = choices1 * choices2 * choices3;
+            
+            countingResult.innerHTML = `
+                <strong>Fundamental Counting Principle:</strong><br><br>
+                <strong>Total outcomes = choices₁ × choices₂ × choices₃</strong><br>
+                = ${choices1} × ${choices2} × ${choices3}<br>
+                = ${total}<br><br>
+                There are ${total} different possible combinations`;
+            
+            countingSteps.innerHTML = `
+                <strong>Step-by-step:</strong><br>
+                1. First choice: ${choices1} options<br>
+                2. Second choice: ${choices2} options<br>
+                3. Third choice: ${choices3} options<br>
+                4. Multiply: ${choices1} × ${choices2} × ${choices3} = ${total}<br><br>
+                <strong>Counting Principle:</strong><br>
+                If there are m ways to do one thing, and n ways to do another,<br>
+                then there are m × n ways to do both.`;
+            
+            countingResult.classList.add('pulse');
+            setTimeout(() => countingResult.classList.remove('pulse'), 1000);
+        }
+
+        function explainCountingPrinciple() {
+            alert(`FUNDAMENTAL COUNTING PRINCIPLE:
+
+STATEMENT:
+If there are m ways to do one thing, and n ways to do another,
+then there are m × n ways to do both things in sequence.
+
+EXTENSION:
+For k stages with n₁, n₂, ..., nₖ choices at each stage:
+Total outcomes = n₁ × n₂ × ... × nₖ
+
+EXAMPLES:
+
+1. Outfit selection:
+   • 3 shirts
+   • 4 pants
+   • 2 pairs of shoes
+   • Total outfits = 3 × 4 × 2 = 24
+
+2. Meal combination:
+   • 2 appetizers
+   • 3 main courses
+   • 4 desserts
+   • Total meals = 2 × 3 × 4 = 24
+
+3. Password with 2 letters then 3 digits:
+   • 26 choices for each letter
+   • 10 choices for each digit
+   • Total passwords = 26 × 26 × 10 × 10 × 10 = 676,000
+
+APPLICATIONS:
+1. Finding total outcomes in sample space
+2. Calculating number of possible combinations
+3. Planning schedules or menus
+4. Creating passwords or codes`);
+        }
+
+        function outfitExample() {
+            document.getElementById('choices1').value = 3;
+            document.getElementById('choices2').value = 4;
+            document.getElementById('choices3').value = 2;
+            
+            countingResult.innerHTML = `
+                <strong>Outfit Example:</strong><br>
+                Choosing an outfit:<br><br>
+                • Shirts: 3 options<br>
+                • Pants: 4 options<br>
+                • Shoes: 2 options<br><br>
+                <strong>Total outfits = 3 × 4 × 2 = 24</strong><br><br>
+                You can create 24 different outfits from these choices.`;
+            
+            calculateTotalOutcomes();
+        }
+
+        // Practice problem generator
+        let currentPracticeProblem = null;
+
+        function generatePracticeProblem() {
+            const problems = [
+                {
+                    problem: "What is the probability of rolling an even number on a fair die?",
+                    solution: "P(even) = 1/2",
+                    explanation: "Even numbers: 2,4,6 (3 outcomes). Total: 6. P=3/6=1/2."
+                },
+                {
+                    problem: "A coin is tossed twice. What's P(heads then tails)?",
+                    solution: "P(HT) = 1/4",
+                    explanation: "Independent events: P(H)=1/2, P(T)=1/2. Multiply: 1/2 × 1/2 = 1/4."
+                },
+                {
+                    problem: "Bag: 5 red, 3 blue marbles. One drawn at random. P(red)?",
+                    solution: "P(red) = 5/8",
+                    explanation: "Total marbles: 5+3=8. Red marbles: 5. P=5/8."
+                },
+                {
+                    problem: "Two dice rolled. P(sum is 8)?",
+                    solution: "P(sum=8) = 5/36",
+                    explanation: "Ways: (2,6),(3,5),(4,4),(5,3),(6,2) - 5 outcomes. Total: 36. P=5/36."
+                },
+                {
+                    problem: "Deck of cards. P(drawing a face card)?",
+                    solution: "P(face) = 3/13",
+                    explanation: "Face cards: J,Q,K (12 total). Total cards: 52. P=12/52=3/13."
+                }
+            ];
+            
+            currentPracticeProblem = problems[Math.floor(Math.random() * problems.length)];
+            document.getElementById('practiceProblem').textContent = currentPracticeProblem.problem;
+            document.getElementById('practiceSolution').style.display = 'none';
+            document.getElementById('userAnswer').value = '';
+        }
+
+        function showSolution() {
+            if (currentPracticeProblem) {
+                const solutionDiv = document.getElementById('practiceSolution');
+                solutionDiv.innerHTML = `
+                    <strong>Solution:</strong> ${currentPracticeProblem.solution}<br><br>
+                    <strong>Explanation:</strong> ${currentPracticeProblem.explanation}`;
+                solutionDiv.style.display = 'block';
+                solutionDiv.classList.add('pulse');
+                setTimeout(() => solutionDiv.classList.remove('pulse'), 1000);
+            }
+        }
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById('userAnswer').value.trim();
+            if (!userAnswer) {
+                alert("Please enter your answer first!");
+                return;
+            }
+            
+            if (!currentPracticeProblem) {
+                alert("Generate a problem first!");
+                return;
+            }
+            
+            // Simple answer checking (in real app, would parse fractions)
+            const correctAnswer = currentPracticeProblem.solution.split('=')[1].trim();
+            
+            if (userAnswer === correctAnswer) {
+                alert("✓ Correct! Well done!");
+            } else {
+                alert(`✗ Incorrect. The correct answer is ${correctAnswer}. Try again!`);
+            }
+        }
+
+        // Dice probability calculator
+        function selectDieFace(face) {
+            const index = appState.selectedDieFaces.indexOf(face);
+            const dieElement = document.querySelector(`.die-face:nth-child(${face})`);
+            
+            if (index === -1) {
+                appState.selectedDieFaces.push(face);
+                dieElement.classList.add('selected');
+            } else {
+                appState.selectedDieFaces.splice(index, 1);
+                dieElement.classList.remove('selected');
+            }
+            
+            updateSelectedFacesDisplay();
+        }
+
+        function selectMultipleDice() {
+            // Select all even numbers as example
+            appState.selectedDieFaces = [2, 4, 6];
+            document.querySelectorAll('.die-face').forEach((el, index) => {
+                el.classList.toggle('selected', appState.selectedDieFaces.includes(index + 1));
+            });
+            updateSelectedFacesDisplay();
+            calculateDieProbability();
+        }
+
+        function clearDieSelection() {
+            appState.selectedDieFaces = [];
+            document.querySelectorAll('.die-face').forEach(el => {
+                el.classList.remove('selected');
+            });
+            updateSelectedFacesDisplay();
+            dieProbabilityResult.textContent = "Select dice faces to calculate probability";
+        }
+
+        function updateSelectedFacesDisplay() {
+            selectedFaces.innerHTML = '';
+            appState.selectedDieFaces.sort((a, b) => a - b).forEach(face => {
+                const faceElement = document.createElement('div');
+                faceElement.className = 'outcome-item';
+                faceElement.textContent = `Face ${face}`;
+                selectedFaces.appendChild(faceElement);
+            });
+        }
+
+        function calculateDieProbability() {
+            if (appState.selectedDieFaces.length === 0) {
+                dieProbabilityResult.textContent = "Please select at least one die face";
+                return;
+            }
+            
+            const probability = appState.selectedDieFaces.length / 6;
+            const fraction = `${appState.selectedDieFaces.length}/6`;
+            const percentage = (probability * 100).toFixed(2);
+            
+            dieProbabilityResult.innerHTML = `
+                <strong>Selected: ${appState.selectedDieFaces.join(', ')}</strong><br><br>
+                <strong>P(selected faces) = ${fraction}</strong><br>
+                = ${probability.toFixed(4)}<br>
+                = ${percentage}%<br><br>
+                ${appState.selectedDieFaces.length} favorable outcome(s) out of 6 total`;
+            
+            dieProbabilityResult.classList.add('pulse');
+            setTimeout(() => dieProbabilityResult.classList.remove('pulse'), 1000);
+        }
+
+        // Coin probability calculator
+        function selectCoinFace(face) {
+            appState.selectedCoinFaces = [face];
+            document.querySelectorAll('.coin-face').forEach(el => {
+                el.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+            calculateCoinProbability();
+        }
+
+        function calculateCoinProbability() {
+            const numTosses = parseInt(document.getElementById('numTosses').value) || 2;
+            const selectedFace = appState.selectedCoinFaces[0] || 'H';
+            
+            const probabilitySingle = 0.5;
+            const probabilityAll = Math.pow(probabilitySingle, numTosses);
+            const totalOutcomes = Math.pow(2, numTosses);
+            const favorableOutcomes = 1; // All tosses showing the selected face
+            
+            coinProbabilityResult.innerHTML = `
+                <strong>${numTosses} coin toss${numTosses > 1 ? 'es' : ''}</strong><br><br>
+                <strong>P(all ${selectedFace === 'H' ? 'heads' : 'tails'}) = (1/2)^${numTosses}</strong><br>
+                = 1/${totalOutcomes}<br>
+                = ${probabilityAll.toFixed(4)}<br>
+                = ${(probabilityAll * 100).toFixed(2)}%<br><br>
+                ${favorableOutcomes} favorable outcome out of ${totalOutcomes} total`;
+            
+            coinProbabilityResult.classList.add('pulse');
+            setTimeout(() => coinProbabilityResult.classList.remove('pulse'), 1000);
+        }
+
+        function generateCoinOutcomes() {
+            const numTosses = parseInt(document.getElementById('numTosses').value) || 2;
+            coinOutcomes.innerHTML = '';
+            
+            // Generate all outcomes for small number of tosses
+            if (numTosses <= 3) {
+                const outcomes = [];
+                const total = Math.pow(2, numTosses);
+                
+                for (let i = 0; i < total; i++) {
+                    let outcome = '';
+                    for (let j = 0; j < numTosses; j++) {
+                        outcome += (i >> j) & 1 ? 'H' : 'T';
+                    }
+                    outcomes.push(outcome);
+                }
+                
+                outcomes.forEach(outcome => {
+                    const outcomeElement = document.createElement('div');
+                    outcomeElement.className = 'outcome-item';
+                    outcomeElement.textContent = outcome;
+                    coinOutcomes.appendChild(outcomeElement);
+                });
+            } else {
+                coinOutcomes.innerHTML = `<div class="outcome-item">Too many outcomes to display (${Math.pow(2, numTosses)})</div>`;
+            }
+        }
+
+        function explainCoinProbability() {
+            alert(`COIN TOSS PROBABILITY:
+
+BASIC PROBABILITY:
+• P(heads) = 1/2 = 0.5 = 50%
+• P(tails) = 1/2 = 0.5 = 50%
+
+MULTIPLE TOSSES:
+• Each toss is independent
+• Total outcomes for n tosses = 2ⁿ
+• Each specific sequence has probability = (1/2)ⁿ
+
+EXAMPLES:
+
+1 toss:
+• Outcomes: H, T
+• P(specific outcome) = 1/2
+
+2 tosses:
+• Outcomes: HH, HT, TH, TT
+• P(specific sequence) = 1/4
+• P(both heads) = 1/4
+
+3 tosses:
+• Outcomes: HHH, HHT, HTH, HTT, THH, THT, TTH, TTT
+• P(specific sequence) = 1/8
+• P(all heads) = 1/8
+
+GENERAL FORMULA:
+P(k heads in n tosses) = C(n,k) × (1/2)ⁿ
+Where C(n,k) = n!/(k!(n-k)!) is the binomial coefficient`);
+        }
+
+        // Card probability calculator
+        function selectCardSuit(suit) {
+            appState.selectedCardSuits = [suit];
+            document.querySelectorAll('.card-suit').forEach(el => {
+                el.classList.remove('selected');
+            });
+            event.target.closest('.card-suit').classList.add('selected');
+            calculateCardProbability();
+        }
+
+        function calculateCardProbability() {
+            const suit = appState.selectedCardSuits[0] || 'hearts';
+            const suits = {
+                hearts: { name: 'Hearts', symbol: '♥', count: 13 },
+                diamonds: { name: 'Diamonds', symbol: '♦', count: 13 },
+                clubs: { name: 'Clubs', symbol: '♣', count: 13 },
+                spades: { name: 'Spades', symbol: '♠', count: 13 }
+            };
+            
+            const selectedSuit = suits[suit];
+            const probability = selectedSuit.count / 52;
+            
+            cardProbabilityResult.innerHTML = `
+                <strong>Standard Deck: 52 cards</strong><br><br>
+                <strong>${selectedSuit.symbol} ${selectedSuit.name}: ${selectedSuit.count} cards</strong><br><br>
+                <strong>P(${selectedSuit.name.toLowerCase()}) = ${selectedSuit.count}/52</strong><br>
+                = ${probability.toFixed(4)}<br>
+                = ${(probability * 100).toFixed(2)}%<br>
+                = 1/4 (simplified)`;
+            
+            cardProbabilitySteps.innerHTML = `
+                <strong>Step-by-step:</strong><br>
+                1. Total cards in deck: 52<br>
+                2. ${selectedSuit.name} cards: ${selectedSuit.count}<br>
+                3. Divide: ${selectedSuit.count} ÷ 52 = ${probability.toFixed(4)}<br>
+                4. Simplify: ${selectedSuit.count}/52 = 1/4`;
+            
+            cardProbabilityResult.classList.add('pulse');
+            setTimeout(() => cardProbabilityResult.classList.remove('pulse'), 1000);
+        }
+
+        function explainCardProbability() {
+            alert(`CARD PROBABILITY:
+
+STANDARD DECK:
+• 52 cards total
+• 4 suits: Hearts ♥, Diamonds ♦, Clubs ♣, Spades ♠
+• 13 cards per suit: A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K
+
+BASIC PROBABILITIES:
+
+1. Suit probability:
+   • P(any specific suit) = 13/52 = 1/4 = 0.25 = 25%
+
+2. Face cards:
+   • Face cards: J, Q, K (3 per suit)
+   • Total face cards: 3 × 4 = 12
+   • P(face card) = 12/52 = 3/13 ≈ 0.2308 = 23.08%
+
+3. Aces:
+   • 4 aces total
+   • P(ace) = 4/52 = 1/13 ≈ 0.0769 = 7.69%
+
+4. Red cards:
+   • Red suits: Hearts and Diamonds
+   • Total red cards: 13 + 13 = 26
+   • P(red) = 26/52 = 1/2 = 0.5 = 50%
+
+IMPORTANT:
+• "With replacement" means independent events
+• "Without replacement" means dependent events`);
+        }
+
+        function faceCardExample() {
+            appState.selectedCardSuits = ['hearts'];
+            document.querySelectorAll('.card-suit').forEach(el => {
+                el.classList.remove('selected');
+            });
+            document.querySelector('.card-suit').classList.add('selected');
+            
+            cardProbabilityResult.innerHTML = `
+                <strong>Face Cards Example:</strong><br><br>
+                <strong>Face cards: Jack, Queen, King</strong><br>
+                • 3 face cards per suit<br>
+                • 4 suits total<br>
+                • Total face cards: 3 × 4 = 12<br><br>
+                <strong>P(face card) = 12/52 = 3/13</strong><br>
+                ≈ 0.2308 = 23.08%`;
+            
+            cardProbabilitySteps.innerHTML = `
+                <strong>Step-by-step for face cards:</strong><br>
+                1. Face cards per suit: 3 (J, Q, K)<br>
+                2. Number of suits: 4<br>
+                3. Total face cards: 3 × 4 = 12<br>
+                4. Total cards: 52<br>
+                5. P(face card) = 12/52 = 3/13`;
+        }
+
+        // Update all probability displays
+        function updateProbabilityDisplays() {
+            calculateBasicProbability();
+            calculateIndependentProbability();
+            calculateDependentProbability();
+            calculateMutuallyExclusive();
+            calculateComplement();
+            calculateTotalOutcomes();
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', showWelcomePage);
+            viewTopicsBtn.addEventListener('click', () => alert("Other math topics would be available here."));
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') startPractice();
+            });
+            
+            // Add input listeners for live updates
+            document.getElementById('favorableOutcomes').addEventListener('change', calculateBasicProbability);
+            document.getElementById('totalOutcomes').addEventListener('change', calculateBasicProbability);
+            document.getElementById('probA').addEventListener('change', calculateIndependentProbability);
+            document.getElementById('probB').addEventListener('change', calculateIndependentProbability);
+            document.getElementById('totalItems').addEventListener('change', calculateDependentProbability);
+            document.getElementById('desiredItems').addEventListener('change', calculateDependentProbability);
+            document.getElementById('probA_mutual').addEventListener('change', calculateMutuallyExclusive);
+            document.getElementById('probB_mutual').addEventListener('change', calculateMutuallyExclusive);
+            document.getElementById('probA_venn').addEventListener('change', drawVennDiagram);
+            document.getElementById('probB_venn').addEventListener('change', drawVennDiagram);
+            document.getElementById('probIntersection').addEventListener('change', drawVennDiagram);
+            document.getElementById('probEvent').addEventListener('change', calculateComplement);
+            document.getElementById('choices1').addEventListener('change', calculateTotalOutcomes);
+            document.getElementById('choices2').addEventListener('change', calculateTotalOutcomes);
+            document.getElementById('choices3').addEventListener('change', calculateTotalOutcomes);
+            document.getElementById('event1Outcomes').addEventListener('change', generateSampleSpace);
+            document.getElementById('event2Outcomes').addEventListener('change', generateSampleSpace);
+            document.getElementById('firstStage').addEventListener('change', generateTreeDiagram);
+            document.getElementById('secondStage').addEventListener('change', generateTreeDiagram);
+            document.getElementById('numTosses').addEventListener('change', calculateCoinProbability);
+            
+            // Initialize practice problem
+            generatePracticeProblem();
+        }
+
+        // Create probability tip display
+        function createProbabilityTip() {
+            const tipDiv = document.createElement('div');
+            tipDiv.className = 'probability-tip';
+            tipDiv.innerHTML = `<strong>Probability Tip:</strong> ${probabilityTips[Math.floor(Math.random() * probabilityTips.length)]}`;
+            return tipDiv;
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            appState.startTime = new Date();
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const percentage = Math.round((appState.score / questions.length) * 100);
+            const timeDiff = new Date() - appState.startTime;
+            const minutes = Math.floor(timeDiff / 60000);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            basicScore.textContent = appState.basicScore;
+            independentScore.textContent = appState.independentScore;
+            dependentScore.textContent = appState.dependentScore;
+            mutuallyExclusiveScore.textContent = appState.mutuallyExclusiveScore;
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Excellent! You've mastered probability!";
+            } else if (percentage >= 75) {
+                scoreMessage.textContent = "Great work! Strong understanding of probability concepts!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Good job! Keep practicing to improve further!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! Focus on independent vs dependent events!";
+            }
+        }
+
+        // Load question
+        function loadQuestion() {
+            const question = questions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${questions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / questions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            probabilityTip.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            probabilityTip.appendChild(createProbabilityTip());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = questions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Track scores by question type
+                if (question.type === 'basic') appState.basicScore++;
+                if (question.type === 'independent') appState.independentScore++;
+                if (question.type === 'dependent') appState.dependentScore++;
+                if (question.type === 'mutually-exclusive') appState.mutuallyExclusiveScore++;
+                if (question.type === 'general-addition') appState.basicScore++; // Group with basic
+                
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation);
+            }
+            
+            nextQuestionBtn.disabled = false;
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+        }
+
+        // Skip question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+        }
+
+        // Retry topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            appState.basicScore = 0;
+            appState.independentScore = 0;
+            appState.dependentScore = 0;
+            appState.mutuallyExclusiveScore = 0;
+            showPracticePage();
+        }
+
+        // Start practice
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin probability practice!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            appState.basicScore = 0;
+            appState.independentScore = 0;
+            appState.dependentScore = 0;
+            appState.mutuallyExclusiveScore = 0;
+            
+            showPracticePage();
+        }
+
+        // Initialize app
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>

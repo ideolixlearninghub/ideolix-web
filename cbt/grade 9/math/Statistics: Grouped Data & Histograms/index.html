@@ -1,0 +1,3414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 9 Math - Statistics: Grouped Data & Histograms | Ideolix Learning Hub</title>
+    <style>
+        /* CSS Variables for Statistics Theme */
+        :root {
+            --data-blue: #2196F3;
+            --histogram-green: #4CAF50;
+            --frequency-purple: #9C27B0;
+            --cumulative-orange: #FF9800;
+            --central-tendency-red: #F44336;
+            --applications-teal: #009688;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --dark-card: #252525;
+            --dark-border: #333;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --stats-glow: 0 0 20px rgba(33, 150, 243, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(33, 150, 243, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(76, 175, 80, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(156, 39, 176, 0.05) 0%, transparent 50%);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            background: var(--dark-surface);
+            padding: 15px 25px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: var(--dark-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-info h1 {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .brand-info p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        /* Card Styles */
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 1px solid var(--dark-border);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Welcome Page */
+        .welcome-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .welcome-title {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, var(--data-blue), var(--histogram-green), var(--frequency-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        .topic-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(33, 150, 243, 0.15);
+            padding: 10px 20px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            border: 2px solid var(--data-blue);
+        }
+
+        .topic-icon {
+            font-size: 1.5rem;
+        }
+
+        .topic-name {
+            font-weight: 600;
+            color: var(--data-blue);
+        }
+
+        /* Statistics Symbols */
+        .stats-symbol {
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-weight: bold;
+        }
+
+        .frequency {
+            color: var(--frequency-purple);
+            font-weight: bold;
+        }
+
+        .interval {
+            color: var(--data-blue);
+            font-style: italic;
+        }
+
+        .bar {
+            color: var(--histogram-green);
+        }
+
+        /* Concepts Grid */
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        @media (max-width: 768px) {
+            .concepts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .concept-card {
+            background: var(--dark-surface);
+            border-radius: 16px;
+            padding: 25px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .concept-card.grouped-data {
+            border-color: var(--data-blue);
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), transparent);
+        }
+
+        .concept-card.histograms {
+            border-color: var(--histogram-green);
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), transparent);
+        }
+
+        .concept-card.frequency {
+            border-color: var(--frequency-purple);
+            background: linear-gradient(135deg, rgba(156, 39, 176, 0.1), transparent);
+        }
+
+        .concept-card.cumulative {
+            border-color: var(--cumulative-orange);
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.1), transparent);
+        }
+
+        .concept-card.central-tendency {
+            border-color: var(--central-tendency-red);
+            background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), transparent);
+        }
+
+        .concept-card.applications {
+            border-color: var(--applications-teal);
+            background: linear-gradient(135deg, rgba(0, 150, 136, 0.1), transparent);
+        }
+
+        .concept-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .concept-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .concept-card.grouped-data .concept-title {
+            color: var(--data-blue);
+        }
+
+        .concept-card.histograms .concept-title {
+            color: var(--histogram-green);
+        }
+
+        .concept-card.frequency .concept-title {
+            color: var(--frequency-purple);
+        }
+
+        .concept-card.cumulative .concept-title {
+            color: var(--cumulative-orange);
+        }
+
+        .concept-card.central-tendency .concept-title {
+            color: var(--central-tendency-red);
+        }
+
+        .concept-card.applications .concept-title {
+            color: var(--applications-teal);
+        }
+
+        .concept-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .concept-examples {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--dark-border);
+        }
+
+        .concept-examples h4 {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .example-list {
+            list-style-type: none;
+        }
+
+        .example-list li {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            padding-left: 20px;
+            position: relative;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+        }
+
+        .example-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--data-blue);
+            font-weight: bold;
+        }
+
+        /* Input Group */
+        .input-group {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            text-align: left;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--dark-border);
+            border-radius: 10px;
+            font-size: 1rem;
+            background: var(--dark-surface);
+            color: var(--text-primary);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--data-blue);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--data-blue);
+            color: white;
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-green {
+            background: var(--histogram-green);
+            color: white;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-green:hover {
+            background: #388E3C;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-purple {
+            background: var(--frequency-purple);
+            color: white;
+            box-shadow: 0 4px 12px rgba(156, 39, 176, 0.3);
+        }
+
+        .btn-purple:hover {
+            background: #7B1FA2;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(156, 39, 176, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--dark-border);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--data-blue);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Practice Page */
+        .practice-page {
+            display: none;
+        }
+
+        .progress-container {
+            margin-bottom: 20px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--dark-surface);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--data-blue), var(--histogram-green), var(--frequency-purple));
+            border-radius: 8px;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+        }
+
+        .question-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+        }
+
+        .stats-tip {
+            background: rgba(255, 152, 0, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid var(--cumulative-orange);
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Options */
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .option {
+            padding: 15px;
+            background: var(--dark-card);
+            border: 2px solid var(--dark-border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+        }
+
+        .option:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--data-blue);
+            transform: translateY(-2px);
+        }
+
+        .option.correct {
+            background: rgba(76, 175, 80, 0.1);
+            border-color: var(--histogram-green);
+            color: var(--histogram-green);
+        }
+
+        .option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: var(--central-tendency-red);
+            color: var(--central-tendency-red);
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 25px;
+            height: 25px;
+            background: var(--data-blue);
+            border-radius: 50%;
+            margin-right: 12px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .option.correct .option-letter {
+            background: var(--histogram-green);
+        }
+
+        .option.incorrect .option-letter {
+            background: var(--central-tendency-red);
+        }
+
+        /* Feedback */
+        .feedback-container {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .feedback-correct {
+            background: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid var(--histogram-green);
+        }
+
+        .feedback-incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 4px solid var(--central-tendency-red);
+        }
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .feedback-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .feedback-correct .feedback-icon {
+            background: var(--histogram-green);
+        }
+
+        .feedback-incorrect .feedback-icon {
+            background: var(--central-tendency-red);
+        }
+
+        .feedback-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .feedback-correct .feedback-title {
+            color: var(--histogram-green);
+        }
+
+        .feedback-incorrect .feedback-title {
+            color: var(--central-tendency-red);
+        }
+
+        .feedback-explanation {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Navigation */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        /* Visualization Side */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 992px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .visualization-container {
+            background: var(--dark-surface);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--dark-border);
+            overflow: auto;
+            max-height: 800px;
+        }
+
+        /* Statistics Visualizers */
+        .stats-visualizer {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid;
+        }
+
+        .visualizer-title {
+            color: inherit;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .stats-example {
+            background: var(--dark-surface);
+            border-radius: 6px;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            text-align: center;
+        }
+
+        .highlight-stats {
+            background: rgba(255, 193, 7, 0.3);
+            padding: 2px 4px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--dark-surface);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .data-table th {
+            background: var(--dark-card);
+            padding: 12px;
+            text-align: center;
+            font-size: 0.9rem;
+            border-bottom: 2px solid var(--data-blue);
+            color: var(--data-blue);
+        }
+
+        .data-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        .data-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Histogram Visualization */
+        .histogram-container {
+            width: 100%;
+            height: 200px;
+            background: var(--dark-surface);
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            border: 1px solid var(--dark-border);
+        }
+
+        .histogram-bar {
+            background: var(--histogram-green);
+            width: 40px;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: height 0.5s ease;
+        }
+
+        .histogram-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        .histogram-value {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            font-weight: bold;
+        }
+
+        /* Cumulative Frequency Curve */
+        .curve-container {
+            width: 100%;
+            height: 200px;
+            background: var(--dark-surface);
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            position: relative;
+            border: 1px solid var(--dark-border);
+        }
+
+        .curve-canvas {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .curve-point {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--cumulative-orange);
+            border-radius: 50%;
+            transform: translate(-50%, 50%);
+        }
+
+        .curve-line {
+            position: absolute;
+            background: var(--cumulative-orange);
+            height: 2px;
+            transform-origin: 0 0;
+        }
+
+        /* Calculator */
+        .calculator-section {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid var(--data-blue);
+        }
+
+        .calculator-display {
+            background: var(--dark-surface);
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 1rem;
+            line-height: 1.6;
+            min-height: 100px;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+        }
+
+        .calculator-step {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .calculator-step:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--data-blue);
+        }
+
+        /* Mean/Median/Mode Practice */
+        .central-tendency-section {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid var(--central-tendency-red);
+        }
+
+        .central-controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+            justify-content: center;
+        }
+
+        /* Grouping Practice */
+        .grouping-section {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid var(--data-blue);
+        }
+
+        .grouping-display {
+            background: var(--dark-surface);
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 1rem;
+            line-height: 1.6;
+            text-align: center;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+        }
+
+        /* Applications */
+        .applications-section {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid var(--applications-teal);
+        }
+
+        .application-problem {
+            background: var(--dark-surface);
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Comparison */
+        .comparison-section {
+            background: var(--dark-card);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid var(--central-tendency-red);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--dark-surface);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: var(--dark-card);
+            padding: 12px;
+            text-align: left;
+            font-size: 0.9rem;
+            border-bottom: 2px solid var(--central-tendency-red);
+            color: var(--central-tendency-red);
+        }
+
+        .comparison-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Results Page */
+        .results-page {
+            display: none;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .results-title {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--data-blue), var(--histogram-green), var(--frequency-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .score-card {
+            background: var(--dark-card);
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 500px;
+            margin: 0 auto 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--dark-border);
+        }
+
+        .score-value {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--data-blue), var(--histogram-green), var(--frequency-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-percentage {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .score-message {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-item {
+            background: var(--dark-surface);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--data-blue);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Statistics Badge */
+        .stats-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 8px;
+            text-transform: uppercase;
+        }
+
+        .data-badge {
+            background: rgba(33, 150, 243, 0.2);
+            color: var(--data-blue);
+        }
+
+        .histogram-badge {
+            background: rgba(76, 175, 80, 0.2);
+            color: var(--histogram-green);
+        }
+
+        .frequency-badge {
+            background: rgba(156, 39, 176, 0.2);
+            color: var(--frequency-purple);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 0.5s ease;
+        }
+
+        @keyframes highlight {
+            0% { background-color: transparent; }
+            50% { background-color: rgba(33, 150, 243, 0.2); }
+            100% { background-color: transparent; }
+        }
+
+        .highlight {
+            animation: highlight 1s ease;
+        }
+
+        @keyframes statsGlow {
+            0% { box-shadow: 0 0 5px currentColor; }
+            50% { box-shadow: 0 0 20px currentColor; }
+            100% { box-shadow: 0 0 5px currentColor; }
+        }
+
+        .stats-glow {
+            animation: statsGlow 2s infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 1.8rem;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .navigation-buttons .btn {
+                width: 100%;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .histogram-bar {
+                width: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <img src="https://raw.githubusercontent.com/ideolixlearninghub/ideolix-web/main/ideolix%20LOGO.jpg" alt="Ideolix Logo">
+            </div>
+            <div class="brand-info">
+                <h1>Ideolix Learning Hub</h1>
+                <p>Building learners for a digital future.</p>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline btn-small" id="backToHome">Home</button>
+            </div>
+        </header>
+
+        <!-- Welcome Page -->
+        <div class="welcome-page card fade-in" id="welcomePage">
+            <h1 class="welcome-title">Grade 9 Mathematics: Statistics - Grouped Data & Histograms</h1>
+            <p class="welcome-subtitle">Master the art of data analysis! Learn to organize, represent, and interpret grouped data using frequency tables, histograms, and cumulative frequency curves. Understand how statistics helps make sense of the world around us.</p>
+            
+            <div class="topic-badge">
+                <span class="topic-icon">📊 ∑ ƒ</span>
+                <span class="topic-name">Grouped Data, Histograms, Cumulative Frequency</span>
+            </div>
+            
+            <div class="concepts-grid">
+                <div class="concept-card grouped-data" onclick="showConceptDetail('grouped-data')">
+                    <div class="concept-icon">📋</div>
+                    <h3 class="concept-title">Grouped Data</h3>
+                    <p class="concept-description">Organizing raw data into class intervals for better analysis and interpretation.</p>
+                    <div class="concept-examples">
+                        <h4>Examples:</h4>
+                        <ul class="example-list">
+                            <li>Height ranges: 150-160 cm, 160-170 cm</li>
+                            <li>Score intervals: 0-10, 11-20, 21-30</li>
+                            <li>Age groups: 10-19, 20-29, 30-39</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="concept-card histograms" onclick="showConceptDetail('histograms')">
+                    <div class="concept-icon">📈</div>
+                    <h3 class="concept-title">Histograms</h3>
+                    <p class="concept-description">Graphical representation of frequency distribution using bars of equal width.</p>
+                    <div class="concept-examples">
+                        <h4>Examples:</h4>
+                        <ul class="example-list">
+                            <li>Distribution of test scores</li>
+                            <li>Height frequency in population</li>
+                            <li>Income distribution analysis</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-card frequency" onclick="showConceptDetail('frequency')">
+                    <div class="concept-icon">ƒ</div>
+                    <h3 class="concept-title">Frequency Distribution</h3>
+                    <p class="concept-description">Table showing how often each value or class interval occurs in a dataset.</p>
+                    <div class="concept-examples">
+                        <h4>Examples:</h4>
+                        <ul class="example-list">
+                            <li>Frequency tables</li>
+                            <li>Class boundaries</li>
+                            <li>Class marks (midpoints)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-card cumulative" onclick="showConceptDetail('cumulative')">
+                    <div class="concept-icon">↗</div>
+                    <h3 class="concept-title">Cumulative Frequency</h3>
+                    <p class="concept-description">Running total of frequencies used to determine percentiles and quartiles.</p>
+                    <div class="concept-examples">
+                        <h4>Examples:</h4>
+                        <ul class="example-list">
+                            <li>Cumulative frequency tables</li>
+                            <li>Ogive curves</li>
+                            <li>Median determination</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-card central-tendency" onclick="showConceptDetail('central-tendency')">
+                    <div class="concept-icon">⚖️</div>
+                    <h3 class="concept-title">Central Tendency</h3>
+                    <p class="concept-description">Measures of center: mean, median, mode for grouped data.</p>
+                    <div class="concept-examples">
+                        <h4>Examples:</h4>
+                        <ul class="example-list">
+                            <li>Mean from grouped data</li>
+                            <li>Modal class identification</li>
+                            <li>Median class calculation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="concept-card applications" onclick="showConceptDetail('applications')">
+                    <div class="concept-icon">🌍</div>
+                    <h3 class="concept-title">Real Applications</h3>
+                    <p class="concept-description">Using statistics in surveys, research, business, and everyday decisions.</p>
+                    <div class="concept-examples">
+                        <h4>Examples:</h4>
+                        <ul class="example-list">
+                            <li>Market research analysis</li>
+                            <li>Academic performance tracking</li>
+                            <li>Health data interpretation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label for="studentName">Enter your name:</label>
+                <input type="text" id="studentName" placeholder="Your name">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="startPractice">
+                    <span>📊 Begin Statistics Practice</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Practice Page -->
+        <div class="practice-page card fade-in" id="practicePage">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="studentNameDisplay"></span>
+                    <span id="progressText">Question 1 of 80</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 1.25%"></div>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div id="statsTip"></div>
+                
+                <h2 class="question-text" id="questionText"></h2>
+                
+                <div class="options-container" id="optionsContainer"></div>
+                
+                <div class="feedback-container" id="feedbackContainer">
+                    <div class="feedback-header">
+                        <div class="feedback-icon"></div>
+                        <div class="feedback-title"></div>
+                    </div>
+                    <div class="feedback-explanation" id="feedbackExplanation"></div>
+                </div>
+            </div>
+            
+            <!-- Visualization Area -->
+            <div class="content-wrapper">
+                <div class="visualization-container">
+                    <!-- Data Table & Histogram -->
+                    <div class="stats-visualizer" style="border-color: var(--data-blue)">
+                        <div class="visualizer-title">Sample Data Table & Histogram</div>
+                        
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Class Interval</th>
+                                    <th>Frequency</th>
+                                    <th>Cumulative Frequency</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sampleDataTable">
+                                <tr>
+                                    <td>10-20</td>
+                                    <td>5</td>
+                                    <td>5</td>
+                                </tr>
+                                <tr>
+                                    <td>20-30</td>
+                                    <td>8</td>
+                                    <td>13</td>
+                                </tr>
+                                <tr>
+                                    <td>30-40</td>
+                                    <td>12</td>
+                                    <td>25</td>
+                                </tr>
+                                <tr>
+                                    <td>40-50</td>
+                                    <td>10</td>
+                                    <td>35</td>
+                                </tr>
+                                <tr>
+                                    <td>50-60</td>
+                                    <td>5</td>
+                                    <td>40</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="histogram-container" id="histogramDisplay">
+                            <!-- Histogram bars will be generated by JavaScript -->
+                        </div>
+                        
+                        <div class="central-controls">
+                            <button class="btn btn-small btn-primary" onclick="generateNewData()">New Data</button>
+                            <button class="btn btn-small btn-outline" onclick="explainHistogram()">How to Read</button>
+                            <button class="btn btn-small btn-outline" onclick="showDataAnalysis()">Analyze Data</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Cumulative Frequency Curve -->
+                    <div class="stats-visualizer" style="border-color: var(--cumulative-orange)">
+                        <div class="visualizer-title">Cumulative Frequency Curve (Ogive)</div>
+                        
+                        <div class="curve-container">
+                            <div id="ogiveCanvas" class="curve-canvas">
+                                <!-- Cumulative frequency curve will be drawn here -->
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin: 10px 0; color: var(--text-secondary); font-size: 0.9rem;">
+                            Upper class boundaries vs Cumulative frequency
+                        </div>
+                        
+                        <div class="central-controls">
+                            <button class="btn btn-small btn-purple" onclick="plotCumulativeCurve()">Plot Curve</button>
+                            <button class="btn btn-small btn-outline" onclick="explainOgive()">What is Ogive?</button>
+                            <button class="btn btn-small btn-outline" onclick="findMedianFromOgive()">Find Median</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Statistics Calculator -->
+                    <div class="calculator-section">
+                        <div class="visualizer-title">Grouped Data Calculator</div>
+                        <div class="calculator-display" id="calculatorDisplay">
+                            Enter data to calculate mean, median, mode
+                        </div>
+                        
+                        <div style="margin: 15px 0;">
+                            <textarea id="dataInput" placeholder="Enter frequencies as: 10-20:5, 20-30:8, 30-40:12" 
+                                      style="width: 100%; height: 60px; padding: 10px; background: var(--dark-surface); border: 2px solid var(--dark-border); border-radius: 6px; color: var(--text-primary); resize: vertical;"></textarea>
+                        </div>
+                        
+                        <div class="central-controls">
+                            <button class="btn btn-small btn-primary" onclick="calculateStatistics()">Calculate</button>
+                            <button class="btn btn-small btn-green" onclick="calculateMean()">Mean Only</button>
+                            <button class="btn btn-small btn-purple" onclick="calculateMedian()">Median Only</button>
+                            <button class="btn btn-small btn-outline" onclick="clearCalculator()">Clear</button>
+                        </div>
+                        
+                        <div id="calculatorResult" style="margin-top: 10px; color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                            Enter data in format: class interval:frequency
+                        </div>
+                    </div>
+                    
+                    <!-- Grouping Practice -->
+                    <div class="grouping-section">
+                        <div class="visualizer-title">Practice: Create Class Intervals</div>
+                        <div class="grouping-display" id="groupingDisplay">
+                            Data: 15, 18, 22, 25, 28, 30, 32, 35, 38, 40, 42, 45, 48, 50
+                        </div>
+                        
+                        <div style="margin: 15px 0; color: var(--text-secondary); text-align: center;">
+                            Create 5 class intervals starting from 15
+                        </div>
+                        
+                        <div class="central-controls">
+                            <button class="btn btn-small btn-green" onclick="checkGrouping('15-25, 25-35, 35-45, 45-55')">15-25, 25-35...</button>
+                            <button class="btn btn-small btn-outline" onclick="checkGrouping('10-20, 20-30, 30-40, 40-50')">10-20, 20-30...</button>
+                            <button class="btn btn-small btn-outline" onclick="checkGrouping('15-30, 30-45, 45-60')">15-30, 30-45...</button>
+                        </div>
+                        
+                        <div id="groupingFeedback" style="margin: 10px 0; color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                            Intervals should be equal width, cover all data, no gaps
+                        </div>
+                        
+                        <div class="central-controls">
+                            <button class="btn btn-small btn-outline" onclick="newGroupingProblem()">New Problem</button>
+                            <button class="btn btn-small btn-outline" onclick="showGroupingRules()">Grouping Rules</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Central Tendency Practice -->
+                    <div class="central-tendency-section">
+                        <div class="visualizer-title">Find Mean, Median, Mode</div>
+                        
+                        <table class="data-table" style="margin: 15px 0;">
+                            <thead>
+                                <tr>
+                                    <th>Marks</th>
+                                    <th>Students</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>0-10</td><td>5</td></tr>
+                                <tr><td>10-20</td><td>8</td></tr>
+                                <tr><td>20-30</td><td>12</td></tr>
+                                <tr><td>30-40</td><td>10</td></tr>
+                                <tr><td>40-50</td><td>5</td></tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="central-controls">
+                            <button class="btn btn-small btn-green" onclick="checkCentralTendency('mean', '25.5')">Mean ≈ 25.5</button>
+                            <button class="btn btn-small btn-purple" onclick="checkCentralTendency('median', '26.7')">Median ≈ 26.7</button>
+                            <button class="btn btn-small btn-primary" onclick="checkCentralTendency('mode', '25')">Mode ≈ 25</button>
+                        </div>
+                        
+                        <div id="centralTendencyFeedback" style="margin: 10px 0; color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                            Click to check your estimate
+                        </div>
+                        
+                        <div class="central-controls">
+                            <button class="btn btn-small btn-outline" onclick="showCentralTendencyFormulas()">Formulas</button>
+                            <button class="btn btn-small btn-outline" onclick="practiceCalculation()">Practice Calculation</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Applications -->
+                    <div class="applications-section">
+                        <div class="visualizer-title">Real-World Application</div>
+                        
+                        <div class="application-problem" id="applicationProblem">
+                            A school surveyed 40 students about hours spent studying daily. Data grouped as: 0-2 hrs: 8 students, 2-4 hrs: 15 students, 4-6 hrs: 12 students, 6-8 hrs: 5 students. What percentage study more than 4 hours daily?
+                        </div>
+                        
+                        <div class="central-controls">
+                            <button class="btn btn-small btn-green" onclick="checkApplication('42.5%')">42.5%</button>
+                            <button class="btn btn-small btn-outline" onclick="checkApplication('35%')">35%</button>
+                            <button class="btn btn-small btn-outline" onclick="checkApplication('50%')">50%</button>
+                            <button class="btn btn-small btn-outline" onclick="checkApplication('30%')">30%</button>
+                        </div>
+                        
+                        <div id="applicationFeedback" style="margin: 10px 0; color: var(--text-secondary); font-size: 0.9rem; text-align: center;">
+                            Calculate: (12+5)/40 × 100 = 17/40 × 100
+                        </div>
+                        
+                        <div class="central-controls">
+                            <button class="btn btn-small btn-outline" onclick="newApplicationProblem()">New Problem</button>
+                            <button class="btn btn-small btn-outline" onclick="showApplicationSolution()">Show Solution</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Comparison Table -->
+                    <div class="comparison-section">
+                        <div class="visualizer-title">Comparing Statistical Graphs</div>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Graph Type</th>
+                                    <th>Used For</th>
+                                    <th>Data Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr onclick="explainGraph('histogram')">
+                                    <td>Histogram</td>
+                                    <td>Frequency distribution</td>
+                                    <td>Grouped continuous data</td>
+                                </tr>
+                                <tr onclick="explainGraph('bar')">
+                                    <td>Bar Graph</td>
+                                    <td>Comparing categories</td>
+                                    <td>Discrete/categorical data</td>
+                                </tr>
+                                <tr onclick="explainGraph('ogive')">
+                                    <td>Ogive</td>
+                                    <td>Cumulative frequency</td>
+                                    <td>Grouped continuous data</td>
+                                </tr>
+                                <tr onclick="explainGraph('pie')">
+                                    <td>Pie Chart</td>
+                                    <td>Showing proportions</td>
+                                    <td>Categorical data</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div id="graphDetail" style="margin-top: 15px; padding: 10px; background: var(--dark-surface); border-radius: 6px; color: var(--text-secondary); font-size: 0.85rem; display: none;">
+                            Click a graph type for detailed explanation
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="navigation-buttons">
+                <button class="btn btn-outline" id="skipQuestion">Skip Question</button>
+                <button class="btn btn-primary" id="nextQuestion" disabled>Next Question</button>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div class="results-page card fade-in" id="resultsPage">
+            <h2 class="results-title">Statistics Practice Complete!</h2>
+            
+            <div class="score-card">
+                <div class="score-value" id="finalScore">0</div>
+                <div class="score-percentage" id="scorePercentage">0%</div>
+                <div class="score-message" id="scoreMessage"></div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-value" id="groupedDataScore">0</div>
+                        <div class="stat-label">Grouped Data</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="histogramScore">0</div>
+                        <div class="stat-label">Histograms</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="frequencyScore">0</div>
+                        <div class="stat-label">Frequency</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="timeSpent">0min</div>
+                        <div class="stat-label">Time Spent</div>
+                    </div>
+                </div>
+                
+                <div class="btn-group" style="margin-top: 20px;">
+                    <button class="btn btn-primary" id="retryTopic">Try Again</button>
+                    <button class="btn btn-green" id="viewTopics">Other Topics</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Comprehensive questions array - 80+ questions on Statistics
+        const questions = [
+            // Basic Grouped Data Concepts (1-15)
+            {
+                question: "What is grouped data?",
+                options: ["Data organized into class intervals", "Raw unorganized data", "Data with no patterns", "Individual data points"],
+                answer: "A",
+                explanation: "Grouped data is organized into class intervals or ranges for easier analysis.",
+                type: "grouped-data"
+            },
+            {
+                question: "Why do we group data?",
+                options: ["To identify patterns and trends", "To make data more complicated", "To hide information", "To create confusion"],
+                answer: "A",
+                explanation: "Grouping helps identify patterns, trends, and makes large datasets manageable.",
+                type: "grouped-data"
+            },
+            {
+                question: "What is a class interval?",
+                options: ["A range of values grouped together", "A single data point", "The average of data", "The highest value"],
+                answer: "A",
+                explanation: "Class interval is a range of values that are grouped together (e.g., 10-20, 20-30).",
+                type: "grouped-data"
+            },
+            {
+                question: "What is frequency?",
+                options: ["Number of observations in a class", "Average of data", "Range of data", "Middle value"],
+                answer: "A",
+                explanation: "Frequency is the number of observations (data points) that fall within a class interval.",
+                type: "frequency"
+            },
+            {
+                question: "What is the class mark?",
+                options: ["Midpoint of a class interval", "Highest value in class", "Lowest value in class", "Frequency of class"],
+                answer: "A",
+                explanation: "Class mark = (Lower limit + Upper limit) ÷ 2. It represents the typical value of the class.",
+                type: "grouped-data"
+            },
+            {
+                question: "For class 10-20, what is the class mark?",
+                options: ["15", "10", "20", "30"],
+                answer: "A",
+                explanation: "Class mark = (10 + 20) ÷ 2 = 15",
+                type: "grouped-data"
+            },
+            {
+                question: "What are class boundaries?",
+                options: ["Exact limits of a class", "Frequency of class", "Class midpoint", "Range of entire data"],
+                answer: "A",
+                explanation: "Class boundaries are the exact limits that separate classes without gaps.",
+                type: "grouped-data"
+            },
+            {
+                question: "For class 10-19, what is the upper class boundary?",
+                options: ["19.5", "19", "20", "18.5"],
+                answer: "A",
+                explanation: "Upper class boundary = Upper limit + 0.5 = 19 + 0.5 = 19.5",
+                type: "grouped-data"
+            },
+            {
+                question: "What is class width?",
+                options: ["Difference between class boundaries", "Number of observations", "Class midpoint", "Frequency"],
+                answer: "A",
+                explanation: "Class width = Upper boundary - Lower boundary. Should be same for all classes.",
+                type: "grouped-data"
+            },
+            {
+                question: "For classes 10-20 and 20-30, what is class width?",
+                options: ["10", "20", "15", "5"],
+                answer: "A",
+                explanation: "Assuming boundaries: 9.5-20.5 and 19.5-30.5, width = 20.5 - 9.5 = 11, but typically we use 10 as the interval width.",
+                type: "grouped-data"
+            },
+            {
+                question: "What is cumulative frequency?",
+                options: ["Running total of frequencies", "Average frequency", "Highest frequency", "Difference in frequencies"],
+                answer: "A",
+                explanation: "Cumulative frequency is the running total of frequencies as we move through classes.",
+                type: "cumulative"
+            },
+            {
+                question: "What is less than cumulative frequency?",
+                options: ["Frequencies of all classes below given class", "Total frequency", "Frequency of modal class", "Difference between frequencies"],
+                answer: "A",
+                explanation: "Less than cumulative frequency shows total observations below upper boundary of each class.",
+                type: "cumulative"
+            },
+            {
+                question: "What is more than cumulative frequency?",
+                options: ["Frequencies of all classes above given class", "Total frequency", "Frequency of modal class", "Average frequency"],
+                answer: "A",
+                explanation: "More than cumulative frequency shows total observations above lower boundary of each class.",
+                type: "cumulative"
+            },
+            {
+                question: "Total of all frequencies equals?",
+                options: ["Total number of observations", "Class width", "Number of classes", "Average frequency"],
+                answer: "A",
+                explanation: "Sum of all frequencies = Total number of observations (N).",
+                type: "frequency"
+            },
+            {
+                question: "What is the modal class?",
+                options: ["Class with highest frequency", "First class", "Last class", "Class with lowest frequency"],
+                answer: "A",
+                explanation: "Modal class has the highest frequency in the distribution.",
+                type: "central-tendency"
+            },
+
+            // Histograms (16-30)
+            {
+                question: "What is a histogram?",
+                options: ["Bar graph for frequency distribution", "Line graph for trends", "Pie chart for proportions", "Scatter plot for correlation"],
+                answer: "A",
+                explanation: "Histogram is a bar graph showing frequency distribution of grouped data.",
+                type: "histograms"
+            },
+            {
+                question: "Histogram bars have no gaps because:",
+                options: ["Data is continuous", "Data is discrete", "It looks better", "It's easier to draw"],
+                answer: "A",
+                explanation: "No gaps because data is continuous and classes are adjacent.",
+                type: "histograms"
+            },
+            {
+                question: "In histogram, what is represented on x-axis?",
+                options: ["Class intervals/boundaries", "Frequency", "Cumulative frequency", "Class marks"],
+                answer: "A",
+                explanation: "X-axis shows class intervals or boundaries (continuous scale).",
+                type: "histograms"
+            },
+            {
+                question: "In histogram, what is represented on y-axis?",
+                options: ["Frequency", "Class intervals", "Cumulative frequency", "Class marks"],
+                answer: "A",
+                explanation: "Y-axis shows frequency (number of observations in each class).",
+                type: "histograms"
+            },
+            {
+                question: "What does area of histogram bar represent?",
+                options: ["Frequency", "Class width", "Class mark", "Cumulative frequency"],
+                answer: "A",
+                explanation: "Area = frequency (height) × class width. Total area = total observations.",
+                type: "histograms"
+            },
+            {
+                question: "Histogram vs Bar graph: main difference?",
+                options: ["Histogram for continuous data, bars touch", "Histogram has gaps between bars", "Bar graph has no scale", "No difference"],
+                answer: "A",
+                explanation: "Histogram: continuous data, bars touch. Bar graph: categorical data, gaps between bars.",
+                type: "histograms"
+            },
+            {
+                question: "What is frequency polygon?",
+                options: ["Line graph joining midpoints of histogram bars", "Type of histogram", "Bar graph variant", "Pie chart"],
+                answer: "A",
+                explanation: "Frequency polygon is line graph joining midpoints of histogram bars at frequency height.",
+                type: "histograms"
+            },
+            {
+                question: "How to draw frequency polygon?",
+                options: ["Plot class marks vs frequency, join points", "Plot boundaries vs frequency", "Plot frequency vs cumulative frequency", "Join tops of histogram bars"],
+                answer: "A",
+                explanation: "Plot points (class mark, frequency) and join them with straight lines.",
+                type: "histograms"
+            },
+            {
+                question: "What is histogram skewness?",
+                options: ["Asymmetry in distribution", "Height of bars", "Width of bars", "Number of bars"],
+                answer: "A",
+                explanation: "Skewness indicates if distribution is symmetrical or tails to one side.",
+                type: "histograms"
+            },
+            {
+                question: "Right-skewed histogram means:",
+                options: ["Tail extends to right, peak left", "Tail extends to left, peak right", "Perfect symmetry", "All bars equal height"],
+                answer: "A",
+                explanation: "Right-skewed: most data on left, tail extends to right (positive skew).",
+                type: "histograms"
+            },
+            {
+                question: "Left-skewed histogram means:",
+                options: ["Tail extends to left, peak right", "Tail extends to right, peak left", "Perfect symmetry", "All bars equal height"],
+                answer: "A",
+                explanation: "Left-skewed: most data on right, tail extends to left (negative skew).",
+                type: "histograms"
+            },
+            {
+                question: "Symmetric histogram means:",
+                options: ["Mirror image around center", "All bars same height", "Only one bar", "No pattern"],
+                answer: "A",
+                explanation: "Symmetric: left and right sides are mirror images (bell-shaped).",
+                type: "histograms"
+            },
+            {
+                question: "What does uniform histogram indicate?",
+                options: ["Equal frequency in all classes", "All data in one class", "No data in any class", "Extreme values only"],
+                answer: "A",
+                explanation: "Uniform distribution: approximately equal frequencies across classes.",
+                type: "histograms"
+            },
+            {
+                question: "Bimodal histogram has:",
+                options: ["Two peaks", "One peak", "No peaks", "Three peaks"],
+                answer: "A",
+                explanation: "Bimodal distribution has two distinct peaks (two modal classes).",
+                type: "histograms"
+            },
+            {
+                question: "Histogram helps identify:",
+                options: ["Shape, center, spread of data", "Only maximum value", "Only minimum value", "Only average"],
+                answer: "A",
+                explanation: "Histogram shows distribution shape, central tendency, variability, and outliers.",
+                type: "histograms"
+            },
+
+            // Cumulative Frequency & Ogives (31-45)
+            {
+                question: "What is cumulative frequency curve (ogive)?",
+                options: ["S-shaped curve of cumulative frequencies", "Straight line", "Bar graph", "Pie chart"],
+                answer: "A",
+                explanation: "Ogive is S-shaped curve plotting upper boundaries vs cumulative frequencies.",
+                type: "cumulative"
+            },
+            {
+                question: "Less than ogive plots:",
+                options: ["Upper boundaries vs less than cumulative frequency", "Lower boundaries vs frequency", "Class marks vs frequency", "Boundaries vs frequency"],
+                answer: "A",
+                explanation: "Less than ogive: upper class boundaries on x-axis, less than cumulative frequency on y-axis.",
+                type: "cumulative"
+            },
+            {
+                question: "More than ogive plots:",
+                options: ["Lower boundaries vs more than cumulative frequency", "Upper boundaries vs frequency", "Class marks vs cumulative frequency", "Boundaries vs frequency"],
+                answer: "A",
+                explanation: "More than ogive: lower class boundaries on x-axis, more than cumulative frequency on y-axis.",
+                type: "cumulative"
+            },
+            {
+                question: "How to find median from ogive?",
+                options: ["Find x where cumulative frequency = N/2", "Find highest point", "Find intersection of axes", "Find starting point"],
+                answer: "A",
+                explanation: "Locate N/2 on y-axis, draw horizontal to curve, then vertical to x-axis for median.",
+                type: "cumulative"
+            },
+            {
+                question: "How to find quartiles from ogive?",
+                options: ["Use N/4, N/2, 3N/4 on y-axis", "Use highest frequency", "Use class marks", "Use boundaries only"],
+                answer: "A",
+                explanation: "Q1 at N/4, Q2 (median) at N/2, Q3 at 3N/4 on cumulative frequency axis.",
+                type: "cumulative"
+            },
+            {
+                question: "What is N in statistics?",
+                options: ["Total number of observations", "Number of classes", "Class width", "Frequency"],
+                answer: "A",
+                explanation: "N = Σf = sum of all frequencies = total observations.",
+                type: "frequency"
+            },
+            {
+                question: "If N=40, median position is at:",
+                options: ["20th observation", "40th observation", "10th observation", "30th observation"],
+                answer: "A",
+                explanation: "Median position = (N+1)/2 = 41/2 = 20.5th observation, or simply N/2 = 20th for grouped data.",
+                type: "cumulative"
+            },
+            {
+                question: "If N=50, Q1 position is at:",
+                options: ["12.5th observation", "25th observation", "50th observation", "37.5th observation"],
+                answer: "A",
+                explanation: "Q1 position = N/4 = 50/4 = 12.5th observation.",
+                type: "cumulative"
+            },
+            {
+                question: "If N=60, Q3 position is at:",
+                options: ["45th observation", "15th observation", "30th observation", "60th observation"],
+                answer: "A",
+                explanation: "Q3 position = 3N/4 = 3×60/4 = 45th observation.",
+                type: "cumulative"
+            },
+            {
+                question: "Two ogives intersect at:",
+                options: ["Median", "Mode", "Mean", "Total frequency"],
+                answer: "A",
+                explanation: "Less than and more than ogives intersect at median (N/2 point).",
+                type: "cumulative"
+            },
+            {
+                question: "Cumulative frequency curve is always:",
+                options: ["Non-decreasing", "Decreasing", "Constant", "Decreasing then increasing"],
+                answer: "A",
+                explanation: "Cumulative frequency always increases or stays same, never decreases.",
+                type: "cumulative"
+            },
+            {
+                question: "At start of less than ogive, cumulative frequency is:",
+                options: ["0", "N", "Frequency of first class", "1"],
+                answer: "A",
+                explanation: "Starts at 0 (no observations below first class).",
+                type: "cumulative"
+            },
+            {
+                question: "At end of less than ogive, cumulative frequency is:",
+                options: ["N", "0", "Frequency of last class", "N/2"],
+                answer: "A",
+                explanation: "Ends at N (all observations below last upper boundary).",
+                type: "cumulative"
+            },
+            {
+                question: "Ogive helps find:",
+                options: ["Percentiles and quartiles", "Only mean", "Only mode", "Only range"],
+                answer: "A",
+                explanation: "Ogive is used to find median, quartiles, percentiles, and other positional measures.",
+                type: "cumulative"
+            },
+            {
+                question: "From ogive, 80th percentile means:",
+                options: ["Value below which 80% observations lie", "Value above which 80% observations lie", "80th observation", "80% of range"],
+                answer: "A",
+                explanation: "80th percentile: 80% of observations have values less than this point.",
+                type: "cumulative"
+            },
+
+            // Central Tendency for Grouped Data (46-60)
+            {
+                question: "Mean for grouped data formula uses:",
+                options: ["Σ(f×x)/Σf where x is class mark", "Σx/N for raw data", "Middle value", "Most frequent value"],
+                answer: "A",
+                explanation: "Mean = Σ(f×x)/Σf, where x = class mark, f = frequency, Σf = N.",
+                type: "central-tendency"
+            },
+            {
+                question: "For classes 10-20(f=5), 20-30(f=8), mean class marks are:",
+                options: ["15 and 25", "10 and 20", "5 and 8", "20 and 30"],
+                answer: "A",
+                explanation: "Class marks: (10+20)/2=15, (20+30)/2=25",
+                type: "central-tendency"
+            },
+            {
+                question: "Median for grouped data formula:",
+                options: ["L + [(N/2 - cf)/f] × h", "Σ(f×x)/Σf", "Most frequent class mark", "Middle class boundary"],
+                answer: "A",
+                explanation: "Median = L + [(N/2 - cf)/f] × h, where L=lower boundary of median class, cf=cumulative frequency before median class, f=frequency of median class, h=class width.",
+                type: "central-tendency"
+            },
+            {
+                question: "Modal class is class with:",
+                options: ["Highest frequency", "Lowest frequency", "Middle frequency", "Any frequency"],
+                answer: "A",
+                explanation: "Modal class has the highest frequency in the distribution.",
+                type: "central-tendency"
+            },
+            {
+                question: "Mode for grouped data formula:",
+                options: ["L + [(f1-f0)/(2f1-f0-f2)] × h", "Σ(f×x)/Σf", "L + [(N/2-cf)/f] × h", "Middle value"],
+                answer: "A",
+                explanation: "Mode = L + [(f1-f0)/(2f1-f0-f2)] × h, where L=lower boundary of modal class, f1=frequency of modal class, f0=frequency of class before, f2=frequency of class after, h=class width.",
+                type: "central-tendency"
+            },
+            {
+                question: "For mean calculation, we assume:",
+                options: ["All values in class are at class mark", "Values evenly distributed", "All values at lower limit", "All values at upper limit"],
+                answer: "A",
+                explanation: "We assume all observations in a class are concentrated at the class mark for mean calculation.",
+                type: "central-tendency"
+            },
+            {
+                question: "Which is most affected by extreme values in grouped data?",
+                options: ["Mean", "Median", "Mode", "All equally"],
+                answer: "A",
+                explanation: "Mean is most affected by extreme values, median and mode less affected.",
+                type: "central-tendency"
+            },
+            {
+                question: "Which represents typical value for skewed data?",
+                options: ["Median", "Mean", "Mode", "Range"],
+                answer: "A",
+                explanation: "Median is better for skewed data as it's not affected by extreme values.",
+                type: "central-tendency"
+            },
+            {
+                question: "For symmetrical distribution:",
+                options: ["Mean ≈ Median ≈ Mode", "Mean > Median > Mode", "Mean < Median < Mode", "No relation"],
+                answer: "A",
+                explanation: "In symmetrical distribution, mean, median and mode are approximately equal.",
+                type: "central-tendency"
+            },
+            {
+                question: "For right-skewed distribution:",
+                options: ["Mean > Median > Mode", "Mean ≈ Median ≈ Mode", "Mean < Median < Mode", "Mode > Median > Mean"],
+                answer: "A",
+                explanation: "Right-skewed: mean > median > mode (tail to right pulls mean up).",
+                type: "central-tendency"
+            },
+            {
+                question: "For left-skewed distribution:",
+                options: ["Mean < Median < Mode", "Mean ≈ Median ≈ Mode", "Mean > Median > Mode", "Mode < Median < Mean"],
+                answer: "A",
+                explanation: "Left-skewed: mean < median < mode (tail to left pulls mean down).",
+                type: "central-tendency"
+            },
+            {
+                question: "If mode=25, median=27, mean=30, distribution is:",
+                options: ["Right-skewed", "Left-skewed", "Symmetric", "Uniform"],
+                answer: "A",
+                explanation: "Mean(30) > Median(27) > Mode(25) indicates right-skewed distribution.",
+                type: "central-tendency"
+            },
+            {
+                question: "Empirical relation: Mode ≈ ?",
+                options: ["3Median - 2Mean", "2Mean - 3Median", "Mean + Median", "Mean - Median"],
+                answer: "A",
+                explanation: "Empirical relation: Mode ≈ 3Median - 2Mean (for moderately skewed distributions).",
+                type: "central-tendency"
+            },
+            {
+                question: "If Mean=40, Median=38, then approximate Mode is:",
+                options: ["34", "42", "38", "40"],
+                answer: "A",
+                explanation: "Mode ≈ 3×38 - 2×40 = 114 - 80 = 34",
+                type: "central-tendency"
+            },
+            {
+                question: "Range for grouped data is approximately:",
+                options: ["Upper boundary of last class - Lower boundary of first class", "Highest frequency - Lowest frequency", "Mean - Mode", "Σf × h"],
+                answer: "A",
+                explanation: "Range ≈ Upper boundary of last class - Lower boundary of first class.",
+                type: "central-tendency"
+            },
+
+            // Applications & Real-World (61-75)
+            {
+                question: "Histograms are used in:",
+                options: ["All of these", "Exam score analysis", "Height distribution", "Income studies"],
+                answer: "A",
+                explanation: "Histograms are used in various fields to analyze distributions of continuous data.",
+                type: "applications"
+            },
+            {
+                question: "In survey of 100 people, if 30 are in class 20-30 years, frequency is:",
+                options: ["30", "100", "20", "25"],
+                answer: "A",
+                explanation: "Frequency = number of observations in that class = 30.",
+                type: "applications"
+            },
+            {
+                question: "If 40 students scored 50-60 marks out of 200, percentage in this class is:",
+                options: ["40/N × 100", "50/N × 100", "60/N × 100", "40/200 × 100"],
+                answer: "A",
+                explanation: "Percentage = (frequency ÷ total) × 100 = (40 ÷ N) × 100",
+                type: "applications"
+            },
+            {
+                question: "For data on monthly rainfall (mm), appropriate grouping would be:",
+                options: ["0-50, 50-100, 100-150 mm", "Jan, Feb, Mar", "Low, Medium, High", "Red, Blue, Green"],
+                answer: "A",
+                explanation: "Rainfall is continuous numerical data, so numerical class intervals are appropriate.",
+                type: "applications"
+            },
+            {
+                question: "In factory, histogram of product weights helps check:",
+                options: ["Quality control consistency", "Only maximum weight", "Only minimum weight", "Color of products"],
+                answer: "A",
+                explanation: "Histogram shows if weights are consistent (centered around target) or vary too much.",
+                type: "applications"
+            },
+            {
+                question: "Cumulative frequency curve helps schools determine:",
+                options: ["Cut-off marks for grades", "Only highest score", "Only average score", "Student names"],
+                answer: "A",
+                explanation: "Ogive helps find percentiles, e.g., top 10% get A grade, next 20% get B, etc.",
+                type: "applications"
+            },
+            {
+                question: "In medical data, histogram of blood pressure readings shows:",
+                options: ["Distribution pattern in population", "Individual readings only", "Only abnormal readings", "Patient names"],
+                answer: "A",
+                explanation: "Shows how blood pressure is distributed: normal range, hypertension prevalence, etc.",
+                type: "applications"
+            },
+            {
+                question: "Market research uses histograms to analyze:",
+                options: ["Customer age distribution", "Product colors only", "Store locations only", "Employee names"],
+                answer: "A",
+                explanation: "Histograms help understand customer demographics like age, income, spending patterns.",
+                type: "applications"
+            },
+            {
+                question: "If histogram of house prices shows right skew, it means:",
+                options: ["Most houses moderately priced, few very expensive", "All houses same price", "Most houses expensive", "Data error"],
+                answer: "A",
+                explanation: "Right skew in house prices: many moderately priced houses, few extremely expensive ones.",
+                type: "applications"
+            },
+            {
+                question: "In sports, histogram of player heights typically shows:",
+                options: ["Approximately symmetric distribution", "Right skew only", "Left skew only", "Uniform distribution"],
+                answer: "A",
+                explanation: "Heights in population usually follow symmetric bell-shaped distribution.",
+                type: "applications"
+            },
+            {
+                question: "For exam scores, if mean=65, median=70, mode=75, distribution is:",
+                options: ["Left-skewed", "Right-skewed", "Symmetric", "Bimodal"],
+                answer: "A",
+                explanation: "Mean(65) < Median(70) < Mode(75) indicates left-skewed distribution.",
+                type: "applications"
+            },
+            {
+                question: "Which graph shows running total of frequencies?",
+                options: ["Cumulative frequency curve (ogive)", "Histogram", "Bar graph", "Pie chart"],
+                answer: "A",
+                explanation: "Ogive shows cumulative frequencies (running totals).",
+                type: "applications"
+            },
+            {
+                question: "To find what score is at 75th percentile, use:",
+                options: ["Ogive", "Histogram", "Frequency polygon", "Bar graph"],
+                answer: "A",
+                explanation: "Ogive helps find percentiles: locate 75% on y-axis, find corresponding x-value.",
+                type: "applications"
+            },
+            {
+                question: "If 60% of students scored below 80 marks, then 80 is:",
+                options: ["60th percentile", "Mean score", "Median score", "Mode score"],
+                answer: "A",
+                explanation: "If 60% scored below 80, then 80 is the 60th percentile.",
+                type: "applications"
+            },
+            {
+                question: "In grouped data, we lose information about:",
+                options: ["Individual data values", "Class intervals", "Frequencies", "Total count"],
+                answer: "A",
+                explanation: "Grouping loses individual values but reveals overall patterns.",
+                type: "applications"
+            }
+        ];
+
+        // Additional questions beyond 75
+        const additionalQuestions = [
+            {
+                question: "For class 15-25 with frequency 8, contribution to Σ(f×x) is:",
+                options: ["8×20=160", "8×15=120", "8×25=200", "8×10=80"],
+                answer: "A",
+                explanation: "Class mark = (15+25)/2 = 20, contribution = f×x = 8×20 = 160",
+                type: "central-tendency"
+            },
+            {
+                question: "If total frequency N=50, median class is where cumulative frequency first exceeds:",
+                options: ["25", "50", "12.5", "37.5"],
+                answer: "A",
+                explanation: "Median position = N/2 = 50/2 = 25",
+                type: "cumulative"
+            },
+            {
+                question: "Class width should generally be:",
+                options: ["Same for all classes", "Different for each class", "Increasing progressively", "Decreasing progressively"],
+                answer: "A",
+                explanation: "For proper histogram, class width should be same for all classes.",
+                type: "grouped-data"
+            },
+            {
+                question: "Frequency density = ?",
+                options: ["Frequency ÷ Class width", "Frequency × Class width", "Cumulative frequency ÷ N", "Frequency ÷ N"],
+                answer: "A",
+                explanation: "Frequency density = Frequency / Class width. Used when classes have unequal widths.",
+                type: "histograms"
+            },
+            {
+                question: "For histogram with unequal class widths, y-axis should show:",
+                options: ["Frequency density", "Frequency only", "Cumulative frequency", "Class marks"],
+                answer: "A",
+                explanation: "With unequal widths, use frequency density so area represents frequency.",
+                type: "histograms"
+            }
+        ];
+
+        // Combine all questions
+        const allQuestions = [...questions, ...additionalQuestions];
+
+        // Statistics tips
+        const statsTips = [
+            "Tip: Class width = Upper boundary - Lower boundary. Keep it consistent!",
+            "Tip: Class mark = (Lower limit + Upper limit) ÷ 2. Represents typical value.",
+            "Tip: Cumulative frequency always increases or stays same, never decreases.",
+            "Tip: Histogram bars touch because data is continuous.",
+            "Tip: Median from ogive: find x where cumulative frequency = N/2.",
+            "Tip: Modal class has highest frequency. Mode formula: L + [(f1-f0)/(2f1-f0-f2)]×h",
+            "Tip: Mean for grouped data: Σ(f×x) ÷ Σf, where x = class mark.",
+            "Tip: Right-skewed: mean > median > mode. Left-skewed: mean < median < mode."
+        ];
+
+        // Sample data for visualization
+        const sampleDataSets = [
+            {
+                intervals: ["10-20", "20-30", "30-40", "40-50", "50-60"],
+                frequencies: [5, 8, 12, 10, 5],
+                color: "#4CAF50"
+            },
+            {
+                intervals: ["0-10", "10-20", "20-30", "30-40", "40-50"],
+                frequencies: [3, 7, 15, 8, 2],
+                color: "#2196F3"
+            },
+            {
+                intervals: ["100-120", "120-140", "140-160", "160-180", "180-200"],
+                frequencies: [4, 9, 14, 7, 1],
+                color: "#9C27B0"
+            },
+            {
+                intervals: ["1-5", "6-10", "11-15", "16-20", "21-25"],
+                frequencies: [6, 10, 8, 4, 2],
+                color: "#FF9800"
+            }
+        ];
+
+        // Grouping problems
+        const groupingProblems = [
+            {
+                data: [15, 18, 22, 25, 28, 30, 32, 35, 38, 40, 42, 45, 48, 50],
+                answer: "15-25, 25-35, 35-45, 45-55",
+                explanation: "Start at 15, width 10: 15-25, 25-35, 35-45, 45-55 covers all data"
+            },
+            {
+                data: [22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 52, 55],
+                answer: "20-30, 30-40, 40-50, 50-60",
+                explanation: "Start at 20, width 10: 20-30, 30-40, 40-50, 50-60"
+            },
+            {
+                data: [5, 8, 12, 15, 18, 21, 24, 27, 30, 33, 36],
+                answer: "5-15, 15-25, 25-35, 35-45",
+                explanation: "Start at 5, width 10: 5-15, 15-25, 25-35, 35-45"
+            }
+        ];
+
+        // Application problems
+        const applicationProblems = [
+            {
+                problem: "A school surveyed 40 students about hours spent studying daily. Data grouped as: 0-2 hrs: 8 students, 2-4 hrs: 15 students, 4-6 hrs: 12 students, 6-8 hrs: 5 students. What percentage study more than 4 hours daily?",
+                answer: "42.5%",
+                solution: "Students studying >4 hrs = 12 + 5 = 17. Percentage = (17/40) × 100 = 42.5%"
+            },
+            {
+                problem: "In a test, 60 students scored: 0-20: 5, 20-40: 12, 40-60: 18, 60-80: 15, 80-100: 10. How many passed if passing is 40+ marks?",
+                answer: "43",
+                solution: "Passed = 18 + 15 + 10 = 43 students"
+            },
+            {
+                problem: "Heights (cm) of 50 students: 140-150: 8, 150-160: 15, 160-170: 20, 170-180: 7. What percentage are shorter than 160 cm?",
+                answer: "46%",
+                solution: "Shorter than 160 cm = 8 + 15 = 23. Percentage = (23/50) × 100 = 46%"
+            }
+        ];
+
+        // App state
+        let appState = {
+            currentQuestionIndex: 0,
+            score: 0,
+            skipped: 0,
+            answered: 0,
+            studentName: "",
+            startTime: null,
+            currentDataset: 0,
+            currentGrouping: 0,
+            currentApplication: 0,
+            groupedDataScore: 0,
+            histogramScore: 0,
+            frequencyScore: 0,
+            cumulativeScore: 0,
+            centralTendencyScore: 0,
+            applicationsScore: 0
+        };
+
+        // DOM elements
+        const welcomePage = document.getElementById('welcomePage');
+        const practicePage = document.getElementById('practicePage');
+        const resultsPage = document.getElementById('resultsPage');
+        const studentNameInput = document.getElementById('studentName');
+        const startPracticeBtn = document.getElementById('startPractice');
+        const backToHomeBtn = document.getElementById('backToHome');
+        const studentNameDisplay = document.getElementById('studentNameDisplay');
+        const progressText = document.getElementById('progressText');
+        const progressFill = document.getElementById('progressFill');
+        const questionText = document.getElementById('questionText');
+        const statsTip = document.getElementById('statsTip');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const feedbackContainer = document.getElementById('feedbackContainer');
+        const feedbackExplanation = document.getElementById('feedbackExplanation');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const skipQuestionBtn = document.getElementById('skipQuestion');
+        const retryTopicBtn = document.getElementById('retryTopic');
+        const viewTopicsBtn = document.getElementById('viewTopics');
+        const finalScore = document.getElementById('finalScore');
+        const scorePercentage = document.getElementById('scorePercentage');
+        const scoreMessage = document.getElementById('scoreMessage');
+        const groupedDataScore = document.getElementById('groupedDataScore');
+        const histogramScore = document.getElementById('histogramScore');
+        const frequencyScore = document.getElementById('frequencyScore');
+        const timeSpent = document.getElementById('timeSpent');
+        const sampleDataTable = document.getElementById('sampleDataTable');
+        const histogramDisplay = document.getElementById('histogramDisplay');
+        const ogiveCanvas = document.getElementById('ogiveCanvas');
+        const calculatorDisplay = document.getElementById('calculatorDisplay');
+        const calculatorResult = document.getElementById('calculatorResult');
+        const dataInput = document.getElementById('dataInput');
+        const groupingDisplay = document.getElementById('groupingDisplay');
+        const groupingFeedback = document.getElementById('groupingFeedback');
+        const centralTendencyFeedback = document.getElementById('centralTendencyFeedback');
+        const applicationProblem = document.getElementById('applicationProblem');
+        const applicationFeedback = document.getElementById('applicationFeedback');
+        const graphDetail = document.getElementById('graphDetail');
+
+        // Initialize
+        function initApp() {
+            setupEventListeners();
+            showWelcomePage();
+            setupVisualizationTools();
+        }
+
+        // Setup visualization tools
+        function setupVisualizationTools() {
+            generateNewData();
+            plotCumulativeCurve();
+            newGroupingProblem();
+            newApplicationProblem();
+        }
+
+        // Generate new sample data
+        function generateNewData() {
+            appState.currentDataset = (appState.currentDataset + 1) % sampleDataSets.length;
+            const dataset = sampleDataSets[appState.currentDataset];
+            
+            // Update data table
+            sampleDataTable.innerHTML = '';
+            let cumulative = 0;
+            
+            dataset.intervals.forEach((interval, index) => {
+                cumulative += dataset.frequencies[index];
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${interval}</td>
+                    <td>${dataset.frequencies[index]}</td>
+                    <td>${cumulative}</td>
+                `;
+                sampleDataTable.appendChild(row);
+            });
+            
+            // Create histogram
+            createHistogram(dataset);
+            
+            // Update cumulative curve
+            plotCumulativeCurve();
+        }
+
+        // Create histogram visualization
+        function createHistogram(dataset) {
+            histogramDisplay.innerHTML = '';
+            const maxFreq = Math.max(...dataset.frequencies);
+            
+            dataset.intervals.forEach((interval, index) => {
+                const bar = document.createElement('div');
+                bar.className = 'histogram-bar';
+                bar.style.height = `${(dataset.frequencies[index] / maxFreq) * 150}px`;
+                bar.style.background = dataset.color;
+                
+                const value = document.createElement('div');
+                value.className = 'histogram-value';
+                value.textContent = dataset.frequencies[index];
+                
+                const label = document.createElement('div');
+                label.className = 'histogram-label';
+                label.textContent = interval;
+                
+                bar.appendChild(value);
+                bar.appendChild(label);
+                histogramDisplay.appendChild(bar);
+            });
+        }
+
+        // Plot cumulative frequency curve
+        function plotCumulativeCurve() {
+            ogiveCanvas.innerHTML = '';
+            const dataset = sampleDataSets[appState.currentDataset];
+            const intervals = dataset.intervals;
+            const frequencies = dataset.frequencies;
+            
+            // Calculate cumulative frequencies
+            let cumulative = 0;
+            const cumulatives = [];
+            const boundaries = [];
+            
+            // Calculate upper boundaries and cumulative frequencies
+            for (let i = 0; i < intervals.length; i++) {
+                const interval = intervals[i];
+                const parts = interval.split('-');
+                const upperBoundary = parseInt(parts[1]) + 0.5; // Assuming .5 adjustment
+                boundaries.push(upperBoundary);
+                
+                cumulative += frequencies[i];
+                cumulatives.push(cumulative);
+            }
+            
+            // Add starting point (lower boundary of first class)
+            const firstInterval = intervals[0].split('-');
+            boundaries.unshift(parseInt(firstInterval[0]) - 0.5);
+            cumulatives.unshift(0);
+            
+            // Add ending point (for line to continue)
+            boundaries.push(boundaries[boundaries.length-1] + 10);
+            cumulatives.push(cumulative);
+            
+            // Find max values for scaling
+            const maxX = Math.max(...boundaries);
+            const minX = Math.min(...boundaries);
+            const maxY = Math.max(...cumulatives);
+            
+            // Plot points and lines
+            const width = ogiveCanvas.clientWidth;
+            const height = ogiveCanvas.clientHeight;
+            
+            for (let i = 0; i < boundaries.length; i++) {
+                // Calculate coordinates
+                const x = ((boundaries[i] - minX) / (maxX - minX)) * (width - 40) + 20;
+                const y = height - 20 - ((cumulatives[i] / maxY) * (height - 40));
+                
+                // Create point
+                const point = document.createElement('div');
+                point.className = 'curve-point';
+                point.style.left = `${x}px`;
+                point.style.bottom = `${y}px`;
+                ogiveCanvas.appendChild(point);
+                
+                // Create line to next point
+                if (i < boundaries.length - 1) {
+                    const nextX = ((boundaries[i+1] - minX) / (maxX - minX)) * (width - 40) + 20;
+                    const nextY = height - 20 - ((cumulatives[i+1] / maxY) * (height - 40));
+                    
+                    const line = document.createElement('div');
+                    line.className = 'curve-line';
+                    line.style.left = `${x}px`;
+                    line.style.bottom = `${y}px`;
+                    
+                    // Calculate length and angle
+                    const dx = nextX - x;
+                    const dy = nextY - y;
+                    const length = Math.sqrt(dx * dx + dy * dy);
+                    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+                    
+                    line.style.width = `${length}px`;
+                    line.style.transform = `rotate(${angle}deg)`;
+                    
+                    ogiveCanvas.appendChild(line);
+                }
+            }
+            
+            // Add labels
+            const startLabel = document.createElement('div');
+            startLabel.textContent = boundaries[0];
+            startLabel.style.position = 'absolute';
+            startLabel.style.left = '10px';
+            startLabel.style.bottom = '0';
+            startLabel.style.color = 'var(--text-secondary)';
+            startLabel.style.fontSize = '0.7rem';
+            ogiveCanvas.appendChild(startLabel);
+            
+            const endLabel = document.createElement('div');
+            endLabel.textContent = boundaries[boundaries.length-2];
+            endLabel.style.position = 'absolute';
+            endLabel.style.right = '10px';
+            endLabel.style.bottom = '0';
+            endLabel.style.color = 'var(--text-secondary)';
+            endLabel.style.fontSize = '0.7rem';
+            ogiveCanvas.appendChild(endLabel);
+            
+            const maxLabel = document.createElement('div');
+            maxLabel.textContent = maxY;
+            maxLabel.style.position = 'absolute';
+            maxLabel.style.left = '0';
+            maxLabel.style.top = '10px';
+            maxLabel.style.color = 'var(--text-secondary)';
+            maxLabel.style.fontSize = '0.7rem';
+            ogiveCanvas.appendChild(maxLabel);
+        }
+
+        // Statistics calculator
+        function calculateStatistics() {
+            const input = dataInput.value.trim();
+            if (!input) {
+                calculatorResult.textContent = "Please enter data in format: 10-20:5, 20-30:8, etc.";
+                calculatorResult.style.color = "var(--cumulative-orange)";
+                return;
+            }
+            
+            try {
+                // Parse input
+                const pairs = input.split(',').map(pair => pair.trim());
+                const intervals = [];
+                const frequencies = [];
+                let totalFreq = 0;
+                
+                for (const pair of pairs) {
+                    const [interval, freq] = pair.split(':').map(str => str.trim());
+                    intervals.push(interval);
+                    frequencies.push(parseInt(freq));
+                    totalFreq += parseInt(freq);
+                }
+                
+                // Calculate class marks
+                const classMarks = intervals.map(interval => {
+                    const [lower, upper] = interval.split('-').map(num => parseInt(num));
+                    return (lower + upper) / 2;
+                });
+                
+                // Calculate Σ(f×x)
+                let sumFX = 0;
+                for (let i = 0; i < intervals.length; i++) {
+                    sumFX += frequencies[i] * classMarks[i];
+                }
+                
+                // Calculate mean
+                const mean = sumFX / totalFreq;
+                
+                // Find median
+                const medianPos = totalFreq / 2;
+                let cumulative = 0;
+                let medianClassIndex = -1;
+                
+                for (let i = 0; i < frequencies.length; i++) {
+                    cumulative += frequencies[i];
+                    if (cumulative >= medianPos && medianClassIndex === -1) {
+                        medianClassIndex = i;
+                    }
+                }
+                
+                // Calculate median
+                let median = 0;
+                if (medianClassIndex !== -1) {
+                    const medianInterval = intervals[medianClassIndex];
+                    const [L, U] = medianInterval.split('-').map(num => parseInt(num));
+                    const f = frequencies[medianClassIndex];
+                    const h = U - L;
+                    const cf = cumulative - f; // Cumulative before median class
+                    
+                    median = L + ((medianPos - cf) / f) * h;
+                }
+                
+                // Find mode (modal class)
+                let maxFreq = 0;
+                let modalClassIndex = -1;
+                
+                for (let i = 0; i < frequencies.length; i++) {
+                    if (frequencies[i] > maxFreq) {
+                        maxFreq = frequencies[i];
+                        modalClassIndex = i;
+                    }
+                }
+                
+                // Calculate mode
+                let mode = 0;
+                if (modalClassIndex !== -1 && modalClassIndex > 0 && modalClassIndex < frequencies.length - 1) {
+                    const modalInterval = intervals[modalClassIndex];
+                    const [L, U] = modalInterval.split('-').map(num => parseInt(num));
+                    const f1 = frequencies[modalClassIndex];
+                    const f0 = frequencies[modalClassIndex - 1];
+                    const f2 = frequencies[modalClassIndex + 1];
+                    const h = U - L;
+                    
+                    mode = L + ((f1 - f0) / (2 * f1 - f0 - f2)) * h;
+                }
+                
+                // Display results
+                calculatorDisplay.innerHTML = `
+                    <div class="calculator-step">Data: ${input}</div>
+                    <div class="calculator-step">Total frequency (N): ${totalFreq}</div>
+                    <div class="calculator-step">Mean (Σf×x/Σf): ${mean.toFixed(2)}</div>
+                    <div class="calculator-step">Median class: ${intervals[medianClassIndex]}</div>
+                    <div class="calculator-step">Median: ${median.toFixed(2)}</div>
+                    <div class="calculator-step">Modal class: ${intervals[modalClassIndex]}</div>
+                    <div class="calculator-step">Mode: ${mode.toFixed(2)}</div>
+                `;
+                
+                calculatorResult.innerHTML = `<strong>Results:</strong> Mean ≈ ${mean.toFixed(2)}, Median ≈ ${median.toFixed(2)}, Mode ≈ ${mode.toFixed(2)}`;
+                calculatorResult.style.color = "var(--histogram-green)";
+                
+            } catch (e) {
+                calculatorResult.textContent = "Error: Please check input format. Use: 10-20:5, 20-30:8, etc.";
+                calculatorResult.style.color = "var(--central-tendency-red)";
+            }
+        }
+
+        function calculateMean() {
+            const input = dataInput.value.trim();
+            if (!input) {
+                alert("Please enter data first");
+                return;
+            }
+            
+            try {
+                const pairs = input.split(',').map(pair => pair.trim());
+                let sumFX = 0;
+                let totalFreq = 0;
+                
+                for (const pair of pairs) {
+                    const [interval, freq] = pair.split(':').map(str => str.trim());
+                    const [lower, upper] = interval.split('-').map(num => parseInt(num));
+                    const classMark = (lower + upper) / 2;
+                    const frequency = parseInt(freq);
+                    
+                    sumFX += frequency * classMark;
+                    totalFreq += frequency;
+                }
+                
+                const mean = sumFX / totalFreq;
+                calculatorDisplay.innerHTML = `<div class="calculator-step">Mean = Σ(f×x)/Σf = ${sumFX.toFixed(2)}/${totalFreq} = ${mean.toFixed(2)}</div>`;
+                calculatorResult.innerHTML = `<strong>Mean:</strong> ${mean.toFixed(2)}`;
+                calculatorResult.style.color = "var(--histogram-green)";
+                
+            } catch (e) {
+                alert("Error in calculation. Check input format.");
+            }
+        }
+
+        function calculateMedian() {
+            const input = dataInput.value.trim();
+            if (!input) {
+                alert("Please enter data first");
+                return;
+            }
+            
+            try {
+                const pairs = input.split(',').map(pair => pair.trim());
+                const intervals = [];
+                const frequencies = [];
+                let totalFreq = 0;
+                
+                for (const pair of pairs) {
+                    const [interval, freq] = pair.split(':').map(str => str.trim());
+                    intervals.push(interval);
+                    frequencies.push(parseInt(freq));
+                    totalFreq += parseInt(freq);
+                }
+                
+                const medianPos = totalFreq / 2;
+                let cumulative = 0;
+                let medianClassIndex = -1;
+                
+                for (let i = 0; i < frequencies.length; i++) {
+                    cumulative += frequencies[i];
+                    if (cumulative >= medianPos && medianClassIndex === -1) {
+                        medianClassIndex = i;
+                        break;
+                    }
+                }
+                
+                if (medianClassIndex !== -1) {
+                    const medianInterval = intervals[medianClassIndex];
+                    const [L, U] = medianInterval.split('-').map(num => parseInt(num));
+                    const f = frequencies[medianClassIndex];
+                    const h = U - L;
+                    const cf = cumulative - f;
+                    
+                    const median = L + ((medianPos - cf) / f) * h;
+                    
+                    calculatorDisplay.innerHTML = `
+                        <div class="calculator-step">Median position = N/2 = ${totalFreq}/2 = ${medianPos}</div>
+                        <div class="calculator-step">Median class: ${medianInterval} (cumulative reaches ${medianPos})</div>
+                        <div class="calculator-step">Median = L + [(N/2 - cf)/f] × h</div>
+                        <div class="calculator-step">= ${L} + [(${medianPos} - ${cf})/${f}] × ${h}</div>
+                        <div class="calculator-step">= ${median.toFixed(2)}</div>
+                    `;
+                    
+                    calculatorResult.innerHTML = `<strong>Median:</strong> ${median.toFixed(2)}`;
+                    calculatorResult.style.color = "var(--histogram-green)";
+                }
+                
+            } catch (e) {
+                alert("Error in calculation. Check input format.");
+            }
+        }
+
+        function clearCalculator() {
+            dataInput.value = '';
+            calculatorDisplay.textContent = "Enter data to calculate mean, median, mode";
+            calculatorResult.textContent = "Enter data in format: class interval:frequency";
+            calculatorResult.style.color = "var(--text-secondary)";
+        }
+
+        // Grouping practice
+        function newGroupingProblem() {
+            appState.currentGrouping = (appState.currentGrouping + 1) % groupingProblems.length;
+            const problem = groupingProblems[appState.currentGrouping];
+            groupingDisplay.textContent = `Data: ${problem.data.join(', ')}`;
+            groupingFeedback.textContent = "Create equal-width intervals covering all data";
+            groupingFeedback.style.color = "var(--text-secondary)";
+        }
+
+        function checkGrouping(selectedAnswer) {
+            const problem = groupingProblems[appState.currentGrouping];
+            
+            if (selectedAnswer === problem.answer) {
+                groupingFeedback.innerHTML = `<span style="color: var(--histogram-green)">Correct! ${problem.explanation}</span>`;
+                groupingFeedback.classList.add('highlight');
+                setTimeout(() => groupingFeedback.classList.remove('highlight'), 1000);
+            } else {
+                groupingFeedback.innerHTML = `<span style="color: var(--central-tendency-red)">Incorrect. Correct grouping: ${problem.answer}</span><br>${problem.explanation}`;
+            }
+        }
+
+        function showGroupingRules() {
+            alert(`RULES FOR GROUPING DATA:
+
+1. Determine number of classes:
+   • Usually 5-15 classes
+   • Sturge's formula: k = 1 + 3.322 log₁₀(N)
+   
+2. Calculate class width:
+   • Width ≈ (Max - Min) / Number of classes
+   • Round up to convenient number
+   
+3. Create intervals:
+   • Start at or below minimum value
+   • Equal width for all classes
+   • No gaps between classes
+   • No overlap (use boundaries: 10-20, 20-30, etc.)
+   
+4. Tally frequencies:
+   • Count observations in each class
+   • Double-check total = N
+   
+5. Calculate:
+   • Class marks: (Lower + Upper)/2
+   • Boundaries: subtract/add 0.5 for discrete data
+   
+Example: Data: 15, 18, 22, 25, 28, 30, 32, 35, 38, 40, 42, 45, 48, 50
+Min=15, Max=50, Range=35
+For 4 classes: Width≈35/4≈8.75→Round to 10
+Intervals: 15-25, 25-35, 35-45, 45-55`);
+        }
+
+        // Central tendency practice
+        function checkCentralTendency(type, correctValue) {
+            const values = {
+                'mean': { correct: "25.5", explanation: "Mean = Σ(f×x)/Σf = (5×5 + 8×15 + 12×25 + 10×35 + 5×45) / 40 = 1020/40 = 25.5" },
+                'median': { correct: "26.7", explanation: "Median class: 20-30 (N/2=20, cumulative reaches 25). Median = 20 + [(20-13)/12]×10 = 20 + (7/12)×10 ≈ 26.7" },
+                'mode': { correct: "25", explanation: "Modal class: 20-30 (highest frequency=12). Mode ≈ class mark of modal class = 25 (or use formula for more exact)" }
+            };
+            
+            if (correctValue === values[type].correct) {
+                centralTendencyFeedback.innerHTML = `<span style="color: var(--histogram-green)">Correct! ${type} ≈ ${correctValue}</span><br>${values[type].explanation}`;
+                centralTendencyFeedback.classList.add('highlight');
+                setTimeout(() => centralTendencyFeedback.classList.remove('highlight'), 1000);
+            } else {
+                centralTendencyFeedback.innerHTML = `<span style="color: var(--central-tendency-red)">Incorrect. ${type} ≈ ${values[type].correct}</span><br>${values[type].explanation}`;
+            }
+        }
+
+        function showCentralTendencyFormulas() {
+            alert(`FORMULAS FOR GROUPED DATA:
+
+1. MEAN:
+   x̄ = Σ(f×x) / Σf
+   where x = class mark, f = frequency
+
+2. MEDIAN:
+   Median = L + [(N/2 - cf)/f] × h
+   where:
+   L = lower boundary of median class
+   N = total frequency
+   cf = cumulative frequency before median class
+   f = frequency of median class
+   h = class width
+
+3. MODE:
+   Mode = L + [(f₁ - f₀)/(2f₁ - f₀ - f₂)] × h
+   where:
+   L = lower boundary of modal class
+   f₁ = frequency of modal class
+   f₀ = frequency of class before modal class
+   f₂ = frequency of class after modal class
+   h = class width
+
+4. EMPIRICAL RELATION (for moderately skewed):
+   Mode ≈ 3Median - 2Mean
+   Mean ≈ (3Median - Mode)/2
+   Median ≈ (Mode + 2Mean)/3
+
+Example using table in practice section:
+Class marks: 5, 15, 25, 35, 45
+Frequencies: 5, 8, 12, 10, 5
+Σf = 40, Σ(f×x) = 1020
+Mean = 1020/40 = 25.5`);
+        }
+
+        function practiceCalculation() {
+            const problems = [
+                {
+                    question: "Calculate mean for: 0-10:4, 10-20:6, 20-30:10, 30-40:8, 40-50:2",
+                    answer: "24",
+                    steps: "Class marks: 5,15,25,35,45. Σ(f×x)=4×5+6×15+10×25+8×35+2×45=20+90+250+280+90=730. Σf=30. Mean=730/30≈24.33"
+                },
+                {
+                    question: "Find median class for the above data (N=30)",
+                    answer: "20-30",
+                    steps: "N/2=15. Cumulative frequencies: 4,10,20,28,30. Median class is where cumulative first exceeds 15: 20-30"
+                }
+            ];
+            
+            const problem = problems[Math.floor(Math.random() * problems.length)];
+            const userAnswer = prompt(`${problem.question}\n\nEnter your answer:`);
+            
+            if (userAnswer && userAnswer.includes(problem.answer)) {
+                alert(`✓ Correct!\n${problem.steps}`);
+            } else {
+                alert(`✗ The correct answer is: ${problem.answer}\n\n${problem.steps}`);
+            }
+        }
+
+        // Application functions
+        function newApplicationProblem() {
+            appState.currentApplication = (appState.currentApplication + 1) % applicationProblems.length;
+            const problem = applicationProblems[appState.currentApplication];
+            applicationProblem.textContent = problem.problem;
+            applicationFeedback.textContent = "Click the correct answer";
+            applicationFeedback.style.color = "var(--text-secondary)";
+        }
+
+        function checkApplication(selectedAnswer) {
+            const problem = applicationProblems[appState.currentApplication];
+            
+            if (selectedAnswer === problem.answer) {
+                applicationFeedback.innerHTML = `<span style="color: var(--histogram-green)">Correct! ${problem.problem}\nAnswer: ${problem.answer}</span>`;
+                applicationFeedback.classList.add('highlight');
+                setTimeout(() => applicationFeedback.classList.remove('highlight'), 1000);
+            } else {
+                applicationFeedback.innerHTML = `<span style="color: var(--central-tendency-red)">Incorrect. ${problem.problem}\nCorrect answer: ${problem.answer}</span>`;
+            }
+        }
+
+        function showApplicationSolution() {
+            const problem = applicationProblems[appState.currentApplication];
+            alert(`SOLUTION:\n\n${problem.problem}\n\n${problem.solution}\n\nAnswer: ${problem.answer}`);
+        }
+
+        // Explanation functions
+        function explainHistogram() {
+            const dataset = sampleDataSets[appState.currentDataset];
+            alert(`HOW TO READ THIS HISTOGRAM:
+
+Data represented: ${dataset.intervals.join(', ')}
+Frequencies: ${dataset.frequencies.join(', ')}
+
+Interpretation:
+1. Each bar represents a class interval
+2. Bar height = frequency (number of observations)
+3. Bar width = class width (all equal here)
+4. Total area = total observations
+
+This histogram shows:
+- Highest frequency in class: ${dataset.intervals[dataset.frequencies.indexOf(Math.max(...dataset.frequencies))]}
+- Lowest frequency in class: ${dataset.intervals[dataset.frequencies.indexOf(Math.min(...dataset.frequencies))]}
+- Distribution shape: ${getDistributionShape(dataset.frequencies)}
+
+Histograms help visualize:
+• Central tendency (where data clusters)
+• Spread/variability
+• Skewness (asymmetry)
+• Modality (number of peaks)`);
+        }
+
+        function getDistributionShape(frequencies) {
+            const maxIndex = frequencies.indexOf(Math.max(...frequencies));
+            
+            if (maxIndex === 0) return "Right-skewed (peak at left)";
+            if (maxIndex === frequencies.length - 1) return "Left-skewed (peak at right)";
+            if (maxIndex === Math.floor(frequencies.length / 2)) return "Approximately symmetric";
+            
+            if (maxIndex < frequencies.length / 2) return "Right-skewed";
+            return "Left-skewed";
+        }
+
+        function explainOgive() {
+            alert(`WHAT IS AN OGIVE?
+
+An ogive (pronounced "oh-jive") is a cumulative frequency curve.
+
+Types:
+1. LESS THAN OGIVE:
+   • Plots upper class boundaries vs cumulative frequency
+   • Shows number of observations below each value
+   • Always increasing (or flat)
+   
+2. MORE THAN OGIVE:
+   • Plots lower class boundaries vs cumulative frequency
+   • Shows number of observations above each value
+   • Always decreasing (or flat)
+
+Uses of Ogive:
+• Find median (value where cumulative frequency = N/2)
+• Find quartiles (Q1 at N/4, Q3 at 3N/4)
+• Find percentiles (Pₖ at kN/100)
+• Compare two distributions
+
+How to read:
+1. Locate value on y-axis (cumulative frequency)
+2. Draw horizontal line to curve
+3. Draw vertical line to x-axis for corresponding value
+
+Example: To find median (50th percentile):
+• Find N/2 on y-axis (e.g., 20 if N=40)
+• Find corresponding x-value ≈ median`);
+        }
+
+        function findMedianFromOgive() {
+            const dataset = sampleDataSets[appState.currentDataset];
+            const totalFreq = dataset.frequencies.reduce((a, b) => a + b, 0);
+            const medianPos = totalFreq / 2;
+            
+            // Simple approximation
+            let cumulative = 0;
+            let medianClassIndex = -1;
+            
+            for (let i = 0; i < dataset.frequencies.length; i++) {
+                cumulative += dataset.frequencies[i];
+                if (cumulative >= medianPos && medianClassIndex === -1) {
+                    medianClassIndex = i;
+                }
+            }
+            
+            if (medianClassIndex !== -1) {
+                const interval = dataset.intervals[medianClassIndex];
+                const [lower, upper] = interval.split('-').map(num => parseInt(num));
+                const approxMedian = lower + (upper - lower) / 2;
+                
+                alert(`FINDING MEDIAN FROM OGIVE:
+
+Total observations (N) = ${totalFreq}
+Median position = N/2 = ${totalFreq}/2 = ${medianPos}
+
+From the ogive (cumulative curve):
+1. Locate ${medianPos} on y-axis (cumulative frequency)
+2. Draw horizontal line to the curve
+3. Draw vertical line down to x-axis
+4. Read the value ≈ ${approxMedian}
+
+Median ≈ ${approxMedian}
+(Note: This is approximate. Exact median requires calculation.)`);
+            }
+        }
+
+        function showDataAnalysis() {
+            const dataset = sampleDataSets[appState.currentDataset];
+            const frequencies = dataset.frequencies;
+            const total = frequencies.reduce((a, b) => a + b, 0);
+            const maxFreq = Math.max(...frequencies);
+            const minFreq = Math.min(...frequencies);
+            const maxIndex = frequencies.indexOf(maxFreq);
+            const minIndex = frequencies.indexOf(minFreq);
+            
+            let analysis = `DATA ANALYSIS:
+
+Frequency Distribution:
+${dataset.intervals.map((int, i) => `${int}: ${frequencies[i]}`).join('\n')}
+
+Total observations: ${total}
+
+Modal class: ${dataset.intervals[maxIndex]} (frequency: ${maxFreq})
+Least frequent class: ${dataset.intervals[minIndex]} (frequency: ${minFreq})
+
+Distribution shape: ${getDistributionShape(frequencies)}
+
+Percentage in modal class: ${((maxFreq/total)*100).toFixed(1)}%
+Percentage in first class: ${((frequencies[0]/total)*100).toFixed(1)}%
+Percentage in last class: ${((frequencies[frequencies.length-1]/total)*100).toFixed(1)}%
+
+Cumulative frequency at end: ${total}
+50th percentile (median) position: ${total/2}`;
+            
+            alert(analysis);
+        }
+
+        // Comparison functions
+        function explainGraph(type) {
+            const explanations = {
+                histogram: {
+                    name: "Histogram",
+                    description: "Bar graph for frequency distribution of continuous data.",
+                    uses: "Showing distribution shape, central tendency, spread, outliers",
+                    data: "Grouped continuous data (e.g., heights, scores, time)",
+                    features: "Bars touch (no gaps), area represents frequency"
+                },
+                bar: {
+                    name: "Bar Graph",
+                    description: "Graph for comparing categories with discrete data.",
+                    uses: "Comparing quantities across different categories",
+                    data: "Discrete/categorical data (e.g., colors, brands, cities)",
+                    features: "Gaps between bars, height represents value"
+                },
+                ogive: {
+                    name: "Ogive (Cumulative Frequency Curve)",
+                    description: "S-shaped curve showing cumulative frequencies.",
+                    uses: "Finding percentiles, quartiles, median, comparing distributions",
+                    data: "Grouped continuous data",
+                    features: "Always non-decreasing, smooth curve"
+                },
+                pie: {
+                    name: "Pie Chart",
+                    description: "Circular graph showing proportions as slices.",
+                    uses: "Showing percentage composition, market shares",
+                    data: "Categorical data (parts of a whole)",
+                    features: "Angles proportional to percentages, total = 360°"
+                }
+            };
+            
+            const exp = explanations[type];
+            graphDetail.innerHTML = `
+                <strong style="color: var(--data-blue)">${exp.name}</strong><br>
+                <strong>Description:</strong> ${exp.description}<br>
+                <strong>Used for:</strong> ${exp.uses}<br>
+                <strong>Data type:</strong> ${exp.data}<br>
+                <strong>Key features:</strong> ${exp.features}
+            `;
+            graphDetail.style.display = 'block';
+        }
+
+        // Concept detail
+        window.showConceptDetail = function(concept) {
+            let info = "";
+            
+            if (concept === 'grouped-data') {
+                info = `📋 GROUPED DATA
+
+Definition:
+Data organized into class intervals (ranges) instead of individual values.
+
+Why Group Data?
+• Large datasets become manageable
+• Patterns and trends become visible
+• Easier to calculate statistics
+• Better for graphical representation
+
+Key Terms:
+• Class Interval: Range of values (e.g., 10-20, 20-30)
+• Class Limits: Stated limits (10 and 20 for 10-20)
+• Class Boundaries: Exact limits (9.5-20.5 for 10-20)
+• Class Width: Difference between boundaries (should be equal)
+• Class Mark: Midpoint = (Lower limit + Upper limit)/2
+• Frequency: Number of observations in class
+• Cumulative Frequency: Running total of frequencies
+
+Example:
+Raw data: 12, 15, 18, 21, 23, 25, 28, 30, 32, 35
+Grouped:
+10-20: 3 values (12,15,18)
+20-30: 4 values (21,23,25,28)
+30-40: 3 values (30,32,35)
+
+Rules for Grouping:
+1. 5-15 classes usually
+2. Equal class width preferred
+3. No gaps between classes
+4. No overlap (use boundaries)
+5. Cover entire range of data`;
+            } else if (concept === 'histograms') {
+                info = `📈 HISTOGRAMS
+
+Definition:
+Bar graph showing frequency distribution of grouped continuous data.
+
+Features:
+• Bars touch (no gaps) - data is continuous
+• X-axis: Class intervals/boundaries
+• Y-axis: Frequency (or frequency density)
+• Area of bar represents frequency
+
+How to Draw:
+1. Draw x-axis with class boundaries
+2. Draw y-axis with frequency scale
+3. For each class: draw bar with height = frequency
+4. Bars should touch (no gaps)
+
+Interpretation:
+• Peak: Modal class (highest frequency)
+• Shape: Symmetric, skewed, uniform
+• Spread: How data is distributed
+• Gaps: Possible outliers or missing data
+
+Types of Distributions:
+1. Symmetric: Bell-shaped, normal
+2. Right-skewed: Tail to right, mean > median
+3. Left-skewed: Tail to left, mean < median
+4. Uniform: Equal frequencies
+5. Bimodal: Two peaks
+
+Histogram vs Bar Graph:
+• Histogram: Continuous data, bars touch
+• Bar Graph: Categorical data, gaps between bars
+
+Uses:
+• Quality control
+• Exam score analysis
+• Market research
+• Scientific data analysis`;
+            } else if (concept === 'frequency') {
+                info = `ƒ FREQUENCY DISTRIBUTION
+
+Definition:
+Table showing how often each value or class interval occurs.
+
+Frequency Table Components:
+1. Class intervals
+2. Tally marks (for counting)
+3. Frequency (count)
+4. Class marks (midpoints)
+5. Cumulative frequency
+
+Example:
+┌─────────────┬───────┬──────┐
+│ Marks       │ Freq  │ CF   │
+├─────────────┼───────┼──────┤
+│ 0-10        │ 5     │ 5    │
+│ 10-20       │ 8     │ 13   │
+│ 20-30       │ 12    │ 25   │
+│ 30-40       │ 10    │ 35   │
+│ 40-50       │ 5     │ 40   │
+└─────────────┴───────┴──────┘
+
+Types of Frequency:
+1. Simple Frequency: Count per class
+2. Cumulative Frequency: Running total
+   • Less than: Observations below upper boundary
+   • More than: Observations above lower boundary
+3. Relative Frequency: Frequency ÷ Total
+4. Percentage Frequency: Relative × 100
+
+Calculations:
+• Class mark = (Lower + Upper)/2
+• Class width = Upper boundary - Lower boundary
+• Total frequency (N) = Σf
+• Cumulative at end = N
+
+Uses:
+• Basis for histograms
+• Calculate statistics
+• Compare distributions
+• Identify patterns`;
+            } else if (concept === 'cumulative') {
+                info = `↗ CUMULATIVE FREQUENCY
+
+Definition:
+Running total of frequencies as we move through classes.
+
+Types:
+1. LESS THAN CUMULATIVE FREQUENCY:
+   • Total observations below upper boundary
+   • Starts at 0, ends at N
+   • Used for "less than" ogive
+
+2. MORE THAN CUMULATIVE FREQUENCY:
+   • Total observations above lower boundary
+   • Starts at N, ends at 0
+   • Used for "more than" ogive
+
+Calculation:
+For class i:
+Less than CF = Σ(f₁ + f₂ + ... + fᵢ)
+More than CF = Σ(fᵢ + fᵢ₊₁ + ... + fₙ)
+
+Ogive (Cumulative Frequency Curve):
+• S-shaped curve
+• Plots boundaries vs cumulative frequency
+• Used to find percentiles
+
+Finding Percentiles from Ogive:
+1. Locate position on y-axis: Pₖ = kN/100
+2. Draw horizontal to curve
+3. Draw vertical to x-axis
+4. Read the value
+
+Special Percentiles:
+• Median (Q2): 50th percentile (N/2)
+• First Quartile (Q1): 25th percentile (N/4)
+• Third Quartile (Q3): 75th percentile (3N/4)
+
+Example:
+If N=40:
+Median position = 40/2 = 20
+Q1 position = 40/4 = 10
+Q3 position = 3×40/4 = 30
+
+Uses:
+• Determine cut-off points
+• Find percentiles
+• Compare distributions
+• Estimate median without calculation`;
+            } else if (concept === 'central-tendency') {
+                info = `⚖️ CENTRAL TENDENCY FOR GROUPED DATA
+
+Measures of Center:
+1. MEAN (Average):
+   Formula: x̄ = Σ(f×x) / Σf
+   where x = class mark, f = frequency
+   Assumes all values in class are at class mark
+
+2. MEDIAN (Middle value):
+   Formula: Median = L + [(N/2 - cf)/f] × h
+   where:
+   L = lower boundary of median class
+   N = total frequency
+   cf = cumulative frequency before median class
+   f = frequency of median class
+   h = class width
+
+3. MODE (Most frequent):
+   Formula: Mode = L + [(f₁ - f₀)/(2f₁ - f₀ - f₂)] × h
+   where:
+   L = lower boundary of modal class
+   f₁ = frequency of modal class
+   f₀ = frequency of class before
+   f₂ = frequency of class after
+   h = class width
+
+Empirical Relationship (for moderately skewed):
+Mode ≈ 3Median - 2Mean
+Mean ≈ (3Median - Mode)/2
+Median ≈ (Mode + 2Mean)/3
+
+Choosing the Right Measure:
+• Symmetric data: Mean = Median = Mode
+• Skewed data: Median is better
+• Extreme values: Median less affected
+• Categorical data: Mode only
+
+Example Calculation:
+Class: 10-20(f=5), 20-30(f=8), 30-40(f=12), 40-50(f=10), 50-60(f=5)
+Class marks: 15,25,35,45,55
+Σf = 40, Σ(f×x) = 1020
+Mean = 1020/40 = 25.5
+Median class: 20-30 (N/2=20, CF reaches 25)
+Median = 20 + [(20-13)/12]×10 = 26.7
+Modal class: 30-40 (highest f=12)
+Mode = 30 + [(12-8)/(24-8-10)]×10 = 36.7`;
+            } else {
+                info = `🌍 REAL-WORLD APPLICATIONS
+
+Statistics in Daily Life:
+
+1. EDUCATION:
+   • Exam score analysis
+   • Grading systems (percentiles)
+   • Performance tracking
+   • Identifying weak areas
+
+2. BUSINESS & MARKETING:
+   • Customer age/income analysis
+   • Sales data analysis
+   • Market research surveys
+   • Quality control charts
+
+3. HEALTH & MEDICINE:
+   • Blood pressure distribution
+   • Disease prevalence studies
+   • Drug effectiveness analysis
+   • Growth charts
+
+4. GOVERNMENT & SOCIAL SCIENCES:
+   • Census data analysis
+   • Income distribution
+   • Unemployment statistics
+   • Crime rate analysis
+
+5. SCIENCE & ENGINEERING:
+   • Experimental data analysis
+   • Measurement errors
+   • Process control
+   • Environmental data
+
+Example Applications:
+
+• School: Histogram of test scores to set grade boundaries
+• Hospital: Frequency distribution of patient ages
+• Factory: Quality control using histograms of product weights
+• Market Research: Customer satisfaction survey analysis
+• Sports: Distribution of player performances
+
+Why Statistics Matters:
+• Helps make informed decisions
+• Identifies patterns and trends
+• Measures uncertainty and risk
+• Provides evidence for conclusions
+• Helps predict future outcomes
+
+"Without data, you're just another person with an opinion."`;
+            }
+            
+            alert(info);
+        };
+
+        // Setup event listeners
+        function setupEventListeners() {
+            startPracticeBtn.addEventListener('click', startPractice);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            skipQuestionBtn.addEventListener('click', skipQuestion);
+            retryTopicBtn.addEventListener('click', retryTopic);
+            backToHomeBtn.addEventListener('click', showWelcomePage);
+            viewTopicsBtn.addEventListener('click', () => alert("Other Math topics would be available here."));
+            
+            studentNameInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') startPractice();
+            });
+        }
+
+        // Create stats tip display
+        function createStatsTip() {
+            const tipDiv = document.createElement('div');
+            tipDiv.className = 'stats-tip';
+            tipDiv.innerHTML = `<strong>Statistics Tip:</strong> ${statsTips[Math.floor(Math.random() * statsTips.length)]}`;
+            return tipDiv;
+        }
+
+        // Show welcome page
+        function showWelcomePage() {
+            welcomePage.style.display = 'flex';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'none';
+            studentNameInput.value = appState.studentName || '';
+        }
+
+        // Show practice page
+        function showPracticePage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'block';
+            resultsPage.style.display = 'none';
+            studentNameDisplay.textContent = appState.studentName;
+            appState.startTime = new Date();
+            loadQuestion();
+        }
+
+        // Show results page
+        function showResultsPage() {
+            welcomePage.style.display = 'none';
+            practicePage.style.display = 'none';
+            resultsPage.style.display = 'block';
+            
+            const percentage = Math.round((appState.score / allQuestions.length) * 100);
+            const timeDiff = new Date() - appState.startTime;
+            const minutes = Math.floor(timeDiff / 60000);
+            
+            finalScore.textContent = appState.score;
+            scorePercentage.textContent = `${percentage}%`;
+            groupedDataScore.textContent = appState.groupedDataScore;
+            histogramScore.textContent = appState.histogramScore;
+            frequencyScore.textContent = appState.frequencyScore;
+            timeSpent.textContent = `${minutes}min`;
+            
+            if (percentage >= 90) {
+                scoreMessage.textContent = "Outstanding! You've mastered statistics concepts!";
+            } else if (percentage >= 75) {
+                scoreMessage.textContent = "Excellent work! Your statistical analysis skills are impressive!";
+            } else if (percentage >= 60) {
+                scoreMessage.textContent = "Good job! You're developing strong statistical thinking!";
+            } else {
+                scoreMessage.textContent = "Keep practicing! Statistics helps make sense of data!";
+            }
+        }
+
+        // Load question
+        function loadQuestion() {
+            const question = allQuestions[appState.currentQuestionIndex];
+            
+            progressText.textContent = `Question ${appState.currentQuestionIndex + 1} of ${allQuestions.length}`;
+            progressFill.style.width = `${((appState.currentQuestionIndex + 1) / allQuestions.length) * 100}%`;
+            
+            questionText.textContent = question.question;
+            
+            statsTip.innerHTML = '';
+            optionsContainer.innerHTML = '';
+            feedbackContainer.style.display = 'none';
+            nextQuestionBtn.disabled = true;
+            
+            statsTip.appendChild(createStatsTip());
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="option-text">${option}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                optionsContainer.appendChild(optionElement);
+            });
+        }
+
+        // Handle option selection
+        function selectOption(optionElement, selectedIndex) {
+            const question = allQuestions[appState.currentQuestionIndex];
+            const correctIndex = question.answer.charCodeAt(0) - 65;
+            
+            const allOptions = document.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            
+            allOptions[correctIndex].classList.add('correct');
+            
+            if (selectedIndex === correctIndex) {
+                optionElement.classList.add('correct');
+                appState.score++;
+                appState.answered++;
+                
+                // Track scores by question type
+                if (question.type === 'grouped-data') appState.groupedDataScore++;
+                if (question.type === 'histograms') appState.histogramScore++;
+                if (question.type === 'frequency') appState.frequencyScore++;
+                if (question.type === 'cumulative') appState.cumulativeScore++;
+                if (question.type === 'central-tendency') appState.centralTendencyScore++;
+                if (question.type === 'applications') appState.applicationsScore++;
+                
+                optionElement.classList.add('pulse');
+                showFeedback(true, question.explanation);
+            } else {
+                optionElement.classList.add('incorrect');
+                appState.answered++;
+                showFeedback(false, question.explanation);
+            }
+            
+            nextQuestionBtn.disabled = false;
+        }
+
+        // Show feedback
+        function showFeedback(isCorrect, explanation) {
+            const feedbackTitle = feedbackContainer.querySelector('.feedback-title');
+            const feedbackIcon = feedbackContainer.querySelector('.feedback-icon');
+            
+            if (isCorrect) {
+                feedbackContainer.className = 'feedback-container feedback-correct';
+                feedbackIcon.textContent = '✓';
+                feedbackTitle.textContent = 'Correct!';
+            } else {
+                feedbackContainer.className = 'feedback-container feedback-incorrect';
+                feedbackIcon.textContent = '✗';
+                feedbackTitle.textContent = 'Incorrect';
+            }
+            
+            feedbackExplanation.textContent = explanation;
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Next question
+        function nextQuestion() {
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < allQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+        }
+
+        // Skip question
+        function skipQuestion() {
+            appState.skipped++;
+            appState.currentQuestionIndex++;
+            
+            if (appState.currentQuestionIndex < allQuestions.length) {
+                loadQuestion();
+            } else {
+                showResultsPage();
+            }
+        }
+
+        // Retry topic
+        function retryTopic() {
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            appState.groupedDataScore = 0;
+            appState.histogramScore = 0;
+            appState.frequencyScore = 0;
+            appState.cumulativeScore = 0;
+            appState.centralTendencyScore = 0;
+            appState.applicationsScore = 0;
+            showPracticePage();
+        }
+
+        // Start practice
+        function startPractice() {
+            const name = studentNameInput.value.trim();
+            if (!name) {
+                alert("Please enter your name to begin statistics practice!");
+                studentNameInput.focus();
+                return;
+            }
+            
+            appState.studentName = name;
+            appState.currentQuestionIndex = 0;
+            appState.score = 0;
+            appState.skipped = 0;
+            appState.answered = 0;
+            appState.groupedDataScore = 0;
+            appState.histogramScore = 0;
+            appState.frequencyScore = 0;
+            appState.cumulativeScore = 0;
+            appState.centralTendencyScore = 0;
+            appState.applicationsScore = 0;
+            
+            showPracticePage();
+        }
+
+        // Initialize app
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
